@@ -41,7 +41,7 @@ const GLOBAL_VIEWS = ['inicio', 'nuevo', 'perfil', 'ajustes', 'ayuda'];
 const NAV = [['panel', 'orbit'], ['traductor', 'waypoints'], ['controles', 'layers'], ['normas', 'file-check'], ['brechas', 'shield-alert'], ['plan', 'square-kanban'], ['mapa', 'grid-3x3'], ['alcance', 'compass'], ['exportar', 'download']];
 function go(view) {
   if (PROJECT_VIEWS.includes(view) && !state) view = 'inicio';
-  if (ui._tT) { clearTimeout(ui._tT); ui._tT = null; if (state) { recompute(); saveProject(); } } // aplica lo que se estaba escribiendo antes de cambiar de vista
+  if (ui._tT) { clearTimeout(ui._tT); ui._tT = null; if (state) { recompute(); undoMark('texto'); saveProject(); } } // aplica lo que se estaba escribiendo antes de cambiar de vista
   ui.view = view; ui.railOpen = false; ui.pop = null; ui.sheet = false; ui.confirm = null; ui.trOpen = false; ui.wAnim = true;
   try { history.replaceState(null, '', '#' + view); } catch (e) { /* entorno aislado */ }
   render(); window.scrollTo({ top: 0 });
@@ -160,7 +160,7 @@ function renderPop() {
 }
 function demoBanner() {
   const p = activeMeta();
-  return `<div class="glass pane row spread" style="padding:12px 16px"><div class="row">${icon('info', 18)}<span class="small"><b>${esc(t('demo'))}</b> ${esc(t('demoTxt'))}</span></div>
+  return `<div class="glass pane row spread demo-bar" style="padding:12px 16px"><div class="row">${icon('info', 18)}<span class="small"><b class="demo-long">${esc(t('demo'))}</b><b class="demo-short">${esc(t('demoShort'))}</b> <span class="demo-txt">${esc(t('demoTxt'))}</span></span></div>
     <div class="row"><button type="button" class="btn sm ghost" data-act="reset-case" data-case="${esc(p.caseId)}">${icon('rotate-ccw', 15)}${esc(t('reset'))}</button><button type="button" class="btn sm primary" data-act="nav" data-view="nuevo">${esc(t('startMine'))}${icon('arrow-right', 15)}</button></div></div>`;
 }
 
@@ -213,10 +213,10 @@ function setLang(l) { ws.settings.lang = l === 'en' ? 'en' : 'es'; saveWs(); app
 
 /* ---------- Avisos ---------- */
 let toastT = null;
-function toast(msg, kind = 'ok') {
+function toast(msg, kind = 'ok', action = null) {
   const x = $('#toast'); const err = kind === 'error';
   x.setAttribute('role', err ? 'alert' : 'status'); x.classList.toggle('err', err);
-  x.innerHTML = `${icon(err ? 'triangle-alert' : 'circle-check', 16)}<span>${esc(msg)}</span>`; x.hidden = false;
-  clearTimeout(toastT); toastT = setTimeout(() => { x.hidden = true; }, err ? 7000 : Math.max(2800, 1500 + msg.length * 45));
+  x.innerHTML = `${icon(err ? 'triangle-alert' : 'circle-check', 16)}<span>${esc(msg)}</span>${action ? `<button type="button" class="toast-act" data-act="${esc(action.act)}">${icon('undo-2', 15)}${esc(action.label)}</button>` : ''}`; x.hidden = false;
+  clearTimeout(toastT); toastT = setTimeout(() => { x.hidden = true; }, err ? 7000 : Math.max(action ? 5000 : 2800, 1500 + msg.length * 45));
 }
 

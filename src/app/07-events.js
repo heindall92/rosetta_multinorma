@@ -35,13 +35,13 @@ function setState(id, v) {
   if (!state || !UC_IDS.has(id) || !E.ESTADOS.includes(v)) return;
   const d = state.controles[id]; if (d.estado === v) return;
   d.estado = v; if ((v === 'implantado' || v === 'parcial') && !d.revision) d.revision = today();
-  commit();
+  commit(t('tState', id, t('est.' + v)));
 }
 
 /* Los campos de texto se guardan mientras se escribe y no redibujan la vista al perder el foco:
  * así un clic en un botón justo después de escribir nunca se pierde. */
 const esTexto = (el) => el.tagName === 'TEXTAREA' || (el.tagName === 'INPUT' && ['text', 'search', 'email', ''].includes(el.type));
-function refrescoLigero() { recompute(); saveProject(); $('#dock').innerHTML = renderDock(); $('#tabbar').innerHTML = renderTabbar(); }
+function refrescoLigero(k) { recompute(); undoMark(k || 'texto'); saveProject(); $('#dock').innerHTML = renderDock(); $('#tabbar').innerHTML = renderTabbar(); }
 function planField(el) {
   const a = plan.find((x) => x.key === el.dataset.plan); if (!a || !UC_IDS.has(a.key)) return false;
   const f = oneOf(el.dataset.f, ['responsable', 'fecha'], null); if (!f) return false;
@@ -105,6 +105,7 @@ function closeLayers() {
 }
 document.addEventListener('keydown', (ev) => {
   const tg = ev.target; const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(tg.tagName) && tg.id !== 'pal-q' && tg.id !== 'tr-q';
+  if ((ev.ctrlKey || ev.metaKey) && !typing && state && (ev.key.toLowerCase() === 'z' || ev.key.toLowerCase() === 'y')) { ev.preventDefault(); undo(ev.key.toLowerCase() === 'y' || ev.shiftKey); return; }
   if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'k') { ev.preventDefault(); ui.palette = !ui.palette; ui.paletteQ = ''; ui.paletteIdx = 0; renderPalette(); return; }
   if (ui.palette) {
     const items = ui._pItems || [];
@@ -240,6 +241,7 @@ document.addEventListener('click', (ev) => {
     case 'plan-start': { const id = el.dataset.id; if (!UC_IDS.has(id)) break; const a = plan.find((x) => x.key === id); state.acciones[id] = { estado: 'En curso', responsable: a ? a.responsable : '', fecha: a ? a.fecha : '', nota: '', ...(state.acciones[id] || {}), estado: 'En curso' }; commit(t('tStarted', id)); openInsp('uc', id); break; }
     case 'plan-move': { const a = plan.find((x) => x.key === el.dataset.key); if (!a) break; const li = LANES.indexOf(laneOf(a)) + (el.dataset.dir === '1' ? 1 : -1); if (li >= 0 && li < LANES.length) moveAction(a.key, LANES[li]); break; }
     case 'plan-all': ui.planAll = true; render(); break;
+    case 'undo': undo(); break;
     /* exportaciones */
     case 'export-xlsx': exportXlsx(); break;
     case 'export-md': saveFile(fname('report', 'md'), informeMd()); break;
