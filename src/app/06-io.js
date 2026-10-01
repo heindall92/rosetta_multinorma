@@ -219,7 +219,7 @@ function aplicaImportEns(st, data) {
   const r = E.desdeSoaEns(IX, data.soa);
   for (const [id, c] of Object.entries(r.controles)) st.controles[id] = { ...st.controles[id], ...c };
   st.exclusiones.ens = r.exclusiones;
-  st.ensSoa = Object.fromEntries(Object.entries(data.soa).map(([k2, d]) => [k2, { aplica: d.aplica, estado: d.estado, pct: d.pct }]));
+  st.ensSoa = Object.fromEntries(Object.entries(data.soa).map(([k2, d]) => [k2, { aplica: d.aplica, estado: d.estado, pct: d.pct, justificacion: d.justificacion, evidencias: d.evidencias, responsable: d.responsable }]));
   if (Object.keys(data.niveles || {}).length) { st.alcance.ens.niveles = data.niveles; st.alcance.ens.categoria = E.categoriaDeNiveles(data.niveles) || st.alcance.ens.categoria; }
   st.alcance.ens.on = true;
   return r.heredados;

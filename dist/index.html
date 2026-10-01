@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Sy9UwaCPCvNvVjx4UjpGRJb6GxNwbYzQrVjjY4sdvyw=' 'sha256-h+RECHgYeQNMuQAFOck7RSt8/VGsn8fxipSw4KhM3ic=' 'sha256-1bcljgtPjz6XPhNfgTduM/S5TGWBKmpehirK8KXdvwA=' 'self' https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js; style-src 'sha256-WR7XhThIyC/NV/LPUsrvp1vvre2wUCDxT+wv8Fl/dfE='; style-src-attr 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'none'; worker-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-Sy9UwaCPCvNvVjx4UjpGRJb6GxNwbYzQrVjjY4sdvyw=' 'sha256-h+RECHgYeQNMuQAFOck7RSt8/VGsn8fxipSw4KhM3ic=' 'sha256-kE4eBjo3bOGWin4fDJ/cv44Tj3zSn26ToDNXIq9ZC88=' 'self' https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js; style-src 'sha256-WR7XhThIyC/NV/LPUsrvp1vvre2wUCDxT+wv8Fl/dfE='; style-src-attr 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'none'; worker-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23e0337a'/%3E%3Cstop offset='1' stop-color='%236d3fd1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='20' cy='20' r='18' fill='url(%23g)'/%3E%3Ccircle cx='20' cy='20' r='7' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
@@ -1489,7 +1489,7 @@ const I18N = {
     tExcl: (r) => `${r} excluido`, tIncl: (r) => `${r} vuelve a aplicar`, tJust: 'Justificación guardada', tCreated: 'Proyecto creado. Siguiente paso: registrar el estado de los controles.', tCreatedEns: (n) => `Proyecto creado · ${n} controles heredados del ENS`,
     tImported: (n, h) => `${n} medidas del ENS importadas · ${h} controles heredados`, tIsoFromEns: (p) => `Con tu SoA del ENS ya cubres el ${p} de ISO/IEC 27001`, tEnsApplied: (n) => `SoA del ENS aplicada: ${n} controles actualizados`,
     tNis2On: 'NIS2 añadida al alcance', tDone: (id) => `${id} marcado como implantado`, tStarted: (id) => `${id} en curso`, tTheme: (t) => `Tema: ${t}`, tRestored: (n) => `Copia restaurada: ${n} proyectos`,
-    tDownloaded: (f) => `Descargado: ${f}`, tSavedFile: (f) => `Guardado: ${f}`, tDeclined: 'Descarga cancelada', tPending: 'Ya hay una descarga pendiente de confirmar', tCantSave: (m) => `No se pudo guardar: ${m}`,
+    tNoStore: 'Los cambios no se están guardando en este navegador (almacenamiento lleno o bloqueado). Descarga una copia de seguridad desde Ajustes.', tDownloaded: (f) => `Descargado: ${f}`, tSavedFile: (f) => `Guardado: ${f}`, tDeclined: 'Descarga cancelada', tPending: 'Ya hay una descarga pendiente de confirmar', tCantSave: (m) => `No se pudo guardar: ${m}`,
     tTooBig: (l, m) => `${l} demasiado grande (máximo ${m} MB)`, fileIs: 'El fichero es', excelIs: 'El Excel es', tNotProject: 'No es un proyecto ni una copia de Rosetta', tNoSoa: 'No encuentro una hoja de SoA con las columnas «Código» y «¿Aplica?».',
     tNoJsonSoa: 'El JSON no contiene una SoA del ENS (proyecto o copia de ENS Compliance Studio).', tTooManySheets: 'El libro tiene demasiadas hojas para ser una SoA.', tNoMeasures: 'No se ha encontrado ninguna medida del Anexo II.',
     tReadFail: 'No se pudo leer el fichero', tXlsxFail: 'No se pudo generar el Excel', tXlsxLib: 'No se pudo cargar la librería de Excel (¿sin conexión?)', tProjNotFound: 'No se encuentra el proyecto'
@@ -1606,7 +1606,7 @@ const I18N = {
     tExcl: (r) => `${r} excluded`, tIncl: (r) => `${r} applies again`, tJust: 'Justification saved', tCreated: 'Project created. Next step: record the status of the controls.', tCreatedEns: (n) => `Project created · ${n} controls inherited from the ENS`,
     tImported: (n, h) => `${n} ENS measures imported · ${h} controls inherited`, tIsoFromEns: (p) => `Your ENS SoA already covers ${p} of ISO/IEC 27001`, tEnsApplied: (n) => `ENS SoA applied: ${n} controls updated`,
     tNis2On: 'NIS2 added to scope', tDone: (id) => `${id} marked as implemented`, tStarted: (id) => `${id} in progress`, tTheme: (t) => `Theme: ${t}`, tRestored: (n) => `Backup restored: ${n} projects`,
-    tDownloaded: (f) => `Downloaded: ${f}`, tSavedFile: (f) => `Saved: ${f}`, tDeclined: 'Download cancelled', tPending: 'A download is already waiting for confirmation', tCantSave: (m) => `Could not save: ${m}`,
+    tNoStore: 'Changes are not being saved in this browser (storage full or blocked). Download a backup from Settings.', tDownloaded: (f) => `Downloaded: ${f}`, tSavedFile: (f) => `Saved: ${f}`, tDeclined: 'Download cancelled', tPending: 'A download is already waiting for confirmation', tCantSave: (m) => `Could not save: ${m}`,
     tTooBig: (l, m) => `${l} too large (maximum ${m} MB)`, fileIs: 'The file is', excelIs: 'The Excel file is', tNotProject: 'Not a Rosetta project or backup', tNoSoa: 'No SoA sheet with "Código" and "¿Aplica?" columns found.',
     tNoJsonSoa: 'The JSON does not contain an ENS SoA (ENS Compliance Studio project or backup).', tTooManySheets: 'The workbook has too many sheets to be a SoA.', tNoMeasures: 'No Annex II measures found.',
     tReadFail: 'Could not read the file', tXlsxFail: 'Could not generate the Excel file', tXlsxLib: 'Could not load the Excel library (offline?)', tProjNotFound: 'Project not found'
@@ -1656,16 +1656,18 @@ const rG = (f, id) => tt(IX.req[f][id], 'g');
 const cT = (id) => tt(IX.ucMap[id], 't');
 const dT = (id) => tt(DOM[id], 't');
 const reqCodeL = (f, id) => { const c = E.codigo(IX, f, id); return LANG() === 'en' ? c.replace(/^RE /, 'IR ') : c; };
-const uid = () => Math.random().toString(36).slice(2, 8) + Date.now().toString(36).slice(-4);
+/* Identificadores con aleatoriedad criptográfica (no Math.random): 9 caracteres aleatorios + 4 de marca temporal */
+const uid = () => { const a = new Uint8Array(9); crypto.getRandomValues(a); return Array.from(a, (b) => (b % 36).toString(36)).join('') + Date.now().toString(36).slice(-4); };
 const initials = (name) => String(name || '').trim().split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('') || '··';
 const reqCode = (f, id) => reqCodeL(f, id);
 const reqTitle = (f, id) => rT(f, id);
 
 /* Almacenamiento: localStorage si está disponible; si no, memoria (la app funciona igual) */
 const MEM = {};
+let STORE_OK = true;
 const store = {
   get(k) { try { const v = localStorage.getItem(k); return v ? safeParse(v) : (MEM[k] ?? null); } catch (e) { return MEM[k] ?? null; } },
-  set(k, v) { MEM[k] = v; try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* sin persistencia */ } },
+  set(k, v) { MEM[k] = v; try { localStorage.setItem(k, JSON.stringify(v)); STORE_OK = true; } catch (e) { if (STORE_OK) { STORE_OK = false; setTimeout(() => toast(t('tNoStore'), 'error'), 0); } } }, // sin espacio o almacenamiento bloqueado: se avisa una vez
   del(k) { delete MEM[k]; try { localStorage.removeItem(k); } catch (e) { /* nada */ } }
 };
 const WS_KEY = 'rosetta/v1/ws';
@@ -1833,7 +1835,7 @@ function sanitizeState(raw) {
   for (const [k, v] of safeEntries(r.acciones, 400)) if (UC_IDS.has(k) && isObj(v)) st.acciones[k] = { estado: oneOf(v.estado, ACC_ESTADOS, 'Pendiente'), responsable: s(v.responsable, 200), fecha: dateOk(v.fecha), nota: s(v.nota, 1000) };
   if (isObj(r.ensSoa)) {
     st.ensSoa = {};
-    for (const [k, v] of safeEntries(r.ensSoa, 100)) if (IX.req.ens[k] && isObj(v)) st.ensSoa[k] = { aplica: s(v.aplica, 20), estado: s(v.estado, 40), pct: v.pct === null || v.pct === undefined || v.pct === '' ? null : num(v.pct, 0, 1, null) };
+    for (const [k, v] of safeEntries(r.ensSoa, 100)) if (IX.req.ens[k] && isObj(v)) st.ensSoa[k] = { aplica: s(v.aplica, 20), estado: s(v.estado, 40), pct: v.pct === null || v.pct === undefined || v.pct === '' ? null : num(v.pct, 0, 1, null), justificacion: s(v.justificacion, 1000), evidencias: s(v.evidencias, 1500), responsable: s(v.responsable, 200) };
   }
   st.historial = arr(r.historial, 60).filter((h) => isObj(h) && dateOk(h.fecha)).map((h) => {
     const cov = {}; const hc = isObj(h.cov) ? h.cov : {};
@@ -2946,7 +2948,7 @@ function aplicaImportEns(st, data) {
   const r = E.desdeSoaEns(IX, data.soa);
   for (const [id, c] of Object.entries(r.controles)) st.controles[id] = { ...st.controles[id], ...c };
   st.exclusiones.ens = r.exclusiones;
-  st.ensSoa = Object.fromEntries(Object.entries(data.soa).map(([k2, d]) => [k2, { aplica: d.aplica, estado: d.estado, pct: d.pct }]));
+  st.ensSoa = Object.fromEntries(Object.entries(data.soa).map(([k2, d]) => [k2, { aplica: d.aplica, estado: d.estado, pct: d.pct, justificacion: d.justificacion, evidencias: d.evidencias, responsable: d.responsable }]));
   if (Object.keys(data.niveles || {}).length) { st.alcance.ens.niveles = data.niveles; st.alcance.ens.categoria = E.categoriaDeNiveles(data.niveles) || st.alcance.ens.categoria; }
   st.alcance.ens.on = true;
   return r.heredados;
