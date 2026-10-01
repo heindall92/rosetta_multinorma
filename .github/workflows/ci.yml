@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '17 6 * * 1' # auditoría semanal de dependencias
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Build, tests y E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: dist/index.html está al día con src/
+        run: npm run check
+      - name: Tests unitarios (motor, catálogo, build)
+        run: npm test
+      - name: Navegador para E2E
+        run: npx playwright install --with-deps chromium
+      - name: Tests E2E (Chromium)
+        run: npm run test:e2e
+      - name: Auditoría de dependencias
+        run: npm audit --audit-level=high
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rosetta-dist
+          path: dist/index.html
+          retention-days: 30
