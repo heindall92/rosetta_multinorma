@@ -12,7 +12,8 @@
     "test": "node --test tests/engine.test.mjs tests/catalog.test.mjs tests/build.test.mjs",
     "test:e2e": "node --test tests/e2e.test.mjs tests/e2e-excel.test.mjs tests/a11y.test.mjs",
     "test:all": "npm run build && npm test && npm run test:e2e",
-    "serve": "node scripts/serve.mjs"
+    "serve": "node scripts/serve.mjs",
+    "capturas": "node scripts/capturas.mjs"
   },
   "devDependencies": {
     "axe-core": "^4.13.0",

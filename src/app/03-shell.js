@@ -40,7 +40,6 @@ const PROJECT_VIEWS = ['panel', 'traductor', 'controles', 'normas', 'brechas', '
 const GLOBAL_VIEWS = ['inicio', 'nuevo', 'perfil', 'ajustes', 'ayuda'];
 const NAV = [['panel', 'orbit'], ['traductor', 'waypoints'], ['controles', 'layers'], ['normas', 'file-check'], ['brechas', 'shield-alert'], ['plan', 'square-kanban'], ['mapa', 'grid-3x3'], ['alcance', 'compass'], ['exportar', 'download']];
 function go(view) {
-  if (PROJECT_VIEWS.includes(view) && !state) view = 'inicio';
   if (ui._tT) { clearTimeout(ui._tT); ui._tT = null; if (state) { recompute(); undoMark('texto'); saveProject(); } } // aplica lo que se estaba escribiendo antes de cambiar de vista
   ui.view = view; ui.railOpen = false; ui.pop = null; ui.sheet = false; ui.confirm = null; ui.trOpen = false; ui.wAnim = true;
   try { history.replaceState(null, '', '#' + view); } catch (e) { /* entorno aislado */ }
@@ -68,7 +67,7 @@ function render() {
   applyRail(); $('#dock').innerHTML = renderDock();
   $('#tabbar').innerHTML = renderTabbar();
   const V = { inicio: vInicio, nuevo: vNuevo, perfil: vPerfil, ajustes: vAjustes, ayuda: vAyuda, panel: vOrbita, traductor: vPrisma, controles: vControles, normas: vNormas, mapa: vMapa, alcance: vAlcance, brechas: vBrechas, plan: vPlan, exportar: vExport };
-  $('#view').innerHTML = (state && isDemo() && PROJECT_VIEWS.includes(ui.view) ? demoBanner() : '') + (V[ui.view] || vInicio)();
+  $('#view').innerHTML = !state && PROJECT_VIEWS.includes(ui.view) ? vNeedProject(ui.view) : (state && isDemo() && PROJECT_VIEWS.includes(ui.view) ? demoBanner() : '') + (V[ui.view] || vInicio)();
   renderInsp(); renderPop(); renderSheet(); renderPalette();
   if (ui.view === 'traductor') requestAnimationFrame(drawBeams);
   if (active) { const el = document.getElementById(active); if (el) { el.focus({ preventScroll: true }); if (sel) { try { el.setSelectionRange(sel[0], sel[1]); } catch (e) { /* n/a */ } } } }
@@ -95,11 +94,12 @@ function toggleRail() {
 }
 function renderDock() {
   const p = activeMeta(); const dark = isDark();
-  const item = ([v, ic]) => `<button type="button" class="nav-i" data-act="nav" data-view="${v}"${ui.view === v ? ' aria-current="page"' : ''}${!state ? ' disabled' : ''} data-tip="${esc(t('nav.' + v))}">${icon(ic, 17)}<span class="lbl">${esc(t('nav.' + v))}</span>${navBadge(v)}</button>`;
+  const item = ([v, ic]) => `<button type="button" class="nav-i${state ? '' : ' locked'}" data-act="nav" data-view="${v}"${ui.view === v ? ' aria-current="page"' : ''}${!state ? ' aria-describedby="nav-note"' : ''} data-tip="${esc(t('nav.' + v))}">${icon(ic, 17)}<span class="lbl">${esc(t('nav.' + v))}</span>${navBadge(v)}${state ? '' : icon('lock', 13, 'lk')}</button>`;
   const cur = NAV.findIndex(([v]) => v === ui.view);
   return `<button type="button" class="brand" data-act="nav" data-view="inicio" aria-label="Rosetta · ${esc(t('nav.inicio'))}">${rosette(34)}<span><b>Rosetta</b><small>${esc(t('brandSub'))}</small></span></button><span class="rail-sp" aria-hidden="true"></span>
     <button type="button" class="ibtn rail-tg" data-act="rail-toggle" aria-expanded="${!railCollapsed()}" aria-label="${esc(t(railCollapsed() ? 'railOpen' : 'railClose'))}" data-tip="${esc(t(railCollapsed() ? 'railOpen' : 'railClose'))} · [">${icon(railCollapsed() ? 'chevron-right' : 'chevron-left', 17)}</button>
     <button type="button" class="proj-pill" data-act="pop" data-pop="proyectos" aria-haspopup="true" aria-expanded="${ui.pop === 'proyectos'}"><span class="dotc">${icon(state ? (p?.kind === 'demo' ? caseIcon(p.caseId) : 'building-complex') : 'folder', 15)}</span><span>${state ? esc(state.proyecto.nombre || '—') : esc(t('noProject'))}</span>${icon('chevron-down', 15)}</button>
+    ${state ? '' : `<p class="nav-note" id="nav-note" role="note">${icon('info', 15)}<span><b>${esc(t('navNoteT'))}</b>${esc(t('navNoteTxt'))}</span></p>`}
     <nav class="nav" aria-label="${esc(t('sections'))}"${cur >= 0 ? ` data-cur style="--cur:${cur}"` : ''}><span class="nav-glow" aria-hidden="true"></span>${NAV.map(item).join('')}</nav>
     <div class="tools">
       <button type="button" class="search-pill" data-act="palette" aria-label="${esc(t('search'))}">${icon('search', 16)}<span class="lbl">${esc(t('search'))}</span><kbd>Ctrl K</kbd></button>
@@ -110,14 +110,14 @@ function renderDock() {
     </div>`;
 }
 function renderTabbar() {
-  const it = (v, ic) => `<button type="button" data-act="nav" data-view="${v}"${ui.view === v ? ' aria-current="page"' : ''}${!state && PROJECT_VIEWS.includes(v) ? ' disabled' : ''}>${icon(ic, 20)}<span>${esc(t('nav.' + v))}</span>${navBadge(v)}</button>`;
+  const it = (v, ic) => `<button type="button" data-act="nav" data-view="${v}"${ui.view === v ? ' aria-current="page"' : ''}${!state && PROJECT_VIEWS.includes(v) ? ' class="locked"' : ''}>${icon(ic, 20)}<span>${esc(t('nav.' + v))}</span>${navBadge(v)}</button>`;
   return `${it('inicio', 'house')}${it('panel', 'orbit')}${it('traductor', 'waypoints')}${it('controles', 'layers')}<button type="button" data-act="sheet"${ui.sheet ? ' aria-current="page"' : ''}>${icon('ellipsis', 20)}<span>${esc(t('nav.mas'))}</span></button>`;
 }
 function renderSheet() {
   const host = $('#sheet');
   if (!ui.sheet) { host.hidden = true; host.innerHTML = ''; return; }
   host.hidden = false; const dark = isDark();
-  const b = (v, ic) => `<button type="button" data-act="nav" data-view="${v}"${ui.view === v ? ' aria-current="page"' : ''}${!state && PROJECT_VIEWS.includes(v) ? ' disabled' : ''}>${icon(ic, 20)}${esc(t('nav.' + v))}</button>`;
+  const b = (v, ic) => `<button type="button" data-act="nav" data-view="${v}"${ui.view === v ? ' aria-current="page"' : ''}${!state && PROJECT_VIEWS.includes(v) ? ' class="locked"' : ''}>${icon(ic, 20)}${esc(t('nav.' + v))}</button>`;
   host.innerHTML = `<div class="overlay" data-act="sheet-close"></div><div class="sheet" role="dialog" aria-label="${esc(t('nav.mas'))}">
     <div class="grid-i">${b('normas', 'file-check')}${b('brechas', 'shield-alert')}${b('plan', 'square-kanban')}${b('mapa', 'grid-3x3')}${b('alcance', 'compass')}${b('exportar', 'download')}${b('ayuda', 'circle-question-mark')}${b('ajustes', 'sliders-horizontal')}${b('perfil', 'user')}</div>
     <div class="row spread" style="margin-top:12px">
@@ -220,3 +220,14 @@ function toast(msg, kind = 'ok', action = null) {
   clearTimeout(toastT); toastT = setTimeout(() => { x.hidden = true; }, err ? 7000 : Math.max(action ? 5000 : 2800, 1500 + msg.length * 45));
 }
 
+
+/* Vista de proyecto sin proyecto abierto: explica qué muestra y ofrece las tres formas de empezar */
+function vNeedProject(v) {
+  const ic = (NAV.find(([x]) => x === v) || [, 'folder'])[1];
+  return `${head(`${icon(ic, 14)}${esc(t('needEyebrow'))}`, esc(t('nav.' + v)), esc(t('needLead', t('viewDesc.' + v))))}
+  <div class="starts">
+    <button type="button" class="start primary" data-act="nav" data-view="nuevo"><span class="ico">${icon('plus', 22)}</span><b>${esc(t('stNew'))}</b><span>${esc(t('stNewTxt'))}</span><em>${esc(t('stNewCta'))}${icon('arrow-right', 16)}</em></button>
+    <button type="button" class="start" data-act="import-ens"><span class="ico">${icon('upload', 22)}</span><b>${esc(t('stImp'))}</b><span>${esc(t('stImpTxt'))}</span><em>${esc(t('stImpCta'))}${icon('arrow-right', 16)}</em></button>
+    <button type="button" class="start" data-act="open-case" data-case="techserv" data-then="${esc(v)}"><span class="ico">${icon('book-open', 22)}</span><b>${esc(t('needCase'))}</b><span>${esc(t('needCaseTxt'))}</span><em>${esc(t('openCase'))}${icon('arrow-right', 16)}</em></button>
+  </div>`;
+}

@@ -82,7 +82,7 @@ Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto n
         <img src="docs/assets/stack/navegador.svg" height="48" alt="Playwright">
         <img src="docs/assets/stack/accesibilidad.svg" height="48" alt="axe-core">
         <img src="docs/assets/stack/codeql.svg" height="48" alt="CodeQL"><br>
-        <sub><code>node:test 72 · Playwright 34 · axe-core 0 violaciones · CodeQL</code></sub>
+        <sub><code>node:test 72 · Playwright 36 · axe-core 0 violaciones · CodeQL</code></sub>
       </td>
       <td valign="top"><code>╰─ ⌁ seguridad:</code><br><br>
         <img src="docs/assets/stack/csp.svg" height="48" alt="CSP">
@@ -95,7 +95,7 @@ Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto n
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="2"><code>version: 2.2.0&nbsp;&nbsp;·&nbsp;&nbsp;catalogo: 2.1.0&nbsp;&nbsp;·&nbsp;&nbsp;pruebas: 110 ok&nbsp;&nbsp;·&nbsp;&nbsp;licencia: GPLv2</code></td>
+      <td colspan="2"><code>version: 2.2.0&nbsp;&nbsp;·&nbsp;&nbsp;catalogo: 2.1.0&nbsp;&nbsp;·&nbsp;&nbsp;pruebas: 112 ok&nbsp;&nbsp;·&nbsp;&nbsp;licencia: GPLv2</code></td>
     </tr>
   </tfoot>
 </table>
@@ -210,6 +210,9 @@ También incluye cinco casos de ejemplo con datos ficticios (proveedor TIC del s
 <td><img src="docs/img/readme/mapa-light.png" alt="Correspondencias"/><br/><sub><b>Correspondencias</b> · requisitos por dominio y tabla completa</sub></td>
 <td><img src="docs/img/readme/alcance-light.png" alt="Alcance"/><br/><sub><b>Alcance</b> · ENS por niveles y asistente NIS2</sub></td>
 </tr>
+<tr>
+<td colspan="2"><img src="docs/img/readme/ayuda-light.png" alt="Centro de ayuda"/><br/><sub><b>Centro de ayuda</b> · buscador, primeros pasos, temas, preguntas frecuentes, fuentes oficiales y contacto</sub></td>
+</tr>
 </table>
 
 **Barra lateral.** Fija y desplegada desde 1241 px; compacta (solo iconos) entre 901 y 1240 px o al pulsar `[`. En compacta se despliega por encima del contenido al pasar el ratón o al llegar con el teclado, sin desplazar los iconos; el resaltado sigue al puntero.
@@ -251,6 +254,7 @@ npm run serve          # http://localhost:5173
 | `npm run test:e2e` | Aplicación en Chromium: flujos, Excel, CSP, fuentes y accesibilidad. |
 | `npm run test:all` | Todo lo anterior. |
 | `npm run serve` | Servidor estático local, sin dependencias. |
+| `npm run capturas` | Regenera las capturas de este README a partir de `dist/`. |
 
 ## <img src="docs/assets/icons/network.svg" width="20" height="20" valign="middle"/> Arquitectura
 
@@ -300,7 +304,7 @@ $$\text{cobertura}(r) = \max_{c \in r} w_{c,r} \cdot \frac{\sum_{c \in r} w_{c,r
 | Motor (`engine.test.mjs`) | 47 | Media ponderada, techo de los enlaces parciales, exclusiones no permitidas, categoría ENS efectiva, KPI, prioridades, solapamiento, equivalencias, aplicabilidad NIS2 (17 casos), cinco casos de ejemplo y una instantánea fija. |
 | Catálogo (`catalog.test.mjs`) | 15 | 73 medidas del ENS más 4 artículos, 93 controles de ISO/IEC 27001 y 38 de ISO/IEC 42001, cláusula 6.1.1, art. 23.4 a–e de NIS2, identificadores únicos, enlaces a requisitos existentes, ningún requisito sin control. |
 | Build (`build.test.mjs`) | 10 | Determinismo, documento bien formado, datos idénticos a `src/data`, CSP, hashes SRI, fuentes incrustadas, iconos existentes y `dist/` al día. |
-| E2E (`e2e.test.mjs`) | 21 | Todas las vistas con los cinco casos, centro de ayuda (buscador y enlaces del autor), barra lateral (anchos, ratón, teclado, tableta), deshacer y rehacer, idioma, tema, móvil, ficheros hostiles, inyección de fórmulas y aviso de almacenamiento lleno. Red bloqueada. |
+| E2E (`e2e.test.mjs`) | 23 | Valores por defecto (claro, español, azul), menú sin proyecto, todas las vistas con los cinco casos, centro de ayuda (buscador y enlaces del autor), barra lateral (anchos, ratón, teclado, tableta), deshacer y rehacer, idioma, tema, móvil, ficheros hostiles, inyección de fórmulas y aviso de almacenamiento lleno. Red bloqueada. |
 | Excel, CSP y fuentes (`e2e-excel.test.mjs`) | 13 | Por `file://` y por HTTP: CSP sin violaciones y bloqueando código inyectado, fuentes sin Google Fonts, importación de una SoA del ENS, exportación sin fórmulas y rechazo de una librería manipulada. |
 | Accesibilidad (`a11y.test.mjs`) | 4 | axe-core (WCAG 2.2 A/AA) en 12 vistas, claro y oscuro, 1440 y 390 px: cero violaciones. |
 

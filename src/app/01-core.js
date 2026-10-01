@@ -125,7 +125,7 @@ function openProject(id, view = 'panel') {
   ui.trFw = FW.find((f) => state.alcance[f].on) || 'ens';
   recompute(); snapshot(); undoReset(); saveProject(); go(view);
 }
-function openCase(caseId) {
+function openCase(caseId, view = 'panel') {
   const cs = D.casos.find((c) => c.id === caseId); if (!cs) return;
   const id = 'demo-' + caseId;
   if (!store.get(PKEY(id))) {
@@ -133,7 +133,7 @@ function openCase(caseId) {
     ws.projects = ws.projects.filter((p) => p.id !== id);
     ws.projects.unshift({ id, kind: 'demo', caseId, nombre: cs.titulo, organizacion: cs.state.proyecto.organizacion, created: new Date().toISOString(), updated: new Date().toISOString(), normas: cs.meta.normas, grado: cs.meta.grado, brechas: cs.meta.brechas });
   }
-  ws.onboarded = true; openProject(id);
+  ws.onboarded = true; openProject(id, view);
   toast(t('tCase', cs.titulo));
 }
 function resetCase(caseId) {

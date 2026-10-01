@@ -574,7 +574,7 @@ select option { background: var(--bg); color: var(--ink); }
 .start { all: unset; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px; padding: 22px; border-radius: var(--r-lg); cursor: pointer; background: var(--glass); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); border: 1px solid var(--stroke); box-shadow: var(--shadow); transition: transform .2s, background .2s; color: var(--ink); }
 .start:hover { transform: translateY(-3px); background: var(--glass-2); }
 .start:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.start .ico { width: 46px; height: 46px; border-radius: 15px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.start .ico { flex: none; width: 46px; height: 46px; border-radius: 15px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
 .start b { font: 650 1.1rem var(--f-display); font-variation-settings: "wdth" 92; }
 .start span { color: var(--ink-2); font-size: .9rem; flex: 1; }
 .start em { font-style: normal; color: var(--accent); font-weight: 600; font-size: .86rem; display: inline-flex; gap: 6px; align-items: center; }
@@ -915,3 +915,19 @@ select option { background: var(--bg); color: var(--ink); }
    con letra estrecha y espaciado negativo, el último glifo de cada línea sobresale y se recorta.
    Se amplía la caja por la derecha y por abajo, y se compensa el margen para no mover el texto. */
 .big-num b, .hero h1 em { padding: .04em .14em .08em 0; margin-right: -.14em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+
+/* ============ Sin proyecto abierto: menú activo, vistas de proyecto marcadas ============ */
+.nav-note { display: none; }
+.nav-i.locked, .nav-i.locked:hover { color: var(--muted); }
+.nav-i.locked .ic:not(.lk) { opacity: .75; }
+.nav-i .lk { display: none; }
+.tabbar button.locked, .sheet button.locked { color: var(--muted); }
+@media (min-width: 901px) {
+  .nav-note { display: flex; gap: 8px; align-items: flex-start; margin: 2px 0 0; padding: 10px 12px; border-radius: 14px; font-size: .76rem; line-height: 1.4; color: var(--ink-2);
+    background: var(--glass-in); border: 1px dashed var(--hair-2); width: calc(var(--rail-full) - 24px);
+    opacity: var(--x); max-height: calc(var(--x) * 120px); overflow: hidden; transition: opacity .22s, max-height var(--rail-t), padding var(--rail-t); }
+  :root[data-mini] .dock:not(:hover):not(.kb) .nav-note { padding-top: 0; padding-bottom: 0; border-width: 0; }
+  .nav-note b { display: block; color: var(--ink); font-size: .8rem; }
+  .nav-note .ic { flex: none; margin-top: 1px; color: var(--accent-text, var(--accent)); }
+  .nav-i .lk { display: block; position: absolute; left: calc(var(--rail-full) - var(--rail-mini) + 22px); top: 50%; transform: translateY(-50%); opacity: calc(var(--x) * .8); transition: opacity .22s; color: var(--muted); }
+}
