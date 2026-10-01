@@ -80,6 +80,7 @@ document.addEventListener('input', (ev) => {
   const el = ev.target;
   if (el.dataset.uiq) { ui[el.dataset.uiq] = s(el.value, 200); clearTimeout(ui._qT); ui._qT = setTimeout(render, 150); return; }
   if (el.id === 'tr-q') { ui.trQ = s(el.value, 200); ui.trOpen = true; ui.trIdx = 0; clearTimeout(ui._qT); ui._qT = setTimeout(render, 120); return; }
+  if (el.id === 'help-q') { ui.helpQ = s(el.value, 200); clearTimeout(ui._qT); ui._qT = setTimeout(render, 150); return; }
   if (el.id === 'glo-q') { ui.glosarioQ = s(el.value, 200); clearTimeout(ui._qT); ui._qT = setTimeout(render, 150); return; }
   if (el.id === 'pal-q') { ui.paletteQ = s(el.value, 200); ui.paletteIdx = 0; renderPalette(); return; }
   if (!esTexto(el)) return;
@@ -131,7 +132,7 @@ document.addEventListener('keydown', (ev) => {
   if (ev.key === 'Escape') { if (closeLayers()) ev.preventDefault(); return; }
   if ((ev.key === 'Enter' || ev.key === ' ') && tg.getAttribute && tg.getAttribute('role') === 'button' && tg.dataset.act && tg.tagName !== 'BUTTON') { ev.preventDefault(); tg.click(); return; }
   if (typing || ev.ctrlKey || ev.metaKey || ev.altKey) return;
-  if (ev.key === '/') { const q = $('#uc-q') || $('#tr-q') || $('#norma-q') || $('#mapa-q') || $('#glo-q'); ev.preventDefault(); if (q) q.focus(); else { ui.palette = true; ui.paletteQ = ''; renderPalette(); } return; }
+  if (ev.key === '/') { const q = $('#uc-q') || $('#tr-q') || $('#norma-q') || $('#mapa-q') || $('#help-q') || $('#glo-q'); ev.preventDefault(); if (q) q.focus(); else { ui.palette = true; ui.paletteQ = ''; renderPalette(); } return; }
   if (ev.key === '?') { ui.helpTab = 'atajos'; go('ayuda'); return; }
   if (ev.key === '[') { ev.preventDefault(); toggleRail(); return; }
   if (ev.key.toLowerCase() === 'g') { gPending = true; setTimeout(() => { gPending = false; }, 900); return; }
@@ -192,6 +193,7 @@ document.addEventListener('click', (ev) => {
     case 'pal-close': ui.palette = false; renderPalette(); break;
     case 'pal-run': { const it = (ui._pItems || [])[i]; ui.palette = false; renderPalette(); if (it) it.act(); break; }
     case 'help-tab': ui.helpTab = el.dataset.tab; render(); break;
+    case 'help-topic': { const g = document.getElementById('help-' + el.dataset.id); if (g) { g.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' }); const d = g.querySelector('details'); if (d) { d.open = true; d.querySelector('summary').focus({ preventScroll: true }); } } break; }
     case 'scroll-casos': ev.preventDefault(); { const c = $('#casos'); if (c) c.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' }); else { ws.settings.mostrarCasos = true; saveWs(); render(); const c2 = $('#casos'); if (c2) c2.scrollIntoView({ block: 'start' }); } } break;
     /* proyectos */
     case 'open-project': ui.pop = null; openProject(el.dataset.id); break;

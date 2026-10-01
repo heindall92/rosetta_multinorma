@@ -152,19 +152,71 @@ function vAjustes() {
 }
 
 /* --- Ayuda --- */
+/* ---------- Ayuda ----------
+ * Centro de ayuda (buscador, temas y preguntas por tema), metodología, glosario, reglas, atajos,
+ * fuentes oficiales y «Acerca de» con los datos de contacto del autor. */
+const AUTOR = { nombre: 'Yoandy Ramírez Delgado', email: 'yoandyramirezdelgado@gmail.com', repo: 'https://github.com/heindall92/rosetta_multinorma',
+  links: [['linkedin', 'LinkedIn', 'https://www.linkedin.com/in/yoandyrd92/'], ['github', 'GitHub', 'https://github.com/heindall92'],
+    ['globe', 'Portafolio', 'https://yoandyramirez.com'], ['hackthebox', 'HackTheBox', 'https://profile.hackthebox.com/profile/019c5812-b4ca-7315-b12f-14db6d2b42fa']] };
+const BRAND = { github: 'M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12', hackthebox: 'm22.5106 6.4566.0008-.0123a.888.888 0 0 0-.2717-.6384c-.0084-.0084-.018-.0155-.0267-.0235-.0186-.0166-.0371-.0333-.0572-.0484-.0193-.0147-.04-.0276-.0607-.0406-.0096-.006-.0182-.0131-.0281-.0188L12.4576.1266a.891.891 0 0 0-.9223.0043L1.933 5.6744c-.0107.0062-.0203.014-.0307.0205-.0073.0047-.015.008-.0223.0128-.007.0047-.013.0106-.02.0155a.8769.8769 0 0 0-.147.1333l-.0026.003a.8872.8872 0 0 0-.2218.5847l.0009.014c-.0002.0088-.0015.0176-.0015.0264v11.0708c0 .3277.1802.6288.469.7836l9.5986 5.5417c.0076.0044.0158.0075.0236.0117a.8754.8754 0 0 0 .166.0687c.0134.004.0266.0083.0401.0117a.8793.8793 0 0 0 .072.0142c.0117.0019.0232.0045.0349.006a.835.835 0 0 0 .2157 0c.0117-.0015.0232-.0041.0348-.006a.9.9 0 0 0 .072-.0142c.0135-.0034.0267-.0077.04-.0117a.895.895 0 0 0 .0646-.0217.9134.9134 0 0 0 .1015-.047c.0078-.0042.016-.0072.0236-.0117l9.5986-5.5417a.8888.8888 0 0 0 .469-.7836V6.4779c0-.0071-.0012-.0142-.0014-.0213zM5.2543 6.0822l6.5367-3.774a.4182.4182 0 0 1 .4182 0l6.5366 3.774a.4182.4182 0 0 1 0 .7243l-6.5367 3.774a.4182.4182 0 0 1-.4182 0l-6.5366-3.774a.4182.4182 0 0 1 0-.7243zm5.6134 14.3449a.4172.4172 0 0 1-.626.3613L3.718 17.0218a.4173.4173 0 0 1-.2086-.3613V9.1279a.4172.4172 0 0 1 .6258-.3613l6.524 3.7666a.4172.4172 0 0 1 .2086.3614v7.5325zm9.623-3.7666a.4173.4173 0 0 1-.2086.3613l-6.5239 3.7666a.4172.4172 0 0 1-.6259-.3613v-7.5325c0-.149.0796-.2868.2087-.3614l6.5239-3.7666a.4172.4172 0 0 1 .6258.3613v7.5326z' };
+const brandIcon = (k, size = 16) => (k === 'linkedin'
+  ? `<svg class="ic" width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="4" fill="currentColor"/><text x="12" y="17.2" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="13" fill="#0A66C2">in</text></svg>`
+  : BRAND[k] ? `<svg class="ic" width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="${BRAND[k]}"/></svg>` : icon(k, size));
+const ext = (href, inner, cls = '') => `<a class="${cls}" href="${esc(href)}" target="_blank" rel="noopener noreferrer">${inner}</a>`;
+/* Resaltado de la búsqueda (sin tildes ni mayúsculas; normTxt está en 05-views.js) sobre el texto ya escapado */
+function hl(escaped, q) {
+  if (!q || /[&<>"']/.test(q)) return escaped;
+  const n = normTxt(escaped), nq = normTxt(q); let out = '', from = 0, i;
+  if (n.length !== escaped.length) return escaped;
+  while ((i = n.indexOf(nq, from)) >= 0) { out += escaped.slice(from, i) + '<mark>' + escaped.slice(i, i + nq.length) + '</mark>'; from = i + nq.length; }
+  return out + escaped.slice(from);
+}
+const rich = (x, q) => hl(esc(x), q).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`(.+?)`/g, '<code>$1</code>');
+function helpCenter() {
+  const q = ui.helpQ.trim(); const nq = normTxt(q);
+  const groups = t('helpGroups').map(([id, ic, title, blurb, faqs]) => ({ id, ic, title, blurb, faqs: q ? faqs.filter(([a, b]) => normTxt(a + ' ' + b).includes(nq)) : faqs }))
+    .filter((g) => g.faqs.length);
+  const gloss = q ? t('glosario').filter(([a, b]) => normTxt(a + ' ' + b).includes(nq)) : [];
+  const n = groups.reduce((a, g) => a + g.faqs.length, 0) + gloss.length;
+  const hero = `<section class="help-hero"><h2>${esc(t('helpHero'))}</h2><p>${esc(t('helpHeroTxt'))}</p>
+    <label class="search help-search">${icon('search', 18)}<input type="search" id="help-q" value="${esc(ui.helpQ)}" placeholder="${esc(t('helpSearchPh'))}" aria-label="${esc(t('search'))}" aria-describedby="help-res"></label><p class="small muted" id="help-res" role="status">${q ? esc(t('helpRes', n)) : ''}</p></section>`;
+  const faqs = groups.map((g) => `<section class="help-group" id="help-${g.id}"><h3>${icon(g.ic, 17)}${esc(g.title)}</h3>
+    ${g.faqs.map(([a, b]) => `<details class="help-faq"${q ? ' open' : ''}><summary><span>${rich(a, q)}</span>${icon('chevron-down', 16)}</summary><p>${rich(b, q)}</p></details>`).join('')}</section>`).join('');
+  if (q) return hero + (n ? faqs + (gloss.length ? `<section class="help-group"><h3>${icon('book-open', 17)}${esc(t('helpTabs.glosario'))}</h3><dl class="gloss">${gloss.map(([a, b]) => `<div><dt>${hl(esc(a), q)}</dt><dd>${hl(esc(b), q)}</dd></div>`).join('')}</dl></section>` : '')
+    : `<div class="empty">${icon('search', 28)}<h3>${esc(t('helpNoRes'))}</h3><p>${esc(t('helpNoResTxt'))}</p></div>`);
+  const steps = `<h3 class="help-sec">${icon('flag', 16)}${esc(t('helpSteps'))}</h3><ol class="help-steps">${t('steps').map(([h, p, v], i) => `<li class="play-i"><span class="play-n">${i + 1}</span><div><b>${esc(h)}</b><span class="small muted">${esc(p)}</span></div>${state || v === 'inicio' ? `<button type="button" class="btn sm ghost" data-act="nav" data-view="${v}">${esc(t('go'))}${icon('arrow-right', 15)}</button>` : '<span></span>'}</li>`).join('')}</ol>`;
+  const topics = `<h3 class="help-sec">${icon('book-open', 16)}${esc(t('helpTopics'))}</h3><div class="help-topics">${t('helpGroups').map(([id, ic, title, blurb]) => `<button type="button" class="help-topic" data-act="help-topic" data-id="${id}"><span class="help-topic-ic">${icon(ic, 18)}</span><b>${esc(title)}</b><span>${esc(blurb)}</span><em>${esc(t('readGuide'))}${icon('arrow-right', 13)}</em></button>`).join('')}</div>`;
+  return hero + steps + topics + faqs + helpCta();
+}
+function helpCta() {
+  return `<section class="help-cta"><h3>${icon('life-buoy', 17)}${esc(t('helpCta'))}</h3><p>${esc(t('helpCtaTxt'))}</p><div class="row">
+    ${ext(AUTOR.repo + '/issues/new', `${icon('bug', 15)}${esc(t('openIssue'))}`, 'btn sm primary')}
+    ${ext('mailto:' + AUTOR.email + '?subject=Rosetta', `${icon('mail', 15)}${esc(t('writeAuthor'))}`, 'btn sm')}
+    ${ext(AUTOR.repo, `${brandIcon('github', 15)}${esc(t('seeCode'))}`, 'btn sm')}</div></section>`;
+}
+function helpAbout() {
+  return `<div class="about-card"><div class="avatar c-rosa about-av" style="--s:84px" aria-hidden="true">YR</div><div class="about-who">
+      <h3>${esc(AUTOR.nombre)}</h3><p class="about-role">${esc(t('aboutRole'))}</p><p class="small muted">${esc(t('aboutBio'))}</p>
+      <div class="about-links">${AUTOR.links.map(([k, l, h]) => ext(h, `${brandIcon(k, 16)}${esc(l)}`, `about-link al-${k}`)).join('')}
+        ${ext('mailto:' + AUTOR.email, `${icon('mail', 16)}${esc(AUTOR.email)}`, 'about-link al-mail')}</div></div></div>
+    <h3 class="help-sec">${icon('info', 16)}${esc(t('aboutApp'))}</h3>
+    <p><b>${esc(t('about', VERSION))}</b></p><p>${esc(t('disclaimer'))}</p>
+    <p class="small muted">${esc(t('licences'))}</p>
+    <p class="small">${ext(AUTOR.repo, `${brandIcon('github', 14)} github.com/heindall92/rosetta_multinorma`, 'about-repo')}</p>${helpCta()}`;
+}
 function vAyuda() {
-  const tabs = [['inicio', 'flag'], ['metodo', 'gauge'], ['glosario', 'book-open'], ['reglas', 'shield-check'], ['atajos', 'keyboard'], ['faq', 'circle-question-mark'], ['acerca', 'info']];
-  const tb = ui.helpTab; let body = '';
-  if (tb === 'inicio') body = `<ol class="stack" style="list-style:none;padding:0;margin:0">${t('steps').map(([h, p, v], i) => `<li class="play-i"><span class="play-n">${i + 1}</span><div><b>${esc(h)}</b><span class="small muted">${esc(p)}</span></div>${state || v === 'inicio' ? `<button type="button" class="btn sm ghost" data-act="nav" data-view="${v}">${esc(t('go'))}${icon('arrow-right', 15)}</button>` : '<span></span>'}</li>`).join('')}</ol>`;
+  const tabs = [['inicio', 'life-buoy'], ['metodo', 'gauge'], ['glosario', 'book-open'], ['reglas', 'shield-check'], ['atajos', 'keyboard'], ['refs', 'landmark'], ['acerca', 'info']];
+  const tb = tabs.some(([id]) => id === ui.helpTab) ? ui.helpTab : 'inicio'; let body = '';
+  if (tb === 'inicio') body = helpCenter();
   else if (tb === 'metodo') body = `<p>${esc(t('methodP1', CAT.controls.length, CAT.domains.length))}</p><div class="grid g3">${t('methodCards').map(([h, p]) => `<div class="glass pane"><h3>${esc(h)}</h3><p class="small" style="margin-top:6px">${esc(p)}</p></div>`).join('')}</div>
     <p class="small">${esc(t('methodSrc'))}</p><p class="small">${esc(t('methodVal', pct(PAREJAS.coinciden / PAREJAS.total, 1), PAREJAS.total, PAREJAS.relacion))}</p><p class="small"><b>${esc(t('methodOv'))}</b></p>${overlapGrid(null)}`;
-  else if (tb === 'glosario') { const q = ui.glosarioQ.toLowerCase(); const items = t('glosario').filter(([a, b]) => !q || (a + b).toLowerCase().includes(q)); body = `<div class="search">${icon('search', 16)}<input type="search" id="glo-q" value="${esc(ui.glosarioQ)}" placeholder="${esc(t('search2'))}"></div><dl class="gloss">${items.map(([a, b]) => `<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join('') || `<p class="muted">${esc(t('noResults'))}</p>`}</dl>`; }
+  else if (tb === 'glosario') { const q = ui.glosarioQ.toLowerCase(); const items = t('glosario').filter(([a, b]) => !q || (a + b).toLowerCase().includes(q)); body = `<div class="search">${icon('search', 16)}<input type="search" id="glo-q" value="${esc(ui.glosarioQ)}" placeholder="${esc(t('search2'))}" aria-label="${esc(t('search2'))}"></div><dl class="gloss">${items.map(([a, b]) => `<div><dt>${esc(a)}</dt><dd>${esc(b)}</dd></div>`).join('') || `<p class="muted">${esc(t('noResults'))}</p>`}</dl>`; }
   else if (tb === 'reglas') body = `<div style="overflow-x:auto"><table class="tbl"><thead><tr><th>${esc(t('rule'))}</th><th>${esc(t('severity'))}</th><th>${esc(t('checks'))}</th>${state ? `<th>${esc(t('inProject'))}</th>` : ''}</tr></thead><tbody>${E.REGLAS.map(([id, sv, d]) => `<tr><td><code>${id}</code></td><td>${sevPill(sv)}</td><td>${esc(LANG() === 'en' ? E.REGLAS_EN[id] : d)}</td>${state ? `<td class="num">${hall.filter((f) => f.id === id).length}</td>` : ''}</tr>`).join('')}</tbody></table></div>`;
   else if (tb === 'atajos') body = `<div class="kbds">${t('keys').map(([a, b]) => `<div><span>${a.split(' ').map((x) => (/^(\+|·|y|luego|then)$/.test(x) ? `<em class="muted">${x}</em>` : `<kbd>${esc(x)}</kbd>`)).join(' ')}</span><span class="small muted">${esc(b)}</span></div>`).join('')}</div>`;
-  else if (tb === 'faq') body = `<div class="faq">${t('faq').map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}</div>`;
-  else body = `<p><b>${esc(t('about', VERSION))}</b></p><p>${esc(t('author'))}</p><p>${esc(t('disclaimer'))}</p><p class="small muted">${esc(t('licences'))}</p>`;
+  else if (tb === 'refs') body = `<div class="help-refs">${t('helpRefs').map(([h, ti, d]) => ext(h, `${icon('external-link', 16)}<span><b>${esc(ti)}</b><small>${esc(d)}</small></span>`, 'help-ref')).join('')}</div>`;
+  else body = helpAbout();
   return `${head(esc(t('helpEyebrow')), esc(t('helpTitle')), esc(t('helpLead')))}
-  <div class="help"><nav class="glass help-nav">${tabs.map(([id, ic]) => `<button type="button" data-act="help-tab" data-tab="${id}"${tb === id ? ' aria-current="page"' : ''}>${icon(ic, 16)}${esc(t('helpTabs.' + id))}</button>`).join('')}</nav>
-  <section class="glass help-body"><h2>${esc(t('helpTabs.' + tb))}</h2>${body}</section></div>`;
+  <div class="help"><nav class="glass help-nav" aria-label="${esc(t('helpTitle'))}">${tabs.map(([id, ic]) => `<button type="button" data-act="help-tab" data-tab="${id}"${tb === id ? ' aria-current="page"' : ''}>${icon(ic, 16)}${esc(t('helpTabs.' + id))}</button>`).join('')}</nav>
+  <section class="glass help-body">${tb === 'inicio' ? '' : `<h2>${esc(t('helpTabs.' + tb))}</h2>`}${body}</section></div>`;
 }
 

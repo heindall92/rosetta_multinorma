@@ -67,7 +67,7 @@ const ui = {
   view: 'inicio', drawer: false, menu: null, confirm: null, palette: false, paletteQ: '', paletteIdx: 0,
   trFw: 'ens', trId: null, trQ: '', trOpen: false, trIdx: 0, ucQ: '', ucEstado: 'todos', ucFw: 'todos', ucSoloRel: true,
   normaFw: 'ens', normaQ: '', normaEstado: 'todos', mapaQ: '', brechaSev: 'todas', planVer: false,
-  helpTab: 'inicio', glosarioQ: '', wizard: null, insp: null, pop: null, sheet: false, wAnim: true, planAll: false
+  helpTab: 'inicio', helpQ: '', glosarioQ: '', wizard: null, insp: null, pop: null, sheet: false, wAnim: true, planAll: false
 };
 
 function recompute() {
