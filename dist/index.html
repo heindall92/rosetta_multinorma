@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-1oe0cWpA2N3r1BL7Qkpb3p36DpWWimj8dtUV2ISoMIU=' 'sha256-h+RECHgYeQNMuQAFOck7RSt8/VGsn8fxipSw4KhM3ic=' 'sha256-Ro3s8KIjhdQWX41uLx8N9Ir1f18miWGYrgLjQCoFKt8=' 'self' https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js; style-src 'sha256-6xQDgFGOlwYqMLK6bFVp49YjIoij618l3t4GoUV1viM='; style-src-attr 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'none'; worker-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-1oe0cWpA2N3r1BL7Qkpb3p36DpWWimj8dtUV2ISoMIU=' 'sha256-h+RECHgYeQNMuQAFOck7RSt8/VGsn8fxipSw4KhM3ic=' 'sha256-ToWsCExo4hl/DQcdMlKwycHQ5CjS44miGlAjoUtdIfM=' 'self' https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js; style-src 'sha256-Cy3fsYV9X9a0cP+H9RD4GQmFuJETFM/silEg71xSn30='; style-src-attr 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'none'; worker-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23e0337a'/%3E%3Cstop offset='1' stop-color='%236d3fd1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='20' cy='20' r='18' fill='url(%23g)'/%3E%3Ccircle cx='20' cy='20' r='7' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
@@ -692,106 +692,83 @@ select option { background: var(--bg); color: var(--ink); }
 .profile { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 32px 20px; }
 .rule { display: grid; grid-template-columns: auto 60px 70px minmax(0, 1fr); gap: 12px; align-items: center; padding: 8px 4px; font-size: .86rem; cursor: pointer; border-top: 1px solid var(--hair); }
 
-.rail-tg { display: none; }
+.rail-tg, .rail-sp, .nav-glow { display: none; }
+.acts { display: contents; }
 /* ============ Barra lateral (escritorio) ============
-   A partir de 901 px la barra flotante pasa a ser un raíl de cristal a la izquierda:
-   ancho con etiquetas desde 1241 px y compacto (solo iconos) entre 901 y 1240 px. */
+   Desde 901 px la barra es un raíl de cristal a la izquierda con dos anchos: completo (264 px) y compacto (76 px).
+   - ≥ 1241 px: completo y fijo; con «[» o el botón se pliega a compacto.
+   - 901–1240 px: compacto.
+   En compacto se despliega por encima del contenido al pasar el ratón, al navegar con teclado o con el botón (táctil).
+   El contenido se maqueta siempre al ancho completo y el raíl lo recorta: los iconos no se mueven y solo cambian
+   anchos, posiciones y opacidades, controlados por --x (0 plegado, 1 desplegado). */
 @media (min-width: 901px) {
-  :root { --rail-w: 248px; }
-  .dock { top: calc(12px + env(safe-area-inset-top, 0px)); bottom: 12px; left: 12px; transform: none; width: var(--rail-w); height: auto;
-    flex-direction: column; align-items: stretch; gap: 10px; padding: 16px 12px 14px; border-radius: 28px; overflow-y: auto; scrollbar-width: none; }
+  :root { --rail-full: 264px; --rail-mini: 76px; --rail-w: var(--rail-full); --rail-t: .38s cubic-bezier(.2,.8,.2,1); --ni: 44px; --ng: 4px; }
+  @media (max-height: 860px) { :root { --ni: 38px; --ng: 2px; } .dock { gap: 6px; } .tools { gap: 8px; padding-top: 10px; } }
+  :root[data-mini] { --rail-w: var(--rail-mini); }
+  .dock { --x: 1; top: calc(12px + env(safe-area-inset-top, 0px)); bottom: 12px; left: 12px; transform: none; height: auto;
+    width: calc(var(--rail-mini) + var(--x) * (var(--rail-full) - var(--rail-mini)));
+    flex-direction: column; align-items: flex-start; gap: 8px; padding: 14px 12px; border-radius: 26px; overflow: hidden auto; scrollbar-width: none; }
   .dock::-webkit-scrollbar { display: none; }
-  .brand { padding: 2px 6px 8px; }
-  .proj-pill { max-width: none; width: 100%; flex: none; }
+  :root[data-mini] .dock { --x: 0; }
+  :root[data-mini][data-rail-open] .dock, :root[data-mini] .dock.kb { --x: 1; }
+  @media (hover: hover) { :root[data-mini] .dock:hover { --x: 1; } }
+  :root[data-mini] .dock:is(:hover, .kb), :root[data-mini][data-rail-open] .dock { background: color-mix(in oklch, var(--glass-3) 70%, var(--bg)); box-shadow: var(--shadow-lg), 0 30px 80px -20px oklch(0.1 0.04 272 / .45); }
+  :root.ready .dock { transition: width var(--rail-t), box-shadow .3s; }
+  :root.ready .main { transition: padding-left var(--rail-t); }
+  .dock > * { flex: none; }
+  /* Elementos que solo se ven desplegado */
+  .brand > span, .proj-pill > span:not(.dotc), .proj-pill > .ic, .nav-i .lbl, .search-pill .lbl, .search-pill kbd, .avatar-btn .who, .avatar-btn .who-more {
+    opacity: var(--x); transition: opacity .22s ease; white-space: nowrap; }
+  :root[data-mini] .dock:not(:hover) :is(.brand > span, .nav-i .lbl, .search-pill .lbl, .avatar-btn .who) { pointer-events: none; }
+  /* Cabecera */
+  .brand { padding: 2px 0 4px 9px; width: calc(var(--rail-full) - 24px); }
+  .rail-tg { display: inline-grid; position: absolute; z-index: 1; width: 34px; height: 34px;
+    top: calc(16px + (1 - var(--x)) * 46px); right: calc(12px + (1 - var(--x)) * 9px); transition: top var(--rail-t), right var(--rail-t); }
+  .rail-sp { display: block; height: calc((1 - var(--x)) * 42px); transition: height var(--rail-t); }
+  .proj-pill { max-width: none; height: 44px; padding: 0 12px 0 9px; gap: 10px; width: calc(52px + var(--x) * (var(--rail-full) - var(--rail-mini))); transition: width var(--rail-t), background .15s; }
+  .proj-pill .dotc { width: 34px; height: 34px; }
   .proj-pill > span:not(.dotc) { flex: 1; }
-  .nav { flex-direction: column; align-items: stretch; margin: 4px 0 0; padding: 0; gap: 3px; overflow: visible; flex: 1; }
-  .nav-i { width: 100%; height: 44px; justify-content: flex-start; gap: 12px; padding: 0 14px !important; border-radius: 14px; flex: none; }
-  .nav-i .badge-n { margin-left: auto; }
-  .nav-i[aria-current="page"]::before { content: ""; position: absolute; left: -12px; top: 10px; bottom: 10px; width: 3px; border-radius: 0 3px 3px 0; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
-  .tools { flex-wrap: wrap; justify-content: space-between; gap: 10px; padding-top: 14px; border-top: 1px solid var(--hair-2); }
-  .search-pill { order: -1; width: 100%; }
+  /* Navegación: resaltado que se desliza hasta la opción bajo el puntero y vuelve a la actual */
+  .nav { position: relative; flex-direction: column; align-items: flex-start; margin: 4px 0 0; padding: 0; gap: var(--ng); overflow: visible; flex: 1 0 auto; --cur: 0; --g: var(--cur); }
+  .nav-glow { display: block; position: absolute; left: 0; top: 0; border-radius: 14px; pointer-events: none; opacity: 0; height: var(--ni);
+    width: calc(52px + var(--x) * (var(--rail-full) - var(--rail-mini))); background: var(--nav-hover); box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--accent) 14%, transparent);
+    transform: translateY(calc(var(--g) * (var(--ni) + var(--ng)))); transition: transform .32s cubic-bezier(.3,1.2,.5,1), opacity .2s, width var(--rail-t); }
+  .nav[data-cur] .nav-glow, .nav.hov .nav-glow { opacity: 1; }
+  .nav-i, .nav-i:not([aria-current="page"]) { height: var(--ni); justify-content: flex-start; gap: 14px; padding: 0 0 0 17px; border-radius: 14px; flex: none;
+    width: calc(52px + var(--x) * (var(--rail-full) - var(--rail-mini))); transition: width var(--rail-t), color .15s, background .2s; }
+  .nav-i .lbl, .nav-i:not([aria-current="page"]) .lbl { display: inline; }
+  .nav-i:hover { background: transparent; }
+  .nav-i[aria-current="page"], .nav-i[aria-current="page"]:hover { background: var(--nav-on); }
+  .nav-i[aria-current="page"]::before { content: ""; position: absolute; left: -12px; top: 11px; bottom: 11px; width: 3px; border-radius: 0 3px 3px 0; background: var(--accent); box-shadow: 0 0 12px var(--accent); }
+  /* El contador viaja de la esquina del icono al extremo derecho */
+  .nav-i .badge-n { position: absolute; margin: 0; top: calc(4px + var(--x) * (var(--ni) / 2 - 13px)); left: calc(30px + var(--x) * (var(--rail-full) - var(--rail-mini) - 4px));
+    transition: top var(--rail-t), left var(--rail-t); box-shadow: 0 0 0 2px var(--glass-3); }
+  /* Pie: buscador, acciones y cuenta */
+  .tools { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding-top: 12px; border-top: 1px solid var(--hair-2); width: calc(52px + var(--x) * (var(--rail-full) - var(--rail-mini))); transition: width var(--rail-t); }
+  .search-pill { order: 0; height: 42px; padding: 0 8px 0 17px; gap: 10px; width: 100%; }
   .search-pill kbd { margin-left: auto; }
+  .acts { display: block; position: relative; width: 100%; height: calc(136px - var(--x) * 96px); transition: height var(--rail-t); }
+  .acts > * { position: absolute; transition: left var(--rail-t), top var(--rail-t), width var(--rail-t); }
+  .acts .lang { left: calc(4px - var(--x) * 4px); top: 0; height: 40px; width: calc(44px + var(--x) * 38px); overflow: hidden; }
+  .acts .lang:has([data-v="en"][aria-pressed="true"]) { justify-content: flex-end; }
+  .acts .theme-sw { left: calc(8px + var(--x) * 82px); top: calc(52px - var(--x) * 50px); width: calc(36px + var(--x) * 28px); overflow: hidden; }
+  .acts .theme-sw .sun, .acts .theme-sw .moon { opacity: var(--x); transition: opacity .2s; }
+  .acts .theme-sw.dark .knob { transform: translateX(calc(var(--x) * 28px)); }
+  .acts .acc-btn { left: calc(6px + var(--x) * 156px); top: calc(96px - var(--x) * 96px); width: 40px; height: 40px; }
+  .avatar-btn { order: 9; display: flex; align-items: center; gap: 10px; margin: 0; padding: 5px 8px 5px 9px; border-radius: 16px; box-sizing: border-box;
+    width: calc(52px + var(--x) * (var(--rail-full) - var(--rail-mini))); transition: width var(--rail-t), background .15s; }
+  .avatar-btn:hover { background: var(--nav-hover); }
+  .avatar-btn .who { display: flex; flex-direction: column; min-width: 0; flex: 1; text-align: left; line-height: 1.25; }
+  .avatar-btn .who b { font-size: .84rem; font-weight: 600; overflow: hidden; text-overflow: ellipsis; }
+  .avatar-btn .who small { font-size: .72rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; }
+  .avatar-btn .who-more { display: block; color: var(--muted); }
   .main { padding: calc(28px + env(safe-area-inset-top, 0px)) 28px 64px calc(var(--rail-w) + 40px); }
   .insp { top: calc(12px + env(safe-area-inset-top, 0px)); }
   .help-nav { top: 24px; }
   .toast { left: calc(50% + var(--rail-w) / 2); }
-  :root.ready .dock { transition: width .28s cubic-bezier(.2,.8,.2,1), padding .28s; }
-  :root.ready .main { transition: padding-left .28s cubic-bezier(.2,.8,.2,1); }
-  .rail-tg { display: inline-grid; position: absolute; top: 16px; right: 12px; width: 34px; height: 34px; z-index: 1; }
-}
-@media (min-width: 1241px) {
-  .nav-i:not([aria-current="page"]) .lbl { display: inline; }
-  .tools { gap: 8px; }
-  .acc-btn { width: 44px; }
-  .avatar-btn { order: 9; width: 100%; display: flex; align-items: center; gap: 10px; margin: 4px 0 0; padding: 6px 8px 6px 6px; border-radius: 16px; box-sizing: border-box; }
-  .avatar-btn:hover { background: var(--nav-hover); }
-  .avatar-btn .who { display: flex; flex-direction: column; min-width: 0; flex: 1; text-align: left; line-height: 1.25; }
-  .avatar-btn .who b { font-size: .84rem; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .avatar-btn .who small { font-size: .72rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .avatar-btn .who-more { display: block; color: var(--muted); }
-}
-/* Raíl compacto: siempre entre 901 y 1240 px (salvo desplegado encima) y, desde 1241 px, si se ha plegado */
-@media (min-width: 901px) and (max-width: 1240px) {
-  :root { --rail-w: 88px; }
-  :root:not([data-rail-open]) .dock { align-items: center; padding: 14px 10px; }
-  :root:not([data-rail-open]) .brand { padding: 2px 0 6px; }
-  :root:not([data-rail-open]) .brand > span { display: none; }
-  :root:not([data-rail-open]) .proj-pill { width: 48px; height: 48px; padding: 0; justify-content: center; }
-  :root:not([data-rail-open]) .proj-pill > span:not(.dotc), :root:not([data-rail-open]) .proj-pill > .ic { display: none; }
-  :root:not([data-rail-open]) .proj-pill .dotc { width: 34px; height: 34px; }
-  :root:not([data-rail-open]) .nav-i { width: 52px; justify-content: center; padding: 0 !important; margin: 0 auto; }
-  :root:not([data-rail-open]) .tools { flex-direction: column; align-items: center; justify-content: flex-start; width: 100%; }
-  :root:not([data-rail-open]) .search-pill { width: 44px; padding: 0; justify-content: center; }
-  :root:not([data-rail-open]) .lang { flex-direction: column; }
-  :root:not([data-rail-open]) .avatar-btn { margin: 0; }
-  :root:not([data-rail-open]) .nav-i .badge-n { position: absolute; top: 2px; right: 2px; margin: 0; }
-  :root:not([data-rail-open]) .rail-tg { position: static; }
-  :root[data-rail-open] .dock { width: 248px; align-items: stretch; padding: 16px 12px 14px; box-shadow: var(--shadow-lg), 0 0 0 100vmax oklch(0.15 0.03 272 / .18); }
-  :root[data-rail-open] .brand { padding: 2px 6px 8px; }
-  :root[data-rail-open] .brand > span { display: block; }
-  :root[data-rail-open] .proj-pill { width: 100%; height: 40px; padding: 0 12px 0 8px; justify-content: flex-start; }
-  :root[data-rail-open] .proj-pill > span:not(.dotc) { display: block; }
-  :root[data-rail-open] .proj-pill > .ic { display: inline; }
-  :root[data-rail-open] .proj-pill .dotc { width: 26px; height: 26px; }
-  :root[data-rail-open] .nav-i { width: 100%; justify-content: flex-start; padding: 0 14px !important; }
-  :root[data-rail-open] .nav-i .lbl { display: inline; }
-  :root[data-rail-open] .nav-i .badge-n { position: static; margin-left: auto; }
-  :root[data-rail-open] .tools { flex-direction: row; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
-  :root[data-rail-open] .search-pill { width: 100%; padding: 0 8px 0 13px; justify-content: flex-start; }
-  :root[data-rail-open] .search-pill .lbl, :root[data-rail-open] .search-pill kbd { display: inline; }
-  :root[data-rail-open] .lang { flex-direction: row; }
-  :root[data-rail-open] .avatar-btn { order: 9; width: 100%; display: flex; align-items: center; gap: 10px; margin: 4px 0 0; padding: 6px 8px 6px 6px; border-radius: 16px; box-sizing: border-box; }
-  :root[data-rail-open] .avatar-btn .who { display: flex; flex-direction: column; min-width: 0; flex: 1; text-align: left; line-height: 1.25; }
-  :root[data-rail-open] .avatar-btn .who b { font-size: .84rem; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  :root[data-rail-open] .avatar-btn .who small { font-size: .72rem; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  :root[data-rail-open] .avatar-btn .who-more { display: block; color: var(--muted); }
-  :root[data-rail-open] .rail-tg { position: absolute; }
-}
-@media (min-width: 1241px) {
-  :root[data-rail="min"] { --rail-w: 88px; }
-  :root[data-rail="min"] .dock { align-items: center; padding: 14px 10px; }
-  :root[data-rail="min"] .brand { padding: 2px 0 6px; }
-  :root[data-rail="min"] .brand > span { display: none; }
-  :root[data-rail="min"] .proj-pill { width: 48px; height: 48px; padding: 0; justify-content: center; }
-  :root[data-rail="min"] .proj-pill > span:not(.dotc), :root[data-rail="min"] .proj-pill > .ic { display: none; }
-  :root[data-rail="min"] .proj-pill .dotc { width: 34px; height: 34px; }
-  :root[data-rail="min"] .nav-i { width: 52px; justify-content: center; padding: 0 !important; margin: 0 auto; }
-  :root[data-rail="min"] .tools { flex-direction: column; align-items: center; justify-content: flex-start; width: 100%; }
-  :root[data-rail="min"] .search-pill { width: 44px; padding: 0; justify-content: center; }
-  :root[data-rail="min"] .lang { flex-direction: column; }
-  :root[data-rail="min"] .avatar-btn { margin: 0; }
-  :root[data-rail="min"] .nav-i .badge-n { position: absolute; top: 2px; right: 2px; margin: 0; }
-  :root[data-rail="min"] .rail-tg { position: static; }
-  :root[data-rail="min"] .nav-i:not([aria-current="page"]) .lbl, :root[data-rail="min"] .nav-i .lbl { display: none; }
-  :root[data-rail="min"] .search-pill .lbl, :root[data-rail="min"] .search-pill kbd { display: none; }
-  :root[data-rail="min"] .avatar-btn { order: 0; width: auto; padding: 0; display: grid; }
-  :root[data-rail="min"] .avatar-btn .who, :root[data-rail="min"] .avatar-btn .who-more { display: none; }
 }
 /* ============ Responsive ============ */
 @media (max-width: 1240px) {
-  .nav-i .lbl { display: none; }
-  .nav-i { padding: 0 11px; }
-  .search-pill .lbl, .search-pill kbd { display: none; }
   .orbit { grid-template-columns: 1fr; }
   .stage { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; }
   .stage .dst { grid-column: 1 / -1; }
@@ -801,12 +778,15 @@ select option { background: var(--bg); color: var(--ink); }
 }
 @media (max-width: 900px) {
   :root { --dock-h: 58px; }
+  .nav-i .lbl { display: none; }
+  .nav-i { padding: 0 11px; }
+  .search-pill .lbl, .search-pill kbd { display: none; }
   .dock { gap: 4px; padding: 0 6px 0 8px; }
   .dock .nav, .dock .theme-sw, .dock .lang, .dock .acc-btn { display: none; }
   .brand small { display: none; }
   .proj-pill { max-width: none; flex: 1; }
   .tabbar { display: flex; position: fixed; z-index: 40; left: 12px; right: 12px; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); height: 64px; padding: 6px; gap: 2px; border-radius: 26px;
-    background: var(--glass-2); -webkit-backdrop-filter: var(--blur-lg); backdrop-filter: var(--blur-lg); border: 1px solid var(--stroke); box-shadow: var(--shadow-lg); }
+    background: var(--glass-3); -webkit-backdrop-filter: var(--blur-lg); backdrop-filter: var(--blur-lg); border: 1px solid var(--stroke); box-shadow: var(--shadow-lg); }
   .tabbar button { all: unset; box-sizing: border-box; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border-radius: 20px; font-size: .64rem; font-weight: 600; color: var(--muted); cursor: pointer; position: relative; }
   .tabbar button[aria-current="page"] { background: var(--nav-on); color: var(--accent); }
   .tabbar button[disabled] { opacity: .35; }
@@ -1925,8 +1905,9 @@ const railMedium = () => window.innerWidth > 900 && window.innerWidth <= 1240;
 const railCollapsed = () => (railMedium() ? !ui.railOpen : !!ws.settings.railMin);
 function applyRail() {
   const r = document.documentElement;
-  if (ws.settings.railMin) r.setAttribute('data-rail', 'min'); else r.removeAttribute('data-rail');
-  if (ui.railOpen && railMedium()) r.setAttribute('data-rail-open', ''); else { r.removeAttribute('data-rail-open'); if (!railMedium()) ui.railOpen = false; }
+  if (!railMedium()) ui.railOpen = false;
+  r.toggleAttribute('data-mini', railMedium() || !!ws.settings.railMin); // raíl compacto (se despliega encima al pasar el ratón)
+  r.toggleAttribute('data-rail-open', railMedium() ? !!ui.railOpen : false);
 }
 function toggleRail() {
   if (railMedium()) ui.railOpen = !ui.railOpen; else { ws.settings.railMin = !ws.settings.railMin; saveWs(); }
@@ -1936,15 +1917,16 @@ function toggleRail() {
 function renderDock() {
   const p = activeMeta(); const dark = isDark();
   const item = ([v, ic]) => `<button type="button" class="nav-i" data-act="nav" data-view="${v}"${ui.view === v ? ' aria-current="page"' : ''}${!state ? ' disabled' : ''} data-tip="${esc(t('nav.' + v))}">${icon(ic, 17)}<span class="lbl">${esc(t('nav.' + v))}</span>${navBadge(v)}</button>`;
-  return `<button type="button" class="brand" data-act="nav" data-view="inicio" aria-label="Rosetta · ${esc(t('nav.inicio'))}">${rosette(34)}<span><b>Rosetta</b><small>${esc(t('brandSub'))}</small></span></button>
+  const cur = NAV.findIndex(([v]) => v === ui.view);
+  return `<button type="button" class="brand" data-act="nav" data-view="inicio" aria-label="Rosetta · ${esc(t('nav.inicio'))}">${rosette(34)}<span><b>Rosetta</b><small>${esc(t('brandSub'))}</small></span></button><span class="rail-sp" aria-hidden="true"></span>
     <button type="button" class="ibtn rail-tg" data-act="rail-toggle" aria-expanded="${!railCollapsed()}" aria-label="${esc(t(railCollapsed() ? 'railOpen' : 'railClose'))}" data-tip="${esc(t(railCollapsed() ? 'railOpen' : 'railClose'))} · [">${icon(railCollapsed() ? 'chevron-right' : 'chevron-left', 17)}</button>
     <button type="button" class="proj-pill" data-act="pop" data-pop="proyectos" aria-haspopup="true" aria-expanded="${ui.pop === 'proyectos'}"><span class="dotc">${icon(state ? (p?.kind === 'demo' ? caseIcon(p.caseId) : 'building-2') : 'folder', 15)}</span><span>${state ? esc(state.proyecto.nombre || '—') : esc(t('noProject'))}</span>${icon('chevron-down', 15)}</button>
-    <nav class="nav" aria-label="${esc(t('sections'))}">${NAV.map(item).join('')}</nav>
+    <nav class="nav" aria-label="${esc(t('sections'))}"${cur >= 0 ? ` data-cur style="--cur:${cur}"` : ''}><span class="nav-glow" aria-hidden="true"></span>${NAV.map(item).join('')}</nav>
     <div class="tools">
       <button type="button" class="search-pill" data-act="palette" aria-label="${esc(t('search'))}">${icon('search', 16)}<span class="lbl">${esc(t('search'))}</span><kbd>Ctrl K</kbd></button>
-      <div class="lang" role="group" aria-label="${esc(t('language'))}"><button type="button" data-act="lang" data-v="es" aria-pressed="${LANG() === 'es'}">ES</button><button type="button" data-act="lang" data-v="en" aria-pressed="${LANG() === 'en'}">EN</button></div>
+      <div class="acts"><div class="lang" role="group" aria-label="${esc(t('language'))}"><button type="button" data-act="lang" data-v="es" aria-pressed="${LANG() === 'es'}">ES</button><button type="button" data-act="lang" data-v="en" aria-pressed="${LANG() === 'en'}">EN</button></div>
       <button type="button" class="theme-sw${dark ? ' dark' : ''}" role="switch" aria-checked="${dark}" data-act="toggle-theme" aria-label="${esc(t('toTheme', dark))}">${icon('sun', 14, 'sun')}${icon('moon', 14, 'moon')}<span class="knob">${icon(dark ? 'moon' : 'sun', 15)}</span></button>
-      <button type="button" class="ibtn acc-btn" data-act="pop" data-pop="acento" aria-label="${esc(t('accent'))}" aria-haspopup="true">${icon('palette', 18)}</button>
+      <button type="button" class="ibtn acc-btn" data-act="pop" data-pop="acento" aria-label="${esc(t('accent'))}" aria-haspopup="true">${icon('palette', 18)}</button></div>
       <button type="button" class="avatar-btn" data-act="pop" data-pop="cuenta" aria-label="${esc(t('nav.perfil'))}" aria-haspopup="true">${avatar(34)}<span class="who"><b>${esc(ws.profile.nombre || t('noName'))}</b><small>${esc(ws.profile.rol || t('noRole'))}</small></span>${icon('ellipsis', 16, 'who-more')}</button>
     </div>`;
 }
@@ -3191,6 +3173,18 @@ document.addEventListener('click', (ev) => {
   }
 });
 function closeLayersInsp() { const back = ui.insp; ui.insp = null; render(); if (back && back.type === 'uc') { const el = document.getElementById('uc-' + back.id); if (el) el.focus({ preventScroll: true }); } }
+
+/* Barra lateral: el resaltado sigue al puntero (la posición la fija --g; ver rosetta.css) */
+document.addEventListener('pointerover', (ev) => {
+  const nav = document.querySelector('#dock .nav'); if (!nav) return;
+  const it = ev.target.closest && ev.target.closest('#dock .nav-i');
+  if (it && !it.disabled) { nav.style.setProperty('--g', [...nav.querySelectorAll('.nav-i')].indexOf(it)); nav.classList.add('hov'); }
+  else if (!(ev.target.closest && ev.target.closest('#dock .nav'))) { nav.style.removeProperty('--g'); nav.classList.remove('hov'); }
+});
+
+/* Barra lateral compacta: se despliega mientras el foco de teclado está dentro (clase .kb; ver rosetta.css) */
+document.addEventListener('focusin', (ev) => { const d = document.getElementById('dock'); if (d) d.classList.toggle('kb', !!(ev.target.closest && ev.target.closest('#dock') && ev.target.matches(':focus-visible'))); });
+document.addEventListener('focusout', (ev) => { const d = document.getElementById('dock'); if (d && !(ev.relatedTarget && ev.relatedTarget.closest && ev.relatedTarget.closest('#dock'))) d.classList.remove('kb'); });
 
 /* Redibujar los haces del Prisma y recolocar menús al cambiar el tamaño */
 let rzT = null;

@@ -68,8 +68,9 @@ const railMedium = () => window.innerWidth > 900 && window.innerWidth <= 1240;
 const railCollapsed = () => (railMedium() ? !ui.railOpen : !!ws.settings.railMin);
 function applyRail() {
   const r = document.documentElement;
-  if (ws.settings.railMin) r.setAttribute('data-rail', 'min'); else r.removeAttribute('data-rail');
-  if (ui.railOpen && railMedium()) r.setAttribute('data-rail-open', ''); else { r.removeAttribute('data-rail-open'); if (!railMedium()) ui.railOpen = false; }
+  if (!railMedium()) ui.railOpen = false;
+  r.toggleAttribute('data-mini', railMedium() || !!ws.settings.railMin); // raíl compacto (se despliega encima al pasar el ratón)
+  r.toggleAttribute('data-rail-open', railMedium() ? !!ui.railOpen : false);
 }
 function toggleRail() {
   if (railMedium()) ui.railOpen = !ui.railOpen; else { ws.settings.railMin = !ws.settings.railMin; saveWs(); }
@@ -79,15 +80,16 @@ function toggleRail() {
 function renderDock() {
   const p = activeMeta(); const dark = isDark();
   const item = ([v, ic]) => `<button type="button" class="nav-i" data-act="nav" data-view="${v}"${ui.view === v ? ' aria-current="page"' : ''}${!state ? ' disabled' : ''} data-tip="${esc(t('nav.' + v))}">${icon(ic, 17)}<span class="lbl">${esc(t('nav.' + v))}</span>${navBadge(v)}</button>`;
-  return `<button type="button" class="brand" data-act="nav" data-view="inicio" aria-label="Rosetta · ${esc(t('nav.inicio'))}">${rosette(34)}<span><b>Rosetta</b><small>${esc(t('brandSub'))}</small></span></button>
+  const cur = NAV.findIndex(([v]) => v === ui.view);
+  return `<button type="button" class="brand" data-act="nav" data-view="inicio" aria-label="Rosetta · ${esc(t('nav.inicio'))}">${rosette(34)}<span><b>Rosetta</b><small>${esc(t('brandSub'))}</small></span></button><span class="rail-sp" aria-hidden="true"></span>
     <button type="button" class="ibtn rail-tg" data-act="rail-toggle" aria-expanded="${!railCollapsed()}" aria-label="${esc(t(railCollapsed() ? 'railOpen' : 'railClose'))}" data-tip="${esc(t(railCollapsed() ? 'railOpen' : 'railClose'))} · [">${icon(railCollapsed() ? 'chevron-right' : 'chevron-left', 17)}</button>
     <button type="button" class="proj-pill" data-act="pop" data-pop="proyectos" aria-haspopup="true" aria-expanded="${ui.pop === 'proyectos'}"><span class="dotc">${icon(state ? (p?.kind === 'demo' ? caseIcon(p.caseId) : 'building-2') : 'folder', 15)}</span><span>${state ? esc(state.proyecto.nombre || '—') : esc(t('noProject'))}</span>${icon('chevron-down', 15)}</button>
-    <nav class="nav" aria-label="${esc(t('sections'))}">${NAV.map(item).join('')}</nav>
+    <nav class="nav" aria-label="${esc(t('sections'))}"${cur >= 0 ? ` data-cur style="--cur:${cur}"` : ''}><span class="nav-glow" aria-hidden="true"></span>${NAV.map(item).join('')}</nav>
     <div class="tools">
       <button type="button" class="search-pill" data-act="palette" aria-label="${esc(t('search'))}">${icon('search', 16)}<span class="lbl">${esc(t('search'))}</span><kbd>Ctrl K</kbd></button>
-      <div class="lang" role="group" aria-label="${esc(t('language'))}"><button type="button" data-act="lang" data-v="es" aria-pressed="${LANG() === 'es'}">ES</button><button type="button" data-act="lang" data-v="en" aria-pressed="${LANG() === 'en'}">EN</button></div>
+      <div class="acts"><div class="lang" role="group" aria-label="${esc(t('language'))}"><button type="button" data-act="lang" data-v="es" aria-pressed="${LANG() === 'es'}">ES</button><button type="button" data-act="lang" data-v="en" aria-pressed="${LANG() === 'en'}">EN</button></div>
       <button type="button" class="theme-sw${dark ? ' dark' : ''}" role="switch" aria-checked="${dark}" data-act="toggle-theme" aria-label="${esc(t('toTheme', dark))}">${icon('sun', 14, 'sun')}${icon('moon', 14, 'moon')}<span class="knob">${icon(dark ? 'moon' : 'sun', 15)}</span></button>
-      <button type="button" class="ibtn acc-btn" data-act="pop" data-pop="acento" aria-label="${esc(t('accent'))}" aria-haspopup="true">${icon('palette', 18)}</button>
+      <button type="button" class="ibtn acc-btn" data-act="pop" data-pop="acento" aria-label="${esc(t('accent'))}" aria-haspopup="true">${icon('palette', 18)}</button></div>
       <button type="button" class="avatar-btn" data-act="pop" data-pop="cuenta" aria-label="${esc(t('nav.perfil'))}" aria-haspopup="true">${avatar(34)}<span class="who"><b>${esc(ws.profile.nombre || t('noName'))}</b><small>${esc(ws.profile.rol || t('noRole'))}</small></span>${icon('ellipsis', 16, 'who-more')}</button>
     </div>`;
 }

@@ -243,6 +243,18 @@ document.addEventListener('click', (ev) => {
 });
 function closeLayersInsp() { const back = ui.insp; ui.insp = null; render(); if (back && back.type === 'uc') { const el = document.getElementById('uc-' + back.id); if (el) el.focus({ preventScroll: true }); } }
 
+/* Barra lateral: el resaltado sigue al puntero (la posición la fija --g; ver rosetta.css) */
+document.addEventListener('pointerover', (ev) => {
+  const nav = document.querySelector('#dock .nav'); if (!nav) return;
+  const it = ev.target.closest && ev.target.closest('#dock .nav-i');
+  if (it && !it.disabled) { nav.style.setProperty('--g', [...nav.querySelectorAll('.nav-i')].indexOf(it)); nav.classList.add('hov'); }
+  else if (!(ev.target.closest && ev.target.closest('#dock .nav'))) { nav.style.removeProperty('--g'); nav.classList.remove('hov'); }
+});
+
+/* Barra lateral compacta: se despliega mientras el foco de teclado está dentro (clase .kb; ver rosetta.css) */
+document.addEventListener('focusin', (ev) => { const d = document.getElementById('dock'); if (d) d.classList.toggle('kb', !!(ev.target.closest && ev.target.closest('#dock') && ev.target.matches(':focus-visible'))); });
+document.addEventListener('focusout', (ev) => { const d = document.getElementById('dock'); if (d && !(ev.relatedTarget && ev.relatedTarget.closest && ev.relatedTarget.closest('#dock'))) d.classList.remove('kb'); });
+
 /* Redibujar los haces del Prisma y recolocar menús al cambiar el tamaño */
 let rzT = null;
 window.addEventListener('resize', () => { clearTimeout(rzT); rzT = setTimeout(() => { applyRail(); $('#dock').innerHTML = renderDock(); if (ui.view === 'traductor') drawBeams(); if (ui.pop) renderPop(); }, 120); });
