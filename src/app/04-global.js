@@ -145,7 +145,7 @@ function vAjustes() {
     <section class="glass pane"><h3>${esc(t('casesPref'))}</h3>
       ${setRow(esc(t('showCases')), esc(t('showCasesHint')), sw('mostrarCasos', 'st-mc'))}
       ${setRow(esc(t('closeCases')), esc(t('closeCasesHint')), `<button type="button" class="btn sm" data-act="close-demos">${icon('x', 15)}${esc(t('closeN', ws.projects.filter((p) => p.kind === 'demo').length))}</button>`)}</section>
-    <section class="glass pane"><h3>${esc(t('dataPriv'))}</h3><p class="small muted" style="margin:6px 0">${esc(t('dataPrivTxt'))}</p>
+    <section class="glass pane"><h3>${esc(t('dataPriv'))}</h3><p class="small muted" style="margin:6px 0">${esc(t('dataPrivTxt'))}</p>${location.protocol === 'file:' ? `<div class="alert">${icon('triangle-alert', 16)}${esc(t('fileWarn'))}</div>` : ''}
       ${setRow(esc(t('backup')), esc(t('backupHint')), `<div class="row"><button type="button" class="btn sm" data-act="backup">${icon('download', 15)}${esc(t('download'))}</button><button type="button" class="btn sm" data-act="restore">${icon('upload', 15)}${esc(t('restore'))}</button></div>`)}
       ${setRow(esc(t('wipe')), esc(t('wipeHint')), conf ? `<div class="row"><button type="button" class="btn sm danger-solid" data-act="wipe">${esc(t('wipeYes'))}</button><button type="button" class="btn sm" data-act="confirm-no">${esc(t('cancel'))}</button></div>` : `<button type="button" class="btn sm danger" data-act="ask" data-what="wipe">${icon('trash-2', 15)}${esc(t('wipeAsk'))}</button>`)}</section>
   </div>`;

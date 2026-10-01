@@ -69,14 +69,25 @@ const ctlCsv = () => toCsv([['ID', tx('Dominio', 'Domain'), t('control'), tx('Es
   ...CAT.controls.map((c) => { const d = state.controles[c.id]; return [c.id, dT(c.dom), cT(c.id), estL(d.estado), d.responsable, d.revision, d.evidencias, ...FW.map((f) => mapsTxt(c, f)), calc.controles[c.id].relevante ? yes() : no()]; })]);
 
 /* --- Excel --- */
-function loadXLSX() {
-  if (window.XLSX) return Promise.resolve(window.XLSX);
+const XLSX_CACHE = {};
+function loadScript(src, sri) {
   return new Promise((res, rej) => {
-    const sc = document.createElement('script'); sc.src = XLSX_URL; sc.async = true;
-    sc.onload = () => (window.XLSX ? res(window.XLSX) : rej(new Error(t('tXlsxLib'))));
-    sc.onerror = () => rej(new Error(t('tXlsxLib')));
+    const sc = document.createElement('script'); sc.src = src; sc.async = true; sc.referrerPolicy = 'no-referrer';
+    // SRI: el navegador rechaza el fichero si cambia un solo byte. Desde el disco (file://) Chromium no puede verificarlo
+    // (no hay CORS) y tampoco aporta nada: quien puede cambiar vendor/ puede cambiar también este HTML.
+    if (!(location.protocol === 'file:' && !/^https?:/.test(src))) { sc.integrity = sri; sc.crossOrigin = 'anonymous'; }
+    sc.onload = () => { sc.remove(); res(); }; sc.onerror = () => { sc.remove(); rej(new Error(t('tXlsxLib'))); };
     document.head.appendChild(sc);
   });
+}
+/* Las dos librerías publican window.XLSX: cada una se guarda aparte y el global se retira tras cargarla. */
+function loadXLSX(uso = 'escribir') {
+  if (XLSX_CACHE[uso]) return XLSX_CACHE[uso];
+  const lib = XLSX_LIBS[uso];
+  const take = () => { const X = window.XLSX; try { delete window.XLSX; } catch (e) { window.XLSX = undefined; } if (!X) throw new Error(t('tXlsxLib')); return X; };
+  XLSX_CACHE[uso] = loadScript(lib.file, lib.sri).catch(() => loadScript(lib.cdn, lib.sri)).then(take)
+    .catch((e) => { delete XLSX_CACHE[uso]; throw e; });
+  return XLSX_CACHE[uso];
 }
 async function exportXlsx() {
   try {
@@ -177,7 +188,7 @@ async function leerSoaEns(file) {
     return { soa: limpiaSoa(o.soa), niveles: nivelesDe(o.categorizacion), organizacion: s(pr.organizacion, 200), descripcion: s(pr.sistema, 300) };
   }
   if (!checkSize(file, LIM.fileXlsx, t('excelIs'))) return null;
-  const X = await loadXLSX();
+  const X = await loadXLSX('leer');
   const wb = X.read(await file.arrayBuffer(), { type: 'array', cellFormula: false, cellHTML: false, sheetStubs: false });
   if (wb.SheetNames.length > 40) throw new Error(t('tTooManySheets'));
   const rowsOf = (name) => X.utils.sheet_to_json(wb.Sheets[name], { header: 1, defval: null, raw: true }).slice(0, 5000).map((r) => (r || []).slice(0, 60).map((c) => (c === null || typeof c === 'number' ? c : s(c))));

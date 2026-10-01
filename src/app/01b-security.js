@@ -82,8 +82,8 @@ function sanitizeWs(raw) {
   };
 }
 /* CSV: una celda que empieza por = + - @ (o tab/CR) se ejecutaría como fórmula al abrirla en una hoja de cálculo */
-const noFormula = (v) => { const x = String(v ?? ''); return /^[=+\-@\t\r]/.test(x) ? "'" + x : x; };
-/* Markdown: se neutraliza HTML incrustado y las barras de tabla */
-const mdSafe = (v) => String(v ?? '').replace(/[<>]/g, (c) => (c === '<' ? '&lt;' : '&gt;')).replace(/\|/g, '/').replace(/\r?\n/g, ' ');
+const noFormula = (v) => { const x = String(v ?? ''); return /^[\s\u200B-\u200F\u202A-\u202E\u2060\uFEFF]*[=+\-@\uFF1D\uFF0B\uFF0D\uFF20]|^[\t\r\n]/.test(x) ? "'" + x : x; };
+/* Markdown: se neutraliza HTML incrustado, enlaces/imágenes ([ ] !), énfasis y las barras de tabla */
+const mdSafe = (v) => String(v ?? '').replace(/[\\`*_[\]!]/g, '\\$&').replace(/[<>]/g, (c) => (c === '<' ? '&lt;' : '&gt;')).replace(/\|/g, '/').replace(/[\r\n]+/g, ' ');
 function checkSize(f, max, label) { if (f.size > max) { toast(t('tTooBig', label, Math.round(max / 1048576))); return false; } return true; }
 

@@ -8,7 +8,7 @@
     "build": "node scripts/build.mjs",
     "check": "node scripts/build.mjs --check",
     "test": "node --test tests/engine.test.mjs tests/catalog.test.mjs tests/build.test.mjs",
-    "test:e2e": "node --test tests/e2e.test.mjs",
+    "test:e2e": "node --test tests/e2e.test.mjs tests/e2e-excel.test.mjs",
     "test:all": "npm run build && npm test && npm run test:e2e",
     "serve": "node scripts/serve.mjs"
   },
