@@ -37,7 +37,7 @@ Fuera: ataques que requieren acceso físico al equipo desbloqueado de la víctim
 
 | Activo | Amenaza | Defensa actual |
 |---|---|---|
-| Datos del proyecto en `localStorage` | Otro usuario del mismo perfil del navegador | Documentado; cifrado en reposo en la hoja de ruta |
+| Datos del proyecto en `localStorage` | Otro usuario del mismo perfil del navegador u otra página del mismo origen | Documentado y avisado; cifrado en reposo en la fase 1 de la hoja de ruta |
 | Ficheros importados (JSON, Excel) | XSS, contaminación de prototipos, estado inválido | Esquema con listas blancas, `safeParse`, `Object.prototype` congelado, límites de tamaño |
 | Exportaciones CSV/Excel | Inyección de fórmulas al abrirlas | `noFormula()` en cada celda |
-| Código servido | Cadena de suministro (CDN) | Sin `<script src>` externos al cargar; SheetJS bajo demanda (ver la auditoría) |
+| Código servido | Cadena de suministro | CSP con hashes; sin peticiones a terceros al cargar; librerías de Excel autoalojadas con SRI |
