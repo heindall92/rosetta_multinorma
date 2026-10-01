@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="light" data-accent="azul">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YLxBfU9mn9NlQLq+I8kJjAMcGj6JZKKZ/z9/wVV9Z20=' 'sha256-h+RECHgYeQNMuQAFOck7RSt8/VGsn8fxipSw4KhM3ic=' 'sha256-LDbnLRhCHi83LEXK6GeWT0/p1vvmr1FXbYLLentCl2s=' 'self' https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js; style-src 'sha256-H8obMHSGG66P7xgP34TlJUEDJXF3B2qpHA03e98w4ag='; style-src-attr 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'none'; worker-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-YLxBfU9mn9NlQLq+I8kJjAMcGj6JZKKZ/z9/wVV9Z20=' 'sha256-h+RECHgYeQNMuQAFOck7RSt8/VGsn8fxipSw4KhM3ic=' 'sha256-IaYc0cdNH04BRnQFcfqcOq84rUSs2/mCHDQSrFIRD5I=' 'self' https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js; style-src 'sha256-H8obMHSGG66P7xgP34TlJUEDJXF3B2qpHA03e98w4ag='; style-src-attr 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'none'; worker-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23e0337a'/%3E%3Cstop offset='1' stop-color='%236d3fd1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='20' cy='20' r='18' fill='url(%23g)'/%3E%3Ccircle cx='20' cy='20' r='7' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
@@ -2032,11 +2032,13 @@ const COLOR_IDS = ['rosa', 'solar', 'glaciar', 'orquidea', 'jade', 'grafito'];
 const ACCENTS = ['rosa', 'solar', 'glaciar', 'orquidea', 'verde', 'azul', 'rojo'];
 function sanitizeWs(raw) {
   const r = isObj(raw) ? raw : {};
-  const pr = isObj(r.profile) ? r.profile : {}; const se = isObj(r.settings) ? r.settings : {};
+  const pr = isObj(r.profile) ? r.profile : {}; const se0 = isObj(r.settings) ? r.settings : {};
+  // Valores por defecto v2 (tema claro y acento azul): se aplican una vez a los navegadores con ajustes anteriores
+  const se = se0.def === 2 ? se0 : { ...se0, tema: undefined, acento: undefined };
   return {
     profile: { nombre: s(pr.nombre, 120), rol: s(pr.rol, 80), organizacion: s(pr.organizacion, 160), email: s(pr.email, 160), color: oneOf(pr.color, COLOR_IDS, 'rosa') },
-    settings: { tema: oneOf(se.tema, ['sistema', 'claro', 'oscuro'], 'sistema'), acento: oneOf(se.acento, ACCENTS, 'rosa'), densidad: oneOf(se.densidad, ['comoda', 'compacta'], 'comoda'), lang: oneOf(se.lang, ['es', 'en'], 'es'),
-      reglasOff: arr(se.reglasOff, 40).filter((x) => E.REGLAS.some((rr) => rr[0] === x)), mostrarCasos: se.mostrarCasos !== false, mostrarRelaciones: se.mostrarRelaciones !== false, railMin: se.railMin === true },
+    settings: { tema: oneOf(se.tema, ['sistema', 'claro', 'oscuro'], 'claro'), acento: oneOf(se.acento, ACCENTS, 'azul'), densidad: oneOf(se.densidad, ['comoda', 'compacta'], 'comoda'), lang: oneOf(se.lang, ['es', 'en'], 'es'),
+      reglasOff: arr(se.reglasOff, 40).filter((x) => E.REGLAS.some((rr) => rr[0] === x)), mostrarCasos: se.mostrarCasos !== false, mostrarRelaciones: se.mostrarRelaciones !== false, railMin: se.railMin === true, def: 2 },
     projects: arr(r.projects, 300).filter((p) => isObj(p) && PROJ_ID.test(String(p.id))).map((p) => ({ id: p.id, kind: oneOf(p.kind, ['own', 'demo'], 'own'), caseId: CASE_IDS.includes(p.caseId) ? p.caseId : undefined,
       nombre: s(p.nombre, 200), organizacion: s(p.organizacion, 200), created: s(p.created, 40), updated: s(p.updated, 40), normas: arr(p.normas, 4).filter((f) => FW.includes(f)),
       grado: p.grado === undefined ? undefined : num(p.grado, 0, 1, 0), brechas: Math.round(num(p.brechas, 0, 9999, 0)) })),

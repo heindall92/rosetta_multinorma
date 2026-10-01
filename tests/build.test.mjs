@@ -12,7 +12,7 @@ test('el build es determinista', () => assert.equal(build(), html));
 
 test('no quedan directivas y el documento está bien formado', () => {
   assert.ok(!html.includes('<!-- @'));
-  assert.match(html, /^<!doctype html>\n<html lang="es">/);
+  assert.match(html, /^<!doctype html>\n<html lang="es" data-theme="light" data-accent="azul">/);
   assert.match(html, /<\/body>\n<\/html>\n?$/);
   assert.equal((html.match(/<script>/g) || []).length, (html.match(/<\/script>/g) || []).length);
   assert.equal((html.match(/<script>/g) || []).length, 3);
