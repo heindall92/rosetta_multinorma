@@ -4,14 +4,14 @@
     "icono": "server",
     "titulo": "TechServ Administración",
     "sector": "Proveedor TIC del sector público",
-    "resumen": "El caso de clase. Ya tiene una SoA del ENS de categoría ALTA muy trabajada y quiere certificarse en ISO/IEC 27001. Como proveedor de servicios gestionados de 85 personas, NIS2 la convierte además en entidad importante.",
+    "resumen": "Tiene una SoA del ENS de categoría ALTA completa y quiere certificarse en ISO/IEC 27001. Como proveedor de servicios gestionados de 85 personas, NIS2 la convierte además en entidad importante.",
     "retos": [
       "Heredar ISO 27001 desde la SoA del ENS",
       "NIS2: notificar en 24 h, no solo al CCN-CERT",
       "La dirección aún no ha recibido formación"
     ],
     "sector_en": "ICT provider to the public sector",
-    "resumen_en": "The classroom case. It already has a well-developed ENS Statement of Applicability at HIGH category and wants ISO/IEC 27001 certification. As an 85-person managed service provider, NIS2 also makes it an important entity.",
+    "resumen_en": "It has a complete ENS Statement of Applicability at HIGH category and wants ISO/IEC 27001 certification. As an 85-person managed service provider, NIS2 also makes it an important entity.",
     "retos_en": [
       "Inherit ISO 27001 from the ENS SoA",
       "NIS2: report within 24 h, not only to CCN-CERT",

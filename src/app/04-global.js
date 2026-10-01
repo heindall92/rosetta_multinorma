@@ -22,7 +22,7 @@ function vInicio() {
   return `
   <section class="hero">
     <div><div class="eyebrow">${icon('sparkles', 14)}${esc(t('heroEyebrow'))}</div>
-      <h1>${nombre ? `${esc(t('hello', nombre))}<br>` : ''}${esc(t('heroA'))}<br>${esc(t('heroB'))} <em>${esc(t('heroC'))}</em></h1>
+      <h1>${esc(t('heroA'))}<br>${esc(t('heroB'))} <em>${esc(t('heroC'))}</em></h1>
       <p class="lead">${esc(t('heroLead', TOTAL_REQS, CAT.controls.length))}</p>
       <div class="hero-cta"><button type="button" class="btn primary" data-act="nav" data-view="nuevo">${icon('plus', 17)}${esc(t('stNew'))}</button><button type="button" class="btn" data-act="open-case" data-case="techserv">${icon('orbit', 17)}${esc(t('openCase'))} · TechServ</button></div></div>
     <div class="hero-wheel" aria-hidden="true">${heroWheel()}
