@@ -16,7 +16,8 @@ describe('catálogo', () => {
     assert.deepEqual(Object.keys(CAT.frameworks), E.FW);
     const n = Object.fromEntries(E.FW.map((f) => [f, CAT.frameworks[f].reqs.length]));
     // ENS: 73 medidas del Anexo II · ISO 27001: cl. 4–10 + 93 controles · NIS2: RE 2024/2690 · ISO 42001: cl. 4–10 + 38 controles
-    assert.equal(n.ens, 73);
+    assert.equal(CAT.frameworks.ens.reqs.filter((r) => r.g !== 'Articulado').length, 73);
+    assert.deepEqual(CAT.frameworks.ens.reqs.filter((r) => r.g === 'Articulado').map((r) => r.id), ['art.28', 'art.31', 'art.32', 'art.33']);
     assert.equal(CAT.frameworks.iso27001.reqs.filter((r) => /^A\d/.test(r.id)).length, 93);
     assert.equal(CAT.frameworks.iso42001.reqs.filter((r) => /^A\d/.test(r.id)).length, 38);
     assert.ok(n.nis2 > 0);
@@ -46,6 +47,20 @@ describe('catálogo', () => {
     const ix = E.indexar(CAT); const huerfanos = [];
     for (const f of E.FW) for (const r of CAT.frameworks[f].reqs) if (!ix.reqUcs[f][r.id].length) huerfanos.push(`${f}:${r.id}`);
     assert.deepEqual(huerfanos, []);
+  });
+  test('cláusulas 6.1.1 de ISO y art. 23.4 a–e de NIS2 presentes', () => {
+    for (const f of ['iso27001', 'iso42001']) assert.ok(CAT.frameworks[f].reqs.some((r) => r.id === 'C6.1.1'), f);
+    const codes = CAT.frameworks.nis2.reqs.map((r) => r.code);
+    for (const l of ['a', 'b', 'c', 'd', 'e']) assert.ok(codes.includes(`Art. 23.4 ${l}`), `23.4 ${l}`);
+  });
+  test('ENS op.pl.5 (CPSTIC) no se hereda de ISO 27001', () => {
+    const ix = E.indexar(CAT);
+    assert.ok(ix.reqUcs.ens['op.pl.5'].some((l) => l.uc === 'DES-08' && l.w === 1));
+    assert.ok(!CAT.controls.find((c) => c.id === 'DES-08').maps.iso27001.some((m) => m.w > 0));
+    assert.ok(!E.equivalencias(ix, 'ens', 'op.pl.5').otras.iso27001.some((x) => x.fuerza === 'total'), 'op.pl.5 no tiene equivalente total en ISO 27001');
+  });
+  test('ISO 27001 no exige los plazos de notificación de NIS2 (INC-07 solo relación)', () => {
+    assert.ok(CAT.controls.find((c) => c.id === 'INC-07').maps.iso27001.every((m) => m.w === 0));
   });
   test('ENS: cada medida declara dimensiones y exigencia por nivel', () => {
     for (const r of CAT.frameworks.ens.reqs) {

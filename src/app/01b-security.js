@@ -39,7 +39,7 @@ function sanitizeState(raw) {
     iso42001: { on: g('iso42001').on === true }
   };
   const q = isObj(r.nis2q) ? r.nis2q : {};
-  st.nis2q = { sector: oneOf(q.sector, ['anexo1', 'anexo2', 'ninguno'], 'ninguno'), especial: oneOf(q.especial, ['ninguno', 'dns', 'tld', 'qtsp', 'telecom', 'admin-central', 'admin-regional'], 'ninguno'), tamano: oneOf(q.tamano, E.TAMANOS, 'pequena'), infraDigital: q.infraDigital === true };
+  st.nis2q = { sector: oneOf(q.sector, ['anexo1', 'anexo2', 'ninguno'], 'ninguno'), especial: oneOf(q.especial, E.NIS2_ESPECIALES, 'ninguno'), tamano: oneOf(q.tamano, E.TAMANOS, 'pequena'), infraDigital: q.infraDigital === true };
   st.controles = {};
   const rc = isObj(r.controles) ? r.controles : {};
   for (const c of CAT.controls) {
@@ -50,7 +50,7 @@ function sanitizeState(raw) {
   const re = isObj(r.exclusiones) ? r.exclusiones : {};
   for (const f of FW) {
     st.exclusiones[f] = {};
-    for (const [k, v] of safeEntries(re[f], 400)) if (IX.req[f][k]) st.exclusiones[f][k] = s(v, 1000);
+    for (const [k, v] of safeEntries(re[f], 400)) if (IX.req[f][k] && E.excluible(f, k)) st.exclusiones[f][k] = s(v, 1000);
   }
   st.acciones = {};
   for (const [k, v] of safeEntries(r.acciones, 400)) if (UC_IDS.has(k) && isObj(v)) st.acciones[k] = { estado: oneOf(v.estado, ACC_ESTADOS, 'Pendiente'), responsable: s(v.responsable, 200), fecha: dateOk(v.fecha), nota: s(v.nota, 1000) };

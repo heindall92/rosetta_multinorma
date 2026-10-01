@@ -55,6 +55,25 @@
     return { BAJO: 'BÁSICA', MEDIO: 'MEDIA', ALTO: 'ALTA' }[max];
   }
 
+  /** Categoría ENS efectiva: nunca inferior a la que exigen los niveles de las dimensiones (Anexo I del RD 311/2022). */
+  function categoriaEfectiva(a) {
+    const orden = ['BÁSICA', 'MEDIA', 'ALTA'];
+    const porNiveles = categoriaDeNiveles(a && a.niveles);
+    const declarada = a && orden.includes(a.categoria) ? a.categoria : null;
+    if (!porNiveles) return declarada || 'ALTA';
+    if (!declarada) return porNiveles;
+    return orden.indexOf(porNiveles) > orden.indexOf(declarada) ? porNiveles : declarada;
+  }
+
+  /* Requisitos que no se pueden excluir: las cláusulas 4–10 de los sistemas de gestión (ISO/IEC 27001 4.3 solo
+   * permite excluir controles del Anexo A, vía 6.1.3 d) y las obligaciones de los arts. 20, 21 y 23 de NIS2. */
+  function excluible(f, id) {
+    const s = String(id);
+    if (f === 'iso27001' || f === 'iso42001') return !/^C\d/.test(s);
+    if (f === 'nis2') return !/^(20|21|23)\./.test(s);
+    return true;
+  }
+
   /** ¿Está la norma en el alcance del proyecto? */
   const enAlcance = (st, f) => !!(st.alcance && st.alcance[f] && st.alcance[f].on);
 
@@ -62,7 +81,7 @@
   function aplicaReq(ix, st, f, id) {
     if (f !== 'ens') return { aplica: true };
     const r = ix.req.ens[id]; const a = st.alcance.ens || {};
-    const nivel = nivelExigidoEns(r.dims, a.niveles, a.categoria);
+    const nivel = nivelExigidoEns(r.dims, a.niveles, categoriaEfectiva(a));
     const exig = r[nivel.toLowerCase()];
     return { aplica: exigidaEns(exig), nivel, exigencia: exig };
   }
@@ -71,12 +90,14 @@
   function estadoUc(st, id) { const c = (st.controles || {})[id]; return c && ESTADOS.includes(c.estado) ? c.estado : 'pendiente'; }
 
   function coberturaReq(ix, st, f, id) {
-    const ex = st.exclusiones && st.exclusiones[f] && Object.prototype.hasOwnProperty.call(st.exclusiones[f], id) ? st.exclusiones[f][id] : undefined;
+    const ex = excluible(f, id) && st.exclusiones && st.exclusiones[f] && Object.prototype.hasOwnProperty.call(st.exclusiones[f], id) ? st.exclusiones[f][id] : undefined;
     const ap = aplicaReq(ix, st, f, id);
     const links = ix.reqUcs[f][id] || [];
     let num = 0, den = 0; const detalle = [];
     for (const l of links) { const e = estadoUc(st, l.uc); num += l.w * SCORE[e]; den += l.w; detalle.push({ uc: l.uc, w: l.w, estado: e }); }
-    const score = den ? num / den : 0;
+    // Techo: si ningún control equivale por completo (todos w = 0,5), el requisito nunca pasa de «parcial».
+    const techo = links.reduce((a, l) => Math.max(a, l.w), 0);
+    const score = den ? (num / den) * techo : 0;
     let estado;
     if (!ap.aplica) estado = 'no-exigido';
     else if (ex !== undefined) estado = 'excluido';
@@ -130,7 +151,7 @@
     const m = {};
     for (const a of FW) {
       const ucsA = new Set();
-      for (const c of ix.cat.controls) if ((c.maps[a] || []).some((x) => x.w > 0)) ucsA.add(c.id); // controles que A necesita
+      for (const c of ix.cat.controls) if ((c.maps[a] || []).some((x) => x.w >= 1)) ucsA.add(c.id); // controles que A exige por completo
       m[a] = {};
       for (const b of FW) {
         const reqs = ix.cat.frameworks[b].reqs;
@@ -149,7 +170,7 @@
   /** Cobertura que se heredaría en B si A estuviese implantada al 100 % (con el estado actual del resto). */
   function inferencia(ix, st, a, b) {
     const st2 = { ...st, controles: { ...(st.controles || {}) } };
-    for (const c of ix.cat.controls) if ((c.maps[a] || []).some((x) => x.w > 0)) st2.controles[c.id] = { ...(st2.controles[c.id] || {}), estado: 'implantado' };
+    for (const c of ix.cat.controls) if ((c.maps[a] || []).some((x) => x.w >= 1)) st2.controles[c.id] = { ...(st2.controles[c.id] || {}), estado: 'implantado' };
     const r = calcular(ix, st2); return r.fw[b];
   }
 
@@ -200,10 +221,10 @@
     ['CO-03', 'Alta', 'Exclusión en una norma que contradice una obligación en otra.'],
     ['CO-04', 'Alta', 'NIS2 en alcance sin supervisión y formación de la dirección (art. 20).'],
     ['CO-05', 'Alta', 'ISO/IEC 42001 en alcance sin evaluación de impacto de los sistemas de IA.'],
-    ['CO-06', 'Media', 'La SoA del ENS declara implantada una medida cuyos controles siguen pendientes.'],
+    ['CO-06', 'Media', 'La SoA del ENS declara implantada una medida cuyos controles no están implantados del todo.'],
     ['CO-07', 'Media', 'Requisito excluido sin justificación.'],
     ['CO-08', 'Media', 'Control implantado sin evidencias.'],
-    ['CO-09', 'Media', 'Control sin revisar en los últimos 12 meses.'],
+    ['CO-09', 'Media', 'Control sin revisar en los últimos 12 meses o sin fecha de revisión.'],
     ['CO-10', 'Baja', 'Control implantado sin responsable.'],
     ['CO-11', 'Baja', 'Control parcial sin acción planificada con fecha.']
   ];
@@ -217,13 +238,14 @@
       co05: ['Sin evaluación de impacto de los sistemas de IA', 'Es uno de los requisitos que ninguna norma de seguridad cubre: no se hereda del ENS ni de ISO/IEC 27001.', 'Define el proceso de evaluación de impacto (personas, grupos y sociedad) y aplícalo a cada sistema antes de desplegarlo.', 'ISO/IEC 42001:2023, 6.1.4, 8.4 y A.5'],
       co02: [(id, n) => `${id} «No aplica», pero lo exigen ${n}`, (k, l) => `Sostiene ${k} requisito(s) en alcance: ${l}.`, 'Implanta el control o excluye formalmente cada requisito con su justificación.'],
       grp: { 'CO-08': ['implantado(s) sin evidencias', 'Sin evidencias, un auditor no puede dar el control por implantado en ninguna de las normas que lo usan.', 'Adjunta las evidencias habituales de cada control (se sugieren en su ficha).'],
-        'CO-09': ['sin revisar en los últimos 12 meses', 'Las cuatro normas exigen revisar periódicamente la eficacia de los controles.', 'Revisa cada control y actualiza su fecha de revisión.'],
+        'CO-09': ['sin revisar en 12 meses o sin fecha de revisión', 'Las cuatro normas exigen revisar periódicamente la eficacia de los controles.', 'Revisa cada control y actualiza su fecha de revisión.'],
         'CO-10': ['implantado(s) sin responsable', 'Todo control necesita un responsable identificable.', 'Asigna un responsable a cada control.'],
         'CO-11': ['parcial(es) sin acción planificada con fecha', 'Un control parcial sin plan no avanza y deja requisitos a medias en todas las normas que lo usan.', 'Planifica cada uno en el plan de acción con responsable y fecha.'] },
       grpT: (n, t) => `${n} control${n === 1 ? '' : 'es'} ${t}`, nCtl: (n) => `${n} controles`, afecta: (l) => ` Afecta a: ${l}.`,
       co07: [(r) => `Exclusión sin justificar: ${r}`, 'Documenta por qué el requisito no aplica.'],
       co03: [(r) => `${r} excluido, pero es obligatorio en otra norma`, (l) => `El mismo control lo exigen: ${l}. La exclusión no ahorra trabajo y un auditor la verá incoherente.`, 'Revisa la exclusión: si el control se implanta por la otra norma, decláralo aplicable.'],
-      co06: [(id) => `La SoA del ENS dice «Implantada» en ${id}, pero sus controles están pendientes`, 'Alinea el estado de los controles con la SoA o corrige la SoA.']
+      co06: [(id) => `La SoA del ENS dice «Implantada» en ${id}, pero sus controles no están implantados del todo`, 'Alinea el estado de los controles con la SoA o corrige la SoA.'],
+      co06p: (n) => `${n === 1 ? 'Una medida declarada' : n + ' medidas declaradas'} «Implantada${n === 1 ? '' : 's'}» en la SoA del ENS con controles solo parciales`, nMed: (n) => `${n} medidas del ENS`
     },
     en: {
       est: (e) => ESTADO_LABEL_EN[e].toLowerCase(), y: ' and ',
@@ -232,20 +254,21 @@
       co05: ['No impact assessment for AI systems', 'No security standard covers this: it is not inherited from the ENS or ISO/IEC 27001.', 'Define the impact assessment process (individuals, groups and society) and apply it to every system before deployment.', 'ISO/IEC 42001:2023, 6.1.4, 8.4 and A.5'],
       co02: [(id, n) => `${id} marked "Not applicable", but ${n} require it`, (k, l) => `It supports ${k} in-scope requirement(s): ${l}.`, 'Implement the control or formally exclude each requirement with its justification.'],
       grp: { 'CO-08': ['implemented without evidence', 'Without evidence, an auditor cannot accept the control as implemented in any of the frameworks that use it.', 'Attach the usual evidence for each control (suggested in its sheet).'],
-        'CO-09': ['not reviewed in the last 12 months', 'All four frameworks require periodic review of control effectiveness.', 'Review each control and update its review date.'],
+        'CO-09': ['not reviewed in 12 months or with no review date', 'All four frameworks require periodic review of control effectiveness.', 'Review each control and update its review date.'],
         'CO-10': ['implemented without an owner', 'Every control needs an identifiable owner.', 'Assign an owner to each control.'],
         'CO-11': ['partial without a dated action', 'A partial control without a plan does not move and leaves requirements half-done in every framework that uses it.', 'Plan each one in the action plan with an owner and a date.'] },
       grpT: (n, t) => `${n} control${n === 1 ? '' : 's'} ${t}`, nCtl: (n) => `${n} controls`, afecta: (l) => ` Affects: ${l}.`,
       co07: [(r) => `Unjustified exclusion: ${r}`, 'Document why the requirement does not apply.'],
       co03: [(r) => `${r} excluded, but mandatory in another framework`, (l) => `The same control is required by: ${l}. The exclusion saves no work and an auditor will see it as inconsistent.`, 'Review the exclusion: if the control is implemented for the other framework, declare it applicable.'],
-      co06: [(id) => `The ENS SoA says "Implemented" for ${id}, but its controls are pending`, 'Align the control states with the SoA or correct the SoA.']
+      co06: [(id) => `The ENS SoA says "Implemented" for ${id}, but its controls are not fully implemented`, 'Align the control states with the SoA or correct the SoA.'],
+      co06p: (n) => `${n === 1 ? 'One measure' : n + ' measures'} declared "Implemented" in the ENS SoA with only partial controls`, nMed: (n) => `${n} ENS measures`
     }
   };
   const REGLAS_EN = {
     'CO-01': 'NIS2 in scope without a 24 h / 72 h / 1 month incident reporting procedure.', 'CO-02': 'Control marked "Not applicable" that an in-scope framework requires.',
     'CO-03': 'Exclusion in one framework that contradicts an obligation in another.', 'CO-04': 'NIS2 in scope without management oversight and training (art. 20).',
-    'CO-05': 'ISO/IEC 42001 in scope without an AI system impact assessment.', 'CO-06': 'The ENS SoA declares a measure implemented while its controls are still pending.',
-    'CO-07': 'Requirement excluded without justification.', 'CO-08': 'Control implemented without evidence.', 'CO-09': 'Control not reviewed in the last 12 months.',
+    'CO-05': 'ISO/IEC 42001 in scope without an AI system impact assessment.', 'CO-06': 'The ENS SoA declares a measure implemented while its controls are not fully implemented.',
+    'CO-07': 'Requirement excluded without justification.', 'CO-08': 'Control implemented without evidence.', 'CO-09': 'Control not reviewed in the last 12 months or with no review date.',
     'CO-10': 'Control implemented without an owner.', 'CO-11': 'Partial control without a dated planned action.'
   };
   function coherencia(ix, st, calc, opts = {}) {
@@ -266,7 +289,7 @@
       if (!cc.relevante) continue;
       if (cc.estado === 'implantado' && !String(d.evidencias || '').trim()) grupo['CO-08'].push(c.id);
       if (cc.estado === 'implantado' && !String(d.responsable || '').trim()) grupo['CO-10'].push(c.id);
-      if (cc.estado !== 'pendiente' && /^\d{4}-\d{2}-\d{2}$/.test(d.revision || '') && dias(d.revision, hoy) > 365) grupo['CO-09'].push(c.id);
+      if (cc.estado !== 'pendiente' && cc.estado !== 'no-aplica' && (!/^\d{4}-\d{2}-\d{2}$/.test(d.revision || '') || dias(d.revision, hoy) > 365)) grupo['CO-09'].push(c.id);
       if (cc.estado === 'parcial') { const a = (st.acciones || {})[c.id]; if (!a || !a.fecha) grupo['CO-11'].push(c.id); }
     }
     for (const [id, ucs] of Object.entries(grupo)) {
@@ -294,10 +317,15 @@
       }
     }
     if (on('ens') && st.ensSoa) {
+      const parciales = [];
       for (const r of calc.req.ens) {
         const d = st.ensSoa[r.id];
-        if (d && /^implantada$/i.test(String(d.estado || '')) && r.estado === 'brecha') add('CO-06', `ENS ${r.id}`, M.co06[0](r.id), titulo(ix, 'ens', r.id, lang), M.co06[1], '', { fw: 'ens', req: r.id });
+        if (!d || !/^implantada$/i.test(String(d.estado || ''))) continue;
+        if (r.estado === 'brecha') add('CO-06', `ENS ${r.id}`, M.co06[0](r.id), titulo(ix, 'ens', r.id, lang), M.co06[1], '', { fw: 'ens', req: r.id });
+        else if (r.estado === 'parcial') parciales.push(r.id);
       }
+      // Las medidas solo parcialmente sostenidas se agrupan en un único hallazgo para no ahogar a las demás
+      if (parciales.length) add('CO-06', parciales.length === 1 ? `ENS ${parciales[0]}` : M.nMed(parciales.length), M.co06p(parciales.length), M.afecta(parciales.join(', ')).trim(), M.co06[1], '', { fw: 'ens', reqs: parciales });
     }
     const peso = { Alta: 0, Media: 1, Baja: 2 };
     return F.sort((a, b) => peso[a.sev] - peso[b.sev] || a.id.localeCompare(b.id));
@@ -359,24 +387,37 @@
 
   /* ---------- Aplicabilidad de NIS2 (Directiva 2022/2555, arts. 2 y 3) ---------- */
   const TAMANOS = ['micro', 'pequena', 'mediana', 'grande'];
+  const NIS2_ESPECIALES = ['ninguno', 'dns', 'tld', 'qtsp', 'telecom', 'admin-central', 'admin-regional', 'tsp', 'cer', 'dora', 'excluida'];
   const N2 = {
     es: { esp: 'Proveedor de DNS, registro de TLD o prestador cualificado de confianza: esencial con independencia del tamaño (art. 3.1 b).', central: 'Entidad de la Administración central (art. 2.2 f i y art. 3.1 d).',
       telG: 'Proveedor de comunicaciones electrónicas públicas mediano o grande (art. 3.1 c).', telP: 'Proveedor de comunicaciones electrónicas públicas: incluido con independencia del tamaño (art. 2.2 a).',
       reg: 'Administración regional o local: su inclusión depende de la ley nacional de transposición (art. 2.2 f ii y 2.5).', a1G: 'Sector de alta criticidad (anexo I) y gran empresa (art. 3.1 a).',
       a1M: 'Sector de alta criticidad (anexo I) y mediana empresa (art. 3.2).', a1P: 'Sector del anexo I, pero por debajo del umbral de mediana empresa, salvo designación expresa (art. 2.2 b–e).',
-      a2: 'Otro sector crítico (anexo II) y empresa mediana o grande (art. 3.2).', a2P: 'Sector del anexo II, pero por debajo del umbral de mediana empresa, salvo designación expresa.', no: 'Sector no incluido en los anexos I y II.' },
+      a2: 'Otro sector crítico (anexo II) y empresa mediana o grande (art. 3.2).', a2P: 'Sector del anexo II, pero por debajo del umbral de mediana empresa, salvo designación expresa.', no: 'Sector no incluido en los anexos I y II.',
+      tspG: 'Prestador de servicios de confianza no cualificado y gran empresa (art. 3.1 a).', tspP: 'Prestador de servicios de confianza no cualificado: incluido con independencia del tamaño (art. 2.2 a iii).',
+      cer: 'Entidad crítica designada con arreglo a la Directiva (UE) 2022/2557 (CER): esencial con independencia del tamaño (arts. 2.3 y 3.1 f).',
+      dora: 'Entidad financiera sujeta al Reglamento (UE) 2022/2554 (DORA): sus requisitos de gestión de riesgos y notificación prevalecen como lex specialis (art. 4). Confirma con tu supervisor.',
+      excl: 'Entidad excluida: actividades de seguridad nacional, defensa o aplicación de la ley (art. 2.7 y 2.8).' },
     en: { esp: 'DNS provider, TLD registry or qualified trust service provider: essential regardless of size (art. 3.1 b).', central: 'Central government entity (art. 2.2 f i and art. 3.1 d).',
       telG: 'Medium or large provider of public electronic communications (art. 3.1 c).', telP: 'Provider of public electronic communications: in scope regardless of size (art. 2.2 a).',
       reg: 'Regional or local administration: inclusion depends on the national transposition law (art. 2.2 f ii and 2.5).', a1G: 'High-criticality sector (Annex I) and large enterprise (art. 3.1 a).',
       a1M: 'High-criticality sector (Annex I) and medium-sized enterprise (art. 3.2).', a1P: 'Annex I sector, but below the medium-sized threshold, unless expressly designated (art. 2.2 b–e).',
-      a2: 'Other critical sector (Annex II) and medium or large enterprise (art. 3.2).', a2P: 'Annex II sector, but below the medium-sized threshold, unless expressly designated.', no: 'Sector not listed in Annexes I and II.' }
+      a2: 'Other critical sector (Annex II) and medium or large enterprise (art. 3.2).', a2P: 'Annex II sector, but below the medium-sized threshold, unless expressly designated.', no: 'Sector not listed in Annexes I and II.',
+      tspG: 'Non-qualified trust service provider and large enterprise (art. 3.1 a).', tspP: 'Non-qualified trust service provider: in scope regardless of size (art. 2.2 a iii).',
+      cer: 'Critical entity designated under Directive (EU) 2022/2557 (CER): essential regardless of size (arts. 2.3 and 3.1 f).',
+      dora: 'Financial entity subject to Regulation (EU) 2022/2554 (DORA): its risk-management and reporting requirements prevail as lex specialis (art. 4). Confirm with your supervisor.',
+      excl: 'Excluded entity: national security, defence or law enforcement activities (art. 2.7 and 2.8).' }
   };
   function nis2Aplicabilidad(q, lang) {
     const T = N2[lang === 'en' ? 'en' : 'es'];
     const t = TAMANOS.includes(q && q.tamano) ? q.tamano : 'pequena';
     const esp = (q && q.especial) || 'ninguno'; const sector = (q && q.sector) || 'ninguno';
     const cir = !!(q && q.infraDigital);
-    const R = (tipo, k) => ({ tipo, motivo: T[k], clave: k, cir });
+    const R = (tipo, k) => ({ tipo, motivo: T[k], clave: k, cir: cir && (tipo === 'esencial' || tipo === 'importante') });
+    if (esp === 'excluida') return R('fuera', 'excl');
+    if (esp === 'dora') return R('fuera', 'dora');
+    if (esp === 'cer') return R('esencial', 'cer');
+    if (esp === 'tsp') return t === 'grande' ? R('esencial', 'tspG') : R('importante', 'tspP');
     if (['dns', 'tld', 'qtsp'].includes(esp)) return R('esencial', 'esp');
     if (esp === 'admin-central') return R('esencial', 'central');
     if (esp === 'telecom') return t === 'mediana' || t === 'grande' ? R('esencial', 'telG') : R('importante', 'telP');
@@ -431,8 +472,8 @@
   function dias(a, b) { return Math.round((new Date(b + 'T00:00:00') - new Date(a + 'T00:00:00')) / 86400000); }
   function instantanea(calc) { const o = {}; for (const f of FW) o[f] = calc.fw[f].on ? Math.round(calc.fw[f].grado * 1000) / 1000 : null; return { cov: o, grado: Math.round(calc.kpi.grado * 1000) / 1000, brechas: calc.kpi.brechas }; }
 
-  return { FW, FW_LABEL, FW_LONG, FW_LONG_EN, ESTADOS, ESTADO_LABEL, ESTADO_LABEL_EN, REGLAS_EN, tt, SCORE, W, DIMS, NIVELES_ENS, CAT_NIVEL, REGLAS, TAMANOS,
-    indexar, nivelExigidoEns, exigidaEns, categoriaDeNiveles, aplicaReq, coberturaReq, calcular, solapamiento, inferencia,
+  return { FW, FW_LABEL, FW_LONG, FW_LONG_EN, ESTADOS, ESTADO_LABEL, ESTADO_LABEL_EN, REGLAS_EN, tt, SCORE, W, DIMS, NIVELES_ENS, CAT_NIVEL, REGLAS, TAMANOS, NIS2_ESPECIALES,
+    indexar, nivelExigidoEns, categoriaEfectiva, excluible, exigidaEns, categoriaDeNiveles, aplicaReq, coberturaReq, calcular, solapamiento, inferencia,
     equivalencias, prioridades, parseIsoRef, parejasClase, coherencia, planAccion, puntuacionEns, desdeSoaEns, nis2Aplicabilidad, orden, codigo, titulo, instantanea, estadoUc };
 });
 

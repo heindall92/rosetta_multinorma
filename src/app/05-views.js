@@ -311,13 +311,13 @@ function vBrechas() {
   const list = hall.filter((h) => ui.brechaSev === 'todas' || h.sev === ui.brechaSev);
   const excl = {};
   for (const f of calc.alcance) excl[f] = calc.req[f].filter((r) => r.estado === 'brecha' && IX.reqUcs[f][r.id].every((l) => calc.controles[l.uc].normas.every((g) => g === f)));
-  const ambito = (h) => (h.ucs && h.ucs.length > 1 ? '' : UC_IDS.has(h.ambito) ? ucChip(h.ambito) : h.fw && h.req && FW.includes(h.fw) && IX.req[h.fw][h.req] ? reqChip(h.fw, h.req) : `<span class="cat">${esc(h.ambito)}</span>`);
-  const multi = (h) => h.ucs && h.ucs.length > 1;
+  const ambito = (h) => ((h.ucs && h.ucs.length > 1) || (h.reqs && h.reqs.length > 1) ? '' : h.reqs && h.reqs.length === 1 && IX.req[h.fw] && IX.req[h.fw][h.reqs[0]] ? reqChip(h.fw, h.reqs[0]) : UC_IDS.has(h.ambito) ? ucChip(h.ambito) : h.fw && h.req && FW.includes(h.fw) && IX.req[h.fw][h.req] ? reqChip(h.fw, h.req) : `<span class="cat">${esc(h.ambito)}</span>`);
+  const multi = (h) => (h.ucs && h.ucs.length > 1) || (h.reqs && h.reqs.length > 1);
   return `${head(`${icon('shield-alert', 14)}${esc(t('gapEyebrow'))}`, esc(t('gapTitle')), esc(t('gapLead')), `<button type="button" class="btn" data-act="export-md">${icon('file-text', 16)}${esc(t('report'))}</button>`)}
   <div class="sev-row">${['Alta', 'Media', 'Baja'].map((sv) => `<button type="button" class="glass sev ${sv}${ui.brechaSev === sv ? ' on' : ''}" data-act="brecha-sev" data-v="${sv}" aria-pressed="${ui.brechaSev === sv}"><b class="num">${hall.filter((h) => h.sev === sv).length}</b><span>${esc(t('sevN', t('sev.' + sv)))}</span></button>`).join('')}</div>
   ${ui.brechaSev !== 'todas' ? `<div class="row"><span class="small muted">${esc(t('filterBy', t('sev.' + ui.brechaSev)))}</span><button type="button" class="btn sm ghost" data-act="brecha-sev" data-v="todas">${esc(t('showAll'))}</button></div>` : ''}
   <div class="findings">${list.map((h) => `<article class="finding ${h.sev}"><div class="row">${sevPill(h.sev)}<code class="ref">${esc(h.id)}</code>${ambito(h)}</div>
-    <div class="t">${esc(h.titulo)}</div><div class="d">${esc(multi(h) ? String(h.detalle).replace(/ (Afecta a|Affects):.*$/, '') : h.detalle)}</div>${multi(h) ? `<div class="chips">${h.ucs.map(ucChip).join('')}</div>` : ''}
+    <div class="t">${esc(h.titulo)}</div><div class="d">${esc(multi(h) ? String(h.detalle).replace(/ (Afecta a|Affects):.*$/, '') : h.detalle)}</div>${multi(h) ? `<div class="chips">${h.ucs ? h.ucs.map(ucChip).join('') : h.reqs.filter((r) => IX.req[h.fw] && IX.req[h.fw][r]).map((r) => reqChip(h.fw, r)).join('')}</div>` : ''}
     <div class="a">${icon('arrow-right', 15)}<span>${esc(h.accion)}</span></div>${h.ref ? `<div class="ref">${esc(h.ref)}</div>` : ''}</article>`).join('') || `<div class="ok-box">${icon('circle-check', 16)}${esc(t('noFindings'))}</div>`}</div>
   <div class="pane-h" style="margin:10px 4px 0"><div><h2>${esc(t('gapsByFw'))}</h2><p>${esc(t('gapsByFwSub'))}</p></div></div>
   <div class="grid g2">${calc.alcance.map((f) => { const br = calc.req[f].filter((r) => r.estado === 'brecha'); return `<section class="glass pane stack"><div class="row spread">${fwTag(f)}<span class="small muted">${br.length} ${esc(t('gaps'))} · ${esc(t('exclusive', excl[f].length))}</span></div>
