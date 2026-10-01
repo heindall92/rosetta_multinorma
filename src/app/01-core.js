@@ -4,7 +4,14 @@ const E = window.RosettaEngine;
 const IX = E.indexar(D.catalog);
 const CAT = D.catalog;
 const FW = E.FW;
-const XLSX_URL = 'https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js';
+/* Librerías de Excel, cargadas solo cuando hacen falta, con integridad verificada (SRI):
+ * - leer ficheros de terceros (SoA del ENS) con SheetJS 0.20.3, sin CVE-2023-30533 ni CVE-2024-22363;
+ * - escribir el Excel con formato con xlsx-js-style (solo datos generados por Rosetta).
+ * Primero se busca la copia autoalojada (vendor/) y, si no está, la misma versión en jsDelivr. tests/build.test.mjs comprueba los hashes. */
+const XLSX_LIBS = {
+  leer: { file: 'vendor/sheetjs-0.20.3.full.min.js', cdn: 'https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js', sri: 'sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT' },
+  escribir: { file: 'vendor/xlsx-js-style-1.2.0.bundle.js', cdn: 'https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js', sri: 'sha384-OUW9euuUyxyHcAhTqbhI+Iyb8LMssXt/cpz0yXhs9UWG2/R/uaWdakx/4cfww7Vb' }
+};
 const VERSION = '2.2.0';
 const DOM = Object.fromEntries(CAT.domains.map((d) => [d.id, d]));
 const SOLAPE = E.solapamiento(IX);

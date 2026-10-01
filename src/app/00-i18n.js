@@ -100,7 +100,7 @@ const I18N = {
     langHint: 'Interfaz, informes y exportaciones.', mapPrefs: 'Prisma y mapa', showRel: 'Mostrar relaciones informativas', showRelHint: 'Correspondencias que orientan pero no cuentan para la cobertura.',
     rulesTitle: 'Revisión de coherencia', activeRules: 'Reglas activas', casesPref: 'Casos de ejemplo', showCases: 'Mostrar los casos en Inicio', showCasesHint: 'Desactívalo cuando trabajes solo con tus proyectos.',
     closeCases: 'Cerrar los casos abiertos', closeCasesHint: 'Elimina las copias de los casos; tus proyectos no se tocan.', closeN: (n) => `Cerrar ${n} caso${n === 1 ? '' : 's'}`,
-    dataPriv: 'Datos y privacidad', dataPrivTxt: 'Todo se guarda en este navegador. Nada se envía a ningún servidor. Haz copias con regularidad.', backup: 'Copia de seguridad', backupHint: 'Perfil, ajustes y proyectos en un único fichero JSON.',
+    dataPriv: 'Datos y privacidad', dataPrivTxt: 'Todo se guarda en este navegador, sin cifrar. Nada se envía a ningún servidor. Haz copias con regularidad.', fileWarn: 'Estás usando Rosetta abierto como fichero local (file://): cualquier otro HTML que abras desde el disco en este navegador puede leer estos datos. Para datos reales, publícalo en un servidor (npm run serve) o en un dominio propio.', backup: 'Copia de seguridad', backupHint: 'Perfil, ajustes y proyectos en un único fichero JSON.',
     download: 'Descargar', restore: 'Restaurar', wipe: 'Borrar todos los datos', wipeHint: 'Elimina perfil, ajustes y proyectos de este navegador.', wipeYes: 'Sí, borrar todo', wipeAsk: 'Borrar…',
     // Ayuda
     helpEyebrow: 'Centro de ayuda', helpTitle: 'Ayuda', helpLead: 'Cómo funciona Rosetta, de dónde salen los datos y cómo sacarle partido.',
@@ -220,7 +220,7 @@ const I18N = {
     langHint: 'Interface, reports and exports.', mapPrefs: 'Prism and map', showRel: 'Show informative relations', showRelHint: 'Links that help you navigate but do not count towards coverage.',
     rulesTitle: 'Consistency review', activeRules: 'Active rules', casesPref: 'Sample cases', showCases: 'Show cases on Home', showCasesHint: 'Turn it off when you work only with your projects.',
     closeCases: 'Close open cases', closeCasesHint: 'Removes the case copies; your projects are untouched.', closeN: (n) => `Close ${n} case${n === 1 ? '' : 's'}`,
-    dataPriv: 'Data and privacy', dataPrivTxt: 'Everything is stored in this browser. Nothing is sent to any server. Back up regularly.', backup: 'Backup', backupHint: 'Profile, settings and projects in one JSON file.',
+    dataPriv: 'Data and privacy', dataPrivTxt: 'Everything is stored in this browser, unencrypted. Nothing is sent to any server. Back up regularly.', fileWarn: 'You are running Rosetta as a local file (file://): any other HTML file you open from disk in this browser can read this data. For real data, serve it (npm run serve) or host it on its own domain.', backup: 'Backup', backupHint: 'Profile, settings and projects in one JSON file.',
     download: 'Download', restore: 'Restore', wipe: 'Delete all data', wipeHint: 'Removes profile, settings and projects from this browser.', wipeYes: 'Yes, delete everything', wipeAsk: 'Delete…',
     helpEyebrow: 'Help centre', helpTitle: 'Help', helpLead: 'How Rosetta works, where the data comes from and how to get the most from it.',
     helpTabs: { inicio: 'Getting started', metodo: 'Methodology', glosario: 'Glossary', reglas: 'Consistency rules', atajos: 'Shortcuts', faq: 'FAQ', acerca: 'About' },

@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { build, buildData, ROOT } from '../scripts/build.mjs';
+import { build, buildData, ROOT, VENDOR, sri } from '../scripts/build.mjs';
 
 const html = build();
 const rd = (p) => readFileSync(join(ROOT, p), 'utf8');
@@ -47,11 +47,31 @@ test('dist/index.html versionado coincide con el build', () => {
   assert.equal(rd('dist/index.html'), html, 'ejecuta «npm run build» y versiona dist/index.html');
 });
 
-test('sin recursos externos salvo Google Fonts y la librería XLSX bajo demanda', () => {
+test('sin recursos externos al cargar: solo el CDN de respaldo de las librerías de Excel', () => {
   const urls = [...html.matchAll(/https?:\/\/[^\s"'`)<>]+/g)].map((m) => new URL(m[0]).host);
-  const allowed = new Set(['fonts.googleapis.com', 'fonts.gstatic.com', 'cdn.jsdelivr.net', 'www.w3.org']);
+  const allowed = new Set(['cdn.jsdelivr.net', 'www.w3.org']);
   const extra = [...new Set(urls)].filter((h) => !allowed.has(h));
   // Enlaces informativos (BOE, EUR-Lex, ISO, CCN…) se permiten solo como texto o href, nunca como <script src>/<link>.
   assert.ok(!/<script[^>]+src=/i.test(html), 'no debe haber <script src> externos');
   for (const h of extra) assert.ok(!new RegExp(`<link[^>]+${h.replace(/\./g, '\\.')}`).test(html), `<link> a ${h}`);
+});
+
+test('los hashes SRI del código coinciden con las librerías autoalojadas y sus CDN', () => {
+  const core = rd('src/app/01-core.js');
+  for (const v of VENDOR) {
+    const h = sri(join(ROOT, 'src/vendor', v.file));
+    assert.ok(core.includes(`file: 'vendor/${v.file}'`), `${v.file} no está en XLSX_LIBS`);
+    assert.ok(core.includes(`cdn: '${v.cdn}', sri: '${h}'`), `SRI desactualizado para ${v.file}: ${h}`);
+    assert.ok(html.includes(v.cdn), `la CSP no permite ${v.cdn}`);
+  }
+});
+
+test('CSP en <meta> con default-src none, sin Google Fonts y con las fuentes incrustadas', () => {
+  const csp = html.match(/<meta http-equiv="Content-Security-Policy" content="([^"]+)">/);
+  assert.ok(csp, 'falta la CSP');
+  assert.match(csp[1], /default-src 'none'/);
+  assert.match(csp[1], /font-src data:/);
+  assert.ok(!/unsafe-eval/.test(csp[1]));
+  assert.ok(!/fonts\.googleapis|fonts\.gstatic/.test(html));
+  assert.equal((html.match(/@font-face/g) || []).length, 3);
 });
