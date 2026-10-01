@@ -95,6 +95,8 @@ for (const modo of ['file', 'http']) {
       assert.ok(r.impl > 10, `controles implantados heredados: ${r.impl}`);
       assert.equal(r.cat, 'MEDIA');
       assert.equal(r.lib, 'undefined', 'la librería no queda en el global');
+      const soa = await s.page.evaluate(() => Object.values(window.__ROSETTA__.state.ensSoa).find((x) => x.evidencias));
+      assert.ok(soa && soa.responsable, 'se conservan evidencias y responsable de la SoA');
       assert.deepEqual(await s.page.evaluate(() => window.__csp), []);
     });
 

@@ -41,16 +41,18 @@ const rG = (f, id) => tt(IX.req[f][id], 'g');
 const cT = (id) => tt(IX.ucMap[id], 't');
 const dT = (id) => tt(DOM[id], 't');
 const reqCodeL = (f, id) => { const c = E.codigo(IX, f, id); return LANG() === 'en' ? c.replace(/^RE /, 'IR ') : c; };
-const uid = () => Math.random().toString(36).slice(2, 8) + Date.now().toString(36).slice(-4);
+/* Identificadores con aleatoriedad criptográfica (no Math.random): 9 caracteres aleatorios + 4 de marca temporal */
+const uid = () => { const a = new Uint8Array(9); crypto.getRandomValues(a); return Array.from(a, (b) => (b % 36).toString(36)).join('') + Date.now().toString(36).slice(-4); };
 const initials = (name) => String(name || '').trim().split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('') || '··';
 const reqCode = (f, id) => reqCodeL(f, id);
 const reqTitle = (f, id) => rT(f, id);
 
 /* Almacenamiento: localStorage si está disponible; si no, memoria (la app funciona igual) */
 const MEM = {};
+let STORE_OK = true;
 const store = {
   get(k) { try { const v = localStorage.getItem(k); return v ? safeParse(v) : (MEM[k] ?? null); } catch (e) { return MEM[k] ?? null; } },
-  set(k, v) { MEM[k] = v; try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* sin persistencia */ } },
+  set(k, v) { MEM[k] = v; try { localStorage.setItem(k, JSON.stringify(v)); STORE_OK = true; } catch (e) { if (STORE_OK) { STORE_OK = false; setTimeout(() => toast(t('tNoStore'), 'error'), 0); } } }, // sin espacio o almacenamiento bloqueado: se avisa una vez
   del(k) { delete MEM[k]; try { localStorage.removeItem(k); } catch (e) { /* nada */ } }
 };
 const WS_KEY = 'rosetta/v1/ws';

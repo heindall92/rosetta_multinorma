@@ -56,7 +56,7 @@ function sanitizeState(raw) {
   for (const [k, v] of safeEntries(r.acciones, 400)) if (UC_IDS.has(k) && isObj(v)) st.acciones[k] = { estado: oneOf(v.estado, ACC_ESTADOS, 'Pendiente'), responsable: s(v.responsable, 200), fecha: dateOk(v.fecha), nota: s(v.nota, 1000) };
   if (isObj(r.ensSoa)) {
     st.ensSoa = {};
-    for (const [k, v] of safeEntries(r.ensSoa, 100)) if (IX.req.ens[k] && isObj(v)) st.ensSoa[k] = { aplica: s(v.aplica, 20), estado: s(v.estado, 40), pct: v.pct === null || v.pct === undefined || v.pct === '' ? null : num(v.pct, 0, 1, null) };
+    for (const [k, v] of safeEntries(r.ensSoa, 100)) if (IX.req.ens[k] && isObj(v)) st.ensSoa[k] = { aplica: s(v.aplica, 20), estado: s(v.estado, 40), pct: v.pct === null || v.pct === undefined || v.pct === '' ? null : num(v.pct, 0, 1, null), justificacion: s(v.justificacion, 1000), evidencias: s(v.evidencias, 1500), responsable: s(v.responsable, 200) };
   }
   st.historial = arr(r.historial, 60).filter((h) => isObj(h) && dateOk(h.fecha)).map((h) => {
     const cov = {}; const hc = isObj(h.cov) ? h.cov : {};

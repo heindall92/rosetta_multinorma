@@ -229,6 +229,17 @@ test('barra lateral compacta en tableta (1100 px)', async () => {
   await ctx2.close();
 });
 
+test('aviso si el navegador no deja guardar', async () => {
+  const p2 = await ctx.newPage();
+  await p2.goto(URL_APP); await p2.waitForFunction(() => window.__ROSETTA__);
+  await p2.evaluate(() => { Storage.prototype.setItem = () => { throw new DOMException('lleno', 'QuotaExceededError'); }; window.__ROSETTA__.openCase('aguas'); });
+  await p2.waitForTimeout(300);
+  const r = await p2.evaluate(() => ({ cls: document.getElementById('toast').className, txt: document.getElementById('toast').textContent, role: document.getElementById('toast').getAttribute('role') }));
+  assert.match(r.txt, /no se están guardando|not being saved/);
+  assert.equal(r.role, 'alert');
+  await p2.close();
+});
+
 test('vista móvil (390 px) sin desbordamiento horizontal', async () => {
   const m = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await m.route(/^https?:\/\//, (r) => r.abort());
