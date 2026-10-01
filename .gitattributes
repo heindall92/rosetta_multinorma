@@ -1,0 +1,4 @@
+* text=auto eol=lf
+*.png binary
+dist/index.html linguist-generated=true
+src/data/*.json linguist-generated=false
