@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="navegador"><title>navegador</title><rect width="256" height="256" rx="60" fill="#242938"/><g transform="translate(58 58) scale(5.8333)" fill="none" stroke="#2EAD33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="m9 10 2 2 4-4" />
+  <rect width="20" height="14" x="2" y="3" rx="2" />
+  <path d="M12 17v4" />
+  <path d="M8 21h8" />
+</g></svg>

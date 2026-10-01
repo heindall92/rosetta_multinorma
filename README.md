@@ -32,6 +32,76 @@ Rosetta enlaza los **319 requisitos** de cuatro normas con **115 controles unifi
 
 Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto no salen del equipo.
 
+<div align="center">
+
+## `$ cat rosetta.yaml`
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="2" align="left"><code>rosetta:~$ cat rosetta.yaml</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%" valign="top"><code>├─ ⚖ normas:</code><br><br>
+        <img src="docs/assets/stack/ens.svg" height="48" alt="ENS">
+        <img src="docs/assets/stack/iso27001.svg" height="48" alt="ISO/IEC 27001">
+        <img src="docs/assets/stack/nis2.svg" height="48" alt="NIS2">
+        <img src="docs/assets/stack/iso42001.svg" height="48" alt="ISO/IEC 42001"><br>
+        <sub><code>ENS 77 · ISO/IEC 27001 118 · NIS2 59 · ISO/IEC 42001 65 requisitos</code></sub>
+      </td>
+      <td width="50%" valign="top"><code>├─ ▣ modelo:</code><br><br>
+        <img src="docs/assets/stack/controles.svg" height="48" alt="Controles unificados">
+        <img src="docs/assets/stack/dominios.svg" height="48" alt="Dominios">
+        <img src="docs/assets/stack/coherencia.svg" height="48" alt="Reglas de coherencia">
+        <img src="docs/assets/stack/plan.svg" height="48" alt="Plan de acción"><br>
+        <sub><code>115 controles · 13 dominios · 11 reglas · plan priorizado</code></sub>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><code>├─ ✦ aplicacion:</code><br><br>
+        <img src="docs/assets/stack/javascript.svg" height="48" alt="JavaScript">
+        <img src="docs/assets/stack/html.svg" height="48" alt="HTML">
+        <img src="docs/assets/stack/css.svg" height="48" alt="CSS">
+        <img src="docs/assets/stack/json.svg" height="48" alt="JSON">
+        <img src="docs/assets/stack/lucide.svg" height="48" alt="Lucide"><br>
+        <sub><code>JavaScript · HTML · CSS · JSON · Lucide</code></sub>
+      </td>
+      <td valign="top"><code>├─ ⚙ build_ci_cd:</code><br><br>
+        <img src="docs/assets/stack/nodejs.svg" height="48" alt="Node.js">
+        <img src="docs/assets/stack/git.svg" height="48" alt="Git">
+        <img src="docs/assets/stack/githubactions.svg" height="48" alt="GitHub Actions">
+        <img src="docs/assets/stack/githubpages.svg" height="48" alt="GitHub Pages"><br>
+        <sub><code>Node.js · Git · GitHub Actions · GitHub Pages</code></sub>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top"><code>├─ ◉ pruebas:</code><br><br>
+        <img src="docs/assets/stack/pruebas.svg" height="48" alt="node:test">
+        <img src="docs/assets/stack/navegador.svg" height="48" alt="Playwright">
+        <img src="docs/assets/stack/accesibilidad.svg" height="48" alt="axe-core">
+        <img src="docs/assets/stack/codeql.svg" height="48" alt="CodeQL"><br>
+        <sub><code>node:test 72 · Playwright 33 · axe-core 0 violaciones · CodeQL</code></sub>
+      </td>
+      <td valign="top"><code>╰─ ⌁ seguridad:</code><br><br>
+        <img src="docs/assets/stack/csp.svg" height="48" alt="CSP">
+        <img src="docs/assets/stack/sri.svg" height="48" alt="SRI">
+        <img src="docs/assets/stack/excel.svg" height="48" alt="SheetJS">
+        <img src="docs/assets/stack/sin-terceros.svg" height="48" alt="Sin terceros"><br>
+        <sub><code>CSP con hashes · SRI · SheetJS 0.20.3 · cero peticiones a terceros</code></sub>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="2"><code>version: 2.2.0&nbsp;&nbsp;·&nbsp;&nbsp;catalogo: 2.1.0&nbsp;&nbsp;·&nbsp;&nbsp;pruebas: 109 ok&nbsp;&nbsp;·&nbsp;&nbsp;licencia: GPLv2</code></td>
+    </tr>
+  </tfoot>
+</table>
+
+</div>
+
 ---
 
 ## Índice
@@ -299,7 +369,7 @@ rosetta_multinorma/
 
 Distribuido bajo licencia [GPLv2](LICENSE) · © 2026 Yoandy Ramírez Delgado.
 
-Componentes de terceros: iconos de [Lucide](https://lucide.dev) (ISC); tipografías Bricolage Grotesque, Onest y Martian Mono (SIL Open Font License 1.1), incrustadas; [SheetJS](https://sheetjs.com) 0.20.3 y [xlsx-js-style](https://github.com/gitbrent/xlsx-js-style) 1.2.0 (Apache 2.0); [Playwright](https://playwright.dev) y [axe-core](https://github.com/dequelabs/axe-core) solo para pruebas. ENS, NIS2 y el RE 2024/2690 son normas públicas (BOE, EUR-Lex); ISO/IEC 27001 e ISO/IEC 42001 son obras protegidas de ISO/IEC.
+Componentes de terceros: iconos de [Lucide](https://lucide.dev) (ISC) y logotipos de [Simple Icons](https://simpleicons.org) (CC0) en la tabla `rosetta.yaml`, cuyas marcas pertenecen a sus titulares; tipografías Bricolage Grotesque, Onest y Martian Mono (SIL Open Font License 1.1), incrustadas; [SheetJS](https://sheetjs.com) 0.20.3 y [xlsx-js-style](https://github.com/gitbrent/xlsx-js-style) 1.2.0 (Apache 2.0); [Playwright](https://playwright.dev) y [axe-core](https://github.com/dequelabs/axe-core) solo para pruebas. ENS, NIS2 y el RE 2024/2690 son normas públicas (BOE, EUR-Lex); ISO/IEC 27001 e ISO/IEC 42001 son obras protegidas de ISO/IEC.
 
 ## <img src="docs/assets/icons/user-round.svg" width="20" height="20" valign="middle"/> Autor
 
