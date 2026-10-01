@@ -98,6 +98,25 @@ test('cambiar el estado de un control recalcula la cobertura', async () => {
   noErrors('set-state');
 });
 
+test('deshacer y rehacer (botón del aviso y Ctrl+Z / Ctrl+Mayús+Z)', async () => {
+  await page.evaluate(() => window.__ROSETTA__.openCase('citafacil'));
+  await page.evaluate(() => window.__ROSETTA__.go('controles'));
+  const id = await page.evaluate(() => Object.entries(window.__ROSETTA__.state.controles).find(([, c]) => c.estado === 'pendiente')[0]);
+  const est = () => page.evaluate((x) => window.__ROSETTA__.state.controles[x].estado, id);
+  await page.evaluate((x) => { const b = document.createElement('button'); b.dataset.act = 'set-state'; b.dataset.id = x; b.dataset.v = 'implantado'; b.hidden = true; document.body.append(b); b.click(); b.remove(); }, id);
+  assert.equal(await est(), 'implantado');
+  await page.locator('#toast [data-act="undo"]').click();
+  assert.equal(await est(), 'pendiente', 'el botón Deshacer revierte');
+  await page.locator('body').press('Control+Shift+z');
+  assert.equal(await est(), 'implantado', 'Ctrl+Mayús+Z rehace');
+  await page.locator('body').press('Control+z');
+  assert.equal(await est(), 'pendiente', 'Ctrl+Z deshace');
+  await page.evaluate(() => window.__ROSETTA__.openCase('techserv'));
+  await page.locator('body').press('Control+z');
+  assert.match(await page.locator('#toast').innerText(), /No hay cambios|Nothing to undo/, 'la pila se vacía al cambiar de proyecto');
+  noErrors('deshacer');
+});
+
 test('idioma: inglés y vuelta a español (interruptor de Ajustes)', async () => {
   await page.evaluate(() => window.__ROSETTA__.go('ajustes'));
   await page.locator('#view [data-act="lang"][data-v="en"]').click();

@@ -94,7 +94,24 @@ function saveProject() {
     saveWs();
   }, 200);
 }
-function commit(msg) { recompute(); snapshot(); saveProject(); render(); if (msg) toast(msg); }
+/* Deshacer / rehacer: pila de estados del proyecto (máx. 30). Cada commit guarda el estado anterior;
+ * la escritura continua en un mismo campo se agrupa en un solo paso. Se vacía al cambiar de proyecto. */
+let UNDO = [], REDO = [], undoBase = null, undoLast = { k: null, t: 0 };
+function undoReset() { UNDO = []; REDO = []; undoBase = state ? clone(state) : null; undoLast = { k: null, t: 0 }; }
+function undoMark(k = null) {
+  if (!state) return;
+  if (!undoBase) { undoBase = clone(state); return; }
+  const now = Date.now();
+  if (!(k && undoLast.k === k && now - undoLast.t < 2500)) { UNDO.push(undoBase); if (UNDO.length > 30) UNDO.shift(); }
+  REDO = []; undoLast = { k, t: now }; undoBase = clone(state);
+}
+function undo(rehacer = false) {
+  const from = rehacer ? REDO : UNDO, to = rehacer ? UNDO : REDO;
+  if (!state || !from.length) { toast(t(rehacer ? 'tNoRedo' : 'tNoUndo')); return; }
+  to.push(clone(state)); state = sanitizeState(from.pop()); undoBase = clone(state); undoLast = { k: null, t: 0 };
+  recompute(); saveProject(); render(); toast(t(rehacer ? 'tRedone' : 'tUndone'), 'ok', rehacer ? null : { act: 'undo', label: t('undo') });
+}
+function commit(msg) { recompute(); snapshot(); undoMark(); saveProject(); render(); if (msg) toast(msg, 'ok', { act: 'undo', label: t('undo') }); }
 
 /* ---------- Proyectos ---------- */
 const activeMeta = () => ws.projects.find((p) => p.id === ws.activeId) || null;
@@ -106,7 +123,7 @@ function openProject(id, view = 'panel') {
   ui.insp = null; ui.trId = null;
   ui.normaFw = state.alcance[ui.normaFw]?.on ? ui.normaFw : (FW.find((f) => state.alcance[f].on) || 'ens');
   ui.trFw = FW.find((f) => state.alcance[f].on) || 'ens';
-  recompute(); snapshot(); saveProject(); go(view);
+  recompute(); snapshot(); undoReset(); saveProject(); go(view);
 }
 function openCase(caseId) {
   const cs = D.casos.find((c) => c.id === caseId); if (!cs) return;
