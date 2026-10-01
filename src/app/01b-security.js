@@ -70,11 +70,13 @@ const COLOR_IDS = ['rosa', 'solar', 'glaciar', 'orquidea', 'jade', 'grafito'];
 const ACCENTS = ['rosa', 'solar', 'glaciar', 'orquidea', 'verde', 'azul', 'rojo'];
 function sanitizeWs(raw) {
   const r = isObj(raw) ? raw : {};
-  const pr = isObj(r.profile) ? r.profile : {}; const se = isObj(r.settings) ? r.settings : {};
+  const pr = isObj(r.profile) ? r.profile : {}; const se0 = isObj(r.settings) ? r.settings : {};
+  // Valores por defecto v2 (tema claro y acento azul): se aplican una vez a los navegadores con ajustes anteriores
+  const se = se0.def === 2 ? se0 : { ...se0, tema: undefined, acento: undefined };
   return {
     profile: { nombre: s(pr.nombre, 120), rol: s(pr.rol, 80), organizacion: s(pr.organizacion, 160), email: s(pr.email, 160), color: oneOf(pr.color, COLOR_IDS, 'rosa') },
-    settings: { tema: oneOf(se.tema, ['sistema', 'claro', 'oscuro'], 'sistema'), acento: oneOf(se.acento, ACCENTS, 'rosa'), densidad: oneOf(se.densidad, ['comoda', 'compacta'], 'comoda'), lang: oneOf(se.lang, ['es', 'en'], 'es'),
-      reglasOff: arr(se.reglasOff, 40).filter((x) => E.REGLAS.some((rr) => rr[0] === x)), mostrarCasos: se.mostrarCasos !== false, mostrarRelaciones: se.mostrarRelaciones !== false, railMin: se.railMin === true },
+    settings: { tema: oneOf(se.tema, ['sistema', 'claro', 'oscuro'], 'claro'), acento: oneOf(se.acento, ACCENTS, 'azul'), densidad: oneOf(se.densidad, ['comoda', 'compacta'], 'comoda'), lang: oneOf(se.lang, ['es', 'en'], 'es'),
+      reglasOff: arr(se.reglasOff, 40).filter((x) => E.REGLAS.some((rr) => rr[0] === x)), mostrarCasos: se.mostrarCasos !== false, mostrarRelaciones: se.mostrarRelaciones !== false, railMin: se.railMin === true, def: 2 },
     projects: arr(r.projects, 300).filter((p) => isObj(p) && PROJ_ID.test(String(p.id))).map((p) => ({ id: p.id, kind: oneOf(p.kind, ['own', 'demo'], 'own'), caseId: CASE_IDS.includes(p.caseId) ? p.caseId : undefined,
       nombre: s(p.nombre, 200), organizacion: s(p.organizacion, 200), created: s(p.created, 40), updated: s(p.updated, 40), normas: arr(p.normas, 4).filter((f) => FW.includes(f)),
       grado: p.grado === undefined ? undefined : num(p.grado, 0, 1, 0), brechas: Math.round(num(p.brechas, 0, 9999, 0)) })),

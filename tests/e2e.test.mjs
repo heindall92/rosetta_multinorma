@@ -44,6 +44,20 @@ test('arranca en Inicio con el dock y sin errores', async () => {
   noErrors('inicio');
 });
 
+test('por defecto: tema claro, español y acento azul eléctrico (también al migrar ajustes antiguos)', async () => {
+  const r = await page.evaluate(() => ({ theme: document.documentElement.dataset.theme, accent: document.documentElement.dataset.accent, lang: document.documentElement.lang }));
+  assert.deepEqual(r, { theme: 'light', accent: 'azul', lang: 'es' });
+  const p2 = await ctx.newPage();
+  await p2.goto(URL_APP);
+  await p2.evaluate(() => localStorage.setItem('rosetta/v1/ws', JSON.stringify({ settings: { tema: 'sistema', acento: 'rosa', lang: 'es' } })));
+  await p2.reload(); await p2.waitForFunction(() => window.__ROSETTA__);
+  assert.deepEqual(await p2.evaluate(() => [document.documentElement.dataset.theme, document.documentElement.dataset.accent]), ['light', 'azul']);
+  await p2.evaluate(() => { localStorage.setItem('rosetta/v1/ws', JSON.stringify({ settings: { tema: 'oscuro', acento: 'verde', def: 2 } })); });
+  await p2.reload(); await p2.waitForFunction(() => window.__ROSETTA__);
+  assert.deepEqual(await p2.evaluate(() => [document.documentElement.dataset.theme, document.documentElement.dataset.accent]), ['dark', 'verde'], 'se respeta la elección del usuario');
+  await p2.evaluate(() => localStorage.clear()); await p2.close();
+});
+
 test('el prototipo de Object queda congelado', async () => {
   assert.equal(await page.evaluate(() => Object.isFrozen(Object.prototype)), true);
 });

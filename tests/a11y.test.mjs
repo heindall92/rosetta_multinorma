@@ -23,6 +23,7 @@ for (const theme of ['light', 'dark']) for (const width of [1440, 390]) {
     await ctx.route(/^https?:\/\//, (r) => r.abort());
     const p = await ctx.newPage();
     await p.goto(URL_APP); await p.waitForFunction(() => window.__ROSETTA__);
+    if (theme === 'dark') await p.evaluate(() => document.querySelector('[data-act="toggle-theme"]').click()); // por defecto es claro
     await p.addScriptTag({ content: AXE });
     const fallos = [];
     for (const v of VIEWS) {
