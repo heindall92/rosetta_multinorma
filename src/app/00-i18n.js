@@ -82,7 +82,7 @@ const I18N = {
       ['file-text', 'Informe de brechas', 'Informe en Markdown con cobertura por norma, solapamiento, incoherencias y prioridades.', 'export-md', 'Descargar .md'],
       ['list-checks', 'Plan de acción', 'Acciones priorizadas con responsable, fecha y normas afectadas.', 'export-plan', 'Descargar .csv'],
       ['layers', 'Controles unificados', 'Estado, responsable, evidencias y requisitos cubiertos de cada control.', 'export-ctl', 'Descargar .csv'],
-      ['file-json', 'Proyecto', 'El proyecto completo en JSON, para llevarlo a otro equipo o a tu repositorio.', 'export-json', 'Descargar .json'],
+      ['file-braces', 'Proyecto', 'El proyecto completo en JSON, para llevarlo a otro equipo o a tu repositorio.', 'export-json', 'Descargar .json'],
       ['archive', 'Copia de seguridad', 'Perfil, ajustes y todos tus proyectos en un único fichero.', 'backup', 'Descargar copia']],
     // Asistente
     wzEyebrow: 'Nuevo proyecto', wzTitle: 'Datos del proyecto', wzLead: 'Tres pasos: organización, normas aplicables y punto de partida.',
@@ -204,7 +204,7 @@ const I18N = {
       ['file-text', 'Gap report', 'Markdown report with coverage per framework, overlap, inconsistencies and priorities.', 'export-md', 'Download .md'],
       ['list-checks', 'Action plan', 'Prioritised actions with owner, date and frameworks affected.', 'export-plan', 'Download .csv'],
       ['layers', 'Unified controls', 'State, owner, evidence and covered requirements of every control.', 'export-ctl', 'Download .csv'],
-      ['file-json', 'Project', 'The full project as JSON, to move it to another machine or your repository.', 'export-json', 'Download .json'],
+      ['file-braces', 'Project', 'The full project as JSON, to move it to another machine or your repository.', 'export-json', 'Download .json'],
       ['archive', 'Backup', 'Profile, settings and all your projects in one file.', 'backup', 'Download backup']],
     wzEyebrow: 'New project', wzTitle: 'Project details', wzLead: 'Three steps: organisation, applicable frameworks and starting point.',
     wzSteps: ['Organisation', 'Frameworks and scope', 'Starting point'], orgReq: 'Organisation *', scopeReq: 'Scope *', orgPh: 'e.g. My Company Ltd', scopePh: 'System, service or unit the project covers',

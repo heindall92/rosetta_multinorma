@@ -75,3 +75,15 @@ test('CSP en <meta> con default-src none, sin Google Fonts y con las fuentes inc
   assert.ok(!/fonts\.googleapis|fonts\.gstatic/.test(html));
   assert.equal((html.match(/@font-face/g) || []).length, 3);
 });
+
+test('todos los iconos usados existen en la biblioteca (nombres actuales de Lucide)', () => {
+  const ICONS = JSON.parse(rd('src/data/icons.json'));
+  const src = readdirSync(join(ROOT, 'src/app')).map((f) => rd(join('src/app', f))).join('\n');
+  const used = new Set([...src.matchAll(/icon\('([a-z0-9-]+)'/g)].map((m) => m[1]));
+  for (const m of src.matchAll(/\['([a-z0-9-]+)', '[^']+', '[^']+', '(?:export-[a-z]+|backup)'/g)) used.add(m[1]); // tarjetas de Exportar
+  for (const c of JSON.parse(rd('src/data/casos.json'))) used.add(c.icono);
+  for (const d of JSON.parse(rd('src/data/catalog.json')).domains) used.add(d.ic);
+  const missing = [...used].filter((n) => !ICONS[n]);
+  assert.deepEqual(missing, []);
+  for (const old of ['trash-2', 'circle-help', 'building-2', 'file-json', 'filter', 'fingerprint']) assert.ok(!ICONS[old], `alias obsoleto: ${old}`);
+});

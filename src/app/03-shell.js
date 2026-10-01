@@ -18,7 +18,7 @@ function reqChip(f, id, { fuerza = 'total', cov = null } = {}) {
 function stateSwitch(id, st, lg = false) {
   return `<span class="stsw${lg ? ' lg' : ''}" role="group" aria-label="${esc(t('stateOf', id))}">${E.ESTADOS.map((e) => `<button type="button" class="${e}" data-act="set-state" data-id="${esc(id)}" data-v="${e}" aria-pressed="${st === e}" aria-label="${esc(t('est.' + e))}"${lg ? '' : ` data-tip="${esc(t('est.' + e))}"`}>${icon(ST_IC[e], 16)}${lg ? `<span>${esc(t('est.' + e))}</span>` : ''}</button>`).join('')}</span>`;
 }
-const caseIcon = (id) => ({ techserv: 'server', hospital: 'hospital', lumen: 'sparkles', aguas: 'droplet', citafacil: 'cloud' }[id] || 'building-2');
+const caseIcon = (id) => ({ techserv: 'server', hospital: 'hospital', lumen: 'sparkles', aguas: 'droplet', citafacil: 'cloud' }[id] || 'building-complex');
 function head(eyebrow, title, lead, actions = '') {
   return `<header class="head"><div>${eyebrow ? `<div class="eyebrow">${eyebrow}</div>` : ''}<h1>${title}</h1>${lead ? `<p class="lead">${lead}</p>` : ''}</div>${actions ? `<div class="head-actions">${actions}</div>` : ''}</header>`;
 }
@@ -99,7 +99,7 @@ function renderDock() {
   const cur = NAV.findIndex(([v]) => v === ui.view);
   return `<button type="button" class="brand" data-act="nav" data-view="inicio" aria-label="Rosetta · ${esc(t('nav.inicio'))}">${rosette(34)}<span><b>Rosetta</b><small>${esc(t('brandSub'))}</small></span></button><span class="rail-sp" aria-hidden="true"></span>
     <button type="button" class="ibtn rail-tg" data-act="rail-toggle" aria-expanded="${!railCollapsed()}" aria-label="${esc(t(railCollapsed() ? 'railOpen' : 'railClose'))}" data-tip="${esc(t(railCollapsed() ? 'railOpen' : 'railClose'))} · [">${icon(railCollapsed() ? 'chevron-right' : 'chevron-left', 17)}</button>
-    <button type="button" class="proj-pill" data-act="pop" data-pop="proyectos" aria-haspopup="true" aria-expanded="${ui.pop === 'proyectos'}"><span class="dotc">${icon(state ? (p?.kind === 'demo' ? caseIcon(p.caseId) : 'building-2') : 'folder', 15)}</span><span>${state ? esc(state.proyecto.nombre || '—') : esc(t('noProject'))}</span>${icon('chevron-down', 15)}</button>
+    <button type="button" class="proj-pill" data-act="pop" data-pop="proyectos" aria-haspopup="true" aria-expanded="${ui.pop === 'proyectos'}"><span class="dotc">${icon(state ? (p?.kind === 'demo' ? caseIcon(p.caseId) : 'building-complex') : 'folder', 15)}</span><span>${state ? esc(state.proyecto.nombre || '—') : esc(t('noProject'))}</span>${icon('chevron-down', 15)}</button>
     <nav class="nav" aria-label="${esc(t('sections'))}"${cur >= 0 ? ` data-cur style="--cur:${cur}"` : ''}><span class="nav-glow" aria-hidden="true"></span>${NAV.map(item).join('')}</nav>
     <div class="tools">
       <button type="button" class="search-pill" data-act="palette" aria-label="${esc(t('search'))}">${icon('search', 16)}<span class="lbl">${esc(t('search'))}</span><kbd>Ctrl K</kbd></button>
@@ -119,7 +119,7 @@ function renderSheet() {
   host.hidden = false; const dark = isDark();
   const b = (v, ic) => `<button type="button" data-act="nav" data-view="${v}"${ui.view === v ? ' aria-current="page"' : ''}${!state && PROJECT_VIEWS.includes(v) ? ' disabled' : ''}>${icon(ic, 20)}${esc(t('nav.' + v))}</button>`;
   host.innerHTML = `<div class="overlay" data-act="sheet-close"></div><div class="sheet" role="dialog" aria-label="${esc(t('nav.mas'))}">
-    <div class="grid-i">${b('normas', 'file-check')}${b('brechas', 'shield-alert')}${b('plan', 'square-kanban')}${b('mapa', 'grid-3x3')}${b('alcance', 'compass')}${b('exportar', 'download')}${b('ayuda', 'circle-help')}${b('ajustes', 'sliders-horizontal')}${b('perfil', 'user')}</div>
+    <div class="grid-i">${b('normas', 'file-check')}${b('brechas', 'shield-alert')}${b('plan', 'square-kanban')}${b('mapa', 'grid-3x3')}${b('alcance', 'compass')}${b('exportar', 'download')}${b('ayuda', 'circle-question-mark')}${b('ajustes', 'sliders-horizontal')}${b('perfil', 'user')}</div>
     <div class="row spread" style="margin-top:12px">
       <div class="lang" role="group" aria-label="${esc(t('language'))}"><button type="button" data-act="lang" data-v="es" aria-pressed="${LANG() === 'es'}">ES</button><button type="button" data-act="lang" data-v="en" aria-pressed="${LANG() === 'en'}">EN</button></div>
       <div class="swatches" style="padding:0">${ACCENTS.map((a) => `<button type="button" class="swatch sw-${a}${ws.settings.acento === a ? ' on' : ''}" data-act="accent" data-v="${a}" aria-label="${esc(t('accents.' + a))}"></button>`).join('')}</div>
@@ -134,7 +134,7 @@ function renderPop() {
   const r = anchor.getBoundingClientRect(); const el = document.createElement('div'); el.className = 'pop'; el.setAttribute('role', 'menu');
   if (ui.pop === 'proyectos') {
     const own = ws.projects.filter((p) => p.kind === 'own'); const demos = ws.projects.filter((p) => p.kind === 'demo');
-    const row = (p) => `<button type="button" class="pop-i${p.id === ws.activeId ? ' on' : ''}" data-act="open-project" data-id="${esc(p.id)}">${icon(p.kind === 'demo' ? caseIcon(p.caseId) : 'building-2', 16)}<span>${esc(p.nombre)}</span>${p.id === ws.activeId ? icon('check', 16) : ''}</button>`;
+    const row = (p) => `<button type="button" class="pop-i${p.id === ws.activeId ? ' on' : ''}" data-act="open-project" data-id="${esc(p.id)}">${icon(p.kind === 'demo' ? caseIcon(p.caseId) : 'building-complex', 16)}<span>${esc(p.nombre)}</span>${p.id === ws.activeId ? icon('check', 16) : ''}</button>`;
     el.innerHTML = `${own.length ? `<div class="pop-l">${esc(t('myProjects'))}</div>${own.map(row).join('')}` : ''}${demos.length ? `<div class="pop-l">${esc(t('openCases'))}</div>${demos.map(row).join('')}` : ''}${own.length || demos.length ? '<div class="pop-sep"></div>' : ''}
       <button type="button" class="pop-i" data-act="nav" data-view="nuevo">${icon('plus', 16)}<span>${esc(t('newProject'))}</span></button>
       <button type="button" class="pop-i" data-act="import-ens">${icon('upload', 16)}<span>${esc(t('importEns'))}</span></button>
@@ -145,7 +145,7 @@ function renderPop() {
     el.innerHTML = `<div class="row" style="padding:8px 10px 10px">${avatar(40)}<div><b>${esc(ws.profile.nombre || t('noName'))}</b><div class="tiny muted">${esc(ws.profile.rol || t('noRole'))}</div></div></div><div class="pop-sep"></div>
       <button type="button" class="pop-i" data-act="nav" data-view="perfil">${icon('user', 16)}<span>${esc(t('nav.perfil'))}</span></button>
       <button type="button" class="pop-i" data-act="nav" data-view="ajustes">${icon('sliders-horizontal', 16)}<span>${esc(t('nav.ajustes'))}</span></button>
-      <button type="button" class="pop-i" data-act="nav" data-view="ayuda">${icon('circle-help', 16)}<span>${esc(t('nav.ayuda'))}</span></button>
+      <button type="button" class="pop-i" data-act="nav" data-view="ayuda">${icon('circle-question-mark', 16)}<span>${esc(t('nav.ayuda'))}</span></button>
       ${state ? `<div class="pop-sep"></div><button type="button" class="pop-i" data-act="nav" data-view="alcance">${icon('compass', 16)}<span>${esc(t('nav.alcance'))}</span></button><button type="button" class="pop-i" data-act="nav" data-view="exportar">${icon('download', 16)}<span>${esc(t('nav.exportar'))}</span></button>` : ''}`;
   }
   document.body.appendChild(el);
@@ -168,7 +168,7 @@ function demoBanner() {
 function paletteItems() {
   const q = ui.paletteQ.trim();
   const items = [];
-  for (const [v, ic] of [['inicio', 'house'], ...NAV, ['ayuda', 'circle-help'], ['ajustes', 'sliders-horizontal'], ['perfil', 'user'], ['nuevo', 'plus']]) if (state || !PROJECT_VIEWS.includes(v)) items.push({ grupo: t('go'), label: t('nav.' + v), ic, act: () => go(v) });
+  for (const [v, ic] of [['inicio', 'house'], ...NAV, ['ayuda', 'circle-question-mark'], ['ajustes', 'sliders-horizontal'], ['perfil', 'user'], ['nuevo', 'plus']]) if (state || !PROJECT_VIEWS.includes(v)) items.push({ grupo: t('go'), label: t('nav.' + v), ic, act: () => go(v) });
   if (state) {
     items.push({ grupo: '⌘', label: t('exp')[0][1], ic: 'file-spreadsheet', act: () => exportXlsx() });
     items.push({ grupo: '⌘', label: t('exp')[1][1], ic: 'file-text', act: () => saveFile(`${slug()}_${LANG() === 'en' ? 'multi_framework_report' : 'informe_multinorma'}_${today()}.md`, informeMd()) });

@@ -13,11 +13,11 @@ function vInicio() {
   const nombre = ws.profile.nombre ? ws.profile.nombre.split(' ')[0] : '';
   const pr = (p) => {
     const del = ui.confirm === 'del:' + p.id;
-    return `<div class="pr"><span class="case-ic">${icon(p.kind === 'demo' ? caseIcon(p.caseId) : 'building-2', 18)}</span>
+    return `<div class="pr"><span class="case-ic">${icon(p.kind === 'demo' ? caseIcon(p.caseId) : 'building-complex', 18)}</span>
       <div style="min-width:0"><b>${esc(p.nombre)}</b><small>${esc(p.organizacion || '')}${p.kind === 'demo' ? ' · ' + esc(t('demoCase')) : ''} · ${esc(t('updated'))} ${fmtDate(p.updated)}</small></div>
       <div class="row pr-meta">${(p.normas || []).map((f) => fwTag(f, false, true)).join('')}${p.grado !== undefined ? `<span class="small muted num">${pct(p.grado)} ${esc(t('covered'))}</span>` : ''}</div>
       <div class="row">${del ? `<span class="small">${esc(t('delQ'))}</span><button type="button" class="btn sm danger-solid" data-act="del-project" data-id="${esc(p.id)}">${esc(t('del'))}</button><button type="button" class="btn sm" data-act="confirm-no">${esc(t('cancel'))}</button>`
-        : `<button type="button" class="btn sm" data-act="open-project" data-id="${esc(p.id)}">${esc(t('open'))}</button><button type="button" class="ibtn sm" data-act="ask" data-what="del:${esc(p.id)}" aria-label="${esc(t('del'))} ${esc(p.nombre)}">${icon('trash-2', 16)}</button>`}</div></div>`;
+        : `<button type="button" class="btn sm" data-act="open-project" data-id="${esc(p.id)}">${esc(t('open'))}</button><button type="button" class="ibtn sm" data-act="ask" data-what="del:${esc(p.id)}" aria-label="${esc(t('del'))} ${esc(p.nombre)}">${icon('trash', 16)}</button>`}</div></div>`;
   };
   return `
   <section class="hero">
@@ -147,13 +147,13 @@ function vAjustes() {
       ${setRow(esc(t('closeCases')), esc(t('closeCasesHint')), `<button type="button" class="btn sm" data-act="close-demos">${icon('x', 15)}${esc(t('closeN', ws.projects.filter((p) => p.kind === 'demo').length))}</button>`)}</section>
     <section class="glass pane"><h3>${esc(t('dataPriv'))}</h3><p class="small muted" style="margin:6px 0">${esc(t('dataPrivTxt'))}</p>${location.protocol === 'file:' ? `<div class="alert">${icon('triangle-alert', 16)}${esc(t('fileWarn'))}</div>` : ''}
       ${setRow(esc(t('backup')), esc(t('backupHint')), `<div class="row"><button type="button" class="btn sm" data-act="backup">${icon('download', 15)}${esc(t('download'))}</button><button type="button" class="btn sm" data-act="restore">${icon('upload', 15)}${esc(t('restore'))}</button></div>`)}
-      ${setRow(esc(t('wipe')), esc(t('wipeHint')), conf ? `<div class="row"><button type="button" class="btn sm danger-solid" data-act="wipe">${esc(t('wipeYes'))}</button><button type="button" class="btn sm" data-act="confirm-no">${esc(t('cancel'))}</button></div>` : `<button type="button" class="btn sm danger" data-act="ask" data-what="wipe">${icon('trash-2', 15)}${esc(t('wipeAsk'))}</button>`)}</section>
+      ${setRow(esc(t('wipe')), esc(t('wipeHint')), conf ? `<div class="row"><button type="button" class="btn sm danger-solid" data-act="wipe">${esc(t('wipeYes'))}</button><button type="button" class="btn sm" data-act="confirm-no">${esc(t('cancel'))}</button></div>` : `<button type="button" class="btn sm danger" data-act="ask" data-what="wipe">${icon('trash', 15)}${esc(t('wipeAsk'))}</button>`)}</section>
   </div>`;
 }
 
 /* --- Ayuda --- */
 function vAyuda() {
-  const tabs = [['inicio', 'flag'], ['metodo', 'gauge'], ['glosario', 'book-open'], ['reglas', 'shield-check'], ['atajos', 'keyboard'], ['faq', 'circle-help'], ['acerca', 'info']];
+  const tabs = [['inicio', 'flag'], ['metodo', 'gauge'], ['glosario', 'book-open'], ['reglas', 'shield-check'], ['atajos', 'keyboard'], ['faq', 'circle-question-mark'], ['acerca', 'info']];
   const tb = ui.helpTab; let body = '';
   if (tb === 'inicio') body = `<ol class="stack" style="list-style:none;padding:0;margin:0">${t('steps').map(([h, p, v], i) => `<li class="play-i"><span class="play-n">${i + 1}</span><div><b>${esc(h)}</b><span class="small muted">${esc(p)}</span></div>${state || v === 'inicio' ? `<button type="button" class="btn sm ghost" data-act="nav" data-view="${v}">${esc(t('go'))}${icon('arrow-right', 15)}</button>` : '<span></span>'}</li>`).join('')}</ol>`;
   else if (tb === 'metodo') body = `<p>${esc(t('methodP1', CAT.controls.length, CAT.domains.length))}</p><div class="grid g3">${t('methodCards').map(([h, p]) => `<div class="glass pane"><h3>${esc(h)}</h3><p class="small" style="margin-top:6px">${esc(p)}</p></div>`).join('')}</div>
