@@ -128,7 +128,7 @@ function setRow(title, desc, control) { return `<div class="set-row"><div><b>${t
 function vAjustes() {
   const st = ws.settings;
   const seg = (key, opts) => `<div class="chipset" role="group">${opts.map(([v, l, ic]) => `<button type="button" data-act="set" data-k="${key}" data-v="${v}" aria-pressed="${st[key] === v}">${ic ? icon(ic, 15) : ''}${esc(l)}</button>`).join('')}</div>`;
-  const sw = (key, id) => `<label class="switch"><input type="checkbox" id="${id}" data-ws="settings.${key}" data-type="bool"${st[key] ? ' checked' : ''}><span></span></label>`;
+  const sw = (key, id, label) => `<label class="switch"><input type="checkbox" id="${id}" data-ws="settings.${key}" data-type="bool" aria-label="${esc(label)}"${st[key] ? ' checked' : ''}><span></span></label>`;
   const conf = ui.confirm === 'wipe';
   return `${head(esc(t('prefs')), esc(t('settingsTitle')), esc(t('settingsLead')))}
   <div class="stack" style="max-width:940px;gap:var(--gap)">
@@ -137,13 +137,13 @@ function vAjustes() {
       ${setRow(esc(t('theme')), esc(t('themeHint')), seg('tema', [['sistema', t('system'), 'monitor'], ['claro', t('light'), 'sun'], ['oscuro', t('dark'), 'moon']]))}
       ${setRow(esc(t('accent')), '', `<div class="swatches" style="padding:0">${ACCENTS.map((a) => `<button type="button" class="swatch sw-${a}${st.acento === a ? ' on' : ''}" data-act="accent" data-v="${a}" aria-label="${esc(t('accents.' + a))}" data-tip="${esc(t('accents.' + a))}"></button>`).join('')}</div>`)}
       ${setRow(esc(t('density')), esc(t('densityHint')), seg('densidad', [['comoda', t('cozy')], ['compacta', t('compact')]]))}
-      ${setRow(esc(t('railPref')), esc(t('railPrefHint')), sw('railMin', 'st-rail'))}</section>
-    <section class="glass pane"><h3>${esc(t('mapPrefs'))}</h3>${setRow(esc(t('showRel')), esc(t('showRelHint')), sw('mostrarRelaciones', 'st-rel'))}</section>
+      ${setRow(esc(t('railPref')), esc(t('railPrefHint')), sw('railMin', 'st-rail', t('railPref')))}</section>
+    <section class="glass pane"><h3>${esc(t('mapPrefs'))}</h3>${setRow(esc(t('showRel')), esc(t('showRelHint')), sw('mostrarRelaciones', 'st-rel', t('showRel')))}</section>
     <section class="glass pane"><h3>${esc(t('rulesTitle'))}</h3>
       <details data-keep="rulesOpen"${ui.rulesOpen ? ' open' : ''} style="margin-top:10px"><summary class="small">${esc(t('activeRules'))} · ${E.REGLAS.length - st.reglasOff.length}/${E.REGLAS.length}</summary>
         ${E.REGLAS.map(([id, sv, d]) => `<label class="rule"><span class="switch"><input type="checkbox" data-rule="${id}"${st.reglasOff.includes(id) ? '' : ' checked'}><span></span></span><code>${id}</code>${sevPill(sv)}<span>${esc(LANG() === 'en' ? E.REGLAS_EN[id] : d)}</span></label>`).join('')}</details></section>
     <section class="glass pane"><h3>${esc(t('casesPref'))}</h3>
-      ${setRow(esc(t('showCases')), esc(t('showCasesHint')), sw('mostrarCasos', 'st-mc'))}
+      ${setRow(esc(t('showCases')), esc(t('showCasesHint')), sw('mostrarCasos', 'st-mc', t('showCases')))}
       ${setRow(esc(t('closeCases')), esc(t('closeCasesHint')), `<button type="button" class="btn sm" data-act="close-demos">${icon('x', 15)}${esc(t('closeN', ws.projects.filter((p) => p.kind === 'demo').length))}</button>`)}</section>
     <section class="glass pane"><h3>${esc(t('dataPriv'))}</h3><p class="small muted" style="margin:6px 0">${esc(t('dataPrivTxt'))}</p>${location.protocol === 'file:' ? `<div class="alert">${icon('triangle-alert', 16)}${esc(t('fileWarn'))}</div>` : ''}
       ${setRow(esc(t('backup')), esc(t('backupHint')), `<div class="row"><button type="button" class="btn sm" data-act="backup">${icon('download', 15)}${esc(t('download'))}</button><button type="button" class="btn sm" data-act="restore">${icon('upload', 15)}${esc(t('restore'))}</button></div>`)}

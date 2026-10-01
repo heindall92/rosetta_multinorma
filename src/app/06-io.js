@@ -7,7 +7,7 @@ async function saveFile(filename, data) {
   } catch (e) {
     if (e && e.code === 'declined') { toast(t('tDeclined')); return; }
     if (e && e.code === 'rate_limited') { toast(t('tPending')); return; }
-    if (e && e.code && !['unavailable', 'not_granted', 'capability_disabled', 'capability_removed'].includes(e.code)) { toast(t('tCantSave', e.message || e.code)); return; }
+    if (e && e.code && !['unavailable', 'not_granted', 'capability_disabled', 'capability_removed'].includes(e.code)) { toast(t('tCantSave', e.message || e.code), 'error'); return; }
   }
   const blob = data instanceof Blob ? data : new Blob([data], { type: 'application/octet-stream' });
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click();
@@ -156,7 +156,7 @@ async function exportXlsx() {
       ...plan.map((a) => [a.rank || '', t('prio.' + a.prioridad), a.id, cT(a.id), estL(a.estadoControl), a.normas.map((f) => E.FW_LABEL[f]).join(', '), Math.round(a.ganancia * 10) / 10, a.responsable, a.fecha, a.verificada ? t('verified') : t('lanes.' + a.estado)])], [8, 10, 9, 44, 14, 30, 14, 24, 12, 12], 0, { fillCol: [1, 4] }), tx('Plan de acción', 'Action plan'));
     const out = X.write(wb, { bookType: 'xlsx', type: 'array' });
     await saveFile(fname('map', 'xlsx'), new Blob([out], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
-  } catch (e) { toast(e.message || t('tXlsxFail')); }
+  } catch (e) { toast(e.message || t('tXlsxFail'), 'error'); }
 }
 
 /* --- Importar la SoA del ENS (Excel de la plantilla o proyecto de ENS Compliance Studio) --- */
@@ -238,7 +238,7 @@ async function importEns(file, destino) {
     const h = aplicaImportEns(st, data);
     createProject(st, { msg: t('tImported', n, h) });
     setTimeout(() => toast(t('tIsoFromEns', pct(calc.fw.iso27001.grado))), 3000);
-  } catch (e) { toast(e.message || t('tReadFail')); }
+  } catch (e) { toast(e.message || t('tReadFail'), 'error'); }
 }
 
 /* --- Proyectos y copias --- */
@@ -248,7 +248,7 @@ function importProyecto(text) {
     if (isObj(o) && o.kind === 'rosetta-backup') { restoreBackup(o); return; }
     if (isObj(o) && isObj(o.controles) && isObj(o.alcance)) { createProject(o, { msg: t('tSaved') }); return; }
     throw new Error('formato');
-  } catch (e) { toast(t('tNotProject')); }
+  } catch (e) { toast(t('tNotProject'), 'error'); }
 }
 function backup() {
   const projects = ws.projects.map((p) => ({ meta: p, state: store.get(PKEY(p.id)) }));

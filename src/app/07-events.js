@@ -1,4 +1,5 @@
 /* ---------- Eventos ---------- */
+const reduceMotion = () => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } };
 function setPath(obj, path, value, schema = 'state') {
   const ks = String(path).split('.');
   if (ks.some((k) => BAD_KEYS.has(k))) return false; // defensa ante prototype pollution
@@ -28,7 +29,7 @@ function pickFile(accept, cb) {
   inp.onchange = () => { const f = inp.files && inp.files[0]; if (f) cb(f); };
   inp.click();
 }
-const readText = (f, cb) => { const r = new FileReader(); r.onload = () => cb(String(r.result)); r.onerror = () => toast(t('tReadFail')); r.readAsText(f); };
+const readText = (f, cb) => { const r = new FileReader(); r.onload = () => cb(String(r.result)); r.onerror = () => toast(t('tReadFail'), 'error'); r.readAsText(f); };
 function syncNis2(obj) { obj.alcance.nis2.tipo = E.nis2Aplicabilidad(obj.nis2q).tipo; }
 function setState(id, v) {
   if (!state || !UC_IDS.has(id) || !E.ESTADOS.includes(v)) return;
@@ -95,10 +96,10 @@ let gPending = false;
 function closeLayers() {
   if (ui.railOpen) { ui.railOpen = false; applyRail(); $('#dock').innerHTML = renderDock(); return true; }
   if (ui.palette) { ui.palette = false; renderPalette(); return true; }
-  if (ui.pop) { ui.pop = null; renderPop(); return true; }
+  if (ui.pop) { const was = ui.pop; ui.pop = null; renderPop(); const tr = document.querySelector(`#dock [data-pop="${was}"]`); if (tr) tr.focus({ preventScroll: true }); return true; }
   if (ui.sheet) { ui.sheet = false; renderSheet(); render(); return true; }
   if (ui.trOpen) { ui.trOpen = false; render(); return true; }
-  if (ui.insp) { const back = ui.insp; ui.insp = null; renderInsp(); render(); const el = back.type === 'uc' ? document.getElementById('uc-' + back.id) : null; if (el) el.focus({ preventScroll: true }); return true; }
+  if (ui.insp) { closeLayersInsp(); return true; }
   if (ui.confirm) { ui.confirm = null; render(); return true; }
   return false;
 }
@@ -108,6 +109,7 @@ document.addEventListener('keydown', (ev) => {
   if (ui.palette) {
     const items = ui._pItems || [];
     if (ev.key === 'Escape') { ui.palette = false; renderPalette(); return; }
+    if (ev.key === 'Tab') { ev.preventDefault(); $('#pal-q').focus(); return; } // diálogo modal: el foco no sale de la paleta
     if (ev.key === 'ArrowDown') { ev.preventDefault(); ui.paletteIdx = Math.min(items.length - 1, ui.paletteIdx + 1); renderPalette(); return; }
     if (ev.key === 'ArrowUp') { ev.preventDefault(); ui.paletteIdx = Math.max(0, ui.paletteIdx - 1); renderPalette(); return; }
     if (ev.key === 'Enter') { ev.preventDefault(); const it = items[ui.paletteIdx]; ui.palette = false; renderPalette(); if (it) it.act(); return; }
@@ -120,6 +122,10 @@ document.addEventListener('keydown', (ev) => {
     if (ev.key === 'Enter') { ev.preventDefault(); const it = list[ui.trIdx]; if (it) { ui.trId = it.id; ui.trOpen = false; ui.trQ = ''; render(); } return; }
     if (ev.key === 'Escape') { ev.preventDefault(); ui.trOpen = false; tg.blur(); render(); return; }
     return;
+  }
+  if (ui.pop && (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') && tg.closest && tg.closest('.pop')) {
+    ev.preventDefault(); const its = [...document.querySelectorAll('.pop button')]; const i = its.indexOf(tg);
+    const nx = its[(i + (ev.key === 'ArrowDown' ? 1 : -1) + its.length) % its.length]; if (nx) nx.focus(); return;
   }
   if (ev.key === 'Escape') { if (closeLayers()) ev.preventDefault(); return; }
   if ((ev.key === 'Enter' || ev.key === ' ') && tg.getAttribute && tg.getAttribute('role') === 'button' && tg.dataset.act && tg.tagName !== 'BUTTON') { ev.preventDefault(); tg.click(); return; }
@@ -166,7 +172,9 @@ document.addEventListener('click', (ev) => {
   const act = el.dataset.act; const i = el.dataset.i !== undefined ? +el.dataset.i : null;
   switch (act) {
     case 'nav': if (el.dataset.view === 'nuevo' && ui.view !== 'nuevo') ui.wizard = null; go(el.dataset.view); break;
-    case 'pop': ui.pop = ui.pop === el.dataset.pop ? null : el.dataset.pop; $('#dock').innerHTML = renderDock(); renderPop(); break;
+    case 'pop': { const k = el.dataset.pop; ui.pop = ui.pop === k ? null : k; $('#dock').innerHTML = renderDock(); renderPop();
+      const first = ui.pop && document.querySelector('.pop .pop-i, .pop button'); const tr = document.querySelector(`#dock [data-pop="${k}"]`);
+      if (first) first.focus({ preventScroll: true }); else if (tr) tr.focus({ preventScroll: true }); break; }
     case 'sheet': ui.sheet = !ui.sheet; render(); break;
     case 'sheet-close': ui.sheet = false; render(); break;
     case 'lang': setLang(el.dataset.v); ui.pop = null; renderPop(); break;
@@ -183,7 +191,7 @@ document.addEventListener('click', (ev) => {
     case 'pal-close': ui.palette = false; renderPalette(); break;
     case 'pal-run': { const it = (ui._pItems || [])[i]; ui.palette = false; renderPalette(); if (it) it.act(); break; }
     case 'help-tab': ui.helpTab = el.dataset.tab; render(); break;
-    case 'scroll-casos': ev.preventDefault(); { const c = $('#casos'); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'start' }); else { ws.settings.mostrarCasos = true; saveWs(); render(); const c2 = $('#casos'); if (c2) c2.scrollIntoView({ block: 'start' }); } } break;
+    case 'scroll-casos': ev.preventDefault(); { const c = $('#casos'); if (c) c.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' }); else { ws.settings.mostrarCasos = true; saveWs(); render(); const c2 = $('#casos'); if (c2) c2.scrollIntoView({ block: 'start' }); } } break;
     /* proyectos */
     case 'open-project': ui.pop = null; openProject(el.dataset.id); break;
     case 'open-case': ui.pop = null; openCase(el.dataset.case); break;
@@ -223,7 +231,7 @@ document.addEventListener('click', (ev) => {
     case 'goto-brechas': ui.brechaSev = ['Alta', 'Media', 'Baja'].includes(el.dataset.v) ? el.dataset.v : 'todas'; go('brechas'); break;
     case 'tr-fw': if (FW.includes(el.dataset.fw) && el.dataset.fw !== ui.trFw) { ui.trFw = el.dataset.fw; ui.trId = null; ui.trQ = ''; ui.trIdx = 0; render(); } break;
     case 'tr-pick': ui.trId = el.dataset.id; ui.trOpen = false; ui.trQ = ''; render(); break;
-    case 'tr-center': { const f = el.dataset.fw, id = el.dataset.id; if (!FW.includes(f) || !IX.req[f][id]) break; ui.trFw = f; ui.trId = id; ui.trQ = ''; ui.trOpen = false; ui.insp = null; if (ui.view !== 'traductor') go('traductor'); else { render(); const st = $('.stage'); if (st && st.getBoundingClientRect().top < 60) st.scrollIntoView({ behavior: 'smooth', block: 'start' }); } break; }
+    case 'tr-center': { const f = el.dataset.fw, id = el.dataset.id; if (!FW.includes(f) || !IX.req[f][id]) break; ui.trFw = f; ui.trId = id; ui.trQ = ''; ui.trOpen = false; ui.insp = null; if (ui.view !== 'traductor') go('traductor'); else { render(); const st = $('.stage'); if (st && st.getBoundingClientRect().top < 60) st.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' }); } break; }
     case 'uc-fw': ui.ucFw = ['todos', ...FW].includes(el.dataset.v) ? el.dataset.v : 'todos'; render(); break;
     case 'uc-estado': ui.ucEstado = ['todos', ...E.ESTADOS].includes(el.dataset.v) ? el.dataset.v : 'todos'; render(); break;
     case 'norma-fw': if (FW.includes(el.dataset.fw)) { ui.normaFw = el.dataset.fw; render(); } break;
@@ -241,7 +249,11 @@ document.addEventListener('click', (ev) => {
     default: break;
   }
 });
-function closeLayersInsp() { const back = ui.insp; ui.insp = null; render(); if (back && back.type === 'uc') { const el = document.getElementById('uc-' + back.id); if (el) el.focus({ preventScroll: true }); } }
+function closeLayersInsp() {
+  const back = ui.insp; ui.insp = null; render();
+  if (ui._inspReturn) { restoreFocus(ui._inspReturn); ui._inspReturn = null; } // vuelve al elemento que abrió el inspector
+  if ((!document.activeElement || document.activeElement === document.body) && back && back.type === 'uc') { const el = document.getElementById('uc-' + back.id); if (el) el.focus({ preventScroll: true }); }
+}
 
 /* Barra lateral: el resaltado sigue al puntero (la posición la fija --g; ver rosetta.css) */
 document.addEventListener('pointerover', (ev) => {

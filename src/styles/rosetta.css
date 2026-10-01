@@ -804,3 +804,38 @@ select option { background: var(--bg); color: var(--ink); }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 
+
+/* ============ Accesibilidad: contraste AA, movimiento, transparencia y objetivos táctiles ============
+   Capa de ajustes al final para no tocar los tokens base. --accent-text / --accent-fill derivan del acento
+   activo (sirven para los 7 acentos) y oscurecen el rosa solo donde hace de texto o de fondo de texto blanco. */
+:root { --accent-text: color-mix(in oklch, var(--accent) 78%, black); --accent-fill: color-mix(in oklch, var(--accent) 86%, black);
+  --ok: oklch(0.49 0.13 155); --warn: oklch(0.5 0.12 65); --crit: oklch(0.5 0.2 25); --muted: oklch(0.47 0.03 275); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent-text: color-mix(in oklch, var(--accent) 72%, white); --accent-fill: var(--accent); --ok: oklch(0.8 0.15 155); --warn: oklch(0.85 0.14 80); --crit: oklch(0.74 0.17 25); --muted: oklch(0.74 0.03 275); } }
+:root[data-theme="dark"] { --accent-text: color-mix(in oklch, var(--accent) 72%, white); --accent-fill: var(--accent); --ok: oklch(0.8 0.15 155); --warn: oklch(0.85 0.14 80); --crit: oklch(0.74 0.17 25); --muted: oklch(0.74 0.03 275); }
+.eyebrow, .btn.ghost, .uc, .start em, .weight.total, .pill.accent, .lang button[aria-pressed="true"], .tabbar button[aria-current="page"] { color: var(--accent-text); }
+.btn.primary { background: var(--accent-fill); } .btn.primary:hover { background: var(--accent-text); }
+.origin { color: color-mix(in oklch, var(--fw-ens) 72%, var(--ink)); }
+.li.dim { opacity: 1; } .li.dim :is(.id, .tt b, .tt small, .pill) { color: var(--muted); } .fwt.off { opacity: .7; } .overlap .c.fuera { opacity: .78; }
+.lens.off, .lens-tab.off { opacity: 1; } .lens.off :is(b, small, .pc), .lens-tab.off :is(b, small) { color: var(--muted); } .eq small { color: var(--muted); }
+.dgrid .c.hi { color: oklch(0.17 0.03 272); }
+.rq.st-excluido, .rq.st-no-exigido { opacity: .7; } .finding .ref { color: var(--muted); }
+.overlap .c.hi { color: var(--ink); background: color-mix(in oklch, var(--accent) calc(var(--v) * 48%), transparent); }
+.li-open { all: unset; box-sizing: border-box; display: block; max-width: 100%; font-weight: 550; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; border-radius: 6px; }
+.node .li-open { white-space: normal; font-size: .88rem; line-height: 1.3; }
+.li-open:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.overlap > [role="row"], .dgrid > [role="row"] { display: contents; }
+.overlap [role="row"] > *, .dgrid [role="row"] > * { min-width: 0; }
+.toast.err { background: var(--crit); color: #fff; } .toast.err .ic { color: #fff; }
+@media (max-width: 900px) {
+  .stsw button { width: 40px; height: 36px; }                 /* 44 px de pitch con el padding: dedo, no puntero */
+  .insp .stsw.lg { flex-wrap: wrap; border-radius: 20px; }     /* «No aplica» quedaba fuera de la hoja en 390 px */
+  .uc, .rq { min-height: 32px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .aurora i { will-change: auto; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass, .pop, .palette, .insp, .sheet, .pick-res, .lens-tab, .finding, .lanek, .start { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg); }
+  .aurora { display: none; }
+}

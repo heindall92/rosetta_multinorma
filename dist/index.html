@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-1oe0cWpA2N3r1BL7Qkpb3p36DpWWimj8dtUV2ISoMIU=' 'sha256-h+RECHgYeQNMuQAFOck7RSt8/VGsn8fxipSw4KhM3ic=' 'sha256-ToWsCExo4hl/DQcdMlKwycHQ5CjS44miGlAjoUtdIfM=' 'self' https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js; style-src 'sha256-Cy3fsYV9X9a0cP+H9RD4GQmFuJETFM/silEg71xSn30='; style-src-attr 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'none'; worker-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-1oe0cWpA2N3r1BL7Qkpb3p36DpWWimj8dtUV2ISoMIU=' 'sha256-h+RECHgYeQNMuQAFOck7RSt8/VGsn8fxipSw4KhM3ic=' 'sha256-ss/9ZwABwu254l6+51CAI7l8x+QhZ6C3/jj9YnckzA0=' 'self' https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js; style-src 'sha256-WR7XhThIyC/NV/LPUsrvp1vvre2wUCDxT+wv8Fl/dfE='; style-src-attr 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'none'; worker-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23e0337a'/%3E%3Cstop offset='1' stop-color='%236d3fd1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='20' cy='20' r='18' fill='url(%23g)'/%3E%3Ccircle cx='20' cy='20' r='7' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
@@ -820,6 +820,42 @@ select option { background: var(--bg); color: var(--ink); }
   .hero-wheel .tag { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+
+/* ============ Accesibilidad: contraste AA, movimiento, transparencia y objetivos táctiles ============
+   Capa de ajustes al final para no tocar los tokens base. --accent-text / --accent-fill derivan del acento
+   activo (sirven para los 7 acentos) y oscurecen el rosa solo donde hace de texto o de fondo de texto blanco. */
+:root { --accent-text: color-mix(in oklch, var(--accent) 78%, black); --accent-fill: color-mix(in oklch, var(--accent) 86%, black);
+  --ok: oklch(0.49 0.13 155); --warn: oklch(0.5 0.12 65); --crit: oklch(0.5 0.2 25); --muted: oklch(0.47 0.03 275); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent-text: color-mix(in oklch, var(--accent) 72%, white); --accent-fill: var(--accent); --ok: oklch(0.8 0.15 155); --warn: oklch(0.85 0.14 80); --crit: oklch(0.74 0.17 25); --muted: oklch(0.74 0.03 275); } }
+:root[data-theme="dark"] { --accent-text: color-mix(in oklch, var(--accent) 72%, white); --accent-fill: var(--accent); --ok: oklch(0.8 0.15 155); --warn: oklch(0.85 0.14 80); --crit: oklch(0.74 0.17 25); --muted: oklch(0.74 0.03 275); }
+.eyebrow, .btn.ghost, .uc, .start em, .weight.total, .pill.accent, .lang button[aria-pressed="true"], .tabbar button[aria-current="page"] { color: var(--accent-text); }
+.btn.primary { background: var(--accent-fill); } .btn.primary:hover { background: var(--accent-text); }
+.origin { color: color-mix(in oklch, var(--fw-ens) 72%, var(--ink)); }
+.li.dim { opacity: 1; } .li.dim :is(.id, .tt b, .tt small, .pill) { color: var(--muted); } .fwt.off { opacity: .7; } .overlap .c.fuera { opacity: .78; }
+.lens.off, .lens-tab.off { opacity: 1; } .lens.off :is(b, small, .pc), .lens-tab.off :is(b, small) { color: var(--muted); } .eq small { color: var(--muted); }
+.dgrid .c.hi { color: oklch(0.17 0.03 272); }
+.rq.st-excluido, .rq.st-no-exigido { opacity: .7; } .finding .ref { color: var(--muted); }
+.overlap .c.hi { color: var(--ink); background: color-mix(in oklch, var(--accent) calc(var(--v) * 48%), transparent); }
+.li-open { all: unset; box-sizing: border-box; display: block; max-width: 100%; font-weight: 550; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; border-radius: 6px; }
+.node .li-open { white-space: normal; font-size: .88rem; line-height: 1.3; }
+.li-open:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.overlap > [role="row"], .dgrid > [role="row"] { display: contents; }
+.overlap [role="row"] > *, .dgrid [role="row"] > * { min-width: 0; }
+.toast.err { background: var(--crit); color: #fff; } .toast.err .ic { color: #fff; }
+@media (max-width: 900px) {
+  .stsw button { width: 40px; height: 36px; }                 /* 44 px de pitch con el padding: dedo, no puntero */
+  .insp .stsw.lg { flex-wrap: wrap; border-radius: 20px; }     /* «No aplica» quedaba fuera de la hoja en 390 px */
+  .uc, .rq { min-height: 32px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .aurora i { will-change: auto; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .glass, .pop, .palette, .insp, .sheet, .pick-res, .lens-tab, .finding, .lanek, .start { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--bg); }
+  .aurora { display: none; }
+}
 </style>
 </head>
 <body>
@@ -1736,7 +1772,7 @@ function applyTheme() {
   r.setAttribute('data-accent', ws.settings.acento);
   r.setAttribute('data-density', ws.settings.densidad);
   r.setAttribute('lang', LANG());
-  try { document.querySelector('.skip').textContent = t('skip'); } catch (e) { /* n/a */ }
+  try { document.querySelector('.skip').textContent = t('skip'); $('#tabbar').setAttribute('aria-label', t('sections')); $('#insp').setAttribute('aria-label', t('inspect')); } catch (e) { /* n/a */ }
 }
 /* ===== 01b-security.js ===== */
 /* ---------- Seguridad: todo lo que entra se trata como no fiable ----------
@@ -1884,8 +1920,23 @@ function go(view) {
   render(); window.scrollTo({ top: 0 });
   const v = $('#view'); if (v) v.focus({ preventScroll: true });
 }
+/* Clave estable del elemento con foco (para recuperarlo tras redibujar con innerHTML aunque no tenga id) */
+const FOCUS_ATTRS = ['act', 'id', 'v', 'fw', 'key', 'dir', 'view', 'pop', 'tab', 'case', 'k'];
+function focusKey(el) {
+  if (!el || !el.dataset || !el.dataset.act) return null;
+  return FOCUS_ATTRS.filter((a) => el.dataset[a] !== undefined).map((a) => `[data-${a}="${CSS.escape(el.dataset[a])}"]`).join('');
+}
+function restoreFocus(key, scope) {
+  if (!key) return;
+  const host = (scope && scope.isConnected ? scope : null) || document;
+  const ok = (x) => x.tabIndex >= 0 && !x.disabled && x.getClientRects().length > 0;
+  const el = [...host.querySelectorAll(key)].find(ok) || [...document.querySelectorAll(key)].find(ok);
+  if (el) el.focus({ preventScroll: true });
+}
 function render() {
   const ae = document.activeElement; const active = ae && ae.id;
+  const fKey = !active && ae !== document.body ? focusKey(ae) : null;
+  const fScope = ae && ae.closest ? (ae.closest('#insp') ? 'insp' : ae.closest('#dock') ? 'dock' : ae.closest('#tabbar') ? 'tabbar' : null) : null;
   let sel = null; try { if (ae && typeof ae.selectionStart === 'number') sel = [ae.selectionStart, ae.selectionEnd]; } catch (e) { sel = null; }
   applyRail(); $('#dock').innerHTML = renderDock();
   $('#tabbar').innerHTML = renderTabbar();
@@ -1894,6 +1945,7 @@ function render() {
   renderInsp(); renderPop(); renderSheet(); renderPalette();
   if (ui.view === 'traductor') requestAnimationFrame(drawBeams);
   if (active) { const el = document.getElementById(active); if (el) { el.focus({ preventScroll: true }); if (sel) { try { el.setSelectionRange(sel[0], sel[1]); } catch (e) { /* n/a */ } } } }
+  else if (fKey && !(fScope === 'insp' && $('#insp').hidden) && (!document.activeElement || document.activeElement === document.body)) restoreFocus(fKey, fScope ? $('#' + fScope) : null);
 }
 function navBadge(v) {
   if (!state) return '';
@@ -2007,24 +2059,26 @@ function paletteItems() {
 }
 function renderPalette() {
   const host = $('#palette');
-  if (!ui.palette) { host.hidden = true; host.innerHTML = ''; return; }
+  if (!ui.palette) { const had = !host.hidden; host.hidden = true; host.innerHTML = ''; if (had && (!document.activeElement || document.activeElement === document.body)) { const r = ui._palReturn; if (typeof r === 'string') restoreFocus(r); else if (r && r.isConnected) r.focus({ preventScroll: true }); } return; }
   const items = paletteItems(); ui._pItems = items;
   if (ui.paletteIdx >= items.length) ui.paletteIdx = Math.max(0, items.length - 1);
   let last = ''; let html = '';
   items.forEach((it, i) => {
     if (it.grupo !== last) { html += `<div class="pal-g">${esc(it.grupo)}</div>`; last = it.grupo; }
-    html += `<button type="button" class="pal-i${i === ui.paletteIdx ? ' on' : ''}" data-act="pal-run" data-i="${i}" id="pal-${i}">${icon(it.ic, 16)}<span>${esc(it.label)}</span>${it.hint ? `<small>${esc(it.hint)}</small>` : ''}</button>`;
+    html += `<button type="button" class="pal-i${i === ui.paletteIdx ? ' on' : ''}" data-act="pal-run" data-i="${i}" id="pal-${i}" role="option" aria-selected="${i === ui.paletteIdx}" tabindex="-1">${icon(it.ic, 16)}<span>${esc(it.label)}</span>${it.hint ? `<small>${esc(it.hint)}</small>` : ''}</button>`;
   });
   const wasOpen = !host.hidden; host.hidden = false;
-  if (!wasOpen || !$('#pal-q')) host.innerHTML = `<div class="overlay" data-act="pal-close"></div><div class="palette" role="dialog" aria-label="${esc(t('search'))}"><div class="pal-in">${icon('search', 18)}<input id="pal-q" type="text" placeholder="${esc(t('searchPh'))}" value="${esc(ui.paletteQ)}" autocomplete="off"><kbd>Esc</kbd></div><div class="pal-list" id="pal-list"></div></div>`;
+  if (!wasOpen || !$('#pal-q')) host.innerHTML = `<div class="overlay" data-act="pal-close"></div><div class="palette" role="dialog" aria-modal="true" aria-label="${esc(t('search'))}"><div class="pal-in">${icon('search', 18)}<input id="pal-q" type="text" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list" aria-label="${esc(t('search'))}" placeholder="${esc(t('searchPh'))}" value="${esc(ui.paletteQ)}" autocomplete="off"><kbd>Esc</kbd></div><div class="pal-list" id="pal-list" role="listbox" aria-label="${esc(t('search'))}"></div></div>`;
   $('#pal-list').innerHTML = html || `<div class="pal-e">${esc(t('noResults'))}</div>`;
   const on = $('#pal-' + ui.paletteIdx); if (on) on.scrollIntoView({ block: 'nearest' });
-  if (!wasOpen) $('#pal-q').focus();
+  if (on) $('#pal-q').setAttribute('aria-activedescendant', on.id); else $('#pal-q').removeAttribute('aria-activedescendant');
+  if (!wasOpen) { ui._palReturn = document.activeElement !== document.body ? focusKey(document.activeElement) || document.activeElement : null; $('#pal-q').focus(); }
 }
 function openInsp(type, id, fw) {
   if (type === 'uc' && !IX.ucMap[id]) return;
   if (type === 'req' && !(FW.includes(fw) && IX.req[fw][id])) return;
   if (!state) return;
+  if (!ui.insp) { const ae = document.activeElement; ui._inspReturn = ae && !ae.closest('#insp') ? focusKey(ae) : null; }
   ui.insp = { type, id, fw }; render();
   const x = $('#insp'); if (x) { x.scrollTop = 0; const h = x.querySelector('h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
 }
@@ -2032,7 +2086,12 @@ function setLang(l) { ws.settings.lang = l === 'en' ? 'en' : 'es'; saveWs(); app
 
 /* ---------- Avisos ---------- */
 let toastT = null;
-function toast(msg) { const x = $('#toast'); x.innerHTML = `${icon('circle-check', 16)}<span>${esc(msg)}</span>`; x.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { x.hidden = true; }, 2800); }
+function toast(msg, kind = 'ok') {
+  const x = $('#toast'); const err = kind === 'error';
+  x.setAttribute('role', err ? 'alert' : 'status'); x.classList.toggle('err', err);
+  x.innerHTML = `${icon(err ? 'triangle-alert' : 'circle-check', 16)}<span>${esc(msg)}</span>`; x.hidden = false;
+  clearTimeout(toastT); toastT = setTimeout(() => { x.hidden = true; }, err ? 7000 : Math.max(2800, 1500 + msg.length * 45));
+}
 /* ===== 04-global.js ===== */
 /* ---------- Vistas globales: inicio, nuevo proyecto, perfil, ajustes, ayuda ---------- */
 const TOTAL_REQS = FW.reduce((a, f) => a + CAT.frameworks[f].reqs.length, 0);
@@ -2164,7 +2223,7 @@ function setRow(title, desc, control) { return `<div class="set-row"><div><b>${t
 function vAjustes() {
   const st = ws.settings;
   const seg = (key, opts) => `<div class="chipset" role="group">${opts.map(([v, l, ic]) => `<button type="button" data-act="set" data-k="${key}" data-v="${v}" aria-pressed="${st[key] === v}">${ic ? icon(ic, 15) : ''}${esc(l)}</button>`).join('')}</div>`;
-  const sw = (key, id) => `<label class="switch"><input type="checkbox" id="${id}" data-ws="settings.${key}" data-type="bool"${st[key] ? ' checked' : ''}><span></span></label>`;
+  const sw = (key, id, label) => `<label class="switch"><input type="checkbox" id="${id}" data-ws="settings.${key}" data-type="bool" aria-label="${esc(label)}"${st[key] ? ' checked' : ''}><span></span></label>`;
   const conf = ui.confirm === 'wipe';
   return `${head(esc(t('prefs')), esc(t('settingsTitle')), esc(t('settingsLead')))}
   <div class="stack" style="max-width:940px;gap:var(--gap)">
@@ -2173,13 +2232,13 @@ function vAjustes() {
       ${setRow(esc(t('theme')), esc(t('themeHint')), seg('tema', [['sistema', t('system'), 'monitor'], ['claro', t('light'), 'sun'], ['oscuro', t('dark'), 'moon']]))}
       ${setRow(esc(t('accent')), '', `<div class="swatches" style="padding:0">${ACCENTS.map((a) => `<button type="button" class="swatch sw-${a}${st.acento === a ? ' on' : ''}" data-act="accent" data-v="${a}" aria-label="${esc(t('accents.' + a))}" data-tip="${esc(t('accents.' + a))}"></button>`).join('')}</div>`)}
       ${setRow(esc(t('density')), esc(t('densityHint')), seg('densidad', [['comoda', t('cozy')], ['compacta', t('compact')]]))}
-      ${setRow(esc(t('railPref')), esc(t('railPrefHint')), sw('railMin', 'st-rail'))}</section>
-    <section class="glass pane"><h3>${esc(t('mapPrefs'))}</h3>${setRow(esc(t('showRel')), esc(t('showRelHint')), sw('mostrarRelaciones', 'st-rel'))}</section>
+      ${setRow(esc(t('railPref')), esc(t('railPrefHint')), sw('railMin', 'st-rail', t('railPref')))}</section>
+    <section class="glass pane"><h3>${esc(t('mapPrefs'))}</h3>${setRow(esc(t('showRel')), esc(t('showRelHint')), sw('mostrarRelaciones', 'st-rel', t('showRel')))}</section>
     <section class="glass pane"><h3>${esc(t('rulesTitle'))}</h3>
       <details data-keep="rulesOpen"${ui.rulesOpen ? ' open' : ''} style="margin-top:10px"><summary class="small">${esc(t('activeRules'))} · ${E.REGLAS.length - st.reglasOff.length}/${E.REGLAS.length}</summary>
         ${E.REGLAS.map(([id, sv, d]) => `<label class="rule"><span class="switch"><input type="checkbox" data-rule="${id}"${st.reglasOff.includes(id) ? '' : ' checked'}><span></span></span><code>${id}</code>${sevPill(sv)}<span>${esc(LANG() === 'en' ? E.REGLAS_EN[id] : d)}</span></label>`).join('')}</details></section>
     <section class="glass pane"><h3>${esc(t('casesPref'))}</h3>
-      ${setRow(esc(t('showCases')), esc(t('showCasesHint')), sw('mostrarCasos', 'st-mc'))}
+      ${setRow(esc(t('showCases')), esc(t('showCasesHint')), sw('mostrarCasos', 'st-mc', t('showCases')))}
       ${setRow(esc(t('closeCases')), esc(t('closeCasesHint')), `<button type="button" class="btn sm" data-act="close-demos">${icon('x', 15)}${esc(t('closeN', ws.projects.filter((p) => p.kind === 'demo').length))}</button>`)}</section>
     <section class="glass pane"><h3>${esc(t('dataPriv'))}</h3><p class="small muted" style="margin:6px 0">${esc(t('dataPrivTxt'))}</p>${location.protocol === 'file:' ? `<div class="alert">${icon('triangle-alert', 16)}${esc(t('fileWarn'))}</div>` : ''}
       ${setRow(esc(t('backup')), esc(t('backupHint')), `<div class="row"><button type="button" class="btn sm" data-act="backup">${icon('download', 15)}${esc(t('download'))}</button><button type="button" class="btn sm" data-act="restore">${icon('upload', 15)}${esc(t('restore'))}</button></div>`)}
@@ -2313,14 +2372,15 @@ function wheelLegend() {
 /* Solapamiento: si cumples la fila al 100 %, qué parte de la columna heredas */
 function overlapGrid(st) {
   const inS = (f) => !st || st.alcance[f].on;
-  let h = `<div class="overlap" role="table" aria-label="${esc(t('overlapTitle'))}"><div class="h" role="columnheader"><span class="tiny muted">${esc(t('overlapRow'))} ↓</span></div>${FW.map((f) => `<div class="h" role="columnheader">${fwTag(f, !inS(f), true)}</div>`).join('')}`;
+  let h = `<div class="overlap" role="table" aria-label="${esc(t('overlapTitle'))}"><div role="row"><div class="h" role="columnheader"><span class="tiny muted">${esc(t('overlapRow'))} ↓</span></div>${FW.map((f) => `<div class="h" role="columnheader">${fwTag(f, !inS(f), true)}</div>`).join('')}</div>`;
   for (const a of FW) {
-    h += `<div class="rh" role="rowheader">${fwTag(a, !inS(a), true)}</div>`;
+    h += `<div role="row"><div class="rh" role="rowheader">${fwTag(a, !inS(a), true)}</div>`;
     for (const b of FW) {
       const x = SOLAPE[a][b]; const v = x.pct;
       if (a === b) { h += '<div class="c self" role="cell">—</div>'; continue; }
       h += `<div class="c${v > 0.62 ? ' hi' : ''}${!inS(a) || !inS(b) ? ' fuera' : ''}" role="cell" style="--v:${v.toFixed(3)}" data-tip="${esc(t('overlapTip', E.FW_LABEL[a], E.FW_LABEL[b], pct(v), x.completos, x.total))}">${Math.round(v * 100)}%</div>`;
     }
+    h += '</div>';
   }
   return h + '</div>';
 }
@@ -2413,15 +2473,15 @@ function vPrisma() {
   }
   const picker = `<section class="glass prism-pick">
     <div class="chipset" role="group" aria-label="${esc(t('source'))}">${FW.map((g) => `<button type="button" data-act="tr-fw" data-fw="${g}" aria-pressed="${g === f}"><span class="dotfw fw-${g}"></span>${FW_SHORT[g]}</button>`).join('')}</div>
-    <div class="search">${icon('search', 16)}<input type="search" id="tr-q" value="${esc(ui.trQ)}" placeholder="${esc(t('pickPh'))}" aria-label="${esc(t('pickPh'))}" autocomplete="off" role="combobox" aria-expanded="${ui.trOpen}" aria-controls="tr-res"></div>${res}</section>`;
+    <div class="search">${icon('search', 16)}<input type="search" id="tr-q" value="${esc(ui.trQ)}" placeholder="${esc(t('pickPh'))}" aria-label="${esc(t('pickPh'))}" autocomplete="off" role="combobox" aria-expanded="${ui.trOpen}" aria-controls="tr-res"${ui.trOpen ? ` aria-activedescendant="tri-${ui.trIdx}"` : ''}></div>${res}</section>`;
   const ensInfo = f === 'ens' ? `<dl class="kv small"><dt>${esc(t('dims'))}</dt><dd>${esc(r.dims)}</dd><dt>${esc(t('exig'))}</dt><dd class="mono">B ${esc(r.bajo)} · M ${esc(r.medio)} · A ${esc(r.alto)}</dd>${state.alcance.ens.on ? `<dt>${esc(t('inYourSys'))}</dt><dd>${esc(t('level'))} ${esc(t('lv.' + cov.nivel))} · <code>${esc(exigL(cov.exigencia))}</code></dd>` : ''}<dt>${esc(t('classIso'))}</dt><dd>${esc(r.ref || '—')}</dd></dl>` : '';
   const src = `<div class="src-col"><div class="col-lbl">${esc(t('source'))}</div><div class="src fw-${f}">
     <div class="row">${fwTag(f, !onFw(f))}<code>${esc(reqCode(f, id))}</code></div><h2>${esc(rT(f, id))}</h2><p class="small muted">${esc(rG(f, id))}</p>
     <div class="row" style="margin-top:12px">${onFw(f) ? covPill(cov.estado) + (cov.estado !== 'no-exigido' && cov.estado !== 'excluido' ? `<span class="small muted num">${esc(t('support', pct(cov.score)))}</span>` : '') : `<span class="pill neutral">${esc(t('outOfScope'))}</span>`}</div>
     ${ensInfo ? `<div style="margin-top:14px">${ensInfo}</div>` : ''}
     <div class="row" style="margin-top:14px"><button type="button" class="btn sm" data-act="insp-req" data-fw="${f}" data-id="${esc(id)}">${icon('panel-right', 15)}${esc(t('inspect'))}</button></div></div></div>`;
-  const nodes = `<div class="nodes-col"><div class="col-lbl">${esc(t('controlsCol'))} · ${ctl.length}</div>${ctl.map((l) => { const fz = fuerzaDe(l.w); const e = E.estadoUc(state, l.uc); return `<div class="node" role="button" tabindex="0" data-act="insp-uc" data-id="${esc(l.uc)}" data-uc="${esc(l.uc)}" data-w="${l.w}">
-      <span class="uc">${esc(l.uc)}</span><b>${esc(cT(l.uc))}</b><div class="row"><span class="weight ${fz}">${esc(t('fuerzaCorta.' + fz))}</span>${l.w > 0 ? stateSwitch(l.uc, e) : ''}</div></div>`; }).join('')}</div>`;
+  const nodes = `<div class="nodes-col"><div class="col-lbl">${esc(t('controlsCol'))} · ${ctl.length}</div>${ctl.map((l) => { const fz = fuerzaDe(l.w); const e = E.estadoUc(state, l.uc); return `<div class="node" data-act="insp-uc" data-id="${esc(l.uc)}" data-uc="${esc(l.uc)}" data-w="${l.w}">
+      <span class="uc">${esc(l.uc)}</span><button type="button" class="li-open" data-act="insp-uc" data-id="${esc(l.uc)}">${esc(cT(l.uc))}</button><div class="row"><span class="weight ${fz}">${esc(t('fuerzaCorta.' + fz))}</span>${l.w > 0 ? stateSwitch(l.uc, e) : ''}</div></div>`; }).join('')}</div>`;
   const lane = (g) => {
     const rows = eq.otras[g].filter((x) => x.fuerza !== 'relacionado' || showRel);
     const noEq = g === 'iso42001' || f === 'iso42001' ? t('noEqAi') : t('noEq');
@@ -2470,8 +2530,8 @@ function vControles() {
     const cs = list.filter((c) => c.dom === d.id); if (!cs.length) continue;
     html += `<section class="glass list"><div class="sec-h">${icon(d.ic, 17)}${esc(dT(d.id))}<small>${esc(t('nControls', cs.length))}</small></div>${cs.map((c) => {
       const cc = calc.controles[c.id]; const dd = state.controles[c.id];
-      return `<div class="li${cc.relevante ? '' : ' dim'}${ui.insp && ui.insp.type === 'uc' && ui.insp.id === c.id ? ' on' : ''}" id="uc-${esc(c.id)}" role="button" tabindex="0" data-act="insp-uc" data-id="${esc(c.id)}">
-        <span class="id">${esc(c.id)}</span><div class="tt"><b>${esc(cT(c.id))}</b><small>${dd.origen === 'ens' ? `<span class="origin">${esc(t('inheritedEns'))}</span> · ` : ''}${esc(dd.responsable || t('noOwner'))}</small></div>
+      return `<div class="li${cc.relevante ? '' : ' dim'}${ui.insp && ui.insp.type === 'uc' && ui.insp.id === c.id ? ' on' : ''}" data-act="insp-uc" data-id="${esc(c.id)}">
+        <span class="id">${esc(c.id)}</span><div class="tt"><button type="button" class="li-open" id="uc-${esc(c.id)}" data-act="insp-uc" data-id="${esc(c.id)}">${esc(cT(c.id))}</button><small>${dd.origen === 'ens' ? `<span class="origin">${esc(t('inheritedEns'))}</span> · ` : ''}${esc(dd.responsable || t('noOwner'))}</small></div>
         <div class="fwdots">${FW.map((f) => { const n = c.maps[f].filter((m) => m.w > 0).length; return n ? `<span class="fwn fw-${f}${onFw(f) ? '' : ' off'}" data-tip="${esc(`${E.FW_LABEL[f]}: ${t('reqs', n)}`)}">${n}</span>` : ''; }).join('')}</div>
         ${stateSwitch(c.id, cc.estado)}</div>`;
     }).join('')}</section>`;
@@ -2569,8 +2629,8 @@ function vMapa() {
   const showRel = ws.settings.mostrarRelaciones;
   const counts = CAT.domains.map((d) => ({ d, n: FW.map((f) => reqsOfDom(d.id, f).size), ctl: CAT.controls.filter((c) => c.dom === d.id).length }));
   const max = Math.max(...counts.flatMap((x) => x.n));
-  const grid = `<div style="overflow-x:auto"><div class="dgrid" role="table" aria-label="${esc(t('byDomain'))}"><div class="h"></div>${FW.map((f) => `<div class="h">${fwTag(f, !onFw(f), true)}</div>`).join('')}<div class="h tot tiny muted">${esc(t('controlsN'))}</div>
-    ${counts.map(({ d, n, ctl }) => `<div class="rh">${icon(d.ic, 15)}<span>${esc(dT(d.id))}</span></div>${n.map((v, i) => `<div class="c fw-${FW[i]}${v ? '' : ' zero'}${v / max > 0.6 ? ' hi' : ''}" style="--v:${(v / max).toFixed(3)}" data-tip="${esc(`${dT(d.id)} · ${E.FW_LABEL[FW[i]]}: ${t('reqs', v)}`)}">${v || '·'}</div>`).join('')}<div class="tot">${ctl}</div>`).join('')}</div></div>`;
+  const grid = `<div style="overflow-x:auto" tabindex="0" role="region" aria-label="${esc(t('byDomain'))}"><div class="dgrid" role="table" aria-label="${esc(t('byDomain'))}"><div role="row"><div class="h" role="cell"></div>${FW.map((f) => `<div class="h" role="columnheader">${fwTag(f, !onFw(f), true)}</div>`).join('')}<div class="h tot tiny muted" role="columnheader">${esc(t('controlsN'))}</div></div>
+    ${counts.map(({ d, n, ctl }) => `<div role="row"><div class="rh" role="rowheader">${icon(d.ic, 15)}<span>${esc(dT(d.id))}</span></div>${n.map((v, i) => `<div class="c fw-${FW[i]}${v ? '' : ' zero'}${v / max > 0.6 ? ' hi' : ''}" role="cell" style="--v:${(v / max).toFixed(3)}" data-tip="${esc(`${dT(d.id)} · ${E.FW_LABEL[FW[i]]}: ${t('reqs', v)}`)}">${v || '·'}</div>`).join('')}<div class="tot" role="cell">${ctl}</div></div>`).join('')}</div></div>`;
   const q = normTxt(ui.mapaQ.trim());
   let rows = ''; let lastDom = '';
   for (const c of CAT.controls) {
@@ -2674,7 +2734,7 @@ async function saveFile(filename, data) {
   } catch (e) {
     if (e && e.code === 'declined') { toast(t('tDeclined')); return; }
     if (e && e.code === 'rate_limited') { toast(t('tPending')); return; }
-    if (e && e.code && !['unavailable', 'not_granted', 'capability_disabled', 'capability_removed'].includes(e.code)) { toast(t('tCantSave', e.message || e.code)); return; }
+    if (e && e.code && !['unavailable', 'not_granted', 'capability_disabled', 'capability_removed'].includes(e.code)) { toast(t('tCantSave', e.message || e.code), 'error'); return; }
   }
   const blob = data instanceof Blob ? data : new Blob([data], { type: 'application/octet-stream' });
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click();
@@ -2823,7 +2883,7 @@ async function exportXlsx() {
       ...plan.map((a) => [a.rank || '', t('prio.' + a.prioridad), a.id, cT(a.id), estL(a.estadoControl), a.normas.map((f) => E.FW_LABEL[f]).join(', '), Math.round(a.ganancia * 10) / 10, a.responsable, a.fecha, a.verificada ? t('verified') : t('lanes.' + a.estado)])], [8, 10, 9, 44, 14, 30, 14, 24, 12, 12], 0, { fillCol: [1, 4] }), tx('Plan de acción', 'Action plan'));
     const out = X.write(wb, { bookType: 'xlsx', type: 'array' });
     await saveFile(fname('map', 'xlsx'), new Blob([out], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
-  } catch (e) { toast(e.message || t('tXlsxFail')); }
+  } catch (e) { toast(e.message || t('tXlsxFail'), 'error'); }
 }
 
 /* --- Importar la SoA del ENS (Excel de la plantilla o proyecto de ENS Compliance Studio) --- */
@@ -2905,7 +2965,7 @@ async function importEns(file, destino) {
     const h = aplicaImportEns(st, data);
     createProject(st, { msg: t('tImported', n, h) });
     setTimeout(() => toast(t('tIsoFromEns', pct(calc.fw.iso27001.grado))), 3000);
-  } catch (e) { toast(e.message || t('tReadFail')); }
+  } catch (e) { toast(e.message || t('tReadFail'), 'error'); }
 }
 
 /* --- Proyectos y copias --- */
@@ -2915,7 +2975,7 @@ function importProyecto(text) {
     if (isObj(o) && o.kind === 'rosetta-backup') { restoreBackup(o); return; }
     if (isObj(o) && isObj(o.controles) && isObj(o.alcance)) { createProject(o, { msg: t('tSaved') }); return; }
     throw new Error('formato');
-  } catch (e) { toast(t('tNotProject')); }
+  } catch (e) { toast(t('tNotProject'), 'error'); }
 }
 function backup() {
   const projects = ws.projects.map((p) => ({ meta: p, state: store.get(PKEY(p.id)) }));
@@ -2930,6 +2990,7 @@ function restoreBackup(b) {
 }
 /* ===== 07-events.js ===== */
 /* ---------- Eventos ---------- */
+const reduceMotion = () => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } };
 function setPath(obj, path, value, schema = 'state') {
   const ks = String(path).split('.');
   if (ks.some((k) => BAD_KEYS.has(k))) return false; // defensa ante prototype pollution
@@ -2959,7 +3020,7 @@ function pickFile(accept, cb) {
   inp.onchange = () => { const f = inp.files && inp.files[0]; if (f) cb(f); };
   inp.click();
 }
-const readText = (f, cb) => { const r = new FileReader(); r.onload = () => cb(String(r.result)); r.onerror = () => toast(t('tReadFail')); r.readAsText(f); };
+const readText = (f, cb) => { const r = new FileReader(); r.onload = () => cb(String(r.result)); r.onerror = () => toast(t('tReadFail'), 'error'); r.readAsText(f); };
 function syncNis2(obj) { obj.alcance.nis2.tipo = E.nis2Aplicabilidad(obj.nis2q).tipo; }
 function setState(id, v) {
   if (!state || !UC_IDS.has(id) || !E.ESTADOS.includes(v)) return;
@@ -3026,10 +3087,10 @@ let gPending = false;
 function closeLayers() {
   if (ui.railOpen) { ui.railOpen = false; applyRail(); $('#dock').innerHTML = renderDock(); return true; }
   if (ui.palette) { ui.palette = false; renderPalette(); return true; }
-  if (ui.pop) { ui.pop = null; renderPop(); return true; }
+  if (ui.pop) { const was = ui.pop; ui.pop = null; renderPop(); const tr = document.querySelector(`#dock [data-pop="${was}"]`); if (tr) tr.focus({ preventScroll: true }); return true; }
   if (ui.sheet) { ui.sheet = false; renderSheet(); render(); return true; }
   if (ui.trOpen) { ui.trOpen = false; render(); return true; }
-  if (ui.insp) { const back = ui.insp; ui.insp = null; renderInsp(); render(); const el = back.type === 'uc' ? document.getElementById('uc-' + back.id) : null; if (el) el.focus({ preventScroll: true }); return true; }
+  if (ui.insp) { closeLayersInsp(); return true; }
   if (ui.confirm) { ui.confirm = null; render(); return true; }
   return false;
 }
@@ -3039,6 +3100,7 @@ document.addEventListener('keydown', (ev) => {
   if (ui.palette) {
     const items = ui._pItems || [];
     if (ev.key === 'Escape') { ui.palette = false; renderPalette(); return; }
+    if (ev.key === 'Tab') { ev.preventDefault(); $('#pal-q').focus(); return; } // diálogo modal: el foco no sale de la paleta
     if (ev.key === 'ArrowDown') { ev.preventDefault(); ui.paletteIdx = Math.min(items.length - 1, ui.paletteIdx + 1); renderPalette(); return; }
     if (ev.key === 'ArrowUp') { ev.preventDefault(); ui.paletteIdx = Math.max(0, ui.paletteIdx - 1); renderPalette(); return; }
     if (ev.key === 'Enter') { ev.preventDefault(); const it = items[ui.paletteIdx]; ui.palette = false; renderPalette(); if (it) it.act(); return; }
@@ -3051,6 +3113,10 @@ document.addEventListener('keydown', (ev) => {
     if (ev.key === 'Enter') { ev.preventDefault(); const it = list[ui.trIdx]; if (it) { ui.trId = it.id; ui.trOpen = false; ui.trQ = ''; render(); } return; }
     if (ev.key === 'Escape') { ev.preventDefault(); ui.trOpen = false; tg.blur(); render(); return; }
     return;
+  }
+  if (ui.pop && (ev.key === 'ArrowDown' || ev.key === 'ArrowUp') && tg.closest && tg.closest('.pop')) {
+    ev.preventDefault(); const its = [...document.querySelectorAll('.pop button')]; const i = its.indexOf(tg);
+    const nx = its[(i + (ev.key === 'ArrowDown' ? 1 : -1) + its.length) % its.length]; if (nx) nx.focus(); return;
   }
   if (ev.key === 'Escape') { if (closeLayers()) ev.preventDefault(); return; }
   if ((ev.key === 'Enter' || ev.key === ' ') && tg.getAttribute && tg.getAttribute('role') === 'button' && tg.dataset.act && tg.tagName !== 'BUTTON') { ev.preventDefault(); tg.click(); return; }
@@ -3097,7 +3163,9 @@ document.addEventListener('click', (ev) => {
   const act = el.dataset.act; const i = el.dataset.i !== undefined ? +el.dataset.i : null;
   switch (act) {
     case 'nav': if (el.dataset.view === 'nuevo' && ui.view !== 'nuevo') ui.wizard = null; go(el.dataset.view); break;
-    case 'pop': ui.pop = ui.pop === el.dataset.pop ? null : el.dataset.pop; $('#dock').innerHTML = renderDock(); renderPop(); break;
+    case 'pop': { const k = el.dataset.pop; ui.pop = ui.pop === k ? null : k; $('#dock').innerHTML = renderDock(); renderPop();
+      const first = ui.pop && document.querySelector('.pop .pop-i, .pop button'); const tr = document.querySelector(`#dock [data-pop="${k}"]`);
+      if (first) first.focus({ preventScroll: true }); else if (tr) tr.focus({ preventScroll: true }); break; }
     case 'sheet': ui.sheet = !ui.sheet; render(); break;
     case 'sheet-close': ui.sheet = false; render(); break;
     case 'lang': setLang(el.dataset.v); ui.pop = null; renderPop(); break;
@@ -3114,7 +3182,7 @@ document.addEventListener('click', (ev) => {
     case 'pal-close': ui.palette = false; renderPalette(); break;
     case 'pal-run': { const it = (ui._pItems || [])[i]; ui.palette = false; renderPalette(); if (it) it.act(); break; }
     case 'help-tab': ui.helpTab = el.dataset.tab; render(); break;
-    case 'scroll-casos': ev.preventDefault(); { const c = $('#casos'); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'start' }); else { ws.settings.mostrarCasos = true; saveWs(); render(); const c2 = $('#casos'); if (c2) c2.scrollIntoView({ block: 'start' }); } } break;
+    case 'scroll-casos': ev.preventDefault(); { const c = $('#casos'); if (c) c.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' }); else { ws.settings.mostrarCasos = true; saveWs(); render(); const c2 = $('#casos'); if (c2) c2.scrollIntoView({ block: 'start' }); } } break;
     /* proyectos */
     case 'open-project': ui.pop = null; openProject(el.dataset.id); break;
     case 'open-case': ui.pop = null; openCase(el.dataset.case); break;
@@ -3154,7 +3222,7 @@ document.addEventListener('click', (ev) => {
     case 'goto-brechas': ui.brechaSev = ['Alta', 'Media', 'Baja'].includes(el.dataset.v) ? el.dataset.v : 'todas'; go('brechas'); break;
     case 'tr-fw': if (FW.includes(el.dataset.fw) && el.dataset.fw !== ui.trFw) { ui.trFw = el.dataset.fw; ui.trId = null; ui.trQ = ''; ui.trIdx = 0; render(); } break;
     case 'tr-pick': ui.trId = el.dataset.id; ui.trOpen = false; ui.trQ = ''; render(); break;
-    case 'tr-center': { const f = el.dataset.fw, id = el.dataset.id; if (!FW.includes(f) || !IX.req[f][id]) break; ui.trFw = f; ui.trId = id; ui.trQ = ''; ui.trOpen = false; ui.insp = null; if (ui.view !== 'traductor') go('traductor'); else { render(); const st = $('.stage'); if (st && st.getBoundingClientRect().top < 60) st.scrollIntoView({ behavior: 'smooth', block: 'start' }); } break; }
+    case 'tr-center': { const f = el.dataset.fw, id = el.dataset.id; if (!FW.includes(f) || !IX.req[f][id]) break; ui.trFw = f; ui.trId = id; ui.trQ = ''; ui.trOpen = false; ui.insp = null; if (ui.view !== 'traductor') go('traductor'); else { render(); const st = $('.stage'); if (st && st.getBoundingClientRect().top < 60) st.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' }); } break; }
     case 'uc-fw': ui.ucFw = ['todos', ...FW].includes(el.dataset.v) ? el.dataset.v : 'todos'; render(); break;
     case 'uc-estado': ui.ucEstado = ['todos', ...E.ESTADOS].includes(el.dataset.v) ? el.dataset.v : 'todos'; render(); break;
     case 'norma-fw': if (FW.includes(el.dataset.fw)) { ui.normaFw = el.dataset.fw; render(); } break;
@@ -3172,7 +3240,11 @@ document.addEventListener('click', (ev) => {
     default: break;
   }
 });
-function closeLayersInsp() { const back = ui.insp; ui.insp = null; render(); if (back && back.type === 'uc') { const el = document.getElementById('uc-' + back.id); if (el) el.focus({ preventScroll: true }); } }
+function closeLayersInsp() {
+  const back = ui.insp; ui.insp = null; render();
+  if (ui._inspReturn) { restoreFocus(ui._inspReturn); ui._inspReturn = null; } // vuelve al elemento que abrió el inspector
+  if ((!document.activeElement || document.activeElement === document.body) && back && back.type === 'uc') { const el = document.getElementById('uc-' + back.id); if (el) el.focus({ preventScroll: true }); }
+}
 
 /* Barra lateral: el resaltado sigue al puntero (la posición la fija --g; ver rosetta.css) */
 document.addEventListener('pointerover', (ev) => {
