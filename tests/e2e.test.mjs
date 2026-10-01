@@ -240,32 +240,31 @@ test('barra lateral: fija, compacta con despliegue al pasar el ratón y por tecl
   await p.goto(URL_APP); await p.waitForFunction(() => window.__ROSETTA__);
   await p.evaluate(() => { window.__ROSETTA__.openCase('techserv'); window.__ROSETTA__.go('brechas'); });
   const w = () => p.evaluate(() => Math.round(document.getElementById('dock').getBoundingClientRect().width));
-  const settle = () => p.waitForTimeout(1000);
-  await settle(); assert.equal(await w(), 264, 'desplegada a 1440 px');
+  // Espera a que el ancho llegue al valor (la transición dura 0,38 s; en CI puede ir más lenta)
+  const waitW = async (x, msg) => { await p.waitForFunction((v) => Math.round(document.getElementById('dock').getBoundingClientRect().width) === v, x, { timeout: 5000 }).catch(() => {}); assert.equal(await w(), x, msg); };
+  await waitW(264, 'desplegada a 1440 px');
   const pad1 = await p.evaluate(() => parseFloat(getComputedStyle(document.getElementById('main')).paddingLeft));
   // el resaltado se desliza hasta la opción bajo el puntero
   const g0 = await p.evaluate(() => getComputedStyle(document.querySelector('.nav-glow')).transform);
   // (si la barra se vuelve a pintar bajo un puntero quieto, :hover no se recalcula hasta que se mueve)
   const nudge = async (sel) => { const b = await p.locator(sel).boundingBox(); await p.mouse.move(b.x + 20, b.y + 10); await p.mouse.move(b.x + 22, b.y + 12); };
-  await nudge('.nav-i[data-view="plan"]'); await settle();
+  await nudge('.nav-i[data-view="plan"]');
+  await p.waitForFunction((g) => getComputedStyle(document.querySelector('.nav-glow')).transform !== g, g0, { timeout: 5000 }).catch(() => {});
   const g1 = await p.evaluate(() => getComputedStyle(document.querySelector('.nav-glow')).transform);
   assert.notEqual(g0, g1, JSON.stringify(await p.evaluate(() => ({ hov: document.querySelector('.nav-i:hover')?.dataset.view, el: document.elementFromPoint(100, 400)?.className, mini: document.documentElement.hasAttribute('data-mini'), w: document.getElementById('dock').offsetWidth }))));
   // plegar con «[»: compacta y el contenido gana espacio
-  await p.mouse.move(1000, 400); await p.keyboard.press('['); await settle();
-  assert.equal(await w(), 76, 'compacta ' + JSON.stringify(await p.evaluate(() => ({ mini: document.documentElement.hasAttribute('data-mini'), act: document.activeElement?.outerHTML.slice(0, 80), fv: !!document.querySelector('.dock :focus-visible'), hov: !!document.querySelector('.dock:hover') }))));
-  const pad2 = await p.evaluate(() => parseFloat(getComputedStyle(document.getElementById('main')).paddingLeft));
+  await p.mouse.move(1000, 400); await p.keyboard.press('['); await waitW(76, 'compacta');
+  await p.waitForFunction(() => Math.round(parseFloat(getComputedStyle(document.getElementById('main')).paddingLeft)) === 116, null, { timeout: 5000 }).catch(() => {});
+  const pad2 = await p.evaluate(() => Math.round(parseFloat(getComputedStyle(document.getElementById('main')).paddingLeft)));
   assert.ok(pad2 < pad1 - 150, `padding ${pad1} → ${pad2}`);
   assert.equal(await p.evaluate(() => getComputedStyle(document.querySelector('.nav-i .lbl')).opacity), '0');
   // al pasar el ratón se despliega por encima sin mover el contenido
-  await nudge('.nav-i[data-view="controles"]'); await settle();
-  assert.equal(await w(), 264, 'desplegada al pasar el ratón');
-  assert.equal(await p.evaluate(() => parseFloat(getComputedStyle(document.getElementById('main')).paddingLeft)), pad2);
-  await p.mouse.move(1000, 400); await p.mouse.move(1010, 410); await settle();
-  assert.equal(await w(), 76, 'plegada al salir ' + JSON.stringify(await p.evaluate(() => ({ act: document.activeElement?.className, fv: !!document.querySelector('.dock :focus-visible'), hov: !!document.querySelector('.dock:hover') }))));
+  await nudge('.nav-i[data-view="controles"]'); await waitW(264, 'desplegada al pasar el ratón');
+  assert.equal(await p.evaluate(() => Math.round(parseFloat(getComputedStyle(document.getElementById('main')).paddingLeft))), pad2, 'el contenido no se desplaza');
+  await p.mouse.move(1000, 400); await p.mouse.move(1010, 410); await waitW(76, 'plegada al salir');
   // por teclado también se despliega
   for (let i = 0; i < 40 && !(await p.evaluate(() => !!document.activeElement?.closest('#dock'))); i++) await p.keyboard.press('Shift+Tab');
-  await p.waitForFunction(() => document.getElementById('dock').getBoundingClientRect().width > 260, null, { timeout: 3000 }).catch(() => {});
-  assert.equal(await w(), 264, 'desplegada con foco de teclado ' + JSON.stringify(await p.evaluate(() => ({ act: document.activeElement?.outerHTML.slice(0, 90), fv: !!document.querySelector('.dock :focus-visible'), x: getComputedStyle(document.getElementById('dock')).getPropertyValue('--x') }))));
+  await waitW(264, 'desplegada con foco de teclado');
   await ctx2.close();
 });
 
