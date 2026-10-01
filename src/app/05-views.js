@@ -107,14 +107,15 @@ function wheelLegend() {
 /* Solapamiento: si cumples la fila al 100 %, qué parte de la columna heredas */
 function overlapGrid(st) {
   const inS = (f) => !st || st.alcance[f].on;
-  let h = `<div class="overlap" role="table" aria-label="${esc(t('overlapTitle'))}"><div class="h" role="columnheader"><span class="tiny muted">${esc(t('overlapRow'))} ↓</span></div>${FW.map((f) => `<div class="h" role="columnheader">${fwTag(f, !inS(f), true)}</div>`).join('')}`;
+  let h = `<div class="overlap" role="table" aria-label="${esc(t('overlapTitle'))}"><div role="row"><div class="h" role="columnheader"><span class="tiny muted">${esc(t('overlapRow'))} ↓</span></div>${FW.map((f) => `<div class="h" role="columnheader">${fwTag(f, !inS(f), true)}</div>`).join('')}</div>`;
   for (const a of FW) {
-    h += `<div class="rh" role="rowheader">${fwTag(a, !inS(a), true)}</div>`;
+    h += `<div role="row"><div class="rh" role="rowheader">${fwTag(a, !inS(a), true)}</div>`;
     for (const b of FW) {
       const x = SOLAPE[a][b]; const v = x.pct;
       if (a === b) { h += '<div class="c self" role="cell">—</div>'; continue; }
       h += `<div class="c${v > 0.62 ? ' hi' : ''}${!inS(a) || !inS(b) ? ' fuera' : ''}" role="cell" style="--v:${v.toFixed(3)}" data-tip="${esc(t('overlapTip', E.FW_LABEL[a], E.FW_LABEL[b], pct(v), x.completos, x.total))}">${Math.round(v * 100)}%</div>`;
     }
+    h += '</div>';
   }
   return h + '</div>';
 }
@@ -207,15 +208,15 @@ function vPrisma() {
   }
   const picker = `<section class="glass prism-pick">
     <div class="chipset" role="group" aria-label="${esc(t('source'))}">${FW.map((g) => `<button type="button" data-act="tr-fw" data-fw="${g}" aria-pressed="${g === f}"><span class="dotfw fw-${g}"></span>${FW_SHORT[g]}</button>`).join('')}</div>
-    <div class="search">${icon('search', 16)}<input type="search" id="tr-q" value="${esc(ui.trQ)}" placeholder="${esc(t('pickPh'))}" aria-label="${esc(t('pickPh'))}" autocomplete="off" role="combobox" aria-expanded="${ui.trOpen}" aria-controls="tr-res"></div>${res}</section>`;
+    <div class="search">${icon('search', 16)}<input type="search" id="tr-q" value="${esc(ui.trQ)}" placeholder="${esc(t('pickPh'))}" aria-label="${esc(t('pickPh'))}" autocomplete="off" role="combobox" aria-expanded="${ui.trOpen}" aria-controls="tr-res"${ui.trOpen ? ` aria-activedescendant="tri-${ui.trIdx}"` : ''}></div>${res}</section>`;
   const ensInfo = f === 'ens' ? `<dl class="kv small"><dt>${esc(t('dims'))}</dt><dd>${esc(r.dims)}</dd><dt>${esc(t('exig'))}</dt><dd class="mono">B ${esc(r.bajo)} · M ${esc(r.medio)} · A ${esc(r.alto)}</dd>${state.alcance.ens.on ? `<dt>${esc(t('inYourSys'))}</dt><dd>${esc(t('level'))} ${esc(t('lv.' + cov.nivel))} · <code>${esc(exigL(cov.exigencia))}</code></dd>` : ''}<dt>${esc(t('classIso'))}</dt><dd>${esc(r.ref || '—')}</dd></dl>` : '';
   const src = `<div class="src-col"><div class="col-lbl">${esc(t('source'))}</div><div class="src fw-${f}">
     <div class="row">${fwTag(f, !onFw(f))}<code>${esc(reqCode(f, id))}</code></div><h2>${esc(rT(f, id))}</h2><p class="small muted">${esc(rG(f, id))}</p>
     <div class="row" style="margin-top:12px">${onFw(f) ? covPill(cov.estado) + (cov.estado !== 'no-exigido' && cov.estado !== 'excluido' ? `<span class="small muted num">${esc(t('support', pct(cov.score)))}</span>` : '') : `<span class="pill neutral">${esc(t('outOfScope'))}</span>`}</div>
     ${ensInfo ? `<div style="margin-top:14px">${ensInfo}</div>` : ''}
     <div class="row" style="margin-top:14px"><button type="button" class="btn sm" data-act="insp-req" data-fw="${f}" data-id="${esc(id)}">${icon('panel-right', 15)}${esc(t('inspect'))}</button></div></div></div>`;
-  const nodes = `<div class="nodes-col"><div class="col-lbl">${esc(t('controlsCol'))} · ${ctl.length}</div>${ctl.map((l) => { const fz = fuerzaDe(l.w); const e = E.estadoUc(state, l.uc); return `<div class="node" role="button" tabindex="0" data-act="insp-uc" data-id="${esc(l.uc)}" data-uc="${esc(l.uc)}" data-w="${l.w}">
-      <span class="uc">${esc(l.uc)}</span><b>${esc(cT(l.uc))}</b><div class="row"><span class="weight ${fz}">${esc(t('fuerzaCorta.' + fz))}</span>${l.w > 0 ? stateSwitch(l.uc, e) : ''}</div></div>`; }).join('')}</div>`;
+  const nodes = `<div class="nodes-col"><div class="col-lbl">${esc(t('controlsCol'))} · ${ctl.length}</div>${ctl.map((l) => { const fz = fuerzaDe(l.w); const e = E.estadoUc(state, l.uc); return `<div class="node" data-act="insp-uc" data-id="${esc(l.uc)}" data-uc="${esc(l.uc)}" data-w="${l.w}">
+      <span class="uc">${esc(l.uc)}</span><button type="button" class="li-open" data-act="insp-uc" data-id="${esc(l.uc)}">${esc(cT(l.uc))}</button><div class="row"><span class="weight ${fz}">${esc(t('fuerzaCorta.' + fz))}</span>${l.w > 0 ? stateSwitch(l.uc, e) : ''}</div></div>`; }).join('')}</div>`;
   const lane = (g) => {
     const rows = eq.otras[g].filter((x) => x.fuerza !== 'relacionado' || showRel);
     const noEq = g === 'iso42001' || f === 'iso42001' ? t('noEqAi') : t('noEq');
@@ -264,8 +265,8 @@ function vControles() {
     const cs = list.filter((c) => c.dom === d.id); if (!cs.length) continue;
     html += `<section class="glass list"><div class="sec-h">${icon(d.ic, 17)}${esc(dT(d.id))}<small>${esc(t('nControls', cs.length))}</small></div>${cs.map((c) => {
       const cc = calc.controles[c.id]; const dd = state.controles[c.id];
-      return `<div class="li${cc.relevante ? '' : ' dim'}${ui.insp && ui.insp.type === 'uc' && ui.insp.id === c.id ? ' on' : ''}" id="uc-${esc(c.id)}" role="button" tabindex="0" data-act="insp-uc" data-id="${esc(c.id)}">
-        <span class="id">${esc(c.id)}</span><div class="tt"><b>${esc(cT(c.id))}</b><small>${dd.origen === 'ens' ? `<span class="origin">${esc(t('inheritedEns'))}</span> · ` : ''}${esc(dd.responsable || t('noOwner'))}</small></div>
+      return `<div class="li${cc.relevante ? '' : ' dim'}${ui.insp && ui.insp.type === 'uc' && ui.insp.id === c.id ? ' on' : ''}" data-act="insp-uc" data-id="${esc(c.id)}">
+        <span class="id">${esc(c.id)}</span><div class="tt"><button type="button" class="li-open" id="uc-${esc(c.id)}" data-act="insp-uc" data-id="${esc(c.id)}">${esc(cT(c.id))}</button><small>${dd.origen === 'ens' ? `<span class="origin">${esc(t('inheritedEns'))}</span> · ` : ''}${esc(dd.responsable || t('noOwner'))}</small></div>
         <div class="fwdots">${FW.map((f) => { const n = c.maps[f].filter((m) => m.w > 0).length; return n ? `<span class="fwn fw-${f}${onFw(f) ? '' : ' off'}" data-tip="${esc(`${E.FW_LABEL[f]}: ${t('reqs', n)}`)}">${n}</span>` : ''; }).join('')}</div>
         ${stateSwitch(c.id, cc.estado)}</div>`;
     }).join('')}</section>`;
@@ -363,8 +364,8 @@ function vMapa() {
   const showRel = ws.settings.mostrarRelaciones;
   const counts = CAT.domains.map((d) => ({ d, n: FW.map((f) => reqsOfDom(d.id, f).size), ctl: CAT.controls.filter((c) => c.dom === d.id).length }));
   const max = Math.max(...counts.flatMap((x) => x.n));
-  const grid = `<div style="overflow-x:auto"><div class="dgrid" role="table" aria-label="${esc(t('byDomain'))}"><div class="h"></div>${FW.map((f) => `<div class="h">${fwTag(f, !onFw(f), true)}</div>`).join('')}<div class="h tot tiny muted">${esc(t('controlsN'))}</div>
-    ${counts.map(({ d, n, ctl }) => `<div class="rh">${icon(d.ic, 15)}<span>${esc(dT(d.id))}</span></div>${n.map((v, i) => `<div class="c fw-${FW[i]}${v ? '' : ' zero'}${v / max > 0.6 ? ' hi' : ''}" style="--v:${(v / max).toFixed(3)}" data-tip="${esc(`${dT(d.id)} · ${E.FW_LABEL[FW[i]]}: ${t('reqs', v)}`)}">${v || '·'}</div>`).join('')}<div class="tot">${ctl}</div>`).join('')}</div></div>`;
+  const grid = `<div style="overflow-x:auto" tabindex="0" role="region" aria-label="${esc(t('byDomain'))}"><div class="dgrid" role="table" aria-label="${esc(t('byDomain'))}"><div role="row"><div class="h" role="cell"></div>${FW.map((f) => `<div class="h" role="columnheader">${fwTag(f, !onFw(f), true)}</div>`).join('')}<div class="h tot tiny muted" role="columnheader">${esc(t('controlsN'))}</div></div>
+    ${counts.map(({ d, n, ctl }) => `<div role="row"><div class="rh" role="rowheader">${icon(d.ic, 15)}<span>${esc(dT(d.id))}</span></div>${n.map((v, i) => `<div class="c fw-${FW[i]}${v ? '' : ' zero'}${v / max > 0.6 ? ' hi' : ''}" role="cell" style="--v:${(v / max).toFixed(3)}" data-tip="${esc(`${dT(d.id)} · ${E.FW_LABEL[FW[i]]}: ${t('reqs', v)}`)}">${v || '·'}</div>`).join('')}<div class="tot" role="cell">${ctl}</div></div>`).join('')}</div></div>`;
   const q = normTxt(ui.mapaQ.trim());
   let rows = ''; let lastDom = '';
   for (const c of CAT.controls) {

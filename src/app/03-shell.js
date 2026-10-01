@@ -47,8 +47,23 @@ function go(view) {
   render(); window.scrollTo({ top: 0 });
   const v = $('#view'); if (v) v.focus({ preventScroll: true });
 }
+/* Clave estable del elemento con foco (para recuperarlo tras redibujar con innerHTML aunque no tenga id) */
+const FOCUS_ATTRS = ['act', 'id', 'v', 'fw', 'key', 'dir', 'view', 'pop', 'tab', 'case', 'k'];
+function focusKey(el) {
+  if (!el || !el.dataset || !el.dataset.act) return null;
+  return FOCUS_ATTRS.filter((a) => el.dataset[a] !== undefined).map((a) => `[data-${a}="${CSS.escape(el.dataset[a])}"]`).join('');
+}
+function restoreFocus(key, scope) {
+  if (!key) return;
+  const host = (scope && scope.isConnected ? scope : null) || document;
+  const ok = (x) => x.tabIndex >= 0 && !x.disabled && x.getClientRects().length > 0;
+  const el = [...host.querySelectorAll(key)].find(ok) || [...document.querySelectorAll(key)].find(ok);
+  if (el) el.focus({ preventScroll: true });
+}
 function render() {
   const ae = document.activeElement; const active = ae && ae.id;
+  const fKey = !active && ae !== document.body ? focusKey(ae) : null;
+  const fScope = ae && ae.closest ? (ae.closest('#insp') ? 'insp' : ae.closest('#dock') ? 'dock' : ae.closest('#tabbar') ? 'tabbar' : null) : null;
   let sel = null; try { if (ae && typeof ae.selectionStart === 'number') sel = [ae.selectionStart, ae.selectionEnd]; } catch (e) { sel = null; }
   applyRail(); $('#dock').innerHTML = renderDock();
   $('#tabbar').innerHTML = renderTabbar();
@@ -57,6 +72,7 @@ function render() {
   renderInsp(); renderPop(); renderSheet(); renderPalette();
   if (ui.view === 'traductor') requestAnimationFrame(drawBeams);
   if (active) { const el = document.getElementById(active); if (el) { el.focus({ preventScroll: true }); if (sel) { try { el.setSelectionRange(sel[0], sel[1]); } catch (e) { /* n/a */ } } } }
+  else if (fKey && !(fScope === 'insp' && $('#insp').hidden) && (!document.activeElement || document.activeElement === document.body)) restoreFocus(fKey, fScope ? $('#' + fScope) : null);
 }
 function navBadge(v) {
   if (!state) return '';
@@ -170,24 +186,26 @@ function paletteItems() {
 }
 function renderPalette() {
   const host = $('#palette');
-  if (!ui.palette) { host.hidden = true; host.innerHTML = ''; return; }
+  if (!ui.palette) { const had = !host.hidden; host.hidden = true; host.innerHTML = ''; if (had && (!document.activeElement || document.activeElement === document.body)) { const r = ui._palReturn; if (typeof r === 'string') restoreFocus(r); else if (r && r.isConnected) r.focus({ preventScroll: true }); } return; }
   const items = paletteItems(); ui._pItems = items;
   if (ui.paletteIdx >= items.length) ui.paletteIdx = Math.max(0, items.length - 1);
   let last = ''; let html = '';
   items.forEach((it, i) => {
     if (it.grupo !== last) { html += `<div class="pal-g">${esc(it.grupo)}</div>`; last = it.grupo; }
-    html += `<button type="button" class="pal-i${i === ui.paletteIdx ? ' on' : ''}" data-act="pal-run" data-i="${i}" id="pal-${i}">${icon(it.ic, 16)}<span>${esc(it.label)}</span>${it.hint ? `<small>${esc(it.hint)}</small>` : ''}</button>`;
+    html += `<button type="button" class="pal-i${i === ui.paletteIdx ? ' on' : ''}" data-act="pal-run" data-i="${i}" id="pal-${i}" role="option" aria-selected="${i === ui.paletteIdx}" tabindex="-1">${icon(it.ic, 16)}<span>${esc(it.label)}</span>${it.hint ? `<small>${esc(it.hint)}</small>` : ''}</button>`;
   });
   const wasOpen = !host.hidden; host.hidden = false;
-  if (!wasOpen || !$('#pal-q')) host.innerHTML = `<div class="overlay" data-act="pal-close"></div><div class="palette" role="dialog" aria-label="${esc(t('search'))}"><div class="pal-in">${icon('search', 18)}<input id="pal-q" type="text" placeholder="${esc(t('searchPh'))}" value="${esc(ui.paletteQ)}" autocomplete="off"><kbd>Esc</kbd></div><div class="pal-list" id="pal-list"></div></div>`;
+  if (!wasOpen || !$('#pal-q')) host.innerHTML = `<div class="overlay" data-act="pal-close"></div><div class="palette" role="dialog" aria-modal="true" aria-label="${esc(t('search'))}"><div class="pal-in">${icon('search', 18)}<input id="pal-q" type="text" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list" aria-label="${esc(t('search'))}" placeholder="${esc(t('searchPh'))}" value="${esc(ui.paletteQ)}" autocomplete="off"><kbd>Esc</kbd></div><div class="pal-list" id="pal-list" role="listbox" aria-label="${esc(t('search'))}"></div></div>`;
   $('#pal-list').innerHTML = html || `<div class="pal-e">${esc(t('noResults'))}</div>`;
   const on = $('#pal-' + ui.paletteIdx); if (on) on.scrollIntoView({ block: 'nearest' });
-  if (!wasOpen) $('#pal-q').focus();
+  if (on) $('#pal-q').setAttribute('aria-activedescendant', on.id); else $('#pal-q').removeAttribute('aria-activedescendant');
+  if (!wasOpen) { ui._palReturn = document.activeElement !== document.body ? focusKey(document.activeElement) || document.activeElement : null; $('#pal-q').focus(); }
 }
 function openInsp(type, id, fw) {
   if (type === 'uc' && !IX.ucMap[id]) return;
   if (type === 'req' && !(FW.includes(fw) && IX.req[fw][id])) return;
   if (!state) return;
+  if (!ui.insp) { const ae = document.activeElement; ui._inspReturn = ae && !ae.closest('#insp') ? focusKey(ae) : null; }
   ui.insp = { type, id, fw }; render();
   const x = $('#insp'); if (x) { x.scrollTop = 0; const h = x.querySelector('h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
 }
@@ -195,5 +213,10 @@ function setLang(l) { ws.settings.lang = l === 'en' ? 'en' : 'es'; saveWs(); app
 
 /* ---------- Avisos ---------- */
 let toastT = null;
-function toast(msg) { const x = $('#toast'); x.innerHTML = `${icon('circle-check', 16)}<span>${esc(msg)}</span>`; x.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { x.hidden = true; }, 2800); }
+function toast(msg, kind = 'ok') {
+  const x = $('#toast'); const err = kind === 'error';
+  x.setAttribute('role', err ? 'alert' : 'status'); x.classList.toggle('err', err);
+  x.innerHTML = `${icon(err ? 'triangle-alert' : 'circle-check', 16)}<span>${esc(msg)}</span>`; x.hidden = false;
+  clearTimeout(toastT); toastT = setTimeout(() => { x.hidden = true; }, err ? 7000 : Math.max(2800, 1500 + msg.length * 45));
+}
 

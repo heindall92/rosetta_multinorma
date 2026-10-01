@@ -157,6 +157,6 @@ function applyTheme() {
   r.setAttribute('data-accent', ws.settings.acento);
   r.setAttribute('data-density', ws.settings.densidad);
   r.setAttribute('lang', LANG());
-  try { document.querySelector('.skip').textContent = t('skip'); } catch (e) { /* n/a */ }
+  try { document.querySelector('.skip').textContent = t('skip'); $('#tabbar').setAttribute('aria-label', t('sections')); $('#insp').setAttribute('aria-label', t('inspect')); } catch (e) { /* n/a */ }
 }
 
