@@ -858,3 +858,60 @@ select option { background: var(--bg); color: var(--ink); }
   .demo-bar .btn.ghost { font-size: 0; gap: 0; padding: 0 9px; } /* solo el icono; el texto sigue siendo el nombre accesible */
   .demo-bar .btn { height: 32px; padding: 0 12px; font-size: .78rem; }
 }
+
+/* ============ Centro de ayuda ============ */
+.help-hero { display: flex; flex-direction: column; gap: 8px; padding-bottom: 6px; }
+.help-hero h2 { font-size: 1.5rem; }
+.help-search { flex: none; width: 100%; max-width: 640px; margin-top: 6px; }
+.help-search input { height: 48px; font-size: .95rem; }
+#help-res:empty { display: none; }
+.help-body mark { background: color-mix(in oklch, var(--accent) 26%, transparent); color: inherit; border-radius: 3px; padding: 0; }
+.help-sec { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: .78rem; font-family: var(--f-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-variation-settings: "wdth" 80; }
+.help-sec .ic { color: var(--accent-text, var(--accent)); }
+.help-steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.help-steps .play-i span.small { display: block; margin-top: 2px; }
+.help-topics { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
+.help-topic { all: unset; box-sizing: border-box; display: flex; flex-direction: column; gap: 6px; padding: 16px; border-radius: 18px; cursor: pointer; background: var(--glass-in); border: 1px solid var(--hair); transition: background .15s, transform .15s, border-color .15s; }
+.help-topic:hover { background: var(--glass-2); border-color: color-mix(in oklch, var(--accent) 35%, transparent); transform: translateY(-2px); }
+.help-topic:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.help-topic-ic { width: 36px; height: 36px; border-radius: 12px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-text, var(--accent)); }
+.help-topic b { font-size: .95rem; } .help-topic > span:not(.help-topic-ic) { font-size: .82rem; color: var(--muted); line-height: 1.45; }
+.help-topic em { margin-top: auto; padding-top: 4px; display: inline-flex; align-items: center; gap: 4px; font-style: normal; font-size: .78rem; font-weight: 600; color: var(--accent-text, var(--accent)); }
+.help-group { display: flex; flex-direction: column; gap: 8px; scroll-margin-top: 24px; }
+.help-group h3 { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+.help-group h3 .ic { color: var(--accent-text, var(--accent)); }
+.help-faq { border-radius: 16px; background: var(--glass-in); border: 1px solid var(--hair); }
+.help-faq summary { list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; font-weight: 550; border-radius: 16px; }
+.help-faq summary::-webkit-details-marker { display: none; }
+.help-faq summary .ic { flex: none; color: var(--muted); transition: transform .2s; }
+.help-faq[open] summary .ic { transform: rotate(180deg); }
+.help-faq summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.help-faq p { padding: 0 16px 14px; font-size: .9rem; line-height: 1.6; }
+.help-faq code, .help-body .help-faq b { font-weight: 600; }
+.help-refs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.help-ref { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border-radius: 16px; background: var(--glass-in); border: 1px solid var(--hair); color: var(--ink); text-decoration: none; }
+.help-ref:hover { background: var(--glass-2); border-color: color-mix(in oklch, var(--accent) 35%, transparent); }
+.help-ref .ic { color: var(--accent-text, var(--accent)); margin-top: 2px; }
+.help-ref span { display: flex; flex-direction: column; gap: 2px; } .help-ref small { color: var(--muted); font-size: .8rem; }
+.help-cta { margin-top: 10px; padding: 20px; border-radius: 20px; background: var(--accent-soft); border: 1px solid color-mix(in oklch, var(--accent) 30%, transparent); display: flex; flex-direction: column; gap: 10px; }
+.help-cta h3 { display: flex; align-items: center; gap: 8px; } .help-cta h3 .ic { color: var(--accent-text, var(--accent)); }
+.help-cta a { text-decoration: none; }
+.about-card { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 20px; align-items: center; padding: 20px; border-radius: 20px; background: var(--glass-in); border: 1px solid var(--hair); }
+.about-av { font-size: 1.9rem; }
+.about-who h3 { font-size: 1.25rem; } .about-role { font-weight: 600; margin-top: 2px; }
+.about-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.about-link { display: inline-flex; align-items: center; gap: 7px; height: 34px; padding: 0 12px; border-radius: 999px; font-size: .82rem; font-weight: 600; text-decoration: none; color: #fff; }
+.about-link:focus-visible, .help-ref:focus-visible, .about-repo:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.al-linkedin { background: #0A66C2; } .al-github { background: #24292f; } .al-globe { background: oklch(0.52 0.2 358); } .al-hackthebox { background: #9fef00; color: #111927; }
+.al-mail { background: var(--glass-2); color: var(--ink); border: 1px solid var(--hair-2); }
+.about-link:hover { filter: brightness(1.08); }
+.about-repo { display: inline-flex; align-items: center; gap: 6px; color: var(--accent-text, var(--accent)); text-decoration: none; font-weight: 600; }
+@media (max-width: 900px) {
+  .help-steps, .help-refs { grid-template-columns: 1fr; }
+  .about-card { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .about-links { justify-content: center; }
+}
+/* Texto con degradado (background-clip: text): el fondo solo pinta dentro de la caja del elemento y,
+   con letra estrecha y espaciado negativo, el último glifo de cada línea sobresale y se recorta.
+   Se amplía la caja por la derecha y por abajo, y se compensa el margen para no mover el texto. */
+.big-num b, .hero h1 em { padding: .04em .14em .08em 0; margin-right: -.14em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }

@@ -117,6 +117,25 @@ test('deshacer y rehacer (botón del aviso y Ctrl+Z / Ctrl+Mayús+Z)', async () 
   noErrors('deshacer');
 });
 
+test('centro de ayuda: buscador, temas y «Acerca de» con los enlaces del autor', async () => {
+  await page.evaluate(() => { window.__ROSETTA__.ui.helpTab = 'inicio'; window.__ROSETTA__.go('ayuda'); });
+  assert.equal(await page.locator('.help-topic').count(), 7);
+  await page.fill('#help-q', 'exclu'); await page.waitForTimeout(300);
+  assert.match(await page.locator('#help-res').innerText(), /\d+ resultados?/);
+  assert.ok(await page.locator('.help-faq mark').count() > 0, 'resalta la búsqueda');
+  await page.fill('#help-q', 'zzzz'); await page.waitForTimeout(300);
+  assert.equal(await page.locator('.help-faq').count(), 0);
+  await page.fill('#help-q', ''); await page.waitForTimeout(300);
+  await page.click('.help-topic[data-id="io"]');
+  assert.equal(await page.locator('#help-io details').first().getAttribute('open'), '');
+  await page.click('[data-act="help-tab"][data-tab="acerca"]');
+  const links = await page.locator('.about-links a').evaluateAll((as) => as.map((a) => [a.textContent.trim(), a.href, a.target, a.rel]));
+  for (const host of ['linkedin.com/in/yoandyrd92', 'github.com/heindall92', 'yoandyramirez.com', 'hackthebox.com', 'mailto:yoandyramirezdelgado@gmail.com'])
+    assert.ok(links.some(([, h]) => h.includes(host)), `falta ${host}`);
+  for (const [, h, tg, rel] of links) if (h.startsWith('http')) { assert.equal(tg, '_blank'); assert.match(rel, /noopener/); }
+  noErrors('ayuda');
+});
+
 test('idioma: inglés y vuelta a español (interruptor de Ajustes)', async () => {
   await page.evaluate(() => window.__ROSETTA__.go('ajustes'));
   await page.locator('#view [data-act="lang"][data-v="en"]').click();
