@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "2.1.0",
   "domains": [
     {
       "id": "GOB",
@@ -197,7 +197,7 @@
           "bajo": "n.a.",
           "medio": "aplica",
           "alto": "aplica",
-          "ref": "5.21 Seguridad en la cadena de suministro TIC; 8.9 Gestión de la configuración (sin equivalente directo – CPSTIC)",
+          "ref": "5.21 Seguridad en la cadena de suministro TIC (sin equivalente directo – CPSTIC)",
           "t_en": "Certified components",
           "g_en": "Planning"
         },
@@ -314,7 +314,7 @@
           "bajo": "aplica",
           "medio": "+ R1",
           "alto": "+ R1 + R2 + R3",
-          "ref": "8.9 Gestión de la configuración; 8.32 Gestión de cambios; 8.13 Copias de seguridad",
+          "ref": "8.9 Gestión de la configuración; 8.32 Gestión de cambios",
           "t_en": "Security configuration management",
           "g_en": "Operation"
         },
@@ -1032,6 +1032,58 @@
           "ref": "8.6 Gestión de la capacidad; 8.16 Monitorización; 8.14 Redundancia; 5.30 Continuidad TIC",
           "t_en": "Denial-of-service protection",
           "g_en": "Service protection"
+        },
+        {
+          "id": "art.28",
+          "code": "Art. 28",
+          "t": "Declaración de Aplicabilidad firmada por el responsable de la seguridad",
+          "t_en": "Statement of Applicability signed by the security officer",
+          "g": "Articulado",
+          "dims": "Categoría",
+          "bajo": "aplica",
+          "medio": "aplica",
+          "alto": "aplica",
+          "ref": "Cl. 6.1.3 Tratamiento de riesgos y Declaración de Aplicabilidad",
+          "g_en": "Articles"
+        },
+        {
+          "id": "art.31",
+          "code": "Art. 31",
+          "t": "Auditoría de la seguridad (ordinaria al menos cada dos años; autoevaluación en categoría BÁSICA)",
+          "t_en": "Security audit (at least every two years; self-assessment for BASIC category)",
+          "g": "Articulado",
+          "dims": "Categoría",
+          "bajo": "autoevaluación",
+          "medio": "auditoría formal",
+          "alto": "auditoría formal",
+          "ref": "Cl. 9.2 Auditoría interna; 5.35 Revisión independiente",
+          "g_en": "Articles"
+        },
+        {
+          "id": "art.32",
+          "code": "Art. 32",
+          "t": "Informe del estado de la seguridad (INES)",
+          "t_en": "Security status report (INES)",
+          "g": "Articulado",
+          "dims": "Categoría",
+          "bajo": "aplica",
+          "medio": "aplica",
+          "alto": "aplica",
+          "ref": "Cl. 9.1 Seguimiento y medición",
+          "g_en": "Articles"
+        },
+        {
+          "id": "art.33",
+          "code": "Art. 33",
+          "t": "Notificación al CCN-CERT de incidentes con impacto significativo",
+          "t_en": "Notification of significant incidents to CCN-CERT",
+          "g": "Articulado",
+          "dims": "Categoría",
+          "bajo": "aplica",
+          "medio": "aplica",
+          "alto": "aplica",
+          "ref": "5.5 Contacto con las autoridades; 5.24 Planificación de la gestión de incidentes",
+          "g_en": "Articles"
         }
       ]
     },
@@ -1092,6 +1144,14 @@
           "t": "Roles, responsabilidades y autoridades",
           "g": "Cláusulas",
           "t_en": "Roles, responsibilities and authorities",
+          "g_en": "Clauses"
+        },
+        {
+          "id": "C6.1.1",
+          "code": "Cl. 6.1.1",
+          "t": "Acciones para abordar riesgos y oportunidades: generalidades",
+          "t_en": "Actions to address risks and opportunities: general",
+          "g": "Cláusulas",
           "g_en": "Clauses"
         },
         {
@@ -2028,11 +2088,27 @@
           "g_en": "Art. 23 · Reporting"
         },
         {
+          "id": "23.e",
+          "code": "Art. 23.4 c",
+          "t": "Informe intermedio sobre la evolución del incidente, a petición del CSIRT o autoridad",
+          "t_en": "Intermediate report on status updates, upon request of the CSIRT or authority",
+          "g": "Art. 23 · Notificación",
+          "g_en": "Art. 23 · Reporting"
+        },
+        {
           "id": "23.c",
           "code": "Art. 23.4 d",
           "t": "Informe final en el plazo de un mes",
           "g": "Art. 23 · Notificación",
           "t_en": "Final report within one month",
+          "g_en": "Art. 23 · Reporting"
+        },
+        {
+          "id": "23.f",
+          "code": "Art. 23.4 e",
+          "t": "Informe de situación si el incidente sigue en curso al vencer el informe final, y final en un mes desde su gestión",
+          "t_en": "Progress report if the incident is ongoing when the final report is due, then final report within one month of handling it",
+          "g": "Art. 23 · Notificación",
           "g_en": "Art. 23 · Reporting"
         },
         {
@@ -2494,6 +2570,14 @@
           "t": "Roles, responsabilidades y autoridades",
           "g": "Cláusulas",
           "t_en": "Roles, responsibilities and authorities",
+          "g_en": "Clauses"
+        },
+        {
+          "id": "C6.1.1",
+          "code": "Cl. 6.1.1",
+          "t": "Acciones para abordar riesgos y oportunidades de IA: generalidades",
+          "t_en": "Actions to address AI risks and opportunities: general",
+          "g": "Cláusulas",
           "g_en": "Clauses"
         },
         {
@@ -3456,6 +3540,10 @@
           {
             "id": "C8.2",
             "w": 1
+          },
+          {
+            "id": "C6.1.1",
+            "w": 0.5
           }
         ],
         "nis2": [
@@ -3481,6 +3569,10 @@
           {
             "id": "op.pl.1",
             "w": 0.5
+          },
+          {
+            "id": "art.28",
+            "w": 1
           }
         ],
         "iso27001": [
@@ -3490,11 +3582,15 @@
           },
           {
             "id": "C8.1",
-            "w": 1
+            "w": 0.5
           },
           {
             "id": "C8.3",
             "w": 1
+          },
+          {
+            "id": "C6.1.1",
+            "w": 0.5
           }
         ],
         "nis2": [
@@ -3636,6 +3732,10 @@
           {
             "id": "op.mon.2",
             "w": 1
+          },
+          {
+            "id": "art.32",
+            "w": 1
           }
         ],
         "iso27001": [
@@ -3668,7 +3768,12 @@
       "obj": "Auditorías planificadas por personal independiente, con protección de los sistemas durante las pruebas.",
       "ev": "Programa de auditoría · informes · auditoría ENS del art. 31",
       "maps": {
-        "ens": [],
+        "ens": [
+          {
+            "id": "art.31",
+            "w": 1
+          }
+        ],
         "iso27001": [
           {
             "id": "C9.2",
@@ -4258,7 +4363,7 @@
           },
           {
             "id": "mp.info.5",
-            "w": 0.5
+            "w": 0
           }
         ],
         "iso27001": [
@@ -4440,6 +4545,36 @@
       "t_en": "Electronic signature and time stamps",
       "obj_en": "Qualified signature and time stamping where the law or the service requires them.",
       "ev_en": "Qualified certificates · signature policy"
+    },
+    {
+      "id": "ACT-10",
+      "dom": "ACT",
+      "t": "Limpieza de metadatos e información oculta en documentos",
+      "t_en": "Removal of metadata and hidden information from documents",
+      "obj": "Antes de publicar o enviar documentos fuera de la organización se elimina la información oculta, metadatos, comentarios y versiones previas.",
+      "obj_en": "Hidden information, metadata, comments and previous versions are removed before documents are published or sent outside the organisation.",
+      "ev": "Procedimiento de limpieza · herramienta aprobada · muestras verificadas",
+      "ev_en": "Clean-up procedure · approved tool · verified samples",
+      "maps": {
+        "ens": [
+          {
+            "id": "mp.info.5",
+            "w": 1
+          }
+        ],
+        "iso27001": [
+          {
+            "id": "A5.14",
+            "w": 0
+          },
+          {
+            "id": "A8.12",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": []
+      }
     },
     {
       "id": "ACC-01",
@@ -4819,6 +4954,10 @@
           {
             "id": "A8.32",
             "w": 1
+          },
+          {
+            "id": "C8.1",
+            "w": 0.5
           }
         ],
         "nis2": [
@@ -5284,10 +5423,6 @@
         "ens": [
           {
             "id": "op.pl.2",
-            "w": 1
-          },
-          {
-            "id": "op.pl.5",
             "w": 1
           },
           {
@@ -5776,6 +5911,37 @@
       "ev_en": "WAF · web application audits · security headers"
     },
     {
+      "id": "DES-08",
+      "dom": "DES",
+      "t": "Productos de seguridad certificados (Catálogo CPSTIC)",
+      "t_en": "Certified security products (CPSTIC catalogue)",
+      "obj": "Los productos que proporcionan funcionalidades de seguridad se seleccionan entre los cualificados o certificados en el Catálogo de Productos y Servicios STIC del CCN, o se justifica su ausencia.",
+      "obj_en": "Products that provide security functions are selected from those qualified or certified in the CCN STIC Products and Services Catalogue, or their absence is justified.",
+      "ev": "Inventario de productos de seguridad con referencia CPSTIC · justificación de excepciones",
+      "ev_en": "Security product inventory with CPSTIC reference · justification of exceptions",
+      "maps": {
+        "ens": [
+          {
+            "id": "op.pl.5",
+            "w": 1
+          }
+        ],
+        "iso27001": [
+          {
+            "id": "A5.21",
+            "w": 0
+          }
+        ],
+        "nis2": [
+          {
+            "id": "6.1",
+            "w": 0
+          }
+        ],
+        "iso42001": []
+      }
+    },
+    {
       "id": "PRO-01",
       "dom": "PRO",
       "t": "Seguridad en las relaciones con proveedores",
@@ -5804,6 +5970,10 @@
           {
             "id": "A5.20",
             "w": 1
+          },
+          {
+            "id": "C8.1",
+            "w": 0.5
           }
         ],
         "nis2": [
@@ -6159,16 +6329,20 @@
           {
             "id": "op.exp.7",
             "w": 0.5
+          },
+          {
+            "id": "art.33",
+            "w": 1
           }
         ],
         "iso27001": [
           {
             "id": "A5.5",
-            "w": 0.5
+            "w": 0
           },
           {
             "id": "A5.24",
-            "w": 0.5
+            "w": 0
           }
         ],
         "nis2": [
@@ -6182,6 +6356,14 @@
           },
           {
             "id": "23.c",
+            "w": 1
+          },
+          {
+            "id": "23.e",
+            "w": 1
+          },
+          {
+            "id": "23.f",
             "w": 1
           }
         ],
@@ -6792,6 +6974,10 @@
           },
           {
             "id": "C8.3",
+            "w": 1
+          },
+          {
+            "id": "C6.1.1",
             "w": 1
           }
         ]

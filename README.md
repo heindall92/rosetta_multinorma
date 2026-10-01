@@ -20,7 +20,7 @@
   <img src="docs/img/readme/panel-dark.png" alt="Órbita: la rueda Rosetta con la cobertura de cada control en cada norma" width="880"/>
 </p>
 
-**Rosetta es una piedra de Rosetta para el cumplimiento normativo.** Enlaza los **311 requisitos** del Esquema Nacional de Seguridad, ISO/IEC 27001, NIS2 (con el detalle técnico del Reglamento de Ejecución 2024/2690) e ISO/IEC 42001 con **113 controles unificados** en 13 dominios. Marcas el estado de cada control una sola vez y Rosetta recalcula la cobertura de todas las normas del alcance, detecta incoherencias entre ellas y ordena el plan de acción por retorno: primero lo que más requisitos desbloquea.
+**Rosetta es una piedra de Rosetta para el cumplimiento normativo.** Enlaza los **319 requisitos** del Esquema Nacional de Seguridad, ISO/IEC 27001, NIS2 (con el detalle técnico del Reglamento de Ejecución 2024/2690) e ISO/IEC 42001 con **115 controles unificados** en 13 dominios. Marcas el estado de cada control una sola vez y Rosetta recalcula la cobertura de todas las normas del alcance, detecta incoherencias entre ellas y ordena el plan de acción por retorno: primero lo que más requisitos desbloquea.
 
 Es un único fichero HTML que funciona sin servidor, sin instalación y sin conexión: **los datos no salen del navegador**.
 
@@ -61,6 +61,7 @@ mindmap
     Normas
       ENS RD 311/2022
         73 medidas del Anexo II
+        Arts. 28, 31, 32 y 33
         Categoría y niveles D·I·C·A·T
       ISO/IEC 27001:2022
         Cláusulas 4 a 10
@@ -73,7 +74,7 @@ mindmap
         Cláusulas 4 a 10
         38 controles del Anexo A
     Controles unificados
-      113 controles
+      115 controles
       13 dominios
       Estado, responsable, evidencias
       Peso total, parcial o relación
@@ -103,7 +104,7 @@ mindmap
 |---|---|---|
 | <img src="docs/assets/icons/orbit.svg" width="18"/> | **Órbita** | La rueda Rosetta: cada rayo es un control y cada anillo una norma. Cobertura media, estado por norma, *siguiente mejor jugada* y cuánto heredas en el resto si ya cumples una. |
 | <img src="docs/assets/icons/waypoints.svg" width="18"/> | **Prisma** | *Un requisito entra, cuatro normas salen*: elige un requisito de cualquier norma y se descompone en sus controles y se proyecta sobre sus equivalentes (total, parcial o relacionado). |
-| <img src="docs/assets/icons/layers.svg" width="18"/> | **Controles** | Los 113 controles unificados con su estado, normas a las que sirven, responsable, evidencias y fecha de revisión. |
+| <img src="docs/assets/icons/layers.svg" width="18"/> | **Controles** | Los 115 controles unificados con su estado, normas a las que sirven, responsable, evidencias y fecha de revisión. |
 | <img src="docs/assets/icons/file-check.svg" width="18"/> | **Normas** | La declaración de aplicabilidad de cada norma: cobertura calculada por requisito, exclusiones con justificación y nivel exigido en el ENS. |
 | <img src="docs/assets/icons/shield-alert.svg" width="18"/> | **Brechas** | Requisitos sin soporte y 11 reglas de coherencia multinorma (notificación NIS2 en 24 h / 72 h / 1 mes, formación de la dirección, evaluación de impacto de IA, exclusiones contradictorias, controles sin evidencias o sin revisar en 12 meses…), por severidad. |
 | <img src="docs/assets/icons/square-kanban.svg" width="18"/> | **Plan** | Tablero pendiente → en curso → hecha ordenado por retorno, con responsable y fecha. Al cerrar una tarjeta el control pasa a implantado. |
@@ -121,7 +122,7 @@ Además: **cinco casos de ejemplo** con datos ficticios (un proveedor TIC del se
 <td width="50%"><img src="docs/img/readme/traductor-light.png" alt="Prisma"/><br/><sub><b>Prisma</b> · un requisito del ENS proyectado sobre ISO 27001, NIS2 e ISO 42001</sub></td>
 </tr>
 <tr>
-<td><img src="docs/img/readme/controles-light.png" alt="Controles"/><br/><sub><b>Controles</b> · 113 controles unificados en 13 dominios</sub></td>
+<td><img src="docs/img/readme/controles-light.png" alt="Controles"/><br/><sub><b>Controles</b> · 115 controles unificados en 13 dominios</sub></td>
 <td><img src="docs/img/readme/normas-dark.png" alt="Normas"/><br/><sub><b>Normas</b> · declaración de aplicabilidad calculada</sub></td>
 </tr>
 <tr>
@@ -265,7 +266,7 @@ rosetta_multinorma/
 │   │   ├── 06-io.js              Excel, CSV, Markdown, JSON, importación del ENS, copias
 │   │   └── 07-events.js          Eventos y arranque
 │   └── data/
-│       ├── catalog.json          4 normas · 311 requisitos · 113 controles · 13 dominios
+│       ├── catalog.json          4 normas · 319 requisitos · 115 controles · 13 dominios
 │       ├── casos.json            5 casos de ejemplo (ficticios)
 │       ├── parejas.json          Contraste ENS ↔ ISO 27001 del material de clase
 │       └── icons.json            Iconos SVG (Lucide)

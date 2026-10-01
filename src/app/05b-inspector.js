@@ -37,7 +37,7 @@ function inspReq(f, id) {
   const r = IX.req[f][id]; const cov = reqRow(f, id); const showRel = ws.settings.mostrarRelaciones;
   const eq = E.equivalencias(IX, f, id);
   const ctl = eq.controles.filter((l) => l.w > 0 || showRel);
-  const ex = cov.estado === 'excluido'; const canEx = onFw(f) && cov.estado !== 'no-exigido';
+  const ex = cov.estado === 'excluido'; const canEx = onFw(f) && cov.estado !== 'no-exigido' && E.excluible(f, id);
   const ens = f === 'ens' ? `<dl class="kv small"><dt>${esc(t('dims'))}</dt><dd>${esc(r.dims)}</dd><dt>${esc(t('exig'))}</dt><dd class="mono">B ${esc(r.bajo)} · M ${esc(r.medio)} · A ${esc(r.alto)}</dd>${state.alcance.ens.on ? `<dt>${esc(t('inYourSys'))}</dt><dd>${esc(t('level'))} ${esc(t('lv.' + cov.nivel))} · <code>${esc(exigL(cov.exigencia))}</code></dd>` : ''}<dt>${esc(t('classIso'))}</dt><dd>${esc(r.ref || '—')}</dd></dl>` : '';
   const eqs = FW.filter((g) => g !== f).map((g) => {
     const rows = eq.otras[g].filter((x) => x.fuerza !== 'relacionado' || showRel);
@@ -52,7 +52,7 @@ function inspReq(f, id) {
   <div class="blk"><h4>${esc(t('equivalents'))}</h4><div class="maps">${eqs}</div></div>
   ${canEx ? `<div class="blk"><h4>${esc(t('exclusion'))}</h4>
     <label class="switch-l"><span class="switch"><input type="checkbox" id="ex-sw" data-exsw="1" data-fw="${f}" data-id="${esc(id)}"${ex ? ' checked' : ''}><span></span></span>${esc(t('excludeIt'))}</label>
-    ${ex ? `<label class="fld">${esc(t('justification'))}<input type="text" id="ex-${f}-${esc(id)}" data-exfw="${f}" data-exid="${esc(id)}" value="${esc(cov.justificacion || '')}" placeholder="${esc(t('justPh'))}"></label>` : ''}</div>` : ''}
+    ${ex ? `<label class="fld">${esc(t('justification'))}<input type="text" id="ex-${f}-${esc(id)}" data-exfw="${f}" data-exid="${esc(id)}" value="${esc(cov.justificacion || '')}" placeholder="${esc(t('justPh'))}"></label>` : ''}</div>` : onFw(f) && !E.excluible(f, id) ? `<div class="blk"><h4>${esc(t('exclusion'))}</h4><p class="hint">${esc(t('notExcludable'))}</p></div>` : ''}
   <button type="button" class="btn" data-act="tr-center" data-fw="${f}" data-id="${esc(id)}">${icon('waypoints', 16)}${esc(t('openPrism'))}</button>`;
 }
 

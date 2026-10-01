@@ -82,6 +82,31 @@ describe('cobertura de requisitos', () => {
   });
 });
 
+describe('reglas de auditoría', () => {
+  const cat = miniCat();
+  cat.frameworks.iso27001.reqs.push({ id: 'C6.1', t: 'Cláusula' }, { id: 'A3', t: 'Solo parcial' });
+  cat.frameworks.nis2.reqs.push({ id: '21.2', t: 'Art. 21.2' });
+  cat.controls.push({ id: 'U3', dom: 'X', t: 'U3', maps: { ens: [], iso27001: [{ id: 'C6.1', w: 1 }, { id: 'A3', w: 0.5 }], nis2: [{ id: '21.2', w: 1 }], iso42001: [] } });
+  const ix = E.indexar(cat);
+  test('un requisito sostenido solo por enlaces parciales nunca llega a «cubierto»', () => {
+    const r = E.coberturaReq(ix, st({ U3: { estado: 'implantado' } }), 'iso27001', 'A3');
+    assert.equal(r.estado, 'parcial'); close(r.score, 0.5);
+  });
+  test('las cláusulas 4–10 y los arts. 20/21/23 de NIS2 no se pueden excluir', () => {
+    assert.equal(E.excluible('iso27001', 'C6.1'), false); assert.equal(E.excluible('iso42001', 'C9.2'), false);
+    assert.equal(E.excluible('iso27001', 'A5.1'), true);
+    assert.equal(E.excluible('nis2', '21.2'), false); assert.equal(E.excluible('nis2', '2.1'), true);
+    const s = st({}, { exclusiones: { iso27001: { 'C6.1': 'no' }, nis2: { '21.2': 'no' } } });
+    assert.equal(E.coberturaReq(ix, s, 'iso27001', 'C6.1').estado, 'brecha');
+    assert.equal(E.coberturaReq(ix, s, 'nis2', '21.2').estado, 'brecha');
+  });
+  test('la categoría ENS nunca queda por debajo de la que fijan los niveles', () => {
+    assert.equal(E.categoriaEfectiva({ categoria: 'BÁSICA', niveles: { C: 'ALTO' } }), 'ALTA');
+    assert.equal(E.categoriaEfectiva({ categoria: 'ALTA', niveles: { C: 'BAJO' } }), 'ALTA');
+    assert.equal(E.categoriaEfectiva({ categoria: 'MEDIA', niveles: {} }), 'MEDIA');
+  });
+});
+
 describe('calcular', () => {
   const ix = E.indexar(miniCat());
   test('grado por norma y KPI globales coherentes', () => {
@@ -149,10 +174,19 @@ describe('NIS2: aplicabilidad (arts. 2 y 3)', () => {
     [{ sector: 'anexo1', tamano: 'pequena' }, 'fuera'],
     [{ sector: 'anexo2', tamano: 'grande' }, 'importante'],
     [{ sector: 'anexo2', tamano: 'micro' }, 'fuera'],
+    [{ especial: 'cer', tamano: 'micro' }, 'esencial'],
+    [{ especial: 'tsp', tamano: 'micro' }, 'importante'],
+    [{ especial: 'tsp', tamano: 'grande' }, 'esencial'],
+    [{ especial: 'dora', sector: 'anexo1', tamano: 'grande' }, 'fuera'],
+    [{ especial: 'excluida', sector: 'anexo1', tamano: 'grande' }, 'fuera'],
     [{}, 'fuera'],
     [null, 'fuera']
   ];
   for (const [q, tipo] of cases) test(`${JSON.stringify(q)} → ${tipo}`, () => assert.equal(E.nis2Aplicabilidad(q).tipo, tipo));
+  test('el RE 2024/2690 solo se señala para entidades en el ámbito', () => {
+    assert.equal(E.nis2Aplicabilidad({ sector: 'anexo1', tamano: 'grande', infraDigital: true }).cir, true);
+    assert.equal(E.nis2Aplicabilidad({ sector: 'ninguno', infraDigital: true }).cir, false);
+  });
   test('textos en inglés', () => assert.match(E.nis2Aplicabilidad({ sector: 'anexo1', tamano: 'grande' }, 'en').motivo, /Annex I/));
 });
 
@@ -190,7 +224,7 @@ describe('casos de ejemplo con el catálogo real', () => {
   }
   test('instantánea reproducible del caso de clase (TechServ)', () => {
     const r = E.calcular(IX, CASOS.find((c) => c.id === 'techserv').state);
-    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.952, iso27001: 0.892, nis2: 0.875, iso42001: null }, grado: 0.905, brechas: 4 });
+    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null }, grado: 0.893, brechas: 4 });
   });
   test('contraste ENS ↔ ISO 27001 con las parejas del material de clase', () => {
     const p = E.parejasClase(IX); const ref = require('../src/data/parejas.json');

@@ -57,7 +57,7 @@ document.addEventListener('change', (ev) => {
   }
   if (el.dataset.uibool) { ui[el.dataset.uibool] = el.checked; render(); return; }
   if (el.dataset.exsw && state) {
-    const f = el.dataset.fw, id = el.dataset.id; if (!FW.includes(f) || !IX.req[f][id]) return;
+    const f = el.dataset.fw, id = el.dataset.id; if (!FW.includes(f) || !IX.req[f][id] || !E.excluible(f, id)) return;
     if (el.checked) { state.exclusiones[f][id] = ''; commit(t('tExcl', `${E.FW_LABEL[f]} ${reqCode(f, id)}`)); const inp = document.getElementById(`ex-${f}-${id}`); if (inp) inp.focus(); }
     else { delete state.exclusiones[f][id]; commit(t('tIncl', `${E.FW_LABEL[f]} ${reqCode(f, id)}`)); }
     return;
@@ -71,6 +71,7 @@ document.addEventListener('change', (ev) => {
   if (!setPath(state, path, v)) return;
   if (path.startsWith('nis2q.')) { syncNis2(state); const tp = state.alcance.nis2.tipo; if ((tp === 'esencial' || tp === 'importante') && !state.alcance.nis2.on) { state.alcance.nis2.on = true; toast(t('tNis2On')); } }
   if (path.startsWith('alcance.ens.niveles')) { const c = E.categoriaDeNiveles(state.alcance.ens.niveles); if (c) state.alcance.ens.categoria = c; }
+  if (path === 'alcance.ens.categoria') state.alcance.ens.categoria = E.categoriaEfectiva(state.alcance.ens); // nunca por debajo de los niveles
   if (/^controles\.[^.]+\.estado$/.test(path)) { const d = state.controles[path.split('.')[1]]; if ((v === 'implantado' || v === 'parcial') && !d.revision) d.revision = today(); }
   commit();
 });
