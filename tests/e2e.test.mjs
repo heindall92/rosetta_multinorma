@@ -40,7 +40,7 @@ test('arranca en Inicio con el dock y sin errores', async () => {
   assert.equal(await page.title(), 'Rosetta multinorma');
   assert.equal(await page.evaluate(() => window.__ROSETTA__.ui.view), 'inicio');
   assert.ok((await page.locator('#dock').innerHTML()).length > 100);
-  assert.match(await viewText(), /Implanta una vez/);
+  assert.match(await viewText(), /Cumplimiento multinorma/);
   noErrors('inicio');
 });
 
@@ -103,7 +103,7 @@ test('idioma: inglés y vuelta a español (interruptor de Ajustes)', async () =>
   await page.locator('#view [data-act="lang"][data-v="en"]').click();
   assert.equal(await page.evaluate(() => document.documentElement.lang), 'en');
   await page.evaluate(() => window.__ROSETTA__.go('inicio'));
-  assert.match(await viewText(), /Implement once/i);
+  assert.match(await viewText(), /Multi-framework compliance/i);
   await page.evaluate(() => window.__ROSETTA__.go('ajustes'));
   await page.locator('#view [data-act="lang"][data-v="es"]').click();
   assert.equal(await page.evaluate(() => document.documentElement.lang), 'es');

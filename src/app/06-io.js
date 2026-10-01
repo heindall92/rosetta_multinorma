@@ -50,7 +50,7 @@ function informeMd() {
     for (const h of hall) L.push(`| ${h.id} | ${t('sev.' + h.sev)} | ${mdSafe(h.ambito)} | **${mdSafe(h.titulo)}.** ${mdSafe(h.detalle)} | ${mdSafe(h.accion)} |`);
     L.push('');
   }
-  L.push(`## ${tx('Qué hacer primero', 'What to do first')}`, '', `| # | ${t('control')} | ${tx('Estado', 'State')} | ${t('fws')} | ${tx('Requisitos que desbloquea', 'Requirements unlocked')} |`, '|---:|---|---|---|---:|');
+  L.push(`## ${tx('Qué hacer primero', 'What to do first')}`, '', `| # | ${t('control')} | ${tx('Estado', 'State')} | ${t('fws')} | ${tx('Requisitos que cubre', 'Requirements covered')} |`, '|---:|---|---|---|---:|');
   prio.slice(0, 15).forEach((x, i) => L.push(`| ${i + 1} | ${x.id} · ${mdSafe(cT(x.id))} | ${estL(x.estado)} | ${x.normas.map((f) => E.FW_LABEL[f]).join(', ')} | ${num1(x.ganancia)} |`));
   L.push('');
   for (const f of calc.alcance) {
@@ -63,7 +63,7 @@ function informeMd() {
     '_Report generated with Rosetta · Multi-framework map. Mappings between frameworks are the author’s judgement, checked against the class material and ENISA technical guidance; review them for each organisation. It does not replace a certification audit._'));
   return L.join('\n');
 }
-const planCsv = () => toCsv([[tx('Prioridad', 'Priority'), tx('Puesto', 'Rank'), t('control'), tx('Acción', 'Action'), tx('Estado del control', 'Control state'), t('fws'), tx('Requisitos que desbloquea', 'Requirements unlocked'), t('owner'), t('due'), tx('Estado de la acción', 'Action state'), t('notes')],
+const planCsv = () => toCsv([[tx('Prioridad', 'Priority'), tx('Puesto', 'Rank'), t('control'), tx('Acción', 'Action'), tx('Estado del control', 'Control state'), t('fws'), tx('Requisitos que cubre', 'Requirements covered'), t('owner'), t('due'), tx('Estado de la acción', 'Action state'), t('notes')],
   ...plan.map((a) => [t('prio.' + a.prioridad), a.rank || '', a.id, cT(a.id), estL(a.estadoControl), a.normas.map((f) => E.FW_LABEL[f]).join(' | '), num1(a.ganancia), a.responsable, a.fecha, a.verificada ? t('verified') : t('lanes.' + a.estado), a.nota])]);
 const ctlCsv = () => toCsv([['ID', tx('Dominio', 'Domain'), t('control'), tx('Estado', 'State'), t('owner'), t('lastRev'), t('evidence'), 'ENS', 'ISO/IEC 27001', 'NIS2', 'ISO/IEC 42001', tx('Relevante', 'Relevant')],
   ...CAT.controls.map((c) => { const d = state.controles[c.id]; return [c.id, dT(c.dom), cT(c.id), estL(d.estado), d.responsable, d.revision, d.evidencias, ...FW.map((f) => mapsTxt(c, f)), calc.controles[c.id].relevante ? yes() : no()]; })]);
@@ -123,7 +123,7 @@ async function exportXlsx() {
     const kv = (lab, v, isPct) => { if (isPct) nPctRows.push(res.length); res.push([lab, v]); };
     kv(tx('Cobertura media del alcance', 'Average coverage in scope'), k.grado, true); kv(tx('Requisitos aplicables', 'Applicable requirements'), k.requisitos); kv(tx('Controles relevantes', 'Relevant controls'), k.controles);
     kv(t('est.implantado'), k.implantados); kv(t('est.parcial'), k.parciales); kv(t('est.pendiente'), k.pendientes); kv(t('kReuseS'), Math.round(k.reutilizacion * 100) / 100);
-    kv(tx('Trabajo ahorrado frente a normas por separado', 'Work saved versus separate frameworks'), k.ahorro, true); kv(t('highAlerts'), hall.filter((h) => h.sev === 'Alta').length);
+    kv(tx('Ahorro por reutilización de controles', 'Saving from control reuse'), k.ahorro, true); kv(t('highAlerts'), hall.filter((h) => h.sev === 'Alta').length);
     if (state.alcance.nis2.on) kv('NIS2', t('ent.' + state.alcance.nis2.tipo));
     if (state.alcance.ens.on) kv(tx('Categoría ENS', 'ENS category'), t('cats.' + state.alcance.ens.categoria));
     res.push([]); const ovStart = res.length + 1;
@@ -152,7 +152,7 @@ async function exportXlsx() {
       ...CAT.controls.map((c) => [c.id, cT(c.id), ...FW.map((f) => mapsTxt(c, f)), FW.map((f) => c.maps[f].filter((m) => m.w === 0).map((m) => `${E.FW_LABEL[f]} ${reqCode(f, m.id)}`).join(', ')).filter(Boolean).join(' · ')])],
       [9, 40, 28, 30, 24, 30, 36], 0, { freeze: { xSplit: 2, ySplit: 1 } }), tx('Matriz de correspondencias', 'Crosswalk'));
     X.utils.book_append_sheet(wb, sheet([[t('rule'), t('severity'), tx('Ámbito', 'Scope'), tx('Hallazgo', 'Finding'), tx('Detalle', 'Detail'), tx('Acción recomendada', 'Recommended action'), tx('Referencia', 'Reference')], ...hall.map((h) => [h.id, t('sev.' + h.sev), h.ambito, h.titulo, h.detalle, h.accion, h.ref])], [9, 10, 18, 44, 70, 60, 26], 0, { fillCol: [1] }), tx('Coherencia', 'Consistency'));
-    X.utils.book_append_sheet(wb, sheet([[tx('Puesto', 'Rank'), tx('Prioridad', 'Priority'), t('control'), tx('Acción', 'Action'), tx('Estado del control', 'Control state'), t('fws'), tx('Requisitos que desbloquea', 'Requirements unlocked'), t('owner'), t('due'), tx('Estado', 'State')],
+    X.utils.book_append_sheet(wb, sheet([[tx('Puesto', 'Rank'), tx('Prioridad', 'Priority'), t('control'), tx('Acción', 'Action'), tx('Estado del control', 'Control state'), t('fws'), tx('Requisitos que cubre', 'Requirements covered'), t('owner'), t('due'), tx('Estado', 'State')],
       ...plan.map((a) => [a.rank || '', t('prio.' + a.prioridad), a.id, cT(a.id), estL(a.estadoControl), a.normas.map((f) => E.FW_LABEL[f]).join(', '), Math.round(a.ganancia * 10) / 10, a.responsable, a.fecha, a.verificada ? t('verified') : t('lanes.' + a.estado)])], [8, 10, 9, 44, 14, 30, 14, 24, 12, 12], 0, { fillCol: [1, 4] }), tx('Plan de acción', 'Action plan'));
     const out = X.write(wb, { bookType: 'xlsx', type: 'array' });
     await saveFile(fname('map', 'xlsx'), new Blob([out], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }));
