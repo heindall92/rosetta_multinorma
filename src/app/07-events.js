@@ -197,7 +197,7 @@ document.addEventListener('click', (ev) => {
     case 'scroll-casos': ev.preventDefault(); { const c = $('#casos'); if (c) c.scrollIntoView({ behavior: reduceMotion() ? 'auto' : 'smooth', block: 'start' }); else { ws.settings.mostrarCasos = true; saveWs(); render(); const c2 = $('#casos'); if (c2) c2.scrollIntoView({ block: 'start' }); } } break;
     /* proyectos */
     case 'open-project': ui.pop = null; openProject(el.dataset.id); break;
-    case 'open-case': ui.pop = null; openCase(el.dataset.case); break;
+    case 'open-case': ui.pop = null; openCase(el.dataset.case, PROJECT_VIEWS.includes(el.dataset.then) ? el.dataset.then : 'panel'); break;
     case 'reset-case': resetCase(el.dataset.case); break;
     case 'close-demos': for (const p of ws.projects.filter((x) => x.kind === 'demo')) deleteProject(p.id); render(); toast(t('tCasesClosed')); break;
     case 'ask': ui.confirm = el.dataset.what; render(); break;

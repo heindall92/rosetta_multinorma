@@ -62,6 +62,24 @@ test('el prototipo de Object queda congelado', async () => {
   assert.equal(await page.evaluate(() => Object.isFrozen(Object.prototype)), true);
 });
 
+test('sin proyecto: el menú está activo y cada vista de proyecto explica cómo empezar', async () => {
+  const p2 = await ctx.newPage();
+  await p2.goto(URL_APP); await p2.waitForFunction(() => window.__ROSETTA__);
+  await p2.evaluate(() => localStorage.clear()); await p2.reload(); await p2.waitForFunction(() => window.__ROSETTA__);
+  assert.equal(await p2.locator('#dock .nav-i[disabled]').count(), 0, 'ninguna opción desactivada');
+  assert.equal(await p2.locator('#dock .nav-i.locked').count(), 9);
+  assert.match(await p2.locator('#nav-note').innerText(), /Sin proyecto abierto/);
+  await p2.click('#dock .nav-i[data-view="brechas"]');
+  assert.equal(await p2.evaluate(() => window.__ROSETTA__.ui.view), 'brechas');
+  assert.match(await p2.locator('#view').innerText(), /Esta vista muestra los requisitos sin cubrir/);
+  assert.equal(await p2.locator('#view .start').count(), 3);
+  await p2.click('#view [data-act="open-case"]');
+  await p2.waitForFunction(() => window.__ROSETTA__.state);
+  assert.deepEqual(await p2.evaluate(() => [window.__ROSETTA__.state.caseId, window.__ROSETTA__.ui.view]), ['techserv', 'brechas'], 'abre el caso en la vista pedida');
+  assert.equal(await p2.locator('#dock .nav-i.locked').count(), 0);
+  await p2.evaluate(() => localStorage.clear()); await p2.close();
+});
+
 test('vistas globales', async () => {
   for (const v of GLOBAL_VIEWS) {
     await page.evaluate((x) => window.__ROSETTA__.go(x), v);
