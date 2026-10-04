@@ -165,6 +165,14 @@ test('centro de ayuda: buscador, temas y «Acerca de» con los enlaces del autor
   for (const host of ['linkedin.com/in/yoandyrd92', 'github.com/heindall92', 'yoandyramirez.com', 'hackthebox.com', 'mailto:yoandyramirezdelgado@gmail.com'])
     assert.ok(links.some(([, h]) => h.includes(host)), `falta ${host}`);
   for (const [, h, tg, rel] of links) if (h.startsWith('http')) { assert.equal(tg, '_blank'); assert.match(rel, /noopener/); }
+  // Herramientas GRC del autor: tres tarjetas, Rosetta marcada y sin enlace a sí misma
+  assert.equal(await page.locator('.suite-card').count(), 3);
+  assert.match(await page.locator('.suite-card.here').innerText(), /Rosetta[\s\S]*Estás aquí/);
+  assert.equal(await page.locator('.suite-card.here a').count(), 1, 'la tarjeta actual solo enlaza al código');
+  const suite = await page.locator('.suite a').evaluateAll((as) => as.map((a) => [a.href, a.target, a.rel]));
+  for (const host of ['heindall92.github.io/kairos', 'github.com/heindall92/kairos', 'heindall92.github.io/grc_ens_compliance_studio', 'github.com/heindall92/grc_ens_compliance_studio', 'github.com/heindall92/rosetta_multinorma'])
+    assert.ok(suite.some(([h]) => h.includes(host)), `falta ${host}`);
+  for (const [, tg, rel] of suite) { assert.equal(tg, '_blank'); assert.match(rel, /noopener/); }
   noErrors('ayuda');
 });
 

@@ -1,4 +1,4 @@
-/* Regresión de accesibilidad: axe-core (WCAG 2.2 A/AA) en las 12 vistas, claro y oscuro, escritorio y móvil.
+/* Regresión de accesibilidad: axe-core (WCAG 2.2 A/AA) en las 12 vistas (y la pestaña «Acerca de»), claro y oscuro, escritorio y móvil.
  * Umbral: cero violaciones. La CSP se omite solo en este test para poder inyectar axe. */
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
@@ -11,7 +11,7 @@ import { chromium } from 'playwright';
 const ROOT = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const URL_APP = pathToFileURL(join(ROOT, 'dist/index.html')).href;
 const AXE = readFileSync(createRequire(import.meta.url).resolve('axe-core/axe.min.js'), 'utf8');
-const VIEWS = ['inicio', 'ajustes', 'ayuda', 'panel', 'traductor', 'controles', 'normas', 'brechas', 'plan', 'mapa', 'alcance', 'exportar'];
+const VIEWS = ['inicio', 'ajustes', 'ayuda', 'panel', 'traductor', 'controles', 'normas', 'brechas', 'plan', 'mapa', 'alcance', 'exportar', 'ayuda:acerca'];
 
 let browser;
 before(async () => { browser = await chromium.launch({ headless: true }); });
@@ -27,7 +27,7 @@ for (const theme of ['light', 'dark']) for (const width of [1440, 390]) {
     await p.addScriptTag({ content: AXE });
     const fallos = [];
     for (const v of VIEWS) {
-      await p.evaluate((x) => { if (x !== 'inicio' && !window.__ROSETTA__.state) window.__ROSETTA__.openCase('techserv'); window.__ROSETTA__.go(x); document.getElementById('toast').hidden = true; }, v);
+      await p.evaluate((x) => { if (x !== 'inicio' && !window.__ROSETTA__.state) window.__ROSETTA__.openCase('techserv'); const [vw, tab] = x.split(':'); if (tab) window.__ROSETTA__.ui.helpTab = tab; window.__ROSETTA__.go(vw); document.getElementById('toast').hidden = true; }, v);
       await p.waitForTimeout(200);
       const r = await p.evaluate(async () => (await window.axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'], resultTypes: ['violations'] }))
         .violations.flatMap((x) => x.nodes.map((n) => `${x.id} · ${n.target.join(' ')}`)));

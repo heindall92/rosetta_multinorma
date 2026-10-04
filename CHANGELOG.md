@@ -15,6 +15,7 @@
   - Cada equivalencia ENS ↔ ISO muestra su origen.
   - La ficha de cada medida muestra su nivel de compatibilidad, su categoría y sus controles ISO.
   - Las 5 medidas sin equivalente en la ISO avisan de que no se heredan de una certificación.
+- **Herramientas GRC del autor.** Ayuda → Acerca de enlaza las otras dos herramientas, ENS Compliance Studio y KAIROS, con tarjetas para abrir cada app o ver su código. Prueba e2e de los enlaces y axe sobre esa pestaña.
 - **Datos reproducibles.** `src/data/ccn825.json` se regenera desde el PDF oficial con `scripts/ccn825.py`.
 - **Documentación y pruebas.**
   - Informe en `docs/auditoria/05-ccn-stic-825.md`.

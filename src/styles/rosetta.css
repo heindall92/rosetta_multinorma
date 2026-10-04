@@ -908,6 +908,14 @@ select option { background: var(--bg); color: var(--ink); }
 .al-mail { background: var(--glass-2); color: var(--ink); border: 1px solid var(--hair-2); }
 .about-link:hover { filter: brightness(1.08); }
 .about-repo { display: inline-flex; align-items: center; gap: 6px; color: var(--accent-text, var(--accent)); text-decoration: none; font-weight: 600; }
+.suite { display: flex; flex-direction: column; gap: 8px; }
+.suite-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 4px; }
+.suite-card { display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 18px; background: var(--glass-in); border: 1px solid var(--hair); }
+.suite-card.here { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.suite-hd { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.suite-card p { flex: 1; font-size: .84rem; color: var(--muted); }
+.suite-here { background: var(--accent-soft, var(--glass-in)); color: var(--accent-text, var(--accent)); }
+@media (max-width: 900px) { .suite-grid { grid-template-columns: 1fr; } }
 @media (max-width: 900px) {
   .help-steps, .help-refs { grid-template-columns: 1fr; }
   .about-card { grid-template-columns: 1fr; justify-items: center; text-align: center; }

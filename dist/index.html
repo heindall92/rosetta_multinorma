@@ -2,7 +2,7 @@
 <html lang="es" data-theme="light" data-accent="azul">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-bXCGU6jBZTTbvY8hThdPbEVkhP21E2x+rQjvSGz2cYM=' 'sha256-V4UV/gRb2kVMmuggu3jKgWVtP3fv3mOVAbDzU0ng1AY=' 'sha256-bZLEfO1Lt9nj9VwdH0kmCiUsSuNfQz8cywMLSWnHCAg=' 'self' https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js; style-src 'sha256-DZtWBu7bk+KhSwuCfYu022gyk8l5P1DRvJxByTi/d8g='; style-src-attr 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'none'; worker-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-bXCGU6jBZTTbvY8hThdPbEVkhP21E2x+rQjvSGz2cYM=' 'sha256-V4UV/gRb2kVMmuggu3jKgWVtP3fv3mOVAbDzU0ng1AY=' 'sha256-v+nL9yZGC+t/nVnZ6O7Vref+axqecP7Mqy0xL62zfPo=' 'self' https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js; style-src 'sha256-9aR8Djz1REsZGpUVojcA6EoSo7uqimf4tWtulS4xxpA='; style-src-attr 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; manifest-src 'none'; worker-src 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23e0337a'/%3E%3Cstop offset='1' stop-color='%236d3fd1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='20' cy='20' r='18' fill='url(%23g)'/%3E%3Ccircle cx='20' cy='20' r='7' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
@@ -925,6 +925,14 @@ select option { background: var(--bg); color: var(--ink); }
 .al-mail { background: var(--glass-2); color: var(--ink); border: 1px solid var(--hair-2); }
 .about-link:hover { filter: brightness(1.08); }
 .about-repo { display: inline-flex; align-items: center; gap: 6px; color: var(--accent-text, var(--accent)); text-decoration: none; font-weight: 600; }
+.suite { display: flex; flex-direction: column; gap: 8px; }
+.suite-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 4px; }
+.suite-card { display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 18px; background: var(--glass-in); border: 1px solid var(--hair); }
+.suite-card.here { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.suite-hd { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.suite-card p { flex: 1; font-size: .84rem; color: var(--muted); }
+.suite-here { background: var(--accent-soft, var(--glass-in)); color: var(--accent-text, var(--accent)); }
+@media (max-width: 900px) { .suite-grid { grid-template-columns: 1fr; } }
 @media (max-width: 900px) {
   .help-steps, .help-refs { grid-template-columns: 1fr; }
   .about-card { grid-template-columns: 1fr; justify-items: center; text-align: center; }
@@ -1677,6 +1685,9 @@ const I18N = {
       ['https://ens.ccn.cni.es/', 'CCN · Portal del ENS', 'Guías CCN-STIC y herramientas']],
     helpCta: '¿Sigues con dudas?', helpCtaTxt: 'Rosetta no tiene soporte en directo. Puedes abrir una incidencia en el repositorio o escribir al autor.', openIssue: 'Abrir una incidencia', writeAuthor: 'Escribir al autor', seeCode: 'Ver el código',
     aboutRole: 'Diseño y desarrollo de Rosetta', aboutBio: 'Junior Pentester · eJPTv2 · AI Governance (ISO 42001) · SysAdmin', aboutApp: 'Sobre la herramienta', aboutContact: 'Contacto',
+    suiteTitle: 'Herramientas GRC del autor', suiteHere: 'Estás aquí', suiteOpen: 'Abrir la app', suiteCode: 'Código',
+    suiteTxt: 'Se complementan: la SoA de ENS Compliance Studio se importa en Rosetta, y KAIROS cubre op.cont, la continuidad que las otras dos solo enumeran.',
+    suiteDesc: { rosetta: 'Mapa multinorma: ENS, ISO/IEC 27001, NIS2 e ISO/IEC 42001 en 115 controles unificados, con equivalencias ENS ↔ ISO alineadas con la CCN-STIC 825.', ens: 'Categorización del sistema, análisis de riesgos MAGERIT, Declaración de Aplicabilidad y preauditoría del ENS.', kairos: 'Continuidad de negocio: BIA, BCP y DRP con la ruta crítica de recuperación de cada función.' },
     steps: [['Crea o abre un proyecto', 'Empieza con tus datos, importa tu SoA del ENS o abre uno de los cinco casos.', 'inicio'], ['Define el alcance', 'Elige las normas, la categoría del ENS y comprueba si NIS2 te afecta.', 'alcance'], ['Registra el estado de los controles', 'Cada control se marca una vez y cuenta para todas las normas que lo exigen.', 'controles'], ['Consulta equivalencias', 'Selecciona un requisito para ver sus equivalentes en las otras normas.', 'traductor'], ['Revisa las brechas', 'Requisitos sin cubrir e incoherencias, ordenados por severidad.', 'brechas'], ['Exporta', 'Excel con una SoA por norma, informe Markdown y plan en CSV.', 'exportar']],
     go: 'Ir', search2: 'Buscar un término…', rule: 'Regla', severity: 'Severidad', checks: 'Qué comprueba', inProject: 'En este proyecto',
     methodP1: (c, d) => `Las normas no se comparan entre sí directamente: todas se enlazan con ${c} controles unificados en ${d} dominios. Las tablas de correspondencia uno a uno dan por cumplido un requisito cuando existe otro parecido en otra norma; este modelo lo evita.`,
@@ -1849,6 +1860,9 @@ const I18N = {
       ['https://ens.ccn.cni.es/', 'CCN · ENS portal', 'CCN-STIC guides and tools']],
     helpCta: 'Still have questions?', helpCtaTxt: 'Rosetta has no live support. You can open an issue in the repository or write to the author.', openIssue: 'Open an issue', writeAuthor: 'Write to the author', seeCode: 'View the code',
     aboutRole: 'Design and development of Rosetta', aboutBio: 'Junior Pentester · eJPTv2 · AI Governance (ISO 42001) · SysAdmin', aboutApp: 'About the tool', aboutContact: 'Contact',
+    suiteTitle: 'GRC tools by the author', suiteHere: 'You are here', suiteOpen: 'Open the app', suiteCode: 'Code',
+    suiteTxt: 'They work together: the ENS Compliance Studio SoA imports into Rosetta, and KAIROS covers op.cont, the continuity the other two only list.',
+    suiteDesc: { rosetta: 'Multi-framework map: ENS, ISO/IEC 27001, NIS2 and ISO/IEC 42001 in 115 unified controls, with ENS ↔ ISO equivalences aligned with CCN-STIC 825.', ens: 'System categorisation, MAGERIT risk analysis, Statement of Applicability and ENS pre-audit.', kairos: 'Business continuity: BIA, BCP and DRP with the critical recovery path of every function.' },
     steps: [['Create or open a project', 'Start with your data, import your ENS SoA or open one of the five cases.', 'inicio'], ['Define the scope', 'Pick frameworks, the ENS category and check whether NIS2 applies.', 'alcance'], ['Record control status', 'Each control is set once and counts for every framework that requires it.', 'controles'], ['Check equivalences', 'Select a requirement to see its equivalents in the other frameworks.', 'traductor'], ['Review gaps', 'Uncovered requirements and inconsistencies, sorted by severity.', 'brechas'], ['Export', 'Excel with one SoA per framework, Markdown report and CSV plan.', 'exportar']],
     go: 'Go', search2: 'Search a term…', rule: 'Rule', severity: 'Severity', checks: 'What it checks', inProject: 'In this project',
     methodP1: (c, d) => `Frameworks are not compared with each other directly: all of them link to ${c} unified controls in ${d} domains. One-to-one crosswalk tables treat a requirement as met when a similar one exists in another framework; this model avoids that.`,
@@ -2596,6 +2610,17 @@ function helpCta() {
     ${ext('mailto:' + AUTOR.email + '?subject=Rosetta', `${icon('mail', 15)}${esc(t('writeAuthor'))}`, 'btn sm')}
     ${ext(AUTOR.repo, `${brandIcon('github', 15)}${esc(t('seeCode'))}`, 'btn sm')}</div></section>`;
 }
+const SUITE = [
+  ['rosetta', 'Rosetta', 'https://heindall92.github.io/rosetta_multinorma/', 'https://github.com/heindall92/rosetta_multinorma'],
+  ['ens', 'ENS Compliance Studio', 'https://heindall92.github.io/grc_ens_compliance_studio/app/dist/ens-compliance-studio.html', 'https://github.com/heindall92/grc_ens_compliance_studio'],
+  ['kairos', 'KAIROS', 'https://heindall92.github.io/kairos/', 'https://github.com/heindall92/kairos']
+];
+function suiteGrc() {
+  const d = t('suiteDesc');
+  return `<section class="suite" aria-labelledby="suite-h"><h3 class="help-sec" id="suite-h">${icon('layers', 16)}${esc(t('suiteTitle'))}</h3><p class="small muted">${esc(t('suiteTxt'))}</p>
+    <div class="suite-grid">${SUITE.map(([id, n, app, repo]) => `<article class="suite-card${id === 'rosetta' ? ' here' : ''}"><div class="suite-hd"><b>${esc(n)}</b>${id === 'rosetta' ? `<span class="pill suite-here">${esc(t('suiteHere'))}</span>` : ''}</div><p>${esc(d[id])}</p>
+      <div class="row">${id === 'rosetta' ? '' : ext(app, `${esc(t('suiteOpen'))}${icon('arrow-right', 15)}`, 'btn sm primary')}${ext(repo, `${brandIcon('github', 15)}${esc(t('suiteCode'))}`, 'btn sm')}</div></article>`).join('')}</div></section>`;
+}
 function helpAbout() {
   return `<div class="about-card"><div class="avatar c-rosa about-av" style="--s:84px" aria-hidden="true">YR</div><div class="about-who">
       <h3>${esc(AUTOR.nombre)}</h3><p class="about-role">${esc(t('aboutRole'))}</p><p class="small muted">${esc(t('aboutBio'))}</p>
@@ -2604,7 +2629,7 @@ function helpAbout() {
     <h3 class="help-sec">${icon('info', 16)}${esc(t('aboutApp'))}</h3>
     <p><b>${esc(t('about', VERSION))}</b></p><p>${esc(t('disclaimer'))}</p>
     <p class="small muted">${esc(t('licences'))}</p>
-    <p class="small">${ext(AUTOR.repo, `${brandIcon('github', 14)} github.com/heindall92/rosetta_multinorma`, 'about-repo')}</p>${helpCta()}`;
+    <p class="small">${ext(AUTOR.repo, `${brandIcon('github', 14)} github.com/heindall92/rosetta_multinorma`, 'about-repo')}</p>${suiteGrc()}${helpCta()}`;
 }
 function vAyuda() {
   const tabs = [['inicio', 'life-buoy'], ['metodo', 'gauge'], ['glosario', 'book-open'], ['reglas', 'shield-check'], ['atajos', 'keyboard'], ['refs', 'landmark'], ['acerca', 'info']];

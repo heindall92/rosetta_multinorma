@@ -194,6 +194,17 @@ function helpCta() {
     ${ext('mailto:' + AUTOR.email + '?subject=Rosetta', `${icon('mail', 15)}${esc(t('writeAuthor'))}`, 'btn sm')}
     ${ext(AUTOR.repo, `${brandIcon('github', 15)}${esc(t('seeCode'))}`, 'btn sm')}</div></section>`;
 }
+const SUITE = [
+  ['rosetta', 'Rosetta', 'https://heindall92.github.io/rosetta_multinorma/', 'https://github.com/heindall92/rosetta_multinorma'],
+  ['ens', 'ENS Compliance Studio', 'https://heindall92.github.io/grc_ens_compliance_studio/app/dist/ens-compliance-studio.html', 'https://github.com/heindall92/grc_ens_compliance_studio'],
+  ['kairos', 'KAIROS', 'https://heindall92.github.io/kairos/', 'https://github.com/heindall92/kairos']
+];
+function suiteGrc() {
+  const d = t('suiteDesc');
+  return `<section class="suite" aria-labelledby="suite-h"><h3 class="help-sec" id="suite-h">${icon('layers', 16)}${esc(t('suiteTitle'))}</h3><p class="small muted">${esc(t('suiteTxt'))}</p>
+    <div class="suite-grid">${SUITE.map(([id, n, app, repo]) => `<article class="suite-card${id === 'rosetta' ? ' here' : ''}"><div class="suite-hd"><b>${esc(n)}</b>${id === 'rosetta' ? `<span class="pill suite-here">${esc(t('suiteHere'))}</span>` : ''}</div><p>${esc(d[id])}</p>
+      <div class="row">${id === 'rosetta' ? '' : ext(app, `${esc(t('suiteOpen'))}${icon('arrow-right', 15)}`, 'btn sm primary')}${ext(repo, `${brandIcon('github', 15)}${esc(t('suiteCode'))}`, 'btn sm')}</div></article>`).join('')}</div></section>`;
+}
 function helpAbout() {
   return `<div class="about-card"><div class="avatar c-rosa about-av" style="--s:84px" aria-hidden="true">YR</div><div class="about-who">
       <h3>${esc(AUTOR.nombre)}</h3><p class="about-role">${esc(t('aboutRole'))}</p><p class="small muted">${esc(t('aboutBio'))}</p>
@@ -202,7 +213,7 @@ function helpAbout() {
     <h3 class="help-sec">${icon('info', 16)}${esc(t('aboutApp'))}</h3>
     <p><b>${esc(t('about', VERSION))}</b></p><p>${esc(t('disclaimer'))}</p>
     <p class="small muted">${esc(t('licences'))}</p>
-    <p class="small">${ext(AUTOR.repo, `${brandIcon('github', 14)} github.com/heindall92/rosetta_multinorma`, 'about-repo')}</p>${helpCta()}`;
+    <p class="small">${ext(AUTOR.repo, `${brandIcon('github', 14)} github.com/heindall92/rosetta_multinorma`, 'about-repo')}</p>${suiteGrc()}${helpCta()}`;
 }
 function vAyuda() {
   const tabs = [['inicio', 'life-buoy'], ['metodo', 'gauge'], ['glosario', 'book-open'], ['reglas', 'shield-check'], ['atajos', 'keyboard'], ['refs', 'landmark'], ['acerca', 'info']];
