@@ -419,6 +419,8 @@ Componentes de terceros: iconos de [Lucide](https://lucide.dev) (ISC) y logotipo
 </tr>
 </table>
 
+Otras herramientas GRC del autor: [ENS Compliance Studio](https://github.com/heindall92/grc_ens_compliance_studio) (categorización, riesgos MAGERIT y Declaración de Aplicabilidad; su SoA se importa en Rosetta) y [KAIROS](https://github.com/heindall92/kairos) (continuidad de negocio: BIA, BCP y DRP).
+
 Errores, correspondencias discutibles o propuestas: abre una *issue* o escribe a <a href="mailto:yoandyramirezdelgado@gmail.com">yoandyramirezdelgado@gmail.com</a>.
 
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24,30&height=120&section=footer&animation=twinkling)
