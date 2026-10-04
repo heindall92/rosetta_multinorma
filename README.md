@@ -300,6 +300,8 @@ $$\text{cobertura}(r) = \max_{c \in r} w_{c,r} \cdot \frac{\sum_{c \in r} w_{c,r
 
 ## <img src="docs/assets/icons/file-check.svg" width="20" height="20" valign="middle"/> Alineación con la CCN-STIC 825
 
+> **Corrección de la versión 2.3.0, a partir de una revisión externa.** Hasta la 2.2.0, las equivalencias ENS ↔ ISO/IEC 27001 eran de criterio propio, y así lo indicaba la publicación del proyecto. Al revisarla, [Heyker D.](https://www.linkedin.com/in/heykerdas/) (consultor GRC y auditor ENS e ISO/IEC 27001) señaló en LinkedIn que el CCN publica la guía CCN-STIC 825 precisamente para fijar esa correspondencia y evitar interpretaciones. La 2.3.0 corrige el mapa con la guía: 17 equivalencias pasan de totales a parciales, se añaden 5 enlaces y lo que no figura en ella queda marcado como criterio propio. El detalle está en el [informe de alineación](docs/auditoria/05-ccn-stic-825.md) y en [CHANGELOG.md](CHANGELOG.md).
+
 Las equivalencias **ENS ↔ ISO/IEC 27001:2022** siguen la guía oficial del Centro Criptológico Nacional [CCN-STIC 825 «Esquema Nacional de Seguridad. Certificaciones 27001»](https://www.ccn-cert.cni.es/es/series-ccn-stic/guias/series-ccn-stic/800-guia-esquema-nacional-de-seguridad/543-ccn-stic-825-ens-iso27001/file.html) (edición de abril de 2026). Para cada una de las 73 medidas del anexo II, la guía fija un control principal de la ISO, los controles complementarios y un nivel de compatibilidad. Rosetta usa esos datos tal cual:
 
 | Origen en la guía | Parejas | Fuerza en Rosetta |

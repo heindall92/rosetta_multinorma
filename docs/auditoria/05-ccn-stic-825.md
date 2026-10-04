@@ -2,6 +2,10 @@
 
 > Informe generado a partir de `src/data/ccn825.json` y del catálogo 2.2.0. Fuente: CCN-STIC 825 «Esquema Nacional de Seguridad. Certificaciones 27001», Centro Criptológico Nacional, abril de 2026, apartados 5.2.2, 6 y 7.
 
+## 0. Origen de la corrección
+
+Rosetta 2.2.0 publicaba las equivalencias ENS ↔ ISO/IEC 27001 como criterio propio. Tras la publicación del proyecto, Heyker D. (consultor GRC y auditor ENS e ISO/IEC 27001) aportó en LinkedIn esta revisión: el CCN mantiene la guía CCN-STIC 825, actualizada en abril de 2026, para estandarizar la equivalencia entre ambos marcos y evitar interpretaciones. Este informe documenta la corrección que se hizo en la versión 2.3.0 a partir de esa revisión.
+
 ## 1. Qué aporta la guía
 
 Para cada una de las 73 medidas del anexo II del RD 311/2022, la guía indica el **control principal** de ISO/IEC 27001:2022, los **controles complementarios**, la **categoría** recomendada para un sistema integrado y el **nivel de medidas compatible**:
