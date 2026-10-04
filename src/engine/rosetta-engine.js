@@ -23,7 +23,7 @@
   const EPS = 1e-9;
 
   /* ---------- Índices ---------- */
-  function indexar(cat) {
+  function indexar(cat, ccn) {
     const reqUcs = {}; const reqRel = {}; const ucMap = {}; const req = {};
     for (const f of FW) {
       reqUcs[f] = {}; reqRel[f] = {}; req[f] = {};
@@ -33,7 +33,40 @@
       ucMap[c.id] = c;
       for (const f of FW) for (const m of c.maps[f] || []) if (reqUcs[f][m.id]) (m.w > 0 ? reqUcs : reqRel)[f][m.id].push({ uc: c.id, w: m.w });
     }
-    return { cat, reqUcs, reqRel, ucMap, req };
+    return { cat, reqUcs, reqRel, ucMap, req, ccn: ccn || null, ccnPar: ccn ? indexarCcn(ccn) : null };
+  }
+
+  /* ---------- CCN-STIC 825: correspondencias oficiales ENS ↔ ISO/IEC 27001:2022 ----------
+   * Cada pareja ENS–ISO de la guía queda con su origen: control principal o complementario de una medida (apartado 6),
+   * cláusula frente al articulado (apartado 5.2.2) u otro control de la ISO con consideración en el ENS (apartado 7).
+   * Si una pareja aparece en varios apartados, prevalece el más fuerte. */
+  const CCN_RANGO = { principal: 0, clausula: 1, complementario: 2, apartado7: 3 };
+  function indexarCcn(ccn) {
+    const m = new Map();
+    const put = (ens, iso, tipo, nivel) => { const k = ens + '|' + iso; const p = m.get(k); if (!p || CCN_RANGO[tipo] < CCN_RANGO[p.tipo]) m.set(k, { tipo, nivel }); };
+    for (const [ens, x] of Object.entries(ccn.medidas || {})) {
+      for (const iso of x.principal || []) put(ens, iso, 'principal', x.nivel);
+      for (const iso of x.complementarios || []) put(ens, iso, 'complementario', x.nivel);
+      for (const iso of x.consideracion || []) put(ens, iso, 'apartado7', x.nivel);
+    }
+    for (const [iso, x] of Object.entries(ccn.clausulas || {})) for (const ens of x.ens || []) put(ens, iso, 'clausula', ccn.medidas && ccn.medidas[ens] ? ccn.medidas[ens].nivel : null);
+    return m;
+  }
+  const ccnPareja = (ix, ens, iso) => (ix.ccnPar ? ix.ccnPar.get(ens + '|' + iso) || null : null);
+  /* Fuerza de una equivalencia ENS ↔ ISO 27001 según la guía:
+   *  · control principal: análogo → total; parcialmente análogo → parcial; nula → relacionado.
+   *  · complementario: parcial (relacionado si la medida es nula: la ISO no la cubre).
+   *  · cláusula 4–10: la que resulte de los controles comunes, al menos parcial.
+   *  · apartado 7: relacionado (la guía los cita como consideración, de menor impacto).
+   *  · fuera de la guía: criterio propio de Rosetta, nunca más que parcial. */
+  const FZ_RANGO = { total: 0, parcial: 1, relacionado: 2 };
+  const fzMin = (a, b) => (FZ_RANGO[a] >= FZ_RANGO[b] ? a : b);
+  function fuerzaCcn(p, propia) {
+    if (!p) return propia ? fzMin(propia, 'parcial') : null;
+    if (p.tipo === 'principal') return p.nivel === 'analogo' ? 'total' : p.nivel === 'parcial' ? 'parcial' : 'relacionado';
+    if (p.tipo === 'complementario') return p.nivel === 'nula' ? 'relacionado' : 'parcial';
+    if (p.tipo === 'clausula') return propia && propia !== 'relacionado' ? propia : 'parcial';
+    return 'relacionado';
   }
 
   /* ---------- Alcance ---------- */
@@ -189,6 +222,16 @@
           if (!prev) out[g][m.id] = { id: m.id, fuerza, via: [c.id] };
           else { if (rank[fuerza] < rank[prev.fuerza]) prev.fuerza = fuerza; if (!prev.via.includes(c.id)) prev.via.push(c.id); }
         }
+      }
+    }
+    // ENS ↔ ISO 27001: la fuerza sale de la CCN-STIC 825; las parejas de la guía sin control común también se muestran
+    const otro = f === 'ens' ? 'iso27001' : f === 'iso27001' ? 'ens' : null;
+    if (otro && ix.ccnPar) {
+      const par = (x) => (f === 'ens' ? ccnPareja(ix, id, x) : ccnPareja(ix, x, id));
+      for (const x of Object.values(out[otro])) { const p = par(x.id); x.ccn = p; x.fuerza = fuerzaCcn(p, x.fuerza); }
+      for (const [k, p] of ix.ccnPar) {
+        const [e, i] = k.split('|'); const peer = f === 'ens' ? (e === id ? i : null) : (i === id ? e : null);
+        if (peer && !out[otro][peer] && ix.req[otro][peer]) out[otro][peer] = { id: peer, fuerza: fuerzaCcn(p, null), via: [], ccn: p };
       }
     }
     const res = {};
@@ -455,6 +498,26 @@
     return { total, coinciden, relacion, faltan };
   }
 
+  /** Contraste del catálogo con la CCN-STIC 825: qué parejas de la guía conecta Rosetta mediante un control unificado
+   *  y cuántas equivalencias ENS ↔ ISO 27001 de Rosetta son criterio propio (no figuran en la guía). */
+  function contrasteCcn825(ix) {
+    if (!ix.ccnPar) return null;
+    const comun = (ens, iso) => ix.cat.controls.some((c) => (c.maps.ens || []).some((m) => m.id === ens) && (c.maps.iso27001 || []).some((m) => m.id === iso));
+    const porTipo = {}; const faltan = [];
+    for (const [k, p] of ix.ccnPar) {
+      const [e, i] = k.split('|'); if (!ix.req.ens[e] || !ix.req.iso27001[i]) continue;
+      const t = porTipo[p.tipo] || (porTipo[p.tipo] = { total: 0, conectadas: 0 }); t.total++;
+      if (comun(e, i)) t.conectadas++; else if (p.tipo === 'principal') faltan.push(k.replace('|', '→'));
+    }
+    let propias = 0; const niveles = { analogo: 0, parcial: 0, nula: 0 };
+    for (const r of ix.cat.frameworks.ens.reqs) {
+      for (const x of equivalencias(ix, 'ens', r.id).otras.iso27001) if (!x.ccn) propias++;
+      const m = ix.ccn.medidas[r.id]; if (m) niveles[m.nivel]++;
+    }
+    const total = Object.values(porTipo).reduce((a, t) => a + t.total, 0);
+    return { edicion: ix.ccn.edicion, medidas: Object.keys(ix.ccn.medidas).length, niveles, parejas: total, porTipo, faltan, propias };
+  }
+
   /* ---------- Utilidades ---------- */
   function orden(a, b) {
     const pa = String(a).split(/[.\-~]/), pb = String(b).split(/[.\-~]/);
@@ -474,6 +537,6 @@
 
   return { FW, FW_LABEL, FW_LONG, FW_LONG_EN, ESTADOS, ESTADO_LABEL, ESTADO_LABEL_EN, REGLAS_EN, tt, SCORE, W, DIMS, NIVELES_ENS, CAT_NIVEL, REGLAS, TAMANOS, NIS2_ESPECIALES,
     indexar, nivelExigidoEns, categoriaEfectiva, excluible, exigidaEns, categoriaDeNiveles, aplicaReq, coberturaReq, calcular, solapamiento, inferencia,
-    equivalencias, prioridades, parseIsoRef, parejasClase, coherencia, planAccion, puntuacionEns, desdeSoaEns, nis2Aplicabilidad, orden, codigo, titulo, instantanea, estadoUc };
+    equivalencias, prioridades, parseIsoRef, parejasClase, ccnPareja, fuerzaCcn, contrasteCcn825, coherencia, planAccion, puntuacionEns, desdeSoaEns, nis2Aplicabilidad, orden, codigo, titulo, instantanea, estadoUc };
 });
 

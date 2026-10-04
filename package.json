@@ -1,6 +1,6 @@
 {
   "name": "rosetta-multinorma",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Rosetta: mapa multinorma ENS · ISO/IEC 27001 · NIS2 · ISO/IEC 42001. Implanta cada control una vez y comprueba qué cubre en cada norma.",
   "private": true,
   "engines": {

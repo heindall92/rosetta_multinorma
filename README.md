@@ -82,7 +82,7 @@ Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto n
         <img src="docs/assets/stack/navegador.svg" height="48" alt="Playwright">
         <img src="docs/assets/stack/accesibilidad.svg" height="48" alt="axe-core">
         <img src="docs/assets/stack/codeql.svg" height="48" alt="CodeQL"><br>
-        <sub><code>node:test 72 · Playwright 36 · axe-core 0 violaciones · CodeQL</code></sub>
+        <sub><code>node:test 80 · Playwright 36 · axe-core 0 violaciones · CodeQL</code></sub>
       </td>
       <td valign="top"><code>╰─ ⌁ seguridad:</code><br><br>
         <img src="docs/assets/stack/csp.svg" height="48" alt="CSP">
@@ -95,7 +95,7 @@ Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto n
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="2"><code>version: 2.2.0&nbsp;&nbsp;·&nbsp;&nbsp;catalogo: 2.1.0&nbsp;&nbsp;·&nbsp;&nbsp;pruebas: 112 ok&nbsp;&nbsp;·&nbsp;&nbsp;licencia: GPLv2</code></td>
+      <td colspan="2"><code>version: 2.3.0&nbsp;&nbsp;·&nbsp;&nbsp;catalogo: 2.2.0&nbsp;&nbsp;·&nbsp;&nbsp;CCN-STIC 825: abril 2026&nbsp;&nbsp;·&nbsp;&nbsp;pruebas: 120 ok&nbsp;&nbsp;·&nbsp;&nbsp;licencia: GPLv2</code></td>
     </tr>
   </tfoot>
 </table>
@@ -113,6 +113,7 @@ Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto n
 - [Arranque rápido](#-arranque-rápido)
 - [Arquitectura](#-arquitectura)
 - [Método de cálculo](#-método-de-cálculo)
+- [Alineación con la CCN-STIC 825](#-alineación-con-la-ccn-stic-825)
 - [Calidad](#-calidad)
 - [Seguridad y privacidad](#-seguridad-y-privacidad)
 - [Auditoría y hoja de ruta a producción](#-auditoría-y-hoja-de-ruta-a-producción)
@@ -297,11 +298,34 @@ $$\text{cobertura}(r) = \max_{c \in r} w_{c,r} \cdot \frac{\sum_{c \in r} w_{c,r
 - **Prioridad** de un control pendiente: cobertura que añade en todas las normas del alcance, repartida según su peso en cada requisito.
 - **Solapamiento A → B**: parte de B cubierta al implantar los controles que A exige con enlace total.
 
+## <img src="docs/assets/icons/file-check.svg" width="20" height="20" valign="middle"/> Alineación con la CCN-STIC 825
+
+Las equivalencias **ENS ↔ ISO/IEC 27001:2022** siguen la guía oficial del Centro Criptológico Nacional [CCN-STIC 825 «Esquema Nacional de Seguridad. Certificaciones 27001»](https://www.ccn-cert.cni.es/es/series-ccn-stic/guias/series-ccn-stic/800-guia-esquema-nacional-de-seguridad/543-ccn-stic-825-ens-iso27001/file.html) (edición de abril de 2026). Para cada una de las 73 medidas del anexo II, la guía fija un control principal de la ISO, los controles complementarios y un nivel de compatibilidad. Rosetta usa esos datos tal cual:
+
+| Origen en la guía | Parejas | Fuerza en Rosetta |
+|---|---|---|
+| Control principal, nivel **análogo** (42 medidas) | 71 en total | Equivalente |
+| Control principal, **parcialmente análogo** (26 medidas) | ↑ | Parcial |
+| Medida **sin equivalente** en la ISO (5: op.pl.5, op.ext.4, mp.info.3, mp.info.4, mp.info.5) | ↑ | Relación, con aviso: no se hereda de una certificación ISO |
+| Controles complementarios | 214 | Parcial |
+| Cláusulas 4–10 frente al articulado (apdo. 5.2.2) | 34 | La de los controles comunes, al menos parcial |
+| Otros controles de la ISO (apdo. 7) | 27 | Relación |
+| Equivalencias de Rosetta que no figuran en la guía | 91 | Como mucho parcial, marcadas como **criterio propio** |
+
+- **Los 71 controles principales de la guía comparten un control unificado** con su medida. El catálogo 2.2.0 añade los 5 enlaces que faltaban: org.4 ↔ 5.2, op.acc.5 ↔ 5.18, op.mon.1 ↔ 8.20, mp.if.7 ↔ 7.2 y mp.info.4 ↔ 8.26.
+- **Ninguna equivalencia ENS ↔ ISO es total sin respaldo de la guía.** Antes, 17 parejas que el CCN califica de *parcialmente análogas* figuraban como totales; por ejemplo, op.exp.7 ↔ 5.24, op.exp.8 ↔ 8.15 y op.cont.4 ↔ 8.14.
+- **Dónde se ve.** En *Equivalencias* y en el panel de detalle, cada equivalencia ENS ↔ ISO indica su origen: control principal, complementario, cláusula u otros controles de la guía, o criterio propio. La ficha de cada medida del ENS muestra su nivel de compatibilidad, la categoría y los controles ISO de la guía.
+- **Qué no cambia.** El cálculo de cumplimiento: los enlaces añadidos son de relación (peso 0). La guía decide qué equivale a qué. La cobertura sigue saliendo del estado de los controles unificados.
+- **Reproducible.** [`scripts/ccn825.py`](scripts/ccn825.py) regenera [`src/data/ccn825.json`](src/data/ccn825.json) desde el PDF oficial, convertido con MarkItDown, y `--check` comprueba que coinciden. La guía no se incluye en el repositorio: su aviso legal prohíbe reproducirla.
+- **Probado.** Ocho pruebas del motor comprueban que no falta ninguna medida ni código, que todos los controles principales están conectados, el reparto 42/26/5, la fuerza por origen, que ninguna equivalencia total carece de respaldo y la simetría ENS → ISO e ISO → ENS.
+
+NIS2 e ISO/IEC 42001 no tienen una guía equivalente: sus correspondencias siguen siendo criterio del autor, contrastado con la guía técnica de ENISA.
+
 ## <img src="docs/assets/icons/flask-conical.svg" width="20" height="20" valign="middle"/> Calidad
 
 | Suite | Pruebas | Qué comprueba |
 |---|---|---|
-| Motor (`engine.test.mjs`) | 47 | Media ponderada, techo de los enlaces parciales, exclusiones no permitidas, categoría ENS efectiva, KPI, prioridades, solapamiento, equivalencias, aplicabilidad NIS2 (17 casos), cinco casos de ejemplo y una instantánea fija. |
+| Motor (`engine.test.mjs`) | 55 | Media ponderada, techo de los enlaces parciales, exclusiones no permitidas, categoría ENS efectiva, KPI, prioridades, solapamiento, equivalencias, correspondencias de la CCN-STIC 825, aplicabilidad NIS2 (17 casos), cinco casos de ejemplo y una instantánea fija. |
 | Catálogo (`catalog.test.mjs`) | 15 | 73 medidas del ENS más 4 artículos, 93 controles de ISO/IEC 27001 y 38 de ISO/IEC 42001, cláusula 6.1.1, art. 23.4 a–e de NIS2, identificadores únicos, enlaces a requisitos existentes, ningún requisito sin control. |
 | Build (`build.test.mjs`) | 10 | Determinismo, documento bien formado, datos idénticos a `src/data`, CSP, hashes SRI, fuentes incrustadas, iconos existentes y `dist/` al día. |
 | E2E (`e2e.test.mjs`) | 23 | Valores por defecto (claro, español, azul), menú sin proyecto, todas las vistas con los cinco casos, centro de ayuda (buscador y enlaces del autor), barra lateral (anchos, ratón, teclado, tableta), deshacer y rehacer, idioma, tema, móvil, ficheros hostiles, inyección de fórmulas y aviso de almacenamiento lleno. Red bloqueada. |
@@ -328,7 +352,7 @@ Antes de usar Rosetta con datos de clientes se auditaron cuatro áreas: segurida
 
 ## <img src="docs/assets/icons/triangle-alert.svg" width="20" height="20" valign="middle"/> Limitaciones conocidas
 
-- **Las correspondencias entre normas son criterio del autor**, contrastado con una plantilla de SoA ENS ↔ ISO/IEC 27001 y con la guía técnica de ENISA. No existe una tabla oficial entre las cuatro normas; revísalas con quien vaya a auditar.
+- **ENS ↔ ISO/IEC 27001 sigue la guía CCN-STIC 825 (abril de 2026)**; el resto de correspondencias (NIS2, ISO/IEC 42001 y las 91 parejas ENS ↔ ISO que la guía no recoge, marcadas en la aplicación) son criterio del autor, contrastado con la plantilla de SoA del curso y con la guía técnica de ENISA. La propia guía advierte que la compatibilidad no es una equivalencia aritmética: revisa el resultado con quien vaya a auditar.
 - **Los refuerzos del ENS (R1, R2…) no se modelan por separado**: una medida con refuerzos se evalúa con los mismos controles que sin ellos.
 - **Datos sin cifrar en el `localStorage` del navegador.** Todas las páginas de `heindall92.github.io` comparten origen; para datos reales, usa un dominio propio o la copia local, y haz copias de seguridad desde *Exportar*.
 - **ISO/IEC 27001 e ISO/IEC 42001 están protegidas por derechos de autor.** Rosetta solo incluye referencias y títulos abreviados.
@@ -358,12 +382,13 @@ rosetta_multinorma/
 │   ├── data/
 │   │   ├── catalog.json          4 normas · 319 requisitos · 115 controles · 13 dominios
 │   │   ├── casos.json            5 casos de ejemplo (ficticios)
-│   │   ├── parejas.json          Contraste ENS ↔ ISO/IEC 27001
+│   │   ├── ccn825.json           Correspondencias oficiales ENS ↔ ISO/IEC 27001 (CCN-STIC 825, abril 2026)
+│   │   ├── parejas.json          Contraste ENS ↔ ISO/IEC 27001 con la plantilla del curso
 │   │   └── icons.json            Iconos SVG (Lucide 1.49)
 │   └── vendor/                   SheetJS 0.20.3 (lectura) y xlsx-js-style 1.2.0 (escritura)
 │
 ├── 📦 dist/                      La aplicación generada (index.html + vendor/)
-├── 🛠️ scripts/                    build.mjs · serve.mjs
+├── 🛠️ scripts/                    build.mjs · serve.mjs · capturas.mjs · ccn825.py
 ├── 🧪 tests/                      engine · catalog · build · e2e · e2e-excel · a11y · fixtures
 ├── 📄 docs/                       Auditoría, capturas e iconos del README
 └── ⚙️ .github/workflows/          ci.yml · codeql.yml · pages.yml

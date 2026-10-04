@@ -231,3 +231,59 @@ describe('casos de ejemplo con el catálogo real', () => {
     assert.equal(p.total, ref.total); assert.equal(p.coinciden, ref.coinciden); assert.equal(p.relacion, ref.relacion);
   });
 });
+
+/* Correspondencias oficiales ENS ↔ ISO/IEC 27001:2022 de la guía CCN-STIC 825 (abril 2026) */
+describe('CCN-STIC 825', () => {
+  const CCN = require('../src/data/ccn825.json');
+  const IXC = E.indexar(CAT, CCN);
+  const ENS = CAT.frameworks.ens.reqs; const ISO = new Set(CAT.frameworks.iso27001.reqs.map((r) => r.id));
+  const MEDIDAS = ENS.filter((r) => !r.id.startsWith('art.')).map((r) => r.id);
+  const eqIso = (ens) => Object.fromEntries(E.equivalencias(IXC, 'ens', ens).otras.iso27001.map((x) => [x.id, x]));
+
+  test('la guía cubre las 73 medidas del anexo II con códigos ISO válidos', () => {
+    assert.deepEqual(Object.keys(CCN.medidas), MEDIDAS);
+    for (const [id, m] of Object.entries(CCN.medidas)) {
+      assert.ok(['analogo', 'parcial', 'nula'].includes(m.nivel), id);
+      for (const c of [...m.principal, ...m.complementarios, ...(m.consideracion || [])]) assert.ok(ISO.has(c), `${id} → ${c}`);
+      if (m.nivel !== 'nula') assert.ok(m.principal.length, `${id} sin control principal`);
+    }
+    for (const [c, x] of Object.entries(CCN.clausulas)) { assert.ok(ISO.has(c), c); for (const e of x.ens) assert.ok(ENS.some((r) => r.id === e), `${c} → ${e}`); }
+  });
+  test('reparto de niveles de compatibilidad de la guía: 42 análogas, 26 parciales, 5 nulas', () => {
+    assert.deepEqual(E.contrasteCcn825(IXC).niveles, { analogo: 42, parcial: 26, nula: 5 });
+  });
+  test('cada control principal de la guía comparte un control unificado con su medida', () => {
+    const r = E.contrasteCcn825(IXC);
+    assert.deepEqual(r.faltan, []);
+    assert.equal(r.porTipo.principal.conectadas, r.porTipo.principal.total);
+  });
+  test('la fuerza de las equivalencias ENS → ISO sale de la guía', () => {
+    assert.equal(eqIso('org.1')['A5.1'].fuerza, 'total');                 // principal análogo
+    assert.equal(eqIso('op.exp.7')['A5.24'].fuerza, 'parcial');           // principal parcialmente análogo
+    assert.equal(eqIso('op.exp.7')['A5.25'].ccn.tipo, 'complementario');
+    assert.equal(eqIso('mp.info.3')['A8.24'].fuerza, 'relacionado');      // medida sin equivalente en la ISO
+    const g = eqIso('org.2')['A5.11']; assert.equal(g.fuerza, 'parcial'); assert.deepEqual(g.via, []); // solo en la guía
+    assert.equal(eqIso('org.2')['A6.6'].fuerza, 'relacionado');          // apartado 7
+  });
+  test('ninguna equivalencia ENS ↔ ISO es total sin respaldo de la guía', () => {
+    for (const id of ENS.map((r) => r.id)) for (const x of Object.values(eqIso(id))) {
+      if (x.fuerza !== 'total') continue;
+      assert.ok(x.ccn && ((x.ccn.tipo === 'principal' && x.ccn.nivel === 'analogo') || x.ccn.tipo === 'clausula'), `${id} → ${x.id}`);
+    }
+  });
+  test('las equivalencias de criterio propio quedan marcadas y nunca pasan de parciales', () => {
+    let n = 0;
+    for (const id of ENS.map((r) => r.id)) for (const x of Object.values(eqIso(id))) if (!x.ccn) { n++; assert.notEqual(x.fuerza, 'total', `${id} → ${x.id}`); }
+    assert.equal(n, E.contrasteCcn825(IXC).propias);
+  });
+  test('la equivalencia es simétrica: ISO → ENS da la misma fuerza que ENS → ISO', () => {
+    for (const id of MEDIDAS) for (const x of Object.values(eqIso(id))) {
+      const back = E.equivalencias(IXC, 'iso27001', x.id).otras.ens.find((y) => y.id === id);
+      assert.ok(back, `${x.id} → ${id}`); assert.equal(back.fuerza, x.fuerza, `${id} ↔ ${x.id}`);
+    }
+  });
+  test('sin la guía, el motor mantiene las equivalencias del catálogo', () => {
+    const plain = E.equivalencias(IX, 'ens', 'org.2').otras.iso27001;
+    assert.ok(plain.every((x) => x.ccn === undefined) && !plain.some((x) => x.id === 'A5.11'));
+  });
+});

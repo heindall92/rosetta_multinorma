@@ -8,6 +8,7 @@ Rosetta pasa de herramienta formativa a herramienta de trabajo con datos reales 
 | Exactitud del catálogo normativo | [02-catalogo-normativo.md](auditoria/02-catalogo-normativo.md) | 15 correcciones de catálogo y 8 del motor. Aplicadas 15 y 6. |
 | Experiencia de uso, accesibilidad y rendimiento | [03-ux-accesibilidad-rendimiento.md](auditoria/03-ux-accesibilidad-rendimiento.md) | 1 597 elementos con violaciones WCAG. Ahora 0, con prueba de regresión. |
 | Arquitectura y hoja de ruta | [04-arquitectura-y-hoja-de-ruta.md](auditoria/04-arquitectura-y-hoja-de-ruta.md) | Fases 0 a 3. La fase 0 está casi completa. |
+| Alineación con la CCN-STIC 825 | [05-ccn-stic-825.md](auditoria/05-ccn-stic-825.md) | Equivalencias ENS ↔ ISO/IEC 27001 alineadas con la guía del CCN (abril 2026): 71 de 71 controles principales conectados, 17 equivalencias rebajadas a parciales, 5 enlaces añadidos y 91 parejas marcadas como criterio propio. |
 
 Los informes se conservan tal como se redactaron, sobre el código de ese día.
 

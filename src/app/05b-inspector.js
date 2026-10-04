@@ -38,10 +38,10 @@ function inspReq(f, id) {
   const eq = E.equivalencias(IX, f, id);
   const ctl = eq.controles.filter((l) => l.w > 0 || showRel);
   const ex = cov.estado === 'excluido'; const canEx = onFw(f) && cov.estado !== 'no-exigido' && E.excluible(f, id);
-  const ens = f === 'ens' ? `<dl class="kv small"><dt>${esc(t('dims'))}</dt><dd>${esc(r.dims)}</dd><dt>${esc(t('exig'))}</dt><dd class="mono">B ${esc(r.bajo)} · M ${esc(r.medio)} · A ${esc(r.alto)}</dd>${state.alcance.ens.on ? `<dt>${esc(t('inYourSys'))}</dt><dd>${esc(t('level'))} ${esc(t('lv.' + cov.nivel))} · <code>${esc(exigL(cov.exigencia))}</code></dd>` : ''}<dt>${esc(t('classIso'))}</dt><dd>${esc(r.ref || '—')}</dd></dl>` : '';
+  const ens = f === 'ens' ? `<dl class="kv small"><dt>${esc(t('dims'))}</dt><dd>${esc(r.dims)}</dd><dt>${esc(t('exig'))}</dt><dd class="mono">B ${esc(r.bajo)} · M ${esc(r.medio)} · A ${esc(r.alto)}</dd>${state.alcance.ens.on ? `<dt>${esc(t('inYourSys'))}</dt><dd>${esc(t('level'))} ${esc(t('lv.' + cov.nivel))} · <code>${esc(exigL(cov.exigencia))}</code></dd>` : ''}${ccnFicha(id)}<dt>${esc(t('classIso'))}</dt><dd>${esc(r.ref || '—')}</dd></dl>${ccnAviso(f, id)}` : '';
   const eqs = FW.filter((g) => g !== f).map((g) => {
     const rows = eq.otras[g].filter((x) => x.fuerza !== 'relacionado' || showRel);
-    return `<div>${fwTag(g, !onFw(g))}<div class="chips">${rows.length ? rows.map((x) => reqChip(g, x.id, { fuerza: x.fuerza, cov: onFw(g) ? reqRow(g, x.id).estado : null })).join('') : `<span class="tiny muted">${esc(g === 'iso42001' || f === 'iso42001' ? t('noEqAi') : t('noEq'))}</span>`}</div></div>`;
+    return `<div>${fwTag(g, !onFw(g))}<div class="chips">${rows.length ? rows.map((x) => reqChip(g, x.id, { fuerza: x.fuerza, cov: onFw(g) ? reqRow(g, x.id).estado : null, origen: ccnTxt(f, g, x) })).join('') : `<span class="tiny muted">${esc(g === 'iso42001' || f === 'iso42001' ? t('noEqAi') : t('noEq'))}</span>`}</div></div>`;
   }).join('');
   return `${inspHead(`${fwTag(f, !onFw(f))} <span class="mono">${esc(reqCode(f, id))}</span>`, rT(f, id), 'file-check', `fw-${f}`)}
   <p class="small muted">${esc(rG(f, id))}</p>

@@ -1,7 +1,7 @@
 /* ---------- Núcleo: datos, almacenamiento, estado global ---------- */
 const D = window.ROSETTA_DATA;
 const E = window.RosettaEngine;
-const IX = E.indexar(D.catalog);
+const IX = E.indexar(D.catalog, D.ccn825);
 const CAT = D.catalog;
 const FW = E.FW;
 /* Librerías de Excel, cargadas solo cuando hacen falta, con integridad verificada (SRI):
@@ -12,10 +12,11 @@ const XLSX_LIBS = {
   leer: { file: 'vendor/sheetjs-0.20.3.full.min.js', cdn: 'https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js', sri: 'sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT' },
   escribir: { file: 'vendor/xlsx-js-style-1.2.0.bundle.js', cdn: 'https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js', sri: 'sha384-OUW9euuUyxyHcAhTqbhI+Iyb8LMssXt/cpz0yXhs9UWG2/R/uaWdakx/4cfww7Vb' }
 };
-const VERSION = '2.2.0';
+const VERSION = '2.3.0';
 const DOM = Object.fromEntries(CAT.domains.map((d) => [d.id, d]));
 const SOLAPE = E.solapamiento(IX);
 const PAREJAS = D.parejas;
+const CCN = E.contrasteCcn825(IX);
 
 const clone = (o) => JSON.parse(JSON.stringify(o));
 const $ = (sel, r = document) => r.querySelector(sel);

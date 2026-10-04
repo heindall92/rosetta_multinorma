@@ -10,8 +10,18 @@ const entPill = (x) => `<span class="pill ent ${esc(x)}">${esc(t('ent.' + x))}</
 const opt = (v, label, sel) => `<option value="${esc(v)}"${String(sel) === String(v) ? ' selected' : ''}>${esc(label ?? v)}</option>`;
 const avatar = (size = 32) => `<span class="avatar c-${esc(ws.profile.color || 'rosa')}" style="--s:${size}px">${esc(initials(ws.profile.nombre))}</span>`;
 const ucChip = (id) => `<button type="button" class="uc" data-act="insp-uc" data-id="${esc(id)}" data-tip="${esc(cT(id))}">${esc(id)}</button>`;
-function reqChip(f, id, { fuerza = 'total', cov = null } = {}) {
-  const tip = `${E.FW_LABEL[f]} ${reqCode(f, id)} · ${rT(f, id)}${fuerza !== 'total' ? ` (${t('fuerza.' + fuerza).toLowerCase()})` : ''}${cov ? ` · ${t('cov.' + cov)}` : ''}`;
+/* Origen de una equivalencia ENS ↔ ISO/IEC 27001: la pareja de la CCN-STIC 825 o criterio propio de Rosetta */
+const esParCcn = (f, g) => (f === 'ens' && g === 'iso27001') || (f === 'iso27001' && g === 'ens');
+const ccnTxt = (f, g, x) => (!esParCcn(f, g) ? '' : x.ccn ? t('ccnDe', t('ccnTipo.' + x.ccn.tipo)) : t('ccnPropio'));
+/* Fila «CCN-STIC 825» de la ficha de una medida del ENS */
+function ccnFicha(id) {
+  const m = D.ccn825 && D.ccn825.medidas[id]; if (!m) return '';
+  const cods = (l) => l.map((c) => reqCode('iso27001', c)).join(', ');
+  return `<dt>${esc(t('ccnRow'))}</dt><dd>${esc(t('ccnMedida', t('ccnNivel.' + m.nivel), m.cat, cods(m.principal), cods(m.complementarios)))}</dd>`;
+}
+const ccnAviso = (f, id) => (f === 'ens' && D.ccn825 && D.ccn825.medidas[id] && D.ccn825.medidas[id].nivel === 'nula' ? `<div class="callout">${icon('info', 17)}<span>${esc(t('ccnNula'))}</span></div>` : '');
+function reqChip(f, id, { fuerza = 'total', cov = null, origen = '' } = {}) {
+  const tip = `${E.FW_LABEL[f]} ${reqCode(f, id)} · ${rT(f, id)}${fuerza !== 'total' ? ` (${t('fuerza.' + fuerza).toLowerCase()})` : ''}${cov ? ` · ${t('cov.' + cov)}` : ''}${origen ? ` · ${origen}` : ''}`;
   return `<button type="button" class="rq fw-${f} ${fuerza}${cov ? ' st-' + esc(cov) : ''}" data-act="insp-req" data-fw="${f}" data-id="${esc(id)}" data-tip="${esc(tip)}">${esc(reqCode(f, id))}</button>`;
 }
 /* Interruptor de cuatro posiciones para el estado de un control */

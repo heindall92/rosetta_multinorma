@@ -34,7 +34,7 @@ test('los datos embebidos equivalen a src/data', () => {
   const m = html.match(/window\.ROSETTA_DATA = (.*);\n/);
   assert.ok(m);
   const d = JSON.parse(m[1]);
-  for (const k of ['catalog', 'casos', 'parejas', 'icons']) assert.deepEqual(d[k], JSON.parse(rd(`src/data/${k}.json`)), k);
+  for (const k of ['catalog', 'casos', 'parejas', 'ccn825', 'icons']) assert.deepEqual(d[k], JSON.parse(rd(`src/data/${k}.json`)), k);
 });
 
 test('una cadena con </script> en los datos se escapa', () => {

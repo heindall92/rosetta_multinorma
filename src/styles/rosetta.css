@@ -430,6 +430,8 @@ select option { background: var(--bg); color: var(--ink); }
 .eq:focus-visible { outline: 2px solid var(--accent); }
 .eq .t { font-size: .82rem; line-height: 1.3; color: var(--ink-2); }
 .eq small { grid-column: 2; color: var(--faint); font-size: .7rem; }
+.eq small .ccn-src { display: block; margin-top: 2px; font-weight: 600; color: var(--ink-2); }
+.eq small .ccn-src.propio { font-weight: 500; font-style: italic; color: var(--muted); }
 .empty-lane { font-size: .8rem; color: var(--muted); padding: 4px 8px 6px; }
 .lane.off { opacity: .62; }
 .eq .rq { grid-row: span 2; align-self: start; }

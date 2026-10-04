@@ -1,0 +1,1365 @@
+{
+ "fuente": "CCN-STIC 825 «Esquema Nacional de Seguridad. Certificaciones 27001»",
+ "edicion": "abril 2026",
+ "nota": "Correspondencias ENS (RD 311/2022, anexo II) ↔ ISO/IEC 27001:2022 extraídas del apartado 6 (control principal, controles complementarios, categoría y nivel de medidas compatible) , del apartado 5.2.2 (cláusulas 4 a 10 de la ISO frente al articulado del ENS) y del apartado 7 (otros controles de la ISO y su consideración en el ENS).",
+ "medidas": {
+  "org.1": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.1"
+   ],
+   "complementarios": [
+    "A5.2",
+    "A6.4",
+    "A5.31"
+   ],
+   "consideracion": [
+    "A5.4",
+    "A5.6",
+    "A5.32"
+   ]
+  },
+  "org.2": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.1"
+   ],
+   "complementarios": [
+    "A5.6",
+    "A5.10",
+    "A5.11",
+    "A5.24",
+    "A5.36",
+    "A6.7",
+    "A7.7",
+    "A7.9",
+    "A8.1"
+   ],
+   "consideracion": [
+    "A5.32",
+    "A6.6"
+   ]
+  },
+  "org.3": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.37"
+   ],
+   "complementarios": [
+    "A5.5",
+    "A5.14",
+    "A5.36"
+   ]
+  },
+  "org.4": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.2"
+   ],
+   "complementarios": [
+    "C5.3",
+    "A8.1",
+    "A5.10",
+    "A7.10",
+    "A8.19",
+    "A8.20",
+    "A8.21",
+    "A8.32"
+   ],
+   "consideracion": [
+    "A5.36"
+   ]
+  },
+  "op.pl.1": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "C6.1.1"
+   ],
+   "complementarios": [
+    "C6.1.2",
+    "C6.1.3",
+    "C8.2",
+    "C8.3"
+   ]
+  },
+  "op.pl.2": {
+   "nivel": "analogo",
+   "cat": "MEDIA (+R2*)",
+   "principal": [
+    "A5.9"
+   ],
+   "complementarios": [
+    "A8.20",
+    "A8.27"
+   ]
+  },
+  "op.pl.3": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.8"
+   ],
+   "complementarios": [
+    "A5.19",
+    "A5.20"
+   ]
+  },
+  "op.pl.4": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.6"
+   ],
+   "complementarios": [
+    "A5.23"
+   ]
+  },
+  "op.pl.5": {
+   "nivel": "nula",
+   "cat": "MEDIA",
+   "principal": [],
+   "complementarios": [
+    "A5.19",
+    "A5.20"
+   ]
+  },
+  "op.acc.1": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.16"
+   ],
+   "complementarios": [
+    "A5.15"
+   ],
+   "consideracion": [
+    "A5.17"
+   ]
+  },
+  "op.acc.2": {
+   "nivel": "analogo",
+   "cat": "ALTA*",
+   "principal": [
+    "A5.15"
+   ],
+   "complementarios": [
+    "A5.18",
+    "A8.2",
+    "A8.3",
+    "A8.18",
+    "A8.4"
+   ],
+   "consideracion": [
+    "A5.17"
+   ]
+  },
+  "op.acc.3": {
+   "nivel": "analogo",
+   "cat": "MEDIA*",
+   "principal": [
+    "A5.3"
+   ],
+   "complementarios": [
+    "A5.18",
+    "A8.2"
+   ],
+   "consideracion": [
+    "A8.3",
+    "A8.19"
+   ]
+  },
+  "op.acc.4": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.18"
+   ],
+   "complementarios": [
+    "A8.2"
+   ],
+   "consideracion": [
+    "A8.3"
+   ]
+  },
+  "op.acc.5": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.18"
+   ],
+   "complementarios": [
+    "A8.5"
+   ]
+  },
+  "op.acc.6": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.5"
+   ],
+   "complementarios": [
+    "A5.15"
+   ]
+  },
+  "op.exp.1": {
+   "nivel": "analogo",
+   "cat": "MEDIA (+R4)",
+   "principal": [
+    "A5.9"
+   ],
+   "complementarios": [
+    "A5.11",
+    "A7.8",
+    "A7.9"
+   ],
+   "consideracion": [
+    "A5.32"
+   ]
+  },
+  "op.exp.2": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.9"
+   ],
+   "complementarios": [
+    "A8.8",
+    "A8.12",
+    "A8.19",
+    "A8.20",
+    "A8.21"
+   ],
+   "consideracion": [
+    "A8.34"
+   ]
+  },
+  "op.exp.3": {
+   "nivel": "parcial",
+   "cat": "ALTA*",
+   "principal": [
+    "A8.9"
+   ],
+   "complementarios": [
+    "A8.8",
+    "A8.12",
+    "A8.13",
+    "A8.19",
+    "A8.20",
+    "A8.21"
+   ],
+   "consideracion": [
+    "A5.36",
+    "A8.34"
+   ]
+  },
+  "op.exp.4": {
+   "nivel": "parcial",
+   "cat": "ALTA*",
+   "principal": [
+    "A7.13"
+   ],
+   "complementarios": [
+    "A8.8",
+    "A8.31",
+    "A8.32"
+   ],
+   "consideracion": [
+    "A5.36",
+    "A8.34"
+   ]
+  },
+  "op.exp.5": {
+   "nivel": "analogo",
+   "cat": "ALTA*",
+   "principal": [
+    "A8.32"
+   ],
+   "complementarios": [
+    "A7.13",
+    "A8.8",
+    "A8.31"
+   ]
+  },
+  "op.exp.6": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.7"
+   ],
+   "complementarios": [
+    "A8.8",
+    "A8.9"
+   ]
+  },
+  "op.exp.7": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.24"
+   ],
+   "complementarios": [
+    "A5.25",
+    "A5.26",
+    "A5.27",
+    "A5.28",
+    "A6.8"
+   ],
+   "consideracion": [
+    "A5.5"
+   ]
+  },
+  "op.exp.8": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.15"
+   ],
+   "complementarios": [
+    "A8.17"
+   ],
+   "consideracion": [
+    "A5.33"
+   ]
+  },
+  "op.exp.9": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.26"
+   ],
+   "complementarios": [
+    "A5.24",
+    "A5.25",
+    "A5.27",
+    "A5.28",
+    "A6.8"
+   ]
+  },
+  "op.exp.10": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.24"
+   ],
+   "complementarios": [
+    "A5.17"
+   ]
+  },
+  "op.ext.1": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.19"
+   ],
+   "complementarios": [
+    "A6.6",
+    "A5.20",
+    "A5.21"
+   ],
+   "consideracion": [
+    "A8.30"
+   ]
+  },
+  "op.ext.2": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.22"
+   ],
+   "complementarios": [
+    "A5.19",
+    "A5.20",
+    "A5.21"
+   ]
+  },
+  "op.ext.3": {
+   "nivel": "analogo",
+   "cat": "ALTA*",
+   "principal": [
+    "A5.21"
+   ],
+   "complementarios": [
+    "A5.29"
+   ],
+   "consideracion": [
+    "A8.30"
+   ]
+  },
+  "op.ext.4": {
+   "nivel": "nula",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.22"
+   ],
+   "complementarios": [
+    "A8.20",
+    "A8.21"
+   ]
+  },
+  "op.nub.1": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.23"
+   ],
+   "complementarios": [
+    "A5.19",
+    "A5.20",
+    "A5.21",
+    "A5.22"
+   ]
+  },
+  "op.cont.1": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.29"
+   ],
+   "complementarios": [
+    "A5.30"
+   ]
+  },
+  "op.cont.2": {
+   "nivel": "analogo",
+   "cat": "ALTA*",
+   "principal": [
+    "A5.29"
+   ],
+   "complementarios": [
+    "A5.30",
+    "A8.14"
+   ]
+  },
+  "op.cont.3": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.30"
+   ],
+   "complementarios": [
+    "A5.29",
+    "A8.13"
+   ]
+  },
+  "op.cont.4": {
+   "nivel": "parcial",
+   "cat": "ALTA*",
+   "principal": [
+    "A8.14"
+   ],
+   "complementarios": [
+    "A5.29",
+    "A8.13"
+   ]
+  },
+  "op.mon.1": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.20"
+   ],
+   "complementarios": [
+    "A8.21",
+    "A8.23"
+   ]
+  },
+  "op.mon.2": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "C9.1"
+   ],
+   "complementarios": []
+  },
+  "op.mon.3": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.7"
+   ],
+   "complementarios": [
+    "A8.8",
+    "A8.16"
+   ],
+   "consideracion": [
+    "A5.33"
+   ]
+  },
+  "mp.if.1": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A7.1"
+   ],
+   "complementarios": [
+    "A7.3",
+    "A7.6"
+   ]
+  },
+  "mp.if.2": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A7.2"
+   ],
+   "complementarios": [
+    "A7.1",
+    "A7.6"
+   ]
+  },
+  "mp.if.3": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A7.5"
+   ],
+   "complementarios": [
+    "A7.3",
+    "A7.6",
+    "A7.8",
+    "A7.12"
+   ]
+  },
+  "mp.if.4": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A7.11"
+   ],
+   "complementarios": [
+    "A7.12",
+    "A5.30"
+   ]
+  },
+  "mp.if.5": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A7.5"
+   ],
+   "complementarios": [
+    "A7.3",
+    "A7.6"
+   ]
+  },
+  "mp.if.6": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A7.5"
+   ],
+   "complementarios": [
+    "A7.3",
+    "A7.6"
+   ]
+  },
+  "mp.if.7": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A7.2"
+   ],
+   "complementarios": [
+    "A7.3",
+    "A7.6"
+   ]
+  },
+  "mp.per.1": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A6.1"
+   ],
+   "complementarios": [
+    "A6.2",
+    "A5.24"
+   ]
+  },
+  "mp.per.2": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A6.2"
+   ],
+   "complementarios": [
+    "A6.4",
+    "A6.5",
+    "A5.11",
+    "A6.6"
+   ],
+   "consideracion": [
+    "A6.7"
+   ]
+  },
+  "mp.per.3": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A6.3"
+   ],
+   "complementarios": [
+    "A5.24"
+   ]
+  },
+  "mp.per.4": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A6.3"
+   ],
+   "complementarios": [
+    "A5.24"
+   ]
+  },
+  "mp.eq.1": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A7.7"
+   ],
+   "complementarios": [
+    "A7.3",
+    "A7.8",
+    "A5.10"
+   ]
+  },
+  "mp.eq.2": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A7.7"
+   ],
+   "complementarios": [
+    "A8.9"
+   ]
+  },
+  "mp.eq.3": {
+   "nivel": "parcial",
+   "cat": "ALTA*",
+   "principal": [
+    "A8.1"
+   ],
+   "complementarios": [
+    "A7.9",
+    "A5.9",
+    "A5.12",
+    "A5.24",
+    "A5.25"
+   ]
+  },
+  "mp.eq.4": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.1"
+   ],
+   "complementarios": [
+    "A5.9",
+    "A5.12",
+    "A8.9"
+   ]
+  },
+  "mp.com.1": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.20"
+   ],
+   "complementarios": [
+    "A8.21",
+    "A8.9"
+   ]
+  },
+  "mp.com.2": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.21"
+   ],
+   "complementarios": [
+    "A8.20",
+    "A8.24",
+    "A8.9",
+    "A8.26"
+   ]
+  },
+  "mp.com.3": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.21"
+   ],
+   "complementarios": [
+    "A8.20",
+    "A8.24",
+    "A8.9",
+    "A8.26"
+   ]
+  },
+  "mp.com.4": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.22"
+   ],
+   "complementarios": [
+    "A8.20",
+    "A8.27",
+    "A5.9"
+   ]
+  },
+  "mp.si.1": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.13"
+   ],
+   "complementarios": [
+    "A5.12",
+    "A7.10",
+    "A8.12"
+   ]
+  },
+  "mp.si.2": {
+   "nivel": "parcial",
+   "cat": "MEDIA (+R2)*",
+   "principal": [
+    "A8.24"
+   ],
+   "complementarios": [
+    "A8.13",
+    "A8.12",
+    "A7.9",
+    "A7.10"
+   ]
+  },
+  "mp.si.3": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A7.10"
+   ],
+   "complementarios": [
+    "A5.9",
+    "A5.10",
+    "A5.11",
+    "A6.3",
+    "A8.12"
+   ]
+  },
+  "mp.si.4": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A7.10"
+   ],
+   "complementarios": [
+    "A8.24",
+    "A8.12",
+    "A7.2"
+   ]
+  },
+  "mp.si.5": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A7.10"
+   ],
+   "complementarios": [
+    "A8.10",
+    "A8.12"
+   ]
+  },
+  "mp.sw.1": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.25"
+   ],
+   "complementarios": [
+    "A8.28",
+    "A8.29",
+    "A8.31",
+    "A8.32",
+    "A8.4",
+    "A8.30",
+    "A8.27",
+    "A5.8"
+   ]
+  },
+  "mp.sw.2": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.29"
+   ],
+   "complementarios": [
+    "A8.31",
+    "A8.32",
+    "A8.33",
+    "A8.11",
+    "A8.30",
+    "A8.27",
+    "A5.8"
+   ],
+   "consideracion": [
+    "A8.19"
+   ]
+  },
+  "mp.info.1": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.34"
+   ],
+   "complementarios": [
+    "A5.31"
+   ],
+   "consideracion": [
+    "A7.4",
+    "A8.11"
+   ]
+  },
+  "mp.info.2": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.12"
+   ],
+   "complementarios": [
+    "A5.13",
+    "A5.14",
+    "A5.15",
+    "A5.9",
+    "A5.10",
+    "A8.12"
+   ]
+  },
+  "mp.info.3": {
+   "nivel": "nula",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.24"
+   ],
+   "complementarios": [
+    "A8.26",
+    "A5.31"
+   ]
+  },
+  "mp.info.4": {
+   "nivel": "nula",
+   "cat": "ALTA*",
+   "principal": [
+    "A8.26"
+   ],
+   "complementarios": [
+    "A8.17",
+    "A8.24"
+   ]
+  },
+  "mp.info.5": {
+   "nivel": "nula",
+   "cat": "MEDIA",
+   "principal": [],
+   "complementarios": [
+    "A5.13",
+    "A8.12"
+   ]
+  },
+  "mp.info.6": {
+   "nivel": "analogo",
+   "cat": "MEDIA (+R2)*",
+   "principal": [
+    "A8.13"
+   ],
+   "complementarios": [
+    "A8.14",
+    "A7.14",
+    "A7.10",
+    "A5.37",
+    "A5.29",
+    "A5.30",
+    "A5.31"
+   ]
+  },
+  "mp.s.1": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A5.14"
+   ],
+   "complementarios": [
+    "A8.12",
+    "A5.10",
+    "A5.23",
+    "A6.2",
+    "A6.3"
+   ]
+  },
+  "mp.s.2": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.26"
+   ],
+   "complementarios": [
+    "A5.35",
+    "A5.8",
+    "A5.17",
+    "A8.2",
+    "A8.5"
+   ],
+   "consideracion": [
+    "A8.34"
+   ]
+  },
+  "mp.s.3": {
+   "nivel": "analogo",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.23"
+   ],
+   "complementarios": [
+    "A8.9",
+    "A8.12",
+    "A6.3"
+   ]
+  },
+  "mp.s.4": {
+   "nivel": "parcial",
+   "cat": "MEDIA",
+   "principal": [
+    "A8.6"
+   ],
+   "complementarios": [
+    "A8.16"
+   ]
+  }
+ },
+ "otrosIso": [
+  {
+   "iso": "A5.4",
+   "ens": [
+    "org.1"
+   ],
+   "articulos": [
+    "art.13"
+   ]
+  },
+  {
+   "iso": "A5.5",
+   "ens": [
+    "op.exp.7"
+   ],
+   "articulos": [
+    "art.25"
+   ]
+  },
+  {
+   "iso": "A5.6",
+   "ens": [
+    "org.1"
+   ],
+   "articulos": [
+    "art.13"
+   ]
+  },
+  {
+   "iso": "A5.11",
+   "ens": [
+    "org.2"
+   ],
+   "articulos": []
+  },
+  {
+   "iso": "A5.17",
+   "ens": [
+    "op.acc.1",
+    "op.acc.2"
+   ],
+   "articulos": []
+  },
+  {
+   "iso": "A5.32",
+   "ens": [
+    "org.1",
+    "op.exp.1",
+    "org.2"
+   ],
+   "articulos": []
+  },
+  {
+   "iso": "A5.33",
+   "ens": [
+    "op.exp.8",
+    "op.mon.3"
+   ],
+   "articulos": []
+  },
+  {
+   "iso": "A5.35",
+   "ens": [
+    "mp.s.2"
+   ],
+   "articulos": [
+    "art.31",
+    "anexo.III"
+   ]
+  },
+  {
+   "iso": "A5.36",
+   "ens": [
+    "org.4",
+    "op.exp.3",
+    "op.exp.4"
+   ],
+   "articulos": [
+    "art.31",
+    "anexo.III"
+   ]
+  },
+  {
+   "iso": "A6.4",
+   "ens": [
+    "org.1"
+   ],
+   "articulos": []
+  },
+  {
+   "iso": "A6.5",
+   "ens": [
+    "mp.per.2"
+   ],
+   "articulos": []
+  },
+  {
+   "iso": "A6.6",
+   "ens": [
+    "org.2",
+    "mp.per.2",
+    "op.ext.1"
+   ],
+   "articulos": []
+  },
+  {
+   "iso": "A6.7",
+   "ens": [
+    "org.2",
+    "mp.per.2"
+   ],
+   "articulos": []
+  },
+  {
+   "iso": "A7.4",
+   "ens": [
+    "mp.info.1"
+   ],
+   "articulos": []
+  },
+  {
+   "iso": "A7.9",
+   "ens": [
+    "mp.eq.3"
+   ],
+   "articulos": []
+  },
+  {
+   "iso": "A8.3",
+   "ens": [
+    "op.acc.2",
+    "op.acc.3",
+    "op.acc.4"
+   ],
+   "articulos": []
+  },
+  {
+   "iso": "A8.11",
+   "ens": [
+    "mp.info.1"
+   ],
+   "articulos": []
+  },
+  {
+   "iso": "A8.19",
+   "ens": [
+    "op.exp.2",
+    "op.acc.3",
+    "mp.sw.2"
+   ],
+   "articulos": []
+  },
+  {
+   "iso": "A8.30",
+   "ens": [
+    "op.ext.1",
+    "mp.sw.1",
+    "mp.sw.2",
+    "op.ext.3"
+   ],
+   "articulos": []
+  },
+  {
+   "iso": "A8.34",
+   "ens": [
+    "op.exp.2",
+    "op.exp.3",
+    "op.exp.4",
+    "mp.s.2"
+   ],
+   "articulos": [
+    "art.31"
+   ]
+  }
+ ],
+ "clausulas": {
+  "C4.1": {
+   "ens": [
+    "org.1"
+   ],
+   "articulos": [
+    "art.30",
+    "art.40",
+    "anexo.I",
+    "anexo.II"
+   ]
+  },
+  "C4.2": {
+   "ens": [],
+   "articulos": [
+    "art.30",
+    "art.40",
+    "anexo.I"
+   ]
+  },
+  "C4.3": {
+   "ens": [],
+   "articulos": [
+    "art.1",
+    "art.2",
+    "ley40.2",
+    "ley40.156"
+   ]
+  },
+  "C4.4": {
+   "ens": [
+    "org.1",
+    "op.pl.2",
+    "op.ext.3",
+    "op.mon.2"
+   ],
+   "articulos": [
+    "art.6",
+    "anexo.III"
+   ]
+  },
+  "C5.1": {
+   "ens": [
+    "org.1"
+   ],
+   "articulos": [
+    "art.11",
+    "art.13"
+   ]
+  },
+  "C5.2": {
+   "ens": [
+    "org.1"
+   ],
+   "articulos": [
+    "art.11",
+    "art.12",
+    "art.13"
+   ]
+  },
+  "C5.3": {
+   "ens": [
+    "org.1"
+   ],
+   "articulos": [
+    "art.11"
+   ]
+  },
+  "C6.1.1": {
+   "ens": [
+    "op.pl.1"
+   ],
+   "articulos": [
+    "art.7",
+    "art.8",
+    "art.14"
+   ]
+  },
+  "C6.1.2": {
+   "ens": [
+    "op.pl.1"
+   ],
+   "articulos": [
+    "art.7",
+    "art.8",
+    "art.14"
+   ]
+  },
+  "C6.1.3": {
+   "ens": [
+    "op.pl.1",
+    "art.28"
+   ],
+   "articulos": [
+    "art.7",
+    "art.14",
+    "art.28",
+    "art.30"
+   ]
+  },
+  "C6.2": {
+   "ens": [
+    "org.1"
+   ],
+   "articulos": [
+    "art.2",
+    "art.5"
+   ]
+  },
+  "C6.3": {
+   "ens": [
+    "op.exp.5"
+   ],
+   "articulos": [
+    "art.21",
+    "art.27"
+   ]
+  },
+  "C7.1": {
+   "ens": [
+    "op.pl.2",
+    "op.mon.2",
+    "op.pl.4"
+   ],
+   "articulos": [
+    "art.6",
+    "art.13"
+   ]
+  },
+  "C7.2": {
+   "ens": [
+    "mp.per.4"
+   ],
+   "articulos": [
+    "art.15",
+    "art.16"
+   ]
+  },
+  "C7.3": {
+   "ens": [
+    "mp.per.3"
+   ],
+   "articulos": [
+    "art.6"
+   ]
+  },
+  "C7.4": {
+   "ens": [
+    "org.1",
+    "org.2",
+    "op.exp.7",
+    "op.cont.2"
+   ],
+   "articulos": [
+    "art.25"
+   ]
+  },
+  "C7.5": {
+   "ens": [
+    "org.1",
+    "org.2",
+    "org.3",
+    "op.pl.2",
+    "art.28"
+   ],
+   "articulos": [
+    "art.12",
+    "art.28"
+   ]
+  },
+  "C8.1": {
+   "ens": [
+    "op.pl.1",
+    "op.pl.2"
+   ],
+   "articulos": [
+    "art.6",
+    "art.7",
+    "art.8",
+    "art.37"
+   ]
+  },
+  "C8.2": {
+   "ens": [
+    "op.pl.1"
+   ],
+   "articulos": [
+    "art.7",
+    "art.14"
+   ]
+  },
+  "C8.3": {
+   "ens": [
+    "op.pl.1"
+   ],
+   "articulos": [
+    "art.7",
+    "art.14"
+   ]
+  },
+  "C9.1": {
+   "ens": [
+    "op.mon.2"
+   ],
+   "articulos": [
+    "art.10",
+    "art.21",
+    "art.27"
+   ]
+  },
+  "C9.2": {
+   "ens": [
+    "art.31"
+   ],
+   "articulos": [
+    "art.31",
+    "anexo.III"
+   ]
+  },
+  "C9.3": {
+   "ens": [],
+   "articulos": [
+    "anexo.III"
+   ]
+  },
+  "C10.1": {
+   "ens": [
+    "op.pl.2"
+   ],
+   "articulos": [
+    "art.12",
+    "art.25",
+    "art.27"
+   ]
+  },
+  "C10.2": {
+   "ens": [
+    "art.31"
+   ],
+   "articulos": [
+    "art.8",
+    "art.31",
+    "anexo.III"
+   ]
+  }
+ }
+}
