@@ -195,6 +195,7 @@ function helpCta() {
     ${ext(AUTOR.repo, `${brandIcon('github', 15)}${esc(t('seeCode'))}`, 'btn sm')}</div></section>`;
 }
 const SUITE = [
+  ['argos', 'ARGOS', 'https://heindall92.github.io/argos-grc/', 'https://github.com/heindall92/argos-grc'],
   ['rosetta', 'Rosetta', 'https://heindall92.github.io/rosetta_multinorma/', 'https://github.com/heindall92/rosetta_multinorma'],
   ['ens', 'ENS Compliance Studio', 'https://heindall92.github.io/grc_ens_compliance_studio/app/dist/ens-compliance-studio.html', 'https://github.com/heindall92/grc_ens_compliance_studio'],
   ['kairos', 'KAIROS', 'https://heindall92.github.io/kairos/', 'https://github.com/heindall92/kairos']
