@@ -22,6 +22,15 @@
 15. **Cifras del README desfasadas**: recuéntalas en cada versión (la prueba de coherencia ayuda).
 16. **Webs del ecosistema supuestas**: comprueba antes de enlazar.
 17. **Tabla cortada en el móvil sin desplazamiento** (Movilización, «Riesgos principales»). Dos causas: la utilidad `table` de Tailwind 4 anula `hidden` (oculta un `div` envoltorio, nunca la `<table class="table">`), y un panel con `overflow-hidden` esconde el desbordamiento, así que «anchura de página ≤ 390» no lo ve. Toda tabla necesita tarjetas por debajo de 640 px o un envoltorio con `overflow-x-auto`, y el e2e comprueba en cada vista que ningún texto visible se sale de la pantalla.
+18. **Inferir datos derivados al importar y guardarlos.** Las técnicas ATT&CK se calculaban al importar y se quedaban congeladas: los hallazgos manuales, CSV o antiguos no las tenían. Lo derivado se calcula al leer (`techniquesOf(f)`) y el campo guardado es solo la corrección del analista.
+19. **Regex sin límites de palabra.** `/rce/` encajaba en «brute fo**rce**» y `/pth/` en «de**pth**». Toda heurística de texto lleva `\b` y una prueba de falsos positivos.
+20. **Inventar claves que ya existen.** Renombré claves de remediación del ejemplo (`kerberoast` → `kerberoasting`) y rompía guías y golden. Antes de mapear claves, lístalas del código (`grep`), nunca de memoria.
+21. **«Cobertura» con signo cambiado.** En defensa, cobertura es algo bueno; en CTEM, una técnica habilitada por hallazgos es exposición. Nombra la métrica por lo que significa para quien la lee.
+22. **Motor sin «hoy».** Lo que caduca (aceptaciones de riesgo) no puede vivir en el motor determinista con paridad TS ↔ Python: se aplica al cargar el proyecto con una función pura y se avisa.
+23. **`<dl>` con texto suelto o `dd` antes de `dt`.** axe lo marca. Orden `dt` → `dd` y, si el valor va arriba, `flex-col-reverse`.
+24. **Barra inferior móvil con seis pestañas.** Recorta etiquetas; máximo cuatro destinos más «Más», etiqueta corta visible y nombre completo en `aria-label`.
+25. **Informe «de una página» que ocupa dos.** Verifica con `pdfinfo` tras generar el PDF; al imprimir, menos filas (`print:hidden`), columnas (`print:grid-cols-*`), 10,5 px y sin relleno inferior del contenedor (página en blanco).
+26. **Commit con una prueba roja.** Pasa la batería completa *antes* del commit; si se cuela, se arregla en un commit nuevo, nunca con `--amend`.
 
 ## Lista de cierre (antes de decir «terminado»)
 
