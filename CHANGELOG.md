@@ -1,5 +1,24 @@
 # Cambios
 
+## 2.5.0 · octubre de 2026
+
+**RIA, el Reglamento europeo de IA** (Reglamento (UE) 2024/1689), con las fechas del Ómnibus digital sobre IA (Reglamento (UE) 2026/1744, publicado el 24-07-2026 y en vigor desde el 27-07-2026).
+
+- **28 obligaciones**, cada una con su rol, su riesgo y su fecha de aplicación.
+  - Para todos: alfabetización (art. 4) y prácticas prohibidas (art. 5), desde el 02-02-2025.
+  - Modelos de uso general: arts. 53 y 55, desde el 02-08-2025.
+  - Transparencia: art. 50, desde el 02-08-2026.
+  - Alto riesgo: requisitos del sistema, obligaciones del proveedor y del responsable del despliegue (incluida la evaluación de impacto en derechos fundamentales del art. 27). Del anexo III desde el 02-12-2027 y del anexo I desde el 02-08-2028.
+- **Rol y riesgo en Alcance.** Lo que no aplica figura como no exigido, con su motivo, en Requisitos, la ficha y el Excel.
+- **Nueve controles nuevos.** Alfabetización (IA-15), prácticas prohibidas (IA-16), supervisión humana (IA-17), calidad y seguimiento poscomercialización (IA-18), impacto en derechos fundamentales (IA-19), transparencia (IA-20), modelos de uso general (IA-21), incidentes graves de IA (INC-10) y evaluación de la conformidad y marcado CE (GOB-15), común a varios reglamentos de producto. Catálogo 2.5.0: 128 controles y 360 requisitos.
+- **Correspondencias** con ISO/IEC 42001 y el resto de criterio propio, nunca más que parciales.
+- **Perfil regulatorio.** Con IA en la UE, el RIA es obligatorio; fuera de la UE, a confirmar. Deja de figurar entre las normas futuras.
+- **Coherencia.** CO-15 (sin alfabetización en IA) y CO-16 (sin revisión de prácticas prohibidas).
+- **Casos.** Lumen, CitaFácil y el hospital traen el RIA en su alcance; sus cifras se recalculan.
+- **Etiqueta en inglés:** «AI Act».
+- **Interfaz.** La ficha de cada requisito muestra su fecha de aplicación y su matiz. Los marcos propios usan colores de reserva menos saturados, para distinguirlos de las normas oficiales.
+- **Pruebas.** 8 pruebas nuevas del motor (rol, riesgo, fechas, exclusiones, equivalencias, alertas, perfil y etiqueta) y una e2e. axe con el RIA en el alcance.
+
 ## 2.4.0 · octubre de 2026
 
 Responde a dos peticiones recibidas en LinkedIn tras publicar la 2.3.0: **Part-IS**, que pidió Zaki Aroutin (sector aéreo), y **marcos propios**, que pidió Javier Pages (GRC, marcos unificados de control). Añade además el **perfil regulatorio**: Rosetta propone qué marcos aplican según la región, el sector y los rasgos de la organización.

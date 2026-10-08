@@ -1,5 +1,5 @@
 {
-  "version": "2.4.0",
+  "version": "2.5.0",
   "domains": [
     {
       "id": "GOB",
@@ -3204,6 +3204,423 @@
           "nota_en": "Periodic assessment of the effectiveness and maturity of the ISMS and improvement based on the results."
         }
       ]
+    },
+    "ria": {
+      "id": "ria",
+      "tope": "parcial",
+      "consulta": "2026-10-09",
+      "fuentes": [
+        "Reglamento (UE) 2024/1689 de inteligencia artificial (DO L de 12.7.2024)",
+        "Reglamento (UE) 2026/1744 (Ómnibus digital sobre IA, DO L de 24.7.2026): alto riesgo del anexo III desde el 02-12-2027 y del anexo I desde el 02-08-2028"
+      ],
+      "reqs": [
+        {
+          "id": "4",
+          "code": "Art. 4",
+          "t": "Alfabetización en IA del personal",
+          "t_en": "AI literacy of staff",
+          "g": "Todos los sistemas de IA",
+          "g_en": "All AI systems",
+          "rol": "todos",
+          "riesgo": "todos",
+          "desde": "2025-02-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 4, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 4, as amended by Regulation (EU) 2026/1744",
+          "nota": "Proveedores y responsables del despliegue adoptan medidas que favorezcan la alfabetización en IA de quien opera y usa los sistemas. El Reglamento (UE) 2026/1744 suavizó la redacción, pero la obligación sigue vigente desde el 02-02-2025.",
+          "nota_en": "Providers and deployers take measures that support the AI literacy of those who operate and use the systems. Regulation (EU) 2026/1744 softened the wording, but the duty has applied since 02-02-2025."
+        },
+        {
+          "id": "5",
+          "code": "Art. 5",
+          "t": "Prácticas de IA prohibidas",
+          "t_en": "Prohibited AI practices",
+          "g": "Todos los sistemas de IA",
+          "g_en": "All AI systems",
+          "rol": "todos",
+          "riesgo": "todos",
+          "desde": "2025-02-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 5, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 5, as amended by Regulation (EU) 2026/1744",
+          "nota": "Manipulación subliminal, explotación de vulnerabilidades, puntuación social, ciertos usos biométricos, entre otras. El Reglamento (UE) 2026/1744 añade la prohibición de generar material íntimo no consentido y de abuso sexual infantil.",
+          "nota_en": "Subliminal manipulation, exploitation of vulnerabilities, social scoring, certain biometric uses, among others. Regulation (EU) 2026/1744 adds a ban on generating non-consensual intimate material and child sexual abuse material."
+        },
+        {
+          "id": "9",
+          "code": "Art. 9",
+          "t": "Sistema de gestión de riesgos",
+          "t_en": "Risk management system",
+          "g": "Alto riesgo · requisitos del sistema",
+          "g_en": "High risk · system requirements",
+          "rol": "proveedor",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 9, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 9, as amended by Regulation (EU) 2026/1744",
+          "nota": "Proceso iterativo durante todo el ciclo de vida, centrado en la salud, la seguridad y los derechos fundamentales, no solo en la seguridad de la información.",
+          "nota_en": "An iterative process over the whole lifecycle, focused on health, safety and fundamental rights, not only on information security."
+        },
+        {
+          "id": "10",
+          "code": "Art. 10",
+          "t": "Datos y gobernanza de datos",
+          "t_en": "Data and data governance",
+          "g": "Alto riesgo · requisitos del sistema",
+          "g_en": "High risk · system requirements",
+          "rol": "proveedor",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 10, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 10, as amended by Regulation (EU) 2026/1744",
+          "nota": "Datos de entrenamiento, validación y prueba pertinentes, representativos y examinados para detectar sesgos.",
+          "nota_en": "Training, validation and test data that are relevant, representative and examined for bias."
+        },
+        {
+          "id": "11",
+          "code": "Art. 11",
+          "t": "Documentación técnica",
+          "t_en": "Technical documentation",
+          "g": "Alto riesgo · requisitos del sistema",
+          "g_en": "High risk · system requirements",
+          "rol": "proveedor",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 11, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 11, as amended by Regulation (EU) 2026/1744",
+          "nota": "Con el contenido del anexo IV, elaborada antes de la comercialización y mantenida al día.",
+          "nota_en": "With the content of Annex IV, drawn up before placing on the market and kept up to date."
+        },
+        {
+          "id": "12",
+          "code": "Art. 12",
+          "t": "Registro automático de eventos",
+          "t_en": "Automatic record-keeping (logs)",
+          "g": "Alto riesgo · requisitos del sistema",
+          "g_en": "High risk · system requirements",
+          "rol": "proveedor",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 12, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 12, as amended by Regulation (EU) 2026/1744",
+          "nota": "El sistema debe permitir técnicamente el registro automático de eventos durante su vida útil, para la trazabilidad.",
+          "nota_en": "The system must technically allow automatic recording of events over its lifetime, for traceability."
+        },
+        {
+          "id": "13",
+          "code": "Art. 13",
+          "t": "Transparencia e instrucciones de uso para el responsable del despliegue",
+          "t_en": "Transparency and instructions for use for deployers",
+          "g": "Alto riesgo · requisitos del sistema",
+          "g_en": "High risk · system requirements",
+          "rol": "proveedor",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 13, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 13, as amended by Regulation (EU) 2026/1744",
+          "nota": "Instrucciones con las capacidades, limitaciones, precisión y medidas de supervisión humana del sistema.",
+          "nota_en": "Instructions covering the system’s capabilities, limitations, accuracy and human oversight measures."
+        },
+        {
+          "id": "14",
+          "code": "Art. 14",
+          "t": "Supervisión humana desde el diseño",
+          "t_en": "Human oversight by design",
+          "g": "Alto riesgo · requisitos del sistema",
+          "g_en": "High risk · system requirements",
+          "rol": "proveedor",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 14, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 14, as amended by Regulation (EU) 2026/1744",
+          "nota": "Diseño que permita a personas físicas supervisar eficazmente el sistema, entender sus límites e intervenir o detenerlo.",
+          "nota_en": "A design that lets natural persons oversee the system effectively, understand its limits and intervene or stop it."
+        },
+        {
+          "id": "15",
+          "code": "Art. 15",
+          "t": "Precisión, solidez y ciberseguridad",
+          "t_en": "Accuracy, robustness and cybersecurity",
+          "g": "Alto riesgo · requisitos del sistema",
+          "g_en": "High risk · system requirements",
+          "rol": "proveedor",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 15, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 15, as amended by Regulation (EU) 2026/1744",
+          "nota": "Incluye la resistencia a ataques específicos de IA: envenenamiento de datos o del modelo, ejemplos adversarios y manipulación de la confidencialidad.",
+          "nota_en": "Includes resilience to AI-specific attacks: data or model poisoning, adversarial examples and confidentiality attacks."
+        },
+        {
+          "id": "17",
+          "code": "Art. 17",
+          "t": "Sistema de gestión de la calidad",
+          "t_en": "Quality management system",
+          "g": "Alto riesgo · obligaciones del proveedor",
+          "g_en": "High risk · provider obligations",
+          "rol": "proveedor",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 17, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 17, as amended by Regulation (EU) 2026/1744",
+          "nota": "Documentado en políticas, procedimientos e instrucciones; puede integrarse en sistemas de gestión existentes.",
+          "nota_en": "Documented in policies, procedures and instructions; it may be integrated into existing management systems."
+        },
+        {
+          "id": "18",
+          "code": "Art. 18",
+          "t": "Conservación de la documentación",
+          "t_en": "Documentation keeping",
+          "g": "Alto riesgo · obligaciones del proveedor",
+          "g_en": "High risk · provider obligations",
+          "rol": "proveedor",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 18, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 18, as amended by Regulation (EU) 2026/1744",
+          "nota": "A disposición de las autoridades durante diez años desde la comercialización.",
+          "nota_en": "Available to the authorities for ten years after placing on the market."
+        },
+        {
+          "id": "20",
+          "code": "Art. 20",
+          "t": "Medidas correctoras y deber de información",
+          "t_en": "Corrective actions and duty of information",
+          "g": "Alto riesgo · obligaciones del proveedor",
+          "g_en": "High risk · provider obligations",
+          "rol": "proveedor",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 20, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 20, as amended by Regulation (EU) 2026/1744",
+          "nota": "Si el sistema deja de ser conforme: corregirlo, retirarlo o recuperarlo e informar a distribuidores, responsables del despliegue y autoridades.",
+          "nota_en": "If the system ceases to conform: correct, withdraw or recall it and inform distributors, deployers and authorities."
+        },
+        {
+          "id": "43",
+          "code": "Arts. 43, 47 y 48",
+          "t": "Evaluación de la conformidad, declaración UE de conformidad y marcado CE",
+          "t_en": "Conformity assessment, EU declaration of conformity and CE marking",
+          "g": "Alto riesgo · obligaciones del proveedor",
+          "g_en": "High risk · provider obligations",
+          "rol": "proveedor",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, arts. 43, 47 y 48, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Arts. 43, 47 y 48, as amended by Regulation (EU) 2026/1744",
+          "nota": "Por control interno o con organismo notificado, según el tipo de sistema.",
+          "nota_en": "Through internal control or with a notified body, depending on the type of system."
+        },
+        {
+          "id": "49",
+          "code": "Art. 49",
+          "t": "Registro en la base de datos de la UE",
+          "t_en": "Registration in the EU database",
+          "g": "Alto riesgo · obligaciones del proveedor",
+          "g_en": "High risk · provider obligations",
+          "rol": "proveedor",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 49, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 49, as amended by Regulation (EU) 2026/1744",
+          "nota": "Antes de comercializar o poner en servicio los sistemas del anexo III.",
+          "nota_en": "Before placing on the market or putting into service Annex III systems."
+        },
+        {
+          "id": "72",
+          "code": "Art. 72",
+          "t": "Seguimiento poscomercialización",
+          "t_en": "Post-market monitoring",
+          "g": "Alto riesgo · obligaciones del proveedor",
+          "g_en": "High risk · provider obligations",
+          "rol": "proveedor",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 72, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 72, as amended by Regulation (EU) 2026/1744",
+          "nota": "Recogida y análisis activos de datos sobre el funcionamiento real del sistema durante toda su vida útil.",
+          "nota_en": "Active collection and analysis of data on the system’s real-world performance throughout its lifetime."
+        },
+        {
+          "id": "73",
+          "code": "Art. 73",
+          "t": "Notificación de incidentes graves",
+          "t_en": "Reporting of serious incidents",
+          "g": "Alto riesgo · obligaciones del proveedor",
+          "g_en": "High risk · provider obligations",
+          "rol": "proveedor",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 73, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 73, as amended by Regulation (EU) 2026/1744",
+          "nota": "A la autoridad de vigilancia del mercado del Estado donde ocurra, con plazos propios. No equivale a la notificación de NIS2 ni a la de Part-IS.",
+          "nota_en": "To the market surveillance authority of the Member State where it occurred, with its own deadlines. It is not the same as NIS2 or Part-IS reporting."
+        },
+        {
+          "id": "26.1",
+          "code": "Art. 26.1",
+          "t": "Uso conforme a las instrucciones del proveedor",
+          "t_en": "Use in accordance with the provider’s instructions",
+          "g": "Alto riesgo · responsable del despliegue",
+          "g_en": "High risk · deployer",
+          "rol": "responsable",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 26.1, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 26.1, as amended by Regulation (EU) 2026/1744"
+        },
+        {
+          "id": "26.2",
+          "code": "Art. 26.2",
+          "t": "Supervisión humana asignada a personas competentes",
+          "t_en": "Human oversight assigned to competent persons",
+          "g": "Alto riesgo · responsable del despliegue",
+          "g_en": "High risk · deployer",
+          "rol": "responsable",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 26.2, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 26.2, as amended by Regulation (EU) 2026/1744"
+        },
+        {
+          "id": "26.4",
+          "code": "Arts. 26.4 y 26.5",
+          "t": "Datos de entrada pertinentes y vigilancia del funcionamiento",
+          "t_en": "Relevant input data and monitoring of operation",
+          "g": "Alto riesgo · responsable del despliegue",
+          "g_en": "High risk · deployer",
+          "rol": "responsable",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, arts. 26.4 y 26.5, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Arts. 26.4 y 26.5, as amended by Regulation (EU) 2026/1744",
+          "nota": "Si detecta un riesgo, suspende el uso e informa al proveedor y a la autoridad.",
+          "nota_en": "If it detects a risk, it suspends use and informs the provider and the authority."
+        },
+        {
+          "id": "26.6",
+          "code": "Art. 26.6",
+          "t": "Conservación de los registros generados (al menos seis meses)",
+          "t_en": "Keeping the generated logs (at least six months)",
+          "g": "Alto riesgo · responsable del despliegue",
+          "g_en": "High risk · deployer",
+          "rol": "responsable",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 26.6, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 26.6, as amended by Regulation (EU) 2026/1744"
+        },
+        {
+          "id": "26.7",
+          "code": "Arts. 26.7 y 26.11",
+          "t": "Información a los trabajadores y a las personas afectadas",
+          "t_en": "Information to workers and affected persons",
+          "g": "Alto riesgo · responsable del despliegue",
+          "g_en": "High risk · deployer",
+          "rol": "responsable",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, arts. 26.7 y 26.11, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Arts. 26.7 y 26.11, as amended by Regulation (EU) 2026/1744"
+        },
+        {
+          "id": "27",
+          "code": "Art. 27",
+          "t": "Evaluación de impacto en los derechos fundamentales",
+          "t_en": "Fundamental rights impact assessment",
+          "g": "Alto riesgo · responsable del despliegue",
+          "g_en": "High risk · deployer",
+          "rol": "responsable",
+          "riesgo": "alto",
+          "desde": "2027-12-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 27, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 27, as amended by Regulation (EU) 2026/1744",
+          "nota": "Para organismos de Derecho público, entidades privadas que prestan servicios públicos y ciertos usos de puntuación crediticia y seguros de vida y salud.",
+          "nota_en": "For bodies governed by public law, private entities providing public services and certain credit scoring and life and health insurance uses."
+        },
+        {
+          "id": "50.1",
+          "code": "Art. 50.1",
+          "t": "Aviso de que se interactúa con un sistema de IA",
+          "t_en": "Notice that people are interacting with an AI system",
+          "g": "Transparencia (art. 50)",
+          "g_en": "Transparency (art. 50)",
+          "rol": "proveedor",
+          "riesgo": "transparencia",
+          "desde": "2026-08-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 50.1, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 50.1, as amended by Regulation (EU) 2026/1744"
+        },
+        {
+          "id": "50.2",
+          "code": "Art. 50.2",
+          "t": "Marcado del contenido sintético en formato legible por máquina",
+          "t_en": "Machine-readable marking of synthetic content",
+          "g": "Transparencia (art. 50)",
+          "g_en": "Transparency (art. 50)",
+          "rol": "proveedor",
+          "riesgo": "transparencia",
+          "desde": "2026-08-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 50.2, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 50.2, as amended by Regulation (EU) 2026/1744",
+          "nota": "Los sistemas ya comercializados antes de agosto de 2026 tienen hasta el 02-12-2026 (Reglamento (UE) 2026/1744).",
+          "nota_en": "Systems already on the market before August 2026 have until 02-12-2026 (Regulation (EU) 2026/1744)."
+        },
+        {
+          "id": "50.3",
+          "code": "Art. 50.3",
+          "t": "Aviso de reconocimiento de emociones o categorización biométrica",
+          "t_en": "Notice of emotion recognition or biometric categorisation",
+          "g": "Transparencia (art. 50)",
+          "g_en": "Transparency (art. 50)",
+          "rol": "responsable",
+          "riesgo": "transparencia",
+          "desde": "2026-08-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 50.3, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 50.3, as amended by Regulation (EU) 2026/1744"
+        },
+        {
+          "id": "50.4",
+          "code": "Art. 50.4",
+          "t": "Divulgación de ultrafalsificaciones y de textos generados de interés público",
+          "t_en": "Disclosure of deepfakes and generated text on matters of public interest",
+          "g": "Transparencia (art. 50)",
+          "g_en": "Transparency (art. 50)",
+          "rol": "responsable",
+          "riesgo": "transparencia",
+          "desde": "2026-08-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 50.4, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 50.4, as amended by Regulation (EU) 2026/1744"
+        },
+        {
+          "id": "53",
+          "code": "Art. 53",
+          "t": "Obligaciones del proveedor de un modelo de uso general",
+          "t_en": "Obligations of general-purpose AI model providers",
+          "g": "Modelos de IA de uso general",
+          "g_en": "General-purpose AI models",
+          "rol": "proveedor",
+          "riesgo": "gpai",
+          "desde": "2025-08-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 53, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 53, as amended by Regulation (EU) 2026/1744",
+          "nota": "Documentación técnica, información a los proveedores posteriores, política de derechos de autor y resumen público de los datos de entrenamiento.",
+          "nota_en": "Technical documentation, information to downstream providers, a copyright policy and a public summary of the training data."
+        },
+        {
+          "id": "55",
+          "code": "Art. 55",
+          "t": "Modelos de uso general con riesgo sistémico",
+          "t_en": "General-purpose AI models with systemic risk",
+          "g": "Modelos de IA de uso general",
+          "g_en": "General-purpose AI models",
+          "rol": "proveedor",
+          "riesgo": "sistemico",
+          "desde": "2025-08-02",
+          "ref": "Reglamento (UE) 2024/1689, art. 55, modificado por el Reglamento (UE) 2026/1744",
+          "ref_en": "Regulation (EU) 2024/1689, Art. 55, as amended by Regulation (EU) 2026/1744",
+          "nota": "Evaluación del modelo con pruebas adversarias, mitigación de riesgos sistémicos, notificación de incidentes graves y ciberseguridad.",
+          "nota_en": "Model evaluation with adversarial testing, mitigation of systemic risks, serious incident reporting and cybersecurity."
+        }
+      ]
     }
   },
   "controls": [
@@ -3251,7 +3668,8 @@
             "id": "OR.200",
             "w": 1
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Security policy approved by management",
       "obj_en": "A single, formally approved policy setting objectives, legal framework, roles and commitment to improvement.",
@@ -3305,7 +3723,8 @@
             "id": "OR.240",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Security roles, responsibilities and committee",
       "obj_en": "Designated security roles (information, service, security and system owners) and a committee with defined duties.",
@@ -3351,7 +3770,8 @@
             "id": "OR.200",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Management commitment and oversight",
       "obj_en": "Management approves the measures, oversees their implementation and is accountable for compliance.",
@@ -3383,7 +3803,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Management body training",
       "obj_en": "Members of management receive regular training to identify risks and assess management practices.",
@@ -3423,7 +3844,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Security rules and procedures",
       "obj_en": "Written, approved usage rules and operating procedures known to those who apply them.",
@@ -3479,7 +3901,8 @@
             "id": "OR.200",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Context, scope and interested parties",
       "obj_en": "The management system defines its scope from the organisation context and interested parties’ expectations.",
@@ -3519,7 +3942,8 @@
             "id": "OR.255",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Management system objectives and planned changes",
       "obj_en": "Measurable objectives with a plan to achieve them, and planned changes to the management system.",
@@ -3565,6 +3989,16 @@
             "id": "OR.250",
             "w": 0.5
           }
+        ],
+        "ria": [
+          {
+            "id": "18",
+            "w": 1
+          },
+          {
+            "id": "11",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Documented information",
@@ -3596,7 +4030,8 @@
             "w": 0.5
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Internal and external communication",
       "obj_en": "It is decided what is communicated about security, to whom, when and through which channel.",
@@ -3632,7 +4067,8 @@
             "id": "OR.200",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Resources for security",
       "obj_en": "Enough budget, people and tools to run and improve the management system.",
@@ -3668,7 +4104,8 @@
             "w": 0
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Contact with authorities and interest groups",
       "obj_en": "Established channels with authorities, the reference CSIRT and specialist groups.",
@@ -3708,7 +4145,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "System and component authorisation process",
       "obj_en": "Nothing goes into production, gets connected or used without prior authorisation from its owner.",
@@ -3740,7 +4178,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Security in project management",
       "obj_en": "Security requirements are built into every project from the start.",
@@ -3772,6 +4211,34 @@
           },
           {
             "id": "OR.255",
+            "w": 1
+          }
+        ],
+        "ria": []
+      }
+    },
+    {
+      "id": "GOB-15",
+      "dom": "GOB",
+      "t": "Evaluación de la conformidad, declaración UE y marcado CE",
+      "t_en": "Conformity assessment, EU declaration and CE marking",
+      "obj": "Antes de comercializar un producto o sistema regulado se evalúa su conformidad por el procedimiento que corresponda, se firma la declaración UE de conformidad, se coloca el marcado CE y, cuando la norma lo exige, se registra en la base de datos de la UE.",
+      "obj_en": "Before placing a regulated product or system on the market, its conformity is assessed under the applicable procedure, the EU declaration of conformity is signed, the CE marking is affixed and, where required, it is registered in the EU database.",
+      "ev": "Expediente de evaluación · certificado del organismo notificado si procede · declaración UE firmada · registro en la base de datos de la UE",
+      "ev_en": "Assessment file · notified body certificate where applicable · signed EU declaration · EU database registration",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [
+          {
+            "id": "43",
+            "w": 1
+          },
+          {
+            "id": "49",
             "w": 1
           }
         ]
@@ -3816,7 +4283,8 @@
             "id": "OR.205",
             "w": 1
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Risk analysis and assessment",
       "obj_en": "A documented method (e.g. MAGERIT) applied periodically and after significant changes.",
@@ -3874,7 +4342,8 @@
             "id": "OR.210",
             "w": 1
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Risk treatment and Statement of Applicability",
       "obj_en": "An approved treatment plan and a statement justifying which controls apply and which do not.",
@@ -3905,7 +4374,8 @@
         ],
         "nis2": [],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Threat intelligence",
       "obj_en": "Information about threats is collected and analysed to anticipate them.",
@@ -3940,7 +4410,8 @@
         ],
         "nis2": [],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Legal, regulatory and contractual requirements",
       "obj_en": "Inventory of applicable obligations and how each is met, including intellectual property.",
@@ -3967,7 +4438,8 @@
         ],
         "nis2": [],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Personal data protection",
       "obj_en": "Processing activities recorded and protected under GDPR and Spanish data protection law.",
@@ -3993,6 +4465,12 @@
           {
             "id": "OR.245",
             "w": 1
+          }
+        ],
+        "ria": [
+          {
+            "id": "18",
+            "w": 0.5
           }
         ]
       },
@@ -4040,7 +4518,8 @@
             "id": "OR.260",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Metrics and effectiveness assessment",
       "obj_en": "Indicators that show whether measures work, with regular review of results.",
@@ -4090,7 +4569,8 @@
             "id": "OR.260",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Internal audit and independent review",
       "obj_en": "Audits planned and run by independent staff, protecting systems during testing.",
@@ -4127,7 +4607,8 @@
             "id": "OR.260",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Management review",
       "obj_en": "Management periodically reviews the management system and decides improvements.",
@@ -4163,7 +4644,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Policy compliance monitoring",
       "obj_en": "Compliance with policies and rules is checked regularly and deviations are corrected.",
@@ -4212,6 +4694,12 @@
             "id": "OR.260",
             "w": 1
           }
+        ],
+        "ria": [
+          {
+            "id": "20",
+            "w": 1
+          }
         ]
       },
       "t_en": "Nonconformities, corrective action and improvement",
@@ -4250,7 +4738,8 @@
             "id": "OR.200",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       }
     },
     {
@@ -4277,7 +4766,8 @@
             "id": "OR.225",
             "w": 1
           }
-        ]
+        ],
+        "ria": []
       }
     },
     {
@@ -4311,7 +4801,8 @@
             "id": "OR.240",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Background verification",
       "obj_en": "Background checks proportionate to the role before joining.",
@@ -4355,7 +4846,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Duties, terms and confidentiality",
       "obj_en": "Security and confidentiality obligations signed by employees and contractors.",
@@ -4401,7 +4893,8 @@
             "id": "OR.240",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Awareness and cyber hygiene",
       "obj_en": "Regular awareness campaigns and basic digital hygiene practices.",
@@ -4451,6 +4944,12 @@
             "id": "OR.240",
             "w": 1
           }
+        ],
+        "ria": [
+          {
+            "id": "4",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Training and competence",
@@ -4483,7 +4982,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Disciplinary process",
       "obj_en": "A formal, known procedure to respond to security breaches.",
@@ -4523,7 +5023,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Termination, role change and return of assets",
       "obj_en": "Access removed and assets recovered when the relationship ends or changes.",
@@ -4562,7 +5063,8 @@
         ],
         "nis2": [],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Remote working",
       "obj_en": "Security conditions for working away from the premises.",
@@ -4612,7 +5114,8 @@
             "id": "OR.205",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Asset inventory",
       "obj_en": "An up-to-date inventory of information, systems and services, each with an owner.",
@@ -4656,7 +5159,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Information classification and labelling",
       "obj_en": "Information is classified by sensitivity and labelled accordingly.",
@@ -4692,7 +5196,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Acceptable use and handling of assets",
       "obj_en": "Clear rules for using and handling information and equipment.",
@@ -4744,7 +5249,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Information media",
       "obj_en": "Controlled custody, transport and use of media, including removable media.",
@@ -4784,7 +5290,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Secure erasure and destruction",
       "obj_en": "Information and equipment are erased or destroyed irrecoverably at end of life.",
@@ -4831,7 +5338,8 @@
         ],
         "nis2": [],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Information transfer",
       "obj_en": "Rules and secure means to exchange information with third parties.",
@@ -4874,7 +5382,8 @@
         ],
         "nis2": [],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Data masking and leakage prevention",
       "obj_en": "Sensitive data is masked where not needed and its egress is monitored.",
@@ -4906,7 +5415,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Backups",
       "obj_en": "Regular, protected backups with tested restores.",
@@ -4950,7 +5460,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Electronic signature and time stamps",
       "obj_en": "Qualified signature and time stamping where the law or the service requires them.",
@@ -4984,7 +5495,8 @@
         ],
         "nis2": [],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       }
     },
     {
@@ -5017,7 +5529,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Identification and identity management",
       "obj_en": "Every user has a unique, traceable identity managed throughout its life cycle.",
@@ -5057,7 +5570,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Access control and least privilege",
       "obj_en": "Access policy based on need-to-know and least privilege.",
@@ -5093,7 +5607,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Access rights management and review",
       "obj_en": "Permissions are granted, changed and reviewed periodically with approval.",
@@ -5125,7 +5640,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Segregation of duties",
       "obj_en": "No single person controls a critical operation end to end.",
@@ -5173,7 +5689,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Privileged accounts and administration systems",
       "obj_en": "Separate, monitored administration accounts used from dedicated systems.",
@@ -5217,7 +5734,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Secure authentication",
       "obj_en": "Authentication proportionate to risk and well-protected credentials.",
@@ -5257,7 +5775,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Multi-factor authentication",
       "obj_en": "Second factor for remote, privileged and exposed-service access.",
@@ -5288,7 +5807,8 @@
         ],
         "nis2": [],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Access to source code",
       "obj_en": "Source code and development tools have restricted, logged access.",
@@ -5320,7 +5840,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Secure configuration and hardening",
       "obj_en": "Systems are deployed with reference security configurations.",
@@ -5352,7 +5873,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Configuration management",
       "obj_en": "Configuration is kept under control and drift is detected.",
@@ -5397,7 +5919,8 @@
             "id": "OR.255",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Change management",
       "obj_en": "Changes are assessed, approved, tested and recorded before being applied.",
@@ -5437,7 +5960,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Maintenance and security patching",
       "obj_en": "Updates and maintenance applied within defined timeframes by criticality.",
@@ -5477,7 +6001,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Vulnerability handling and disclosure",
       "obj_en": "Vulnerabilities are detected, prioritised and fixed, with a channel for external reports.",
@@ -5509,7 +6034,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Protection against malicious code",
       "obj_en": "Antimalware or EDR on every device, centrally managed.",
@@ -5549,7 +6075,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Software installation in production",
       "obj_en": "Only authorised software, installed by authorised staff.",
@@ -5590,7 +6117,8 @@
             "w": 0
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Activity logging",
       "obj_en": "User and system event logs, protected and retained.",
@@ -5626,7 +6154,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Clock synchronisation",
       "obj_en": "All systems use a common, reliable time source.",
@@ -5675,7 +6204,8 @@
             "id": "OR.220",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Monitoring and intrusion detection",
       "obj_en": "Continuous monitoring of networks and systems to detect anomalous behaviour.",
@@ -5706,7 +6236,8 @@
         ],
         "nis2": [],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Capacity management and DoS protection",
       "obj_en": "Sized capacity and measures against saturation and DoS attacks.",
@@ -5745,7 +6276,8 @@
         ],
         "nis2": [],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "User endpoint devices",
       "obj_en": "Laptops, phones and other devices protected, encrypted and managed.",
@@ -5780,7 +6312,8 @@
         ],
         "nis2": [],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Clear desk and session locking",
       "obj_en": "No papers or unattended screens with sensitive information.",
@@ -5820,7 +6353,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Cryptography and key management",
       "obj_en": "Approved algorithms and a complete key life cycle.",
@@ -5855,7 +6389,8 @@
         ],
         "nis2": [],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Email and web browsing protection",
       "obj_en": "Email and web filtering against malware, phishing and malicious sites.",
@@ -5891,7 +6426,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Secure architecture and certified components",
       "obj_en": "Documented architecture with security principles and qualified products.",
@@ -5939,7 +6475,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Network security and perimeter",
       "obj_en": "Network protected at its perimeter and network services managed securely.",
@@ -5983,7 +6520,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Network and flow segregation",
       "obj_en": "Networks separated by function and trust level, with controlled flows.",
@@ -6031,7 +6569,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Communications protection",
       "obj_en": "Encryption and authentication of communications leaving the perimeter.",
@@ -6067,7 +6606,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "System interconnection",
       "obj_en": "Each connection with third-party systems is authorised and documented.",
@@ -6103,7 +6643,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Secure and emergency communications",
       "obj_en": "Encrypted voice, video and messaging plus an alternative channel for emergencies.",
@@ -6148,7 +6689,13 @@
             "w": 0
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": [
+          {
+            "id": "15",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Secure development life cycle",
       "obj_en": "A development method with security in every phase and secure coding.",
@@ -6189,7 +6736,8 @@
             "w": 0
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Application security requirements",
       "obj_en": "Security requirements defined and approved before developing or buying.",
@@ -6230,7 +6778,17 @@
             "w": 0
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": [
+          {
+            "id": "15",
+            "w": 0.5
+          },
+          {
+            "id": "55",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Security testing and acceptance",
       "obj_en": "Security tests before go-live, without real data.",
@@ -6261,7 +6819,8 @@
         ],
         "nis2": [],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Environment separation",
       "obj_en": "Development, test and production separated with different access.",
@@ -6297,7 +6856,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Outsourced development",
       "obj_en": "Outsourced development meets the same requirements and is supervised.",
@@ -6333,7 +6893,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Acquisition of ICT products and services",
       "obj_en": "Security criteria when buying ICT products and services.",
@@ -6369,7 +6930,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Web service and application protection",
       "obj_en": "Web applications protected and audited before exposure.",
@@ -6404,7 +6966,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       }
     },
     {
@@ -6454,7 +7017,8 @@
             "id": "OR.235",
             "w": 1
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Security in supplier relationships",
       "obj_en": "Security requirements included in contracts and service level agreements.",
@@ -6491,7 +7055,8 @@
             "id": "OR.235",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Monitoring of supplier services",
       "obj_en": "Contracted services are supervised, reviewed and their changes managed.",
@@ -6532,7 +7097,8 @@
             "id": "OR.235",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "ICT supply chain security",
       "obj_en": "Risks introduced by suppliers and their subcontractors are assessed.",
@@ -6564,7 +7130,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Supplier directory",
       "obj_en": "Up-to-date register of suppliers and service providers with their criticality.",
@@ -6596,7 +7163,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Cloud services",
       "obj_en": "Acquisition, use and exit of cloud services with security requirements.",
@@ -6637,7 +7205,8 @@
             "id": "OR.220",
             "w": 1
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Incident management plan",
       "obj_en": "Incident management procedure with roles, phases and criteria.",
@@ -6674,7 +7243,8 @@
             "id": "OR.215",
             "w": 1
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Internal event reporting",
       "obj_en": "Everyone knows how and to whom to report a security event.",
@@ -6711,7 +7281,8 @@
             "id": "OR.215",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Event assessment and classification",
       "obj_en": "Criteria to decide whether an event is an incident and how severe it is.",
@@ -6752,7 +7323,8 @@
             "id": "OR.220",
             "w": 1
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Incident response",
       "obj_en": "Containment, eradication and recovery following tested procedures.",
@@ -6793,7 +7365,8 @@
             "id": "OR.220",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Lessons learned",
       "obj_en": "Post-incident review of every relevant incident with improvement actions.",
@@ -6829,7 +7402,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Collection of evidence",
       "obj_en": "Evidence collected and preserved so it holds up in court.",
@@ -6895,6 +7469,12 @@
             "id": "OR.230",
             "w": 0.5
           }
+        ],
+        "ria": [
+          {
+            "id": "73",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Reporting to the authority on time",
@@ -6926,7 +7506,8 @@
             "w": 0
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Communication to affected customers and users",
       "obj_en": "Notice to recipients of the affected services and of measures they can take.",
@@ -6959,6 +7540,40 @@
         "partis": [
           {
             "id": "OR.230",
+            "w": 1
+          }
+        ],
+        "ria": []
+      }
+    },
+    {
+      "id": "INC-10",
+      "dom": "INC",
+      "t": "Notificación de incidentes graves de IA",
+      "t_en": "Reporting of serious AI incidents",
+      "obj": "El proveedor de un sistema de IA de alto riesgo notifica los incidentes graves a la autoridad de vigilancia del mercado en los plazos del art. 73, investiga la causa y coopera con la autoridad.",
+      "obj_en": "The provider of a high-risk AI system reports serious incidents to the market surveillance authority within the deadlines of Article 73, investigates the cause and cooperates with the authority.",
+      "ev": "Procedimiento de notificación del art. 73 · registro de incidentes graves · informes de investigación",
+      "ev_en": "Article 73 reporting procedure · serious incident log · investigation reports",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [
+          {
+            "id": "23.a",
+            "w": 0
+          }
+        ],
+        "iso42001": [
+          {
+            "id": "A8.4",
+            "w": 0.5
+          }
+        ],
+        "partis": [],
+        "ria": [
+          {
+            "id": "73",
             "w": 1
           }
         ]
@@ -6994,7 +7609,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Impact analysis",
       "obj_en": "Critical processes, their maximum tolerable downtime and dependencies are identified.",
@@ -7043,7 +7659,8 @@
             "id": "OR.220",
             "w": 0.5
           }
-        ]
+        ],
+        "ria": []
       },
       "t_en": "Continuity and recovery plan",
       "obj_en": "Approved, known business continuity and disaster recovery plan.",
@@ -7075,7 +7692,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Continuity testing",
       "obj_en": "The plan is tested regularly and corrected with what is learned.",
@@ -7123,7 +7741,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Redundancy and alternative means",
       "obj_en": "Alternative facilities, systems and communications for critical services.",
@@ -7155,7 +7774,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Crisis management",
       "obj_en": "Crisis committee, activation criteria and communication during the crisis.",
@@ -7203,7 +7823,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Secure areas and physical access control",
       "obj_en": "Defined perimeters with controlled and identified physical access.",
@@ -7239,7 +7860,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Physical security monitoring",
       "obj_en": "Premises are continuously monitored against unauthorised access.",
@@ -7287,7 +7909,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Protection against environmental threats",
       "obj_en": "Rooms conditioned and protected against fire, water and temperature.",
@@ -7327,7 +7950,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Utilities and cabling",
       "obj_en": "Guaranteed power and communications, protected cabling.",
@@ -7371,7 +7995,8 @@
           }
         ],
         "iso42001": [],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Equipment entry and exit",
       "obj_en": "Equipment entering and leaving is logged and protected off-premises.",
@@ -7415,7 +8040,13 @@
             "w": 1
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": [
+          {
+            "id": "17",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "AI policy",
       "obj_en": "An approved AI policy, aligned with other policies and reviewed periodically.",
@@ -7454,7 +8085,13 @@
             "w": 1
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": [
+          {
+            "id": "26.2",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "AI roles and concern reporting",
       "obj_en": "Responsibilities defined across the life cycle and a channel to raise concerns.",
@@ -7502,7 +8139,8 @@
             "w": 0.5
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "AI system resources",
       "obj_en": "Data, tools, compute and people documented for each AI system.",
@@ -7559,7 +8197,13 @@
             "w": 1
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": [
+          {
+            "id": "9",
+            "w": 1
+          }
+        ]
       },
       "t_en": "AI risk management",
       "obj_en": "AI-specific risks (bias, robustness, transparency, misuse) assessed and treated.",
@@ -7601,7 +8245,13 @@
             "w": 1
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": [
+          {
+            "id": "27",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "AI system impact assessment",
       "obj_en": "Impact on people, groups and society assessed and documented before deployment.",
@@ -7632,7 +8282,13 @@
             "w": 1
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": [
+          {
+            "id": "17",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Responsible AI development",
       "obj_en": "Objectives and processes that guide responsible design and development.",
@@ -7671,7 +8327,21 @@
             "w": 1
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": [
+          {
+            "id": "11",
+            "w": 1
+          },
+          {
+            "id": "13",
+            "w": 0.5
+          },
+          {
+            "id": "53",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "AI system specification and documentation",
       "obj_en": "Requirements, design and technical documentation maintained across the life cycle.",
@@ -7711,7 +8381,13 @@
             "w": 1
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": [
+          {
+            "id": "15",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Verification, validation and deployment",
       "obj_en": "Model validation criteria and a controlled deployment plan.",
@@ -7743,7 +8419,25 @@
             "w": 1
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": [
+          {
+            "id": "14",
+            "w": 0.5
+          },
+          {
+            "id": "15",
+            "w": 0.5
+          },
+          {
+            "id": "26.4",
+            "w": 1
+          },
+          {
+            "id": "72",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "AI system operation and monitoring",
       "obj_en": "Production monitoring of performance, drift and errors.",
@@ -7775,7 +8469,17 @@
             "w": 1
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": [
+          {
+            "id": "12",
+            "w": 1
+          },
+          {
+            "id": "26.6",
+            "w": 1
+          }
+        ]
       },
       "t_en": "AI system event logs",
       "obj_en": "Logging of inputs, decisions and relevant events for traceability.",
@@ -7823,7 +8527,17 @@
             "w": 1
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": [
+          {
+            "id": "10",
+            "w": 1
+          },
+          {
+            "id": "26.4",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Data governance for AI",
       "obj_en": "Acquisition, quality, provenance and preparation of data controlled and documented.",
@@ -7853,7 +8567,25 @@
             "w": 1
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": [
+          {
+            "id": "13",
+            "w": 1
+          },
+          {
+            "id": "26.7",
+            "w": 1
+          },
+          {
+            "id": "50.3",
+            "w": 1
+          },
+          {
+            "id": "50.1",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Information for users and interested parties",
       "obj_en": "User documentation and transparent communication about the AI system.",
@@ -7883,7 +8615,17 @@
             "w": 1
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": [
+          {
+            "id": "5",
+            "w": 0.5
+          },
+          {
+            "id": "26.1",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Responsible and intended use",
       "obj_en": "Processes and objectives that keep use of the system within its intended scope.",
@@ -7932,11 +8674,248 @@
             "w": 1
           }
         ],
-        "partis": []
+        "partis": [],
+        "ria": []
       },
       "t_en": "Third parties and customers in the AI chain",
       "obj_en": "Responsibilities shared with suppliers and customers of AI components or services.",
       "ev_en": "Contracts allocating responsibilities · AI supplier assessment"
+    },
+    {
+      "id": "IA-15",
+      "dom": "IA",
+      "t": "Alfabetización en IA",
+      "t_en": "AI literacy",
+      "obj": "Formación y medidas proporcionadas para que quien opera y usa sistemas de IA entienda sus capacidades, límites y riesgos, según su función.",
+      "obj_en": "Proportionate training and measures so that those who operate and use AI systems understand their capabilities, limits and risks, according to their role.",
+      "ev": "Plan de alfabetización por perfil · materiales · registros de asistencia · revisión anual",
+      "ev_en": "Literacy plan by role · materials · attendance records · annual review",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [],
+        "iso42001": [
+          {
+            "id": "C7.2",
+            "w": 0.5
+          },
+          {
+            "id": "C7.3",
+            "w": 0.5
+          }
+        ],
+        "partis": [],
+        "ria": [
+          {
+            "id": "4",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "IA-16",
+      "dom": "IA",
+      "t": "Revisión de prácticas de IA prohibidas",
+      "t_en": "Review of prohibited AI practices",
+      "obj": "Cada sistema y cada uso nuevo de IA se contrasta con la lista de prácticas prohibidas antes de desarrollarlo, comprarlo o desplegarlo, y la decisión queda documentada.",
+      "obj_en": "Every new AI system and use is checked against the list of prohibited practices before it is developed, bought or deployed, and the decision is documented.",
+      "ev": "Lista de comprobación del art. 5 · registro de decisiones por sistema",
+      "ev_en": "Article 5 checklist · decision log per system",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [],
+        "iso42001": [
+          {
+            "id": "A9.4",
+            "w": 0
+          }
+        ],
+        "partis": [],
+        "ria": [
+          {
+            "id": "5",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "IA-17",
+      "dom": "IA",
+      "t": "Supervisión humana del sistema de IA",
+      "t_en": "Human oversight of the AI system",
+      "obj": "Personas competentes y con autoridad supervisan el sistema, entienden sus límites, interpretan sus resultados y pueden intervenir, ignorarlo o detenerlo.",
+      "obj_en": "Competent persons with authority oversee the system, understand its limits, interpret its outputs and can intervene, disregard it or stop it.",
+      "ev": "Asignación de supervisores · procedimiento de intervención y parada · registros de intervenciones",
+      "ev_en": "Overseer assignment · intervention and stop procedure · intervention records",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [],
+        "iso42001": [
+          {
+            "id": "A9.2",
+            "w": 0.5
+          }
+        ],
+        "partis": [],
+        "ria": [
+          {
+            "id": "14",
+            "w": 1
+          },
+          {
+            "id": "26.2",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "IA-18",
+      "dom": "IA",
+      "t": "Gestión de la calidad y seguimiento poscomercialización de la IA",
+      "t_en": "AI quality management and post-market monitoring",
+      "obj": "El proveedor mantiene un sistema de gestión de la calidad para sus sistemas de IA de alto riesgo y un plan de seguimiento poscomercialización que recoge y analiza su funcionamiento real.",
+      "obj_en": "The provider maintains a quality management system for its high-risk AI systems and a post-market monitoring plan that collects and analyses their real-world performance.",
+      "ev": "Manual de calidad · plan de seguimiento poscomercialización · informes periódicos",
+      "ev_en": "Quality manual · post-market monitoring plan · periodic reports",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [],
+        "iso42001": [
+          {
+            "id": "C4.4",
+            "w": 0.5
+          },
+          {
+            "id": "C9.1",
+            "w": 0.5
+          }
+        ],
+        "partis": [],
+        "ria": [
+          {
+            "id": "17",
+            "w": 1
+          },
+          {
+            "id": "72",
+            "w": 1
+          },
+          {
+            "id": "20",
+            "w": 0.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "IA-19",
+      "dom": "IA",
+      "t": "Evaluación de impacto en los derechos fundamentales",
+      "t_en": "Fundamental rights impact assessment",
+      "obj": "Antes de desplegar un sistema de alto riesgo, el responsable del despliegue describe su uso, las personas afectadas, los riesgos para sus derechos, la supervisión humana y las medidas si se materializan, y notifica el resultado a la autoridad.",
+      "obj_en": "Before deploying a high-risk system, the deployer describes its use, the affected persons, the risks to their rights, human oversight and the measures if they materialise, and notifies the result to the authority.",
+      "ev": "Evaluación firmada · plantilla de la Oficina de IA · notificación a la autoridad",
+      "ev_en": "Signed assessment · AI Office template · notification to the authority",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [],
+        "iso42001": [
+          {
+            "id": "A5.4",
+            "w": 0.5
+          },
+          {
+            "id": "C8.4",
+            "w": 0.5
+          }
+        ],
+        "partis": [],
+        "ria": [
+          {
+            "id": "27",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "IA-20",
+      "dom": "IA",
+      "t": "Transparencia: aviso de IA y marcado de contenido sintético",
+      "t_en": "Transparency: AI notice and synthetic content marking",
+      "obj": "Las personas saben cuándo interactúan con una IA, el contenido generado o manipulado se marca en formato legible por máquina y las ultrafalsificaciones se divulgan como tales.",
+      "obj_en": "People know when they interact with AI, generated or manipulated content is marked in a machine-readable format and deepfakes are disclosed as such.",
+      "ev": "Avisos en la interfaz · marcas de agua o metadatos · procedimiento editorial de divulgación",
+      "ev_en": "Interface notices · watermarks or metadata · editorial disclosure procedure",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [],
+        "iso42001": [
+          {
+            "id": "A8.2",
+            "w": 0.5
+          }
+        ],
+        "partis": [],
+        "ria": [
+          {
+            "id": "50.1",
+            "w": 1
+          },
+          {
+            "id": "50.2",
+            "w": 1
+          },
+          {
+            "id": "50.4",
+            "w": 1
+          },
+          {
+            "id": "50.3",
+            "w": 0.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "IA-21",
+      "dom": "IA",
+      "t": "Obligaciones de los modelos de IA de uso general",
+      "t_en": "General-purpose AI model obligations",
+      "obj": "Quien proporciona un modelo de uso general mantiene su documentación técnica, informa a los proveedores posteriores, aplica una política de derechos de autor y publica un resumen de los datos de entrenamiento; si el modelo tiene riesgo sistémico, además lo evalúa con pruebas adversarias, mitiga los riesgos, notifica los incidentes graves y protege su ciberseguridad.",
+      "obj_en": "Whoever provides a general-purpose model keeps its technical documentation, informs downstream providers, applies a copyright policy and publishes a summary of the training data; if the model has systemic risk, it also evaluates it with adversarial testing, mitigates the risks, reports serious incidents and protects its cybersecurity.",
+      "ev": "Documentación del modelo · política de derechos de autor · resumen de datos de entrenamiento · informes de evaluación",
+      "ev_en": "Model documentation · copyright policy · training data summary · evaluation reports",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [],
+        "iso42001": [
+          {
+            "id": "A6.2.7",
+            "w": 0.5
+          }
+        ],
+        "partis": [],
+        "ria": [
+          {
+            "id": "53",
+            "w": 1
+          },
+          {
+            "id": "55",
+            "w": 1
+          }
+        ]
+      }
     }
   ]
 }

@@ -153,7 +153,7 @@ async function exportXlsx() {
     X.utils.book_append_sheet(wb, sheet([['ID', tx('Dominio', 'Domain'), t('control'), t('objective'), tx('Estado', 'State'), t('owner'), t('evidence'), t('lastRev'), ...FW.map((f) => fwLbl(f)), tx('Normas del alcance', 'Frameworks in scope'), tx('Prioridad', 'Priority')],
       ...CAT.controls.map((c) => { const d = state.controles[c.id]; const cc = calc.controles[c.id]; return [c.id, dT(c.dom), cT(c.id), tt(c, 'obj'), estL(d.estado), d.responsable, d.evidencias, d.revision, ...FW.map((f) => mapsTxt(c, f)), cc.normas.map((f) => fwLbl(f)).join(', '), rank[c.id] || '']; })],
       [9, 22, 36, 50, 12, 24, 50, 12, ...FW.map(() => 22), 26, 9], 0, { fillCol: [4], freeze: { xSplit: 3, ySplit: 1 } }), tx('Controles unificados', 'Unified controls'));
-    const sheetName = { ens: 'SoA ENS', iso27001: 'SoA ISO 27001', nis2: 'NIS2', iso42001: 'SoA ISO 42001', partis: 'SoA Part-IS' };
+    const sheetName = { ens: 'SoA ENS', iso27001: 'SoA ISO 27001', nis2: 'NIS2', iso42001: 'SoA ISO 42001', partis: 'SoA Part-IS', ria: tx('RIA', 'AI Act') };
     const usados = new Set(['Resumen', 'Summary', 'Aplicabilidad', 'Applicability']);
     for (const f of FW) if (!sheetName[f]) { // marcos propios: nombre válido para Excel (sin : \ / ? * [ ], 31 caracteres) y único
       let n = fwLbl(f).replace(/[:\\/?*[\]]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 22) || 'Marco'; let k = 2; const b = n;
@@ -162,7 +162,7 @@ async function exportXlsx() {
     for (const f of FW) {
       const rows = calc.req[f].map((r) => {
         const aplica = r.estado === 'no-exigido' ? tx('NO EXIGIDO', 'NOT REQUIRED') : r.estado === 'excluido' ? no() : yes();
-        const just = r.estado === 'excluido' ? r.justificacion || `(${t('unjustified')})` : r.estado === 'no-exigido' ? t('notRequired', t('lv.' + r.nivel), r.exigencia) : tx(`Aplica. Soportado por ${IX.reqUcs[f][r.id].map((l) => l.uc).join(', ')}.`, `Applies. Supported by ${IX.reqUcs[f][r.id].map((l) => l.uc).join(', ')}.`);
+        const just = r.estado === 'excluido' ? r.justificacion || `(${t('unjustified')})` : r.estado === 'no-exigido' ? noExigidoTxt(f, r) : tx(`Aplica. Soportado por ${IX.reqUcs[f][r.id].map((l) => l.uc).join(', ')}.`, `Applies. Supported by ${IX.reqUcs[f][r.id].map((l) => l.uc).join(', ')}.`);
         const evid = IX.reqUcs[f][r.id].map((l) => state.controles[l.uc].evidencias ? `[${l.uc}] ${state.controles[l.uc].evidencias}` : '').filter(Boolean).join(' · ').slice(0, 3000);
         return [reqCode(f, r.id), rT(f, r.id), rG(f, r.id), ...(f === 'ens' ? [r.nivel ? t('lv.' + r.nivel) : '', r.exigencia || ''] : []), aplica, just, t('cov.' + r.estado), r.estado === 'no-exigido' || r.estado === 'excluido' ? '' : r.score, ucList(f, r.id), evid];
       });

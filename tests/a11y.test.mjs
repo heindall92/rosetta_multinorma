@@ -51,7 +51,7 @@ for (const theme of ['light', 'dark']) for (const width of [1440, 390]) {
       s.marcos.push({ id: 'mp-acme', nombre: 'Política ACME', descripcion: 'Ejemplo ficticio', tipo: 'propio', importado: '2026-10-08', requisitos: [
         { id: 'A-01', titulo: 'Autenticación multifactor en los accesos remotos', texto: 'Texto de prueba', grupo: '', controles: [{ control: 'ACC-07', w: 1 }] },
         { id: 'A-02', titulo: 'Copias de seguridad cifradas', texto: '', grupo: '', controles: [] }] });
-      s.alcance['mp-acme'] = { on: true }; s.alcance.ens.on = true; s.alcance.iso42001.on = true; s.exclusiones['mp-acme'] = {};
+      s.alcance['mp-acme'] = { on: true }; s.alcance.ens.on = true; s.alcance.iso42001.on = true; s.alcance.ria.on = true; s.exclusiones['mp-acme'] = {};
       R.ui.mpOpen = 'mp-acme'; R.go('alcance');
     });
     await p.addScriptTag({ content: AXE });

@@ -39,7 +39,7 @@ describe('API pública', () => {
     for (const k of ['indexar', 'calcular', 'coberturaReq', 'solapamiento', 'inferencia', 'equivalencias', 'prioridades', 'coherencia', 'planAccion', 'desdeSoaEns', 'nis2Aplicabilidad', 'orden', 'instantanea', 'parejasClase',
       'perfilRegulatorio', 'perfilNormalizado', 'sugerirControles', 'fundirPropios', 'listaNormas', 'etiqueta'])
       assert.equal(typeof E[k], 'function', k);
-    assert.deepEqual(E.FW, ['ens', 'iso27001', 'nis2', 'iso42001', 'partis']);
+    assert.deepEqual(E.FW, ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria']);
   });
 });
 
@@ -226,7 +226,7 @@ describe('casos de ejemplo con el catálogo real', () => {
   }
   test('instantánea reproducible del caso de clase (TechServ)', () => {
     const r = E.calcular(IX, CASOS.find((c) => c.id === 'techserv').state);
-    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null }, grado: 0.893, brechas: 4 });
+    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null, ria: null }, grado: 0.893, brechas: 4 });
   });
   test('contraste ENS ↔ ISO 27001 con las parejas del material de clase', () => {
     const p = E.parejasClase(IX); const ref = require('../src/data/parejas.json');
@@ -364,9 +364,9 @@ describe('perfil regulatorio', () => {
     assert.equal(pr({ ia: true }).iso42001.estado, 'voluntaria'); assert.equal(pr({}).iso42001.estado, 'no-aplica');
     assert.equal(pr({}, {}, 'es', ['mp-acme'])['mp-acme'].estado, 'voluntaria');
   });
-  test('normas que aún no están en Rosetta: DORA, RIA y CRA, solo dentro de la UE', () => {
+  test('normas que aún no están en Rosetta: DORA y CRA, solo dentro de la UE', () => {
     const f = E.perfilRegulatorio({ financiera: true, ia: true, fabricante: true }).futuras.map((x) => x.id);
-    assert.deepEqual(f, ['dora', 'ria', 'cra']);
+    assert.deepEqual(f, ['dora', 'cra']);
     assert.deepEqual(E.perfilRegulatorio({ jurisdiccion: 'fuera', financiera: true, ia: true }).futuras, []);
   });
   test('entradas hostiles o vacías se normalizan al perfil por defecto', () => {
@@ -423,4 +423,55 @@ describe('sugerencias de mapeo', () => {
     assert.deepEqual(E.sugerirControles(IX, ''), []); assert.deepEqual(E.sugerirControles(IX, 'de la y el'), []);
     assert.ok(E.sugerirControles(IX, 'gestión de incidentes de seguridad y notificación', 2).length <= 2);
   });
+});
+
+describe('RIA (Reglamento (UE) 2024/1689, modificado por el 2026/1744)', () => {
+  const st = (ria, controles = {}) => ({ alcance: { iso42001: { on: true }, ria: { on: true, ...ria } }, controles, exclusiones: {} });
+  const vivos = (ria) => E.calcular(IX, st(ria)).req.ria.filter((r) => r.estado !== 'no-exigido').map((r) => r.id);
+  test('28 obligaciones con rol, riesgo, fecha de aplicación y fuente', () => {
+    const R = CAT.frameworks.ria.reqs; assert.equal(R.length, 28); assert.equal(CAT.frameworks.ria.tope, 'parcial');
+    for (const r of R) { assert.ok(['todos', 'proveedor', 'responsable'].includes(r.rol), r.id); assert.ok(['todos', 'alto', 'transparencia', 'gpai', 'sistemico'].includes(r.riesgo), r.id); assert.match(r.desde, /^20\d\d-\d\d-\d\d$/); assert.match(r.ref, /2024\/1689/); }
+    for (const r of R) assert.ok(IX.reqUcs.ria[r.id].some((l) => l.w === 1), `${r.id} necesita un control que lo cubra por completo`);
+  });
+  test('fechas del Ómnibus: alto riesgo del anexo III desde el 02-12-2027; transparencia desde el 02-08-2026; arts. 4 y 5 desde el 02-02-2025', () => {
+    const d = Object.fromEntries(CAT.frameworks.ria.reqs.map((r) => [r.id, r.desde]));
+    assert.equal(d['4'], '2025-02-02'); assert.equal(d['5'], '2025-02-02'); assert.equal(d['9'], '2027-12-02'); assert.equal(d['50.1'], '2026-08-02'); assert.equal(d['53'], '2025-08-02');
+  });
+  test('lo que se exige depende del rol y del riesgo', () => {
+    assert.deepEqual(vivos({ rol: 'responsable', alto: false, transparencia: false }), ['4', '5']);
+    assert.deepEqual(vivos({ rol: 'responsable', alto: true, transparencia: false }), ['4', '5', '26.1', '26.2', '26.4', '26.6', '26.7', '27']);
+    assert.ok(vivos({ rol: 'proveedor', alto: true, transparencia: false }).includes('43'));
+    assert.ok(!vivos({ rol: 'proveedor', alto: true, transparencia: false }).includes('26.1'));
+    assert.deepEqual(vivos({ rol: 'proveedor', alto: false, transparencia: true }), ['4', '5', '50.1', '50.2']);
+    assert.ok(vivos({ rol: 'proveedor', alto: false, transparencia: false, gpai: 'si' }).includes('53'));
+    assert.ok(!vivos({ rol: 'proveedor', alto: false, transparencia: false, gpai: 'si' }).includes('55'));
+    assert.ok(vivos({ rol: 'proveedor', alto: false, transparencia: false, gpai: 'sistemico' }).includes('55'));
+    assert.equal(E.calcular(IX, st({ rol: 'responsable', alto: false })).req.ria.find((r) => r.id === '9').motivo, 'rol');
+  });
+  test('sin exclusiones; valores de alcance hostiles se normalizan', () => {
+    for (const r of CAT.frameworks.ria.reqs) assert.equal(E.excluible('ria', r.id), false);
+    assert.deepEqual(E.riaAlcance({ rol: 'admin', gpai: '__proto__', alto: 'no' }), { rol: 'ambos', alto: true, transparencia: true, gpai: 'no' });
+  });
+  test('ninguna equivalencia con el RIA es total', () => {
+    for (const r of CAT.frameworks.ria.reqs) for (const g of IX.fw) for (const x of E.equivalencias(IX, 'ria', r.id).otras[g] || []) assert.notEqual(x.fuerza, 'total', `ria ${r.id} → ${g}`);
+  });
+  test('alertas CO-15 y CO-16 hasta implantar la alfabetización y la revisión de prácticas prohibidas', () => {
+    const a = st({ rol: 'ambos' }); const h = E.coherencia(IX, a, E.calcular(IX, a)).map((x) => x.id);
+    assert.ok(h.includes('CO-15') && h.includes('CO-16'));
+    const b = st({ rol: 'ambos' }, { 'IA-15': { estado: 'implantado' }, 'IA-16': { estado: 'implantado' } }); const h2 = E.coherencia(IX, b, E.calcular(IX, b)).map((x) => x.id);
+    assert.ok(!h2.includes('CO-15') && !h2.includes('CO-16'));
+  });
+  test('perfil: obligatoria con IA en la UE, a confirmar fuera, no aplica sin IA; etiqueta en inglés', () => {
+    assert.equal(E.perfilRegulatorio({ ia: true }).marcos.ria.estado, 'obligatoria');
+    assert.equal(E.perfilRegulatorio({ ia: true, jurisdiccion: 'fuera' }).marcos.ria.estado, 'confirmar');
+    assert.equal(E.perfilRegulatorio({}).marcos.ria.estado, 'no-aplica');
+    assert.equal(E.etiqueta(IX, 'ria', 'en'), 'AI Act'); assert.equal(E.etiqueta(IX, 'ria'), 'RIA');
+  });
+  test('el control de conformidad GOB-15 sirve al RIA (y servirá al CRA)', () => {
+    assert.deepEqual(CAT.controls.find((c) => c.id === 'GOB-15').maps.ria.map((m) => m.id), ['43', '49']);
+  });
+});
+test('el motivo del RIA en el perfil es el vigente, no el de norma futura', () => {
+  for (const l of ['es', 'en']) assert.doesNotMatch(E.perfilRegulatorio({ ia: true }, {}, l).marcos.ria.motivo, /2\.5\.0/);
+  assert.match(E.perfilRegulatorio({ ia: true }).marcos.ria.motivo, /02-12-2027/);
 });

@@ -15,7 +15,7 @@ const XLSX_LIBS = {
   leer: { file: 'vendor/sheetjs-0.20.3.full.min.js', cdn: 'https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js', sri: 'sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT' },
   escribir: { file: 'vendor/xlsx-js-style-1.2.0.bundle.js', cdn: 'https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js', sri: 'sha384-OUW9euuUyxyHcAhTqbhI+Iyb8LMssXt/cpz0yXhs9UWG2/R/uaWdakx/4cfww7Vb' }
 };
-const VERSION = '2.4.0';
+const VERSION = '2.5.0';
 const DOM = Object.fromEntries(CAT0.domains.map((d) => [d.id, d]));
 const SOLAPE0 = E.solapamiento(IX0);
 let SOLAPE = SOLAPE0;
@@ -34,10 +34,10 @@ function reindex() {
 }
 /* Nombres y colores de cada norma. Los marcos propios toman el nombre que trae su fichero (saneado al importar)
  * y uno de cuatro colores de reserva; las normas incluidas tienen el suyo. */
-const FW_SHORT = { ens: 'ENS', iso27001: '27001', nis2: 'NIS2', iso42001: '42001', partis: 'Part-IS' };
+const FW_SHORT = { ens: 'ENS', iso27001: '27001', nis2: 'NIS2', iso42001: '42001', partis: 'Part-IS', ria: 'RIA' };
 const esPropio = (f) => !!(IX.propio && IX.propio[f]);
-const fwLbl = (f) => (FW_BASE.includes(f) || IX.req[f] ? E.etiqueta(IX, f) : t('ownFw'));
-const fwShort = (f) => FW_SHORT[f] || (() => { const n = fwLbl(f); return n.length > 14 ? n.slice(0, 13).trim() + '…' : n; })();
+const fwLbl = (f) => (FW_BASE.includes(f) || IX.req[f] ? E.etiqueta(IX, f, LANG()) : t('ownFw'));
+const fwShort = (f) => (LANG() === 'en' && E.FW_LABEL_EN[f]) || FW_SHORT[f] || (() => { const n = fwLbl(f); return n.length > 14 ? n.slice(0, 13).trim() + '…' : n; })();
 const fwCls = (f) => (FW_BASE.includes(f) ? f : 'p' + (Math.max(0, FW.indexOf(f) - FW_BASE.length) % 4));
 const PRISM_DEF = {};
 
@@ -71,6 +71,8 @@ const reqCodeL = (f, id) => { let c = E.codigo(IX, f, id); if (f === 'partis') c
 const uid = () => { const a = new Uint8Array(9); crypto.getRandomValues(a); return Array.from(a, (b) => (b % 36).toString(36)).join('') + Date.now().toString(36).slice(-4); };
 const initials = (name) => String(name || '').trim().split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('') || '··';
 const reqCode = (f, id) => reqCodeL(f, id);
+/* Por qué un requisito no se exige: el nivel en el ENS; el rol o el riesgo del sistema en el RIA */
+const noExigidoTxt = (f, r) => (f === 'ens' ? t('notRequired', t('lv.' + r.nivel), r.exigencia) : t('notRequiredBy.' + (r.motivo || 'rol')));
 const reqTitle = (f, id) => rT(f, id);
 
 /* Almacenamiento: localStorage si está disponible; si no, memoria (la app funciona igual) */
@@ -195,7 +197,7 @@ function deleteProject(id) {
   if (ws.activeId === id) { ws.activeId = null; state = null; recompute(); }
   saveWs();
 }
-const alcanceDefecto = () => ({ ens: { on: true, categoria: 'MEDIA', niveles: {} }, iso27001: { on: true }, nis2: { on: false, tipo: 'fuera' }, iso42001: { on: false }, partis: { on: false, regimen: 'I' } });
+const alcanceDefecto = () => ({ ens: { on: true, categoria: 'MEDIA', niveles: {} }, iso27001: { on: true }, nis2: { on: false, tipo: 'fuera' }, iso42001: { on: false }, partis: { on: false, regimen: 'I' }, ria: { on: false, ...E.riaAlcance() } });
 function blankState({ nombre = '', organizacion = '', sector = '', descripcion = '', alcance, nis2q, perfil } = {}) {
   const st = { version: 1, proyecto: { nombre: nombre || organizacion, organizacion, sector, descripcion },
     alcance: alcance || alcanceDefecto(),

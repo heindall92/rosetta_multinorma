@@ -6,7 +6,7 @@ function setPath(obj, path, value, schema = 'state') {
   // Solo rutas conocidas del modelo (lista blanca)
   const okState = (ks[0] === 'controles' && UC_IDS.has(ks[1]) && ['estado', 'responsable', 'evidencias', 'revision', 'notas'].includes(ks[2]) && ks.length === 3)
     || (ks[0] === 'proyecto' && ['nombre', 'organizacion', 'descripcion', 'sector'].includes(ks[1]) && ks.length === 2)
-    || (ks[0] === 'alcance' && FW.includes(ks[1]) && ((['on', 'motivo'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'categoria' && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'niveles' && E.DIMS.includes(ks[3]) && ks.length === 4) || (ks[1] === 'partis' && ks[2] === 'regimen' && ks.length === 3)))
+    || (ks[0] === 'alcance' && FW.includes(ks[1]) && ((['on', 'motivo'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'categoria' && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'niveles' && E.DIMS.includes(ks[3]) && ks.length === 4) || (ks[1] === 'partis' && ks[2] === 'regimen' && ks.length === 3) || (ks[1] === 'ria' && ['rol', 'alto', 'transparencia', 'gpai'].includes(ks[2]) && ks.length === 3)))
     || (ks[0] === 'perfil' && has(E.PERFIL_DEF, ks[1]) && ks.length === 2)
     || (ks[0] === 'nis2q' && ['sector', 'especial', 'tamano', 'infraDigital'].includes(ks[1]) && ks.length === 2);
   const ok = schema === 'ws' ? ((ks[0] === 'profile' || ks[0] === 'settings') && ks.length === 2)
@@ -22,6 +22,7 @@ function setPath(obj, path, value, schema = 'state') {
   else if (ks[0] === 'alcance' && last === 'categoria') o[last] = oneOf(value, CATS_ENS, 'MEDIA');
   else if (ks[0] === 'alcance' && ks[2] === 'niveles') o[last] = oneOf(value, E.NIVELES_ENS, undefined);
   else if (ks[0] === 'alcance' && last === 'regimen') o[last] = oneOf(value, PARTIS_REG, 'I');
+  else if (ks[0] === 'alcance' && ks[1] === 'ria') o[last] = E.riaAlcance({ [last]: value })[last];
   else if (ks[0] === 'alcance' && last === 'motivo') o[last] = s(value, 300);
   else if (ks[0] === 'perfil') o[last] = typeof E.PERFIL_DEF[last] === 'boolean' ? value === true : E.perfilNormalizado({ [last]: value })[last];
   else o[last] = typeof value === 'string' ? s(value) : value;

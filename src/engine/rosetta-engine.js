@@ -8,12 +8,13 @@
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
-  const FW = ['ens', 'iso27001', 'nis2', 'iso42001', 'partis'];
-  const FW_LABEL = { ens: 'ENS', iso27001: 'ISO/IEC 27001', nis2: 'NIS2', iso42001: 'ISO/IEC 42001', partis: 'Part-IS' };
+  const FW = ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria'];
+  const FW_LABEL = { ens: 'ENS', iso27001: 'ISO/IEC 27001', nis2: 'NIS2', iso42001: 'ISO/IEC 42001', partis: 'Part-IS', ria: 'RIA' };
+  const FW_LABEL_EN = { ria: 'AI Act' };
   const FW_LONG = { ens: 'Esquema Nacional de Seguridad (RD 311/2022)', iso27001: 'ISO/IEC 27001:2022', nis2: 'Directiva NIS2 y RE 2024/2690', iso42001: 'ISO/IEC 42001:2023',
-    partis: 'Part-IS · Reglamentos (UE) 2023/203 y 2022/1645' };
+    partis: 'Part-IS · Reglamentos (UE) 2023/203 y 2022/1645', ria: 'RIA · Reglamento (UE) 2024/1689 de inteligencia artificial' };
   const FW_LONG_EN = { ens: 'Spanish National Security Framework (RD 311/2022)', iso27001: 'ISO/IEC 27001:2022', nis2: 'NIS2 Directive and IR 2024/2690', iso42001: 'ISO/IEC 42001:2023',
-    partis: 'Part-IS · Regulations (EU) 2023/203 and 2022/1645' };
+    partis: 'Part-IS · Regulations (EU) 2023/203 and 2022/1645', ria: 'AI Act · Regulation (EU) 2024/1689' };
   const ESTADOS = ['implantado', 'parcial', 'pendiente', 'no-aplica'];
   const ESTADO_LABEL = { implantado: 'Implantado', parcial: 'Parcial', pendiente: 'Pendiente', 'no-aplica': 'No aplica' };
   const ESTADO_LABEL_EN = { implantado: 'Implemented', parcial: 'Partial', pendiente: 'Pending', 'no-aplica': 'Not applicable' };
@@ -133,14 +134,30 @@
     if (f === 'nis2') return !/^(20|21|23)\./.test(s);
     // Part-IS no admite exclusiones requisito a requisito: solo la derogación completa que aprueba la autoridad (punto .200 e)
     if (f === 'partis') return false;
+    // RIA: sus obligaciones dependen del rol y del riesgo (no exigido), no de una exclusión
+    if (f === 'ria') return false;
     return true;
   }
 
   /** ¿Está la norma en el alcance del proyecto? */
   const enAlcance = (st, f) => !!(st.alcance && st.alcance[f] && st.alcance[f].on);
 
-  /** Aplicabilidad de un requisito según la norma (solo el ENS depende del nivel). */
+  /** Aplicabilidad de un requisito según la norma: el ENS depende del nivel; el RIA, del rol y del riesgo del sistema. */
+  const RIA_ROLES = ['proveedor', 'responsable', 'ambos'];
+  const RIA_GPAI = ['no', 'si', 'sistemico'];
+  function riaAlcance(a) {
+    const x = a && typeof a === 'object' ? a : {};
+    return { rol: RIA_ROLES.includes(x.rol) ? x.rol : 'ambos', alto: x.alto !== false, transparencia: x.transparencia !== false, gpai: RIA_GPAI.includes(x.gpai) ? x.gpai : 'no' };
+  }
+  function aplicaRia(r, a) {
+    const x = riaAlcance(a);
+    if (r.rol !== 'todos' && x.rol !== 'ambos' && x.rol !== r.rol) return { aplica: false, motivo: 'rol' };
+    const ok = r.riesgo === 'todos' || (r.riesgo === 'alto' && x.alto) || (r.riesgo === 'transparencia' && x.transparencia) ||
+      (r.riesgo === 'gpai' && x.gpai !== 'no') || (r.riesgo === 'sistemico' && x.gpai === 'sistemico');
+    return ok ? { aplica: true } : { aplica: false, motivo: r.riesgo };
+  }
   function aplicaReq(ix, st, f, id) {
+    if (f === 'ria') { const r = ix.req.ria[id]; return r ? aplicaRia(r, st.alcance && st.alcance.ria) : { aplica: true }; }
     if (f !== 'ens') return { aplica: true };
     const r = ix.req.ens[id]; const a = st.alcance.ens || {};
     const nivel = nivelExigidoEns(r.dims, a.niveles, categoriaEfectiva(a));
@@ -306,7 +323,9 @@
     ['CO-11', 'Baja', 'Control parcial sin acción planificada con fecha.'],
     ['CO-12', 'Alta', 'Part-IS en alcance sin notificación externa a la autoridad aeronáutica (punto .230).'],
     ['CO-13', 'Alta', 'Part-IS en alcance sin análisis de riesgos con impacto en la seguridad operacional (punto .205).'],
-    ['CO-14', 'Media', 'Requisito de un marco propio sin controles asignados: no se puede medir.']
+    ['CO-14', 'Media', 'Requisito de un marco propio sin controles asignados: no se puede medir.'],
+    ['CO-15', 'Alta', 'RIA en alcance sin alfabetización en IA (art. 4, obligatoria desde el 02-02-2025).'],
+    ['CO-16', 'Alta', 'RIA en alcance sin revisión de prácticas prohibidas (art. 5, obligatoria desde el 02-02-2025).']
   ];
   /* Mensajes de las reglas en español e inglés */
   const tt = (obj, key, lang) => (lang === 'en' && obj && obj[key + '_en'] ? obj[key + '_en'] : obj ? obj[key] : '');
@@ -328,6 +347,8 @@
       co06p: (n) => `${n === 1 ? 'Una medida declarada' : n + ' medidas declaradas'} «Implantada${n === 1 ? '' : 's'}» en la SoA del ENS con controles solo parciales`, nMed: (n) => `${n} medidas del ENS`,
       co12: ['Sin notificación a la autoridad aeronáutica', (e) => `Part-IS exige notificar a la autoridad competente (AESA o EASA) los incidentes y vulnerabilidades que puedan suponer un riesgo significativo para la seguridad operacional, coordinado con el Reglamento (UE) 376/2014. No sustituye a la notificación de NIS2. El control INC-09 está ${e}.`, 'Define el canal, los plazos del punto .230 y su AMC, y quién notifica; enlázalo con la notificación de sucesos que ya hace el SMS.', 'Part-IS, punto IS.I.OR.230 / IS.D.OR.230'],
       co13: ['Riesgos sin la mirada de la seguridad operacional', (e) => `Part-IS no mide solo la información: pide identificar los elementos e interfaces cuya alteración podría afectar a la seguridad operacional y evaluarlos con el SMS. El control RIE-12 está ${e}.`, 'Inventaría los elementos e interfaces relevantes para la seguridad operacional y llévalos al análisis de riesgos junto al responsable del SMS.', 'Part-IS, puntos .205 y .210'],
+      co15: ['Sin alfabetización en IA', (e) => `El art. 4 del RIA obliga desde el 02-02-2025 a proveedores y responsables del despliegue a adoptar medidas de alfabetización en IA. El control IA-15 está ${e}.`, 'Define un plan de alfabetización por perfil y registra la formación de quien opera o usa la IA.', 'RIA, art. 4'],
+      co16: ['Sin revisión de prácticas prohibidas', (e) => `Las prácticas del art. 5 están prohibidas desde el 02-02-2025 y llevan las multas más altas del RIA. El control IA-16 está ${e}.`, 'Contrasta cada sistema y uso de IA con el art. 5 y documenta la decisión.', 'RIA, art. 5'],
       co14: [(m, n) => `${m}: ${n} requisito${n === 1 ? '' : 's'} sin controles`, 'Un requisito sin controles cuenta siempre como brecha: Rosetta no puede saber qué lo cumple.', 'Abre el marco en Alcance y asigna los controles, empezando por las sugerencias.']
     },
     en: {
@@ -347,6 +368,8 @@
       co06p: (n) => `${n === 1 ? 'One measure' : n + ' measures'} declared "Implemented" in the ENS SoA with only partial controls`, nMed: (n) => `${n} ENS measures`,
       co12: ['No reporting to the aviation authority', (e) => `Part-IS requires reporting to the competent authority (AESA or EASA) the incidents and vulnerabilities that may represent a significant risk to aviation safety, coordinated with Regulation (EU) 376/2014. It does not replace NIS2 reporting. Control INC-09 is ${e}.`, 'Define the channel, the deadlines of point .230 and its AMC, and who reports; link it to the occurrence reporting the SMS already does.', 'Part-IS, point IS.I.OR.230 / IS.D.OR.230'],
       co13: ['Risk assessment without the aviation safety view', (e) => `Part-IS does not look only at information: it asks you to identify the elements and interfaces whose compromise could affect aviation safety and to assess them with the SMS. Control RIE-12 is ${e}.`, 'List the elements and interfaces relevant to aviation safety and bring them into the risk assessment with the safety manager.', 'Part-IS, points .205 and .210'],
+      co15: ['No AI literacy', (e) => `AI Act art. 4 has required providers and deployers to take AI literacy measures since 02-02-2025. Control IA-15 is ${e}.`, 'Define a literacy plan by role and record the training of those who operate or use AI.', 'AI Act, art. 4'],
+      co16: ['No review of prohibited practices', (e) => `The practices in art. 5 have been prohibited since 02-02-2025 and carry the AI Act’s highest fines. Control IA-16 is ${e}.`, 'Check every AI system and use against art. 5 and document the decision.', 'AI Act, art. 5'],
       co14: [(m, n) => `${m}: ${n} requirement${n === 1 ? '' : 's'} without controls`, 'A requirement without controls always counts as a gap: Rosetta cannot know what meets it.', 'Open the framework in Scope and assign controls, starting with the suggestions.']
     }
   };
@@ -358,7 +381,9 @@
     'CO-10': 'Control implemented without an owner.', 'CO-11': 'Partial control without a dated planned action.',
     'CO-12': 'Part-IS in scope without external reporting to the aviation authority (point .230).',
     'CO-13': 'Part-IS in scope without a risk assessment covering the impact on aviation safety (point .205).',
-    'CO-14': 'Requirement of a custom framework with no controls assigned: it cannot be measured.'
+    'CO-14': 'Requirement of a custom framework with no controls assigned: it cannot be measured.',
+    'CO-15': 'AI Act in scope without AI literacy (art. 4, mandatory since 02-02-2025).',
+    'CO-16': 'AI Act in scope without a review of prohibited practices (art. 5, mandatory since 02-02-2025).'
   };
   function coherencia(ix, st, calc, opts = {}) {
     const lang = opts.lang === 'en' ? 'en' : 'es'; const M = MSG[lang];
@@ -367,12 +392,14 @@
     const on = (f) => calc.alcance.includes(f);
     const est = (id) => estadoUc(st, id);
     const ct = (id) => tt(ix.ucMap[id], 't', lang);
-    const lbl = (f) => etiqueta(ix, f);
+    const lbl = (f) => etiqueta(ix, f, lang);
     const rq = (f, id) => `${lbl(f)} ${codigo(ix, f, id)}`;
     if (on('nis2') && est('INC-07') !== 'implantado') add('CO-01', 'INC-07', M.co01[0], M.co01[1](M.est(est('INC-07'))), M.co01[2], M.co01[3]);
     if (on('nis2')) for (const id of ['GOB-03', 'GOB-04']) if (est(id) !== 'implantado') add('CO-04', id, `${ct(id)}: ${M.est(est(id))}`, M.co04[0], id === 'GOB-03' ? M.co04[1] : M.co04[2], M.co04[3]);
     if (on('iso42001') && est('IA-05') !== 'implantado') add('CO-05', 'IA-05', M.co05[0], M.co05[1], M.co05[2], M.co05[3]);
     if (on('partis') && ix.ucMap['INC-09'] && est('INC-09') !== 'implantado') add('CO-12', 'INC-09', M.co12[0], M.co12[1](M.est(est('INC-09'))), M.co12[2], M.co12[3]);
+    if (on('ria') && ix.ucMap['IA-15'] && est('IA-15') !== 'implantado') add('CO-15', 'IA-15', M.co15[0], M.co15[1](M.est(est('IA-15'))), M.co15[2], M.co15[3]);
+    if (on('ria') && ix.ucMap['IA-16'] && est('IA-16') !== 'implantado') add('CO-16', 'IA-16', M.co16[0], M.co16[1](M.est(est('IA-16'))), M.co16[2], M.co16[3]);
     if (on('partis') && ix.ucMap['RIE-12'] && est('RIE-12') !== 'implantado') add('CO-13', 'RIE-12', M.co13[0], M.co13[1](M.est(est('RIE-12'))), M.co13[2], M.co13[3]);
     for (const f of calc.alcance) {
       if (!ix.propio[f]) continue;
@@ -603,6 +630,8 @@
       n2Dora: 'Entidad financiera: DORA prevalece como lex specialis en gestión de riesgos y notificación (art. 4 NIS2). Confirma con tu supervisor qué queda de NIS2.',
       n2Base: 'Directiva (UE) 2022/2555, arts. 2 y 3', n2Base26: 'Directiva (UE) 2022/2555, art. 26', n2Base4: 'Directiva (UE) 2022/2555, art. 4', n2Trans: ' La aplicación concreta depende de la ley nacional de transposición.',
       ia: 'Norma voluntaria, pero es la base reconocida para gobernar los sistemas de IA y preparar el RIA (Reglamento (UE) 2024/1689).', iaNo: 'La organización no desarrolla ni despliega sistemas de IA.',
+      riaOk: 'Desarrolla o despliega IA en la UE: le aplican al menos la alfabetización en IA y las prácticas prohibidas (desde el 02-02-2025). El resto depende del rol (proveedor o responsable del despliegue) y del riesgo: transparencia desde el 02-08-2026 y alto riesgo del anexo III desde el 02-12-2027 (Reglamento (UE) 2026/1744).',
+      riaFuera: 'Fuera de la UE, el RIA alcanza a quien comercializa sistemas en la Unión o cuyos resultados se usan en ella (art. 2.1).', riaBase: 'Reglamento (UE) 2024/1689, art. 2', riaNo: 'La organización no desarrolla ni despliega sistemas de IA.',
       piI: 'Organización aprobada (operador, CAMO, Part-145, Part-147, ATO, ATM/ANS…): le aplica el anexo II (IS.I.OR) desde el 22-02-2026.',
       piD: 'Organización de diseño o producción (Part-21, subpartes G y J) u operador de aeródromo o servicio de dirección en plataforma: le aplica el anexo (IS.D.OR) desde el 16-10-2025.',
       piID: 'Tiene aprobaciones de los dos grupos: le aplican IS.I.OR (desde el 22-02-2026) e IS.D.OR (desde el 16-10-2025).',
@@ -610,7 +639,7 @@
       piNo: 'No es una organización aprobada por EASA o AESA.',
       piBaseI: 'Reglamento de Ejecución (UE) 2023/203, modificado por el (UE) 2025/2293', piBaseD: 'Reglamento Delegado (UE) 2022/1645, modificado por el (UE) 2025/22',
       propio: 'Marco propio: lo decide la organización o lo pide un cliente.', propioBase: 'Contractual o voluntaria',
-      dora: 'Entidad financiera: le aplica DORA. Rosetta lo incluirá en la versión 2.8.0.', ria: 'Desarrolla o despliega IA: revisa sus obligaciones según el rol y el nivel de riesgo. Rosetta lo incluirá en la 2.5.0.',
+      dora: 'Entidad financiera: le aplica DORA. Rosetta lo incluirá en la versión 2.8.0.',
       cra: 'Fabrica productos con elementos digitales: le aplicarán los requisitos esenciales del CRA. Rosetta lo incluirá en la 2.6.0.'
     },
     en: {
@@ -623,6 +652,8 @@
       n2Dora: 'Financial entity: DORA prevails as lex specialis for risk management and reporting (NIS2 art. 4). Confirm with your supervisor what remains of NIS2.',
       n2Base: 'Directive (EU) 2022/2555, arts. 2 and 3', n2Base26: 'Directive (EU) 2022/2555, art. 26', n2Base4: 'Directive (EU) 2022/2555, art. 4', n2Trans: ' How it applies depends on the national transposition law.',
       ia: 'Voluntary standard, but the recognised basis to govern AI systems and prepare for the AI Act (Regulation (EU) 2024/1689).', iaNo: 'The organisation neither develops nor deploys AI systems.',
+      riaOk: 'It develops or deploys AI in the EU: at least AI literacy and the prohibited practices apply (since 02-02-2025). The rest depends on the role (provider or deployer) and the risk: transparency from 02-08-2026 and Annex III high risk from 02-12-2027 (Regulation (EU) 2026/1744).',
+      riaFuera: 'Outside the EU, the AI Act reaches those who place systems on the Union market or whose output is used in it (art. 2.1).', riaBase: 'Regulation (EU) 2024/1689, art. 2', riaNo: 'The organisation neither develops nor deploys AI systems.',
       piI: 'Approved organisation (operator, CAMO, Part-145, Part-147, ATO, ATM/ANS…): Annex II (IS.I.OR) applies from 22-02-2026.',
       piD: 'Design or production organisation (Part-21, Subparts G and J) or aerodrome operator or apron management service: the Annex (IS.D.OR) applies from 16-10-2025.',
       piID: 'It holds approvals in both groups: IS.I.OR (from 22-02-2026) and IS.D.OR (from 16-10-2025) apply.',
@@ -630,7 +661,7 @@
       piNo: 'Not an organisation approved by EASA or a national aviation authority.',
       piBaseI: 'Implementing Regulation (EU) 2023/203, as amended by (EU) 2025/2293', piBaseD: 'Delegated Regulation (EU) 2022/1645, as amended by (EU) 2025/22',
       propio: 'Custom framework: chosen by the organisation or required by a customer.', propioBase: 'Contractual or voluntary',
-      dora: 'Financial entity: DORA applies. Rosetta will add it in version 2.8.0.', ria: 'It develops or deploys AI: check its obligations by role and risk level. Rosetta will add it in 2.5.0.',
+      dora: 'Financial entity: DORA applies. Rosetta will add it in version 2.8.0.',
       cra: 'It manufactures products with digital elements: the CRA essential requirements will apply. Rosetta will add it in 2.6.0.'
     }
   };
@@ -669,11 +700,11 @@
     const sgsiLegal = m.partis.estado === 'obligatoria' || m.nis2.estado === 'obligatoria' || m.ens.estado === 'obligatoria' || financiera;
     m.iso27001 = R('voluntaria', T.iso27Base, sgsiLegal ? T.iso27Sgsi : T.iso27);
     m.iso42001 = p.ia ? R('voluntaria', T.iso27Base, T.ia) : R('no-aplica', T.iso27Base, T.iaNo);
+    m.ria = !p.ia ? R('no-aplica', T.riaBase, T.riaNo) : ue ? R('obligatoria', T.riaBase, T.riaOk) : R('confirmar', T.riaBase, T.riaFuera);
     for (const f of propios || []) m[f] = R('voluntaria', T.propioBase, T.propio);
     // Normas que la organización tendrá que mirar y Rosetta aún no incluye
     const futuras = [];
     if (financiera && ue) futuras.push({ id: 'dora', nombre: 'DORA', base: 'Reglamento (UE) 2022/2554', version: '2.8.0', motivo: T.dora });
-    if (p.ia && ue) futuras.push({ id: 'ria', nombre: lang === 'en' ? 'AI Act' : 'RIA', base: 'Reglamento (UE) 2024/1689', version: '2.5.0', motivo: T.ria });
     if (p.fabricante && ue) futuras.push({ id: 'cra', nombre: 'CRA', base: 'Reglamento (UE) 2024/2847', version: '2.6.0', motivo: T.cra });
     if (lang === 'en') for (const x of futuras) x.base = x.base.replace('Reglamento', 'Regulation');
     return { perfil: p, marcos: m, futuras };
@@ -701,13 +732,13 @@
   }
 
   /** Nombre corto de una norma o de un marco propio. */
-  function etiqueta(ix, f) { return FW_LABEL[f] || (ix && ix.cat.frameworks[f] && ix.cat.frameworks[f].nombre) || f; }
+  function etiqueta(ix, f, lang) { return (lang === 'en' && FW_LABEL_EN[f]) || FW_LABEL[f] || (ix && ix.cat.frameworks[f] && ix.cat.frameworks[f].nombre) || f; }
   function codigo(ix, f, id) { const r = ix.req[f][id]; return r ? r.code || id : id; }
   function titulo(ix, f, id, lang) { const r = ix.req[f][id]; return r ? tt(r, 't', lang) : id; }
   function dias(a, b) { return Math.round((new Date(b + 'T00:00:00') - new Date(a + 'T00:00:00')) / 86400000); }
   function instantanea(calc) { const o = {}; for (const f of Object.keys(calc.fw)) o[f] = calc.fw[f].on ? Math.round(calc.fw[f].grado * 1000) / 1000 : null; return { cov: o, grado: Math.round(calc.kpi.grado * 1000) / 1000, brechas: calc.kpi.brechas }; }
 
-  return { FW, FW_LABEL, etiqueta, fundirPropios, listaNormas, FW_LONG, FW_LONG_EN, ESTADOS, ESTADO_LABEL, ESTADO_LABEL_EN, REGLAS_EN, tt, SCORE, W, DIMS, NIVELES_ENS, CAT_NIVEL, REGLAS, TAMANOS, NIS2_ESPECIALES,
+  return { FW, FW_LABEL, FW_LABEL_EN, etiqueta, riaAlcance, RIA_ROLES, RIA_GPAI, fundirPropios, listaNormas, FW_LONG, FW_LONG_EN, ESTADOS, ESTADO_LABEL, ESTADO_LABEL_EN, REGLAS_EN, tt, SCORE, W, DIMS, NIVELES_ENS, CAT_NIVEL, REGLAS, TAMANOS, NIS2_ESPECIALES,
     ESTADOS_PERFIL, JURISDICCIONES, AVIACION, PERFIL_DEF, perfilNormalizado, perfilRegulatorio, sugerirControles,
     indexar, nivelExigidoEns, categoriaEfectiva, excluible, exigidaEns, categoriaDeNiveles, aplicaReq, coberturaReq, calcular, solapamiento, inferencia,
     equivalencias, prioridades, parseIsoRef, parejasClase, ccnPareja, fuerzaCcn, contrasteCcn825, coherencia, planAccion, puntuacionEns, desdeSoaEns, nis2Aplicabilidad, orden, codigo, titulo, instantanea, estadoUc };

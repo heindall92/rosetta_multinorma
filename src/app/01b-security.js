@@ -114,7 +114,8 @@ function sanitizeState(raw) {
     iso27001: { on: g('iso27001').on === true },
     nis2: { on: g('nis2').on === true, tipo: oneOf(g('nis2').tipo, NIS2_TIPOS, 'fuera') },
     iso42001: { on: g('iso42001').on === true },
-    partis: { on: g('partis').on === true, regimen: oneOf(g('partis').regimen, PARTIS_REG, 'I') }
+    partis: { on: g('partis').on === true, regimen: oneOf(g('partis').regimen, PARTIS_REG, 'I') },
+    ria: { on: g('ria').on === true, ...E.riaAlcance(g('ria')) }
   };
   for (const m of st.marcos) st.alcance[m.id] = { on: g(m.id).on === true };
   for (const f of fws) if (mot(f)) st.alcance[f].motivo = mot(f);

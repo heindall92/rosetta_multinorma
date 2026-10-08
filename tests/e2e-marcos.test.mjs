@@ -44,7 +44,7 @@ test('caso de aviación: Part-IS en el mapa, con su prefijo, su matiz y sin excl
   const rings = await page.locator('.wheel:not(.hero) .ring-lbl').allTextContents();
   assert.deepEqual(rings, ['27001', 'NIS2', 'Part-IS'], 'el mapa circular solo dibuja las normas del alcance');
   const leyenda = await page.locator('.wheel-legend').innerText();
-  assert.match(leyenda, /Part-IS\s*obligatoria/); assert.match(leyenda, /27001\s*voluntaria/); assert.match(leyenda, /\+2 fuera del alcance/);
+  assert.match(leyenda, /Part-IS\s*obligatoria/); assert.match(leyenda, /27001\s*voluntaria/); const fuera = (await R(() => window.__ROSETTA__.FW.length)) - 3; assert.match(leyenda, new RegExp(`\\+${fuera} fuera del alcance`));
   await act('goto-norma', { fw: 'partis' });
   assert.match(await page.locator('#view').innerText(), /IS\.I\.OR\.230/);
   await act('insp-req', { fw: 'partis', id: 'OR.230' });
@@ -176,7 +176,7 @@ test('Excel e informe con columnas y hojas para Part-IS y los marcos propios', a
   assert.ok(!/<img/.test(md.text), 'el informe no lleva HTML');
   const ctl = await descarga(() => act('export-ctl'));
   const head = ctl.text.split('\r\n')[0];
-  assert.match(head, /;ENS;ISO\/IEC 27001;NIS2;ISO\/IEC 42001;Part-IS;img src=x onerror=window\.__xss=1Política ACME;/); assert.match(head, /;Pliego Ayuntamiento 2026;/);
+  assert.match(head, /;ENS;ISO\/IEC 27001;NIS2;ISO\/IEC 42001;Part-IS;RIA;/); assert.match(head, /;img src=x onerror=window\.__xss=1Política ACME;/); assert.match(head, /;Pliego Ayuntamiento 2026;/);
   noErrors('exportaciones');
 });
 
@@ -212,4 +212,23 @@ test('los ficheros de ejemplo del repositorio se importan sin avisos', async () 
     assert.match(toast, new RegExp(`importado con ${n} requisitos`)); assert.ok(!/omitid/.test(toast), toast);
   }
   noErrors('ficheros de ejemplo');
+});
+
+test('RIA: rol y riesgo deciden qué se exige, con fecha de aplicación y etiqueta en inglés', async () => {
+  await R(() => window.__ROSETTA__.openCase('lumen')); await R(() => window.__ROSETTA__.go('alcance'));
+  assert.ok((await R(() => window.__ROSETTA__.calc.alcance)).includes('ria'));
+  const n0 = await R(() => window.__ROSETTA__.calc.fw.ria.aplicables);
+  await page.selectOption('#set-ria-rol', 'responsable'); await page.waitForTimeout(150);
+  const n1 = await R(() => window.__ROSETTA__.calc.fw.ria.aplicables);
+  assert.ok(n1 < n0, `${n1} < ${n0}`);
+  await act('goto-norma', { fw: 'ria' });
+  assert.equal(await page.locator('[data-act="norma-estado"][data-v="no-exigido"]').count(), 1);
+  await act('insp-req', { fw: 'ria', id: '9' });
+  const insp = await page.locator('#insp').innerText();
+  assert.match(insp, /No exigido para el rol/); assert.match(insp, /Aplicable desde/); assert.match(insp, /2026\/1744/);
+  await act('insp-close');
+  await act('lang', { v: 'en' }); await page.waitForTimeout(150);
+  assert.match(await page.locator('#view').innerText(), /AI Act/);
+  await act('lang', { v: 'es' }); await page.waitForTimeout(150);
+  noErrors('RIA');
 });

@@ -35,7 +35,7 @@ function inspUc(id) {
 }
 /* Ficha de un requisito: el matiz de Part-IS con su fuente, o el texto que trae un marco propio */
 function extraReq(f, r) {
-  if (f === 'partis') return `<div class="nota"><b>${esc(t('partisNota'))}.</b> ${esc(tt(r, 'nota'))}</div><p class="tiny muted">${esc(tt(r, 'ref'))}</p>`;
+  if (r.nota || r.desde) return `${r.nota ? `<div class="nota fw-${fwCls(f)}"><b>${esc(t(f === 'partis' ? 'partisNota' : 'fwNota'))}.</b> ${esc(tt(r, 'nota'))}</div>` : ''}${r.desde ? `<p class="small"><b>${esc(t('appliesFrom'))}:</b> ${esc(fmtDate(r.desde))}</p>` : ''}${r.ref ? `<p class="tiny muted">${esc(tt(r, 'ref'))}</p>` : ''}`;
   if (esPropio(f)) return `<div class="blk"><h4>${esc(t('mpBadge'))} · ${esc(t('mpUserMap'))}</h4>${r.texto ? `<p class="small">${esc(r.texto)}</p>` : ''}</div>`;
   return '';
 }
@@ -52,7 +52,7 @@ function inspReq(f, id) {
   return `${inspHead(`${fwTag(f, !onFw(f))} <span class="mono">${esc(reqCode(f, id))}</span>`, rT(f, id), 'file-check', `fw-${fwCls(f)}`)}
   <p class="small muted">${esc(rG(f, id))}</p>
   <div class="row">${onFw(f) ? covPill(cov.estado) : `<span class="pill neutral">${esc(t('outOfScope'))}</span>`}${cov.estado !== 'no-exigido' && cov.estado !== 'excluido' ? `<span class="small muted num">${esc(t('support', pct(cov.score)))}</span>` : ''}</div>
-  ${cov.estado === 'no-exigido' ? `<div class="callout">${icon('info', 17)}<span>${esc(t('notRequired', t('lv.' + cov.nivel), cov.exigencia))}</span></div>` : ''}
+  ${cov.estado === 'no-exigido' ? `<div class="callout">${icon('info', 17)}<span>${esc(noExigidoTxt(f, cov))}</span></div>` : ''}
   ${ens}${extraReq(f, r)}
   <div class="blk"><h4>${esc(t('supportedBy'))} · ${ctl.length}</h4>${ctl.map((l) => { const fz = fuerzaDe(l.w); return `<div class="ucrow">${ucChip(l.uc)}<div style="min-width:0"><b>${esc(cT(l.uc))}</b><div><span class="weight ${fz}">${esc(t('fuerzaCorta.' + fz))}</span></div></div>${l.w > 0 ? stateSwitch(l.uc, E.estadoUc(state, l.uc)) : '<span></span>'}</div>`; }).join('')}</div>
   <div class="blk"><h4>${esc(t('equivalents'))}</h4><div class="maps">${eqs}</div></div>

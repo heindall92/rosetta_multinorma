@@ -12,4 +12,4 @@
 
 ## Siguiente paso
 
-- La siguiente versión y las posteriores están en `ROADMAP.md`. La 2.4.0 (Part-IS, marcos propios y perfil regulatorio) está publicada; la siguiente es la **2.5.0, RIA / AI Act (Reglamento (UE) 2024/1689)**, que añade su regla al perfil regulatorio. Léelo antes de proponer trabajo nuevo en Rosetta.
+- La siguiente versión y las posteriores están en `ROADMAP.md`. La 2.5.0 (RIA) está publicada; la siguiente es la **2.6.0, CRA (Reglamento (UE) 2024/2847)**, que añade su regla al perfil regulatorio y reutiliza GOB-15 (conformidad y marcado CE). Léelo antes de proponer trabajo nuevo en Rosetta.

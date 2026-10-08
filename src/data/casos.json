@@ -23,8 +23,8 @@
         "iso27001",
         "nis2"
       ],
-      "grado": 0.9051554641060814,
-      "controles": 99,
+      "grado": 0.8934777777777779,
+      "controles": 101,
       "brechas": 4,
       "altas": 3,
       "nis2": "importante"
@@ -63,6 +63,13 @@
         "partis": {
           "on": false,
           "regimen": "I"
+        },
+        "ria": {
+          "on": false,
+          "rol": "ambos",
+          "alto": true,
+          "transparencia": true,
+          "gpai": "no"
         }
       },
       "nis2q": {
@@ -1479,12 +1486,13 @@
       "normas": [
         "ens",
         "nis2",
-        "iso42001"
+        "iso42001",
+        "ria"
       ],
-      "grado": 0.7452033218785795,
-      "controles": 112,
-      "brechas": 27,
-      "altas": 3,
+      "grado": 0.7078681552365762,
+      "controles": 122,
+      "brechas": 31,
+      "altas": 4,
       "nis2": "esencial"
     },
     "state": {
@@ -1521,6 +1529,13 @@
         "partis": {
           "on": false,
           "regimen": "I"
+        },
+        "ria": {
+          "on": true,
+          "rol": "responsable",
+          "alto": true,
+          "transparencia": false,
+          "gpai": "no"
         }
       },
       "nis2q": {
@@ -2433,6 +2448,38 @@
           "revision": "2025-12-19",
           "notas": "",
           "origen": ""
+        },
+        "IA-15": {
+          "estado": "parcial",
+          "responsable": "Responsable de IA",
+          "evidencias": "",
+          "revision": "2026-09-15",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-16": {
+          "estado": "implantado",
+          "responsable": "Responsable de IA",
+          "evidencias": "Registro de decisiones del art. 5 (ficticio)",
+          "revision": "2026-09-15",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-17": {
+          "estado": "parcial",
+          "responsable": "Responsable de IA",
+          "evidencias": "",
+          "revision": "2026-09-15",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-19": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
         }
       },
       "exclusiones": {
@@ -2929,12 +2976,13 @@
       "normas": [
         "ens",
         "iso27001",
-        "iso42001"
+        "iso42001",
+        "ria"
       ],
-      "grado": 0.7933181848119608,
-      "controles": 112,
-      "brechas": 17,
-      "altas": 5,
+      "grado": 0.7587693886172975,
+      "controles": 123,
+      "brechas": 20,
+      "altas": 6,
       "nis2": null
     },
     "state": {
@@ -2971,6 +3019,13 @@
         "partis": {
           "on": false,
           "regimen": "I"
+        },
+        "ria": {
+          "on": true,
+          "rol": "proveedor",
+          "alto": true,
+          "transparencia": false,
+          "gpai": "no"
         }
       },
       "nis2q": {
@@ -3883,6 +3938,70 @@
           "revision": "2026-03-07",
           "notas": "",
           "origen": ""
+        },
+        "IA-15": {
+          "estado": "parcial",
+          "responsable": "Responsable de IA",
+          "evidencias": "",
+          "revision": "2026-09-15",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-16": {
+          "estado": "implantado",
+          "responsable": "Responsable de IA",
+          "evidencias": "Registro de decisiones del art. 5 (ficticio)",
+          "revision": "2026-09-15",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-17": {
+          "estado": "parcial",
+          "responsable": "Responsable de IA",
+          "evidencias": "",
+          "revision": "2026-09-15",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-18": {
+          "estado": "parcial",
+          "responsable": "Responsable de IA",
+          "evidencias": "",
+          "revision": "2026-09-15",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-15": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-19": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-20": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-10": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
         }
       },
       "exclusiones": {
@@ -4019,9 +4138,9 @@
         "iso27001",
         "nis2"
       ],
-      "grado": 0.8305876685934489,
+      "grado": 0.8197443181818183,
       "controles": 97,
-      "brechas": 8,
+      "brechas": 10,
       "altas": 3,
       "nis2": "importante"
     },
@@ -4053,6 +4172,13 @@
         "partis": {
           "on": false,
           "regimen": "I"
+        },
+        "ria": {
+          "on": false,
+          "rol": "ambos",
+          "alto": true,
+          "transparencia": true,
+          "gpai": "no"
         }
       },
       "nis2q": {
@@ -5096,12 +5222,13 @@
       "normas": [
         "ens",
         "iso27001",
-        "iso42001"
+        "iso42001",
+        "ria"
       ],
-      "grado": 0.6834051724137931,
-      "controles": 112,
-      "brechas": 57,
-      "altas": 1,
+      "grado": 0.6648071625344353,
+      "controles": 121,
+      "brechas": 58,
+      "altas": 3,
       "nis2": null
     },
     "state": {
@@ -5138,6 +5265,13 @@
         "partis": {
           "on": false,
           "regimen": "I"
+        },
+        "ria": {
+          "on": true,
+          "rol": "proveedor",
+          "alto": false,
+          "transparencia": true,
+          "gpai": "no"
         }
       },
       "nis2q": {
@@ -6050,6 +6184,30 @@
           "revision": "2025-12-02",
           "notas": "",
           "origen": ""
+        },
+        "IA-15": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-16": {
+          "estado": "parcial",
+          "responsable": "Responsable de IA",
+          "evidencias": "",
+          "revision": "2026-09-15",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-20": {
+          "estado": "parcial",
+          "responsable": "Responsable de IA",
+          "evidencias": "",
+          "revision": "2026-09-15",
+          "notas": "",
+          "origen": ""
         }
       },
       "exclusiones": {
@@ -6597,6 +6755,13 @@
         "partis": {
           "on": true,
           "regimen": "I"
+        },
+        "ria": {
+          "on": false,
+          "rol": "ambos",
+          "alto": true,
+          "transparencia": true,
+          "gpai": "no"
         }
       },
       "nis2q": {

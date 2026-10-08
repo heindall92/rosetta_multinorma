@@ -295,7 +295,7 @@ function vNormas() {
   const rows = calc.req[f].filter((r) => (ui.normaEstado === 'todos' || r.estado === ui.normaEstado) && (!q || normTxt(`${reqCode(f, r.id)} ${IX.req[f][r.id].code} ${rT(f, r.id)}`).includes(q)));
   const tabs = `<div class="lens-row" role="group" aria-label="${esc(t('fws'))}">${FW.map((g) => { const w = calc.fw[g]; return `<button type="button" class="lens-tab fw-${fwCls(g)}${onFw(g) ? '' : ' off'}" data-act="norma-fw" data-fw="${g}" aria-pressed="${g === f}">${miniRing(g, w.grado, w.cubiertos, w.aplicables, 52, !onFw(g))}<span><b>${fwLbl(g)}</b><small>${onFw(g) ? `${pct(w.grado)} · ${w.brechas} ${esc(t('gaps'))}` : esc(t('ringOff'))}</small></span></button>`; }).join('')}</div>`;
   const cntE = (e) => calc.req[f].filter((r) => r.estado === e).length;
-  const filtros = [['todos', t('all'), calc.req[f].length], ...['brecha', 'parcial', 'cubierto', 'excluido', ...(f === 'ens' ? ['no-exigido'] : [])].map((e) => [e, t('cov.' + e), cntE(e)])];
+  const filtros = [['todos', t('all'), calc.req[f].length], ...['brecha', 'parcial', 'cubierto', 'excluido', ...(calc.req[f].some((r) => r.estado === 'no-exigido') ? ['no-exigido'] : [])].map((e) => [e, t('cov.' + e), cntE(e)])];
   let html = ''; let lastG = null; let buf = '';
   const flush = () => { if (buf) html += `<section class="glass list"><div class="sec-h">${icon('file-check', 16)}${esc(lastG)}<small>${buf.split('class="li req').length - 1}</small></div>${buf}</section>`; buf = ''; };
   for (const r of rows) {
@@ -421,6 +421,16 @@ function propuestaTabla() {
     ${futurasBox(prop)}
     <div class="callout">${icon('info', 17)}<span>${esc(t('prDisclaimer'))}</span></div></section>`;
 }
+function riaBox() {
+  const a = state.alcance.ria; const F = CAT0.frameworks.ria;
+  const sw = (k) => `<label class="switch-l"><span class="switch"><input type="checkbox" id="set-ria-${k}" data-set="alcance.ria.${k}" data-type="bool"${a[k] ? ' checked' : ''}><span></span></span><span class="small">${esc(t('riaQ.' + k))}</span></label>`;
+  return `<section class="glass pane stack"><h3>${fwTag('ria')} ${esc(t('riaTitle'))}</h3>
+    <div class="form"><label class="fld">${esc(t('riaRol'))}<select id="set-ria-rol" data-set="alcance.ria.rol">${t('riaRoles').map(([v, l]) => opt(v, l, a.rol)).join('')}</select></label>
+      <label class="fld">${esc(t('riaGpai'))}<select id="set-ria-gpai" data-set="alcance.ria.gpai">${t('riaGpais').map(([v, l]) => opt(v, l, a.gpai)).join('')}</select></label>
+      <div class="span2 pf-sw">${sw('alto')}${sw('transparencia')}</div></div>
+    <p class="small">${esc(t('riaTxt', calc.fw.ria.aplicables, calc.fw.ria.total))}</p>
+    <p class="hint">${esc(t('partisSrc', F.fuentes.join(' · '), fmtDate(F.consulta)))}</p></section>`;
+}
 function partisBox() {
   const a = state.alcance.partis; const F = CAT0.frameworks.partis;
   return `<section class="glass pane stack"><h3>${fwTag('partis')} ${esc(t('partisTitle'))}</h3>
@@ -467,6 +477,7 @@ function vAlcance() {
   <section class="glass pane stack"><div class="pane-h"><div><h3>${esc(t('prTitle'))}</h3><p>${esc(t('prLead'))}</p></div></div>${perfilForm(state.perfil, 'set')}<p class="hint">${esc(t('prNis2Hint'))}</p></section>
   ${propuestaTabla()}
   ${a.partis.on ? partisBox() : ''}
+  ${a.ria.on ? riaBox() : ''}
   ${a.ens.on ? `<section class="glass pane stack"><h3>${fwTag('ens')} ${esc(t('ensCat'))}</h3>${ensLevels(a.ens, 'set')}<p class="hint">${esc(t('ensCount', calc.fw.ens.aplicables + calc.fw.ens.excluidos, calc.fw.ens.noExigidos))}</p>
     <div class="row"><button type="button" class="btn sm" data-act="import-ens-into">${icon('upload', 15)}${esc(t('updateFromEns'))}</button><span class="hint">${esc(t('updateFromEnsTxt'))}</span></div></section>` : ''}
   <section class="glass pane stack"><h3>${fwTag('nis2')} ${esc(t('nis2Title'))}</h3>${nis2Form(state.nis2q, 'set')}${nis2Box(state.nis2q)}</section>
