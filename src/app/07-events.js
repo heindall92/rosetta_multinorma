@@ -6,7 +6,8 @@ function setPath(obj, path, value, schema = 'state') {
   // Solo rutas conocidas del modelo (lista blanca)
   const okState = (ks[0] === 'controles' && UC_IDS.has(ks[1]) && ['estado', 'responsable', 'evidencias', 'revision', 'notas'].includes(ks[2]) && ks.length === 3)
     || (ks[0] === 'proyecto' && ['nombre', 'organizacion', 'descripcion', 'sector'].includes(ks[1]) && ks.length === 2)
-    || (ks[0] === 'alcance' && FW.includes(ks[1]) && ((ks[2] === 'on' && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'categoria' && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'niveles' && E.DIMS.includes(ks[3]) && ks.length === 4)))
+    || (ks[0] === 'alcance' && FW.includes(ks[1]) && ((['on', 'motivo'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'categoria' && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'niveles' && E.DIMS.includes(ks[3]) && ks.length === 4) || (ks[1] === 'partis' && ks[2] === 'regimen' && ks.length === 3)))
+    || (ks[0] === 'perfil' && has(E.PERFIL_DEF, ks[1]) && ks.length === 2)
     || (ks[0] === 'nis2q' && ['sector', 'especial', 'tamano', 'infraDigital'].includes(ks[1]) && ks.length === 2);
   const ok = schema === 'ws' ? ((ks[0] === 'profile' || ks[0] === 'settings') && ks.length === 2)
     : schema === 'wz' ? (okState && ks[0] !== 'controles' && ks[0] !== 'proyecto') || (['organizacion', 'descripcion', 'sector', 'inicio'].includes(ks[0]) && ks.length === 1)
@@ -20,6 +21,9 @@ function setPath(obj, path, value, schema = 'state') {
   else if (ks[0] === 'controles' && last === 'revision') o[last] = dateOk(value);
   else if (ks[0] === 'alcance' && last === 'categoria') o[last] = oneOf(value, CATS_ENS, 'MEDIA');
   else if (ks[0] === 'alcance' && ks[2] === 'niveles') o[last] = oneOf(value, E.NIVELES_ENS, undefined);
+  else if (ks[0] === 'alcance' && last === 'regimen') o[last] = oneOf(value, PARTIS_REG, 'I');
+  else if (ks[0] === 'alcance' && last === 'motivo') o[last] = s(value, 300);
+  else if (ks[0] === 'perfil') o[last] = typeof E.PERFIL_DEF[last] === 'boolean' ? value === true : E.perfilNormalizado({ [last]: value })[last];
   else o[last] = typeof value === 'string' ? s(value) : value;
   return true;
 }
@@ -59,18 +63,21 @@ document.addEventListener('change', (ev) => {
   if (el.dataset.uibool) { ui[el.dataset.uibool] = el.checked; render(); return; }
   if (el.dataset.exsw && state) {
     const f = el.dataset.fw, id = el.dataset.id; if (!FW.includes(f) || !IX.req[f][id] || !E.excluible(f, id)) return;
-    if (el.checked) { state.exclusiones[f][id] = ''; commit(t('tExcl', `${E.FW_LABEL[f]} ${reqCode(f, id)}`)); const inp = document.getElementById(`ex-${f}-${id}`); if (inp) inp.focus(); }
-    else { delete state.exclusiones[f][id]; commit(t('tIncl', `${E.FW_LABEL[f]} ${reqCode(f, id)}`)); }
+    if (el.checked) { state.exclusiones[f][id] = ''; commit(t('tExcl', `${fwLbl(f)} ${reqCode(f, id)}`)); const inp = document.getElementById(`ex-${f}-${id}`); if (inp) inp.focus(); }
+    else { delete state.exclusiones[f][id]; commit(t('tIncl', `${fwLbl(f)} ${reqCode(f, id)}`)); }
     return;
   }
   if (el.dataset.ws) { if (setPath(ws, el.dataset.ws, readVal(el), 'ws')) { const clean = sanitizeWs(ws); ws.settings = clean.settings; ws.profile = clean.profile; saveWs(); recompute(); render(); } return; }
-  if (el.dataset.wz) { const w = ui.wizard; if (w && setPath(w, el.dataset.wz, readVal(el), 'wz')) { if (el.dataset.wz.startsWith('nis2q.')) { const tp = E.nis2Aplicabilidad(w.nis2q).tipo; if (tp === 'esencial' || tp === 'importante') w.alcance.nis2.on = true; } w.error = ''; render(); } return; }
+  if (el.dataset.wz) { const w = ui.wizard; if (w && setPath(w, el.dataset.wz, readVal(el), 'wz')) { if (el.dataset.wz.startsWith('nis2q.')) { const tp = E.nis2Aplicabilidad(w.nis2q).tipo; if (tp === 'esencial' || tp === 'importante') w.alcance.nis2.on = true; } if (el.dataset.wz === 'perfil.aviacion' && w.perfil.aviacion !== 'no') w.alcance.partis.regimen = w.perfil.aviacion; w.error = ''; render(); } return; }
   if (el.dataset.rule) { const st = new Set(ws.settings.reglasOff); el.checked ? st.delete(el.dataset.rule) : st.add(el.dataset.rule); ws.settings.reglasOff = [...st]; saveWs(); recompute(); render(); return; }
   if (el.dataset.plan && state) { if (planField(el)) commit(); return; }
+  if (el.dataset.mpfz && state) { const r = mpReq(el.dataset.mpfz, el.dataset.req); const c = r && r.controles.find((x) => x.control === el.dataset.ctl); const w = Number(el.value); if (c && [0, 0.5, 1].includes(w)) { c.w = w; commit(t('tMpFz', c.control, t('mpFz.' + W_FUERZA(w)))); } return; }
+  if (el.dataset.mpadd && state) { mpAdd(el.dataset.mpadd, el.dataset.req, el.value); return; }
   const path = el.dataset.set; if (!path || !state) return;
   const v = readVal(el);
   if (!setPath(state, path, v)) return;
   if (path.startsWith('nis2q.')) { syncNis2(state); const tp = state.alcance.nis2.tipo; if ((tp === 'esencial' || tp === 'importante') && !state.alcance.nis2.on) { state.alcance.nis2.on = true; toast(t('tNis2On')); } }
+  if (path === 'perfil.aviacion' && state.perfil.aviacion !== 'no') state.alcance.partis.regimen = state.perfil.aviacion;
   if (path.startsWith('alcance.ens.niveles')) { const c = E.categoriaDeNiveles(state.alcance.ens.niveles); if (c) state.alcance.ens.categoria = c; }
   if (path === 'alcance.ens.categoria') state.alcance.ens.categoria = E.categoriaEfectiva(state.alcance.ens); // nunca por debajo de los niveles
   if (/^controles\.[^.]+\.estado$/.test(path)) { const d = state.controles[path.split('.')[1]]; if ((v === 'implantado' || v === 'parcial') && !d.revision) d.revision = today(); }
@@ -201,6 +208,17 @@ document.addEventListener('click', (ev) => {
     case 'reset-case': resetCase(el.dataset.case); break;
     case 'close-demos': for (const p of ws.projects.filter((x) => x.kind === 'demo')) deleteProject(p.id); render(); toast(t('tCasesClosed')); break;
     case 'ask': ui.confirm = el.dataset.what; render(); break;
+    case 'perfil-aplicar': if (state) { perfilAplicar(state, FW); state.perfil.confirmado = today(); syncNis2(state); commit(t('tPerfil')); } break;
+    case 'wz-perfil-aplicar': if (ui.wizard) { perfilAplicar(ui.wizard, FW_BASE); ui.wizard.error = ''; render(); toast(t('tPerfil')); } break;
+    case 'mp-import': if (state) pickFile('.json,.csv,application/json,text/csv', mpImport); break;
+    case 'mp-tpl-json': saveFile(LANG() === 'en' ? 'rosetta_framework_template.json' : 'plantilla_marco_rosetta.json', JSON.stringify(mpPlantilla(), null, 2)); break;
+    case 'mp-tpl-csv': saveFile(LANG() === 'en' ? 'rosetta_framework_template.csv' : 'plantilla_marco_rosetta.csv', mpPlantillaCsv()); break;
+    case 'mp-open': ui.mpOpen = ui.mpOpen === el.dataset.fw ? null : el.dataset.fw; ui.mpAll = false; render(); break;
+    case 'mp-all': ui.mpAll = true; render(); break;
+    case 'mp-export': mpExport(el.dataset.fw); break;
+    case 'mp-del': mpDel(el.dataset.fw); break;
+    case 'mp-add': mpAdd(el.dataset.fw, el.dataset.req, el.dataset.ctl); break;
+    case 'mp-rm': { const r = mpReq(el.dataset.fw, el.dataset.req); if (r) { r.controles = r.controles.filter((c) => c.control !== el.dataset.ctl); commit(t('tMpRm', el.dataset.ctl)); } break; }
     case 'confirm-no': ui.confirm = null; render(); break;
     case 'del-project': deleteProject(el.dataset.id); ui.confirm = null; render(); toast(t('tDeleted')); break;
     case 'wipe': for (const p of ws.projects) store.del(PKEY(p.id)); store.del(WS_KEY); ws = sanitizeWs(null); state = null; recompute(); applyTheme(); ui.confirm = null; ui.insp = null; go('inicio'); toast(t('tWiped')); break;
@@ -215,13 +233,13 @@ document.addEventListener('click', (ev) => {
     case 'wz-back': ui.wizard.step--; ui.wizard.error = ''; render(); break;
     case 'wz-next': { const w = ui.wizard;
       if (w.step === 1 && (blank(w.organizacion) || blank(w.descripcion))) { w.error = t('errOrg'); render(); break; }
-      if (w.step === 2 && !FW.some((f) => w.alcance[f].on)) { w.error = t('errFw'); render(); break; }
+      if (w.step === 2 && !FW_BASE.some((f) => w.alcance[f].on)) { w.error = t('errFw'); render(); break; }
       w.step++; w.error = ''; render(); break; }
     case 'wz-create': { const w = ui.wizard;
       if (w.inicio === 'ens' && !w.ensSoa) { w.error = t('errFile'); render(); break; }
       const alc = clone(w.alcance); alc.nis2.tipo = E.nis2Aplicabilidad(w.nis2q).tipo;
-      const st = blankState({ organizacion: w.organizacion, descripcion: w.descripcion, sector: w.sector, nombre: w.organizacion, alcance: alc, nis2q: clone(w.nis2q) });
-      if (w.inicio === 'todo') for (const c of CAT.controls) st.controles[c.id].estado = 'parcial';
+      const st = blankState({ organizacion: w.organizacion, descripcion: w.descripcion, sector: w.sector, nombre: w.organizacion, alcance: alc, nis2q: clone(w.nis2q), perfil: clone(w.perfil) });
+      if (w.inicio === 'todo') for (const c of CAT0.controls) st.controles[c.id].estado = 'parcial';
       let h = 0; if (w.inicio === 'ens') h = aplicaImportEns(st, w.ensSoa);
       ui.wizard = null; createProject(st, { msg: h ? t('tCreatedEns', h) : t('tCreated') }); break; }
     /* inspector y estado de controles */
@@ -285,4 +303,4 @@ if (ws.activeId && store.get(PKEY(ws.activeId))) { state = sanitizeState(store.g
 ui.view = [...PROJECT_VIEWS, ...GLOBAL_VIEWS].includes(initialView) && (state || !PROJECT_VIEWS.includes(initialView)) ? initialView : (state ? 'panel' : 'inicio');
 render();
 requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.add('ready'))); // sin animación del raíl al cargar
-window.__ROSETTA__ = Object.freeze({ get state() { return state; }, get calc() { return calc; }, get hall() { return hall; }, get plan() { return plan; }, get prio() { return prio; }, get ws() { return ws; }, get ui() { return ui; }, openCase, go, IX });
+window.__ROSETTA__ = Object.freeze({ get state() { return state; }, get calc() { return calc; }, get hall() { return hall; }, get plan() { return plan; }, get prio() { return prio; }, get ws() { return ws; }, get ui() { return ui; }, openCase, go, get IX() { return IX; }, get FW() { return FW; } });

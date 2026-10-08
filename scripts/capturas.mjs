@@ -11,7 +11,7 @@ const OUT = join(ROOT, 'docs/img/readme');
 const VISTAS = [
   ['inicio-light', 'inicio', 'claro', null, 1440], ['panel-dark', 'panel', 'oscuro', 'techserv', 1440], ['traductor-light', 'traductor', 'claro', 'techserv', 1440],
   ['controles-light', 'controles', 'claro', 'techserv', 1440], ['normas-dark', 'normas', 'oscuro', 'aguas', 1440], ['brechas-dark', 'brechas', 'oscuro', 'hospital', 1440],
-  ['plan-dark', 'plan', 'oscuro', 'lumen', 1440], ['mapa-light', 'mapa', 'claro', 'techserv', 1440], ['alcance-light', 'alcance', 'claro', 'citafacil', 1440],
+  ['plan-dark', 'plan', 'oscuro', 'lumen', 1440], ['mapa-light', 'mapa', 'claro', 'techserv', 1440], ['alcance-light', 'alcance', 'claro', 'alas', 1440], ['partis-dark', 'panel', 'oscuro', 'alas', 1440], ['partis-normas-light', 'normas', 'claro', 'alas', 1440],
   ['ayuda-light', 'ayuda', 'claro', null, 1440],
   ['mobile-panel-dark', 'panel', 'oscuro', 'hospital', 390], ['mobile-traductor-light', 'traductor', 'claro', 'techserv', 390]
 ];
@@ -26,9 +26,22 @@ async function abrir(w, tema) {
 const limpiar = (p) => p.evaluate(() => { document.getElementById('toast').style.display = 'none'; });
 for (const [name, v, tema, caso, w] of VISTAS) {
   const { ctx, p } = await abrir(w, tema);
-  await p.evaluate(([v, c]) => { if (c) window.__ROSETTA__.openCase(c); window.__ROSETTA__.go(v); }, [v, caso]);
+  await p.evaluate(([v, c]) => { if (c) window.__ROSETTA__.openCase(c); if (c === 'alas') window.__ROSETTA__.ui.normaFw = 'partis'; window.__ROSETTA__.go(v); }, [v, caso]);
   await p.mouse.move(w - 5, 300); await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(1600);
   await limpiar(p); await p.screenshot({ path: join(OUT, `${name}.png`) }); await ctx.close();
+}
+{ // Marco propio importado con el editor de mapeo abierto (ejemplo ficticio)
+  const { ctx, p } = await abrir(1440, 'claro');
+  await p.evaluate(() => {
+    const R = window.__ROSETTA__; R.openCase('citafacil'); const s = R.state;
+    s.marcos = [{ id: 'mp-pliego', nombre: 'Pliego Ayuntamiento 2026 (ficticio)', descripcion: 'Requisitos de seguridad del pliego de cita previa', tipo: 'pliego', importado: '2026-10-08', requisitos: [
+      { id: 'PL-01', titulo: 'Copias de seguridad cifradas y probadas cada trimestre', texto: '', grupo: '', controles: [{ control: 'ACT-08', w: 1 }, { control: 'CON-03', w: 0.5 }] },
+      { id: 'PL-02', titulo: 'Autenticación multifactor en los accesos de administración', texto: '', grupo: '', controles: [] },
+      { id: 'PL-03', titulo: 'Notificación de incidentes al ayuntamiento en 24 horas', texto: '', grupo: '', controles: [{ control: 'INC-08', w: 0.5 }] }] }];
+    s.alcance['mp-pliego'] = { on: true }; s.exclusiones['mp-pliego'] = {}; R.ui.mpOpen = 'mp-pliego'; R.go('alcance');
+  });
+  await p.waitForTimeout(400); await p.locator('#sec-marcos').scrollIntoViewIfNeeded(); await p.waitForTimeout(900); await limpiar(p);
+  await p.screenshot({ path: join(OUT, 'marcos-light.png') }); await ctx.close();
 }
 const { ctx, p } = await abrir(1440, 'oscuro');
 await p.evaluate(() => { window.__ROSETTA__.openCase('techserv'); window.__ROSETTA__.go('brechas'); });

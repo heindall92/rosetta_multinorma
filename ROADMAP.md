@@ -11,15 +11,16 @@ La publicación de Rosetta en LinkedIn (octubre de 2026, más de 5.600 impresion
 
 Las dos encajan con el rumbo del ecosistema: marcos públicos sin problemas de derechos de autor, sectores regulados (banca, transporte, industria) y correcciones hechas en abierto con revisión experta, como la de Heyker D. con la CCN-STIC 825 en la 2.3.0.
 
-## Estado actual (2.3.0)
+## Estado actual (2.4.0)
 
-- Marcos: **ENS** (RD 311/2022), **ISO/IEC 27001:2022**, **NIS2** (Directiva 2022/2555 y Reglamento de Ejecución 2024/2690) e **ISO/IEC 42001:2023**, relacionados mediante un catálogo común de controles (`src/data/catalog.json`).
-- ENS ↔ ISO/IEC 27001 sigue la CCN-STIC 825; el resto de correspondencias son criterio propio y la interfaz lo indica.
-- No hay forma de cargar un marco propio.
+- Marcos: **ENS** (RD 311/2022), **ISO/IEC 27001:2022**, **NIS2** (Directiva 2022/2555 y Reglamento de Ejecución 2024/2690), **ISO/IEC 42001:2023** y **Part-IS** (Reglamentos (UE) 2023/203 y 2022/1645), relacionados mediante un catálogo común de 119 controles (`src/data/catalog.json`).
+- ENS ↔ ISO/IEC 27001 sigue la CCN-STIC 825; el resto de correspondencias son criterio propio y la interfaz lo indica. Las de Part-IS nunca pasan de parciales.
+- **Perfil regulatorio** con la propuesta de marcos aplicables y su base legal; el mapa circular dibuja solo los marcos del alcance.
+- **Marcos propios** en JSON o CSV, con mapeo asistido.
 
 ---
 
-## 2.4.0 · Part-IS, marcos propios y perfil regulatorio ← siguiente versión
+## 2.4.0 · Part-IS, marcos propios y perfil regulatorio ✓ publicada
 
 ### 1. Part-IS (EASA / AESA)
 
@@ -30,7 +31,7 @@ Las dos encajan con el rumbo del ecosistema: marcos públicos sin problemas de d
 | Reglamento Delegado (UE) 2022/1645 | Organizaciones de diseño y producción (requisitos `IS.D.OR`) | 16-10-2025 |
 | Reglamento de Ejecución (UE) 2023/203 | Operadores, mantenimiento, formación, ATM/ANS, aeródromos… (requisitos `IS.I.OR`) | 22-02-2026 |
 
-Antes de implementar, comprueba las fechas y la numeración contra el texto consolidado de EUR-Lex.
+Fechas y numeración contrastadas el 8 de octubre de 2026 con el BOE (DOUE-L-2023-80133, DOUE-L-2022-81402, DOUE-L-2025-81691), las Easy Access Rules for Information Security de EASA y sus guías de supervisión y de derogación.
 
 **Requisitos de organización** (la misma estructura en los dos reglamentos):
 - .200 Sistema de gestión de la seguridad de la información (SGSI)
@@ -117,13 +118,13 @@ La propuesta es generalizar ese asistente. A partir de **dónde opera** la organ
 
 ### Aceptación de la 2.4.0
 
-- [ ] Part-IS completo (los 13 requisitos de organización de cada reglamento) en el catálogo, con fuente y fecha de consulta en EUR-Lex.
-- [ ] Perfil regulatorio (jurisdicción, sector y rasgos) con estado y base legal de cada marco, incluida la aplicabilidad de Part-IS. Pruebas del motor por cada regla; el auditor confirma y su decisión queda guardada; el mapa y los informes muestran el motivo.
-- [ ] Marcos propios: importar (JSON y CSV), mapear, calcular, exportar y borrar, con validación hostil probada.
-- [ ] Ficheros de ejemplo ficticios en `src/data/` o `tests/`: un marco propio y un CSV.
-- [ ] Pruebas del motor nuevas para Part-IS y para el cálculo con marcos propios; e2e de importar y mapear; axe con 0 infracciones en las vistas nuevas.
-- [ ] Interfaz completa en español y en inglés.
-- [ ] README, CHANGELOG, capturas y cifras de pruebas al día.
+- [x] Part-IS completo (los 13 requisitos de organización de cada reglamento) en el catálogo, con fuente y fecha de consulta en EUR-Lex.
+- [x] Perfil regulatorio (jurisdicción, sector y rasgos) con estado y base legal de cada marco, incluida la aplicabilidad de Part-IS. Pruebas del motor por cada regla; el auditor confirma y su decisión queda guardada; el mapa y los informes muestran el motivo.
+- [x] Marcos propios: importar (JSON y CSV), mapear, calcular, exportar y borrar, con validación hostil probada.
+- [x] Ficheros de ejemplo ficticios en `src/data/` o `tests/`: un marco propio y un CSV.
+- [x] Pruebas del motor nuevas para Part-IS y para el cálculo con marcos propios; e2e de importar y mapear; axe con 0 infracciones en las vistas nuevas.
+- [x] Interfaz completa en español y en inglés.
+- [x] README, CHANGELOG, capturas y cifras de pruebas al día.
 - [ ] Publicación en LinkedIn **al menos 3 o 4 días después** de la anterior, citando las dos peticiones y con invitación a revisar.
 
 ---
@@ -132,7 +133,7 @@ La propuesta es generalizar ese asistente. A partir de **dónde opera** la organ
 
 | Versión | Marco | Fuente citable | Notas |
 |---|---|---|---|
-| 2.5.0 | **RIA / AI Act** | Reglamento (UE) 2024/1689 | Se cruza con ISO/IEC 42001, que ya está en Rosetta. Obligaciones por rol (proveedor, responsable del despliegue) y por nivel de riesgo. |
+| 2.5.0 ← siguiente | **RIA / AI Act** | Reglamento (UE) 2024/1689 | Se cruza con ISO/IEC 42001, que ya está en Rosetta. Obligaciones por rol (proveedor, responsable del despliegue) y por nivel de riesgo. |
 | 2.6.0 | **CRA** | Reglamento (UE) 2024/2847 | Requisitos esenciales del anexo I para productos con elementos digitales. Interesa a fabricantes de software y hardware. |
 | 2.7.0 | **NIST CSF 2.0** | Publicación del NIST (dominio público en EE. UU.) | Seis funciones, incluida *Govern*. Útil para clientes internacionales y para LATAM. |
 | 2.8.0 | **DORA** | Reglamento (UE) 2022/2554 y sus normas técnicas | Banca y servicios financieros. Se relaciona con NIS2, que ya se menciona en el asistente de Alcance. |

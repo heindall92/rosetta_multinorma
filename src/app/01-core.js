@@ -1,9 +1,12 @@
 /* ---------- Núcleo: datos, almacenamiento, estado global ---------- */
 const D = window.ROSETTA_DATA;
 const E = window.RosettaEngine;
-const IX = E.indexar(D.catalog, D.ccn825);
-const CAT = D.catalog;
-const FW = E.FW;
+/* Índice de normas. IX0 es el del catálogo publicado (Part-IS incluido). Si el proyecto activo trae marcos propios,
+ * reindex() funde un catálogo derivado y todo lo que depende de él (IX, CAT, FW, SOLAPE) pasa a incluirlos. */
+const CAT0 = D.catalog;
+const IX0 = E.indexar(CAT0, D.ccn825);
+const FW_BASE = E.FW;
+let IX = IX0, CAT = CAT0, FW = IX0.fw, IX_SIG = '[]';
 /* Librerías de Excel, cargadas solo cuando hacen falta, con integridad verificada (SRI):
  * - leer ficheros de terceros (SoA del ENS) con SheetJS 0.20.3, sin CVE-2023-30533 ni CVE-2024-22363;
  * - escribir el Excel con formato con xlsx-js-style (solo datos generados por Rosetta).
@@ -12,11 +15,31 @@ const XLSX_LIBS = {
   leer: { file: 'vendor/sheetjs-0.20.3.full.min.js', cdn: 'https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js', sri: 'sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT' },
   escribir: { file: 'vendor/xlsx-js-style-1.2.0.bundle.js', cdn: 'https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js', sri: 'sha384-OUW9euuUyxyHcAhTqbhI+Iyb8LMssXt/cpz0yXhs9UWG2/R/uaWdakx/4cfww7Vb' }
 };
-const VERSION = '2.3.0';
-const DOM = Object.fromEntries(CAT.domains.map((d) => [d.id, d]));
-const SOLAPE = E.solapamiento(IX);
+const VERSION = '2.4.0';
+const DOM = Object.fromEntries(CAT0.domains.map((d) => [d.id, d]));
+const SOLAPE0 = E.solapamiento(IX0);
+let SOLAPE = SOLAPE0;
 const PAREJAS = D.parejas;
-const CCN = E.contrasteCcn825(IX);
+const CCN = E.contrasteCcn825(IX0);
+/** Rehace el índice si han cambiado los marcos propios del proyecto activo. Devuelve true si cambió. */
+function reindex() {
+  const ms = state && Array.isArray(state.marcos) ? state.marcos : [];
+  const sig = JSON.stringify(ms);
+  if (sig === IX_SIG) return false;
+  IX_SIG = sig;
+  IX = ms.length ? E.indexar(CAT0, D.ccn825, ms) : IX0;
+  CAT = IX.cat; FW = IX.fw; SOLAPE = ms.length ? E.solapamiento(IX) : SOLAPE0;
+  for (const k of Object.keys(PRISM_DEF)) delete PRISM_DEF[k];
+  return true;
+}
+/* Nombres y colores de cada norma. Los marcos propios toman el nombre que trae su fichero (saneado al importar)
+ * y uno de cuatro colores de reserva; las normas incluidas tienen el suyo. */
+const FW_SHORT = { ens: 'ENS', iso27001: '27001', nis2: 'NIS2', iso42001: '42001', partis: 'Part-IS' };
+const esPropio = (f) => !!(IX.propio && IX.propio[f]);
+const fwLbl = (f) => (FW_BASE.includes(f) || IX.req[f] ? E.etiqueta(IX, f) : t('ownFw'));
+const fwShort = (f) => FW_SHORT[f] || (() => { const n = fwLbl(f); return n.length > 14 ? n.slice(0, 13).trim() + '…' : n; })();
+const fwCls = (f) => (FW_BASE.includes(f) ? f : 'p' + (Math.max(0, FW.indexOf(f) - FW_BASE.length) % 4));
+const PRISM_DEF = {};
 
 const clone = (o) => JSON.parse(JSON.stringify(o));
 const $ = (sel, r = document) => r.querySelector(sel);
@@ -37,11 +60,13 @@ const fmtDate = (iso) => { if (!iso) return '—'; const d = new Date(iso.length
 const plural = (n, a, b) => `${n} ${n === 1 ? a : b}`;
 /* Textos del catálogo en el idioma activo */
 const tt = (o, k) => E.tt(o, k, LANG());
-const rT = (f, id) => tt(IX.req[f][id], 't');
+const rT = (f, id) => (IX.req[f] && IX.req[f][id] ? tt(IX.req[f][id], 't') : id);
 const rG = (f, id) => tt(IX.req[f][id], 'g');
 const cT = (id) => tt(IX.ucMap[id], 't');
 const dT = (id) => tt(DOM[id], 't');
-const reqCodeL = (f, id) => { const c = E.codigo(IX, f, id); return LANG() === 'en' ? c.replace(/^RE /, 'IR ') : c; };
+/* Part-IS: el mismo punto se llama IS.I.OR (Reglamento 2023/203) o IS.D.OR (Reglamento Delegado 2022/1645) según la organización */
+const partisPre = () => { const r = state && state.alcance && state.alcance.partis ? state.alcance.partis.regimen : 'I'; return r === 'D' ? 'IS.D.OR' : r === 'ID' ? 'IS.I/D.OR' : 'IS.I.OR'; };
+const reqCodeL = (f, id) => { let c = E.codigo(IX, f, id); if (f === 'partis') c = c.replace(/^IS\.I\.OR/, partisPre()); return LANG() === 'en' ? c.replace(/^RE /, 'IR ') : c; };
 /* Identificadores con aleatoriedad criptográfica (no Math.random): 9 caracteres aleatorios + 4 de marca temporal */
 const uid = () => { const a = new Uint8Array(9); crypto.getRandomValues(a); return Array.from(a, (b) => (b % 36).toString(36)).join('') + Date.now().toString(36).slice(-4); };
 const initials = (name) => String(name || '').trim().split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('') || '··';
@@ -72,11 +97,25 @@ const ui = {
 };
 
 function recompute() {
+  reindex();
   if (!state) { calc = null; hall = []; plan = []; prio = []; return; }
   calc = E.calcular(IX, state);
   hall = E.coherencia(IX, state, calc, { reglasOff: ws.settings.reglasOff, lang: LANG() });
   prio = E.prioridades(IX, state, calc);
   plan = E.planAccion(IX, state, calc);
+}
+/* Propuesta del perfil regulatorio para el proyecto activo (se rehace con cada cálculo) */
+let _prop = { calc: null, lang: '', v: null };
+function propuesta() {
+  if (!state) return null;
+  if (_prop.calc !== calc || _prop.lang !== LANG()) _prop = { calc, lang: LANG(), v: E.perfilRegulatorio(state.perfil, state.nis2q, LANG(), (state.marcos || []).map((m) => m.id)) };
+  return _prop.v;
+}
+/** Por qué una norma está en el alcance: lo que propone el perfil o, si el perfil dice que no aplica, «elegida» por el auditor. */
+function motivoAlcance(f) {
+  const p = propuesta(); const x = p && p.marcos[f]; const on = state.alcance[f] && state.alcance[f].on;
+  if (!x) return { estado: 'voluntaria', base: '' };
+  return { estado: on && x.estado === 'no-aplica' ? 'elegida' : x.estado, base: x.base, motivo: x.motivo };
 }
 function snapshot() {
   if (!state || !calc) return;
@@ -120,8 +159,8 @@ const isDemo = () => activeMeta()?.kind === 'demo';
 function openProject(id, view = 'panel') {
   const st = store.get(PKEY(id));
   if (!st) { toast(t('tProjNotFound')); return; }
-  state = sanitizeState(st); ws.activeId = id; saveWs();
-  ui.insp = null; ui.trId = null;
+  state = sanitizeState(st); ws.activeId = id; saveWs(); reindex();
+  ui.insp = null; ui.trId = null; ui.mpOpen = null; if (!FW.includes(ui.ucFw)) ui.ucFw = 'todos';
   ui.normaFw = state.alcance[ui.normaFw]?.on ? ui.normaFw : (FW.find((f) => state.alcance[f].on) || 'ens');
   ui.trFw = FW.find((f) => state.alcance[f].on) || 'ens';
   recompute(); snapshot(); undoReset(); saveProject(); go(view);
@@ -156,12 +195,14 @@ function deleteProject(id) {
   if (ws.activeId === id) { ws.activeId = null; state = null; recompute(); }
   saveWs();
 }
-function blankState({ nombre = '', organizacion = '', sector = '', descripcion = '', alcance, nis2q } = {}) {
+const alcanceDefecto = () => ({ ens: { on: true, categoria: 'MEDIA', niveles: {} }, iso27001: { on: true }, nis2: { on: false, tipo: 'fuera' }, iso42001: { on: false }, partis: { on: false, regimen: 'I' } });
+function blankState({ nombre = '', organizacion = '', sector = '', descripcion = '', alcance, nis2q, perfil } = {}) {
   const st = { version: 1, proyecto: { nombre: nombre || organizacion, organizacion, sector, descripcion },
-    alcance: alcance || { ens: { on: true, categoria: 'MEDIA', niveles: {} }, iso27001: { on: true }, nis2: { on: false, tipo: 'fuera' }, iso42001: { on: false } },
+    alcance: alcance || alcanceDefecto(),
     nis2q: nis2q || { sector: 'ninguno', especial: 'ninguno', tamano: 'pequena', infraDigital: false },
-    controles: {}, exclusiones: { ens: {}, iso27001: {}, nis2: {}, iso42001: {} }, acciones: {}, historial: [] };
-  for (const c of CAT.controls) st.controles[c.id] = { estado: 'pendiente', responsable: '', evidencias: '', revision: '', notas: '', origen: '' };
+    perfil: perfil || { ...E.PERFIL_DEF },
+    controles: {}, exclusiones: Object.fromEntries(FW_BASE.map((f) => [f, {}])), acciones: {}, historial: [], marcos: [] };
+  for (const c of CAT0.controls) st.controles[c.id] = { estado: 'pendiente', responsable: '', evidencias: '', revision: '', notas: '', origen: '' };
   return st;
 }
 

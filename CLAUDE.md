@@ -12,4 +12,4 @@
 
 ## Siguiente paso
 
-- La siguiente versión y las posteriores están en `ROADMAP.md`. La 2.4.0 es **Part-IS (EASA/AESA), marcos propios y perfil regulatorio por región y sector**: Part-IS está prometido en público a quien lo pidió, así que va primero. Léelo antes de proponer trabajo nuevo en Rosetta.
+- La siguiente versión y las posteriores están en `ROADMAP.md`. La 2.4.0 (Part-IS, marcos propios y perfil regulatorio) está publicada; la siguiente es la **2.5.0, RIA / AI Act (Reglamento (UE) 2024/1689)**, que añade su regla al perfil regulatorio. Léelo antes de proponer trabajo nuevo en Rosetta.

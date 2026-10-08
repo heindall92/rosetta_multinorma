@@ -59,6 +59,10 @@
         },
         "iso42001": {
           "on": false
+        },
+        "partis": {
+          "on": false,
+          "regimen": "I"
         }
       },
       "nis2q": {
@@ -1441,6 +1445,15 @@
           "estado": "Parcial (compensada)",
           "pct": 0.9
         }
+      },
+      "perfil": {
+        "jurisdiccion": "es",
+        "publico": false,
+        "proveedorPublico": true,
+        "financiera": false,
+        "aviacion": "no",
+        "ia": false,
+        "fabricante": false
       }
     }
   },
@@ -1504,6 +1517,10 @@
         },
         "iso42001": {
           "on": true
+        },
+        "partis": {
+          "on": false,
+          "regimen": "I"
         }
       },
       "nis2q": {
@@ -2878,6 +2895,15 @@
           "estado": "Implantada",
           "pct": 1
         }
+      },
+      "perfil": {
+        "jurisdiccion": "es",
+        "publico": true,
+        "proveedorPublico": false,
+        "financiera": false,
+        "aviacion": "no",
+        "ia": true,
+        "fabricante": false
       }
     }
   },
@@ -2941,6 +2967,10 @@
         },
         "iso42001": {
           "on": true
+        },
+        "partis": {
+          "on": false,
+          "regimen": "I"
         }
       },
       "nis2q": {
@@ -3954,7 +3984,16 @@
           "brechas": 17,
           "ejemplo": true
         }
-      ]
+      ],
+      "perfil": {
+        "jurisdiccion": "es",
+        "publico": false,
+        "proveedorPublico": true,
+        "financiera": false,
+        "aviacion": "no",
+        "ia": true,
+        "fabricante": false
+      }
     }
   },
   {
@@ -4010,6 +4049,10 @@
         },
         "iso42001": {
           "on": false
+        },
+        "partis": {
+          "on": false,
+          "regimen": "I"
         }
       },
       "nis2q": {
@@ -5019,7 +5062,16 @@
           "brechas": 8,
           "ejemplo": true
         }
-      ]
+      ],
+      "perfil": {
+        "jurisdiccion": "es",
+        "publico": false,
+        "proveedorPublico": false,
+        "financiera": false,
+        "aviacion": "no",
+        "ia": false,
+        "fabricante": false
+      }
     }
   },
   {
@@ -5082,6 +5134,10 @@
         },
         "iso42001": {
           "on": true
+        },
+        "partis": {
+          "on": false,
+          "regimen": "I"
         }
       },
       "nis2q": {
@@ -6471,7 +6527,1160 @@
           "estado": "No aplica",
           "pct": null
         }
+      },
+      "perfil": {
+        "jurisdiccion": "es",
+        "publico": false,
+        "proveedorPublico": true,
+        "financiera": false,
+        "aviacion": "no",
+        "ia": true,
+        "fabricante": false
       }
+    }
+  },
+  {
+    "id": "alas",
+    "icono": "plane",
+    "titulo": "Alas del Atlántico",
+    "sector": "Aviación: aerolínea regional",
+    "sector_en": "Aviation: regional airline",
+    "resumen": "Aerolínea regional de 240 personas con certificado de operador aéreo, CAMO y taller Part-145. Tiene un SGSI certificado en ISO/IEC 27001 y desde el 22-02-2026 le aplica Part-IS (IS.I.OR). Como transporte aéreo y mediana empresa, NIS2 la hace entidad importante.",
+    "resumen_en": "240-person regional airline with an air operator certificate, a CAMO and a Part-145 shop. It has an ISO/IEC 27001 certified ISMS and, since 22-02-2026, Part-IS (IS.I.OR) applies. As an air carrier and a medium-sized company, NIS2 makes it an important entity.",
+    "retos": [
+      "Notificar a AESA no es notificar a NIS2",
+      "Riesgos sin la mirada de la seguridad operacional",
+      "Manual del SGSI (ISMM) para la autoridad"
+    ],
+    "retos_en": [
+      "Reporting to the aviation authority is not NIS2 reporting",
+      "Risk assessment without the aviation safety view",
+      "ISMS manual (ISMM) for the authority"
+    ],
+    "meta": {
+      "normas": [
+        "iso27001",
+        "nis2",
+        "partis"
+      ],
+      "grado": 0.9230670426065163,
+      "controles": 101,
+      "brechas": 2,
+      "altas": 4,
+      "nis2": "importante"
+    },
+    "state": {
+      "version": 1,
+      "caseId": "alas",
+      "proyecto": {
+        "nombre": "Alas del Atlántico · Part-IS + NIS2 + 27001",
+        "organizacion": "Alas del Atlántico, S.A. (ficticia)",
+        "sector": "Aviación",
+        "descripcion": "Operación aérea regional (AOC), CAMO y mantenimiento Part-145"
+      },
+      "alcance": {
+        "ens": {
+          "on": false,
+          "categoria": "MEDIA",
+          "niveles": {}
+        },
+        "iso27001": {
+          "on": true
+        },
+        "nis2": {
+          "on": true,
+          "tipo": "importante"
+        },
+        "iso42001": {
+          "on": false
+        },
+        "partis": {
+          "on": true,
+          "regimen": "I"
+        }
+      },
+      "nis2q": {
+        "sector": "anexo1",
+        "especial": "ninguno",
+        "tamano": "mediana",
+        "infraDigital": false
+      },
+      "perfil": {
+        "jurisdiccion": "es",
+        "publico": false,
+        "proveedorPublico": false,
+        "financiera": false,
+        "aviacion": "I",
+        "ia": false,
+        "fabricante": false
+      },
+      "controles": {
+        "GOB-01": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · GOB-01",
+          "revision": "2026-03-06",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-02": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · GOB-02",
+          "revision": "2026-04-07",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-03": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · GOB-03",
+          "revision": "2026-05-08",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-04": {
+          "estado": "parcial",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "",
+          "revision": "2026-06-09",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-05": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · GOB-05",
+          "revision": "2026-07-10",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-06": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · GOB-06",
+          "revision": "2026-08-11",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-07": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · GOB-07",
+          "revision": "2026-03-12",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-08": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · GOB-08",
+          "revision": "2026-04-13",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-09": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · GOB-09",
+          "revision": "2026-05-14",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-10": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · GOB-10",
+          "revision": "2026-06-15",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-11": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · GOB-11",
+          "revision": "2026-07-16",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-12": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-13": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · GOB-13",
+          "revision": "2026-03-18",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-14": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-01": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · RIE-01",
+          "revision": "2026-05-20",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-02": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · RIE-02",
+          "revision": "2026-06-21",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-03": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · RIE-03",
+          "revision": "2026-07-22",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-04": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · RIE-04",
+          "revision": "2026-08-23",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-05": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · RIE-05",
+          "revision": "2026-03-24",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-06": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · RIE-06",
+          "revision": "2026-04-05",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-07": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · RIE-07",
+          "revision": "2026-05-06",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-08": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · RIE-08",
+          "revision": "2026-06-07",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-09": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · RIE-09",
+          "revision": "2026-07-08",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-10": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · RIE-10",
+          "revision": "2026-08-09",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-11": {
+          "estado": "implantado",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · RIE-11",
+          "revision": "2026-03-10",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-12": {
+          "estado": "parcial",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "",
+          "revision": "2026-04-11",
+          "notas": "Inventario de interfaces con el SMS a medias: falta el sistema de planificación de vuelo y el EFB.",
+          "origen": ""
+        },
+        "RIE-13": {
+          "estado": "parcial",
+          "responsable": "Responsable de Seguridad de la Información",
+          "evidencias": "",
+          "revision": "2026-05-12",
+          "notas": "",
+          "origen": ""
+        },
+        "PER-01": {
+          "estado": "implantado",
+          "responsable": "Recursos Humanos",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · PER-01",
+          "revision": "2026-06-13",
+          "notas": "",
+          "origen": ""
+        },
+        "PER-02": {
+          "estado": "implantado",
+          "responsable": "Recursos Humanos",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · PER-02",
+          "revision": "2026-07-14",
+          "notas": "",
+          "origen": ""
+        },
+        "PER-03": {
+          "estado": "parcial",
+          "responsable": "Recursos Humanos",
+          "evidencias": "",
+          "revision": "2026-08-15",
+          "notas": "",
+          "origen": ""
+        },
+        "PER-04": {
+          "estado": "implantado",
+          "responsable": "Recursos Humanos",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · PER-04",
+          "revision": "2026-03-16",
+          "notas": "",
+          "origen": ""
+        },
+        "PER-05": {
+          "estado": "implantado",
+          "responsable": "Recursos Humanos",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · PER-05",
+          "revision": "2026-04-17",
+          "notas": "",
+          "origen": ""
+        },
+        "PER-06": {
+          "estado": "implantado",
+          "responsable": "Recursos Humanos",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · PER-06",
+          "revision": "2026-05-18",
+          "notas": "",
+          "origen": ""
+        },
+        "PER-07": {
+          "estado": "implantado",
+          "responsable": "Recursos Humanos",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · PER-07",
+          "revision": "2026-06-19",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-01": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · ACT-01",
+          "revision": "2026-07-20",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-02": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · ACT-02",
+          "revision": "2026-08-21",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-03": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · ACT-03",
+          "revision": "2026-03-22",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-04": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · ACT-04",
+          "revision": "2026-04-23",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-05": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · ACT-05",
+          "revision": "2026-05-24",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-06": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · ACT-06",
+          "revision": "2026-06-05",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-07": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · ACT-07",
+          "revision": "2026-07-06",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-08": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · ACT-08",
+          "revision": "2026-08-07",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-09": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-10": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-01": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · ACC-01",
+          "revision": "2026-05-10",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-02": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · ACC-02",
+          "revision": "2026-06-11",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-03": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · ACC-03",
+          "revision": "2026-07-12",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-04": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · ACC-04",
+          "revision": "2026-08-13",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-05": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · ACC-05",
+          "revision": "2026-03-14",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-06": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · ACC-06",
+          "revision": "2026-04-15",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-07": {
+          "estado": "parcial",
+          "responsable": "Sistemas",
+          "evidencias": "",
+          "revision": "2026-05-16",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-08": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · ACC-08",
+          "revision": "2026-06-17",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-01": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · OPE-01",
+          "revision": "2026-07-18",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-02": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · OPE-02",
+          "revision": "2026-08-19",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-03": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · OPE-03",
+          "revision": "2026-03-20",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-04": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · OPE-04",
+          "revision": "2026-04-21",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-05": {
+          "estado": "parcial",
+          "responsable": "Sistemas",
+          "evidencias": "",
+          "revision": "2026-05-22",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-06": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · OPE-06",
+          "revision": "2026-06-23",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-07": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · OPE-07",
+          "revision": "2026-07-24",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-08": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · OPE-08",
+          "revision": "2026-08-05",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-09": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · OPE-09",
+          "revision": "2026-03-06",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-10": {
+          "estado": "parcial",
+          "responsable": "Sistemas",
+          "evidencias": "",
+          "revision": "2026-04-07",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-11": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · OPE-11",
+          "revision": "2026-05-08",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-12": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · OPE-12",
+          "revision": "2026-06-09",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-13": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · OPE-13",
+          "revision": "2026-07-10",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-14": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · OPE-14",
+          "revision": "2026-08-11",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-15": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · OPE-15",
+          "revision": "2026-03-12",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-16": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · OPE-16",
+          "revision": "2026-04-13",
+          "notas": "",
+          "origen": ""
+        },
+        "RED-01": {
+          "estado": "implantado",
+          "responsable": "Comunicaciones",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · RED-01",
+          "revision": "2026-05-14",
+          "notas": "",
+          "origen": ""
+        },
+        "RED-02": {
+          "estado": "implantado",
+          "responsable": "Comunicaciones",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · RED-02",
+          "revision": "2026-06-15",
+          "notas": "",
+          "origen": ""
+        },
+        "RED-03": {
+          "estado": "implantado",
+          "responsable": "Comunicaciones",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · RED-03",
+          "revision": "2026-07-16",
+          "notas": "",
+          "origen": ""
+        },
+        "RED-04": {
+          "estado": "implantado",
+          "responsable": "Comunicaciones",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · RED-04",
+          "revision": "2026-08-17",
+          "notas": "",
+          "origen": ""
+        },
+        "RED-05": {
+          "estado": "parcial",
+          "responsable": "Comunicaciones",
+          "evidencias": "",
+          "revision": "2026-03-18",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-01": {
+          "estado": "implantado",
+          "responsable": "Ingeniería de software",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · DES-01",
+          "revision": "2026-04-19",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-02": {
+          "estado": "implantado",
+          "responsable": "Ingeniería de software",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · DES-02",
+          "revision": "2026-05-20",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-03": {
+          "estado": "implantado",
+          "responsable": "Ingeniería de software",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · DES-03",
+          "revision": "2026-06-21",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-04": {
+          "estado": "implantado",
+          "responsable": "Ingeniería de software",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · DES-04",
+          "revision": "2026-07-22",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-05": {
+          "estado": "implantado",
+          "responsable": "Ingeniería de software",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · DES-05",
+          "revision": "2026-08-23",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-06": {
+          "estado": "implantado",
+          "responsable": "Ingeniería de software",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · DES-06",
+          "revision": "2026-03-24",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-07": {
+          "estado": "implantado",
+          "responsable": "Ingeniería de software",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · DES-07",
+          "revision": "2026-04-05",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-08": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "PRO-01": {
+          "estado": "implantado",
+          "responsable": "Compras",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · PRO-01",
+          "revision": "2026-06-07",
+          "notas": "",
+          "origen": ""
+        },
+        "PRO-02": {
+          "estado": "implantado",
+          "responsable": "Compras",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · PRO-02",
+          "revision": "2026-07-08",
+          "notas": "",
+          "origen": ""
+        },
+        "PRO-03": {
+          "estado": "parcial",
+          "responsable": "Compras",
+          "evidencias": "",
+          "revision": "2026-08-09",
+          "notas": "",
+          "origen": ""
+        },
+        "PRO-04": {
+          "estado": "implantado",
+          "responsable": "Compras",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · PRO-04",
+          "revision": "2026-03-10",
+          "notas": "",
+          "origen": ""
+        },
+        "PRO-05": {
+          "estado": "implantado",
+          "responsable": "Compras",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · PRO-05",
+          "revision": "2026-04-11",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-01": {
+          "estado": "implantado",
+          "responsable": "SOC",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · INC-01",
+          "revision": "2026-05-12",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-02": {
+          "estado": "implantado",
+          "responsable": "SOC",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · INC-02",
+          "revision": "2026-06-13",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-03": {
+          "estado": "implantado",
+          "responsable": "SOC",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · INC-03",
+          "revision": "2026-07-14",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-04": {
+          "estado": "implantado",
+          "responsable": "SOC",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · INC-04",
+          "revision": "2026-08-15",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-05": {
+          "estado": "implantado",
+          "responsable": "SOC",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · INC-05",
+          "revision": "2026-03-16",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-06": {
+          "estado": "parcial",
+          "responsable": "SOC",
+          "evidencias": "",
+          "revision": "2026-04-17",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-07": {
+          "estado": "parcial",
+          "responsable": "SOC",
+          "evidencias": "",
+          "revision": "2026-05-18",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-08": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-09": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "Hoy solo se notifica a INCIBE-CERT (NIS2) y los sucesos del Reglamento 376/2014 por el SMS; falta el canal de Part-IS con AESA.",
+          "origen": ""
+        },
+        "CON-01": {
+          "estado": "implantado",
+          "responsable": "Responsable de Continuidad",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · CON-01",
+          "revision": "2026-08-21",
+          "notas": "",
+          "origen": ""
+        },
+        "CON-02": {
+          "estado": "implantado",
+          "responsable": "Responsable de Continuidad",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · CON-02",
+          "revision": "2026-03-22",
+          "notas": "",
+          "origen": ""
+        },
+        "CON-03": {
+          "estado": "parcial",
+          "responsable": "Responsable de Continuidad",
+          "evidencias": "",
+          "revision": "2026-04-23",
+          "notas": "",
+          "origen": ""
+        },
+        "CON-04": {
+          "estado": "implantado",
+          "responsable": "Responsable de Continuidad",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · CON-04",
+          "revision": "2026-05-24",
+          "notas": "",
+          "origen": ""
+        },
+        "CON-05": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "FIS-01": {
+          "estado": "implantado",
+          "responsable": "Servicios Generales",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · FIS-01",
+          "revision": "2026-07-06",
+          "notas": "",
+          "origen": ""
+        },
+        "FIS-02": {
+          "estado": "implantado",
+          "responsable": "Servicios Generales",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · FIS-02",
+          "revision": "2026-08-07",
+          "notas": "",
+          "origen": ""
+        },
+        "FIS-03": {
+          "estado": "implantado",
+          "responsable": "Servicios Generales",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · FIS-03",
+          "revision": "2026-03-08",
+          "notas": "",
+          "origen": ""
+        },
+        "FIS-04": {
+          "estado": "implantado",
+          "responsable": "Servicios Generales",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · FIS-04",
+          "revision": "2026-04-09",
+          "notas": "",
+          "origen": ""
+        },
+        "FIS-05": {
+          "estado": "implantado",
+          "responsable": "Servicios Generales",
+          "evidencias": "Evidencia del SGSI certificado (ficticia) · FIS-05",
+          "revision": "2026-05-10",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-01": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-02": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-03": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-04": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-05": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-06": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-07": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-08": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-09": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-10": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-11": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-12": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-13": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-14": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        }
+      },
+      "exclusiones": {
+        "ens": {},
+        "iso27001": {},
+        "nis2": {},
+        "iso42001": {},
+        "partis": {}
+      },
+      "acciones": {
+        "INC-09": {
+          "estado": "En curso",
+          "responsable": "Responsable de Seguridad de la Información",
+          "fecha": "2026-11-15",
+          "nota": "Procedimiento conjunto con el responsable del SMS"
+        },
+        "RIE-12": {
+          "estado": "En curso",
+          "responsable": "Responsable de Seguridad de la Información",
+          "fecha": "2026-12-01",
+          "nota": ""
+        },
+        "GOB-14": {
+          "estado": "Pendiente",
+          "responsable": "Gerente responsable",
+          "fecha": "2026-12-15",
+          "nota": "Manual (ISMM) para AESA"
+        },
+        "GOB-04": {
+          "estado": "Pendiente",
+          "responsable": "Dirección",
+          "fecha": "2026-11-30",
+          "nota": ""
+        }
+      },
+      "historial": [
+        {
+          "fecha": "2026-04-01",
+          "cov": {
+            "ens": null,
+            "iso27001": 0.599,
+            "nis2": 0.541,
+            "iso42001": null,
+            "partis": 0.474
+          },
+          "grado": 0.572,
+          "brechas": 18,
+          "ejemplo": true
+        },
+        {
+          "fecha": "2026-05-01",
+          "cov": {
+            "ens": null,
+            "iso27001": 0.66,
+            "nis2": 0.597,
+            "iso42001": null,
+            "partis": 0.523
+          },
+          "grado": 0.631,
+          "brechas": 15,
+          "ejemplo": true
+        },
+        {
+          "fecha": "2026-06-01",
+          "cov": {
+            "ens": null,
+            "iso27001": 0.721,
+            "nis2": 0.652,
+            "iso42001": null,
+            "partis": 0.571
+          },
+          "grado": 0.689,
+          "brechas": 12,
+          "ejemplo": true
+        },
+        {
+          "fecha": "2026-07-01",
+          "cov": {
+            "ens": null,
+            "iso27001": 0.782,
+            "nis2": 0.707,
+            "iso42001": null,
+            "partis": 0.62
+          },
+          "grado": 0.748,
+          "brechas": 8,
+          "ejemplo": true
+        },
+        {
+          "fecha": "2026-08-01",
+          "cov": {
+            "ens": null,
+            "iso27001": 0.844,
+            "nis2": 0.762,
+            "iso42001": null,
+            "partis": 0.668
+          },
+          "grado": 0.806,
+          "brechas": 5,
+          "ejemplo": true
+        },
+        {
+          "fecha": "2026-09-01",
+          "cov": {
+            "ens": null,
+            "iso27001": 0.905,
+            "nis2": 0.818,
+            "iso42001": null,
+            "partis": 0.717
+          },
+          "grado": 0.865,
+          "brechas": 2,
+          "ejemplo": true
+        }
+      ]
     }
   }
 ]

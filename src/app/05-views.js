@@ -6,7 +6,7 @@ function reqRow(f, id) { // índice de cobertura por requisito (se rehace cuando
 }
 const onFw = (f) => calc.alcance.includes(f);
 const fuerzaDe = (w) => (w === 1 ? 'total' : w > 0 ? 'parcial' : 'relacionado');
-const fwLong = (f) => (LANG() === 'en' ? E.FW_LONG_EN[f] : E.FW_LONG[f]);
+const fwLong = (f) => (LANG() === 'en' ? E.FW_LONG_EN[f] : E.FW_LONG[f]) || fwLbl(f);
 const exigL = (x) => (LANG() === 'en' ? String(x || '').replace(/^aplica\b/, 'applies').replace(/^n\.a\./, 'n/a') : x);
 const normTxt = (x) => String(x).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 const reqsOfDom = (dom, f) => { const set = new Set(); for (const c of CAT.controls) if (c.dom === dom) for (const m of c.maps[f]) if (m.w > 0) set.add(m.id); return set; };
@@ -24,17 +24,24 @@ function covSiEnAlcance(f) {
 }
 
 /* ================= Rueda Rosetta =================
- * Cada rayo es un control unificado (en orden de dominio); cada anillo, una norma (ENS fuera → ISO 42001 dentro).
+ * Cada rayo es un control unificado (en orden de dominio); cada anillo, una norma del alcance, de fuera adentro en el
+ * orden del registro (ENS, ISO/IEC 27001, NIS2, ISO/IEC 42001, Part-IS y los marcos propios). La banda entre los radios
+ * 176 y 300 se reparte entre los anillos: hasta cuatro conservan el grosor de siempre (26) y, con más, adelgazan.
  * Hay celda solo donde el control sostiene algún requisito de esa norma. Relleno: implantado; mitad interior: parcial;
- * contorno: pendiente. La geometría es estática y se calcula una vez; en cada render solo cambian las clases. */
-const RINGS = [['ens', 274, 300], ['iso27001', 243, 269], ['nis2', 212, 238], ['iso42001', 181, 207]];
+ * contorno: pendiente. La geometría se calcula una vez por conjunto de anillos; en cada render solo cambian las clases. */
+function ringsFor(fws) {
+  const n = Math.max(1, fws.length); const gap = n > 6 ? 3 : 5; const th = Math.min(26, (124 - gap * (n - 1)) / n);
+  return fws.map((f, i) => { const r1 = 300 - i * (th + gap); return [f, +(r1 - th).toFixed(2), +r1.toFixed(2)]; });
+}
 const DSHORT = {
   es: { GOB: 'Gobierno', RIE: 'Riesgos', PER: 'Personas', ACT: 'Activos', ACC: 'Acceso', OPE: 'Operación', RED: 'Redes', DES: 'Desarrollo', PRO: 'Proveedores', INC: 'Incidentes', CON: 'Continuidad', FIS: 'Física', IA: 'IA' },
   en: { GOB: 'Governance', RIE: 'Risk', PER: 'People', ACT: 'Assets', ACC: 'Access', OPE: 'Operations', RED: 'Network', DES: 'Development', PRO: 'Suppliers', INC: 'Incidents', CON: 'Continuity', FIS: 'Physical', IA: 'AI' }
 };
-let WGEO = null;
-function wheelGeo() {
-  if (WGEO) return WGEO;
+const WGEO = new Map();
+function wheelGeo(RINGS) {
+  const key = IX_SIG + '|' + RINGS.map((r) => r[0]).join(',');
+  if (WGEO.has(key)) return WGEO.get(key);
+  if (WGEO.size > 12) WGEO.clear();
   const P = (r, deg) => { const a = (deg * Math.PI) / 180; return `${(400 + r * Math.sin(a)).toFixed(2)},${(400 - r * Math.cos(a)).toFixed(2)}`; };
   const sector = (r0, r1, a0, a1) => `M${P(r1, a0)}A${r1},${r1} 0 0 1 ${P(r1, a1)}L${P(r0, a1)}A${r0},${r0} 0 0 0 ${P(r0, a0)}Z`;
   const TOP = 4; const slots = CAT.controls.length + (CAT.domains.length - 1) + TOP; const step = 360 / slots; const pad = 0.34;
@@ -43,7 +50,7 @@ function wheelGeo() {
     const cs = CAT.controls.filter((c) => c.dom === d.id); const start = k * step;
     for (const c of cs) {
       const a0 = k * step + pad, a1 = (k + 1) * step - pad; const cells = {};
-      for (const [f, r0, r1] of RINGS) if (c.maps[f].some((m) => m.w > 0)) cells[f] = { full: sector(r0, r1, a0, a1), half: sector(r0, r0 + (r1 - r0) / 2, a0, a1) };
+      for (const [f, r0, r1] of RINGS) if ((c.maps[f] || []).some((m) => m.w > 0)) cells[f] = { full: sector(r0, r1, a0, a1), half: sector(r0, r0 + (r1 - r0) / 2, a0, a1) };
       spokes.push({ id: c.id, i: spokes.length, hit: sector(176, 304, k * step, (k + 1) * step), cells });
       k++;
     }
@@ -52,11 +59,12 @@ function wheelGeo() {
     doms.push({ id: d.id, arc: `M${P(308, start + pad)}A308,308 0 0 1 ${P(308, end - pad)}`, lbl: bottom ? `M${P(rl, end)}A${rl},${rl} 0 0 0 ${P(rl, start)}` : `M${P(rl, start)}A${rl},${rl} 0 0 1 ${P(rl, end)}` });
     if (di < CAT.domains.length - 1) k++;
   });
-  WGEO = { spokes, doms };
-  return WGEO;
+  const geo = { spokes, doms }; WGEO.set(key, geo);
+  return geo;
 }
 function wheelSVG(st, cc, { hero = false } = {}) {
-  const g = wheelGeo(); const L = LANG(); const pre = hero ? 'hw' : 'ow';
+  const RINGS = ringsFor(cc.alcance.length ? cc.alcance : FW_BASE.slice(0, 4));
+  const g = wheelGeo(RINGS); const L = LANG(); const pre = hero ? 'hw' : 'ow';
   const on = (f) => st.alcance[f] && st.alcance[f].on;
   const sel = !hero && ui.insp && ui.insp.type === 'uc' ? ui.insp.id : null;
   const out = [];
@@ -64,14 +72,15 @@ function wheelSVG(st, cc, { hero = false } = {}) {
     const e = E.estadoUc(st, s.id); let cells = '';
     for (const [f] of RINGS) {
       const c = s.cells[f]; if (!c) continue;
-      const cls = `cell fw-${f}${on(f) ? '' : ' off'}`;
+      const cls = `cell fw-${fwCls(f)}${on(f) ? '' : ' off'}`;
       cells += e === 'parcial' ? `<path class="${cls} parcial o" d="${c.full}"/><path class="${cls} parcial f" d="${c.half}"/>` : `<path class="${cls} ${e}" d="${c.full}"/>`;
     }
     const attrs = hero ? '' : ` data-act="insp-uc" data-id="${esc(s.id)}" data-tip="${esc(`${s.id} · ${cT(s.id)} · ${t('est.' + e)}`)}" data-st="${e}"`;
     out.push(`<g class="spoke${sel === s.id ? ' sel' : ''}" style="--i:${s.i}"${attrs}><path class="hit" d="${s.hit}"/>${cells}</g>`);
   }
   const doms = g.doms.map((d) => `<g class="dom" data-tip="${esc(dT(d.id))}"><path class="dom-arc" d="${d.arc}"/><path id="${pre}-${d.id}" d="${d.lbl}" fill="none"/><text class="dom-lbl"><textPath href="#${pre}-${d.id}" startOffset="50%" text-anchor="middle">${esc(DSHORT[L][d.id])}</textPath></text></g>`).join('');
-  const rings = RINGS.map(([f, r0, r1]) => `<text class="ring-lbl fw-${f}${on(f) ? '' : ' off'}" x="400" y="${(400 - (r0 + r1) / 2 + 3).toFixed(1)}" text-anchor="middle">${FW_SHORT[f]}</text>`).join('');
+  const fs = RINGS.length && RINGS[0][2] - RINGS[0][1] < 15 ? ' style="font-size:7.5px"' : '';
+  const rings = RINGS.map(([f, r0, r1]) => `<text class="ring-lbl fw-${fwCls(f)}${on(f) ? '' : ' off'}" x="400" y="${(400 - (r0 + r1) / 2 + 3).toFixed(1)}" text-anchor="middle"${fs}>${esc(fwShort(f))}</text>`).join('');
   let core;
   if (hero) {
     core = `<defs><linearGradient id="hwg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--accent)"/><stop offset="1" stop-color="var(--fw-nis2)"/></linearGradient></defs><circle class="core" cx="400" cy="400" r="166"/>
@@ -96,12 +105,13 @@ function wheelHover(spoke) {
   const tit = cT(id); svg.classList.add('hov');
   v.textContent = id; tl.textContent = tit.length > 30 ? tit.slice(0, 29) + '…' : tit;
   s1.textContent = dT(c.dom).toUpperCase().slice(0, 34);
-  s2.textContent = `${t('est.' + E.estadoUc(state, id))} · ${FW.filter((f) => c.maps[f].some((m) => m.w > 0)).map((f) => FW_SHORT[f]).join(' · ')}`;
+  s2.textContent = `${t('est.' + E.estadoUc(state, id))} · ${FW.filter((f) => c.maps[f].some((m) => m.w > 0)).map((f) => fwShort(f)).join(' · ')}`;
 }
 function wheelLegend() {
   const sw = (cls) => `<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">${cls === 'part' ? '<rect x="1.5" y="1.5" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="1.5" y="7" width="11" height="5.5" rx="1.5" fill="currentColor"/>' : cls === 'pend' ? '<rect x="1.5" y="1.5" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.2"/>' : '<rect x="1" y="1" width="12" height="12" rx="2.5" fill="currentColor"/>'}</svg>`;
   return `<div class="wheel-legend"><span class="lg">${sw('impl')}${esc(t('legend.impl'))}</span><span class="lg">${sw('part')}${esc(t('legend.part'))}</span><span class="lg">${sw('pend')}${esc(t('legend.pend'))}</span>
-    ${FW.map((f) => `<span class="lg dotfw fw-${f}${onFw(f) ? '' : ' off'}">${FW_SHORT[f]}${onFw(f) ? '' : ` · ${esc(t('ringOff'))}`}</span>`).join('')}</div>`;
+    ${calc.alcance.map((f) => { const m = motivoAlcance(f); return `<span class="lg dotfw fw-${fwCls(f)}" data-tip="${esc(`${fwLbl(f)} · ${m.base}`)}">${esc(fwShort(f))}<em class="why ${m.estado}">${esc(t('prMark.' + m.estado))}</em></span>`; }).join('')}
+    ${FW.length > calc.alcance.length ? `<button type="button" class="lg linkish" data-act="nav" data-view="alcance">${esc(t('ringsOut', FW.length - calc.alcance.length))}</button>` : ''}</div>`;
 }
 
 /* Solapamiento: si cumples la fila al 100 %, qué parte de la columna heredas */
@@ -113,7 +123,7 @@ function overlapGrid(st) {
     for (const b of FW) {
       const x = SOLAPE[a][b]; const v = x.pct;
       if (a === b) { h += '<div class="c self" role="cell">—</div>'; continue; }
-      h += `<div class="c${v > 0.62 ? ' hi' : ''}${!inS(a) || !inS(b) ? ' fuera' : ''}" role="cell" style="--v:${v.toFixed(3)}" data-tip="${esc(t('overlapTip', E.FW_LABEL[a], E.FW_LABEL[b], pct(v), x.completos, x.total))}">${Math.round(v * 100)}%</div>`;
+      h += `<div class="c${v > 0.62 ? ' hi' : ''}${!inS(a) || !inS(b) ? ' fuera' : ''}" role="cell" style="--v:${v.toFixed(3)}" data-tip="${esc(t('overlapTip', fwLbl(a), fwLbl(b), pct(v), x.completos, x.total))}">${Math.round(v * 100)}%</div>`;
     }
     h += '</div>';
   }
@@ -145,8 +155,8 @@ function vOrbita() {
   const n2 = state.alcance.nis2;
   const lens = FW.map((f) => {
     const w = calc.fw[f];
-    if (!w.on) { const g = covSiEnAlcance(f); return `<button type="button" class="lens off fw-${f}" data-act="nav" data-view="alcance">${miniRing(f, g, 0, 1, 46, true)}<span><b>${E.FW_LABEL[f]}</b><small>${esc(t('outScope'))}</small></span><span class="pc num muted">${pct(g)}</span></button>`; }
-    return `<button type="button" class="lens fw-${f}" data-act="goto-norma" data-fw="${f}">${miniRing(f, w.grado, w.cubiertos, w.aplicables)}<span><b>${E.FW_LABEL[f]}</b><small>${esc(t('lensSub', w.aplicables, w.brechas))}</small></span><span class="pc num">${pct(w.grado)}</span></button>`;
+    if (!w.on) { const g = covSiEnAlcance(f); return `<button type="button" class="lens off fw-${fwCls(f)}" data-act="nav" data-view="alcance">${miniRing(f, g, 0, 1, 46, true)}<span><b>${fwLbl(f)}</b><small>${esc(t('outScope'))}</small></span><span class="pc num muted">${pct(g)}</span></button>`; }
+    return `<button type="button" class="lens fw-${fwCls(f)}" data-act="goto-norma" data-fw="${f}">${miniRing(f, w.grado, w.cubiertos, w.aplicables)}<span><b>${fwLbl(f)}</b><small>${esc(t('lensSub', w.aplicables, w.brechas))}</small></span><span class="pc num">${pct(w.grado)}</span></button>`;
   }).join('');
   const top = prio.slice(0, 3);
   const play = top.length ? `<ol class="play" style="list-style:none;margin:0;padding:0">${top.map((x, i) => {
@@ -185,7 +195,6 @@ function vOrbita() {
 }
 
 /* ================= Prisma ================= */
-const PRISM_DEF = {};
 function prismDefault(f) { // el requisito con más equivalencias: la mejor demostración al entrar
   if (!PRISM_DEF[f]) { let best = null, bn = -1; for (const r of CAT.frameworks[f].reqs) { const eq = E.equivalencias(IX, f, r.id); const n = FW.reduce((a, g) => a + eq.otras[g].filter((x) => x.fuerza !== 'relacionado').length, 0); if (n > bn) { bn = n; best = r.id; } } PRISM_DEF[f] = best; }
   return PRISM_DEF[f];
@@ -204,13 +213,13 @@ function vPrisma() {
   let res = '';
   if (ui.trOpen) {
     const list = prismResults(); if (ui.trIdx >= list.length) ui.trIdx = Math.max(0, list.length - 1);
-    res = `<div class="pick-res" role="listbox" id="tr-res" aria-label="${esc(E.FW_LABEL[f])}">${list.map((x, i) => { const c = onFw(f) ? reqRow(f, x.id).estado : ''; return `<button type="button" class="pick-i${i === ui.trIdx ? ' on' : ''}${x.id === id ? ' cur' : ''}" role="option" aria-selected="${x.id === id}" data-act="tr-pick" data-id="${esc(x.id)}" id="tri-${i}"><code>${esc(reqCode(f, x.id))}</code><span>${esc(rT(f, x.id))}</span>${c ? `<i class="dot st-${esc(c)}" aria-hidden="true"></i>` : '<i></i>'}</button>`; }).join('') || `<div class="pal-e">${esc(t('noResults'))}</div>`}</div>`;
+    res = `<div class="pick-res" role="listbox" id="tr-res" aria-label="${esc(fwLbl(f))}">${list.map((x, i) => { const c = onFw(f) ? reqRow(f, x.id).estado : ''; return `<button type="button" class="pick-i${i === ui.trIdx ? ' on' : ''}${x.id === id ? ' cur' : ''}" role="option" aria-selected="${x.id === id}" data-act="tr-pick" data-id="${esc(x.id)}" id="tri-${i}"><code>${esc(reqCode(f, x.id))}</code><span>${esc(rT(f, x.id))}</span>${c ? `<i class="dot st-${esc(c)}" aria-hidden="true"></i>` : '<i></i>'}</button>`; }).join('') || `<div class="pal-e">${esc(t('noResults'))}</div>`}</div>`;
   }
   const picker = `<section class="glass prism-pick">
-    <div class="chipset" role="group" aria-label="${esc(t('source'))}">${FW.map((g) => `<button type="button" data-act="tr-fw" data-fw="${g}" aria-pressed="${g === f}"><span class="dotfw fw-${g}"></span>${FW_SHORT[g]}</button>`).join('')}</div>
+    <div class="chipset" role="group" aria-label="${esc(t('source'))}">${FW.map((g) => `<button type="button" data-act="tr-fw" data-fw="${g}" aria-pressed="${g === f}"><span class="dotfw fw-${fwCls(g)}"></span>${fwShort(g)}</button>`).join('')}</div>
     <div class="search">${icon('search', 16)}<input type="search" id="tr-q" value="${esc(ui.trQ)}" placeholder="${esc(t('pickPh'))}" aria-label="${esc(t('pickPh'))}" autocomplete="off" role="combobox" aria-expanded="${ui.trOpen}" aria-controls="tr-res"${ui.trOpen ? ` aria-activedescendant="tri-${ui.trIdx}"` : ''}></div>${res}</section>`;
   const ensInfo = f === 'ens' ? `<dl class="kv small"><dt>${esc(t('dims'))}</dt><dd>${esc(r.dims)}</dd><dt>${esc(t('exig'))}</dt><dd class="mono">B ${esc(r.bajo)} · M ${esc(r.medio)} · A ${esc(r.alto)}</dd>${state.alcance.ens.on ? `<dt>${esc(t('inYourSys'))}</dt><dd>${esc(t('level'))} ${esc(t('lv.' + cov.nivel))} · <code>${esc(exigL(cov.exigencia))}</code></dd>` : ''}${ccnFicha(id)}<dt>${esc(t('classIso'))}</dt><dd>${esc(r.ref || '—')}</dd></dl>${ccnAviso(f, id)}` : '';
-  const src = `<div class="src-col"><div class="col-lbl">${esc(t('source'))}</div><div class="src fw-${f}">
+  const src = `<div class="src-col"><div class="col-lbl">${esc(t('source'))}</div><div class="src fw-${fwCls(f)}">
     <div class="row">${fwTag(f, !onFw(f))}<code>${esc(reqCode(f, id))}</code></div><h2>${esc(rT(f, id))}</h2><p class="small muted">${esc(rG(f, id))}</p>
     <div class="row" style="margin-top:12px">${onFw(f) ? covPill(cov.estado) + (cov.estado !== 'no-exigido' && cov.estado !== 'excluido' ? `<span class="small muted num">${esc(t('support', pct(cov.score)))}</span>` : '') : `<span class="pill neutral">${esc(t('outOfScope'))}</span>`}</div>
     ${ensInfo ? `<div style="margin-top:14px">${ensInfo}</div>` : ''}
@@ -220,8 +229,8 @@ function vPrisma() {
   const lane = (g) => {
     const rows = eq.otras[g].filter((x) => x.fuerza !== 'relacionado' || showRel);
     const noEq = g === 'iso42001' || f === 'iso42001' ? t('noEqAi') : t('noEq');
-    return `<div class="lane fw-${g}${onFw(g) ? '' : ' off'}"><h4>${fwTag(g, !onFw(g))}<span class="tiny muted num">${rows.length}</span></h4>
-      ${rows.length ? rows.map((x) => { const c = onFw(g) ? reqRow(g, x.id).estado : ''; return `<button type="button" class="eq" data-act="tr-center" data-fw="${g}" data-id="${esc(x.id)}" data-via="${esc(x.via.join(' '))}" data-fz="${x.fuerza}" data-tip="${esc(t('centerHere'))}"><span class="rq fw-${g} ${x.fuerza}${c ? ' st-' + esc(c) : ''}">${esc(reqCode(g, x.id))}</span><span class="t">${esc(rT(g, x.id))}</span><small>${esc(t('fuerza.' + x.fuerza))} · ${esc(x.via.length ? t('viaCtl', x.via.join(', ')) : t('ccnSinCtl'))}${esParCcn(f, g) ? `<span class="ccn-src${x.ccn ? '' : ' propio'}">${esc(ccnTxt(f, g, x))}</span>` : ''}</small></button>`; }).join('') : `<p class="empty-lane">${esc(noEq)}</p>`}</div>`;
+    return `<div class="lane fw-${fwCls(g)}${onFw(g) ? '' : ' off'}"><h4>${fwTag(g, !onFw(g))}<span class="tiny muted num">${rows.length}</span></h4>
+      ${rows.length ? rows.map((x) => { const c = onFw(g) ? reqRow(g, x.id).estado : ''; return `<button type="button" class="eq" data-act="tr-center" data-fw="${g}" data-id="${esc(x.id)}" data-via="${esc(x.via.join(' '))}" data-fz="${x.fuerza}" data-tip="${esc(t('centerHere'))}"><span class="rq fw-${fwCls(g)} ${x.fuerza}${c ? ' st-' + esc(c) : ''}">${esc(reqCode(g, x.id))}</span><span class="t">${esc(rT(g, x.id))}</span><small>${esc(t('fuerza.' + x.fuerza))} · ${esc(x.via.length ? t('viaCtl', x.via.join(', ')) : t('ccnSinCtl'))}${esParCcn(f, g) ? `<span class="ccn-src${x.ccn ? '' : ' propio'}">${esc(ccnTxt(f, g, x))}</span>` : ''}</small></button>`; }).join('') : `<p class="empty-lane">${esc(noEq)}</p>`}</div>`;
   };
   const dst = `<div class="dst"><div class="col-lbl">${esc(t('targets'))}</div>${FW.filter((g) => g !== f).map(lane).join('')}</div>`;
   return `${head(`${icon('waypoints', 14)}${esc(t('prismEyebrow'))}`, esc(t('prismTitle')), esc(t('prismLead')))}
@@ -239,11 +248,11 @@ function drawBeams() {
   const f = ui.trFw; const nodes = {}; let d = '', flow = '';
   stage.querySelectorAll('.node').forEach((n) => {
     const p = pos(n); nodes[n.dataset.uc] = p; const w = +n.dataset.w; const y0 = Math.max(sTop, Math.min(Math.max(sTop, sBot), p.y)); const path = curve(s.r, y0, p.l, p.y);
-    d += `<path class="fw-${f} ${fuerzaDe(w)}" d="${path}"/>`; if (w > 0) flow += `<path class="fw-${f} flow" d="${path}"/>`;
+    d += `<path class="fw-${fwCls(f)} ${fuerzaDe(w)}" d="${path}"/>`; if (w > 0) flow += `<path class="fw-${fwCls(f)} flow" d="${path}"/>`;
   });
   stage.querySelectorAll('.eq').forEach((e) => {
     const p = pos(e); const g = e.dataset.fw; if (!FW.includes(g)) return;
-    for (const uc of String(e.dataset.via || '').split(' ')) { const n = nodes[uc]; if (n) d += `<path class="fw-${g} ${oneOf(e.dataset.fz, ['total', 'parcial', 'relacionado'], 'total')}" d="${curve(n.r, n.y, p.l, p.y)}"/>`; }
+    for (const uc of String(e.dataset.via || '').split(' ')) { const n = nodes[uc]; if (n) d += `<path class="fw-${fwCls(g)} ${oneOf(e.dataset.fz, ['total', 'parcial', 'relacionado'], 'total')}" d="${curve(n.r, n.y, p.l, p.y)}"/>`; }
   });
   svg.setAttribute('width', R.width); svg.setAttribute('height', R.height); svg.setAttribute('viewBox', `0 0 ${R.width} ${R.height}`);
   svg.innerHTML = d + flow;
@@ -267,13 +276,13 @@ function vControles() {
       const cc = calc.controles[c.id]; const dd = state.controles[c.id];
       return `<div class="li${cc.relevante ? '' : ' dim'}${ui.insp && ui.insp.type === 'uc' && ui.insp.id === c.id ? ' on' : ''}" data-act="insp-uc" data-id="${esc(c.id)}">
         <span class="id">${esc(c.id)}</span><div class="tt"><button type="button" class="li-open" id="uc-${esc(c.id)}" data-act="insp-uc" data-id="${esc(c.id)}">${esc(cT(c.id))}</button><small>${dd.origen === 'ens' ? `<span class="origin">${esc(t('inheritedEns'))}</span> · ` : ''}${esc(dd.responsable || t('noOwner'))}</small></div>
-        <div class="fwdots">${FW.map((f) => { const n = c.maps[f].filter((m) => m.w > 0).length; return n ? `<span class="fwn fw-${f}${onFw(f) ? '' : ' off'}" data-tip="${esc(`${E.FW_LABEL[f]}: ${t('reqs', n)}`)}">${n}</span>` : ''; }).join('')}</div>
+        <div class="fwdots">${FW.map((f) => { const n = c.maps[f].filter((m) => m.w > 0).length; return n ? `<span class="fwn fw-${fwCls(f)}${onFw(f) ? '' : ' off'}" data-tip="${esc(`${fwLbl(f)}: ${t('reqs', n)}`)}">${n}</span>` : ''; }).join('')}</div>
         ${stateSwitch(c.id, cc.estado)}</div>`;
     }).join('')}</section>`;
   }
   return `${head(`${icon('layers', 14)}${esc(t('ctlEyebrow'))}`, esc(t('ctlTitle')), esc(t('ctlLead', CAT.controls.length, CAT.domains.length)))}
   <div class="toolbar"><div class="search">${icon('search', 16)}<input type="search" id="uc-q" data-uiq="ucQ" value="${esc(ui.ucQ)}" placeholder="${esc(t('ctlSearch'))}" aria-label="${esc(t('ctlSearch'))}"></div>
-    <div class="chipset" role="group" aria-label="${esc(t('fws'))}">${[['todos', t('allFw')], ...FW.map((f) => [f, FW_SHORT[f]])].map(([v, l]) => `<button type="button" data-act="uc-fw" data-v="${v}" aria-pressed="${ui.ucFw === v}">${v !== 'todos' ? `<span class="dotfw fw-${v}"></span>` : ''}${esc(l)}</button>`).join('')}</div>
+    <div class="chipset" role="group" aria-label="${esc(t('fws'))}">${[['todos', t('allFw')], ...FW.map((f) => [f, fwShort(f)])].map(([v, l]) => `<button type="button" data-act="uc-fw" data-v="${v}" aria-pressed="${ui.ucFw === v}">${v !== 'todos' ? `<span class="dotfw fw-${fwCls(v)}"></span>` : ''}${esc(l)}</button>`).join('')}</div>
     <label class="switch-l"><span class="switch"><input type="checkbox" id="uc-rel" data-uibool="ucSoloRel"${ui.ucSoloRel ? ' checked' : ''}><span></span></span>${esc(t('onlyScope'))}</label></div>
   <div class="chipset" role="group" aria-label="${esc(t('severity'))}">${estados.map(([v, l, n]) => `<button type="button" data-act="uc-estado" data-v="${v}" aria-pressed="${ui.ucEstado === v}">${v !== 'todos' ? icon(ST_IC[v], 14) : ''}${esc(l)}<span class="n">${n}</span></button>`).join('')}</div>
   ${html || `<section class="glass pane">${empty('search', esc(t('noResults')), esc(t('noResultsTxt')))}</section>`}`;
@@ -284,7 +293,7 @@ function vNormas() {
   const f = ui.normaFw; const fw = calc.fw[f];
   const q = normTxt(ui.normaQ.trim());
   const rows = calc.req[f].filter((r) => (ui.normaEstado === 'todos' || r.estado === ui.normaEstado) && (!q || normTxt(`${reqCode(f, r.id)} ${IX.req[f][r.id].code} ${rT(f, r.id)}`).includes(q)));
-  const tabs = `<div class="lens-row" role="group" aria-label="${esc(t('fws'))}">${FW.map((g) => { const w = calc.fw[g]; return `<button type="button" class="lens-tab fw-${g}${onFw(g) ? '' : ' off'}" data-act="norma-fw" data-fw="${g}" aria-pressed="${g === f}">${miniRing(g, w.grado, w.cubiertos, w.aplicables, 52, !onFw(g))}<span><b>${E.FW_LABEL[g]}</b><small>${onFw(g) ? `${pct(w.grado)} · ${w.brechas} ${esc(t('gaps'))}` : esc(t('ringOff'))}</small></span></button>`; }).join('')}</div>`;
+  const tabs = `<div class="lens-row" role="group" aria-label="${esc(t('fws'))}">${FW.map((g) => { const w = calc.fw[g]; return `<button type="button" class="lens-tab fw-${fwCls(g)}${onFw(g) ? '' : ' off'}" data-act="norma-fw" data-fw="${g}" aria-pressed="${g === f}">${miniRing(g, w.grado, w.cubiertos, w.aplicables, 52, !onFw(g))}<span><b>${fwLbl(g)}</b><small>${onFw(g) ? `${pct(w.grado)} · ${w.brechas} ${esc(t('gaps'))}` : esc(t('ringOff'))}</small></span></button>`; }).join('')}</div>`;
   const cntE = (e) => calc.req[f].filter((r) => r.estado === e).length;
   const filtros = [['todos', t('all'), calc.req[f].length], ...['brecha', 'parcial', 'cubierto', 'excluido', ...(f === 'ens' ? ['no-exigido'] : [])].map((e) => [e, t('cov.' + e), cntE(e)])];
   let html = ''; let lastG = null; let buf = '';
@@ -301,7 +310,7 @@ function vNormas() {
   flush();
   return `${head(`${icon('file-check', 14)}${esc(t('normEyebrow'))}`, esc(t('normTitle')), esc(t('normLead')))}
   ${tabs}
-  <section class="glass pane stack fw-${f}"><div class="row spread"><div><h3>${esc(fwLong(f))}</h3><p class="small muted" style="margin-top:3px">${onFw(f) ? `${esc(t('applicable', fw.aplicables))} · ${pct(fw.grado)}${fw.excluidos ? ` · ${fw.excluidos} ${esc(t('cov.excluido').toLowerCase())}` : ''}${fw.noExigidos ? ` · ${fw.noExigidos} ${esc(t('cov.no-exigido').toLowerCase())}` : ''}` : esc(t('orient'))}</p></div>${onFw(f) ? '' : `<button type="button" class="btn sm" data-act="nav" data-view="alcance">${icon('plus', 15)}${esc(t('addScope'))}</button>`}</div>${stackBar(fw)}</section>
+  <section class="glass pane stack fw-${fwCls(f)}"><div class="row spread"><div><h3>${esc(fwLong(f))}</h3><p class="small muted" style="margin-top:3px">${onFw(f) ? `${esc(t('applicable', fw.aplicables))} · ${pct(fw.grado)}${fw.excluidos ? ` · ${fw.excluidos} ${esc(t('cov.excluido').toLowerCase())}` : ''}${fw.noExigidos ? ` · ${fw.noExigidos} ${esc(t('cov.no-exigido').toLowerCase())}` : ''}` : esc(t('orient'))}</p></div>${onFw(f) ? '' : `<button type="button" class="btn sm" data-act="nav" data-view="alcance">${icon('plus', 15)}${esc(t('addScope'))}</button>`}</div>${stackBar(fw)}</section>
   <div class="toolbar"><div class="search">${icon('search', 16)}<input type="search" id="norma-q" data-uiq="normaQ" value="${esc(ui.normaQ)}" placeholder="${esc(t('reqSearch'))}" aria-label="${esc(t('reqSearch'))}"></div>
     <div class="chipset" role="group">${filtros.map(([v, l, n]) => `<button type="button" data-act="norma-estado" data-v="${v}" aria-pressed="${ui.normaEstado === v}">${esc(l)}<span class="n">${n}</span></button>`).join('')}</div></div>
   ${html || `<section class="glass pane">${empty('search', esc(t('noResults')), esc(t('noResultsTxt')))}</section>`}`;
@@ -322,7 +331,7 @@ function vBrechas() {
     <div class="a">${icon('arrow-right', 15)}<span>${esc(h.accion)}</span></div>${h.ref ? `<div class="ref">${esc(h.ref)}</div>` : ''}</article>`).join('') || (calc.kpi.brechas ? `<div class="info-box">${icon('info', 16)}${esc(t('noFindingsGaps', calc.kpi.brechas))}</div>` : `<div class="ok-box">${icon('circle-check', 16)}${esc(t('noFindings'))}</div>`)}</div>
   <div class="pane-h" style="margin:10px 4px 0"><div><h2>${esc(t('gapsByFw'))}</h2><p>${esc(t('gapsByFwSub'))}</p></div></div>
   <div class="grid g2">${calc.alcance.map((f) => { const br = calc.req[f].filter((r) => r.estado === 'brecha'); return `<section class="glass pane stack"><div class="row spread">${fwTag(f)}<span class="small muted">${br.length} ${esc(t('gaps'))} · ${esc(t('exclusive', excl[f].length))}</span></div>
-    ${br.length ? `<div class="chips">${br.map((r) => reqChip(f, r.id, { cov: 'brecha' })).join('')}</div>${excl[f].length ? `<p class="small muted">${esc(t('exclusiveTxt', E.FW_LABEL[f], excl[f].map((r) => reqCode(f, r.id)).join(', ')))}</p>` : ''}` : `<div class="ok-box">${icon('circle-check', 16)}${esc(t('noGaps'))}</div>`}</section>`; }).join('')}</div>`;
+    ${br.length ? `<div class="chips">${br.map((r) => reqChip(f, r.id, { cov: 'brecha' })).join('')}</div>${excl[f].length ? `<p class="small muted">${esc(t('exclusiveTxt', fwLbl(f), excl[f].map((r) => reqCode(f, r.id)).join(', ')))}</p>` : ''}` : `<div class="ok-box">${icon('circle-check', 16)}${esc(t('noGaps'))}</div>`}</section>`; }).join('')}</div>`;
 }
 
 /* ================= Plan (tablero) ================= */
@@ -365,22 +374,88 @@ function vMapa() {
   const counts = CAT.domains.map((d) => ({ d, n: FW.map((f) => reqsOfDom(d.id, f).size), ctl: CAT.controls.filter((c) => c.dom === d.id).length }));
   const max = Math.max(...counts.flatMap((x) => x.n));
   const grid = `<div style="overflow-x:auto" tabindex="0" role="region" aria-label="${esc(t('byDomain'))}"><div class="dgrid" role="table" aria-label="${esc(t('byDomain'))}"><div role="row"><div class="h" role="cell"></div>${FW.map((f) => `<div class="h" role="columnheader">${fwTag(f, !onFw(f), true)}</div>`).join('')}<div class="h tot tiny muted" role="columnheader">${esc(t('controlsN'))}</div></div>
-    ${counts.map(({ d, n, ctl }) => `<div role="row"><div class="rh" role="rowheader">${icon(d.ic, 15)}<span>${esc(dT(d.id))}</span></div>${n.map((v, i) => `<div class="c fw-${FW[i]}${v ? '' : ' zero'}${v / max > 0.6 ? ' hi' : ''}" role="cell" style="--v:${(v / max).toFixed(3)}" data-tip="${esc(`${dT(d.id)} · ${E.FW_LABEL[FW[i]]}: ${t('reqs', v)}`)}">${v || '·'}</div>`).join('')}<div class="tot" role="cell">${ctl}</div></div>`).join('')}</div></div>`;
+    ${counts.map(({ d, n, ctl }) => `<div role="row"><div class="rh" role="rowheader">${icon(d.ic, 15)}<span>${esc(dT(d.id))}</span></div>${n.map((v, i) => `<div class="c fw-${fwCls(FW[i])}${v ? '' : ' zero'}${v / max > 0.6 ? ' hi' : ''}" role="cell" style="--v:${(v / max).toFixed(3)}" data-tip="${esc(`${dT(d.id)} · ${fwLbl(FW[i])}: ${t('reqs', v)}`)}">${v || '·'}</div>`).join('')}<div class="tot" role="cell">${ctl}</div></div>`).join('')}</div></div>`;
   const q = normTxt(ui.mapaQ.trim());
   let rows = ''; let lastDom = '';
   for (const c of CAT.controls) {
     if (q && !normTxt(`${c.id} ${cT(c.id)} ${FW.map((f) => c.maps[f].map((m) => reqCode(f, m.id) + ' ' + IX.req[f][m.id].code).join(' ')).join(' ')}`).includes(q)) continue;
-    if (c.dom !== lastDom) { rows += `<tr class="dom"><td colspan="6">${esc(dT(c.dom))}</td></tr>`; lastDom = c.dom; }
+    if (c.dom !== lastDom) { rows += `<tr class="dom"><td colspan="${FW.length + 2}">${esc(dT(c.dom))}</td></tr>`; lastDom = c.dom; }
     rows += `<tr><td>${ucChip(c.id)}</td><td class="t"><b>${esc(cT(c.id))}</b></td>${FW.map((f) => `<td><div class="chips">${c.maps[f].filter((m) => m.w > 0 || showRel).map((m) => reqChip(f, m.id, { fuerza: fuerzaDe(m.w), cov: onFw(f) ? reqRow(f, m.id).estado : null })).join('')}</div></td>`).join('')}</tr>`;
   }
-  return `${head(`${icon('grid-3x3', 14)}${esc(t('mapEyebrow'))}`, esc(t('mapTitle')), esc(t('mapLead', CAT.controls.length, TOTAL_REQS)), `<button type="button" class="btn" data-act="export-xlsx">${icon('file-spreadsheet', 16)}${esc(t('excel'))}</button>`)}
+  return `${head(`${icon('grid-3x3', 14)}${esc(t('mapEyebrow'))}`, esc(t('mapTitle')), esc(t('mapLead', CAT.controls.length, totalReqs())), `<button type="button" class="btn" data-act="export-xlsx">${icon('file-spreadsheet', 16)}${esc(t('excel'))}</button>`)}
   <section class="glass pane"><div class="pane-h"><div><h3>${esc(t('byDomain'))}</h3><p>${esc(t('byDomainSub'))}</p></div></div>${grid}</section>
   <div class="toolbar"><div class="search">${icon('search', 16)}<input type="search" id="mapa-q" data-uiq="mapaQ" value="${esc(ui.mapaQ)}" placeholder="${esc(t('mapFilter'))}" aria-label="${esc(t('mapFilter'))}"></div>
     <div class="row small muted"><span class="rq total fw-iso27001">${esc(t('fuerzaCorta.total'))}</span><span class="rq parcial fw-iso27001">${esc(t('fuerzaCorta.parcial'))}</span>${showRel ? `<span class="rq relacionado fw-iso27001">${esc(t('fuerzaCorta.relacionado'))}</span>` : ''}</div></div>
-  <section class="glass list xw-wrap"><table class="xw"><thead><tr><th>${esc(t('control'))}</th><th>${esc(t('description'))}</th>${FW.map((f) => `<th>${fwTag(f)}</th>`).join('')}</tr></thead><tbody>${rows || `<tr><td colspan="6" class="muted">${esc(t('noResults'))}</td></tr>`}</tbody></table></section>`;
+  <section class="glass list xw-wrap"><table class="xw"><thead><tr><th>${esc(t('control'))}</th><th>${esc(t('description'))}</th>${FW.map((f) => `<th>${fwTag(f)}</th>`).join('')}</tr></thead><tbody>${rows || `<tr><td colspan="${FW.length + 2}" class="muted">${esc(t('noResults'))}</td></tr>`}</tbody></table></section>`;
 }
 
 /* ================= Alcance ================= */
+/* Perfil regulatorio: pocas preguntas en lenguaje de negocio (el sector y el tamaño son los de NIS2) */
+function perfilForm(p, pre) {
+  const sw = (k) => `<label class="switch-l"><span class="switch"><input type="checkbox" id="${pre}-pf-${k}" data-${pre}="perfil.${k}" data-type="bool"${p[k] ? ' checked' : ''}><span></span></span><span class="small">${esc(t('prQ.' + k))}</span></label>`;
+  return `<div class="form">
+    <label class="fld">${esc(t('prJur'))}<select id="${pre}-pf-jur" data-${pre}="perfil.jurisdiccion">${t('prJurs').map(([v, l]) => opt(v, l, p.jurisdiccion)).join('')}</select></label>
+    <label class="fld">${esc(t('prAvi'))}<select id="${pre}-pf-avi" data-${pre}="perfil.aviacion">${t('prAvis').map(([v, l]) => opt(v, l, p.aviacion)).join('')}</select></label>
+    <div class="span2 pf-sw">${['publico', 'proveedorPublico', 'financiera', 'ia', 'fabricante'].map(sw).join('')}</div></div>`;
+}
+const prPill = (e) => `<span class="pill pr-${esc(e)}">${icon({ obligatoria: 'scale', confirmar: 'circle-question-mark', voluntaria: 'handshake', 'no-aplica': 'circle-slash', elegida: 'check' }[e] || 'info', 13)}${esc(t('prEstado.' + e))}</span>`;
+function futurasBox(prop) {
+  if (!prop.futuras.length) return '';
+  return `<div class="fut"><h4>${esc(t('prFuturas'))}</h4><ul>${prop.futuras.map((x) => `<li><b>${esc(x.nombre)}</b> <span class="tiny muted">${esc(x.base)}</span><span class="small">${esc(x.motivo)}</span></li>`).join('')}</ul></div>`;
+}
+function propuestaTabla() {
+  const prop = propuesta(); const conf = state.perfil.confirmado;
+  const rows = FW.map((f) => {
+    const x = prop.marcos[f] || { estado: 'voluntaria', base: '', motivo: '' }; const on = !!state.alcance[f].on;
+    const desajuste = (x.estado === 'obligatoria' && !on) || (x.estado === 'no-aplica' && on);
+    return `<div class="prow fw-${fwCls(f)}${on ? ' on' : ''}">
+      <label class="switch-l prow-on"><span class="switch"><input type="checkbox" id="set-on-${esc(f)}" data-set="alcance.${esc(f)}.on" data-type="bool"${on ? ' checked' : ''}><span></span></span><span class="sr">${esc(t('prInScope'))} · ${esc(fwLbl(f))}</span></label>
+      <div class="prow-fw">${fwTag(f, !on)}${esPropio(f) ? `<span class="tiny muted">${esc(t('mpBadge'))}</span>` : ''}</div>
+      <div class="prow-why">${prPill(x.estado)}${desajuste ? `<span class="pill warn">${icon('triangle-alert', 13)}${esc(t(on ? 'prOnAnyway' : 'prOffAnyway'))}</span>` : ''}<p class="small">${esc(x.motivo)}</p>${x.base ? `<p class="tiny muted">${esc(x.base)}</p>` : ''}</div>
+      <label class="fld prow-mot">${esc(t('prDecision'))}<input type="text" id="set-mot-${esc(f)}" data-set="alcance.${esc(f)}.motivo" value="${esc(state.alcance[f].motivo || '')}" placeholder="${esc(t(desajuste ? 'prDecisionReq' : 'prDecisionPh'))}"></label></div>`;
+  }).join('');
+  return `<section class="glass pane stack" id="sec-propuesta"><div class="pane-h"><div><h3>${esc(t('prPropTitle'))}</h3><p>${esc(t('prPropLead'))}</p></div>
+      <div class="row"><button type="button" class="btn sm primary" data-act="perfil-aplicar">${icon('wand-sparkles', 15)}${esc(t('prApply'))}</button></div></div>
+    <p class="hint">${esc(t('prApplyHint'))}${conf ? ` · ${esc(t('prApplied', fmtDate(conf)))}` : ''}</p>
+    <div class="ptable">${rows}</div>
+    ${futurasBox(prop)}
+    <div class="callout">${icon('info', 17)}<span>${esc(t('prDisclaimer'))}</span></div></section>`;
+}
+function partisBox() {
+  const a = state.alcance.partis; const F = CAT0.frameworks.partis;
+  return `<section class="glass pane stack"><h3>${fwTag('partis')} ${esc(t('partisTitle'))}</h3>
+    <div class="form"><label class="fld span2">${esc(t('partisReg'))}<select id="set-partis-reg" data-set="alcance.partis.regimen">${t('partisRegs').map(([v, l]) => opt(v, l, a.regimen)).join('')}</select></label></div>
+    <p class="small">${esc(t('partisTxt'))}</p>
+    <p class="hint">${esc(t('partisSrc', F.fuentes.join(' · '), fmtDate(F.consulta)))}</p></section>`;
+}
+/* Marcos propios: importar, revisar el mapeo (con sugerencias), exportar y borrar */
+const FZ_OPTS = [[1, 'equivalente'], [0.5, 'parcial'], [0, 'relacion']];
+function mapeoMarco(m) {
+  const lim = ui.mpAll ? m.requisitos.length : 30; const ctlOpts = CAT0.controls.map((c) => opt(c.id, `${c.id} · ${cT(c.id)}`, '')).join('');
+  const rows = m.requisitos.slice(0, lim).map((r) => {
+    const ya = new Set(r.controles.map((c) => c.control));
+    const sug = E.sugerirControles(IX, `${r.titulo} ${r.texto}`, 3).filter((x) => !ya.has(x.id));
+    const ctls = r.controles.map((c) => `<span class="mp-ctl">${ucChip(c.control)}<select id="mpfz-${esc(r.id)}-${esc(c.control)}" data-mpfz="${esc(m.id)}" data-req="${esc(r.id)}" data-ctl="${esc(c.control)}" aria-label="${esc(t('mpFuerza', c.control))}">${FZ_OPTS.map(([w, k]) => opt(w, t('mpFz.' + k), c.w)).join('')}</select><button type="button" class="ibtn sm" data-act="mp-rm" data-fw="${esc(m.id)}" data-req="${esc(r.id)}" data-ctl="${esc(c.control)}" aria-label="${esc(t('mpRemove', c.control))}">${icon('x', 14)}</button></span>`).join('');
+    return `<div class="mp-req"><div class="mp-h"><code>${esc(r.id)}</code><b>${esc(r.titulo)}</b></div>${r.texto ? `<p class="small muted">${esc(r.texto.length > 220 ? r.texto.slice(0, 219) + '…' : r.texto)}</p>` : ''}
+      <div class="chips">${ctls || `<span class="small warn-t">${icon('circle-dashed', 14)}${esc(t('mpNoCtl'))}</span>`}</div>
+      <div class="row mp-add">${sug.length ? `<span class="tiny muted">${esc(t('mpSug'))}</span>${sug.map((x) => `<button type="button" class="btn sm ghost" data-act="mp-add" data-fw="${esc(m.id)}" data-req="${esc(r.id)}" data-ctl="${esc(x.id)}">${icon('plus', 14)}${esc(x.id)} · ${esc(cT(x.id))}</button>`).join('')}` : ''}
+        <select id="mpadd-${esc(r.id)}" data-mpadd="${esc(m.id)}" data-req="${esc(r.id)}" aria-label="${esc(t('mpAdd'))} · ${esc(r.id)}">${opt('', t('mpAdd'), '')}${ctlOpts}</select></div></div>`;
+  }).join('');
+  return `<div class="mp-map">${rows}${m.requisitos.length > lim ? `<button type="button" class="btn sm ghost" data-act="mp-all">${esc(t('mpAll', m.requisitos.length))}</button>` : ''}</div>`;
+}
+function marcosPanel() {
+  const ms = state.marcos || [];
+  const list = ms.map((m) => {
+    const con = m.requisitos.filter((r) => r.controles.some((c) => c.w > 0)).length; const open = ui.mpOpen === m.id; const del = ui.confirm === 'mpdel:' + m.id;
+    return `<article class="mp fw-${fwCls(m.id)}"><div class="row spread"><div class="row">${fwTag(m.id)}<span class="small muted">${esc(t('mpReqs', m.requisitos.length, con))} · ${esc(t('mpUserMap'))}</span></div>
+      <div class="row">${del ? `<span class="small">${esc(t('mpDelQ'))}</span><button type="button" class="btn sm danger-solid" data-act="mp-del" data-fw="${esc(m.id)}">${esc(t('del'))}</button><button type="button" class="btn sm" data-act="confirm-no">${esc(t('cancel'))}</button>`
+        : `<button type="button" class="btn sm${open ? '' : ' primary'}" data-act="mp-open" data-fw="${esc(m.id)}" aria-expanded="${open}">${icon(open ? 'chevron-up' : 'list-checks', 15)}${esc(t(open ? 'mpClose' : 'mpMap'))}</button><button type="button" class="btn sm" data-act="mp-export" data-fw="${esc(m.id)}">${icon('download', 15)}${esc(t('mpExport'))}</button><button type="button" class="ibtn sm" data-act="ask" data-what="mpdel:${esc(m.id)}" aria-label="${esc(t('mpDel'))} ${esc(m.nombre)}">${icon('trash', 16)}</button>`}</div></div>
+      ${m.descripcion ? `<p class="small muted">${esc(m.descripcion)}</p>` : ''}${open ? mapeoMarco(m) : ''}</article>`;
+  }).join('');
+  return `<section class="glass pane stack" id="sec-marcos"><div class="pane-h"><div><h3>${esc(t('mpTitle'))}</h3><p>${esc(t('mpLead'))}</p></div>
+      <div class="row"><button type="button" class="btn sm primary" data-act="mp-import"${ms.length >= MAX_MARCOS ? ' disabled' : ''}>${icon('upload', 15)}${esc(t('mpImport'))}</button><button type="button" class="btn sm ghost" data-act="mp-tpl-json">${icon('file-braces', 15)}${esc(t('mpTplJson'))}</button><button type="button" class="btn sm ghost" data-act="mp-tpl-csv">${icon('file-spreadsheet', 15)}${esc(t('mpTplCsv'))}</button></div></div>
+    ${list || `<p class="small muted">${esc(t('mpEmpty'))}</p>`}</section>`;
+}
 function vAlcance() {
   const a = state.alcance; const p = state.proyecto; const S = t('sectors');
   return `${head(`${icon('compass', 14)}${esc(t('scopeEyebrow'))}`, esc(t('scopeTitle')), esc(t('scopeLead')))}
@@ -389,11 +464,14 @@ function vAlcance() {
     <label class="fld">${esc(t('org'))}<input type="text" id="al-o" data-set="proyecto.organizacion" value="${esc(p.organizacion)}"></label>
     <label class="fld span2">${esc(t('scopeDesc'))}<input type="text" id="al-d" data-set="proyecto.descripcion" value="${esc(p.descripcion)}"></label>
     <label class="fld">${esc(t('sector'))}<select id="al-s" data-set="proyecto.sector">${opt('', t('choose'), p.sector)}${S.map((x) => opt(x, x, p.sector)).join('')}${p.sector && !S.includes(p.sector) ? opt(p.sector, p.sector, p.sector) : ''}</select></label></div></section>
-  <section class="glass pane stack"><h3>${esc(t('fwInScope'))}</h3>${scopeCards(a, 'set')}</section>
+  <section class="glass pane stack"><div class="pane-h"><div><h3>${esc(t('prTitle'))}</h3><p>${esc(t('prLead'))}</p></div></div>${perfilForm(state.perfil, 'set')}<p class="hint">${esc(t('prNis2Hint'))}</p></section>
+  ${propuestaTabla()}
+  ${a.partis.on ? partisBox() : ''}
   ${a.ens.on ? `<section class="glass pane stack"><h3>${fwTag('ens')} ${esc(t('ensCat'))}</h3>${ensLevels(a.ens, 'set')}<p class="hint">${esc(t('ensCount', calc.fw.ens.aplicables + calc.fw.ens.excluidos, calc.fw.ens.noExigidos))}</p>
     <div class="row"><button type="button" class="btn sm" data-act="import-ens-into">${icon('upload', 15)}${esc(t('updateFromEns'))}</button><span class="hint">${esc(t('updateFromEnsTxt'))}</span></div></section>` : ''}
   <section class="glass pane stack"><h3>${fwTag('nis2')} ${esc(t('nis2Title'))}</h3>${nis2Form(state.nis2q, 'set')}${nis2Box(state.nis2q)}</section>
-  ${a.iso42001.on ? `<section class="glass pane stack"><h3>${fwTag('iso42001')} ${esc(t('aiTitle'))}</h3><p class="small">${esc(t('aiTxt', pct(calc.fw.iso42001.grado)))}</p></section>` : ''}`;
+  ${a.iso42001.on ? `<section class="glass pane stack"><h3>${fwTag('iso42001')} ${esc(t('aiTitle'))}</h3><p class="small">${esc(t('aiTxt', pct(calc.fw.iso42001.grado)))}</p></section>` : ''}
+  ${marcosPanel()}`;
 }
 
 /* ================= Exportar ================= */

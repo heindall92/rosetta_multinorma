@@ -12,7 +12,7 @@ const ICONS = require('../src/data/icons.json');
 const dupes = (arr) => arr.filter((x, i) => arr.indexOf(x) !== i);
 
 describe('catálogo', () => {
-  test('cuatro normas con el número de requisitos esperado', () => {
+  test('cinco normas con el número de requisitos esperado', () => {
     assert.deepEqual(Object.keys(CAT.frameworks), E.FW);
     const n = Object.fromEntries(E.FW.map((f) => [f, CAT.frameworks[f].reqs.length]));
     // ENS: 73 medidas del Anexo II · ISO 27001: cl. 4–10 + 93 controles · NIS2: RE 2024/2690 · ISO 42001: cl. 4–10 + 38 controles
@@ -21,6 +21,13 @@ describe('catálogo', () => {
     assert.equal(CAT.frameworks.iso27001.reqs.filter((r) => /^A\d/.test(r.id)).length, 93);
     assert.equal(CAT.frameworks.iso42001.reqs.filter((r) => /^A\d/.test(r.id)).length, 38);
     assert.ok(n.nis2 > 0);
+    assert.equal(n.partis, 13, 'Part-IS: puntos .200 a .260');
+    assert.equal(CAT.frameworks.partis.tope, 'parcial');
+    assert.ok(CAT.frameworks.partis.fuentes.some((f) => /2023\/203/.test(f)) && CAT.frameworks.partis.fuentes.some((f) => /2022\/1645/.test(f)));
+    for (const r of CAT.frameworks.partis.reqs) { assert.match(r.code, /^IS\.I\.OR\.\d{3}$/); for (const k of ['t', 't_en', 'nota', 'nota_en', 'ref', 'ref_en']) assert.ok(r[k], `${r.id}.${k}`); }
+  });
+  test('cada control declara su correspondencia con todas las normas (aunque sea vacía)', () => {
+    for (const c of CAT.controls) assert.deepEqual(Object.keys(c.maps), E.FW, c.id);
   });
   test('identificadores únicos (requisitos, controles, dominios)', () => {
     for (const f of E.FW) assert.deepEqual(dupes(CAT.frameworks[f].reqs.map((r) => r.id)), [], f);
@@ -77,8 +84,9 @@ describe('catálogo', () => {
 });
 
 describe('casos de ejemplo', () => {
-  test('cinco casos con identificador único y datos bilingües', () => {
-    assert.equal(CASOS.length, 5);
+  test('seis casos con identificador único, datos bilingües y perfil regulatorio', () => {
+    assert.equal(CASOS.length, 6);
+    for (const c of CASOS) assert.deepEqual(E.perfilNormalizado(c.state.perfil), c.state.perfil, `${c.id}: perfil válido`);
     assert.deepEqual(dupes(CASOS.map((c) => c.id)), []);
     for (const c of CASOS) for (const k of ['titulo', 'sector', 'sector_en', 'resumen', 'resumen_en']) assert.ok(c[k], `${c.id}.${k}`);
   });

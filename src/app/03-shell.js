@@ -1,8 +1,7 @@
 /* ---------- Piezas de presentación ---------- */
 const COV_IC = { cubierto: 'circle-check', parcial: 'contrast', brecha: 'circle-dashed', excluido: 'circle-slash', 'no-exigido': 'info' };
 const ST_IC = { pendiente: 'circle-dashed', parcial: 'contrast', implantado: 'circle-check', 'no-aplica': 'circle-slash' };
-const FW_SHORT = { ens: 'ENS', iso27001: '27001', nis2: 'NIS2', iso42001: '42001' };
-const fwTag = (f, off = false, short = false) => `<span class="fwt fw-${f}${off ? ' off' : ''}"${short ? ` title="${E.FW_LABEL[f]}"` : ''}>${short ? FW_SHORT[f] : E.FW_LABEL[f]}</span>`;
+const fwTag = (f, off = false, short = false) => `<span class="fwt fw-${fwCls(f)}${off ? ' off' : ''}"${short || fwLbl(f).length > 24 ? ` title="${esc(fwLbl(f))}"` : ''}><span class="fwt-l">${esc(short ? fwShort(f) : fwLbl(f))}</span></span>`;
 const covPill = (st) => `<span class="pill ${esc(st)}">${icon(COV_IC[st] || 'info', 13)}${esc(t('cov.' + st))}</span>`;
 const stPill = (st) => `<span class="pill ${esc(st)}">${icon(ST_IC[st], 13)}${esc(t('est.' + st))}</span>`;
 const sevPill = (sv) => `<span class="pill ${sv === 'Alta' ? 'crit' : sv === 'Media' ? 'warn' : 'accent'}">${esc(t('sev.' + sv))}</span>`;
@@ -21,21 +20,21 @@ function ccnFicha(id) {
 }
 const ccnAviso = (f, id) => (f === 'ens' && D.ccn825 && D.ccn825.medidas[id] && D.ccn825.medidas[id].nivel === 'nula' ? `<div class="callout">${icon('info', 17)}<span>${esc(t('ccnNula'))}</span></div>` : '');
 function reqChip(f, id, { fuerza = 'total', cov = null, origen = '' } = {}) {
-  const tip = `${E.FW_LABEL[f]} ${reqCode(f, id)} · ${rT(f, id)}${fuerza !== 'total' ? ` (${t('fuerza.' + fuerza).toLowerCase()})` : ''}${cov ? ` · ${t('cov.' + cov)}` : ''}${origen ? ` · ${origen}` : ''}`;
-  return `<button type="button" class="rq fw-${f} ${fuerza}${cov ? ' st-' + esc(cov) : ''}" data-act="insp-req" data-fw="${f}" data-id="${esc(id)}" data-tip="${esc(tip)}">${esc(reqCode(f, id))}</button>`;
+  const tip = `${fwLbl(f)} ${reqCode(f, id)} · ${rT(f, id)}${fuerza !== 'total' ? ` (${t('fuerza.' + fuerza).toLowerCase()})` : ''}${cov ? ` · ${t('cov.' + cov)}` : ''}${origen ? ` · ${origen}` : ''}`;
+  return `<button type="button" class="rq fw-${fwCls(f)} ${fuerza}${cov ? ' st-' + esc(cov) : ''}" data-act="insp-req" data-fw="${f}" data-id="${esc(id)}" data-tip="${esc(tip)}">${esc(reqCode(f, id))}</button>`;
 }
 /* Interruptor de cuatro posiciones para el estado de un control */
 function stateSwitch(id, st, lg = false) {
   return `<span class="stsw${lg ? ' lg' : ''}" role="group" aria-label="${esc(t('stateOf', id))}">${E.ESTADOS.map((e) => `<button type="button" class="${e}" data-act="set-state" data-id="${esc(id)}" data-v="${e}" aria-pressed="${st === e}" aria-label="${esc(t('est.' + e))}"${lg ? '' : ` data-tip="${esc(t('est.' + e))}"`}>${icon(ST_IC[e], 16)}${lg ? `<span>${esc(t('est.' + e))}</span>` : ''}</button>`).join('')}</span>`;
 }
-const caseIcon = (id) => ({ techserv: 'server', hospital: 'hospital', lumen: 'sparkles', aguas: 'droplet', citafacil: 'cloud' }[id] || 'building-complex');
+const caseIcon = (id) => ({ techserv: 'server', hospital: 'hospital', lumen: 'sparkles', aguas: 'droplet', citafacil: 'cloud', alas: 'plane' }[id] || 'building-complex');
 function head(eyebrow, title, lead, actions = '') {
   return `<header class="head"><div>${eyebrow ? `<div class="eyebrow">${eyebrow}</div>` : ''}<h1>${title}</h1>${lead ? `<p class="lead">${lead}</p>` : ''}</div>${actions ? `<div class="head-actions">${actions}</div>` : ''}</header>`;
 }
 function empty(ic, title, text, action = '') { return `<div class="empty">${icon(ic, 30)}<h3>${title}</h3><p>${text}</p>${action}</div>`; }
 function miniRing(f, grado, cubiertos, n, size = 46, off = false) {
   const r = 18, c = 2 * Math.PI * r; const full = n ? cubiertos / n : 0; const g = Math.max(0, Math.min(1, grado));
-  return `<svg class="mini-ring fw-${f}" width="${size}" height="${size}" viewBox="0 0 46 46" role="img" aria-label="${E.FW_LABEL[f]} ${pct(g)}"${off ? ' opacity=".5"' : ''}>
+  return `<svg class="mini-ring fw-${fwCls(f)}" width="${size}" height="${size}" viewBox="0 0 46 46" role="img" aria-label="${fwLbl(f)} ${pct(g)}"${off ? ' opacity=".5"' : ''}>
     <circle class="trk" cx="23" cy="23" r="${r}" fill="none" stroke-width="5"/>
     <circle class="prt" cx="23" cy="23" r="${r}" fill="none" stroke-width="5" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - g)}" transform="rotate(-90 23 23)"/>
     <circle class="val" cx="23" cy="23" r="${r}" fill="none" stroke-width="5" stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - full)}" transform="rotate(-90 23 23)"/></svg>`;
@@ -187,7 +186,7 @@ function paletteItems() {
   items.push({ grupo: '⌘', label: LANG() === 'es' ? 'Switch to English' : 'Cambiar a español', ic: 'languages', act: () => setLang(LANG() === 'es' ? 'en' : 'es') });
   for (const c of D.casos) items.push({ grupo: t('cases'), label: c.titulo, ic: caseIcon(c.id), act: () => openCase(c.id) });
   if (q) {
-    for (const f of FW) for (const r of CAT.frameworks[f].reqs) items.push({ grupo: E.FW_LABEL[f], label: `${reqCode(f, r.id)} · ${rT(f, r.id)}`, ic: 'file-check', act: () => openInsp('req', r.id, f), hint: state ? t('cov.' + calc.req[f].find((x) => x.id === r.id).estado) : '' });
+    for (const f of FW) for (const r of CAT.frameworks[f].reqs) items.push({ grupo: fwLbl(f), label: `${reqCode(f, r.id)} · ${rT(f, r.id)}`, ic: 'file-check', act: () => openInsp('req', r.id, f), hint: state ? t('cov.' + calc.req[f].find((x) => x.id === r.id).estado) : '' });
     for (const c of CAT.controls) items.push({ grupo: t('nav.controles'), label: `${c.id} · ${cT(c.id)}`, ic: 'layers', act: () => openInsp('uc', c.id), hint: state ? t('est.' + calc.controles[c.id].estado) : '' });
   }
   const norm = (x) => String(x).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');

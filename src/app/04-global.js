@@ -1,10 +1,11 @@
 /* ---------- Vistas globales: inicio, nuevo proyecto, perfil, ajustes, ayuda ---------- */
-const TOTAL_REQS = FW.reduce((a, f) => a + CAT.frameworks[f].reqs.length, 0);
+const TOTAL_REQS = FW_BASE.reduce((a, f) => a + CAT0.frameworks[f].reqs.length, 0);
+const totalReqs = () => FW.reduce((a, f) => a + CAT.frameworks[f].reqs.length, 0);
 const COLORS = COLOR_IDS;
 const caseTxt = (c, k) => (LANG() === 'en' && c[k + '_en'] ? c[k + '_en'] : c[k]);
 let HERO = null; // rueda del caso de clase para la portada (se calcula una vez)
 function heroWheel() {
-  if (!HERO) { const cs = D.casos.find((c) => c.id === 'techserv'); const st = sanitizeState(clone(cs.state)); HERO = { st, calc: E.calcular(IX, st) }; }
+  if (!HERO) { const cs = D.casos.find((c) => c.id === 'techserv'); const st = sanitizeState(clone(cs.state)); HERO = { st, calc: E.calcular(IX0, st) }; }
   return wheelSVG(HERO.st, HERO.calc, { hero: true });
 }
 
@@ -44,7 +45,7 @@ function vInicio() {
     <div class="cases">${D.casos.map((c) => `<article class="glass case">
       <div class="case-top"><span class="case-ic">${icon(caseIcon(c.id), 22)}</span>${c.meta.nis2 ? entPill(c.meta.nis2) : ''}</div>
       <div><h3>${esc(c.titulo)}</h3><span class="small muted">${esc(caseTxt(c, 'sector'))}</span></div>
-      <div class="rings">${FW.map((f) => { const on = c.meta.normas.includes(f); const cc = caseCalc(c.id); return `<figure>${miniRing(f, on ? cc.fw[f].grado : 0, on ? cc.fw[f].cubiertos : 0, cc.fw[f].aplicables, 40, !on)}<figcaption>${FW_SHORT[f]}</figcaption></figure>`; }).join('')}</div>
+      <div class="rings">${FW_BASE.filter((f) => f !== 'partis' || c.meta.normas.includes(f)).map((f) => { const on = c.meta.normas.includes(f); const cc = caseCalc(c.id); return `<figure>${miniRing(f, on ? cc.fw[f].grado : 0, on ? cc.fw[f].cubiertos : 0, cc.fw[f].aplicables, 40, !on)}<figcaption>${fwShort(f)}</figcaption></figure>`; }).join('')}</div>
       <p>${esc(caseTxt(c, 'resumen'))}</p>
       <ul class="retos">${caseTxt(c, 'retos').map((r) => `<li>${icon('flag', 14)}${esc(r)}</li>`).join('')}</ul>
       <div class="row small muted"><span><b class="num" style="color:var(--ink)">${pct(c.meta.grado)}</b> ${esc(t('covered'))}</span>·<span><b class="num" style="color:var(--ink)">${c.meta.brechas}</b> ${esc(t('gaps'))}</span>·<span><b class="num" style="color:var(--crit)">${c.meta.altas}</b> ${esc(t('highAlerts'))}</span></div>
@@ -52,11 +53,11 @@ function vInicio() {
     </article>`).join('')}</div></section>` : ''}`;
 }
 const CASE_CALC = {};
-function caseCalc(id) { if (!CASE_CALC[id]) { const cs = D.casos.find((c) => c.id === id); CASE_CALC[id] = E.calcular(IX, sanitizeState(clone(cs.state))); } return CASE_CALC[id]; }
+function caseCalc(id) { if (!CASE_CALC[id]) { const cs = D.casos.find((c) => c.id === id); CASE_CALC[id] = E.calcular(IX0, sanitizeState(clone(cs.state))); } return CASE_CALC[id]; }
 
 /* --- Asistente --- */
 function wzInit() {
-  ui.wizard = { step: 1, organizacion: '', descripcion: '', sector: '', alcance: { ens: { on: true, categoria: 'MEDIA', niveles: {} }, iso27001: { on: true }, nis2: { on: false }, iso42001: { on: false } },
+  ui.wizard = { step: 1, organizacion: '', descripcion: '', sector: '', alcance: alcanceDefecto(), perfil: { ...E.PERFIL_DEF },
     nis2q: { sector: 'ninguno', especial: 'ninguno', tamano: 'pequena', infraDigital: false }, inicio: 'cero', ensSoa: null, ensInfo: '', error: '' };
 }
 function nis2Box(q) {
@@ -78,7 +79,7 @@ function ensLevels(a, pre) {
     <div class="dims">${E.DIMS.map((d) => `<label>${d}<select id="${pre}-dim-${d}" data-${pre}="alcance.ens.niveles.${d}" aria-label="${d}">${opt('', '—', a.niveles[d] || '')}${E.NIVELES_ENS.map((n) => opt(n, t('lv.' + n), a.niveles[d] || '')).join('')}</select></label>`).join('')}</div>`;
 }
 function scopeCards(a, pre) {
-  return `<div class="scope">${FW.map((f) => `<label class="fw-${f}"><input type="checkbox" id="${pre}-on-${f}" data-${pre}="alcance.${f}.on" data-type="bool"${a[f].on ? ' checked' : ''}><span class="chk">${icon('check', 14)}</span><b>${E.FW_LABEL[f]}</b><small>${esc(t('fwDesc.' + f))}</small><span class="tiny muted num">${esc(t('reqs', CAT.frameworks[f].reqs.length))}</span></label>`).join('')}</div>`;
+  return `<div class="scope">${FW_BASE.map((f) => `<label class="fw-${fwCls(f)}"><input type="checkbox" id="${pre}-on-${f}" data-${pre}="alcance.${f}.on" data-type="bool"${a[f].on ? ' checked' : ''}><span class="chk">${icon('check', 14)}</span><b>${fwLbl(f)}</b><small>${esc(t('fwDesc.' + f))}</small><span class="tiny muted num">${esc(t('reqs', CAT.frameworks[f].reqs.length))}</span></label>`).join('')}</div>`;
 }
 function vNuevo() {
   if (!ui.wizard) wzInit();
@@ -90,13 +91,16 @@ function vNuevo() {
       <label class="fld span2">${esc(t('scopeReq'))}<input type="text" id="wz-desc" data-wz="descripcion" value="${esc(w.descripcion)}" placeholder="${esc(t('scopePh'))}"></label>
       <label class="fld">${esc(t('sector'))}<select id="wz-sector" data-wz="sector">${opt('', t('choose'), w.sector)}${t('sectors').map((x) => opt(x, x, w.sector)).join('')}</select></label></div>`;
   } else if (w.step === 2) {
-    body = `${scopeCards(w.alcance, 'wz')}${w.alcance.ens.on ? `<div class="stack"><h3>${fwTag('ens')} ${esc(t('ensCat'))}</h3>${ensLevels(w.alcance.ens, 'wz')}</div>` : ''}
+    const pr = E.perfilRegulatorio(w.perfil, w.nis2q, LANG());
+    body = `<div class="stack"><div class="pane-h"><div><h3>${esc(t('prTitle'))}</h3><p>${esc(t('prLead'))}</p></div><button type="button" class="btn sm primary" data-act="wz-perfil-aplicar">${icon('wand-sparkles', 15)}${esc(t('prApply'))}</button></div>${perfilForm(w.perfil, 'wz')}
+        <div class="chips wz-prop">${FW_BASE.map((f) => `<span class="wz-p">${fwTag(f, false, true)}${prPill(pr.marcos[f].estado)}</span>`).join('')}</div>${futurasBox(pr)}<p class="hint">${esc(t('prDisclaimer'))}</p></div>
+      ${scopeCards(w.alcance, 'wz')}${w.alcance.ens.on ? `<div class="stack"><h3>${fwTag('ens')} ${esc(t('ensCat'))}</h3>${ensLevels(w.alcance.ens, 'wz')}</div>` : ''}
       <div class="stack"><h3>${fwTag('nis2')} ${esc(t('nis2Title'))}</h3>${nis2Form(w.nis2q, 'wz')}${nis2Box(w.nis2q)}</div>`;
   } else {
     const ch = (v, a, b) => `<label class="choice${w.inicio === v ? ' on' : ''}"><input type="radio" name="wz-in" data-wz="inicio" value="${v}"${w.inicio === v ? ' checked' : ''}><span><b>${esc(t(a))}</b><small>${esc(t(b))}</small></span></label>`;
     body = `<div class="grid g3">${ch('cero', 'fromZero', 'fromZeroTxt')}${ch('ens', 'fromEns', 'fromEnsTxt')}${ch('todo', 'fromAll', 'fromAllTxt')}</div>
       ${w.inicio === 'ens' ? `<div class="stack"><h3>${esc(t('ensFile'))}</h3><p class="small muted">${esc(t('ensFileTxt'))}</p><div class="row"><button type="button" class="btn sm" data-act="wz-ens-file">${icon('upload', 15)}${esc(t('chooseFile'))}</button>${w.ensInfo ? `<span class="ok-box">${icon('circle-check', 16)}${esc(w.ensInfo)}</span>` : ''}</div></div>` : ''}
-      <div class="glass pane"><dl class="kv"><dt>${esc(t('org'))}</dt><dd><b>${esc(w.organizacion || t('yourOrg'))}</b></dd><dt>${esc(t('scopeDesc'))}</dt><dd>${esc(w.descripcion || '—')}</dd><dt>${esc(t('fws'))}</dt><dd class="chips">${FW.filter((f) => w.alcance[f].on).map((f) => fwTag(f)).join('') || '—'}</dd>
+      <div class="glass pane"><dl class="kv"><dt>${esc(t('org'))}</dt><dd><b>${esc(w.organizacion || t('yourOrg'))}</b></dd><dt>${esc(t('scopeDesc'))}</dt><dd>${esc(w.descripcion || '—')}</dd><dt>${esc(t('fws'))}</dt><dd class="chips">${FW_BASE.filter((f) => w.alcance[f].on).map((f) => fwTag(f)).join('') || '—'}</dd>
         ${w.alcance.ens.on ? `<dt>ENS</dt><dd>${esc(t('category'))}: ${esc(t('cats.' + w.alcance.ens.categoria))}</dd>` : ''}<dt>NIS2</dt><dd>${entPill(E.nis2Aplicabilidad(w.nis2q).tipo)}</dd></dl></div>`;
   }
   return `${head(esc(t('wzEyebrow')), esc(t('wzTitle')), esc(t('wzLead')))}

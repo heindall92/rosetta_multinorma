@@ -1,0 +1,4 @@
+﻿id;titulo;texto;grupo;controles
+POL-01;Copias de seguridad cifradas y probadas cada trimestre;;Continuidad;ACT-08:equivalente|CON-03:parcial
+POL-02;Autenticación multifactor en los accesos remotos;;Acceso;
+POL-03;"Registro de accesos ""privilegiados"" revisado cada mes";;Acceso;OPE-08:parcial|ACC-05:parcial

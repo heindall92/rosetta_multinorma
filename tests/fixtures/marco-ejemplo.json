@@ -1,0 +1,13 @@
+{
+  "format": "rosetta-marco",
+  "version": 1,
+  "id": "pliego-ayuntamiento-2026",
+  "nombre": "Pliego Ayuntamiento 2026 (ficticio)",
+  "descripcion": "Requisitos de seguridad de un pliego ficticio de cita previa, para probar la importación.",
+  "tipo": "pliego",
+  "requisitos": [
+    { "id": "PL-01", "titulo": "Copias de seguridad cifradas y probadas cada trimestre", "grupo": "Continuidad", "controles": [{ "control": "ACT-08", "fuerza": "equivalente" }, { "control": "CON-03", "fuerza": "parcial" }] },
+    { "id": "PL-02", "titulo": "Autenticación multifactor en los accesos de administración", "grupo": "Acceso", "controles": [] },
+    { "id": "PL-03", "titulo": "Notificación de incidentes al ayuntamiento en 24 horas", "texto": "El adjudicatario comunicará al responsable del contrato cualquier incidente que afecte al servicio.", "grupo": "Incidentes", "controles": [{ "control": "INC-08", "fuerza": "parcial" }] }
+  ]
+}

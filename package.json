@@ -1,7 +1,7 @@
 {
   "name": "rosetta-multinorma",
-  "version": "2.3.0",
-  "description": "Rosetta: mapa multinorma ENS · ISO/IEC 27001 · NIS2 · ISO/IEC 42001. Implanta cada control una vez y comprueba qué cubre en cada norma.",
+  "version": "2.4.0",
+  "description": "Rosetta: mapa multinorma ENS · ISO/IEC 27001 · NIS2 · ISO/IEC 42001 · Part-IS, con perfil regulatorio y marcos propios. Implanta cada control una vez y comprueba qué cubre en cada norma.",
   "private": true,
   "engines": {
     "node": ">=20"
@@ -10,7 +10,7 @@
     "build": "node scripts/build.mjs",
     "check": "node scripts/build.mjs --check",
     "test": "node --test tests/engine.test.mjs tests/catalog.test.mjs tests/build.test.mjs",
-    "test:e2e": "node --test tests/e2e.test.mjs tests/e2e-excel.test.mjs tests/a11y.test.mjs",
+    "test:e2e": "node --test tests/e2e.test.mjs tests/e2e-marcos.test.mjs tests/e2e-excel.test.mjs tests/a11y.test.mjs",
     "test:all": "npm run build && npm test && npm run test:e2e",
     "serve": "node scripts/serve.mjs",
     "capturas": "node scripts/capturas.mjs"
@@ -24,6 +24,8 @@
     "iso27001",
     "nis2",
     "iso42001",
+    "part-is",
+    "easa",
     "compliance",
     "grc",
     "cybersecurity",

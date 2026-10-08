@@ -1,5 +1,5 @@
 {
-  "version": "2.2.0",
+  "version": "2.4.0",
   "domains": [
     {
       "id": "GOB",
@@ -3037,6 +3037,173 @@
           "g_en": "A.10 Third parties and customers"
         }
       ]
+    },
+    "partis": {
+      "id": "partis",
+      "tope": "parcial",
+      "consulta": "2026-10-08",
+      "fuentes": [
+        "Reglamento de Ejecución (UE) 2023/203 (DO L 31 de 2.2.2023), modificado por el Reglamento de Ejecución (UE) 2025/2293",
+        "Reglamento Delegado (UE) 2022/1645 (DO L 248 de 26.9.2022), modificado por el Reglamento Delegado (UE) 2025/22"
+      ],
+      "reqs": [
+        {
+          "id": "OR.200",
+          "code": "IS.I.OR.200",
+          "t": "Sistema de gestión de la seguridad de la información (SGSI)",
+          "t_en": "Information security management system (ISMS)",
+          "g": "Sistema de gestión",
+          "g_en": "Management system",
+          "ref": "Reglamento de Ejecución (UE) 2023/203, anexo II, IS.I.OR.200 · Reglamento Delegado (UE) 2022/1645, anexo, IS.D.OR.200",
+          "ref_en": "Implementing Regulation (EU) 2023/203, Annex II, IS.I.OR.200 · Delegated Regulation (EU) 2022/1645, Annex, IS.D.OR.200",
+          "nota": "El SGSI de Part-IS protege la seguridad operacional de la aviación, no solo la confidencialidad, integridad y disponibilidad de la información, y debe coordinarse con el sistema de gestión de la seguridad operacional (SMS).",
+          "nota_en": "The Part-IS ISMS protects aviation safety, not only the confidentiality, integrity and availability of information, and must be coordinated with the safety management system (SMS)."
+        },
+        {
+          "id": "OR.205",
+          "code": "IS.I.OR.205",
+          "t": "Evaluación de riesgos de seguridad de la información",
+          "t_en": "Information security risk assessment",
+          "g": "Riesgos",
+          "g_en": "Risk",
+          "ref": "Reglamento de Ejecución (UE) 2023/203, anexo II, IS.I.OR.205 · Reglamento Delegado (UE) 2022/1645, anexo, IS.D.OR.205",
+          "ref_en": "Implementing Regulation (EU) 2023/203, Annex II, IS.I.OR.205 · Delegated Regulation (EU) 2022/1645, Annex, IS.D.OR.205",
+          "nota": "Parte de identificar los elementos, interfaces y datos de la organización cuya alteración podría afectar a la seguridad operacional, incluidos los que comparte con otras organizaciones.",
+          "nota_en": "It starts by identifying the elements, interfaces and data whose compromise could affect aviation safety, including those shared with other organisations."
+        },
+        {
+          "id": "OR.210",
+          "code": "IS.I.OR.210",
+          "t": "Tratamiento de riesgos de seguridad de la información",
+          "t_en": "Information security risk treatment",
+          "g": "Riesgos",
+          "g_en": "Risk",
+          "ref": "Reglamento de Ejecución (UE) 2023/203, anexo II, IS.I.OR.210 · Reglamento Delegado (UE) 2022/1645, anexo, IS.D.OR.210",
+          "ref_en": "Implementing Regulation (EU) 2023/203, Annex II, IS.I.OR.210 · Delegated Regulation (EU) 2022/1645, Annex, IS.D.OR.210",
+          "nota": "Las medidas se eligen por su efecto en la seguridad operacional y se comunican a las organizaciones afectadas por las interfaces.",
+          "nota_en": "Measures are chosen for their effect on aviation safety and shared with the organisations affected through the interfaces."
+        },
+        {
+          "id": "OR.215",
+          "code": "IS.I.OR.215",
+          "t": "Sistema interno de notificación de seguridad de la información",
+          "t_en": "Information security internal reporting scheme",
+          "g": "Incidentes y notificación",
+          "g_en": "Incidents and reporting",
+          "ref": "Reglamento de Ejecución (UE) 2023/203, anexo II, IS.I.OR.215 · Reglamento Delegado (UE) 2022/1645, anexo, IS.D.OR.215",
+          "ref_en": "Implementing Regulation (EU) 2023/203, Annex II, IS.I.OR.215 · Delegated Regulation (EU) 2022/1645, Annex, IS.D.OR.215",
+          "nota": "Recoge y evalúa los eventos que notifica el personal, de forma parecida a la notificación interna de sucesos de seguridad operacional.",
+          "nota_en": "It collects and assesses events reported by staff, much like internal safety occurrence reporting."
+        },
+        {
+          "id": "OR.220",
+          "code": "IS.I.OR.220",
+          "t": "Incidentes: detección, respuesta y recuperación",
+          "t_en": "Incidents: detection, response and recovery",
+          "g": "Incidentes y notificación",
+          "g_en": "Incidents and reporting",
+          "ref": "Reglamento de Ejecución (UE) 2023/203, anexo II, IS.I.OR.220 · Reglamento Delegado (UE) 2022/1645, anexo, IS.D.OR.220",
+          "ref_en": "Implementing Regulation (EU) 2023/203, Annex II, IS.I.OR.220 · Delegated Regulation (EU) 2022/1645, Annex, IS.D.OR.220",
+          "nota": "La respuesta y la recuperación se miden por su efecto en la seguridad operacional, no solo en el servicio.",
+          "nota_en": "Response and recovery are measured by their effect on aviation safety, not only on the service."
+        },
+        {
+          "id": "OR.225",
+          "code": "IS.I.OR.225",
+          "t": "Respuesta a los hallazgos de la autoridad competente",
+          "t_en": "Response to findings notified by the competent authority",
+          "g": "Incidentes y notificación",
+          "g_en": "Incidents and reporting",
+          "ref": "Reglamento de Ejecución (UE) 2023/203, anexo II, IS.I.OR.225 · Reglamento Delegado (UE) 2022/1645, anexo, IS.D.OR.225",
+          "ref_en": "Implementing Regulation (EU) 2023/203, Annex II, IS.I.OR.225 · Delegated Regulation (EU) 2022/1645, Annex, IS.D.OR.225",
+          "nota": "Plan de acciones correctivas con análisis de causa raíz, en el plazo que acuerde la autoridad (AESA o EASA). No tiene equivalente directo en las otras normas.",
+          "nota_en": "Corrective action plan with root cause analysis, within the period agreed with the authority (AESA or EASA). It has no direct equivalent in the other frameworks."
+        },
+        {
+          "id": "OR.230",
+          "code": "IS.I.OR.230",
+          "t": "Sistema externo de notificación a la autoridad",
+          "t_en": "Information security external reporting scheme",
+          "g": "Incidentes y notificación",
+          "g_en": "Incidents and reporting",
+          "ref": "Reglamento de Ejecución (UE) 2023/203, anexo II, IS.I.OR.230 · Reglamento Delegado (UE) 2022/1645, anexo, IS.D.OR.230",
+          "ref_en": "Implementing Regulation (EU) 2023/203, Annex II, IS.I.OR.230 · Delegated Regulation (EU) 2022/1645, Annex, IS.D.OR.230",
+          "nota": "Notificación a la autoridad competente de los incidentes y vulnerabilidades que puedan suponer un riesgo significativo para la seguridad operacional, coordinada con el Reglamento (UE) 376/2014. Sus plazos y destinatario son propios: no equivale a la notificación de NIS2 aunque se parezca.",
+          "nota_en": "Reporting to the competent authority of incidents and vulnerabilities that may represent a significant risk to aviation safety, coordinated with Regulation (EU) 376/2014. Its deadlines and recipient are its own: it is not the same as NIS2 reporting, however similar."
+        },
+        {
+          "id": "OR.235",
+          "code": "IS.I.OR.235",
+          "t": "Contratación de actividades de gestión de la seguridad de la información",
+          "t_en": "Contracting of information security management activities",
+          "g": "Personas, proveedores y registros",
+          "g_en": "People, suppliers and records",
+          "ref": "Reglamento de Ejecución (UE) 2023/203, anexo II, IS.I.OR.235 · Reglamento Delegado (UE) 2022/1645, anexo, IS.D.OR.235",
+          "ref_en": "Implementing Regulation (EU) 2023/203, Annex II, IS.I.OR.235 · Delegated Regulation (EU) 2022/1645, Annex, IS.D.OR.235",
+          "nota": "La organización sigue respondiendo de lo que contrata y debe garantizar que el proveedor cumple Part-IS en lo contratado.",
+          "nota_en": "The organisation remains responsible for what it contracts out and must ensure the supplier meets Part-IS for that work."
+        },
+        {
+          "id": "OR.240",
+          "code": "IS.I.OR.240",
+          "t": "Requisitos del personal",
+          "t_en": "Personnel requirements",
+          "g": "Personas, proveedores y registros",
+          "g_en": "People, suppliers and records",
+          "ref": "Reglamento de Ejecución (UE) 2023/203, anexo II, IS.I.OR.240 · Reglamento Delegado (UE) 2022/1645, anexo, IS.D.OR.240",
+          "ref_en": "Implementing Regulation (EU) 2023/203, Annex II, IS.I.OR.240 · Delegated Regulation (EU) 2022/1645, Annex, IS.D.OR.240",
+          "nota": "Incluye una persona o grupo responsable de la seguridad de la información con acceso directo al gerente responsable, y competencia acreditada del personal.",
+          "nota_en": "It includes a person or group responsible for information security with direct access to the accountable manager, and demonstrated staff competence."
+        },
+        {
+          "id": "OR.245",
+          "code": "IS.I.OR.245",
+          "t": "Conservación de registros",
+          "t_en": "Record-keeping",
+          "g": "Personas, proveedores y registros",
+          "g_en": "People, suppliers and records",
+          "ref": "Reglamento de Ejecución (UE) 2023/203, anexo II, IS.I.OR.245 · Reglamento Delegado (UE) 2022/1645, anexo, IS.D.OR.245",
+          "ref_en": "Implementing Regulation (EU) 2023/203, Annex II, IS.I.OR.245 · Delegated Regulation (EU) 2022/1645, Annex, IS.D.OR.245",
+          "nota": "Registros de la gestión, de los riesgos y de los incidentes, protegidos y conservados durante el tiempo que fija el reglamento.",
+          "nota_en": "Records of management activities, risks and incidents, protected and kept for the period the regulation sets."
+        },
+        {
+          "id": "OR.250",
+          "code": "IS.I.OR.250",
+          "t": "Manual de gestión de la seguridad de la información (ISMM)",
+          "t_en": "Information security management manual (ISMM)",
+          "g": "Sistema de gestión",
+          "g_en": "Management system",
+          "ref": "Reglamento de Ejecución (UE) 2023/203, anexo II, IS.I.OR.250 · Reglamento Delegado (UE) 2022/1645, anexo, IS.D.OR.250",
+          "ref_en": "Implementing Regulation (EU) 2023/203, Annex II, IS.I.OR.250 · Delegated Regulation (EU) 2022/1645, Annex, IS.D.OR.250",
+          "nota": "Documento propio de Part-IS que se presenta a la autoridad competente. No equivale a la documentación del SGSI de ISO/IEC 27001, aunque puede reutilizarla.",
+          "nota_en": "A Part-IS document submitted to the competent authority. It is not the same as the ISO/IEC 27001 ISMS documentation, although it can reuse it."
+        },
+        {
+          "id": "OR.255",
+          "code": "IS.I.OR.255",
+          "t": "Cambios en el SGSI",
+          "t_en": "Changes to the ISMS",
+          "g": "Sistema de gestión",
+          "g_en": "Management system",
+          "ref": "Reglamento de Ejecución (UE) 2023/203, anexo II, IS.I.OR.255 · Reglamento Delegado (UE) 2022/1645, anexo, IS.D.OR.255",
+          "ref_en": "Implementing Regulation (EU) 2023/203, Annex II, IS.I.OR.255 · Delegated Regulation (EU) 2022/1645, Annex, IS.D.OR.255",
+          "nota": "Algunos cambios necesitan la aprobación previa de la autoridad competente o su notificación, según el procedimiento que acuerde con ella.",
+          "nota_en": "Some changes need prior approval from or notification to the competent authority, under the procedure agreed with it."
+        },
+        {
+          "id": "OR.260",
+          "code": "IS.I.OR.260",
+          "t": "Mejora continua",
+          "t_en": "Continuous improvement",
+          "g": "Sistema de gestión",
+          "g_en": "Management system",
+          "ref": "Reglamento de Ejecución (UE) 2023/203, anexo II, IS.I.OR.260 · Reglamento Delegado (UE) 2022/1645, anexo, IS.D.OR.260",
+          "ref_en": "Implementing Regulation (EU) 2023/203, Annex II, IS.I.OR.260 · Delegated Regulation (EU) 2022/1645, Annex, IS.D.OR.260",
+          "nota": "Evaluación periódica de la eficacia y madurez del SGSI y mejora a partir de los resultados.",
+          "nota_en": "Periodic assessment of the effectiveness and maturity of the ISMS and improvement based on the results."
+        }
+      ]
     }
   },
   "controls": [
@@ -3077,6 +3244,12 @@
           {
             "id": "A2.3",
             "w": 0.5
+          }
+        ],
+        "partis": [
+          {
+            "id": "OR.200",
+            "w": 1
           }
         ]
       },
@@ -3122,6 +3295,16 @@
             "id": "C5.3",
             "w": 0.5
           }
+        ],
+        "partis": [
+          {
+            "id": "OR.200",
+            "w": 1
+          },
+          {
+            "id": "OR.240",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Security roles, responsibilities and committee",
@@ -3162,6 +3345,12 @@
             "id": "C5.1",
             "w": 1
           }
+        ],
+        "partis": [
+          {
+            "id": "OR.200",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Management commitment and oversight",
@@ -3193,7 +3382,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Management body training",
       "obj_en": "Members of management receive regular training to identify risks and assess management practices.",
@@ -3232,7 +3422,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Security rules and procedures",
       "obj_en": "Written, approved usage rules and operating procedures known to those who apply them.",
@@ -3282,6 +3473,12 @@
             "id": "C4.4",
             "w": 1
           }
+        ],
+        "partis": [
+          {
+            "id": "OR.200",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Context, scope and interested parties",
@@ -3315,6 +3512,12 @@
           {
             "id": "C6.3",
             "w": 1
+          }
+        ],
+        "partis": [
+          {
+            "id": "OR.255",
+            "w": 0.5
           }
         ]
       },
@@ -3352,6 +3555,16 @@
             "id": "C7.5",
             "w": 1
           }
+        ],
+        "partis": [
+          {
+            "id": "OR.245",
+            "w": 0.5
+          },
+          {
+            "id": "OR.250",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Documented information",
@@ -3382,7 +3595,8 @@
             "id": "A8.5",
             "w": 0.5
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "Internal and external communication",
       "obj_en": "It is decided what is communicated about security, to whom, when and through which channel.",
@@ -3411,6 +3625,12 @@
           {
             "id": "A4.2",
             "w": 0
+          }
+        ],
+        "partis": [
+          {
+            "id": "OR.200",
+            "w": 0.5
           }
         ]
       },
@@ -3447,7 +3667,8 @@
             "id": "A8.3",
             "w": 0
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "Contact with authorities and interest groups",
       "obj_en": "Established channels with authorities, the reference CSIRT and specialist groups.",
@@ -3486,7 +3707,8 @@
             "w": 0
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "System and component authorisation process",
       "obj_en": "Nothing goes into production, gets connected or used without prior authorisation from its owner.",
@@ -3517,11 +3739,43 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Security in project management",
       "obj_en": "Security requirements are built into every project from the start.",
       "ev_en": "Project template with security requirements · security review per phase"
+    },
+    {
+      "id": "GOB-14",
+      "dom": "GOB",
+      "t": "Manual del SGSI ante la autoridad y gestión de sus cambios",
+      "t_en": "ISMS manual for the authority and management of its changes",
+      "obj": "Un manual que describe el SGSI y su alcance, presentado a la autoridad competente y mantenido al día; los cambios del SGSI se clasifican y, cuando procede, se aprueban o notifican antes de aplicarlos.",
+      "obj_en": "A manual describing the ISMS and its scope, submitted to the competent authority and kept up to date; ISMS changes are classified and, where required, approved or notified before they are applied.",
+      "ev": "Manual (ISMM) firmado por el gerente responsable · acuse de la autoridad · procedimiento de cambios acordado · registro de cambios",
+      "ev_en": "ISMM signed by the accountable manager · authority acknowledgement · agreed change procedure · change log",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "C7.5",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.250",
+            "w": 1
+          },
+          {
+            "id": "OR.255",
+            "w": 1
+          }
+        ]
+      }
     },
     {
       "id": "RIE-01",
@@ -3556,7 +3810,13 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.205",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Risk analysis and assessment",
       "obj_en": "A documented method (e.g. MAGERIT) applied periodically and after significant changes.",
@@ -3608,6 +3868,12 @@
             "id": "C8.1",
             "w": 0.5
           }
+        ],
+        "partis": [
+          {
+            "id": "OR.210",
+            "w": 1
+          }
         ]
       },
       "t_en": "Risk treatment and Statement of Applicability",
@@ -3638,7 +3904,8 @@
           }
         ],
         "nis2": [],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Threat intelligence",
       "obj_en": "Information about threats is collected and analysed to anticipate them.",
@@ -3672,7 +3939,8 @@
           }
         ],
         "nis2": [],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Legal, regulatory and contractual requirements",
       "obj_en": "Inventory of applicable obligations and how each is met, including intellectual property.",
@@ -3698,7 +3966,8 @@
           }
         ],
         "nis2": [],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Personal data protection",
       "obj_en": "Processing activities recorded and protected under GDPR and Spanish data protection law.",
@@ -3719,7 +3988,13 @@
           }
         ],
         "nis2": [],
-        "iso42001": []
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.245",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Protection of records",
       "obj_en": "Records are protected against loss, alteration or improper access during their retention period.",
@@ -3758,6 +4033,12 @@
           {
             "id": "C9.1",
             "w": 1
+          }
+        ],
+        "partis": [
+          {
+            "id": "OR.260",
+            "w": 0.5
           }
         ]
       },
@@ -3803,6 +4084,12 @@
             "id": "C9.2",
             "w": 1
           }
+        ],
+        "partis": [
+          {
+            "id": "OR.260",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Internal audit and independent review",
@@ -3833,6 +4120,12 @@
           {
             "id": "C9.3",
             "w": 1
+          }
+        ],
+        "partis": [
+          {
+            "id": "OR.260",
+            "w": 0.5
           }
         ]
       },
@@ -3869,7 +4162,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Policy compliance monitoring",
       "obj_en": "Compliance with policies and rules is checked regularly and deviations are corrected.",
@@ -3908,11 +4202,83 @@
             "id": "C10.2",
             "w": 1
           }
+        ],
+        "partis": [
+          {
+            "id": "OR.225",
+            "w": 0.5
+          },
+          {
+            "id": "OR.260",
+            "w": 1
+          }
         ]
       },
       "t_en": "Nonconformities, corrective action and improvement",
       "obj_en": "Every nonconformity is analysed, corrected without delay and feeds continual improvement.",
       "ev_en": "Nonconformity register · root cause analysis · closed actions"
+    },
+    {
+      "id": "RIE-12",
+      "dom": "RIE",
+      "t": "Riesgos con impacto en la seguridad operacional (aviación)",
+      "t_en": "Risks with an impact on aviation safety",
+      "obj": "El análisis de riesgos identifica los elementos, interfaces y datos cuya alteración podría afectar a la seguridad operacional, incluidos los compartidos con otras organizaciones, y los evalúa junto al sistema de gestión de la seguridad operacional (SMS).",
+      "obj_en": "The risk assessment identifies the elements, interfaces and data whose compromise could affect aviation safety, including those shared with other organisations, and assesses them together with the safety management system (SMS).",
+      "ev": "Inventario de elementos e interfaces relevantes para la seguridad operacional · análisis de riesgos firmado con el responsable del SMS · comunicación a las organizaciones con interfaz",
+      "ev_en": "Inventory of elements and interfaces relevant to aviation safety · risk assessment signed with the safety manager · communication to interfacing organisations",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "C6.1.2",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.205",
+            "w": 1
+          },
+          {
+            "id": "OR.210",
+            "w": 0.5
+          },
+          {
+            "id": "OR.200",
+            "w": 0.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "RIE-13",
+      "dom": "RIE",
+      "t": "Respuesta a los hallazgos de la autoridad competente",
+      "t_en": "Response to findings from the competent authority",
+      "obj": "Cada hallazgo de la autoridad tiene análisis de causa raíz, plan de acciones correctivas aceptado en el plazo acordado y demostración de su cierre.",
+      "obj_en": "Every finding from the authority has a root cause analysis, a corrective action plan accepted within the agreed period and proof of closure.",
+      "ev": "Registro de hallazgos · análisis de causa raíz · plan de acciones correctivas aceptado · evidencias de cierre",
+      "ev_en": "Findings log · root cause analysis · accepted corrective action plan · closure evidence",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "C10.2",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.225",
+            "w": 1
+          }
+        ]
+      }
     },
     {
       "id": "PER-01",
@@ -3939,7 +4305,13 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.240",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Background verification",
       "obj_en": "Background checks proportionate to the role before joining.",
@@ -3982,7 +4354,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Duties, terms and confidentiality",
       "obj_en": "Security and confidentiality obligations signed by employees and contractors.",
@@ -4021,6 +4394,12 @@
           {
             "id": "C7.3",
             "w": 1
+          }
+        ],
+        "partis": [
+          {
+            "id": "OR.240",
+            "w": 0.5
           }
         ]
       },
@@ -4066,6 +4445,12 @@
             "id": "A4.6",
             "w": 1
           }
+        ],
+        "partis": [
+          {
+            "id": "OR.240",
+            "w": 1
+          }
         ]
       },
       "t_en": "Training and competence",
@@ -4097,7 +4482,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Disciplinary process",
       "obj_en": "A formal, known procedure to respond to security breaches.",
@@ -4136,7 +4522,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Termination, role change and return of assets",
       "obj_en": "Access removed and assets recovered when the relationship ends or changes.",
@@ -4174,7 +4561,8 @@
           }
         ],
         "nis2": [],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Remote working",
       "obj_en": "Security conditions for working away from the premises.",
@@ -4217,6 +4605,12 @@
           {
             "id": "A4.2",
             "w": 0
+          }
+        ],
+        "partis": [
+          {
+            "id": "OR.205",
+            "w": 0.5
           }
         ]
       },
@@ -4261,7 +4655,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Information classification and labelling",
       "obj_en": "Information is classified by sensitivity and labelled accordingly.",
@@ -4296,7 +4691,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Acceptable use and handling of assets",
       "obj_en": "Clear rules for using and handling information and equipment.",
@@ -4347,7 +4743,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Information media",
       "obj_en": "Controlled custody, transport and use of media, including removable media.",
@@ -4386,7 +4783,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Secure erasure and destruction",
       "obj_en": "Information and equipment are erased or destroyed irrecoverably at end of life.",
@@ -4432,7 +4830,8 @@
           }
         ],
         "nis2": [],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Information transfer",
       "obj_en": "Rules and secure means to exchange information with third parties.",
@@ -4474,7 +4873,8 @@
           }
         ],
         "nis2": [],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Data masking and leakage prevention",
       "obj_en": "Sensitive data is masked where not needed and its egress is monitored.",
@@ -4505,7 +4905,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Backups",
       "obj_en": "Regular, protected backups with tested restores.",
@@ -4548,7 +4949,8 @@
             "w": 0
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Electronic signature and time stamps",
       "obj_en": "Qualified signature and time stamping where the law or the service requires them.",
@@ -4581,7 +4983,8 @@
           }
         ],
         "nis2": [],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       }
     },
     {
@@ -4613,7 +5016,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Identification and identity management",
       "obj_en": "Every user has a unique, traceable identity managed throughout its life cycle.",
@@ -4652,7 +5056,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Access control and least privilege",
       "obj_en": "Access policy based on need-to-know and least privilege.",
@@ -4687,7 +5092,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Access rights management and review",
       "obj_en": "Permissions are granted, changed and reviewed periodically with approval.",
@@ -4718,7 +5124,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Segregation of duties",
       "obj_en": "No single person controls a critical operation end to end.",
@@ -4765,7 +5172,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Privileged accounts and administration systems",
       "obj_en": "Separate, monitored administration accounts used from dedicated systems.",
@@ -4808,7 +5216,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Secure authentication",
       "obj_en": "Authentication proportionate to risk and well-protected credentials.",
@@ -4847,7 +5256,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Multi-factor authentication",
       "obj_en": "Second factor for remote, privileged and exposed-service access.",
@@ -4877,7 +5287,8 @@
           }
         ],
         "nis2": [],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Access to source code",
       "obj_en": "Source code and development tools have restricted, logged access.",
@@ -4908,7 +5319,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Secure configuration and hardening",
       "obj_en": "Systems are deployed with reference security configurations.",
@@ -4939,7 +5351,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Configuration management",
       "obj_en": "Configuration is kept under control and drift is detected.",
@@ -4978,7 +5391,13 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.255",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Change management",
       "obj_en": "Changes are assessed, approved, tested and recorded before being applied.",
@@ -5017,7 +5436,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Maintenance and security patching",
       "obj_en": "Updates and maintenance applied within defined timeframes by criticality.",
@@ -5056,7 +5476,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Vulnerability handling and disclosure",
       "obj_en": "Vulnerabilities are detected, prioritised and fixed, with a channel for external reports.",
@@ -5087,7 +5508,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Protection against malicious code",
       "obj_en": "Antimalware or EDR on every device, centrally managed.",
@@ -5126,7 +5548,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Software installation in production",
       "obj_en": "Only authorised software, installed by authorised staff.",
@@ -5166,7 +5589,8 @@
             "id": "A6.2.8",
             "w": 0
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "Activity logging",
       "obj_en": "User and system event logs, protected and retained.",
@@ -5201,7 +5625,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Clock synchronisation",
       "obj_en": "All systems use a common, reliable time source.",
@@ -5244,7 +5669,13 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.220",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Monitoring and intrusion detection",
       "obj_en": "Continuous monitoring of networks and systems to detect anomalous behaviour.",
@@ -5274,7 +5705,8 @@
           }
         ],
         "nis2": [],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Capacity management and DoS protection",
       "obj_en": "Sized capacity and measures against saturation and DoS attacks.",
@@ -5312,7 +5744,8 @@
           }
         ],
         "nis2": [],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "User endpoint devices",
       "obj_en": "Laptops, phones and other devices protected, encrypted and managed.",
@@ -5346,7 +5779,8 @@
           }
         ],
         "nis2": [],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Clear desk and session locking",
       "obj_en": "No papers or unattended screens with sensitive information.",
@@ -5385,7 +5819,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Cryptography and key management",
       "obj_en": "Approved algorithms and a complete key life cycle.",
@@ -5419,7 +5854,8 @@
           }
         ],
         "nis2": [],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Email and web browsing protection",
       "obj_en": "Email and web filtering against malware, phishing and malicious sites.",
@@ -5454,7 +5890,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Secure architecture and certified components",
       "obj_en": "Documented architecture with security principles and qualified products.",
@@ -5501,7 +5938,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Network security and perimeter",
       "obj_en": "Network protected at its perimeter and network services managed securely.",
@@ -5544,7 +5982,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Network and flow segregation",
       "obj_en": "Networks separated by function and trust level, with controlled flows.",
@@ -5591,7 +6030,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Communications protection",
       "obj_en": "Encryption and authentication of communications leaving the perimeter.",
@@ -5626,7 +6066,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "System interconnection",
       "obj_en": "Each connection with third-party systems is authorised and documented.",
@@ -5661,7 +6102,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Secure and emergency communications",
       "obj_en": "Encrypted voice, video and messaging plus an alternative channel for emergencies.",
@@ -5705,7 +6147,8 @@
             "id": "A6.1.3",
             "w": 0
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "Secure development life cycle",
       "obj_en": "A development method with security in every phase and secure coding.",
@@ -5745,7 +6188,8 @@
             "id": "A6.2.2",
             "w": 0
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "Application security requirements",
       "obj_en": "Security requirements defined and approved before developing or buying.",
@@ -5785,7 +6229,8 @@
             "id": "A6.2.4",
             "w": 0
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "Security testing and acceptance",
       "obj_en": "Security tests before go-live, without real data.",
@@ -5815,7 +6260,8 @@
           }
         ],
         "nis2": [],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Environment separation",
       "obj_en": "Development, test and production separated with different access.",
@@ -5850,7 +6296,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Outsourced development",
       "obj_en": "Outsourced development meets the same requirements and is supervised.",
@@ -5885,7 +6332,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Acquisition of ICT products and services",
       "obj_en": "Security criteria when buying ICT products and services.",
@@ -5920,7 +6368,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Web service and application protection",
       "obj_en": "Web applications protected and audited before exposure.",
@@ -5954,7 +6403,8 @@
             "w": 0
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       }
     },
     {
@@ -5998,7 +6448,13 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.235",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Security in supplier relationships",
       "obj_en": "Security requirements included in contracts and service level agreements.",
@@ -6029,7 +6485,13 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.235",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Monitoring of supplier services",
       "obj_en": "Contracted services are supervised, reviewed and their changes managed.",
@@ -6064,7 +6526,13 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.235",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "ICT supply chain security",
       "obj_en": "Risks introduced by suppliers and their subcontractors are assessed.",
@@ -6095,7 +6563,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Supplier directory",
       "obj_en": "Up-to-date register of suppliers and service providers with their criticality.",
@@ -6126,7 +6595,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Cloud services",
       "obj_en": "Acquisition, use and exit of cloud services with security requirements.",
@@ -6161,7 +6631,13 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.220",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Incident management plan",
       "obj_en": "Incident management procedure with roles, phases and criteria.",
@@ -6192,7 +6668,13 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.215",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Internal event reporting",
       "obj_en": "Everyone knows how and to whom to report a security event.",
@@ -6223,7 +6705,13 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.215",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Event assessment and classification",
       "obj_en": "Criteria to decide whether an event is an incident and how severe it is.",
@@ -6258,7 +6746,13 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.220",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Incident response",
       "obj_en": "Containment, eradication and recovery following tested procedures.",
@@ -6293,7 +6787,13 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.220",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Lessons learned",
       "obj_en": "Post-incident review of every relevant incident with improvement actions.",
@@ -6328,7 +6828,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Collection of evidence",
       "obj_en": "Evidence collected and preserved so it holds up in court.",
@@ -6388,6 +6889,12 @@
             "id": "A8.4",
             "w": 0
           }
+        ],
+        "partis": [
+          {
+            "id": "OR.230",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Reporting to the authority on time",
@@ -6418,11 +6925,44 @@
             "id": "A10.4",
             "w": 0
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "Communication to affected customers and users",
       "obj_en": "Notice to recipients of the affected services and of measures they can take.",
       "ev_en": "Communication templates · notice records"
+    },
+    {
+      "id": "INC-09",
+      "dom": "INC",
+      "t": "Notificación a la autoridad aeronáutica",
+      "t_en": "Reporting to the aviation authority",
+      "obj": "Los incidentes y vulnerabilidades que puedan suponer un riesgo significativo para la seguridad operacional se notifican a la autoridad competente (AESA o EASA) en los plazos del punto .230 y su AMC, coordinado con la notificación de sucesos del Reglamento (UE) 376/2014.",
+      "obj_en": "Incidents and vulnerabilities that may represent a significant risk to aviation safety are reported to the competent authority (AESA or EASA) within the deadlines of point .230 and its AMC, coordinated with occurrence reporting under Regulation (EU) 376/2014.",
+      "ev": "Procedimiento de notificación externa · criterios de riesgo significativo · registros de envío a la autoridad · enlace con el sistema de notificación de sucesos",
+      "ev_en": "External reporting procedure · significant-risk criteria · submission records to the authority · link with occurrence reporting",
+      "maps": {
+        "ens": [
+          {
+            "id": "art.33",
+            "w": 0
+          }
+        ],
+        "iso27001": [],
+        "nis2": [
+          {
+            "id": "23.a",
+            "w": 0
+          }
+        ],
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.230",
+            "w": 1
+          }
+        ]
+      }
     },
     {
       "id": "CON-01",
@@ -6453,7 +6993,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Impact analysis",
       "obj_en": "Critical processes, their maximum tolerable downtime and dependencies are identified.",
@@ -6496,7 +7037,13 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": [
+          {
+            "id": "OR.220",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Continuity and recovery plan",
       "obj_en": "Approved, known business continuity and disaster recovery plan.",
@@ -6527,7 +7074,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Continuity testing",
       "obj_en": "The plan is tested regularly and corrected with what is learned.",
@@ -6574,7 +7122,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Redundancy and alternative means",
       "obj_en": "Alternative facilities, systems and communications for critical services.",
@@ -6605,7 +7154,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Crisis management",
       "obj_en": "Crisis committee, activation criteria and communication during the crisis.",
@@ -6652,7 +7202,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Secure areas and physical access control",
       "obj_en": "Defined perimeters with controlled and identified physical access.",
@@ -6687,7 +7238,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Physical security monitoring",
       "obj_en": "Premises are continuously monitored against unauthorised access.",
@@ -6734,7 +7286,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Protection against environmental threats",
       "obj_en": "Rooms conditioned and protected against fire, water and temperature.",
@@ -6773,7 +7326,8 @@
             "w": 1
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Utilities and cabling",
       "obj_en": "Guaranteed power and communications, protected cabling.",
@@ -6816,7 +7370,8 @@
             "w": 0.5
           }
         ],
-        "iso42001": []
+        "iso42001": [],
+        "partis": []
       },
       "t_en": "Equipment entry and exit",
       "obj_en": "Equipment entering and leaving is logged and protected off-premises.",
@@ -6859,7 +7414,8 @@
             "id": "A2.4",
             "w": 1
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "AI policy",
       "obj_en": "An approved AI policy, aligned with other policies and reviewed periodically.",
@@ -6897,7 +7453,8 @@
             "id": "A3.3",
             "w": 1
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "AI roles and concern reporting",
       "obj_en": "Responsibilities defined across the life cycle and a channel to raise concerns.",
@@ -6944,7 +7501,8 @@
             "id": "A4.6",
             "w": 0.5
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "AI system resources",
       "obj_en": "Data, tools, compute and people documented for each AI system.",
@@ -7000,7 +7558,8 @@
             "id": "C6.1.1",
             "w": 1
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "AI risk management",
       "obj_en": "AI-specific risks (bias, robustness, transparency, misuse) assessed and treated.",
@@ -7041,7 +7600,8 @@
             "id": "A5.5",
             "w": 1
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "AI system impact assessment",
       "obj_en": "Impact on people, groups and society assessed and documented before deployment.",
@@ -7071,7 +7631,8 @@
             "id": "A6.1.3",
             "w": 1
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "Responsible AI development",
       "obj_en": "Objectives and processes that guide responsible design and development.",
@@ -7109,7 +7670,8 @@
             "id": "A6.2.7",
             "w": 1
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "AI system specification and documentation",
       "obj_en": "Requirements, design and technical documentation maintained across the life cycle.",
@@ -7148,7 +7710,8 @@
             "id": "A6.2.5",
             "w": 1
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "Verification, validation and deployment",
       "obj_en": "Model validation criteria and a controlled deployment plan.",
@@ -7179,7 +7742,8 @@
             "id": "A6.2.6",
             "w": 1
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "AI system operation and monitoring",
       "obj_en": "Production monitoring of performance, drift and errors.",
@@ -7210,7 +7774,8 @@
             "id": "A6.2.8",
             "w": 1
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "AI system event logs",
       "obj_en": "Logging of inputs, decisions and relevant events for traceability.",
@@ -7257,7 +7822,8 @@
             "id": "A7.6",
             "w": 1
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "Data governance for AI",
       "obj_en": "Acquisition, quality, provenance and preparation of data controlled and documented.",
@@ -7286,7 +7852,8 @@
             "id": "A8.5",
             "w": 1
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "Information for users and interested parties",
       "obj_en": "User documentation and transparent communication about the AI system.",
@@ -7315,7 +7882,8 @@
             "id": "A9.4",
             "w": 1
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "Responsible and intended use",
       "obj_en": "Processes and objectives that keep use of the system within its intended scope.",
@@ -7363,7 +7931,8 @@
             "id": "A10.4",
             "w": 1
           }
-        ]
+        ],
+        "partis": []
       },
       "t_en": "Third parties and customers in the AI chain",
       "obj_en": "Responsibilities shared with suppliers and customers of AI components or services.",

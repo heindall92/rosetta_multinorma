@@ -22,7 +22,7 @@ function inspUc(id) {
   }).join('');
   return `${inspHead(`${esc(id)} · ${esc(dT(c.dom))}`, cT(id), DOM[c.dom].ic)}
   ${stateSwitch(id, cc.estado, true)}
-  ${g ? `<div class="callout">${icon('lightbulb', 17)}<span>${esc(t('unlocksTxt', num1(g.ganancia), g.normas.map((f) => E.FW_LABEL[f]).join(', '), rank))}</span></div>` : ''}
+  ${g ? `<div class="callout">${icon('lightbulb', 17)}<span>${esc(t('unlocksTxt', num1(g.ganancia), g.normas.map((f) => fwLbl(f)).join(', '), rank))}</span></div>` : ''}
   <div class="blk"><h4>${esc(t('objective'))}</h4><p class="small">${esc(tt(c, 'obj'))}</p></div>
   <div class="blk"><h4>${esc(t('usualEv'))}</h4><p class="norma">${esc(tt(c, 'ev'))}</p></div>
   <div class="form">
@@ -32,6 +32,12 @@ function inspUc(id) {
     <label class="fld span2">${esc(t('notes'))}<textarea id="uc-n-${esc(id)}" data-set="controles.${esc(id)}.notas">${esc(d.notas)}</textarea></label></div>
   ${d.origen === 'ens' ? `<p class="tiny"><span class="origin">${esc(t('inheritedEns'))}</span></p>` : ''}
   <div class="blk"><h4>${esc(t('covers'))}</h4><div class="maps">${maps}</div></div>`;
+}
+/* Ficha de un requisito: el matiz de Part-IS con su fuente, o el texto que trae un marco propio */
+function extraReq(f, r) {
+  if (f === 'partis') return `<div class="nota"><b>${esc(t('partisNota'))}.</b> ${esc(tt(r, 'nota'))}</div><p class="tiny muted">${esc(tt(r, 'ref'))}</p>`;
+  if (esPropio(f)) return `<div class="blk"><h4>${esc(t('mpBadge'))} · ${esc(t('mpUserMap'))}</h4>${r.texto ? `<p class="small">${esc(r.texto)}</p>` : ''}</div>`;
+  return '';
 }
 function inspReq(f, id) {
   const r = IX.req[f][id]; const cov = reqRow(f, id); const showRel = ws.settings.mostrarRelaciones;
@@ -43,16 +49,16 @@ function inspReq(f, id) {
     const rows = eq.otras[g].filter((x) => x.fuerza !== 'relacionado' || showRel);
     return `<div>${fwTag(g, !onFw(g))}<div class="chips">${rows.length ? rows.map((x) => reqChip(g, x.id, { fuerza: x.fuerza, cov: onFw(g) ? reqRow(g, x.id).estado : null, origen: ccnTxt(f, g, x) })).join('') : `<span class="tiny muted">${esc(g === 'iso42001' || f === 'iso42001' ? t('noEqAi') : t('noEq'))}</span>`}</div></div>`;
   }).join('');
-  return `${inspHead(`${fwTag(f, !onFw(f))} <span class="mono">${esc(reqCode(f, id))}</span>`, rT(f, id), 'file-check', `fw-${f}`)}
+  return `${inspHead(`${fwTag(f, !onFw(f))} <span class="mono">${esc(reqCode(f, id))}</span>`, rT(f, id), 'file-check', `fw-${fwCls(f)}`)}
   <p class="small muted">${esc(rG(f, id))}</p>
   <div class="row">${onFw(f) ? covPill(cov.estado) : `<span class="pill neutral">${esc(t('outOfScope'))}</span>`}${cov.estado !== 'no-exigido' && cov.estado !== 'excluido' ? `<span class="small muted num">${esc(t('support', pct(cov.score)))}</span>` : ''}</div>
   ${cov.estado === 'no-exigido' ? `<div class="callout">${icon('info', 17)}<span>${esc(t('notRequired', t('lv.' + cov.nivel), cov.exigencia))}</span></div>` : ''}
-  ${ens}
+  ${ens}${extraReq(f, r)}
   <div class="blk"><h4>${esc(t('supportedBy'))} · ${ctl.length}</h4>${ctl.map((l) => { const fz = fuerzaDe(l.w); return `<div class="ucrow">${ucChip(l.uc)}<div style="min-width:0"><b>${esc(cT(l.uc))}</b><div><span class="weight ${fz}">${esc(t('fuerzaCorta.' + fz))}</span></div></div>${l.w > 0 ? stateSwitch(l.uc, E.estadoUc(state, l.uc)) : '<span></span>'}</div>`; }).join('')}</div>
   <div class="blk"><h4>${esc(t('equivalents'))}</h4><div class="maps">${eqs}</div></div>
   ${canEx ? `<div class="blk"><h4>${esc(t('exclusion'))}</h4>
     <label class="switch-l"><span class="switch"><input type="checkbox" id="ex-sw" data-exsw="1" data-fw="${f}" data-id="${esc(id)}"${ex ? ' checked' : ''}><span></span></span>${esc(t('excludeIt'))}</label>
-    ${ex ? `<label class="fld">${esc(t('justification'))}<input type="text" id="ex-${f}-${esc(id)}" data-exfw="${f}" data-exid="${esc(id)}" value="${esc(cov.justificacion || '')}" placeholder="${esc(t('justPh'))}"></label>` : ''}</div>` : onFw(f) && !E.excluible(f, id) ? `<div class="blk"><h4>${esc(t('exclusion'))}</h4><p class="hint">${esc(t('notExcludable'))}</p></div>` : ''}
+    ${ex ? `<label class="fld">${esc(t('justification'))}<input type="text" id="ex-${f}-${esc(id)}" data-exfw="${f}" data-exid="${esc(id)}" value="${esc(cov.justificacion || '')}" placeholder="${esc(t('justPh'))}"></label>` : ''}</div>` : onFw(f) && !E.excluible(f, id) ? `<div class="blk"><h4>${esc(t('exclusion'))}</h4><p class="hint">${esc(t(f === 'partis' ? 'notExcludablePartis' : 'notExcludable'))}</p></div>` : ''}
   <button type="button" class="btn" data-act="tr-center" data-fw="${f}" data-id="${esc(id)}">${icon('waypoints', 16)}${esc(t('openPrism'))}</button>`;
 }
 
