@@ -8,13 +8,14 @@
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
-  const FW = ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra', 'nist', 'dora'];
-  const FW_LABEL = { ens: 'ENS', iso27001: 'ISO/IEC 27001', nis2: 'NIS2', iso42001: 'ISO/IEC 42001', partis: 'Part-IS', ria: 'RIA', cra: 'CRA', nist: 'NIST CSF', dora: 'DORA' };
+  const FW = ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra', 'nist', 'dora', 'cl21663', 'cl21719'];
+  const FW_LABEL = { ens: 'ENS', iso27001: 'ISO/IEC 27001', nis2: 'NIS2', iso42001: 'ISO/IEC 42001', partis: 'Part-IS', ria: 'RIA', cra: 'CRA', nist: 'NIST CSF', dora: 'DORA', cl21663: 'Ley 21.663 (Chile)', cl21719: 'Ley 21.719 (Chile)' };
+  const LATAM = ['cl', 'co', 'mx', 'pe', 'ar'];
   const FW_LABEL_EN = { ria: 'AI Act' };
   const FW_LONG = { ens: 'Esquema Nacional de Seguridad (RD 311/2022)', iso27001: 'ISO/IEC 27001:2022', nis2: 'Directiva NIS2 y RE 2024/2690', iso42001: 'ISO/IEC 42001:2023',
-    partis: 'Part-IS · Reglamentos (UE) 2023/203 y 2022/1645', ria: 'RIA · Reglamento (UE) 2024/1689 de inteligencia artificial', cra: 'CRA · Reglamento (UE) 2024/2847 de ciberresiliencia', nist: 'NIST Cybersecurity Framework 2.0', dora: 'DORA · Reglamento (UE) 2022/2554 de resiliencia operativa digital' };
+    partis: 'Part-IS · Reglamentos (UE) 2023/203 y 2022/1645', ria: 'RIA · Reglamento (UE) 2024/1689 de inteligencia artificial', cra: 'CRA · Reglamento (UE) 2024/2847 de ciberresiliencia', nist: 'NIST Cybersecurity Framework 2.0', dora: 'DORA · Reglamento (UE) 2022/2554 de resiliencia operativa digital', cl21663: 'Ley 21.663 Marco de Ciberseguridad (Chile)', cl21719: 'Ley 21.719 de protección de datos personales (Chile)' };
   const FW_LONG_EN = { ens: 'Spanish National Security Framework (RD 311/2022)', iso27001: 'ISO/IEC 27001:2022', nis2: 'NIS2 Directive and IR 2024/2690', iso42001: 'ISO/IEC 42001:2023',
-    partis: 'Part-IS · Regulations (EU) 2023/203 and 2022/1645', ria: 'AI Act · Regulation (EU) 2024/1689', cra: 'CRA · Cyber Resilience Act, Regulation (EU) 2024/2847', nist: 'NIST Cybersecurity Framework 2.0', dora: 'DORA · Digital Operational Resilience Act, Regulation (EU) 2022/2554' };
+    partis: 'Part-IS · Regulations (EU) 2023/203 and 2022/1645', ria: 'AI Act · Regulation (EU) 2024/1689', cra: 'CRA · Cyber Resilience Act, Regulation (EU) 2024/2847', nist: 'NIST Cybersecurity Framework 2.0', dora: 'DORA · Digital Operational Resilience Act, Regulation (EU) 2022/2554', cl21663: 'Cybersecurity Framework Law 21.663 (Chile)', cl21719: 'Personal Data Protection Law 21.719 (Chile)' };
   const ESTADOS = ['implantado', 'parcial', 'pendiente', 'no-aplica'];
   const ESTADO_LABEL = { implantado: 'Implantado', parcial: 'Parcial', pendiente: 'Pendiente', 'no-aplica': 'No aplica' };
   const ESTADO_LABEL_EN = { implantado: 'Implemented', parcial: 'Partial', pendiente: 'Pending', 'no-aplica': 'Not applicable' };
@@ -140,6 +141,8 @@
     if (f === 'cra') return /^I\.2\.[b-m]$/.test(s);
     // DORA: solo el intercambio de información (art. 45) es voluntario; el régimen y las TLPT se fijan en Alcance
     if (f === 'dora') return s === '45';
+    if (f === 'cl21663') return false;
+    if (f === 'cl21719') return s === 'mpi'; // el modelo de prevención de infracciones es voluntario
     return true;
   }
 
@@ -173,6 +176,7 @@
   }
   function aplicaReq(ix, st, f, id) {
     if (f === 'ria') { const r = ix.req.ria[id]; return r ? aplicaRia(r, st.alcance && st.alcance.ria) : { aplica: true }; }
+    if (f === 'cl21663') { const r = ix.req.cl21663[id]; return r && r.tipo === 'oiv' && !(st.alcance && st.alcance.cl21663 && st.alcance.cl21663.oiv === true) ? { aplica: false, motivo: 'oiv' } : { aplica: true }; }
     if (f === 'dora') { const r = ix.req.dora[id]; return r ? aplicaDora(r, st.alcance && st.alcance.dora) : { aplica: true }; }
     if (f !== 'ens') return { aplica: true };
     const r = ix.req.ens[id]; const a = st.alcance.ens || {};
@@ -345,7 +349,9 @@
     ['CO-17', 'Alta', 'CRA en alcance sin notificación a ENISA de vulnerabilidades explotadas e incidentes graves (art. 14, desde el 11-09-2026).'],
     ['CO-18', 'Media', 'CRA en alcance sin lista de materiales de software (SBOM) de los productos.'],
     ['CO-19', 'Alta', 'DORA en alcance sin notificación de incidentes graves a la autoridad financiera (art. 19).'],
-    ['CO-20', 'Media', 'DORA en alcance sin registro de información de los acuerdos con proveedores de TIC (art. 28.3).']
+    ['CO-20', 'Media', 'DORA en alcance sin registro de información de los acuerdos con proveedores de TIC (art. 28.3).'],
+    ['CO-21', 'Alta', 'Ley 21.663 en alcance sin reporte de incidentes al CSIRT Nacional (alerta en 3 h).'],
+    ['CO-22', 'Alta', 'Ley de protección de datos en alcance sin procedimiento de notificación de vulneraciones.']
   ];
   /* Mensajes de las reglas en español e inglés */
   const tt = (obj, key, lang) => (lang === 'en' && obj && obj[key + '_en'] ? obj[key + '_en'] : obj ? obj[key] : '');
@@ -367,6 +373,8 @@
       co06p: (n) => `${n === 1 ? 'Una medida declarada' : n + ' medidas declaradas'} «Implantada${n === 1 ? '' : 's'}» en la SoA del ENS con controles solo parciales`, nMed: (n) => `${n} medidas del ENS`,
       co12: ['Sin notificación a la autoridad aeronáutica', (e) => `Part-IS exige notificar a la autoridad competente (AESA o EASA) los incidentes y vulnerabilidades que puedan suponer un riesgo significativo para la seguridad operacional, coordinado con el Reglamento (UE) 376/2014. No sustituye a la notificación de NIS2. El control INC-09 está ${e}.`, 'Define el canal, los plazos del punto .230 y su AMC, y quién notifica; enlázalo con la notificación de sucesos que ya hace el SMS.', 'Part-IS, punto IS.I.OR.230 / IS.D.OR.230'],
       co13: ['Riesgos sin la mirada de la seguridad operacional', (e) => `Part-IS no mide solo la información: pide identificar los elementos e interfaces cuya alteración podría afectar a la seguridad operacional y evaluarlos con el SMS. El control RIE-12 está ${e}.`, 'Inventaría los elementos e interfaces relevantes para la seguridad operacional y llévalos al análisis de riesgos junto al responsable del SMS.', 'Part-IS, puntos .205 y .210'],
+      co21: ['Sin reporte al CSIRT Nacional de Chile', (e) => `La Ley 21.663 exige una alerta temprana en 3 horas, un segundo reporte en 72 horas (24 para operadores de importancia vital) y un informe final en 15 días. El control INC-13 está ${e}.`, 'Registra la organización en la plataforma de la ANCI y define quién reporta cada incidente y en qué plazo.', 'Ley 21.663, art. 9'],
+      co22: [(m) => `${m}: sin procedimiento de vulneraciones`, (e) => `La ley obliga a notificar las vulneraciones de datos personales a la autoridad y, cuando procede, a los titulares. El control PRI-07 está ${e}.`, 'Define cómo se detecta, evalúa, registra y notifica una vulneración de datos personales, con los plazos de cada país.'],
       co19: ['Sin notificación de incidentes graves (DORA)', (e) => `DORA exige notificar los incidentes TIC graves a la autoridad financiera: inicial en 4 h desde la clasificación y como mucho 24 h, intermedio en 72 h y final en un mes. El control INC-12 está ${e}.`, 'Aprueba el procedimiento con los criterios de clasificación del art. 18, las plantillas de las ITS y quién notifica.', 'DORA, arts. 18 y 19'],
       co20: ['Sin registro de información de proveedores TIC', (e) => `El registro del art. 28.3 se remite a la autoridad cuando lo pide y es la base para evaluar la concentración. El control PRO-06 está ${e}.`, 'Completa el registro con todos los acuerdos TIC y marca los que soportan funciones esenciales o importantes.', 'DORA, art. 28.3'],
       co17: ['Sin notificación a ENISA', (e) => `El art. 14 del CRA obliga desde el 11-09-2026 a notificar las vulnerabilidades explotadas y los incidentes graves: alerta en 24 h, notificación en 72 h e informe final. No sustituye a la de NIS2. El control INC-11 está ${e}.`, 'Da de alta a la organización en la plataforma única de ENISA y define quién detecta, evalúa y notifica cada caso.', 'CRA, art. 14'],
@@ -392,6 +400,8 @@
       co06p: (n) => `${n === 1 ? 'One measure' : n + ' measures'} declared "Implemented" in the ENS SoA with only partial controls`, nMed: (n) => `${n} ENS measures`,
       co12: ['No reporting to the aviation authority', (e) => `Part-IS requires reporting to the competent authority (AESA or EASA) the incidents and vulnerabilities that may represent a significant risk to aviation safety, coordinated with Regulation (EU) 376/2014. It does not replace NIS2 reporting. Control INC-09 is ${e}.`, 'Define the channel, the deadlines of point .230 and its AMC, and who reports; link it to the occurrence reporting the SMS already does.', 'Part-IS, point IS.I.OR.230 / IS.D.OR.230'],
       co13: ['Risk assessment without the aviation safety view', (e) => `Part-IS does not look only at information: it asks you to identify the elements and interfaces whose compromise could affect aviation safety and to assess them with the SMS. Control RIE-12 is ${e}.`, 'List the elements and interfaces relevant to aviation safety and bring them into the risk assessment with the safety manager.', 'Part-IS, points .205 and .210'],
+      co21: ['No reporting to Chile’s National CSIRT', (e) => `Law 21.663 requires an early warning within 3 hours, a second report within 72 hours (24 for operators of vital importance) and a final report within 15 days. Control INC-13 is ${e}.`, 'Register the organisation on the ANCI platform and define who reports each incident and within which deadline.', 'Law 21.663, art. 9'],
+      co22: [(m) => `${m}: no breach procedure`, (e) => `The law requires notifying personal data breaches to the authority and, where applicable, to data subjects. Control PRI-07 is ${e}.`, 'Define how a personal data breach is detected, assessed, recorded and notified, with each country’s deadlines.'],
       co19: ['No major incident reporting (DORA)', (e) => `DORA requires reporting major ICT incidents to the financial authority: initial within 4 h of classification and at most 24 h, intermediate within 72 h and final within one month. Control INC-12 is ${e}.`, 'Approve the procedure with the art. 18 classification criteria, the ITS templates and who reports.', 'DORA, arts. 18 and 19'],
       co20: ['No register of ICT third-party information', (e) => `The art. 28.3 register is submitted to the authority on request and underpins the concentration assessment. Control PRO-06 is ${e}.`, 'Complete the register with every ICT arrangement and flag those supporting critical or important functions.', 'DORA, art. 28.3'],
       co17: ['No reporting to ENISA', (e) => `CRA art. 14 has required reporting actively exploited vulnerabilities and severe incidents since 11-09-2026: early warning within 24 h, notification within 72 h and a final report. It does not replace NIS2 reporting. Control INC-11 is ${e}.`, 'Register the organisation on ENISA’s single reporting platform and define who detects, assesses and reports each case.', 'CRA, art. 14'],
@@ -415,7 +425,9 @@
     'CO-17': 'CRA in scope without reporting actively exploited vulnerabilities and severe incidents to ENISA (art. 14, from 11-09-2026).',
     'CO-18': 'CRA in scope without a software bill of materials (SBOM) for the products.',
     'CO-19': 'DORA in scope without reporting major incidents to the financial authority (art. 19).',
-    'CO-20': 'DORA in scope without a register of information on ICT third-party arrangements (art. 28.3).'
+    'CO-20': 'DORA in scope without a register of information on ICT third-party arrangements (art. 28.3).',
+    'CO-21': 'Law 21.663 in scope without incident reporting to the National CSIRT (3 h early warning).',
+    'CO-22': 'Data protection law in scope without a breach notification procedure.'
   };
   function coherencia(ix, st, calc, opts = {}) {
     const lang = opts.lang === 'en' ? 'en' : 'es'; const M = MSG[lang];
@@ -430,6 +442,8 @@
     if (on('nis2')) for (const id of ['GOB-03', 'GOB-04']) if (est(id) !== 'implantado') add('CO-04', id, `${ct(id)}: ${M.est(est(id))}`, M.co04[0], id === 'GOB-03' ? M.co04[1] : M.co04[2], M.co04[3]);
     if (on('iso42001') && est('IA-05') !== 'implantado') add('CO-05', 'IA-05', M.co05[0], M.co05[1], M.co05[2], M.co05[3]);
     if (on('partis') && ix.ucMap['INC-09'] && est('INC-09') !== 'implantado') add('CO-12', 'INC-09', M.co12[0], M.co12[1](M.est(est('INC-09'))), M.co12[2], M.co12[3]);
+    if (on('cl21663') && ix.ucMap['INC-13'] && est('INC-13') !== 'implantado') add('CO-21', 'INC-13', M.co21[0], M.co21[1](M.est(est('INC-13'))), M.co21[2], M.co21[3]);
+    if (ix.ucMap['PRI-07'] && est('PRI-07') !== 'implantado') for (const f of calc.alcance) if (ix.cat.frameworks[f].datos) add('CO-22', 'PRI-07', M.co22[0](lbl(f)), M.co22[1](M.est(est('PRI-07'))), M.co22[2], '', { fw: f });
     if (on('dora') && ix.ucMap['INC-12'] && est('INC-12') !== 'implantado') add('CO-19', 'INC-12', M.co19[0], M.co19[1](M.est(est('INC-12'))), M.co19[2], M.co19[3]);
     if (on('dora') && ix.ucMap['PRO-06'] && est('PRO-06') !== 'implantado') add('CO-20', 'PRO-06', M.co20[0], M.co20[1](M.est(est('PRO-06'))), M.co20[2], M.co20[3]);
     if (on('cra') && ix.ucMap['INC-11'] && est('INC-11') !== 'implantado') add('CO-17', 'INC-11', M.co17[0], M.co17[1](M.est(est('INC-11'))), M.co17[2], M.co17[3]);
@@ -652,9 +666,9 @@
    * Estados: obligatoria (la impone una norma), confirmar (depende de algo que el asistente no puede saber),
    * voluntaria (contractual o voluntaria) y no-aplica (con su motivo). */
   const ESTADOS_PERFIL = ['obligatoria', 'confirmar', 'voluntaria', 'no-aplica'];
-  const JURISDICCIONES = ['es', 'ue', 'fuera'];
+  const JURISDICCIONES = ['es', 'ue', 'cl', 'co', 'mx', 'pe', 'ar', 'fuera'];
   const AVIACION = ['no', 'I', 'D', 'ID'];
-  const PERFIL_DEF = { jurisdiccion: 'es', publico: false, proveedorPublico: false, financiera: false, aviacion: 'no', ia: false, fabricante: false };
+  const PERFIL_DEF = { jurisdiccion: 'es', opera: [], publico: false, proveedorPublico: false, financiera: false, aviacion: 'no', ia: false, fabricante: false };
   const PR = {
     es: {
       ensFuera: 'El ENS es una norma española: obliga al sector público español y a quienes le prestan servicios.',
@@ -668,6 +682,8 @@
       ia: 'Norma voluntaria, pero es la base reconocida para gobernar los sistemas de IA y preparar el RIA (Reglamento (UE) 2024/1689).', iaNo: 'La organización no desarrolla ni despliega sistemas de IA.',
       riaOk: 'Desarrolla o despliega IA en la UE: le aplican al menos la alfabetización en IA y las prácticas prohibidas (desde el 02-02-2025). El resto depende del rol (proveedor o responsable del despliegue) y del riesgo: transparencia desde el 02-08-2026 y alto riesgo del anexo III desde el 02-12-2027 (Reglamento (UE) 2026/1744).',
       dora: 'Entidad financiera de la UE: DORA le aplica desde el 17-01-2025 y prevalece sobre NIS2 en gestión del riesgo TIC y notificación de incidentes.', doraFuera: 'Fuera de la UE, DORA solo alcanza a los proveedores de TIC críticos que sirven a entidades financieras de la Unión.', doraBase: 'Reglamento (UE) 2022/2554, art. 2', doraNo: 'No es una entidad financiera.',
+      cl63: 'Presta un servicio esencial en Chile (sector de los anexos de NIS2 como referencia o Administración): deberes del art. 7 y reporte al CSIRT Nacional desde el 01-03-2025; si la ANCI lo designa operador de importancia vital, también los del art. 8.', cl63Conf: 'Aplica a quien presta servicios esenciales o es designado operador de importancia vital por la ANCI: confírmalo con su calificación.', cl63Opera: 'Opera en Chile: aplica si presta allí servicios esenciales o la ANCI la designa operador de importancia vital.', cl63Base: 'Ley 21.663, arts. 1, 4 y 5',
+      cl19: 'Trata datos personales en Chile: la Ley 21.719 le aplica desde el 01-12-2026 (en trámite su aplazamiento al 01-12-2027, Boletín 18.623-07).', cl19Opera: 'Opera en Chile: aplica si trata datos de personas que están allí, como responsable establecido en Chile o al ofrecerles bienes o servicios.', cl19Base: 'Ley 21.719, que modifica la Ley 19.628', clNo: 'No opera en Chile.',
       nist: 'Marco voluntario del NIST (EE. UU.): lenguaje común con clientes internacionales y de LATAM para expresar el perfil actual y el objetivo.', nistBase: 'NIST CSWP 29 (CSF 2.0)',
       cra: 'Fabrica productos con elementos digitales: la notificación de vulnerabilidades explotadas e incidentes graves (art. 14) le obliga desde el 11-09-2026; los requisitos esenciales, la gestión de vulnerabilidades y el marcado CE, desde el 11-12-2027.',
       craFuera: 'Fuera de la UE, el CRA alcanza a quien comercializa productos con elementos digitales en la Unión.', craBase: 'Reglamento (UE) 2024/2847, art. 2', craNo: 'La organización no fabrica productos con elementos digitales.',
@@ -694,6 +710,8 @@
       ia: 'Voluntary standard, but the recognised basis to govern AI systems and prepare for the AI Act (Regulation (EU) 2024/1689).', iaNo: 'The organisation neither develops nor deploys AI systems.',
       riaOk: 'It develops or deploys AI in the EU: at least AI literacy and the prohibited practices apply (since 02-02-2025). The rest depends on the role (provider or deployer) and the risk: transparency from 02-08-2026 and Annex III high risk from 02-12-2027 (Regulation (EU) 2026/1744).',
       dora: 'EU financial entity: DORA has applied since 17-01-2025 and prevails over NIS2 for ICT risk management and incident reporting.', doraFuera: 'Outside the EU, DORA only reaches critical ICT third-party providers serving Union financial entities.', doraBase: 'Regulation (EU) 2022/2554, art. 2', doraNo: 'Not a financial entity.',
+      cl63: 'It provides an essential service in Chile (NIS2 annex sectors as a reference, or public administration): art. 7 duties and reporting to the National CSIRT since 01-03-2025; if ANCI designates it an operator of vital importance, also art. 8.', cl63Conf: 'It applies to providers of essential services or operators of vital importance designated by ANCI: confirm with its classification.', cl63Opera: 'It operates in Chile: it applies if it provides essential services there or ANCI designates it an operator of vital importance.', cl63Base: 'Law 21.663, arts. 1, 4 and 5',
+      cl19: 'It processes personal data in Chile: Law 21.719 applies from 01-12-2026 (a bill to postpone it to 01-12-2027 is pending, Bill 18.623-07).', cl19Opera: 'It operates in Chile: it applies if it processes data of people there, as a controller established in Chile or when offering them goods or services.', cl19Base: 'Law 21.719, amending Law 19.628', clNo: 'It does not operate in Chile.',
       nist: 'Voluntary NIST (US) framework: a common language with international and LATAM customers to express current and target profiles.', nistBase: 'NIST CSWP 29 (CSF 2.0)',
       cra: 'It manufactures products with digital elements: reporting actively exploited vulnerabilities and severe incidents (art. 14) has applied since 11-09-2026; the essential requirements, vulnerability handling and CE marking from 11-12-2027.',
       craFuera: 'Outside the EU, the CRA reaches those who place products with digital elements on the Union market.', craBase: 'Regulation (EU) 2024/2847, art. 2', craNo: 'The organisation does not manufacture products with digital elements.',
@@ -712,14 +730,16 @@
   function perfilNormalizado(p) {
     const o = p && typeof p === 'object' ? p : {};
     const r = {}; for (const k of Object.keys(PERFIL_DEF)) if (Object.prototype.hasOwnProperty.call(o, k)) r[k] = o[k]; // solo propiedades propias
-    return { jurisdiccion: JURISDICCIONES.includes(r.jurisdiccion) ? r.jurisdiccion : 'es', publico: r.publico === true, proveedorPublico: r.proveedorPublico === true,
+    const opera = Array.isArray(r.opera) ? LATAM.filter((x) => r.opera.includes(x)) : [];
+    return { jurisdiccion: JURISDICCIONES.includes(r.jurisdiccion) ? r.jurisdiccion : 'es', opera, publico: r.publico === true, proveedorPublico: r.proveedorPublico === true,
       financiera: r.financiera === true, aviacion: AVIACION.includes(r.aviacion) ? r.aviacion : 'no', ia: r.ia === true, fabricante: r.fabricante === true };
   }
   /** Propuesta de marcos aplicables. `propios` son los identificadores de los marcos propios del proyecto. */
   function perfilRegulatorio(perfil, nis2q, lang, propios) {
     const T = PR[lang === 'en' ? 'en' : 'es']; const p = perfilNormalizado(perfil);
     const R = (estado, base, motivo) => ({ estado, base, motivo });
-    const ue = p.jurisdiccion !== 'fuera'; const q = nis2q || {};
+    const ue = p.jurisdiccion === 'es' || p.jurisdiccion === 'ue'; const q = nis2q || {};
+    const enPais = (c) => p.jurisdiccion === c; const operaEn = (c) => p.opera.includes(c);
     const financiera = p.financiera || q.especial === 'dora';
     const m = {};
     // ENS (RD 311/2022, art. 2)
@@ -745,6 +765,10 @@
     m.iso27001 = R('voluntaria', T.iso27Base, sgsiLegal ? T.iso27Sgsi : T.iso27);
     m.iso42001 = p.ia ? R('voluntaria', T.iso27Base, T.ia) : R('no-aplica', T.iso27Base, T.iaNo);
     m.nist = R('voluntaria', T.nistBase, T.nist);
+    // Chile: Ley 21.663 (servicios esenciales y operadores de importancia vital) y Ley 21.719 (protección de datos)
+    const esencial = p.publico || q.sector === 'anexo1' || q.sector === 'anexo2' || (q.especial && q.especial !== 'ninguno' && q.especial !== 'excluida');
+    m.cl21663 = enPais('cl') ? (esencial ? R('obligatoria', T.cl63Base, T.cl63) : R('confirmar', T.cl63Base, T.cl63Conf)) : operaEn('cl') ? R('confirmar', T.cl63Base, T.cl63Opera) : R('no-aplica', T.cl63Base, T.clNo);
+    m.cl21719 = enPais('cl') ? R('obligatoria', T.cl19Base, T.cl19) : operaEn('cl') ? R('confirmar', T.cl19Base, T.cl19Opera) : R('no-aplica', T.cl19Base, T.clNo);
     m.dora = !financiera ? R('no-aplica', T.doraBase, T.doraNo) : ue ? R('obligatoria', T.doraBase, T.dora) : R('confirmar', T.doraBase, T.doraFuera);
     m.cra = !p.fabricante ? R('no-aplica', T.craBase, T.craNo) : ue ? R('obligatoria', T.craBase, T.cra) : R('confirmar', T.craBase, T.craFuera);
     m.ria = !p.ia ? R('no-aplica', T.riaBase, T.riaNo) : ue ? R('obligatoria', T.riaBase, T.riaOk) : R('confirmar', T.riaBase, T.riaFuera);
@@ -783,7 +807,7 @@
   function dias(a, b) { return Math.round((new Date(b + 'T00:00:00') - new Date(a + 'T00:00:00')) / 86400000); }
   function instantanea(calc) { const o = {}; for (const f of Object.keys(calc.fw)) o[f] = calc.fw[f].on ? Math.round(calc.fw[f].grado * 1000) / 1000 : null; return { cov: o, grado: Math.round(calc.kpi.grado * 1000) / 1000, brechas: calc.kpi.brechas }; }
 
-  return { FW, FW_LABEL, FW_LABEL_EN, etiqueta, riaAlcance, RIA_ROLES, RIA_GPAI, craAlcance, CRA_CLASES, doraAlcance, DORA_REGIMENES, fundirPropios, listaNormas, FW_LONG, FW_LONG_EN, ESTADOS, ESTADO_LABEL, ESTADO_LABEL_EN, REGLAS_EN, tt, SCORE, W, DIMS, NIVELES_ENS, CAT_NIVEL, REGLAS, TAMANOS, NIS2_ESPECIALES,
+  return { FW, FW_LABEL, FW_LABEL_EN, etiqueta, riaAlcance, RIA_ROLES, RIA_GPAI, craAlcance, CRA_CLASES, doraAlcance, DORA_REGIMENES, LATAM, fundirPropios, listaNormas, FW_LONG, FW_LONG_EN, ESTADOS, ESTADO_LABEL, ESTADO_LABEL_EN, REGLAS_EN, tt, SCORE, W, DIMS, NIVELES_ENS, CAT_NIVEL, REGLAS, TAMANOS, NIS2_ESPECIALES,
     ESTADOS_PERFIL, JURISDICCIONES, AVIACION, PERFIL_DEF, perfilNormalizado, perfilRegulatorio, sugerirControles,
     indexar, nivelExigidoEns, categoriaEfectiva, excluible, exigidaEns, categoriaDeNiveles, aplicaReq, coberturaReq, calcular, solapamiento, inferencia,
     equivalencias, prioridades, parseIsoRef, parejasClase, ccnPareja, fuerzaCcn, contrasteCcn825, coherencia, planAccion, puntuacionEns, desdeSoaEns, nis2Aplicabilidad, orden, codigo, titulo, instantanea, estadoUc };

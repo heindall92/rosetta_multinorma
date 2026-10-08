@@ -79,7 +79,8 @@ function ensLevels(a, pre) {
     <div class="dims">${E.DIMS.map((d) => `<label>${d}<select id="${pre}-dim-${d}" data-${pre}="alcance.ens.niveles.${d}" aria-label="${d}">${opt('', '—', a.niveles[d] || '')}${E.NIVELES_ENS.map((n) => opt(n, t('lv.' + n), a.niveles[d] || '')).join('')}</select></label>`).join('')}</div>`;
 }
 function scopeCards(a, pre) {
-  return `<div class="scope">${FW_BASE.map((f) => `<label class="fw-${fwCls(f)}"><input type="checkbox" id="${pre}-on-${f}" data-${pre}="alcance.${f}.on" data-type="bool"${a[f].on ? ' checked' : ''}><span class="chk">${icon('check', 14)}</span><b>${fwLbl(f)}</b><small>${esc(t('fwDesc.' + f))}</small><span class="tiny muted num">${esc(t('reqs', CAT.frameworks[f].reqs.length))}</span></label>`).join('')}</div>`;
+  const vis = (f) => !regionDe(f) || a[f].on || (ui.wizard && (ui.wizard.perfil.jurisdiccion === regionDe(f) || (ui.wizard.perfil.opera || []).includes(regionDe(f))));
+  return `<div class="scope">${FW_BASE.filter(vis).map((f) => `<label class="fw-${fwCls(f)}"><input type="checkbox" id="${pre}-on-${f}" data-${pre}="alcance.${f}.on" data-type="bool"${a[f].on ? ' checked' : ''}><span class="chk">${icon('check', 14)}</span><b>${fwLbl(f)}</b><small>${esc(t('fwDesc.' + f))}</small><span class="tiny muted num">${esc(t('reqs', CAT.frameworks[f].reqs.length))}</span></label>`).join('')}</div>`;
 }
 function vNuevo() {
   if (!ui.wizard) wzInit();
@@ -93,7 +94,7 @@ function vNuevo() {
   } else if (w.step === 2) {
     const pr = E.perfilRegulatorio(w.perfil, w.nis2q, LANG());
     body = `<div class="stack"><div class="pane-h"><div><h3>${esc(t('prTitle'))}</h3><p>${esc(t('prLead'))}</p></div><button type="button" class="btn sm primary" data-act="wz-perfil-aplicar">${icon('wand-sparkles', 15)}${esc(t('prApply'))}</button></div>${perfilForm(w.perfil, 'wz')}
-        <div class="chips wz-prop">${FW_BASE.map((f) => `<span class="wz-p">${fwTag(f, false, true)}${prPill(pr.marcos[f].estado)}</span>`).join('')}</div>${futurasBox(pr)}<p class="hint">${esc(t('prDisclaimer'))}</p></div>
+        <div class="chips wz-prop">${FW_BASE.filter((f) => !regionDe(f) || pr.marcos[f].estado !== 'no-aplica').map((f) => `<span class="wz-p">${fwTag(f, false, true)}${prPill(pr.marcos[f].estado)}</span>`).join('')}</div>${futurasBox(pr)}<p class="hint">${esc(t('prDisclaimer'))}</p></div>
       ${scopeCards(w.alcance, 'wz')}${w.alcance.ens.on ? `<div class="stack"><h3>${fwTag('ens')} ${esc(t('ensCat'))}</h3>${ensLevels(w.alcance.ens, 'wz')}</div>` : ''}
       <div class="stack"><h3>${fwTag('nis2')} ${esc(t('nis2Title'))}</h3>${nis2Form(w.nis2q, 'wz')}${nis2Box(w.nis2q)}</div>`;
   } else {

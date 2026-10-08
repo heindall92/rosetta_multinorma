@@ -39,7 +39,7 @@ describe('API pública', () => {
     for (const k of ['indexar', 'calcular', 'coberturaReq', 'solapamiento', 'inferencia', 'equivalencias', 'prioridades', 'coherencia', 'planAccion', 'desdeSoaEns', 'nis2Aplicabilidad', 'orden', 'instantanea', 'parejasClase',
       'perfilRegulatorio', 'perfilNormalizado', 'sugerirControles', 'fundirPropios', 'listaNormas', 'etiqueta'])
       assert.equal(typeof E[k], 'function', k);
-    assert.deepEqual(E.FW, ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra', 'nist', 'dora']);
+    assert.deepEqual(E.FW, ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra', 'nist', 'dora', 'cl21663', 'cl21719']);
   });
 });
 
@@ -226,7 +226,7 @@ describe('casos de ejemplo con el catálogo real', () => {
   }
   test('instantánea reproducible del caso de clase (TechServ)', () => {
     const r = E.calcular(IX, CASOS.find((c) => c.id === 'techserv').state);
-    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null, ria: null, cra: null, nist: null, dora: null }, grado: 0.893, brechas: 4 });
+    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null, ria: null, cra: null, nist: null, dora: null, cl21663: null, cl21719: null }, grado: 0.893, brechas: 4 });
   });
   test('contraste ENS ↔ ISO 27001 con las parejas del material de clase', () => {
     const p = E.parejasClase(IX); const ref = require('../src/data/parejas.json');
@@ -571,5 +571,37 @@ describe('DORA (Reglamento (UE) 2022/2554)', () => {
   });
   test('ninguna equivalencia con DORA es total', () => {
     for (const r of CAT.frameworks.dora.reqs) for (const g of IX.fw) for (const x of E.equivalencias(IX, 'dora', r.id).otras[g] || []) assert.notEqual(x.fuerza, 'total', `dora ${r.id} → ${g}`);
+  });
+});
+
+describe('Chile: Ley 21.663 y Ley 21.719', () => {
+  test('requisitos con fecha, región y cobertura completa', () => {
+    const A = CAT.frameworks.cl21663, B = CAT.frameworks.cl21719;
+    assert.equal(A.region, 'cl'); assert.equal(B.region, 'cl'); assert.equal(B.datos, true);
+    assert.equal(A.reqs.length, 10); assert.equal(B.reqs.length, 10);
+    for (const r of A.reqs) assert.equal(r.desde, '2025-03-01'); for (const r of B.reqs) assert.equal(r.desde, '2026-12-01');
+    for (const f of ['cl21663', 'cl21719']) for (const r of CAT.frameworks[f].reqs) assert.ok(IX.reqUcs[f][r.id].some((l) => l.w === 1), `${f} ${r.id}`);
+    assert.match(A.reqs.find((r) => r.id === '9').nota, /3 horas.*72 horas.*15 días/);
+    assert.match(B.reqs.find((r) => r.id === 'pri').nota, /18\.623-07/);
+  });
+  test('los deberes del art. 8 solo para operadores de importancia vital', () => {
+    const vivos = (oiv) => E.calcular(IX, { alcance: { cl21663: { on: true, oiv } }, controles: {}, exclusiones: {} }).req.cl21663.filter((r) => r.estado !== 'no-exigido').map((r) => r.id);
+    assert.deepEqual(vivos(false), ['7', '9']); assert.equal(vivos(true).length, 10);
+  });
+  test('perfil por país: obligatoria donde está establecida, a confirmar donde opera, no aplica fuera', () => {
+    const p = (perfil, q) => E.perfilRegulatorio(perfil, q || {}).marcos;
+    assert.equal(p({ jurisdiccion: 'cl' }, { sector: 'anexo1', tamano: 'grande' }).cl21663.estado, 'obligatoria');
+    assert.equal(p({ jurisdiccion: 'cl' }).cl21663.estado, 'confirmar');
+    assert.equal(p({ jurisdiccion: 'cl' }).cl21719.estado, 'obligatoria');
+    assert.equal(p({ jurisdiccion: 'es', opera: ['cl'] }).cl21719.estado, 'confirmar');
+    assert.equal(p({ jurisdiccion: 'es' }).cl21719.estado, 'no-aplica');
+    assert.equal(p({ jurisdiccion: 'cl' }).nis2.estado, 'no-aplica', 'NIS2 no aplica en Chile');
+    assert.equal(p({ jurisdiccion: 'cl', publico: true }).ens.estado, 'no-aplica', 'el ENS es solo para España');
+    assert.deepEqual(E.perfilNormalizado({ opera: ['cl', 'pe', 'cl', '__proto__', 'us'] }).opera, ['cl', 'pe']);
+  });
+  test('alertas CO-21 (sin reporte al CSIRT Nacional) y CO-22 (sin procedimiento de vulneraciones)', () => {
+    const st = { alcance: { cl21663: { on: true }, cl21719: { on: true } }, controles: {}, exclusiones: {} };
+    const h = E.coherencia(IX, st, E.calcular(IX, st)).map((x) => x.id);
+    assert.ok(h.includes('CO-21') && h.includes('CO-22'));
   });
 });

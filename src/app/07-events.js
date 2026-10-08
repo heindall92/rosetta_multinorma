@@ -6,13 +6,15 @@ function setPath(obj, path, value, schema = 'state') {
   // Solo rutas conocidas del modelo (lista blanca)
   const okState = (ks[0] === 'controles' && UC_IDS.has(ks[1]) && ['estado', 'responsable', 'evidencias', 'revision', 'notas'].includes(ks[2]) && ks.length === 3)
     || (ks[0] === 'proyecto' && ['nombre', 'organizacion', 'descripcion', 'sector'].includes(ks[1]) && ks.length === 2)
-    || (ks[0] === 'alcance' && FW.includes(ks[1]) && ((['on', 'motivo'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'categoria' && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'niveles' && E.DIMS.includes(ks[3]) && ks.length === 4) || (ks[1] === 'partis' && ks[2] === 'regimen' && ks.length === 3) || (ks[1] === 'ria' && ['rol', 'alto', 'transparencia', 'gpai'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'cra' && ks[2] === 'clase' && ks.length === 3) || (ks[1] === 'dora' && ['regimen', 'tlpt'].includes(ks[2]) && ks.length === 3)))
+    || (ks[0] === 'alcance' && FW.includes(ks[1]) && ((['on', 'motivo'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'categoria' && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'niveles' && E.DIMS.includes(ks[3]) && ks.length === 4) || (ks[1] === 'partis' && ks[2] === 'regimen' && ks.length === 3) || (ks[1] === 'ria' && ['rol', 'alto', 'transparencia', 'gpai'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'cra' && ks[2] === 'clase' && ks.length === 3) || (ks[1] === 'dora' && ['regimen', 'tlpt'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'cl21663' && ks[2] === 'oiv' && ks.length === 3)))
+    || (ks[0] === 'perfil' && ks[1] === 'opera' && E.LATAM.includes(ks[2]) && ks.length === 3)
     || (ks[0] === 'perfil' && has(E.PERFIL_DEF, ks[1]) && ks.length === 2)
     || (ks[0] === 'nis2q' && ['sector', 'especial', 'tamano', 'infraDigital'].includes(ks[1]) && ks.length === 2);
   const ok = schema === 'ws' ? ((ks[0] === 'profile' || ks[0] === 'settings') && ks.length === 2)
     : schema === 'wz' ? (okState && ks[0] !== 'controles' && ks[0] !== 'proyecto') || (['organizacion', 'descripcion', 'sector', 'inicio'].includes(ks[0]) && ks.length === 1)
       : okState;
   if (!ok) return false;
+  if (ks[0] === 'perfil' && ks[1] === 'opera') { const prev = obj.perfil && Array.isArray(obj.perfil.opera) ? obj.perfil.opera : []; obj.perfil.opera = E.perfilNormalizado({ opera: value === true ? [...prev, ks[2]] : prev.filter((x) => x !== ks[2]) }).opera; return true; }
   let o = obj;
   for (let i = 0; i < ks.length - 1; i++) { const k = ks[i]; if (!has(o, k) || o[k] === null || typeof o[k] !== 'object') o[k] = {}; o = o[k]; }
   const last = ks[ks.length - 1];
@@ -26,6 +28,7 @@ function setPath(obj, path, value, schema = 'state') {
   else if (ks[0] === 'alcance' && ks[1] === 'cra' && last === 'clase') o[last] = E.craAlcance({ [last]: value })[last];
   else if (ks[0] === 'alcance' && ks[1] === 'dora' && ['regimen', 'tlpt'].includes(last)) o[last] = E.doraAlcance({ [last]: value })[last];
   else if (ks[0] === 'alcance' && last === 'motivo') o[last] = s(value, 300);
+  else if (ks[0] === 'alcance' && ks[1] === 'cl21663' && last === 'oiv') o[last] = value === true;
   else if (ks[0] === 'perfil') o[last] = typeof E.PERFIL_DEF[last] === 'boolean' ? value === true : E.perfilNormalizado({ [last]: value })[last];
   else o[last] = typeof value === 'string' ? s(value) : value;
   return true;
@@ -306,4 +309,4 @@ if (ws.activeId && store.get(PKEY(ws.activeId))) { state = sanitizeState(store.g
 ui.view = [...PROJECT_VIEWS, ...GLOBAL_VIEWS].includes(initialView) && (state || !PROJECT_VIEWS.includes(initialView)) ? initialView : (state ? 'panel' : 'inicio');
 render();
 requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.add('ready'))); // sin animación del raíl al cargar
-window.__ROSETTA__ = Object.freeze({ get state() { return state; }, get calc() { return calc; }, get hall() { return hall; }, get plan() { return plan; }, get prio() { return prio; }, get ws() { return ws; }, get ui() { return ui; }, openCase, go, get IX() { return IX; }, get FW() { return FW; } });
+window.__ROSETTA__ = Object.freeze({ get state() { return state; }, get calc() { return calc; }, get hall() { return hall; }, get plan() { return plan; }, get prio() { return prio; }, get ws() { return ws; }, get ui() { return ui; }, openCase, go, get IX() { return IX; }, get FW() { return FW; }, get FWV() { return FWV; } });

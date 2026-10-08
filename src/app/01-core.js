@@ -7,6 +7,15 @@ const CAT0 = D.catalog;
 const IX0 = E.indexar(CAT0, D.ccn825);
 const FW_BASE = E.FW;
 let IX = IX0, CAT = CAT0, FW = IX0.fw, IX_SIG = '[]';
+/* Normas visibles en las vistas: las regionales (leyes LATAM) solo aparecen si están en el alcance o si el perfil
+ * dice que la organización opera en ese país. El cálculo usa siempre todas (FW). */
+let FWV = FW;
+const regionDe = (f) => (CAT0.frameworks[f] && CAT0.frameworks[f].region) || null;
+function visibles(st) {
+  if (!st) return FW.filter((f) => !regionDe(f));
+  const pf = st.perfil || {}; const ops = Array.isArray(pf.opera) ? pf.opera : [];
+  return FW.filter((f) => { const r = regionDe(f); return !r || (st.alcance[f] && st.alcance[f].on) || pf.jurisdiccion === r || ops.includes(r); });
+}
 /* Librerías de Excel, cargadas solo cuando hacen falta, con integridad verificada (SRI):
  * - leer ficheros de terceros (SoA del ENS) con SheetJS 0.20.3, sin CVE-2023-30533 ni CVE-2024-22363;
  * - escribir el Excel con formato con xlsx-js-style (solo datos generados por Rosetta).
@@ -34,7 +43,7 @@ function reindex() {
 }
 /* Nombres y colores de cada norma. Los marcos propios toman el nombre que trae su fichero (saneado al importar)
  * y uno de cuatro colores de reserva; las normas incluidas tienen el suyo. */
-const FW_SHORT = { ens: 'ENS', iso27001: '27001', nis2: 'NIS2', iso42001: '42001', partis: 'Part-IS', ria: 'RIA', cra: 'CRA', nist: 'CSF', dora: 'DORA' };
+const FW_SHORT = { ens: 'ENS', iso27001: '27001', nis2: 'NIS2', iso42001: '42001', partis: 'Part-IS', ria: 'RIA', cra: 'CRA', nist: 'CSF', dora: 'DORA', cl21663: 'CL 21.663', cl21719: 'CL 21.719' };
 const esPropio = (f) => !!(IX.propio && IX.propio[f]);
 const fwLbl = (f) => (FW_BASE.includes(f) || IX.req[f] ? E.etiqueta(IX, f, LANG()) : t('ownFw'));
 const fwShort = (f) => (LANG() === 'en' && E.FW_LABEL_EN[f]) || FW_SHORT[f] || (() => { const n = fwLbl(f); return n.length > 14 ? n.slice(0, 13).trim() + '…' : n; })();
@@ -99,7 +108,7 @@ const ui = {
 };
 
 function recompute() {
-  reindex();
+  reindex(); FWV = visibles(state);
   if (!state) { calc = null; hall = []; plan = []; prio = []; return; }
   calc = E.calcular(IX, state);
   hall = E.coherencia(IX, state, calc, { reglasOff: ws.settings.reglasOff, lang: LANG() });
@@ -197,7 +206,7 @@ function deleteProject(id) {
   if (ws.activeId === id) { ws.activeId = null; state = null; recompute(); }
   saveWs();
 }
-const alcanceDefecto = () => ({ ens: { on: true, categoria: 'MEDIA', niveles: {} }, iso27001: { on: true }, nis2: { on: false, tipo: 'fuera' }, iso42001: { on: false }, partis: { on: false, regimen: 'I' }, ria: { on: false, ...E.riaAlcance() }, cra: { on: false, ...E.craAlcance() }, nist: { on: false }, dora: { on: false, ...E.doraAlcance() } });
+const alcanceDefecto = () => ({ ens: { on: true, categoria: 'MEDIA', niveles: {} }, iso27001: { on: true }, nis2: { on: false, tipo: 'fuera' }, iso42001: { on: false }, partis: { on: false, regimen: 'I' }, ria: { on: false, ...E.riaAlcance() }, cra: { on: false, ...E.craAlcance() }, nist: { on: false }, dora: { on: false, ...E.doraAlcance() }, cl21663: { on: false, oiv: false }, cl21719: { on: false } });
 function blankState({ nombre = '', organizacion = '', sector = '', descripcion = '', alcance, nis2q, perfil } = {}) {
   const st = { version: 1, proyecto: { nombre: nombre || organizacion, organizacion, sector, descripcion },
     alcance: alcance || alcanceDefecto(),

@@ -1,5 +1,5 @@
 {
-  "version": "2.8.0",
+  "version": "2.9.0",
   "domains": [
     {
       "id": "GOB",
@@ -78,6 +78,12 @@
       "t": "Gobierno de la IA",
       "t_en": "AI governance",
       "ic": "sparkles"
+    },
+    {
+      "id": "PRI",
+      "t": "Privacidad y protección de datos",
+      "t_en": "Privacy and data protection",
+      "ic": "user-lock"
     }
   ],
   "frameworks": {
@@ -5335,6 +5341,268 @@
           "nota_en": "Voluntary: participation in a sharing arrangement is notified to the authority."
         }
       ]
+    },
+    "cl21663": {
+      "id": "cl21663",
+      "region": "cl",
+      "tope": "parcial",
+      "consulta": "2026-10-09",
+      "fuentes": [
+        "Ley 21.663 Marco de Ciberseguridad (Diario Oficial de 8.4.2024); arts. 5, 8, 9 y título VII vigentes desde el 01-03-2025",
+        "Resolución 295/2024 (reglamento de reporte de incidentes) y Resolución Ex. 7/2025 (taxonomía)"
+      ],
+      "reqs": [
+        {
+          "id": "7",
+          "code": "Art. 7",
+          "t": "Medidas para prevenir, reportar y resolver incidentes según los protocolos de la ANCI",
+          "t_en": "Measures to prevent, report and resolve incidents under ANCI protocols",
+          "g": "Instituciones obligadas",
+          "g_en": "Obligated institutions",
+          "tipo": "todos",
+          "desde": "2025-03-01",
+          "ref": "Ley 21.663 Marco de Ciberseguridad (Chile), art. 7",
+          "ref_en": "Cybersecurity Framework Law 21.663 (Chile), Art. 7"
+        },
+        {
+          "id": "8.sgsi",
+          "code": "Art. 8 · sistema de gestión",
+          "t": "Sistema de gestión de seguridad de la información continuo",
+          "t_en": "Continuous information security management system",
+          "g": "Operadores de importancia vital (art. 8)",
+          "g_en": "Operators of vital importance (art. 8)",
+          "tipo": "oiv",
+          "desde": "2025-03-01",
+          "ref": "Ley 21.663 Marco de Ciberseguridad (Chile), art. 8 · sistema de gestión",
+          "ref_en": "Cybersecurity Framework Law 21.663 (Chile), Art. 8 · sistema de gestión",
+          "nota": "Los deberes del art. 8 son para los operadores de importancia vital que designe la ANCI. Vigentes desde el 01-03-2025.",
+          "nota_en": "Article 8 duties apply to operators of vital importance designated by ANCI. In force since 01-03-2025."
+        },
+        {
+          "id": "8.reg",
+          "code": "Art. 8 · registro",
+          "t": "Registro de las acciones ejecutadas en el sistema de gestión",
+          "t_en": "Record of the actions taken in the management system",
+          "g": "Operadores de importancia vital (art. 8)",
+          "g_en": "Operators of vital importance (art. 8)",
+          "tipo": "oiv",
+          "desde": "2025-03-01",
+          "ref": "Ley 21.663 Marco de Ciberseguridad (Chile), art. 8 · registro",
+          "ref_en": "Cybersecurity Framework Law 21.663 (Chile), Art. 8 · registro"
+        },
+        {
+          "id": "8.cont",
+          "code": "Art. 8 · continuidad",
+          "t": "Planes de continuidad operacional y ciberseguridad probados periódicamente",
+          "t_en": "Operational continuity and cybersecurity plans tested periodically",
+          "g": "Operadores de importancia vital (art. 8)",
+          "g_en": "Operators of vital importance (art. 8)",
+          "tipo": "oiv",
+          "desde": "2025-03-01",
+          "ref": "Ley 21.663 Marco de Ciberseguridad (Chile), art. 8 · continuidad",
+          "ref_en": "Cybersecurity Framework Law 21.663 (Chile), Art. 8 · continuidad"
+        },
+        {
+          "id": "8.rev",
+          "code": "Art. 8 · revisiones",
+          "t": "Revisiones, ejercicios, simulacros y análisis de redes y sistemas",
+          "t_en": "Reviews, exercises, drills and analysis of networks and systems",
+          "g": "Operadores de importancia vital (art. 8)",
+          "g_en": "Operators of vital importance (art. 8)",
+          "tipo": "oiv",
+          "desde": "2025-03-01",
+          "ref": "Ley 21.663 Marco de Ciberseguridad (Chile), art. 8 · revisiones",
+          "ref_en": "Cybersecurity Framework Law 21.663 (Chile), Art. 8 · revisiones"
+        },
+        {
+          "id": "8.imp",
+          "code": "Art. 8 · contención",
+          "t": "Medidas oportunas para reducir el impacto y la propagación de los incidentes",
+          "t_en": "Timely measures to reduce the impact and spread of incidents",
+          "g": "Operadores de importancia vital (art. 8)",
+          "g_en": "Operators of vital importance (art. 8)",
+          "tipo": "oiv",
+          "desde": "2025-03-01",
+          "ref": "Ley 21.663 Marco de Ciberseguridad (Chile), art. 8 · contención",
+          "ref_en": "Cybersecurity Framework Law 21.663 (Chile), Art. 8 · contención"
+        },
+        {
+          "id": "8.cap",
+          "code": "Art. 8 · capacitación",
+          "t": "Programas de capacitación, formación y concienciación",
+          "t_en": "Training, education and awareness programmes",
+          "g": "Operadores de importancia vital (art. 8)",
+          "g_en": "Operators of vital importance (art. 8)",
+          "tipo": "oiv",
+          "desde": "2025-03-01",
+          "ref": "Ley 21.663 Marco de Ciberseguridad (Chile), art. 8 · capacitación",
+          "ref_en": "Cybersecurity Framework Law 21.663 (Chile), Art. 8 · capacitación"
+        },
+        {
+          "id": "8.inf",
+          "code": "Art. 8 · afectados",
+          "t": "Informar a los posibles afectados de incidentes que puedan afectarles",
+          "t_en": "Inform those potentially affected by incidents",
+          "g": "Operadores de importancia vital (art. 8)",
+          "g_en": "Operators of vital importance (art. 8)",
+          "tipo": "oiv",
+          "desde": "2025-03-01",
+          "ref": "Ley 21.663 Marco de Ciberseguridad (Chile), art. 8 · afectados",
+          "ref_en": "Cybersecurity Framework Law 21.663 (Chile), Art. 8 · afectados"
+        },
+        {
+          "id": "8.del",
+          "code": "Art. 8 · delegado",
+          "t": "Delegado de ciberseguridad como contraparte ante la ANCI",
+          "t_en": "Cybersecurity delegate as the counterpart before ANCI",
+          "g": "Operadores de importancia vital (art. 8)",
+          "g_en": "Operators of vital importance (art. 8)",
+          "tipo": "oiv",
+          "desde": "2025-03-01",
+          "ref": "Ley 21.663 Marco de Ciberseguridad (Chile), art. 8 · delegado",
+          "ref_en": "Cybersecurity Framework Law 21.663 (Chile), Art. 8 · delegado"
+        },
+        {
+          "id": "9",
+          "code": "Art. 9",
+          "t": "Reporte de incidentes al CSIRT Nacional: alerta temprana en 3 h, segundo reporte en 72 h e informe final en 15 días",
+          "t_en": "Incident reporting to the National CSIRT: early warning within 3 h, second report within 72 h and final report within 15 days",
+          "g": "Reporte de incidentes",
+          "g_en": "Incident reporting",
+          "tipo": "todos",
+          "desde": "2025-03-01",
+          "ref": "Ley 21.663 Marco de Ciberseguridad (Chile), art. 9",
+          "ref_en": "Cybersecurity Framework Law 21.663 (Chile), Art. 9",
+          "nota": "Alerta temprana en 3 horas desde que se conoce el incidente; segundo reporte en 72 horas (24 horas para un operador de importancia vital con el servicio esencial afectado); informe final en 15 días corridos. Los operadores de importancia vital informan además su plan de acción en 7 días. Reglamento de reporte: Resolución 295/2024; taxonomía: Resolución Ex. 7/2025.",
+          "nota_en": "Early warning within 3 hours of becoming aware; second report within 72 hours (24 hours for an operator of vital importance whose essential service is affected); final report within 15 calendar days. Operators of vital importance also report their action plan within 7 days. Reporting regulation: Resolution 295/2024; taxonomy: Exempt Resolution 7/2025."
+        }
+      ]
+    },
+    "cl21719": {
+      "id": "cl21719",
+      "region": "cl",
+      "tope": "parcial",
+      "consulta": "2026-10-09",
+      "fuentes": [
+        "Ley 21.719 (Diario Oficial de 13.12.2024), en vigor desde el 01-12-2026; Boletín 18.623-07 en trámite para aplazarla al 01-12-2027"
+      ],
+      "reqs": [
+        {
+          "id": "pri",
+          "code": "Principios",
+          "t": "Principios de licitud, finalidad, proporcionalidad, calidad, responsabilidad, seguridad, transparencia y confidencialidad",
+          "t_en": "Principles of lawfulness, purpose, proportionality, quality, accountability, security, transparency and confidentiality",
+          "g": "Principios y licitud",
+          "g_en": "Principles and lawfulness",
+          "desde": "2026-12-01",
+          "ref": "Ley 21.719 de protección de datos personales (Chile), que modifica la Ley 19.628",
+          "ref_en": "Personal Data Protection Law 21.719 (Chile), amending Law 19.628",
+          "nota": "Entra en vigor el 01-12-2026. El Boletín 18.623-07, en trámite en el Senado, propone aplazarla al 01-12-2027: revisa su estado.",
+          "nota_en": "In force from 01-12-2026. Bill 18.623-07, before the Senate, proposes postponing it to 01-12-2027: check its status."
+        },
+        {
+          "id": "base",
+          "code": "Bases de licitud",
+          "t": "Base de licitud de cada tratamiento, con consentimiento cuando corresponda",
+          "t_en": "Lawful basis for each processing, with consent where applicable",
+          "g": "Principios y licitud",
+          "g_en": "Principles and lawfulness",
+          "desde": "2026-12-01",
+          "ref": "Ley 21.719 de protección de datos personales (Chile), que modifica la Ley 19.628",
+          "ref_en": "Personal Data Protection Law 21.719 (Chile), amending Law 19.628"
+        },
+        {
+          "id": "info",
+          "code": "Deber de información",
+          "t": "Información a los titulares sobre el tratamiento y sus derechos",
+          "t_en": "Information to data subjects about the processing and their rights",
+          "g": "Principios y licitud",
+          "g_en": "Principles and lawfulness",
+          "desde": "2026-12-01",
+          "ref": "Ley 21.719 de protección de datos personales (Chile), que modifica la Ley 19.628",
+          "ref_en": "Personal Data Protection Law 21.719 (Chile), amending Law 19.628"
+        },
+        {
+          "id": "arco",
+          "code": "Derechos",
+          "t": "Derechos de acceso, rectificación, supresión, oposición, portabilidad y bloqueo, respondidos en plazo",
+          "t_en": "Rights of access, rectification, erasure, objection, portability and blocking, answered on time",
+          "g": "Derechos de los titulares",
+          "g_en": "Data subject rights",
+          "desde": "2026-12-01",
+          "ref": "Ley 21.719 de protección de datos personales (Chile), que modifica la Ley 19.628",
+          "ref_en": "Personal Data Protection Law 21.719 (Chile), amending Law 19.628"
+        },
+        {
+          "id": "seg",
+          "code": "Deber de seguridad",
+          "t": "Medidas de seguridad adecuadas al riesgo del tratamiento",
+          "t_en": "Security measures appropriate to the processing risk",
+          "g": "Seguridad y vulneraciones",
+          "g_en": "Security and breaches",
+          "desde": "2026-12-01",
+          "ref": "Ley 21.719 de protección de datos personales (Chile), que modifica la Ley 19.628",
+          "ref_en": "Personal Data Protection Law 21.719 (Chile), amending Law 19.628"
+        },
+        {
+          "id": "brecha",
+          "code": "Vulneraciones",
+          "t": "Notificación de vulneraciones a la Agencia y, cuando proceda, a los titulares",
+          "t_en": "Breach notification to the Agency and, where applicable, to data subjects",
+          "g": "Seguridad y vulneraciones",
+          "g_en": "Security and breaches",
+          "desde": "2026-12-01",
+          "ref": "Ley 21.719 de protección de datos personales (Chile), que modifica la Ley 19.628",
+          "ref_en": "Personal Data Protection Law 21.719 (Chile), amending Law 19.628",
+          "nota": "Por los medios más expeditos posibles y sin dilaciones indebidas, sin un plazo en horas en la ley. Si el incidente afecta además a un servicio esencial, corren en paralelo los plazos de la Ley 21.663.",
+          "nota_en": "Through the most expeditious means possible and without undue delay, with no deadline in hours in the law. If the incident also affects an essential service, the Law 21.663 deadlines run in parallel."
+        },
+        {
+          "id": "enc",
+          "code": "Encargados",
+          "t": "Tratamiento por encargados con contrato y garantías",
+          "t_en": "Processing by processors under contract with safeguards",
+          "g": "Responsabilidad proactiva",
+          "g_en": "Accountability",
+          "desde": "2026-12-01",
+          "ref": "Ley 21.719 de protección de datos personales (Chile), que modifica la Ley 19.628",
+          "ref_en": "Personal Data Protection Law 21.719 (Chile), amending Law 19.628"
+        },
+        {
+          "id": "transf",
+          "code": "Transferencias",
+          "t": "Transferencias internacionales con nivel adecuado o garantías",
+          "t_en": "International transfers with adequacy or safeguards",
+          "g": "Responsabilidad proactiva",
+          "g_en": "Accountability",
+          "desde": "2026-12-01",
+          "ref": "Ley 21.719 de protección de datos personales (Chile), que modifica la Ley 19.628",
+          "ref_en": "Personal Data Protection Law 21.719 (Chile), amending Law 19.628"
+        },
+        {
+          "id": "eipd",
+          "code": "Evaluación de impacto",
+          "t": "Evaluación de impacto cuando el tratamiento suponga un alto riesgo",
+          "t_en": "Impact assessment when processing is high risk",
+          "g": "Responsabilidad proactiva",
+          "g_en": "Accountability",
+          "desde": "2026-12-01",
+          "ref": "Ley 21.719 de protección de datos personales (Chile), que modifica la Ley 19.628",
+          "ref_en": "Personal Data Protection Law 21.719 (Chile), amending Law 19.628"
+        },
+        {
+          "id": "mpi",
+          "code": "Modelo de prevención",
+          "t": "Modelo de prevención de infracciones con delegado de protección de datos (voluntario, atenúa la responsabilidad)",
+          "t_en": "Infringement prevention model with a data protection officer (voluntary, mitigates liability)",
+          "g": "Responsabilidad proactiva",
+          "g_en": "Accountability",
+          "desde": "2026-12-01",
+          "ref": "Ley 21.719 de protección de datos personales (Chile), que modifica la Ley 19.628",
+          "ref_en": "Personal Data Protection Law 21.719 (Chile), amending Law 19.628"
+        }
+      ],
+      "datos": true
     }
   },
   "controls": [
@@ -5395,7 +5663,14 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [
+          {
+            "id": "8.sgsi",
+            "w": 1
+          }
+        ],
+        "cl21719": []
       },
       "t_en": "Security policy approved by management",
       "obj_en": "A single, formally approved policy setting objectives, legal framework, roles and commitment to improvement.",
@@ -5462,7 +5737,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Security roles, responsibilities and committee",
       "obj_en": "Designated security roles (information, service, security and system owners) and a committee with defined duties.",
@@ -5526,7 +5803,9 @@
             "id": "5",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Management commitment and oversight",
       "obj_en": "Management approves the measures, oversees their implementation and is accountable for compliance.",
@@ -5571,7 +5850,9 @@
             "id": "13",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Management body training",
       "obj_en": "Members of management receive regular training to identify risks and assess management practices.",
@@ -5625,7 +5906,9 @@
             "id": "9",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Security rules and procedures",
       "obj_en": "Written, approved usage rules and operating procedures known to those who apply them.",
@@ -5698,7 +5981,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Context, scope and interested parties",
       "obj_en": "The management system defines its scope from the organisation context and interested parties’ expectations.",
@@ -5751,7 +6036,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Management system objectives and planned changes",
       "obj_en": "Measurable objectives with a plan to achieve them, and planned changes to the management system.",
@@ -5815,7 +6102,14 @@
           }
         ],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [
+          {
+            "id": "8.reg",
+            "w": 1
+          }
+        ],
+        "cl21719": []
       },
       "t_en": "Documented information",
       "obj_en": "Required documents and records are created, approved, versioned and retained in a controlled way.",
@@ -5860,7 +6154,9 @@
             "id": "14",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Internal and external communication",
       "obj_en": "It is decided what is communicated about security, to whom, when and through which channel.",
@@ -5905,7 +6201,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Resources for security",
       "obj_en": "Enough budget, people and tools to run and improve the management system.",
@@ -5960,7 +6258,9 @@
             "id": "45",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Contact with authorities and interest groups",
       "obj_en": "Established channels with authorities, the reference CSIRT and specialist groups.",
@@ -6004,7 +6304,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "System and component authorisation process",
       "obj_en": "Nothing goes into production, gets connected or used without prior authorisation from its owner.",
@@ -6040,7 +6342,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Security in project management",
       "obj_en": "Security requirements are built into every project from the start.",
@@ -6078,7 +6382,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -6117,7 +6423,9 @@
           }
         ],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -6156,7 +6464,37 @@
             "id": "5",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
+      }
+    },
+    {
+      "id": "GOB-17",
+      "dom": "GOB",
+      "t": "Delegado de ciberseguridad",
+      "t_en": "Cybersecurity delegate",
+      "obj": "Una persona designada como delegado de ciberseguridad, contraparte de la autoridad nacional y responsable de coordinar el cumplimiento de las obligaciones legales de ciberseguridad.",
+      "obj_en": "A person designated as cybersecurity delegate, counterpart of the national authority and responsible for coordinating compliance with legal cybersecurity obligations.",
+      "ev": "Nombramiento · comunicación a la autoridad · informes",
+      "ev_en": "Appointment · notification to the authority · reports",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [],
+        "cl21663": [
+          {
+            "id": "8.del",
+            "w": 1
+          }
+        ],
+        "cl21719": []
       }
     },
     {
@@ -6249,7 +6587,14 @@
             "id": "8",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [
+          {
+            "id": "8.sgsi",
+            "w": 0.5
+          }
+        ],
+        "cl21719": []
       },
       "t_en": "Risk analysis and assessment",
       "obj_en": "A documented method (e.g. MAGERIT) applied periodically and after significant changes.",
@@ -6320,7 +6665,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Risk treatment and Statement of Applicability",
       "obj_en": "An approved treatment plan and a statement justifying which controls apply and which do not.",
@@ -6373,7 +6720,9 @@
             "id": "45",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Threat intelligence",
       "obj_en": "Information about threats is collected and analysed to anticipate them.",
@@ -6417,7 +6766,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Legal, regulatory and contractual requirements",
       "obj_en": "Inventory of applicable obligations and how each is met, including intellectual property.",
@@ -6458,7 +6809,18 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": [
+          {
+            "id": "seg",
+            "w": 1
+          },
+          {
+            "id": "pri",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Personal data protection",
       "obj_en": "Processing activities recorded and protected under GDPR and Spanish data protection law.",
@@ -6494,7 +6856,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Protection of records",
       "obj_en": "Records are protected against loss, alteration or improper access during their retention period.",
@@ -6549,7 +6913,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Metrics and effectiveness assessment",
       "obj_en": "Indicators that show whether measures work, with regular review of results.",
@@ -6613,7 +6979,14 @@
             "id": "6",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [
+          {
+            "id": "8.rev",
+            "w": 1
+          }
+        ],
+        "cl21719": []
       },
       "t_en": "Internal audit and independent review",
       "obj_en": "Audits planned and run by independent staff, protecting systems during testing.",
@@ -6663,7 +7036,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Management review",
       "obj_en": "Management periodically reviews the management system and decides improvements.",
@@ -6708,7 +7083,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Policy compliance monitoring",
       "obj_en": "Compliance with policies and rules is checked regularly and deviations are corrected.",
@@ -6775,7 +7152,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Nonconformities, corrective action and improvement",
       "obj_en": "Every nonconformity is analysed, corrected without delay and feeds continual improvement.",
@@ -6817,7 +7196,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -6848,7 +7229,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -6895,7 +7278,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Background verification",
       "obj_en": "Background checks proportionate to the role before joining.",
@@ -6948,7 +7333,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Duties, terms and confidentiality",
       "obj_en": "Security and confidentiality obligations signed by employees and contractors.",
@@ -7008,7 +7395,14 @@
             "id": "13",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [
+          {
+            "id": "8.cap",
+            "w": 1
+          }
+        ],
+        "cl21719": []
       },
       "t_en": "Awareness and cyber hygiene",
       "obj_en": "Regular awareness campaigns and basic digital hygiene practices.",
@@ -7072,7 +7466,14 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [
+          {
+            "id": "8.cap",
+            "w": 0.5
+          }
+        ],
+        "cl21719": []
       },
       "t_en": "Training and competence",
       "obj_en": "Role-specific training, with proven competence for technical staff.",
@@ -7108,7 +7509,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Disciplinary process",
       "obj_en": "A formal, known procedure to respond to security breaches.",
@@ -7157,7 +7560,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Termination, role change and return of assets",
       "obj_en": "Access removed and assets recovered when the relationship ends or changes.",
@@ -7200,7 +7605,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Remote working",
       "obj_en": "Security conditions for working away from the premises.",
@@ -7276,7 +7683,9 @@
             "id": "8",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Asset inventory",
       "obj_en": "An up-to-date inventory of information, systems and services, each with an owner.",
@@ -7333,7 +7742,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Information classification and labelling",
       "obj_en": "Information is classified by sensitivity and labelled accordingly.",
@@ -7373,7 +7784,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Acceptable use and handling of assets",
       "obj_en": "Clear rules for using and handling information and equipment.",
@@ -7434,7 +7847,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Information media",
       "obj_en": "Controlled custody, transport and use of media, including removable media.",
@@ -7492,7 +7907,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Secure erasure and destruction",
       "obj_en": "Information and equipment are erased or destroyed irrecoverably at end of life.",
@@ -7548,7 +7965,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Information transfer",
       "obj_en": "Rules and secure means to exchange information with third parties.",
@@ -7600,7 +8019,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Data masking and leakage prevention",
       "obj_en": "Sensitive data is masked where not needed and its egress is monitored.",
@@ -7650,7 +8071,9 @@
             "id": "12",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Backups",
       "obj_en": "Regular, protected backups with tested restores.",
@@ -7698,7 +8121,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Electronic signature and time stamps",
       "obj_en": "Qualified signature and time stamping where the law or the service requires them.",
@@ -7736,7 +8161,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -7782,7 +8209,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Identification and identity management",
       "obj_en": "Every user has a unique, traceable identity managed throughout its life cycle.",
@@ -7841,6 +8270,13 @@
             "id": "9",
             "w": 0.5
           }
+        ],
+        "cl21663": [],
+        "cl21719": [
+          {
+            "id": "seg",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Access control and least privilege",
@@ -7886,7 +8322,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Access rights management and review",
       "obj_en": "Permissions are granted, changed and reviewed periodically with approval.",
@@ -7927,7 +8365,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Segregation of duties",
       "obj_en": "No single person controls a critical operation end to end.",
@@ -7979,7 +8419,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Privileged accounts and administration systems",
       "obj_en": "Separate, monitored administration accounts used from dedicated systems.",
@@ -8041,7 +8483,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Secure authentication",
       "obj_en": "Authentication proportionate to risk and well-protected credentials.",
@@ -8095,7 +8539,9 @@
             "id": "9",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Multi-factor authentication",
       "obj_en": "Second factor for remote, privileged and exposed-service access.",
@@ -8130,7 +8576,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Access to source code",
       "obj_en": "Source code and development tools have restricted, logged access.",
@@ -8176,7 +8624,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Secure configuration and hardening",
       "obj_en": "Systems are deployed with reference security configurations.",
@@ -8221,7 +8671,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Configuration management",
       "obj_en": "Configuration is kept under control and drift is detected.",
@@ -8280,7 +8732,9 @@
             "id": "9",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Change management",
       "obj_en": "Changes are assessed, approved, tested and recorded before being applied.",
@@ -8347,7 +8801,9 @@
             "id": "9",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Maintenance and security patching",
       "obj_en": "Updates and maintenance applied within defined timeframes by criticality.",
@@ -8426,7 +8882,9 @@
             "id": "25",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Vulnerability handling and disclosure",
       "obj_en": "Vulnerabilities are detected, prioritised and fixed, with a channel for external reports.",
@@ -8471,7 +8929,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Protection against malicious code",
       "obj_en": "Antimalware or EDR on every device, centrally managed.",
@@ -8524,7 +8984,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Software installation in production",
       "obj_en": "Only authorised software, installed by authorised staff.",
@@ -8579,7 +9041,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Activity logging",
       "obj_en": "User and system event logs, protected and retained.",
@@ -8619,7 +9083,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Clock synchronisation",
       "obj_en": "All systems use a common, reliable time source.",
@@ -8694,7 +9160,9 @@
             "id": "10",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Monitoring and intrusion detection",
       "obj_en": "Continuous monitoring of networks and systems to detect anomalous behaviour.",
@@ -8744,7 +9212,9 @@
             "id": "7",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Capacity management and DoS protection",
       "obj_en": "Sized capacity and measures against saturation and DoS attacks.",
@@ -8787,7 +9257,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "User endpoint devices",
       "obj_en": "Laptops, phones and other devices protected, encrypted and managed.",
@@ -8826,7 +9298,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Clear desk and session locking",
       "obj_en": "No papers or unattended screens with sensitive information.",
@@ -8893,6 +9367,13 @@
             "id": "9",
             "w": 0.5
           }
+        ],
+        "cl21663": [],
+        "cl21719": [
+          {
+            "id": "seg",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Cryptography and key management",
@@ -8932,7 +9413,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Email and web browsing protection",
       "obj_en": "Email and web filtering against malware, phishing and malicious sites.",
@@ -8972,7 +9455,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Secure architecture and certified components",
       "obj_en": "Documented architecture with security principles and qualified products.",
@@ -9034,7 +9519,9 @@
             "id": "9",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Network security and perimeter",
       "obj_en": "Network protected at its perimeter and network services managed securely.",
@@ -9091,7 +9578,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Network and flow segregation",
       "obj_en": "Networks separated by function and trust level, with controlled flows.",
@@ -9148,7 +9637,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Communications protection",
       "obj_en": "Encryption and authentication of communications leaving the perimeter.",
@@ -9188,7 +9679,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "System interconnection",
       "obj_en": "Each connection with third-party systems is authorised and documented.",
@@ -9228,7 +9721,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Secure and emergency communications",
       "obj_en": "Encrypted voice, video and messaging plus an alternative channel for emergencies.",
@@ -9296,7 +9791,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Secure development life cycle",
       "obj_en": "A development method with security in every phase and secure coding.",
@@ -9346,7 +9843,9 @@
           }
         ],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Application security requirements",
       "obj_en": "Security requirements defined and approved before developing or buying.",
@@ -9419,7 +9918,14 @@
             "id": "25",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [
+          {
+            "id": "8.rev",
+            "w": 0.5
+          }
+        ],
+        "cl21719": []
       },
       "t_en": "Security testing and acceptance",
       "obj_en": "Security tests before go-live, without real data.",
@@ -9454,7 +9960,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Environment separation",
       "obj_en": "Development, test and production separated with different access.",
@@ -9494,7 +10002,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Outsourced development",
       "obj_en": "Outsourced development meets the same requirements and is supervised.",
@@ -9552,7 +10062,9 @@
             "id": "28.4",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Acquisition of ICT products and services",
       "obj_en": "Security criteria when buying ICT products and services.",
@@ -9592,7 +10104,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Web service and application protection",
       "obj_en": "Web applications protected and audited before exposure.",
@@ -9636,7 +10150,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -9680,7 +10196,9 @@
             "w": 0.5
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -9723,7 +10241,9 @@
           }
         ],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -9770,7 +10290,9 @@
           }
         ],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -9796,7 +10318,9 @@
           }
         ],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -9831,7 +10355,9 @@
           }
         ],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -9919,7 +10445,9 @@
             "id": "30",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Security in supplier relationships",
       "obj_en": "Security requirements included in contracts and service level agreements.",
@@ -9973,7 +10501,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Monitoring of supplier services",
       "obj_en": "Contracted services are supervised, reviewed and their changes managed.",
@@ -10041,7 +10571,9 @@
             "id": "28.1",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "ICT supply chain security",
       "obj_en": "Risks introduced by suppliers and their subcontractors are assessed.",
@@ -10095,7 +10627,9 @@
             "id": "28.3",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Supplier directory",
       "obj_en": "Up-to-date register of suppliers and service providers with their criticality.",
@@ -10131,7 +10665,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Cloud services",
       "obj_en": "Acquisition, use and exit of cloud services with security requirements.",
@@ -10160,7 +10696,9 @@
             "id": "28.3",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -10195,7 +10733,9 @@
             "id": "29",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -10255,7 +10795,14 @@
             "id": "17",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [
+          {
+            "id": "7",
+            "w": 1
+          }
+        ],
+        "cl21719": []
       },
       "t_en": "Incident management plan",
       "obj_en": "Incident management procedure with roles, phases and criteria.",
@@ -10301,7 +10848,14 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [
+          {
+            "id": "7",
+            "w": 0.5
+          }
+        ],
+        "cl21719": []
       },
       "t_en": "Internal event reporting",
       "obj_en": "Everyone knows how and to whom to report a security event.",
@@ -10380,7 +10934,9 @@
             "id": "18",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Event assessment and classification",
       "obj_en": "Criteria to decide whether an event is an incident and how severe it is.",
@@ -10451,7 +11007,18 @@
             "id": "17",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [
+          {
+            "id": "7",
+            "w": 0.5
+          },
+          {
+            "id": "8.imp",
+            "w": 1
+          }
+        ],
+        "cl21719": []
       },
       "t_en": "Incident response",
       "obj_en": "Containment, eradication and recovery following tested procedures.",
@@ -10514,7 +11081,9 @@
             "id": "13",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Lessons learned",
       "obj_en": "Post-incident review of every relevant incident with improvement actions.",
@@ -10567,7 +11136,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Collection of evidence",
       "obj_en": "Evidence collected and preserved so it holds up in court.",
@@ -10657,7 +11228,14 @@
             "id": "19",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [
+          {
+            "id": "9",
+            "w": 0.5
+          }
+        ],
+        "cl21719": []
       },
       "t_en": "Reporting to the authority on time",
       "obj_en": "Early warning in 24 h, notification in 72 h and final report in one month for significant incidents.",
@@ -10710,7 +11288,14 @@
             "id": "19",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [
+          {
+            "id": "8.inf",
+            "w": 1
+          }
+        ],
+        "cl21719": []
       },
       "t_en": "Communication to affected customers and users",
       "obj_en": "Notice to recipients of the affected services and of measures they can take.",
@@ -10749,7 +11334,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -10785,7 +11372,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -10816,7 +11405,9 @@
           }
         ],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -10847,7 +11438,42 @@
             "id": "19",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
+      }
+    },
+    {
+      "id": "INC-13",
+      "dom": "INC",
+      "t": "Reporte de incidentes al CSIRT Nacional de Chile",
+      "t_en": "Incident reporting to Chile’s National CSIRT",
+      "obj": "Los incidentes con efectos significativos se reportan al CSIRT Nacional de la ANCI en los plazos de la Ley 21.663: alerta temprana en 3 h, segundo reporte en 72 h (24 h para operadores de importancia vital) e informe final en 15 días.",
+      "obj_en": "Incidents with significant effects are reported to ANCI’s National CSIRT within the Law 21.663 deadlines: early warning within 3 h, second report within 72 h (24 h for operators of vital importance) and final report within 15 days.",
+      "ev": "Procedimiento de reporte · alta en la plataforma de la ANCI · registro de reportes",
+      "ev_en": "Reporting procedure · registration on the ANCI platform · reporting log",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [
+          {
+            "id": "23.a",
+            "w": 0
+          }
+        ],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [],
+        "cl21663": [
+          {
+            "id": "9",
+            "w": 1
+          }
+        ],
+        "cl21719": []
       }
     },
     {
@@ -10906,7 +11532,9 @@
             "id": "8",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Impact analysis",
       "obj_en": "Critical processes, their maximum tolerable downtime and dependencies are identified.",
@@ -10993,7 +11621,14 @@
             "id": "11",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [
+          {
+            "id": "8.cont",
+            "w": 1
+          }
+        ],
+        "cl21719": []
       },
       "t_en": "Continuity and recovery plan",
       "obj_en": "Approved, known business continuity and disaster recovery plan.",
@@ -11043,7 +11678,18 @@
             "id": "24",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [
+          {
+            "id": "8.cont",
+            "w": 0.5
+          },
+          {
+            "id": "8.rev",
+            "w": 0.5
+          }
+        ],
+        "cl21719": []
       },
       "t_en": "Continuity testing",
       "obj_en": "The plan is tested regularly and corrected with what is learned.",
@@ -11105,7 +11751,9 @@
             "id": "12",
             "w": 0.5
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Redundancy and alternative means",
       "obj_en": "Alternative facilities, systems and communications for critical services.",
@@ -11159,7 +11807,9 @@
             "id": "14",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Crisis management",
       "obj_en": "Crisis committee, activation criteria and communication during the crisis.",
@@ -11188,7 +11838,9 @@
             "id": "24",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -11214,7 +11866,9 @@
             "id": "26",
             "w": 1
           }
-        ]
+        ],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -11268,7 +11922,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Secure areas and physical access control",
       "obj_en": "Defined perimeters with controlled and identified physical access.",
@@ -11313,7 +11969,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Physical security monitoring",
       "obj_en": "Premises are continuously monitored against unauthorised access.",
@@ -11370,7 +12028,9 @@
             "w": 1
           }
         ],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Protection against environmental threats",
       "obj_en": "Rooms conditioned and protected against fire, water and temperature.",
@@ -11414,7 +12074,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Utilities and cabling",
       "obj_en": "Guaranteed power and communications, protected cabling.",
@@ -11462,7 +12124,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Equipment entry and exit",
       "obj_en": "Equipment entering and leaving is logged and protected off-premises.",
@@ -11515,7 +12179,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "AI policy",
       "obj_en": "An approved AI policy, aligned with other policies and reviewed periodically.",
@@ -11563,7 +12229,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "AI roles and concern reporting",
       "obj_en": "Responsibilities defined across the life cycle and a channel to raise concerns.",
@@ -11615,7 +12283,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "AI system resources",
       "obj_en": "Data, tools, compute and people documented for each AI system.",
@@ -11681,7 +12351,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "AI risk management",
       "obj_en": "AI-specific risks (bias, robustness, transparency, misuse) assessed and treated.",
@@ -11732,7 +12404,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "AI system impact assessment",
       "obj_en": "Impact on people, groups and society assessed and documented before deployment.",
@@ -11772,7 +12446,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Responsible AI development",
       "obj_en": "Objectives and processes that guide responsible design and development.",
@@ -11828,7 +12504,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "AI system specification and documentation",
       "obj_en": "Requirements, design and technical documentation maintained across the life cycle.",
@@ -11877,7 +12555,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Verification, validation and deployment",
       "obj_en": "Model validation criteria and a controlled deployment plan.",
@@ -11930,7 +12610,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "AI system operation and monitoring",
       "obj_en": "Production monitoring of performance, drift and errors.",
@@ -11975,7 +12657,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "AI system event logs",
       "obj_en": "Logging of inputs, decisions and relevant events for traceability.",
@@ -12036,7 +12720,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Data governance for AI",
       "obj_en": "Acquisition, quality, provenance and preparation of data controlled and documented.",
@@ -12087,7 +12773,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Information for users and interested parties",
       "obj_en": "User documentation and transparent communication about the AI system.",
@@ -12130,7 +12818,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Responsible and intended use",
       "obj_en": "Processes and objectives that keep use of the system within its intended scope.",
@@ -12183,7 +12873,9 @@
         "ria": [],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       },
       "t_en": "Third parties and customers in the AI chain",
       "obj_en": "Responsibilities shared with suppliers and customers of AI components or services.",
@@ -12221,7 +12913,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -12252,7 +12946,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -12287,7 +12983,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -12330,7 +13028,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -12365,7 +13065,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -12408,7 +13110,9 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
       }
     },
     {
@@ -12443,7 +13147,334 @@
         ],
         "cra": [],
         "nist": [],
-        "dora": []
+        "dora": [],
+        "cl21663": [],
+        "cl21719": []
+      }
+    },
+    {
+      "id": "PRI-01",
+      "dom": "PRI",
+      "t": "Política y aviso de privacidad",
+      "t_en": "Privacy policy and notice",
+      "obj": "Una política de tratamiento de datos personales y avisos de privacidad claros en cada punto de recogida: qué datos, para qué, con qué base, a quién se comunican y cómo ejercer los derechos.",
+      "obj_en": "A personal data processing policy and clear privacy notices at every collection point: what data, for what purpose, on what basis, to whom it is disclosed and how to exercise rights.",
+      "ev": "Política de tratamiento · avisos por canal · registro de versiones",
+      "ev_en": "Processing policy · notices per channel · version log",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "A5.34",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [],
+        "cl21663": [],
+        "cl21719": [
+          {
+            "id": "info",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRI-02",
+      "dom": "PRI",
+      "t": "Base de licitud y consentimiento",
+      "t_en": "Lawful basis and consent",
+      "obj": "Cada tratamiento tiene identificada su base de licitud; cuando es el consentimiento, se obtiene de forma informada, específica y demostrable, y se puede retirar con la misma facilidad.",
+      "obj_en": "Every processing has its lawful basis identified; when it is consent, it is obtained in an informed, specific and demonstrable way and can be withdrawn just as easily.",
+      "ev": "Inventario de bases de licitud · registros de consentimiento · mecanismo de retirada",
+      "ev_en": "Lawful basis inventory · consent records · withdrawal mechanism",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "A5.34",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [],
+        "cl21663": [],
+        "cl21719": [
+          {
+            "id": "base",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRI-03",
+      "dom": "PRI",
+      "t": "Atención de los derechos de los titulares en plazo",
+      "t_en": "Handling data subject rights on time",
+      "obj": "Un canal y un procedimiento para recibir, verificar y responder las solicitudes de acceso, rectificación, supresión, oposición, portabilidad y demás derechos en los plazos de cada ley.",
+      "obj_en": "A channel and a procedure to receive, verify and answer requests for access, rectification, erasure, objection, portability and other rights within each law’s deadlines.",
+      "ev": "Procedimiento de derechos · registro de solicitudes con fechas · plantillas de respuesta",
+      "ev_en": "Rights procedure · request log with dates · response templates",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "A5.34",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [],
+        "cl21663": [],
+        "cl21719": [
+          {
+            "id": "arco",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRI-04",
+      "dom": "PRI",
+      "t": "Inventario de tratamientos y registro ante la autoridad",
+      "t_en": "Processing inventory and registration with the authority",
+      "obj": "Un inventario de tratamientos y bases de datos al día y, donde la ley lo exige, su inscripción o actualización ante la autoridad de protección de datos.",
+      "obj_en": "An up-to-date inventory of processing activities and databases and, where the law requires it, their registration or update with the data protection authority.",
+      "ev": "Inventario de tratamientos · constancias de inscripción · revisión anual",
+      "ev_en": "Processing inventory · registration records · annual review",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "A5.34",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [],
+        "cl21663": [],
+        "cl21719": [
+          {
+            "id": "pri",
+            "w": 0.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRI-05",
+      "dom": "PRI",
+      "t": "Encargados del tratamiento con contrato",
+      "t_en": "Processors under contract",
+      "obj": "Quien trata datos por cuenta de la organización lo hace con un contrato que fija instrucciones, confidencialidad, seguridad, subencargos y devolución o borrado al terminar.",
+      "obj_en": "Whoever processes data on the organisation’s behalf does so under a contract setting instructions, confidentiality, security, sub-processing and return or deletion at the end.",
+      "ev": "Contratos de encargo · inventario de encargados · revisiones",
+      "ev_en": "Processing agreements · processor inventory · reviews",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "A5.34",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [],
+        "cl21663": [],
+        "cl21719": [
+          {
+            "id": "enc",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRI-06",
+      "dom": "PRI",
+      "t": "Transferencias internacionales de datos",
+      "t_en": "International data transfers",
+      "obj": "Las transferencias de datos personales a otros países se identifican y se hacen a destinos con nivel adecuado o con garantías (cláusulas, normas corporativas o consentimiento cuando la ley lo admite).",
+      "obj_en": "Personal data transfers to other countries are identified and made to destinations with adequate protection or with safeguards (clauses, corporate rules or consent where the law allows).",
+      "ev": "Mapa de transferencias · cláusulas firmadas · análisis de destino",
+      "ev_en": "Transfer map · signed clauses · destination analysis",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "A5.34",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [],
+        "cl21663": [],
+        "cl21719": [
+          {
+            "id": "transf",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRI-07",
+      "dom": "PRI",
+      "t": "Notificación de vulneraciones de datos personales",
+      "t_en": "Personal data breach notification",
+      "obj": "Las vulneraciones de seguridad que afectan a datos personales se registran, se evalúan y se notifican a la autoridad de protección de datos y, cuando lo exige la ley, a los titulares, en los plazos de cada país.",
+      "obj_en": "Security breaches affecting personal data are recorded, assessed and notified to the data protection authority and, where the law requires it, to data subjects, within each country’s deadlines.",
+      "ev": "Procedimiento de brechas · registro de vulneraciones · notificaciones enviadas",
+      "ev_en": "Breach procedure · breach log · notifications sent",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "A5.24",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [],
+        "cl21663": [],
+        "cl21719": [
+          {
+            "id": "brecha",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRI-08",
+      "dom": "PRI",
+      "t": "Delegado u oficial de protección de datos",
+      "t_en": "Data protection officer",
+      "obj": "Una persona designada, con independencia y recursos, supervisa el cumplimiento, asesora y es el punto de contacto con la autoridad y los titulares.",
+      "obj_en": "A designated person, with independence and resources, monitors compliance, advises and is the contact point for the authority and data subjects.",
+      "ev": "Nombramiento · funciones · informes al órgano de dirección",
+      "ev_en": "Appointment · duties · reports to management",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [],
+        "cl21663": [],
+        "cl21719": [
+          {
+            "id": "mpi",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRI-09",
+      "dom": "PRI",
+      "t": "Evaluación de impacto en protección de datos",
+      "t_en": "Data protection impact assessment",
+      "obj": "Antes de un tratamiento de alto riesgo (datos sensibles a gran escala, perfiles, nuevas tecnologías) se evalúa su necesidad, sus riesgos para las personas y las medidas para mitigarlos.",
+      "obj_en": "Before high-risk processing (large-scale sensitive data, profiling, new technologies) its necessity, risks to people and mitigation measures are assessed.",
+      "ev": "Evaluaciones de impacto · criterios de alto riesgo · consultas a la autoridad",
+      "ev_en": "Impact assessments · high-risk criteria · authority consultations",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "A5.34",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [],
+        "cl21663": [],
+        "cl21719": [
+          {
+            "id": "eipd",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRI-10",
+      "dom": "PRI",
+      "t": "Finalidad, minimización y conservación de los datos",
+      "t_en": "Purpose, minimisation and retention",
+      "obj": "Solo se recogen los datos necesarios para finalidades determinadas, se mantienen exactos y se conservan el tiempo justo, con borrado o anonimización al terminar.",
+      "obj_en": "Only the data needed for specified purposes are collected, kept accurate and retained only as long as necessary, with deletion or anonymisation afterwards.",
+      "ev": "Calendario de conservación · revisiones de minimización · registros de borrado",
+      "ev_en": "Retention schedule · minimisation reviews · deletion records",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "A5.34",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [],
+        "cl21663": [],
+        "cl21719": [
+          {
+            "id": "pri",
+            "w": 1
+          }
+        ]
       }
     }
   ]

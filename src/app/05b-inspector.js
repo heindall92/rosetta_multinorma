@@ -16,7 +16,7 @@ function inspHead(eyebrow, title, ic, fwc = '') {
 function inspUc(id) {
   const c = IX.ucMap[id]; const d = state.controles[id]; const cc = calc.controles[id];
   const g = prio.find((p) => p.id === id); const rank = g ? prio.indexOf(g) + 1 : 0;
-  const maps = FW.map((f) => {
+  const maps = FWV.map((f) => {
     const ms = c.maps[f].filter((m) => m.w > 0 || ws.settings.mostrarRelaciones); if (!ms.length) return '';
     return `<div>${fwTag(f, !onFw(f))}<div class="chips">${ms.map((m) => reqChip(f, m.id, { fuerza: fuerzaDe(m.w), cov: onFw(f) ? reqRow(f, m.id).estado : null })).join('')}</div></div>`;
   }).join('');
@@ -45,7 +45,7 @@ function inspReq(f, id) {
   const ctl = eq.controles.filter((l) => l.w > 0 || showRel);
   const ex = cov.estado === 'excluido'; const canEx = onFw(f) && cov.estado !== 'no-exigido' && E.excluible(f, id);
   const ens = f === 'ens' ? `<dl class="kv small"><dt>${esc(t('dims'))}</dt><dd>${esc(r.dims)}</dd><dt>${esc(t('exig'))}</dt><dd class="mono">B ${esc(r.bajo)} · M ${esc(r.medio)} · A ${esc(r.alto)}</dd>${state.alcance.ens.on ? `<dt>${esc(t('inYourSys'))}</dt><dd>${esc(t('level'))} ${esc(t('lv.' + cov.nivel))} · <code>${esc(exigL(cov.exigencia))}</code></dd>` : ''}${ccnFicha(id)}<dt>${esc(t('classIso'))}</dt><dd>${esc(r.ref || '—')}</dd></dl>${ccnAviso(f, id)}` : '';
-  const eqs = FW.filter((g) => g !== f).map((g) => {
+  const eqs = FWV.filter((g) => g !== f).map((g) => {
     const rows = eq.otras[g].filter((x) => x.fuerza !== 'relacionado' || showRel);
     return `<div>${fwTag(g, !onFw(g))}<div class="chips">${rows.length ? rows.map((x) => reqChip(g, x.id, { fuerza: x.fuerza, cov: onFw(g) ? reqRow(g, x.id).estado : null, origen: ccnTxt(f, g, x) })).join('') : `<span class="tiny muted">${esc(g === 'iso42001' || f === 'iso42001' ? t('noEqAi') : t('noEq'))}</span>`}</div></div>`;
   }).join('');
@@ -58,7 +58,7 @@ function inspReq(f, id) {
   <div class="blk"><h4>${esc(t('equivalents'))}</h4><div class="maps">${eqs}</div></div>
   ${canEx ? `<div class="blk"><h4>${esc(t('exclusion'))}</h4>
     <label class="switch-l"><span class="switch"><input type="checkbox" id="ex-sw" data-exsw="1" data-fw="${f}" data-id="${esc(id)}"${ex ? ' checked' : ''}><span></span></span>${esc(t('excludeIt'))}</label>
-    ${ex ? `<label class="fld">${esc(t('justification'))}<input type="text" id="ex-${f}-${esc(id)}" data-exfw="${f}" data-exid="${esc(id)}" value="${esc(cov.justificacion || '')}" placeholder="${esc(t('justPh'))}"></label>` : ''}</div>` : onFw(f) && !E.excluible(f, id) ? `<div class="blk"><h4>${esc(t('exclusion'))}</h4><p class="hint">${esc(t({ partis: 'notExcludablePartis', ria: 'notExcludableRia', cra: 'notExcludableCra', dora: 'notExcludableDora' }[f] || 'notExcludable'))}</p></div>` : ''}
+    ${ex ? `<label class="fld">${esc(t('justification'))}<input type="text" id="ex-${f}-${esc(id)}" data-exfw="${f}" data-exid="${esc(id)}" value="${esc(cov.justificacion || '')}" placeholder="${esc(t('justPh'))}"></label>` : ''}</div>` : onFw(f) && !E.excluible(f, id) ? `<div class="blk"><h4>${esc(t('exclusion'))}</h4><p class="hint">${esc(t({ partis: 'notExcludablePartis', ria: 'notExcludableRia', cra: 'notExcludableCra', dora: 'notExcludableDora', cl21663: 'notExcludableLey', cl21719: 'notExcludableLey' }[f] || 'notExcludable'))}</p></div>` : ''}
   <button type="button" class="btn" data-act="tr-center" data-fw="${f}" data-id="${esc(id)}">${icon('waypoints', 16)}${esc(t('openPrism'))}</button>`;
 }
 

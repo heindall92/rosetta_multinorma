@@ -67,7 +67,7 @@ function informeMd() {
 /* «Marcos aplicables y por qué»: el primer folio que pide un auditor */
 function aplicabilidadFilas() {
   const prop = propuesta();
-  return FW.map((f) => { const x = prop.marcos[f] || { estado: 'voluntaria', base: '', motivo: '' }; const a = state.alcance[f];
+  return FWV.map((f) => { const x = prop.marcos[f] || { estado: 'voluntaria', base: '', motivo: '' }; const a = state.alcance[f];
     return { f, nombre: fwLbl(f), estado: t('prEstado.' + x.estado), base: x.base, motivo: x.motivo, on: !!a.on, decision: a.motivo || '' }; });
 }
 function aplicabilidadMd() {
@@ -131,7 +131,7 @@ async function exportXlsx() {
       return w;
     };
     const k = calc.kpi; const p = state.proyecto; const nPctRows = [];
-    const res = [[tx('MAPA MULTINORMA', 'MULTI-FRAMEWORK MAP') + ' · ' + FW.map((f) => fwLbl(f)).join(' · ')], [`${p.organizacion} · ${p.descripcion || ''} · ${today()} · ${firma()}`],
+    const res = [[tx('MAPA MULTINORMA', 'MULTI-FRAMEWORK MAP') + ' · ' + FWV.map((f) => fwLbl(f)).join(' · ')], [`${p.organizacion} · ${p.descripcion || ''} · ${today()} · ${firma()}`],
       [tx('Norma', 'Framework'), tx('En alcance', 'In scope'), tx('Requisitos', 'Requirements'), tx('Aplicables', 'Applicable'), t('cov.cubierto'), t('cov.parcial'), t('cov.brecha'), t('cov.excluido'), t('cov.no-exigido'), tx('Cobertura', 'Coverage')],
       ...FW.map((f) => { const w = calc.fw[f]; return [fwLong(f), w.on ? yes() : no(), w.total, w.aplicables, w.cubiertos, w.parciales, w.brechas, w.excluidos, w.noExigidos, w.grado]; }),
       [], [tx('Indicador', 'Indicator'), tx('Valor', 'Value')]];
@@ -145,7 +145,7 @@ async function exportXlsx() {
     res.push([tx('Solapamiento (si cumples la fila → cobertura de la columna)', 'Overlap (if you comply with the row → coverage of the column)'), ...FW.map((f) => fwLbl(f))], ...FW.map((a) => [fwLbl(a), ...FW.map((b) => (a === b ? '—' : SOLAPE[a][b].pct))]));
     const wsR = sheet(res, [48, 12, 12, 12, 12, 12, 12, 12, 12, 12], 2, { autofilter: false, pctCol: [9] });
     for (const R of nPctRows) { const ref = X.utils.encode_cell({ r: R, c: 1 }); if (wsR[ref]) wsR[ref].z = '0%'; }
-    for (let R = ovStart; R < res.length; R++) for (let Cc = 1; Cc <= FW.length; Cc++) { const ref = X.utils.encode_cell({ r: R, c: Cc }); if (wsR[ref] && typeof wsR[ref].v === 'number') wsR[ref].z = '0%'; }
+    for (let R = ovStart; R < res.length; R++) for (let Cc = 1; Cc <= FWV.length; Cc++) { const ref = X.utils.encode_cell({ r: R, c: Cc }); if (wsR[ref] && typeof wsR[ref].v === 'number') wsR[ref].z = '0%'; }
     X.utils.book_append_sheet(wb, wsR, tx('Resumen', 'Summary'));
     X.utils.book_append_sheet(wb, sheet([[tx('Marco', 'Framework'), t('proposal'), t('basis'), tx('Motivo de la propuesta', 'Reason for the proposal'), tx('En alcance', 'In scope'), t('prDecision')],
       ...aplicabilidadFilas().map((r) => [r.nombre, r.estado, r.base, r.motivo, r.on ? yes() : no(), r.decision])], [26, 22, 44, 70, 11, 44], 0, { autofilter: false }), tx('Aplicabilidad', 'Applicability'));
@@ -153,13 +153,13 @@ async function exportXlsx() {
     X.utils.book_append_sheet(wb, sheet([['ID', tx('Dominio', 'Domain'), t('control'), t('objective'), tx('Estado', 'State'), t('owner'), t('evidence'), t('lastRev'), ...FW.map((f) => fwLbl(f)), tx('Normas del alcance', 'Frameworks in scope'), tx('Prioridad', 'Priority')],
       ...CAT.controls.map((c) => { const d = state.controles[c.id]; const cc = calc.controles[c.id]; return [c.id, dT(c.dom), cT(c.id), tt(c, 'obj'), estL(d.estado), d.responsable, d.evidencias, d.revision, ...FW.map((f) => mapsTxt(c, f)), cc.normas.map((f) => fwLbl(f)).join(', '), rank[c.id] || '']; })],
       [9, 22, 36, 50, 12, 24, 50, 12, ...FW.map(() => 22), 26, 9], 0, { fillCol: [4], freeze: { xSplit: 3, ySplit: 1 } }), tx('Controles unificados', 'Unified controls'));
-    const sheetName = { ens: 'SoA ENS', iso27001: 'SoA ISO 27001', nis2: 'NIS2', iso42001: 'SoA ISO 42001', partis: 'SoA Part-IS', ria: tx('RIA', 'AI Act'), cra: 'CRA', nist: 'NIST CSF', dora: 'DORA' };
+    const sheetName = { ens: 'SoA ENS', iso27001: 'SoA ISO 27001', nis2: 'NIS2', iso42001: 'SoA ISO 42001', partis: 'SoA Part-IS', ria: tx('RIA', 'AI Act'), cra: 'CRA', nist: 'NIST CSF', dora: 'DORA', cl21663: 'CL Ley 21.663', cl21719: 'CL Ley 21.719' };
     const usados = new Set(['Resumen', 'Summary', 'Aplicabilidad', 'Applicability']);
-    for (const f of FW) if (!sheetName[f]) { // marcos propios: nombre válido para Excel (sin : \ / ? * [ ], 31 caracteres) y único
+    for (const f of FWV) if (!sheetName[f]) { // marcos propios: nombre válido para Excel (sin : \ / ? * [ ], 31 caracteres) y único
       let n = fwLbl(f).replace(/[:\\/?*[\]]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 22) || 'Marco'; let k = 2; const b = n;
       while (usados.has(n)) n = `${b} ${k++}`; usados.add(n); sheetName[f] = n;
     }
-    for (const f of FW) {
+    for (const f of FWV) {
       const rows = calc.req[f].map((r) => {
         const aplica = r.estado === 'no-exigido' ? tx('NO EXIGIDO', 'NOT REQUIRED') : r.estado === 'excluido' ? no() : yes();
         const just = r.estado === 'excluido' ? r.justificacion || `(${t('unjustified')})` : r.estado === 'no-exigido' ? noExigidoTxt(f, r) : tx(`Aplica. Soportado por ${IX.reqUcs[f][r.id].map((l) => l.uc).join(', ')}.`, `Applies. Supported by ${IX.reqUcs[f][r.id].map((l) => l.uc).join(', ')}.`);
@@ -171,7 +171,7 @@ async function exportXlsx() {
       X.utils.book_append_sheet(wb, sheet([hd, ...rows], [10, 44, 26, ...(f === 'ens' ? [10, 18] : []), 12, 50, 12, 10, 50, 60], 0, { fillCol: [5 + off], pctCol: [6 + off], freeze: { xSplit: 2, ySplit: 1 } }), sheetName[f] + (calc.fw[f].on ? '' : tx(' (fuera)', ' (out)')));
     }
     X.utils.book_append_sheet(wb, sheet([[t('control'), t('description'), ...FW.map((f) => (f === 'nis2' ? tx('NIS2 (art. y RE 2024/2690)', 'NIS2 (art. and IR 2024/2690)') : fwLbl(f))), tx('Relaciones informativas', 'Informative relations')],
-      ...CAT.controls.map((c) => [c.id, cT(c.id), ...FW.map((f) => mapsTxt(c, f)), FW.map((f) => c.maps[f].filter((m) => m.w === 0).map((m) => `${fwLbl(f)} ${reqCode(f, m.id)}`).join(', ')).filter(Boolean).join(' · ')])],
+      ...CAT.controls.map((c) => [c.id, cT(c.id), ...FW.map((f) => mapsTxt(c, f)), FWV.map((f) => c.maps[f].filter((m) => m.w === 0).map((m) => `${fwLbl(f)} ${reqCode(f, m.id)}`).join(', ')).filter(Boolean).join(' · ')])],
       [9, 40, ...FW.map(() => 28), 36], 0, { freeze: { xSplit: 2, ySplit: 1 } }), tx('Matriz de correspondencias', 'Crosswalk'));
     X.utils.book_append_sheet(wb, sheet([[t('rule'), t('severity'), tx('Ámbito', 'Scope'), tx('Hallazgo', 'Finding'), tx('Detalle', 'Detail'), tx('Acción recomendada', 'Recommended action'), tx('Referencia', 'Reference')], ...hall.map((h) => [h.id, t('sev.' + h.sev), h.ambito, h.titulo, h.detalle, h.accion, h.ref])], [9, 10, 18, 44, 70, 60, 26], 0, { fillCol: [1] }), tx('Coherencia', 'Consistency'));
     X.utils.book_append_sheet(wb, sheet([[tx('Puesto', 'Rank'), tx('Prioridad', 'Priority'), t('control'), tx('Acción', 'Action'), tx('Estado del control', 'Control state'), t('fws'), tx('Requisitos que cubre', 'Requirements covered'), t('owner'), t('due'), tx('Estado', 'State')],

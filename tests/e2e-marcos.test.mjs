@@ -44,7 +44,7 @@ test('caso de aviación: Part-IS en el mapa, con su prefijo, su matiz y sin excl
   const rings = await page.locator('.wheel:not(.hero) .ring-lbl').allTextContents();
   assert.deepEqual(rings, ['27001', 'NIS2', 'Part-IS'], 'el mapa circular solo dibuja las normas del alcance');
   const leyenda = await page.locator('.wheel-legend').innerText();
-  assert.match(leyenda, /Part-IS\s*obligatoria/); assert.match(leyenda, /27001\s*voluntaria/); const fuera = (await R(() => window.__ROSETTA__.FW.length)) - 3; assert.match(leyenda, new RegExp(`\\+${fuera} fuera del alcance`));
+  assert.match(leyenda, /Part-IS\s*obligatoria/); assert.match(leyenda, /27001\s*voluntaria/); const fuera = (await R(() => window.__ROSETTA__.FWV.length)) - 3; assert.match(leyenda, new RegExp(`\\+${fuera} fuera del alcance`));
   await act('goto-norma', { fw: 'partis' });
   assert.match(await page.locator('#view').innerText(), /IS\.I\.OR\.230/);
   await act('insp-req', { fw: 'partis', id: 'OR.230' });
@@ -252,7 +252,7 @@ test('CRA: caso del fabricante, exclusión justificada solo donde el anexo I lo 
 
 test('cada norma se puede activar y desactivar desde Alcance, con su motivo', async () => {
   await R(() => window.__ROSETTA__.openCase('aguas')); await R(() => window.__ROSETTA__.go('alcance'));
-  const fws = await R(() => window.__ROSETTA__.FW);
+  const fws = await R(() => window.__ROSETTA__.FWV);
   for (const f of fws) {
     const antes = await R((f) => window.__ROSETTA__.state.alcance[f].on, f);
     await page.locator(`#set-on-${f}`).evaluate((el) => el.click()); await page.waitForTimeout(120);
@@ -277,4 +277,20 @@ test('DORA: banco ficticio, régimen simplificado y TLPT desde Alcance', async (
   assert.match(await page.locator('#insp').innerText(), /régimen simplificado/);
   await act('insp-close');
   noErrors('DORA');
+});
+
+test('LATAM: las leyes de Chile solo se ven si la organización opera allí, y el perfil las propone', async () => {
+  await R(() => window.__ROSETTA__.openCase('aguas')); await R(() => window.__ROSETTA__.go('alcance'));
+  assert.equal(await page.locator('#set-on-cl21663').count(), 0, 'una empresa española no ve las leyes chilenas');
+  await page.check('#set-pf-op-cl'); await page.waitForTimeout(200);
+  assert.equal(await page.locator('#set-on-cl21719').count(), 1);
+  assert.match(await page.locator('#sec-propuesta').innerText(), /Ley 21\.719 \(Chile\)[\s\S]*A confirmar/);
+  await R(() => window.__ROSETTA__.openCase('austral'));
+  assert.deepEqual(await R(() => window.__ROSETTA__.calc.alcance), ['iso27001', 'nist', 'cl21663', 'cl21719']);
+  const hall = await R(() => window.__ROSETTA__.hall.map((h) => h.id));
+  assert.ok(hall.includes('CO-21') && hall.includes('CO-22'));
+  await R(() => window.__ROSETTA__.go('alcance'));
+  await page.uncheck('#set-cl-oiv'); await page.waitForTimeout(150);
+  assert.equal(await R(() => window.__ROSETTA__.calc.fw.cl21663.aplicables), 2);
+  noErrors('LATAM');
 });

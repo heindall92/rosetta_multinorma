@@ -27,7 +27,7 @@ function reqChip(f, id, { fuerza = 'total', cov = null, origen = '' } = {}) {
 function stateSwitch(id, st, lg = false) {
   return `<span class="stsw${lg ? ' lg' : ''}" role="group" aria-label="${esc(t('stateOf', id))}">${E.ESTADOS.map((e) => `<button type="button" class="${e}" data-act="set-state" data-id="${esc(id)}" data-v="${e}" aria-pressed="${st === e}" aria-label="${esc(t('est.' + e))}"${lg ? '' : ` data-tip="${esc(t('est.' + e))}"`}>${icon(ST_IC[e], 16)}${lg ? `<span>${esc(t('est.' + e))}</span>` : ''}</button>`).join('')}</span>`;
 }
-const caseIcon = (id) => ({ techserv: 'server', hospital: 'hospital', lumen: 'sparkles', aguas: 'droplet', citafacil: 'cloud', alas: 'plane', sensorica: 'cpu', ribera: 'landmark' }[id] || 'building-complex');
+const caseIcon = (id) => ({ techserv: 'server', hospital: 'hospital', lumen: 'sparkles', aguas: 'droplet', citafacil: 'cloud', alas: 'plane', sensorica: 'cpu', ribera: 'landmark', austral: 'zap' }[id] || 'building-complex');
 function head(eyebrow, title, lead, actions = '') {
   return `<header class="head"><div>${eyebrow ? `<div class="eyebrow">${eyebrow}</div>` : ''}<h1>${title}</h1>${lead ? `<p class="lead">${lead}</p>` : ''}</div>${actions ? `<div class="head-actions">${actions}</div>` : ''}</header>`;
 }
@@ -186,7 +186,7 @@ function paletteItems() {
   items.push({ grupo: '⌘', label: LANG() === 'es' ? 'Switch to English' : 'Cambiar a español', ic: 'languages', act: () => setLang(LANG() === 'es' ? 'en' : 'es') });
   for (const c of D.casos) items.push({ grupo: t('cases'), label: c.titulo, ic: caseIcon(c.id), act: () => openCase(c.id) });
   if (q) {
-    for (const f of FW) for (const r of CAT.frameworks[f].reqs) items.push({ grupo: fwLbl(f), label: `${reqCode(f, r.id)} · ${rT(f, r.id)}`, ic: 'file-check', act: () => openInsp('req', r.id, f), hint: state ? t('cov.' + calc.req[f].find((x) => x.id === r.id).estado) : '' });
+    for (const f of FWV) for (const r of CAT.frameworks[f].reqs) items.push({ grupo: fwLbl(f), label: `${reqCode(f, r.id)} · ${rT(f, r.id)}`, ic: 'file-check', act: () => openInsp('req', r.id, f), hint: state ? t('cov.' + calc.req[f].find((x) => x.id === r.id).estado) : '' });
     for (const c of CAT.controls) items.push({ grupo: t('nav.controles'), label: `${c.id} · ${cT(c.id)}`, ic: 'layers', act: () => openInsp('uc', c.id), hint: state ? t('est.' + calc.controles[c.id].estado) : '' });
   }
   const norm = (x) => String(x).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');

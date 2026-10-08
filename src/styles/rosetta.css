@@ -26,7 +26,7 @@
   --warn: oklch(0.6 0.14 70); --warn-bg: oklch(0.72 0.15 75 / 0.18);
   --crit: oklch(0.56 0.2 25); --crit-bg: oklch(0.6 0.2 25 / 0.13);
   --fw-ens: oklch(0.63 0.18 45); --fw-iso27001: oklch(0.55 0.17 255); --fw-nis2: oklch(0.52 0.2 292); --fw-iso42001: oklch(0.58 0.14 165);
-  --fw-partis: oklch(0.58 0.12 220); --fw-ria: oklch(0.57 0.19 340); --fw-cra: oklch(0.6 0.13 120); --fw-nist: oklch(0.62 0.13 85); --fw-dora: oklch(0.5 0.1 200);
+  --fw-partis: oklch(0.58 0.12 220); --fw-ria: oklch(0.57 0.19 340); --fw-cra: oklch(0.6 0.13 120); --fw-nist: oklch(0.62 0.13 85); --fw-dora: oklch(0.5 0.1 200); --fw-cl21663: oklch(0.55 0.12 35); --fw-cl21719: oklch(0.55 0.09 175);
   --fw-p0: oklch(0.56 0.07 70); --fw-p1: oklch(0.55 0.07 195); --fw-p2: oklch(0.55 0.08 305); --fw-p3: oklch(0.52 0.04 260);
   --accent: oklch(0.6 0.22 358); --accent-2: oklch(0.54 0.22 358); --accent-ink: oklch(0.99 0 0); --accent-soft: oklch(0.6 0.22 358 / 0.13);
   --aur-1: oklch(0.78 0.16 358 / 0.55); --aur-2: oklch(0.8 0.12 250 / 0.55); --aur-3: oklch(0.82 0.1 300 / 0.5); --aur-4: oklch(0.86 0.11 170 / 0.45);
@@ -57,7 +57,7 @@
     --shadow: 0 1px 0 oklch(1 0 0 / 0.07) inset, 0 24px 60px -26px oklch(0.04 0.03 272 / 0.9);
     --shadow-lg: 0 1px 0 oklch(1 0 0 / 0.09) inset, 0 40px 100px -30px oklch(0.02 0.02 272 / 0.95);
     --ok: oklch(0.8 0.15 155); --ok-bg: oklch(0.8 0.15 155 / 0.14); --warn: oklch(0.85 0.14 80); --warn-bg: oklch(0.85 0.14 80 / 0.14); --crit: oklch(0.74 0.17 25); --crit-bg: oklch(0.72 0.18 25 / 0.16);
-    --fw-ens: oklch(0.76 0.15 50); --fw-iso27001: oklch(0.72 0.14 250); --fw-nis2: oklch(0.74 0.14 295); --fw-iso42001: oklch(0.8 0.13 168); --fw-partis: oklch(0.78 0.11 220); --fw-ria: oklch(0.76 0.15 340); --fw-cra: oklch(0.82 0.14 120); --fw-nist: oklch(0.84 0.13 88); --fw-dora: oklch(0.76 0.1 200); --fw-p0: oklch(0.78 0.07 70); --fw-p1: oklch(0.78 0.07 195); --fw-p2: oklch(0.76 0.08 305); --fw-p3: oklch(0.78 0.04 260);
+    --fw-ens: oklch(0.76 0.15 50); --fw-iso27001: oklch(0.72 0.14 250); --fw-nis2: oklch(0.74 0.14 295); --fw-iso42001: oklch(0.8 0.13 168); --fw-partis: oklch(0.78 0.11 220); --fw-ria: oklch(0.76 0.15 340); --fw-cra: oklch(0.82 0.14 120); --fw-nist: oklch(0.84 0.13 88); --fw-dora: oklch(0.76 0.1 200); --fw-cl21663: oklch(0.76 0.11 40); --fw-cl21719: oklch(0.78 0.08 175); --fw-p0: oklch(0.78 0.07 70); --fw-p1: oklch(0.78 0.07 195); --fw-p2: oklch(0.76 0.08 305); --fw-p3: oklch(0.78 0.04 260);
     --accent: oklch(0.74 0.18 358); --accent-2: oklch(0.8 0.15 358); --accent-ink: oklch(0.16 0.04 358); --accent-soft: oklch(0.74 0.18 358 / 0.16);
     --aur-1: oklch(0.5 0.2 358 / 0.45); --aur-2: oklch(0.45 0.16 255 / 0.5); --aur-3: oklch(0.42 0.18 300 / 0.45); --aur-4: oklch(0.5 0.12 175 / 0.32);
   }
@@ -77,7 +77,7 @@
   --shadow: 0 1px 0 oklch(1 0 0 / 0.07) inset, 0 24px 60px -26px oklch(0.04 0.03 272 / 0.9);
   --shadow-lg: 0 1px 0 oklch(1 0 0 / 0.09) inset, 0 40px 100px -30px oklch(0.02 0.02 272 / 0.95);
   --ok: oklch(0.8 0.15 155); --ok-bg: oklch(0.8 0.15 155 / 0.14); --warn: oklch(0.85 0.14 80); --warn-bg: oklch(0.85 0.14 80 / 0.14); --crit: oklch(0.74 0.17 25); --crit-bg: oklch(0.72 0.18 25 / 0.16);
-  --fw-ens: oklch(0.76 0.15 50); --fw-iso27001: oklch(0.72 0.14 250); --fw-nis2: oklch(0.74 0.14 295); --fw-iso42001: oklch(0.8 0.13 168); --fw-partis: oklch(0.78 0.11 220); --fw-ria: oklch(0.76 0.15 340); --fw-cra: oklch(0.82 0.14 120); --fw-nist: oklch(0.84 0.13 88); --fw-dora: oklch(0.76 0.1 200); --fw-p0: oklch(0.78 0.07 70); --fw-p1: oklch(0.78 0.07 195); --fw-p2: oklch(0.76 0.08 305); --fw-p3: oklch(0.78 0.04 260);
+  --fw-ens: oklch(0.76 0.15 50); --fw-iso27001: oklch(0.72 0.14 250); --fw-nis2: oklch(0.74 0.14 295); --fw-iso42001: oklch(0.8 0.13 168); --fw-partis: oklch(0.78 0.11 220); --fw-ria: oklch(0.76 0.15 340); --fw-cra: oklch(0.82 0.14 120); --fw-nist: oklch(0.84 0.13 88); --fw-dora: oklch(0.76 0.1 200); --fw-cl21663: oklch(0.76 0.11 40); --fw-cl21719: oklch(0.78 0.08 175); --fw-p0: oklch(0.78 0.07 70); --fw-p1: oklch(0.78 0.07 195); --fw-p2: oklch(0.76 0.08 305); --fw-p3: oklch(0.78 0.04 260);
   --accent: oklch(0.74 0.18 358); --accent-2: oklch(0.8 0.15 358); --accent-ink: oklch(0.16 0.04 358); --accent-soft: oklch(0.74 0.18 358 / 0.16);
   --aur-1: oklch(0.5 0.2 358 / 0.45); --aur-2: oklch(0.45 0.16 255 / 0.5); --aur-3: oklch(0.42 0.18 300 / 0.45); --aur-4: oklch(0.5 0.12 175 / 0.32);
 }
@@ -279,7 +279,7 @@ select option { background: var(--bg); color: var(--ink); }
 
 /* ============ Etiquetas ============ */
 .fw-ens { --fw: var(--fw-ens); } .fw-iso27001 { --fw: var(--fw-iso27001); } .fw-nis2 { --fw: var(--fw-nis2); } .fw-iso42001 { --fw: var(--fw-iso42001); }
-.fw-partis { --fw: var(--fw-partis); } .fw-ria { --fw: var(--fw-ria); } .fw-cra { --fw: var(--fw-cra); } .fw-nist { --fw: var(--fw-nist); } .fw-dora { --fw: var(--fw-dora); } .fw-p0 { --fw: var(--fw-p0); } .fw-p1 { --fw: var(--fw-p1); } .fw-p2 { --fw: var(--fw-p2); } .fw-p3 { --fw: var(--fw-p3); }
+.fw-partis { --fw: var(--fw-partis); } .fw-ria { --fw: var(--fw-ria); } .fw-cra { --fw: var(--fw-cra); } .fw-nist { --fw: var(--fw-nist); } .fw-dora { --fw: var(--fw-dora); } .fw-cl21663 { --fw: var(--fw-cl21663); } .fw-cl21719 { --fw: var(--fw-cl21719); } .fw-p0 { --fw: var(--fw-p0); } .fw-p1 { --fw: var(--fw-p1); } .fw-p2 { --fw: var(--fw-p2); } .fw-p3 { --fw: var(--fw-p3); }
 .fwt { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px 0 8px; border-radius: 999px; font-size: .74rem; font-weight: 600; white-space: nowrap; color: var(--ink); background: color-mix(in oklch, var(--fw) 16%, transparent); border: 1px solid color-mix(in oklch, var(--fw) 35%, transparent); }
 .fwt::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--fw); box-shadow: 0 0 8px var(--fw); }
 .fwt.off { opacity: .45; }
@@ -990,3 +990,4 @@ select option { background: var(--bg); color: var(--ink); }
 .mp-add select { max-width: min(280px, 100%); }
 .fwt { max-width: 100%; } .fwt-l { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .eyebrow { max-width: 100%; } /* el antetítulo largo (8 normas) parte línea en el móvil en vez de desbordar */
+.pf-ops { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px 18px; } .pf-ops legend { padding: 0; margin-bottom: 8px; color: var(--muted); }
