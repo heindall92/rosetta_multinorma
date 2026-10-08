@@ -1,0 +1,118 @@
+/* Tokens del sistema visual de Yoandy Ramírez Delgado (extraídos de CTEM-Nexus 0.4.1).
+ * Oscuro por defecto; claro con [data-theme='light'] en <html>; acento con data-accent.
+ * Pon siempre data-accent="azul" en <html> al arrancar: el --color-accent base (verde azulado) es solo un respaldo.
+ * Todos los pares texto/fondo cumplen WCAG 2.2 AA (verificado con axe en 144 estados). */
+
+:root {
+  --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --color-ground: #08090b;
+  --color-sidebar: #0c0e11;
+  --color-surface: #111317;
+  --color-surface-2: #171a1f;
+  --color-surface-3: #1e2228;
+  --color-hairline: rgb(255 255 255 / 0.07);
+  --color-hairline-strong: rgb(255 255 255 / 0.12);
+
+  --color-ink: #eef1f3;
+  --color-ink-2: #a3aab2;
+  --color-ink-3: #8f97a0; /* ≥ 4,5:1 también sobre surface-3 y fondos tintados (WCAG 2.2 AA) */
+  --color-ink-4: #646c75;
+
+  --color-accent: #3ddcc4;
+  --color-accent-strong: #5ff0d9;
+  --color-accent-ink: #04201c;
+
+  --color-critica: #ff5d5d;
+  --color-on-critica: #2a0606; /* texto sobre fondo crítico (≥ 4,5:1) */
+  /* Rellenos de gráficos por banda, validados con el script de dataviz (separación CVD y de visión normal ≥ 15).
+     Nunca van solos: la posición en el eje y las zonas rotuladas también dicen la banda. */
+  --color-critica-fill: #f03e5a;
+  --color-alta-fill: #ff9f43;
+  --color-media-fill: #ffe36e;
+  --color-baja-fill: #8f9aa6;
+  --color-alta: #ff9f43;
+  --color-media: #e3c45a;
+  --color-baja: #8f9aa6;
+  --color-ok: #4ad38a;
+
+  --radius-chip: 6px;
+  --radius-control: 10px;
+  --radius-card: 14px;
+  --radius-panel: 16px;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+:root {
+  color-scheme: dark;
+  --sh-panel: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px rgb(0 0 0 / 0.28);
+  --sh-overlay: 0 2px 8px rgb(0 0 0 / 0.45), 0 30px 80px rgb(0 0 0 / 0.55);
+  --glass: rgb(17 19 23 / 0.75);
+  --glass-thick: rgb(17 19 23 / 0.95);
+  --glass-edge: rgb(255 255 255 / 0.08);
+}
+
+[data-theme='light'], html.light {
+  color-scheme: light;
+  --color-ground: #f3f5f7;
+  --color-sidebar: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-2: #eef1f4;
+  --color-surface-3: #e2e6eb;
+  --color-hairline: rgb(0 0 0 / 0.07);
+  --color-hairline-strong: rgb(0 0 0 / 0.12);
+
+  --color-ink: #101418;
+  --color-ink-2: #2c3440;
+  --color-ink-3: #5c6773;
+  --color-ink-4: #8b949e;
+
+  /* Bandas en claro: los tonos del oscuro no llegan a 4,5:1 sobre blanco. */
+  --color-critica: #a8234a;
+  --color-on-critica: #ffffff;
+  /* Claro: rampa ordinal por luminosidad (ocre → coral → carmesí) que convive con el azul del acento. */
+  --color-critica-fill: #a8234a;
+  --color-alta-fill: #dd6b3d;
+  --color-media-fill: #eab84f;
+  --color-baja-fill: #8c96a3;
+  --color-alta: #9c3d08;
+  --color-media: #7a5600;
+  --color-baja: #5c6773;
+  --color-ok: #146c38;
+
+  /* Claro: arranca en azul eléctrico. Malva (orquídea) solo si se elige. */
+  --color-accent: #1a4fe0;
+  --color-accent-strong: #123db8;
+  --color-accent-ink: #ffffff;
+
+  --glass: rgb(255 255 255 / 0.85);
+  --glass-thick: rgb(255 255 255 / 0.96);
+  --glass-edge: rgb(0 0 0 / 0.06);
+  --sh-panel: 0 1px 3px rgb(0 0 0 / 0.04), 0 10px 25px -5px rgb(0 0 0 / 0.05);
+  --sh-overlay: 0 4px 14px rgb(0 0 0 / 0.08), 0 25px 50px -10px rgb(0 0 0 / 0.14);
+}
+
+/* Siete acentos de Rosetta. Por defecto: azul. */
+[data-accent='rosa'] { --color-accent: #ff7ab8; --color-accent-strong: #ffc0de; --color-accent-ink: #3b0620; }
+[data-theme='light'][data-accent='rosa'], html.light[data-accent='rosa'] { --color-accent: #b8155a; --color-accent-strong: #9a0f4a; --color-accent-ink: #ffffff; }
+[data-accent='solar'] { --color-accent: #ffb020; --color-accent-strong: #ffd27a; --color-accent-ink: #2a1600; }
+[data-theme='light'][data-accent='solar'], html.light[data-accent='solar'] { --color-accent: #8a4a00; --color-accent-strong: #703c00; --color-accent-ink: #ffffff; }
+[data-accent='glaciar'] { --color-accent: #5ee7f5; --color-accent-strong: #b6f6ff; --color-accent-ink: #042028; }
+[data-theme='light'][data-accent='glaciar'], html.light[data-accent='glaciar'] { --color-accent: #0a6a7d; --color-accent-strong: #085968; --color-accent-ink: #ffffff; }
+[data-accent='orquidea'] { --color-accent: #b79bff; --color-accent-strong: #ddd0ff; --color-accent-ink: #1a0838; }
+[data-theme='light'][data-accent='orquidea'], html.light[data-accent='orquidea'] { --color-accent: #5b35f0; --color-accent-strong: #4a22d6; --color-accent-ink: #ffffff; }
+[data-accent='verde'] { --color-accent: #5aa86a; --color-accent-strong: #8fd4a0; --color-accent-ink: #06210f; }
+[data-theme='light'][data-accent='verde'], html.light[data-accent='verde'] { --color-accent: #1a6b36; --color-accent-strong: #12552a; --color-accent-ink: #ffffff; }
+[data-accent='azul'] { --color-accent: #6b9bff; --color-accent-strong: #9dbdff; --color-accent-ink: #041226; }
+[data-theme='light'][data-accent='azul'], html.light[data-accent='azul'] { --color-accent: #1a4fe0; --color-accent-strong: #123db8; --color-accent-ink: #ffffff; }
+[data-accent='rojo'] { --color-accent: #ff6b6b; --color-accent-strong: #ffb0b0; --color-accent-ink: #2a0808; }
+[data-theme='light'][data-accent='rojo'], html.light[data-accent='rojo'] { --color-accent: #b3141a; --color-accent-strong: #930f14; --color-accent-ink: #ffffff; }
+
+/* Movimiento reducido: solo fundidos y sin animaciones continuas. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}
