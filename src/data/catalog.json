@@ -1,5 +1,5 @@
 {
-  "version": "2.7.0",
+  "version": "2.8.0",
   "domains": [
     {
       "id": "GOB",
@@ -5028,6 +5028,313 @@
           "ref_en": "NIST CSF 2.0 (CSWP 29), RC.CO-04"
         }
       ]
+    },
+    "dora": {
+      "id": "dora",
+      "tope": "parcial",
+      "consulta": "2026-10-09",
+      "fuentes": [
+        "Reglamento (UE) 2022/2554 (DORA), aplicable desde el 17-01-2025",
+        "Reglamento Delegado (UE) 2025/301 (plazos de notificación de incidentes graves)"
+      ],
+      "reqs": [
+        {
+          "id": "5",
+          "code": "Art. 5",
+          "t": "Gobernanza: el órgano de dirección define, aprueba y responde del marco de riesgo TIC",
+          "t_en": "Governance: the management body defines, approves and is accountable for the ICT risk framework",
+          "g": "Gestión del riesgo TIC",
+          "g_en": "ICT risk management",
+          "regimen": "general",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 5",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 5"
+        },
+        {
+          "id": "6",
+          "code": "Art. 6",
+          "t": "Marco de gestión del riesgo TIC documentado, revisado y auditado, con estrategia de resiliencia operativa digital",
+          "t_en": "Documented, reviewed and audited ICT risk management framework, with a digital operational resilience strategy",
+          "g": "Gestión del riesgo TIC",
+          "g_en": "ICT risk management",
+          "regimen": "general",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 6",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 6"
+        },
+        {
+          "id": "7",
+          "code": "Art. 7",
+          "t": "Sistemas, protocolos y herramientas TIC actualizados, fiables y con capacidad suficiente",
+          "t_en": "Up-to-date, reliable ICT systems, protocols and tools with sufficient capacity",
+          "g": "Gestión del riesgo TIC",
+          "g_en": "ICT risk management",
+          "regimen": "general",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 7",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 7"
+        },
+        {
+          "id": "8",
+          "code": "Art. 8",
+          "t": "Identificación de funciones, activos, dependencias y riesgos TIC",
+          "t_en": "Identification of business functions, assets, dependencies and ICT risks",
+          "g": "Gestión del riesgo TIC",
+          "g_en": "ICT risk management",
+          "regimen": "general",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 8",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 8"
+        },
+        {
+          "id": "9",
+          "code": "Art. 9",
+          "t": "Protección y prevención: políticas de seguridad, acceso, autenticación robusta, cambios y parches",
+          "t_en": "Protection and prevention: security policies, access, strong authentication, changes and patches",
+          "g": "Gestión del riesgo TIC",
+          "g_en": "ICT risk management",
+          "regimen": "general",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 9",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 9"
+        },
+        {
+          "id": "10",
+          "code": "Art. 10",
+          "t": "Detección rápida de actividades anómalas",
+          "t_en": "Prompt detection of anomalous activities",
+          "g": "Gestión del riesgo TIC",
+          "g_en": "ICT risk management",
+          "regimen": "general",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 10",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 10"
+        },
+        {
+          "id": "11",
+          "code": "Art. 11",
+          "t": "Respuesta y recuperación: política de continuidad TIC, planes y pruebas",
+          "t_en": "Response and recovery: ICT business continuity policy, plans and tests",
+          "g": "Gestión del riesgo TIC",
+          "g_en": "ICT risk management",
+          "regimen": "general",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 11",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 11"
+        },
+        {
+          "id": "12",
+          "code": "Art. 12",
+          "t": "Copias de seguridad, restauración y recuperación, con ubicación separada",
+          "t_en": "Backup, restoration and recovery, with a separate location",
+          "g": "Gestión del riesgo TIC",
+          "g_en": "ICT risk management",
+          "regimen": "general",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 12",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 12"
+        },
+        {
+          "id": "13",
+          "code": "Art. 13",
+          "t": "Aprendizaje y evolución: revisiones tras incidentes y formación, también de la dirección",
+          "t_en": "Learning and evolving: post-incident reviews and training, including management",
+          "g": "Gestión del riesgo TIC",
+          "g_en": "ICT risk management",
+          "regimen": "general",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 13",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 13"
+        },
+        {
+          "id": "14",
+          "code": "Art. 14",
+          "t": "Planes de comunicación de crisis con clientes, contrapartes y público",
+          "t_en": "Crisis communication plans for clients, counterparts and the public",
+          "g": "Gestión del riesgo TIC",
+          "g_en": "ICT risk management",
+          "regimen": "general",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 14",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 14"
+        },
+        {
+          "id": "16",
+          "code": "Art. 16",
+          "t": "Marco simplificado de gestión del riesgo TIC (pequeñas entidades y no interconectadas)",
+          "t_en": "Simplified ICT risk management framework (small and non-interconnected entities)",
+          "g": "Gestión del riesgo TIC",
+          "g_en": "ICT risk management",
+          "regimen": "simplificado",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 16",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 16",
+          "nota": "Sustituye a los arts. 5 a 15 para las entidades del art. 16 (por ejemplo, pequeñas y no interconectadas).",
+          "nota_en": "It replaces arts. 5 to 15 for the entities in art. 16 (for example, small and non-interconnected ones)."
+        },
+        {
+          "id": "17",
+          "code": "Art. 17",
+          "t": "Proceso de gestión de incidentes TIC",
+          "t_en": "ICT-related incident management process",
+          "g": "Incidentes TIC",
+          "g_en": "ICT-related incidents",
+          "regimen": "todos",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 17",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 17"
+        },
+        {
+          "id": "18",
+          "code": "Art. 18",
+          "t": "Clasificación de incidentes y ciberamenazas según los criterios del reglamento",
+          "t_en": "Classification of incidents and cyber threats according to the regulation’s criteria",
+          "g": "Incidentes TIC",
+          "g_en": "ICT-related incidents",
+          "regimen": "todos",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 18",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 18"
+        },
+        {
+          "id": "19",
+          "code": "Art. 19",
+          "t": "Notificación de incidentes graves a la autoridad competente e información a los clientes",
+          "t_en": "Reporting major incidents to the competent authority and informing clients",
+          "g": "Incidentes TIC",
+          "g_en": "ICT-related incidents",
+          "regimen": "todos",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 19",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 19",
+          "nota": "Notificación inicial en 4 h desde que se clasifica como grave y como mucho 24 h desde que se conoce; informe intermedio en 72 h; informe final en un mes (Reglamento Delegado (UE) 2025/301). Con DORA, esta notificación prevalece sobre la de NIS2.",
+          "nota_en": "Initial notification within 4 h of classification as major and at most 24 h after becoming aware; intermediate report within 72 h; final report within one month (Delegated Regulation (EU) 2025/301). Under DORA, this reporting prevails over NIS2."
+        },
+        {
+          "id": "24",
+          "code": "Art. 24",
+          "t": "Programa de pruebas de resiliencia operativa digital, con pruebas anuales de los sistemas críticos",
+          "t_en": "Digital operational resilience testing programme, with yearly tests of critical systems",
+          "g": "Pruebas de resiliencia operativa digital",
+          "g_en": "Digital operational resilience testing",
+          "regimen": "todos",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 24",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 24"
+        },
+        {
+          "id": "25",
+          "code": "Art. 25",
+          "t": "Pruebas de herramientas y sistemas TIC: vulnerabilidades, código, escenarios y penetración",
+          "t_en": "Testing of ICT tools and systems: vulnerabilities, code, scenarios and penetration",
+          "g": "Pruebas de resiliencia operativa digital",
+          "g_en": "Digital operational resilience testing",
+          "regimen": "todos",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 25",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 25"
+        },
+        {
+          "id": "26",
+          "code": "Art. 26",
+          "t": "Pruebas de penetración basadas en amenazas (TLPT) al menos cada tres años",
+          "t_en": "Threat-led penetration testing (TLPT) at least every three years",
+          "g": "Pruebas de resiliencia operativa digital",
+          "g_en": "Digital operational resilience testing",
+          "regimen": "tlpt",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 26",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 26",
+          "nota": "Solo para las entidades que designe la autoridad competente, según TIBER-EU.",
+          "nota_en": "Only for entities designated by the competent authority, following TIBER-EU."
+        },
+        {
+          "id": "28.1",
+          "code": "Art. 28.1–28.2",
+          "t": "Estrategia y política de riesgo de terceros proveedores de TIC",
+          "t_en": "ICT third-party risk strategy and policy",
+          "g": "Riesgo de terceros proveedores de TIC",
+          "g_en": "ICT third-party risk",
+          "regimen": "todos",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 28.1–28.2",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 28.1–28.2"
+        },
+        {
+          "id": "28.3",
+          "code": "Art. 28.3",
+          "t": "Registro de información de todos los acuerdos con proveedores de TIC",
+          "t_en": "Register of information on all ICT third-party arrangements",
+          "g": "Riesgo de terceros proveedores de TIC",
+          "g_en": "ICT third-party risk",
+          "regimen": "todos",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 28.3",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 28.3"
+        },
+        {
+          "id": "28.4",
+          "code": "Art. 28.4–28.6",
+          "t": "Evaluación previa y diligencia debida antes de contratar servicios TIC",
+          "t_en": "Pre-contractual assessment and due diligence for ICT services",
+          "g": "Riesgo de terceros proveedores de TIC",
+          "g_en": "ICT third-party risk",
+          "regimen": "todos",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 28.4–28.6",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 28.4–28.6"
+        },
+        {
+          "id": "28.8",
+          "code": "Art. 28.8",
+          "t": "Estrategias de salida para servicios TIC que soportan funciones esenciales o importantes",
+          "t_en": "Exit strategies for ICT services supporting critical or important functions",
+          "g": "Riesgo de terceros proveedores de TIC",
+          "g_en": "ICT third-party risk",
+          "regimen": "todos",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 28.8",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 28.8"
+        },
+        {
+          "id": "29",
+          "code": "Art. 29",
+          "t": "Evaluación del riesgo de concentración en proveedores de TIC",
+          "t_en": "Assessment of ICT concentration risk",
+          "g": "Riesgo de terceros proveedores de TIC",
+          "g_en": "ICT third-party risk",
+          "regimen": "todos",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 29",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 29"
+        },
+        {
+          "id": "30",
+          "code": "Art. 30",
+          "t": "Disposiciones contractuales clave con los proveedores de TIC",
+          "t_en": "Key contractual provisions with ICT providers",
+          "g": "Riesgo de terceros proveedores de TIC",
+          "g_en": "ICT third-party risk",
+          "regimen": "todos",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 30",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 30"
+        },
+        {
+          "id": "45",
+          "code": "Art. 45",
+          "t": "Intercambio voluntario de información e inteligencia sobre ciberamenazas",
+          "t_en": "Voluntary sharing of cyber threat information and intelligence",
+          "g": "Intercambio de información",
+          "g_en": "Information sharing",
+          "regimen": "todos",
+          "desde": "2025-01-17",
+          "ref": "Reglamento (UE) 2022/2554 (DORA), art. 45",
+          "ref_en": "Regulation (EU) 2022/2554 (DORA), Art. 45",
+          "nota": "Voluntario: si se participa en un acuerdo de intercambio, se notifica a la autoridad.",
+          "nota_en": "Voluntary: participation in a sharing arrangement is notified to the authority."
+        }
+      ]
     }
   },
   "controls": [
@@ -5087,7 +5394,8 @@
             "id": "GV.PO-02",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Security policy approved by management",
       "obj_en": "A single, formally approved policy setting objectives, legal framework, roles and commitment to improvement.",
@@ -5153,7 +5461,8 @@
             "id": "GV.SC-02",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Security roles, responsibilities and committee",
       "obj_en": "Designated security roles (information, service, security and system owners) and a committee with defined duties.",
@@ -5211,6 +5520,12 @@
             "id": "GV.RR-01",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "5",
+            "w": 1
+          }
         ]
       },
       "t_en": "Management commitment and oversight",
@@ -5246,7 +5561,17 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": [
+          {
+            "id": "5",
+            "w": 0.5
+          },
+          {
+            "id": "13",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Management body training",
       "obj_en": "Members of management receive regular training to identify risks and assess management practices.",
@@ -5293,6 +5618,12 @@
           {
             "id": "GV.PO-02",
             "w": 0.5
+          }
+        ],
+        "dora": [
+          {
+            "id": "9",
+            "w": 1
           }
         ]
       },
@@ -5366,7 +5697,8 @@
             "id": "GV.OC-04",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Context, scope and interested parties",
       "obj_en": "The management system defines its scope from the organisation context and interested parties’ expectations.",
@@ -5418,7 +5750,8 @@
             "id": "GV.RM-07",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Management system objectives and planned changes",
       "obj_en": "Measurable objectives with a plan to achieve them, and planned changes to the management system.",
@@ -5481,7 +5814,8 @@
             "w": 0.5
           }
         ],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Documented information",
       "obj_en": "Required documents and records are created, approved, versioned and retained in a controlled way.",
@@ -5519,6 +5853,12 @@
           {
             "id": "GV.RM-05",
             "w": 1
+          }
+        ],
+        "dora": [
+          {
+            "id": "14",
+            "w": 0.5
           }
         ]
       },
@@ -5564,7 +5904,8 @@
             "id": "GV.RR-03",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Resources for security",
       "obj_en": "Enough budget, people and tools to run and improve the management system.",
@@ -5613,6 +5954,12 @@
             "id": "RS.CO-03",
             "w": 0.5
           }
+        ],
+        "dora": [
+          {
+            "id": "45",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Contact with authorities and interest groups",
@@ -5656,7 +6003,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "System and component authorisation process",
       "obj_en": "Nothing goes into production, gets connected or used without prior authorisation from its owner.",
@@ -5691,7 +6039,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Security in project management",
       "obj_en": "Security requirements are built into every project from the start.",
@@ -5728,7 +6077,8 @@
         ],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -5766,7 +6116,47 @@
             "w": 1
           }
         ],
-        "nist": []
+        "nist": [],
+        "dora": []
+      }
+    },
+    {
+      "id": "GOB-16",
+      "dom": "GOB",
+      "t": "Marco de gestión del riesgo TIC y resiliencia operativa digital",
+      "t_en": "ICT risk management framework and digital operational resilience",
+      "obj": "Un marco documentado de gestión del riesgo TIC, con estrategia de resiliencia operativa digital, aprobado por la dirección, revisado al menos una vez al año y tras incidentes graves, y auditado por la auditoría interna.",
+      "obj_en": "A documented ICT risk management framework, with a digital operational resilience strategy, approved by management, reviewed at least yearly and after major incidents, and audited by internal audit.",
+      "ev": "Marco y estrategia aprobados · informe anual de revisión · informe de auditoría interna",
+      "ev_en": "Approved framework and strategy · annual review report · internal audit report",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "C4.4",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [
+          {
+            "id": "6",
+            "w": 1
+          },
+          {
+            "id": "16",
+            "w": 1
+          },
+          {
+            "id": "5",
+            "w": 0.5
+          }
+        ]
       }
     },
     {
@@ -5849,6 +6239,16 @@
             "id": "ID.RA-05",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "6",
+            "w": 0.5
+          },
+          {
+            "id": "8",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Risk analysis and assessment",
@@ -5919,7 +6319,8 @@
             "id": "ID.RA-06",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Risk treatment and Statement of Applicability",
       "obj_en": "An approved treatment plan and a statement justifying which controls apply and which do not.",
@@ -5966,6 +6367,12 @@
             "id": "DE.AE-07",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "45",
+            "w": 1
+          }
         ]
       },
       "t_en": "Threat intelligence",
@@ -6009,7 +6416,8 @@
             "id": "GV.OC-03",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Legal, regulatory and contractual requirements",
       "obj_en": "Inventory of applicable obligations and how each is met, including intellectual property.",
@@ -6049,7 +6457,8 @@
             "id": "ID.AM-07",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Personal data protection",
       "obj_en": "Processing activities recorded and protected under GDPR and Spanish data protection law.",
@@ -6084,7 +6493,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Protection of records",
       "obj_en": "Records are protected against loss, alteration or improper access during their retention period.",
@@ -6138,7 +6548,8 @@
             "id": "GV.OV-03",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Metrics and effectiveness assessment",
       "obj_en": "Indicators that show whether measures work, with regular review of results.",
@@ -6196,6 +6607,12 @@
             "id": "ID.IM-01",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "6",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Internal audit and independent review",
@@ -6245,7 +6662,8 @@
             "id": "GV.OV-02",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Management review",
       "obj_en": "Management periodically reviews the management system and decides improvements.",
@@ -6289,7 +6707,8 @@
             "id": "DE.CM-03",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Policy compliance monitoring",
       "obj_en": "Compliance with policies and rules is checked regularly and deviations are corrected.",
@@ -6355,7 +6774,8 @@
             "id": "ID.IM-03",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Nonconformities, corrective action and improvement",
       "obj_en": "Every nonconformity is analysed, corrected without delay and feeds continual improvement.",
@@ -6396,7 +6816,8 @@
         ],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -6426,7 +6847,8 @@
         ],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -6472,7 +6894,8 @@
             "id": "PR.AA-02",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Background verification",
       "obj_en": "Background checks proportionate to the role before joining.",
@@ -6524,7 +6947,8 @@
             "id": "GV.RR-04",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Duties, terms and confidentiality",
       "obj_en": "Security and confidentiality obligations signed by employees and contractors.",
@@ -6577,6 +7001,12 @@
           {
             "id": "PR.AT-01",
             "w": 1
+          }
+        ],
+        "dora": [
+          {
+            "id": "13",
+            "w": 0.5
           }
         ]
       },
@@ -6641,7 +7071,8 @@
             "id": "PR.AT-02",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Training and competence",
       "obj_en": "Role-specific training, with proven competence for technical staff.",
@@ -6676,7 +7107,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Disciplinary process",
       "obj_en": "A formal, known procedure to respond to security breaches.",
@@ -6724,7 +7156,8 @@
             "id": "GV.RR-04",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Termination, role change and return of assets",
       "obj_en": "Access removed and assets recovered when the relationship ends or changes.",
@@ -6766,7 +7199,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Remote working",
       "obj_en": "Security conditions for working away from the premises.",
@@ -6836,6 +7270,12 @@
             "id": "ID.AM-08",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "8",
+            "w": 1
+          }
         ]
       },
       "t_en": "Asset inventory",
@@ -6892,7 +7332,8 @@
             "id": "ID.AM-07",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Information classification and labelling",
       "obj_en": "Information is classified by sensitivity and labelled accordingly.",
@@ -6931,7 +7372,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Acceptable use and handling of assets",
       "obj_en": "Clear rules for using and handling information and equipment.",
@@ -6991,7 +7433,8 @@
             "id": "PR.DS-01",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Information media",
       "obj_en": "Controlled custody, transport and use of media, including removable media.",
@@ -7048,7 +7491,8 @@
             "id": "PR.PS-03",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Secure erasure and destruction",
       "obj_en": "Information and equipment are erased or destroyed irrecoverably at end of life.",
@@ -7103,7 +7547,8 @@
             "id": "ID.AM-03",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Information transfer",
       "obj_en": "Rules and secure means to exchange information with third parties.",
@@ -7154,7 +7599,8 @@
             "id": "PR.DS-10",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Data masking and leakage prevention",
       "obj_en": "Sensitive data is masked where not needed and its egress is monitored.",
@@ -7196,6 +7642,12 @@
           },
           {
             "id": "RC.RP-03",
+            "w": 1
+          }
+        ],
+        "dora": [
+          {
+            "id": "12",
             "w": 1
           }
         ]
@@ -7245,7 +7697,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Electronic signature and time stamps",
       "obj_en": "Qualified signature and time stamping where the law or the service requires them.",
@@ -7282,7 +7735,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -7327,7 +7781,8 @@
             "id": "PR.AA-02",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Identification and identity management",
       "obj_en": "Every user has a unique, traceable identity managed throughout its life cycle.",
@@ -7380,6 +7835,12 @@
             "id": "PR.AA-05",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "9",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Access control and least privilege",
@@ -7424,7 +7885,8 @@
             "id": "PR.AA-05",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Access rights management and review",
       "obj_en": "Permissions are granted, changed and reviewed periodically with approval.",
@@ -7464,7 +7926,8 @@
             "id": "PR.AA-05",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Segregation of duties",
       "obj_en": "No single person controls a critical operation end to end.",
@@ -7515,7 +7978,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Privileged accounts and administration systems",
       "obj_en": "Separate, monitored administration accounts used from dedicated systems.",
@@ -7576,7 +8040,8 @@
             "id": "PR.AA-04",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Secure authentication",
       "obj_en": "Authentication proportionate to risk and well-protected credentials.",
@@ -7624,6 +8089,12 @@
             "id": "PR.AA-03",
             "w": 0.5
           }
+        ],
+        "dora": [
+          {
+            "id": "9",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Multi-factor authentication",
@@ -7658,7 +8129,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Access to source code",
       "obj_en": "Source code and development tools have restricted, logged access.",
@@ -7703,7 +8175,8 @@
             "id": "PR.PS-01",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Secure configuration and hardening",
       "obj_en": "Systems are deployed with reference security configurations.",
@@ -7747,7 +8220,8 @@
             "id": "PR.PS-01",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Configuration management",
       "obj_en": "Configuration is kept under control and drift is detected.",
@@ -7799,6 +8273,12 @@
           {
             "id": "ID.RA-07",
             "w": 1
+          }
+        ],
+        "dora": [
+          {
+            "id": "9",
+            "w": 0.5
           }
         ]
       },
@@ -7856,6 +8336,16 @@
           {
             "id": "PR.PS-03",
             "w": 1
+          }
+        ],
+        "dora": [
+          {
+            "id": "7",
+            "w": 0.5
+          },
+          {
+            "id": "9",
+            "w": 0.5
           }
         ]
       },
@@ -7930,6 +8420,12 @@
             "id": "ID.RA-08",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "25",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Vulnerability handling and disclosure",
@@ -7974,7 +8470,8 @@
             "id": "DE.CM-09",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Protection against malicious code",
       "obj_en": "Antimalware or EDR on every device, centrally managed.",
@@ -8026,7 +8523,8 @@
             "id": "PR.PS-05",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Software installation in production",
       "obj_en": "Only authorised software, installed by authorised staff.",
@@ -8080,7 +8578,8 @@
             "id": "PR.PS-04",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Activity logging",
       "obj_en": "User and system event logs, protected and retained.",
@@ -8119,7 +8618,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Clock synchronisation",
       "obj_en": "All systems use a common, reliable time source.",
@@ -8188,6 +8688,12 @@
             "id": "DE.AE-03",
             "w": 0.5
           }
+        ],
+        "dora": [
+          {
+            "id": "10",
+            "w": 1
+          }
         ]
       },
       "t_en": "Monitoring and intrusion detection",
@@ -8232,6 +8738,12 @@
             "id": "PR.IR-04",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "7",
+            "w": 1
+          }
         ]
       },
       "t_en": "Capacity management and DoS protection",
@@ -8274,7 +8786,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "User endpoint devices",
       "obj_en": "Laptops, phones and other devices protected, encrypted and managed.",
@@ -8312,7 +8825,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Clear desk and session locking",
       "obj_en": "No papers or unattended screens with sensitive information.",
@@ -8373,6 +8887,12 @@
             "id": "PR.DS-10",
             "w": 0.5
           }
+        ],
+        "dora": [
+          {
+            "id": "9",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Cryptography and key management",
@@ -8411,7 +8931,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Email and web browsing protection",
       "obj_en": "Email and web filtering against malware, phishing and malicious sites.",
@@ -8450,7 +8971,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Secure architecture and certified components",
       "obj_en": "Documented architecture with security principles and qualified products.",
@@ -8505,6 +9027,12 @@
           {
             "id": "PR.IR-01",
             "w": 1
+          }
+        ],
+        "dora": [
+          {
+            "id": "9",
+            "w": 0.5
           }
         ]
       },
@@ -8562,7 +9090,8 @@
             "id": "PR.IR-01",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Network and flow segregation",
       "obj_en": "Networks separated by function and trust level, with controlled flows.",
@@ -8618,7 +9147,8 @@
             "id": "PR.DS-02",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Communications protection",
       "obj_en": "Encryption and authentication of communications leaving the perimeter.",
@@ -8657,7 +9187,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "System interconnection",
       "obj_en": "Each connection with third-party systems is authorised and documented.",
@@ -8696,7 +9227,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Secure and emergency communications",
       "obj_en": "Encrypted voice, video and messaging plus an alternative channel for emergencies.",
@@ -8763,7 +9295,8 @@
             "id": "PR.PS-06",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Secure development life cycle",
       "obj_en": "A development method with security in every phase and secure coding.",
@@ -8812,7 +9345,8 @@
             "w": 1
           }
         ],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Application security requirements",
       "obj_en": "Security requirements defined and approved before developing or buying.",
@@ -8879,6 +9413,12 @@
             "id": "ID.IM-02",
             "w": 0.5
           }
+        ],
+        "dora": [
+          {
+            "id": "25",
+            "w": 1
+          }
         ]
       },
       "t_en": "Security testing and acceptance",
@@ -8913,7 +9453,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Environment separation",
       "obj_en": "Development, test and production separated with different access.",
@@ -8952,7 +9493,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Outsourced development",
       "obj_en": "Outsourced development meets the same requirements and is supervised.",
@@ -9004,6 +9546,12 @@
             "id": "ID.RA-10",
             "w": 0.5
           }
+        ],
+        "dora": [
+          {
+            "id": "28.4",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Acquisition of ICT products and services",
@@ -9043,7 +9591,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Web service and application protection",
       "obj_en": "Web applications protected and audited before exposure.",
@@ -9086,7 +9635,8 @@
             "id": "ID.RA-09",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       }
     },
     {
@@ -9129,7 +9679,8 @@
             "id": "ID.AM-02",
             "w": 0.5
           }
-        ]
+        ],
+        "dora": []
       }
     },
     {
@@ -9171,7 +9722,8 @@
             "w": 0.5
           }
         ],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -9217,7 +9769,8 @@
             "w": 0.5
           }
         ],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -9242,7 +9795,8 @@
             "w": 1
           }
         ],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -9276,7 +9830,8 @@
             "w": 1
           }
         ],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -9350,6 +9905,20 @@
             "id": "ID.RA-10",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "28.1",
+            "w": 0.5
+          },
+          {
+            "id": "28.4",
+            "w": 1
+          },
+          {
+            "id": "30",
+            "w": 1
+          }
         ]
       },
       "t_en": "Security in supplier relationships",
@@ -9403,7 +9972,8 @@
             "id": "DE.CM-06",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Monitoring of supplier services",
       "obj_en": "Contracted services are supervised, reviewed and their changes managed.",
@@ -9465,6 +10035,12 @@
             "id": "GV.SC-09",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "28.1",
+            "w": 1
+          }
         ]
       },
       "t_en": "ICT supply chain security",
@@ -9513,6 +10089,12 @@
             "id": "ID.AM-04",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "28.3",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Supplier directory",
@@ -9548,11 +10130,73 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Cloud services",
       "obj_en": "Acquisition, use and exit of cloud services with security requirements.",
       "ev_en": "Cloud provider assessment · ENS certification of the service · exit plan"
+    },
+    {
+      "id": "PRO-06",
+      "dom": "PRO",
+      "t": "Registro de información de los acuerdos con proveedores de TIC",
+      "t_en": "Register of information on ICT third-party arrangements",
+      "obj": "Registro completo y al día de todos los acuerdos con proveedores de TIC, distinguiendo los que soportan funciones esenciales o importantes, en el formato de las autoridades y remitido cuando lo piden.",
+      "obj_en": "A complete, up-to-date register of all ICT third-party arrangements, distinguishing those supporting critical or important functions, in the authorities’ format and submitted on request.",
+      "ev": "Registro en el formato de las ITS · acuse de remisión a la autoridad",
+      "ev_en": "Register in the ITS format · submission acknowledgement",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [
+          {
+            "id": "28.3",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "PRO-07",
+      "dom": "PRO",
+      "t": "Estrategias de salida y riesgo de concentración en proveedores de TIC",
+      "t_en": "Exit strategies and ICT concentration risk",
+      "obj": "Cada servicio TIC que soporta funciones esenciales o importantes tiene una estrategia de salida probada, y antes de contratar se evalúa la concentración en un mismo proveedor o en proveedores difíciles de sustituir.",
+      "obj_en": "Every ICT service supporting critical or important functions has a tested exit strategy, and concentration on a single or hard-to-replace provider is assessed before contracting.",
+      "ev": "Planes de salida · pruebas de salida · análisis de concentración",
+      "ev_en": "Exit plans · exit tests · concentration analysis",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "A5.23",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [
+          {
+            "id": "28.8",
+            "w": 1
+          },
+          {
+            "id": "29",
+            "w": 1
+          }
+        ]
+      }
     },
     {
       "id": "INC-01",
@@ -9605,6 +10249,12 @@
             "id": "RS.MA-01",
             "w": 0.5
           }
+        ],
+        "dora": [
+          {
+            "id": "17",
+            "w": 1
+          }
         ]
       },
       "t_en": "Incident management plan",
@@ -9650,7 +10300,8 @@
             "id": "DE.AE-06",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Internal event reporting",
       "obj_en": "Everyone knows how and to whom to report a security event.",
@@ -9723,6 +10374,12 @@
             "id": "RS.AN-08",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "18",
+            "w": 1
+          }
         ]
       },
       "t_en": "Event assessment and classification",
@@ -9788,6 +10445,12 @@
             "id": "RS.MI-02",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "17",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Incident response",
@@ -9845,6 +10508,12 @@
             "id": "RC.RP-06",
             "w": 0.5
           }
+        ],
+        "dora": [
+          {
+            "id": "13",
+            "w": 1
+          }
         ]
       },
       "t_en": "Lessons learned",
@@ -9897,7 +10566,8 @@
             "id": "RS.AN-07",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Collection of evidence",
       "obj_en": "Evidence collected and preserved so it holds up in court.",
@@ -9981,6 +10651,12 @@
             "id": "RS.CO-02",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "19",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Reporting to the authority on time",
@@ -10028,6 +10704,12 @@
             "id": "RC.CO-04",
             "w": 0.5
           }
+        ],
+        "dora": [
+          {
+            "id": "19",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Communication to affected customers and users",
@@ -10066,7 +10748,8 @@
         ],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -10101,7 +10784,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -10131,7 +10815,39 @@
             "w": 1
           }
         ],
-        "nist": []
+        "nist": [],
+        "dora": []
+      }
+    },
+    {
+      "id": "INC-12",
+      "dom": "INC",
+      "t": "Notificación de incidentes graves a la autoridad financiera",
+      "t_en": "Reporting major incidents to the financial authority",
+      "obj": "Los incidentes TIC graves se notifican a la autoridad competente (Banco de España, CNMV o DGSFP en España) en los plazos de DORA: inicial en 4 h desde la clasificación y como mucho en 24 h, intermedio en 72 h y final en un mes, y se informa a los clientes afectados.",
+      "obj_en": "Major ICT incidents are reported to the competent authority (in Spain, Banco de España, CNMV or DGSFP) within the DORA deadlines: initial within 4 h of classification and at most 24 h, intermediate within 72 h and final within one month, and affected clients are informed.",
+      "ev": "Procedimiento de notificación DORA · plantillas de las ITS · registro de notificaciones",
+      "ev_en": "DORA reporting procedure · ITS templates · reporting log",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [
+          {
+            "id": "23.a",
+            "w": 0
+          }
+        ],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [
+          {
+            "id": "19",
+            "w": 1
+          }
+        ]
       }
     },
     {
@@ -10183,6 +10899,12 @@
           {
             "id": "RC.RP-04",
             "w": 1
+          }
+        ],
+        "dora": [
+          {
+            "id": "8",
+            "w": 0.5
           }
         ]
       },
@@ -10265,6 +10987,12 @@
             "id": "RC.RP-06",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "11",
+            "w": 1
+          }
         ]
       },
       "t_en": "Continuity and recovery plan",
@@ -10304,6 +11032,16 @@
           {
             "id": "ID.IM-02",
             "w": 1
+          }
+        ],
+        "dora": [
+          {
+            "id": "11",
+            "w": 0.5
+          },
+          {
+            "id": "24",
+            "w": 0.5
           }
         ]
       },
@@ -10361,6 +11099,12 @@
             "id": "PR.IR-03",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "12",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Redundancy and alternative means",
@@ -10405,11 +11149,73 @@
             "id": "RC.CO-04",
             "w": 1
           }
+        ],
+        "dora": [
+          {
+            "id": "11",
+            "w": 0.5
+          },
+          {
+            "id": "14",
+            "w": 1
+          }
         ]
       },
       "t_en": "Crisis management",
       "obj_en": "Crisis committee, activation criteria and communication during the crisis.",
       "ev_en": "Crisis procedure · committee membership · drills"
+    },
+    {
+      "id": "CON-06",
+      "dom": "CON",
+      "t": "Programa de pruebas de resiliencia operativa digital",
+      "t_en": "Digital operational resilience testing programme",
+      "obj": "Un programa de pruebas proporcional al riesgo, con pruebas al menos anuales de los sistemas que soportan funciones esenciales o importantes, hecho por personal independiente y con plan de corrección de lo detectado.",
+      "obj_en": "A risk-based testing programme, with at least yearly tests of systems supporting critical or important functions, carried out by independent staff and with a remediation plan for findings.",
+      "ev": "Programa de pruebas · informes de resultados · plan de corrección",
+      "ev_en": "Testing programme · results reports · remediation plan",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [
+          {
+            "id": "24",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "CON-07",
+      "dom": "CON",
+      "t": "Pruebas de penetración basadas en amenazas (TLPT)",
+      "t_en": "Threat-led penetration testing (TLPT)",
+      "obj": "Las entidades designadas hacen, al menos cada tres años, pruebas de penetración basadas en amenazas sobre sistemas en producción, con proveedores externos de inteligencia y de pruebas, según el marco TIBER-EU.",
+      "obj_en": "Designated entities perform, at least every three years, threat-led penetration tests on live production systems, with external threat intelligence and testing providers, following TIBER-EU.",
+      "ev": "Alcance aprobado por la autoridad · informe de inteligencia · informe de pruebas · atestación",
+      "ev_en": "Scope approved by the authority · threat intelligence report · test report · attestation",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [],
+        "nist": [],
+        "dora": [
+          {
+            "id": "26",
+            "w": 1
+          }
+        ]
+      }
     },
     {
       "id": "FIS-01",
@@ -10461,7 +11267,8 @@
             "id": "PR.AA-06",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Secure areas and physical access control",
       "obj_en": "Defined perimeters with controlled and identified physical access.",
@@ -10505,7 +11312,8 @@
             "id": "DE.CM-02",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Physical security monitoring",
       "obj_en": "Premises are continuously monitored against unauthorised access.",
@@ -10561,7 +11369,8 @@
             "id": "PR.IR-02",
             "w": 1
           }
-        ]
+        ],
+        "dora": []
       },
       "t_en": "Protection against environmental threats",
       "obj_en": "Rooms conditioned and protected against fire, water and temperature.",
@@ -10604,7 +11413,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Utilities and cabling",
       "obj_en": "Guaranteed power and communications, protected cabling.",
@@ -10651,7 +11461,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Equipment entry and exit",
       "obj_en": "Equipment entering and leaving is logged and protected off-premises.",
@@ -10703,7 +11514,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "AI policy",
       "obj_en": "An approved AI policy, aligned with other policies and reviewed periodically.",
@@ -10750,7 +11562,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "AI roles and concern reporting",
       "obj_en": "Responsibilities defined across the life cycle and a channel to raise concerns.",
@@ -10801,7 +11614,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "AI system resources",
       "obj_en": "Data, tools, compute and people documented for each AI system.",
@@ -10866,7 +11680,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "AI risk management",
       "obj_en": "AI-specific risks (bias, robustness, transparency, misuse) assessed and treated.",
@@ -10916,7 +11731,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "AI system impact assessment",
       "obj_en": "Impact on people, groups and society assessed and documented before deployment.",
@@ -10955,7 +11771,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Responsible AI development",
       "obj_en": "Objectives and processes that guide responsible design and development.",
@@ -11010,7 +11827,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "AI system specification and documentation",
       "obj_en": "Requirements, design and technical documentation maintained across the life cycle.",
@@ -11058,7 +11876,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Verification, validation and deployment",
       "obj_en": "Model validation criteria and a controlled deployment plan.",
@@ -11110,7 +11929,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "AI system operation and monitoring",
       "obj_en": "Production monitoring of performance, drift and errors.",
@@ -11154,7 +11974,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "AI system event logs",
       "obj_en": "Logging of inputs, decisions and relevant events for traceability.",
@@ -11214,7 +12035,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Data governance for AI",
       "obj_en": "Acquisition, quality, provenance and preparation of data controlled and documented.",
@@ -11264,7 +12086,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Information for users and interested parties",
       "obj_en": "User documentation and transparent communication about the AI system.",
@@ -11306,7 +12129,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Responsible and intended use",
       "obj_en": "Processes and objectives that keep use of the system within its intended scope.",
@@ -11358,7 +12182,8 @@
         "partis": [],
         "ria": [],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       },
       "t_en": "Third parties and customers in the AI chain",
       "obj_en": "Responsibilities shared with suppliers and customers of AI components or services.",
@@ -11395,7 +12220,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -11425,7 +12251,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -11459,7 +12286,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -11501,7 +12329,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -11535,7 +12364,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -11577,7 +12407,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     },
     {
@@ -11611,7 +12442,8 @@
           }
         ],
         "cra": [],
-        "nist": []
+        "nist": [],
+        "dora": []
       }
     }
   ]

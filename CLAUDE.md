@@ -12,4 +12,4 @@
 
 ## Siguiente paso
 
-- La siguiente versión y las posteriores están en `ROADMAP.md`. La 2.7.0 (NIST CSF 2.0) está publicada; la siguiente es la **2.8.0, DORA**, y después las leyes LATAM. Léelo antes de proponer trabajo nuevo en Rosetta.
+- La siguiente versión y las posteriores están en `ROADMAP.md`. La 2.8.0 (DORA) está publicada; lo siguiente son las leyes LATAM. Léelo antes de proponer trabajo nuevo en Rosetta.

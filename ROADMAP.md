@@ -11,9 +11,9 @@ La publicación de Rosetta en LinkedIn (octubre de 2026, más de 5.600 impresion
 
 Las dos encajan con el rumbo del ecosistema: marcos públicos sin problemas de derechos de autor, sectores regulados (banca, transporte, industria) y correcciones hechas en abierto con revisión experta, como la de Heyker D. con la CCN-STIC 825 en la 2.3.0.
 
-## Estado actual (2.7.0)
+## Estado actual (2.8.0)
 
-- Marcos: **ENS** (RD 311/2022), **ISO/IEC 27001:2022**, **NIS2** (Directiva 2022/2555 y Reglamento de Ejecución 2024/2690), **ISO/IEC 42001:2023** **Part-IS** (Reglamentos (UE) 2023/203 y 2022/1645) el **RIA** (Reglamento (UE) 2024/1689, con el Ómnibus 2026/1744) el **CRA** (Reglamento (UE) 2024/2847) y el **NIST CSF 2.0**, relacionados mediante un catálogo común de 134 controles (`src/data/catalog.json`).
+- Marcos: **ENS** (RD 311/2022), **ISO/IEC 27001:2022**, **NIS2** (Directiva 2022/2555 y Reglamento de Ejecución 2024/2690), **ISO/IEC 42001:2023** **Part-IS** (Reglamentos (UE) 2023/203 y 2022/1645) el **RIA** (Reglamento (UE) 2024/1689, con el Ómnibus 2026/1744) el **CRA** (Reglamento (UE) 2024/2847), el **NIST CSF 2.0** y **DORA** (Reglamento (UE) 2022/2554), relacionados mediante un catálogo común de 134 controles (`src/data/catalog.json`).
 - ENS ↔ ISO/IEC 27001 sigue la CCN-STIC 825; el resto de correspondencias son criterio propio y la interfaz lo indica. Las de Part-IS nunca pasan de parciales.
 - **Perfil regulatorio** con la propuesta de marcos aplicables y su base legal; el mapa circular dibuja solo los marcos del alcance.
 - **Marcos propios** en JSON o CSV, con mapeo asistido.
@@ -136,7 +136,7 @@ La propuesta es generalizar ese asistente. A partir de **dónde opera** la organ
 | 2.5.0 ✓ publicada | **RIA / AI Act** | Reglamento (UE) 2024/1689 | Se cruza con ISO/IEC 42001, que ya está en Rosetta. Obligaciones por rol (proveedor, responsable del despliegue) y por nivel de riesgo. |
 | 2.6.0 ✓ publicada | **CRA** | Reglamento (UE) 2024/2847 | Requisitos esenciales del anexo I para productos con elementos digitales. Interesa a fabricantes de software y hardware. |
 | 2.7.0 ✓ publicada | **NIST CSF 2.0** | Publicación del NIST (dominio público en EE. UU.) | Seis funciones, incluida *Govern*. Útil para clientes internacionales y para LATAM. |
-| 2.8.0 ← siguiente | **DORA** | Reglamento (UE) 2022/2554 y sus normas técnicas | Banca y servicios financieros. Se relaciona con NIS2, que ya se menciona en el asistente de Alcance. |
+| 2.8.0 ✓ publicada | **DORA** | Reglamento (UE) 2022/2554 y sus normas técnicas | Banca y servicios financieros. Se relaciona con NIS2, que ya se menciona en el asistente de Alcance. |
 | Más adelante | Leyes LATAM de ciberseguridad y protección de datos | Chile (Ley 21.663), Colombia, México, Perú, Argentina | Texto oficial público. |
 
 **Mediante marcos propios, sin texto en el repositorio:** IEC 62443 e ISO/IEC 20000. Como mucho se publicaría una plantilla con su numeración; el texto lo pone quien tiene la licencia.

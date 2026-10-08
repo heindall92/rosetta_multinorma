@@ -431,6 +431,14 @@ function riaBox() {
     <p class="small">${esc(t('riaTxt', calc.fw.ria.aplicables, calc.fw.ria.total))}</p>
     <p class="hint">${esc(t('partisSrc', F.fuentes.join(' · '), fmtDate(F.consulta)))}</p></section>`;
 }
+function doraBox() {
+  const a = state.alcance.dora; const F = CAT0.frameworks.dora;
+  return `<section class="glass pane stack"><h3>${fwTag('dora')} ${esc(t('doraTitle'))}</h3>
+    <div class="form"><label class="fld">${esc(t('doraRegimen'))}<select id="set-dora-regimen" data-set="alcance.dora.regimen">${t('doraRegimenes').map(([v, l]) => opt(v, l, a.regimen)).join('')}</select></label>
+      <label class="switch-l"><span class="switch"><input type="checkbox" id="set-dora-tlpt" data-set="alcance.dora.tlpt" data-type="bool"${a.tlpt ? ' checked' : ''}><span></span></span><span class="small">${esc(t('doraTlpt'))}</span></label></div>
+    <p class="small">${esc(t('doraTxt', calc.fw.dora.aplicables, calc.fw.dora.total))}</p>
+    <p class="hint">${esc(t('partisSrc', F.fuentes.join(' · '), fmtDate(F.consulta)))}</p></section>`;
+}
 function craBox() {
   const a = state.alcance.cra; const F = CAT0.frameworks.cra;
   return `<section class="glass pane stack"><h3>${fwTag('cra')} ${esc(t('craTitle'))}</h3>
@@ -486,6 +494,7 @@ function vAlcance() {
   ${a.partis.on ? partisBox() : ''}
   ${a.ria.on ? riaBox() : ''}
   ${a.cra.on ? craBox() : ''}
+  ${a.dora.on ? doraBox() : ''}
   ${a.ens.on ? `<section class="glass pane stack"><h3>${fwTag('ens')} ${esc(t('ensCat'))}</h3>${ensLevels(a.ens, 'set')}<p class="hint">${esc(t('ensCount', calc.fw.ens.aplicables + calc.fw.ens.excluidos, calc.fw.ens.noExigidos))}</p>
     <div class="row"><button type="button" class="btn sm" data-act="import-ens-into">${icon('upload', 15)}${esc(t('updateFromEns'))}</button><span class="hint">${esc(t('updateFromEnsTxt'))}</span></div></section>` : ''}
   <section class="glass pane stack"><h3>${fwTag('nis2')} ${esc(t('nis2Title'))}</h3>${nis2Form(state.nis2q, 'set')}${nis2Box(state.nis2q)}</section>

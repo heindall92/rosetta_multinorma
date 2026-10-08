@@ -263,3 +263,18 @@ test('cada norma se puede activar y desactivar desde Alcance, con su motivo', as
   }
   noErrors('activar normas');
 });
+
+test('DORA: banco ficticio, régimen simplificado y TLPT desde Alcance', async () => {
+  await R(() => window.__ROSETTA__.openCase('ribera'));
+  assert.deepEqual(await R(() => window.__ROSETTA__.calc.alcance), ['iso27001', 'ria', 'dora']);
+  await R(() => window.__ROSETTA__.go('alcance'));
+  const n0 = await R(() => window.__ROSETTA__.calc.fw.dora.aplicables);
+  await page.check('#set-dora-tlpt'); await page.waitForTimeout(150);
+  assert.equal(await R(() => window.__ROSETTA__.calc.fw.dora.aplicables), n0 + 1);
+  await page.selectOption('#set-dora-regimen', 'simplificado'); await page.waitForTimeout(150);
+  assert.ok(await R(() => window.__ROSETTA__.calc.req.dora.find((r) => r.id === '16').estado !== 'no-exigido'));
+  await act('insp-req', { fw: 'dora', id: '9' });
+  assert.match(await page.locator('#insp').innerText(), /régimen simplificado/);
+  await act('insp-close');
+  noErrors('DORA');
+});

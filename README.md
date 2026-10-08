@@ -21,14 +21,14 @@
 </p>
 
 <p align="center">
-  <img src="docs/img/readme/panel-dark.png" alt="Resumen de un proyecto: estado de los 134 controles por norma y grado de cumplimiento" width="880"/>
+  <img src="docs/img/readme/panel-dark.png" alt="Resumen de un proyecto: estado de los 140 controles por norma y grado de cumplimiento" width="880"/>
 </p>
 
-Rosetta enlaza los **495 requisitos** de ocho normas (ENS, ISO/IEC 27001, NIS2, ISO/IEC 42001, **Part-IS** de aviación, el **RIA**, el Reglamento europeo de IA, el **CRA**, la ley de ciberresiliencia de productos, y el **NIST CSF 2.0**) con **134 controles unificados** agrupados en 13 dominios, y admite **marcos propios** que importa el usuario. El estado de cada control (implantado, parcial, pendiente o no aplica) se registra una sola vez y la herramienta calcula:
+Rosetta enlaza los **519 requisitos** de nueve normas (ENS, ISO/IEC 27001, NIS2, ISO/IEC 42001, **Part-IS** de aviación, el **RIA**, el Reglamento europeo de IA, el **CRA**, la ley de ciberresiliencia de productos, el **NIST CSF 2.0** y **DORA**, para el sector financiero) con **140 controles unificados** agrupados en 13 dominios, y admite **marcos propios** que importa el usuario. El estado de cada control (implantado, parcial, pendiente o no aplica) se registra una sola vez y la herramienta calcula:
 
 - el grado de cumplimiento de cada norma del alcance y de cada uno de sus requisitos;
 - qué marcos aplican a la organización y por qué, según su **perfil regulatorio** (jurisdicción, sector y rasgos), con la base legal de cada uno;
-- los requisitos sin cubrir y las incoherencias entre normas (18 reglas);
+- los requisitos sin cubrir y las incoherencias entre normas (20 reglas);
 - el orden de implantación, según cuántos requisitos cubre cada control pendiente en todas las normas.
 
 Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto no salen del equipo.
@@ -53,15 +53,16 @@ Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto n
         <img src="docs/assets/stack/partis.svg" height="48" alt="Part-IS">
         <img src="docs/assets/stack/ria.svg" height="48" alt="RIA">
         <img src="docs/assets/stack/cra.svg" height="48" alt="CRA">
-        <img src="docs/assets/stack/nist.svg" height="48" alt="NIST CSF"><br>
-        <sub><code>ENS 77 · ISO/IEC 27001 118 · NIS2 59 · ISO/IEC 42001 65 · Part-IS 13 · RIA 28 · CRA 29 · NIST CSF 106 requisitos · marcos propios</code></sub>
+        <img src="docs/assets/stack/nist.svg" height="48" alt="NIST CSF">
+        <img src="docs/assets/stack/dora.svg" height="48" alt="DORA"><br>
+        <sub><code>ENS 77 · ISO/IEC 27001 118 · NIS2 59 · ISO/IEC 42001 65 · Part-IS 13 · RIA 28 · CRA 29 · NIST CSF 106 · DORA 24 requisitos · marcos propios</code></sub>
       </td>
       <td width="50%" valign="top"><code>├─ ▣ modelo:</code><br><br>
         <img src="docs/assets/stack/controles.svg" height="48" alt="Controles unificados">
         <img src="docs/assets/stack/dominios.svg" height="48" alt="Dominios">
         <img src="docs/assets/stack/coherencia.svg" height="48" alt="Reglas de coherencia">
         <img src="docs/assets/stack/plan.svg" height="48" alt="Plan de acción"><br>
-        <sub><code>134 controles · 13 dominios · 18 reglas · perfil regulatorio · plan priorizado</code></sub>
+        <sub><code>140 controles · 13 dominios · 20 reglas · perfil regulatorio · plan priorizado</code></sub>
       </td>
     </tr>
     <tr>
@@ -87,7 +88,7 @@ Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto n
         <img src="docs/assets/stack/navegador.svg" height="48" alt="Playwright">
         <img src="docs/assets/stack/accesibilidad.svg" height="48" alt="axe-core">
         <img src="docs/assets/stack/codeql.svg" height="48" alt="CodeQL"><br>
-        <sub><code>node:test 123 · Playwright 59 · axe-core 0 violaciones · CodeQL</code></sub>
+        <sub><code>node:test 130 · Playwright 60 · axe-core 0 violaciones · CodeQL</code></sub>
       </td>
       <td valign="top"><code>╰─ ⌁ seguridad:</code><br><br>
         <img src="docs/assets/stack/csp.svg" height="48" alt="CSP">
@@ -100,7 +101,7 @@ Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto n
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="2"><code>version: 2.7.0&nbsp;&nbsp;·&nbsp;&nbsp;catalogo: 2.7.0&nbsp;&nbsp;·&nbsp;&nbsp;CCN-STIC 825: abril 2026&nbsp;&nbsp;·&nbsp;&nbsp;pruebas: 182 ok&nbsp;&nbsp;·&nbsp;&nbsp;licencia: GPLv2</code></td>
+      <td colspan="2"><code>version: 2.8.0&nbsp;&nbsp;·&nbsp;&nbsp;catalogo: 2.8.0&nbsp;&nbsp;·&nbsp;&nbsp;CCN-STIC 825: abril 2026&nbsp;&nbsp;·&nbsp;&nbsp;pruebas: 190 ok&nbsp;&nbsp;·&nbsp;&nbsp;licencia: GPLv2</code></td>
     </tr>
   </tfoot>
 </table>
@@ -132,7 +133,7 @@ Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto n
 ## <img src="docs/assets/icons/route.svg" width="20" height="20" valign="middle"/> Cómo se usa
 
 1. **Alcance.** Normas aplicables; categoría del ENS y nivel de cada dimensión (D, I, C, A, T); clasificación NIS2 según los arts. 2 y 3 de la Directiva (incluye entidades CER, prestadores de confianza, DORA y exclusiones del art. 2.7–2.8); inclusión de ISO/IEC 42001.
-2. **Punto de partida.** Desde cero, desde la Declaración de Aplicabilidad del ENS en Excel (plantilla de 73 medidas) o desde uno de los siete casos de ejemplo.
+2. **Punto de partida.** Desde cero, desde la Declaración de Aplicabilidad del ENS en Excel (plantilla de 73 medidas) o desde uno de los ocho casos de ejemplo.
 3. **Estado de los controles.** Implantado, parcial, pendiente o no aplica, con responsable, evidencias y fecha de revisión. Cada cambio recalcula las normas del alcance y se puede deshacer.
 4. **Revisión.** Cobertura por norma y requisito, equivalencias entre normas, brechas, incoherencias y plan de acción.
 5. **Entrega.** Excel con una Declaración de Aplicabilidad por norma, informe en Markdown, plan y controles en CSV, proyecto en JSON y copia de seguridad.
@@ -187,15 +188,15 @@ mindmap
 |---|---|---|
 | <img src="docs/assets/icons/orbit.svg" width="18"/> | **Resumen** | Grado de cumplimiento por norma, estado de los controles por dominio y norma, controles prioritarios, solapamiento entre normas y alertas de coherencia. |
 | <img src="docs/assets/icons/waypoints.svg" width="18"/> | **Equivalencias** | Para un requisito de cualquier norma: los controles que lo cubren y los requisitos equivalentes en las demás normas, con el tipo de correspondencia (total, parcial o informativa). |
-| <img src="docs/assets/icons/layers.svg" width="18"/> | **Controles** | Los 134 controles con su estado, normas a las que sirven, responsable, evidencias y fecha de revisión. |
+| <img src="docs/assets/icons/layers.svg" width="18"/> | **Controles** | Los 140 controles con su estado, normas a las que sirven, responsable, evidencias y fecha de revisión. |
 | <img src="docs/assets/icons/file-check.svg" width="18"/> | **Requisitos** | Declaración de aplicabilidad de cada norma: cobertura por requisito, nivel exigido en el ENS y exclusiones justificadas. Las cláusulas 4–10 y los arts. 20, 21 y 23 de NIS2 no se pueden excluir. |
-| <img src="docs/assets/icons/shield-alert.svg" width="18"/> | **Brechas** | Requisitos sin cubrir y 18 reglas de coherencia (entre ellas, notificación a ENISA y SBOM del CRA, alfabetización en IA y prácticas prohibidas del RIA, notificación a la autoridad aeronáutica y riesgos con impacto en la seguridad operacional de Part-IS, y requisitos de marcos propios sin controles): notificación NIS2 (24 h, 72 h, 1 mes), formación de la dirección, evaluación de impacto de IA, exclusiones contradictorias, controles sin evidencias o sin revisar en 12 meses, entre otras. |
+| <img src="docs/assets/icons/shield-alert.svg" width="18"/> | **Brechas** | Requisitos sin cubrir y 20 reglas de coherencia (entre ellas, notificación de incidentes graves y registro de información de DORA, notificación a ENISA y SBOM del CRA, alfabetización en IA y prácticas prohibidas del RIA, notificación a la autoridad aeronáutica y riesgos con impacto en la seguridad operacional de Part-IS, y requisitos de marcos propios sin controles): notificación NIS2 (24 h, 72 h, 1 mes), formación de la dirección, evaluación de impacto de IA, exclusiones contradictorias, controles sin evidencias o sin revisar en 12 meses, entre otras. |
 | <img src="docs/assets/icons/square-kanban.svg" width="18"/> | **Plan** | Tablero pendiente, en curso y hecha, ordenado por requisitos cubiertos, con responsable y fecha. |
 | <img src="docs/assets/icons/grid-3x3.svg" width="18"/> | **Correspondencias** | Requisitos de cada norma por dominio, solapamiento entre normas y tabla completa control ↔ requisitos. |
 | <img src="docs/assets/icons/compass.svg" width="18"/> | **Alcance** | Perfil regulatorio con la propuesta de marcos aplicables y su base legal, decisión y motivo del auditor, categoría y niveles del ENS, aplicabilidad de NIS2, reglamento de Part-IS y marcos propios (importar, mapear con sugerencias, exportar y borrar). |
 | <img src="docs/assets/icons/download.svg" width="18"/> | **Exportar** | Excel, Markdown, CSV, JSON y copia de seguridad. |
 
-También incluye siete casos de ejemplo con datos ficticios (proveedor TIC del sector público, hospital, empresa de IA, operador de agua, SaaS para ayuntamientos, aerolínea regional con Part-IS y fabricante de cámaras IP con el CRA), varios proyectos en paralelo, buscador global (`Ctrl + K`), deshacer y rehacer (`Ctrl + Z`, `Ctrl + Mayús + Z`), tema claro y oscuro con siete colores de acento, y versión móvil.
+También incluye siete casos de ejemplo con datos ficticios (proveedor TIC del sector público, hospital, empresa de IA, operador de agua, SaaS para ayuntamientos, aerolínea regional con Part-IS, fabricante de cámaras IP con el CRA y banco en línea con DORA), varios proyectos en paralelo, buscador global (`Ctrl + K`), deshacer y rehacer (`Ctrl + Z`, `Ctrl + Mayús + Z`), tema claro y oscuro con siete colores de acento, y versión móvil.
 
 ## <img src="docs/assets/icons/image.svg" width="20" height="20" valign="middle"/> Capturas
 
@@ -205,7 +206,7 @@ También incluye siete casos de ejemplo con datos ficticios (proveedor TIC del s
 <td width="50%"><img src="docs/img/readme/traductor-light.png" alt="Equivalencias"/><br/><sub><b>Equivalencias</b> · ENS op.exp.7 y sus equivalentes en ISO/IEC 27001, NIS2 e ISO/IEC 42001</sub></td>
 </tr>
 <tr>
-<td><img src="docs/img/readme/controles-light.png" alt="Controles"/><br/><sub><b>Controles</b> · 134 controles en 13 dominios</sub></td>
+<td><img src="docs/img/readme/controles-light.png" alt="Controles"/><br/><sub><b>Controles</b> · 140 controles en 13 dominios</sub></td>
 <td><img src="docs/img/readme/normas-dark.png" alt="Requisitos"/><br/><sub><b>Requisitos</b> · declaración de aplicabilidad calculada por norma</sub></td>
 </tr>
 <tr>
@@ -328,6 +329,24 @@ Las equivalencias **ENS ↔ ISO/IEC 27001:2022** siguen la guía oficial del Cen
 
 NIS2 e ISO/IEC 42001 no tienen una guía equivalente: sus correspondencias siguen siendo criterio del autor, contrastado con la guía técnica de ENISA.
 
+## <img src="docs/assets/icons/landmark.svg" width="20" height="20" valign="middle"/> Novedades de la 2.8.0: DORA, resiliencia operativa digital del sector financiero
+
+Los 24 requisitos del Reglamento (UE) 2022/2554, aplicable desde el 17-01-2025, para banca, seguros, inversión y pagos:
+
+| Capítulo | Requisitos |
+|---|---|
+| II · Gestión del riesgo TIC | Gobernanza, marco y estrategia, sistemas, identificación, protección, detección, respuesta y recuperación, copias, aprendizaje y comunicación de crisis (arts. 5–14), o el marco simplificado del art. 16 |
+| III · Incidentes TIC | Proceso, clasificación y notificación de incidentes graves (arts. 17–19). Plazos del Reglamento Delegado (UE) 2025/301: inicial en 4 h desde la clasificación (como mucho 24 h), intermedio en 72 h y final en un mes |
+| IV · Pruebas | Programa anual, pruebas de herramientas y sistemas y TLPT cada tres años para las entidades designadas (arts. 24–26) |
+| V · Terceros proveedores de TIC | Estrategia, registro de información, diligencia debida, estrategias de salida, concentración y cláusulas contractuales (arts. 28–30) |
+| VI · Intercambio de información | Voluntario (art. 45) |
+
+- **Régimen y TLPT en Alcance.** Al elegir el régimen general o el simplificado, Rosetta marca como no exigido lo que corresponde. Las pruebas TLPT solo se exigen si la autoridad designó a la entidad.
+- **Seis controles nuevos:** marco de riesgo TIC, programa de pruebas, TLPT, registro de información, estrategias de salida y concentración, y notificación a la autoridad financiera.
+- **Perfil regulatorio.** Para una entidad financiera de la UE, DORA es **obligatorio** y NIS2 queda **a confirmar**, porque DORA prevalece como lex specialis. El perfil ya no anuncia normas europeas pendientes.
+- **Coherencia.** Dos alertas nuevas: sin notificación de incidentes graves y sin registro de información.
+- **Caso nuevo:** **Ribera Banca Digital**, banco en línea ficticio con DORA, ISO/IEC 27001 y el RIA, porque su puntuación crediticia es IA de alto riesgo.
+
 ## <img src="docs/assets/icons/layers.svg" width="20" height="20" valign="middle"/> Novedades de la 2.7.0: NIST CSF 2.0
 
 Las **106 subcategorías** del NIST Cybersecurity Framework 2.0 (CSWP 29, febrero de 2024), en sus 6 funciones y 22 categorías. Incluye **Gobernar** (GV), la función nueva de la 2.0: contexto, estrategia de riesgos, roles, política, supervisión y cadena de suministro.
@@ -418,11 +437,11 @@ Las 28 obligaciones del Reglamento (UE) 2024/1689 que afectan a una organizació
 
 | Suite | Pruebas | Qué comprueba |
 |---|---|---|
-| Motor (`engine.test.mjs`) | 97 | NIST CSF 2.0 (106 subcategorías en 6 funciones y 22 categorías, cobertura completa, voluntario). CRA (29 requisitos, fechas, exclusiones solo en el anexo I.I.2 b–m, equivalencias, CO-17 y CO-18, perfil). RIA (rol, riesgo, fechas del Ómnibus, sin exclusiones, equivalencias, CO-15 y CO-16, perfil). Part-IS (13 requisitos, sin exclusiones, equivalencias nunca totales, alertas CO-12 y CO-13), perfil regulatorio (cada regla del ENS, NIS2, Part-IS, ISO y normas futuras, entradas hostiles), marcos propios (fusión sin tocar el catálogo, cálculo, CO-14) y sugerencias de mapeo. Media ponderada, techo de los enlaces parciales, exclusiones no permitidas, categoría ENS efectiva, KPI, prioridades, solapamiento, equivalencias, correspondencias de la CCN-STIC 825, aplicabilidad NIS2 (17 casos), cinco casos de ejemplo y una instantánea fija. |
-| Catálogo (`catalog.test.mjs`) | 16 | Ocho normas; 13 requisitos de Part-IS con fuentes, matiz y referencia en los dos idiomas; cada control declara todas las normas; siete casos con perfil válido. 73 medidas del ENS más 4 artículos, 93 controles de ISO/IEC 27001 y 38 de ISO/IEC 42001, cláusula 6.1.1, art. 23.4 a–e de NIS2, identificadores únicos, enlaces a requisitos existentes, ningún requisito sin control. |
+| Motor (`engine.test.mjs`) | 103 | DORA (24 requisitos, régimen simplificado y TLPT, exclusión solo del art. 45, plazos de 2025/301, CO-19 y CO-20, perfil). NIST CSF 2.0 (106 subcategorías en 6 funciones y 22 categorías, cobertura completa, voluntario). CRA (29 requisitos, fechas, exclusiones solo en el anexo I.I.2 b–m, equivalencias, CO-17 y CO-18, perfil). RIA (rol, riesgo, fechas del Ómnibus, sin exclusiones, equivalencias, CO-15 y CO-16, perfil). Part-IS (13 requisitos, sin exclusiones, equivalencias nunca totales, alertas CO-12 y CO-13), perfil regulatorio (cada regla del ENS, NIS2, Part-IS, ISO y normas futuras, entradas hostiles), marcos propios (fusión sin tocar el catálogo, cálculo, CO-14) y sugerencias de mapeo. Media ponderada, techo de los enlaces parciales, exclusiones no permitidas, categoría ENS efectiva, KPI, prioridades, solapamiento, equivalencias, correspondencias de la CCN-STIC 825, aplicabilidad NIS2 (17 casos), cinco casos de ejemplo y una instantánea fija. |
+| Catálogo (`catalog.test.mjs`) | 16 | Nueve normas; 13 requisitos de Part-IS con fuentes, matiz y referencia en los dos idiomas; cada control declara todas las normas; ocho casos con perfil válido. 73 medidas del ENS más 4 artículos, 93 controles de ISO/IEC 27001 y 38 de ISO/IEC 42001, cláusula 6.1.1, art. 23.4 a–e de NIS2, identificadores únicos, enlaces a requisitos existentes, ningún requisito sin control. |
 | Build (`build.test.mjs`) | 10 | Determinismo, documento bien formado, datos idénticos a `src/data`, CSP, hashes SRI, fuentes incrustadas, iconos existentes y `dist/` al día. |
 | E2E (`e2e.test.mjs`) | 24 | Valores por defecto (claro, español, azul), menú sin proyecto, todas las vistas con los cinco casos, centro de ayuda (buscador y enlaces del autor), barra lateral (anchos, ratón, teclado, tableta), deshacer y rehacer, idioma, tema, móvil, ficheros hostiles, inyección de fórmulas y aviso de almacenamiento lleno. Red bloqueada. |
-| Part-IS, RIA, CRA, perfil y marcos propios (`e2e-marcos.test.mjs`) | 13 | Caso de aviación (anillos solo del alcance, prefijo IS.I/IS.D.OR, matiz, sin exclusiones), perfil aplicado y motivo en el informe, asistente, marco propio hostil (prototype pollution, HTML, identificadores y controles inválidos), mapeo con sugerencias, persistencia, exportar e importar sin pérdidas, CSV con comillas y fórmulas, borrar y deshacer, 390 px y ficheros de ejemplo de `tests/fixtures`. |
+| Part-IS, RIA, CRA, DORA, perfil y marcos propios (`e2e-marcos.test.mjs`) | 14 | Caso de aviación (anillos solo del alcance, prefijo IS.I/IS.D.OR, matiz, sin exclusiones), perfil aplicado y motivo en el informe, asistente, marco propio hostil (prototype pollution, HTML, identificadores y controles inválidos), mapeo con sugerencias, persistencia, exportar e importar sin pérdidas, CSV con comillas y fórmulas, borrar y deshacer, 390 px y ficheros de ejemplo de `tests/fixtures`. |
 | Excel, CSP y fuentes (`e2e-excel.test.mjs`) | 13 | Por `file://` y por HTTP: CSP sin violaciones y bloqueando código inyectado, fuentes sin Google Fonts, importación de una SoA del ENS, exportación sin fórmulas y rechazo de una librería manipulada. |
 | Accesibilidad (`a11y.test.mjs`) | 8 | axe-core (WCAG 2.2 A/AA) en 12 vistas y, aparte, en Alcance con el perfil, Part-IS y el editor de mapeo abierto, Resumen con cinco anillos y Requisitos de Part-IS; claro y oscuro, 1440 y 390 px: cero violaciones. |
 
@@ -476,7 +495,7 @@ rosetta_multinorma/
 │   │   ├── 06-io.js              Excel, CSV, Markdown, JSON, importación del ENS, copias
 │   │   └── 07-events.js          Eventos y arranque
 │   ├── data/
-│   │   ├── catalog.json          8 normas · 495 requisitos · 134 controles · 13 dominios
+│   │   ├── catalog.json          9 normas · 519 requisitos · 140 controles · 13 dominios
 │   │   ├── casos.json            5 casos de ejemplo (ficticios)
 │   │   ├── ccn825.json           Correspondencias oficiales ENS ↔ ISO/IEC 27001 (CCN-STIC 825, abril 2026)
 │   │   ├── parejas.json          Contraste ENS ↔ ISO/IEC 27001 con la plantilla del curso

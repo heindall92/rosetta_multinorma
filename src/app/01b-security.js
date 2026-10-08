@@ -116,7 +116,8 @@ function sanitizeState(raw) {
     iso42001: { on: g('iso42001').on === true },
     partis: { on: g('partis').on === true, regimen: oneOf(g('partis').regimen, PARTIS_REG, 'I') },
     ria: { on: g('ria').on === true, ...E.riaAlcance(g('ria')) },
-    cra: { on: g('cra').on === true, ...E.craAlcance(g('cra')) }
+    cra: { on: g('cra').on === true, ...E.craAlcance(g('cra')) },
+    dora: { on: g('dora').on === true, ...E.doraAlcance(g('dora')) }
   };
   for (const f of FW_BASE) if (!st.alcance[f]) st.alcance[f] = { on: g(f).on === true }; // normas sin opciones propias
   for (const m of st.marcos) st.alcance[m.id] = { on: g(m.id).on === true };

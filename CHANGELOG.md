@@ -1,5 +1,18 @@
 # Cambios
 
+## 2.8.0 · octubre de 2026
+
+**DORA**, el Reglamento (UE) 2022/2554 de resiliencia operativa digital del sector financiero, aplicable desde el 17-01-2025.
+
+- **24 requisitos** de los capítulos II a VI: gestión del riesgo TIC (arts. 5–14 y el marco simplificado del art. 16), incidentes (arts. 17–19), pruebas (arts. 24–26), terceros proveedores de TIC (arts. 28–30) e intercambio de información (art. 45).
+- **Plazos de notificación del Reglamento Delegado (UE) 2025/301** en la ficha del art. 19: 4 h, 24 h, 72 h y un mes.
+- **Régimen general o simplificado y designación para TLPT en Alcance.** Lo que no corresponde figura como no exigido, con su motivo. Solo el art. 45 es excluible.
+- **Seis controles nuevos:** GOB-16 (marco de riesgo TIC), CON-06 (programa de pruebas), CON-07 (TLPT), PRO-06 (registro de información), PRO-07 (salida y concentración) e INC-12 (notificación a la autoridad financiera). Catálogo 2.8.0: 140 controles y 519 requisitos.
+- **Perfil regulatorio.** DORA es obligatorio para entidades financieras de la UE; NIS2 queda a confirmar por la lex specialis. Ya no quedan normas europeas pendientes.
+- **Coherencia.** CO-19 (sin notificación de incidentes graves) y CO-20 (sin registro de información).
+- **Caso nuevo:** Ribera Banca Digital, con DORA, ISO/IEC 27001 y el RIA.
+- **Pruebas.** 7 pruebas nuevas del motor y una e2e.
+
 ## 2.7.0 · octubre de 2026
 
 **NIST Cybersecurity Framework 2.0** (NIST CSWP 29, febrero de 2024).

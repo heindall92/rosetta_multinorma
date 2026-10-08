@@ -1,7 +1,7 @@
 {
   "name": "rosetta-multinorma",
-  "version": "2.7.0",
-  "description": "Rosetta: mapa multinorma ENS · ISO/IEC 27001 · NIS2 · ISO/IEC 42001 · Part-IS · RIA · CRA · NIST CSF, con perfil regulatorio y marcos propios. Implanta cada control una vez y comprueba qué cubre en cada norma.",
+  "version": "2.8.0",
+  "description": "Rosetta: mapa multinorma ENS · ISO/IEC 27001 · NIS2 · ISO/IEC 42001 · Part-IS · RIA · CRA · NIST CSF · DORA, con perfil regulatorio y marcos propios. Implanta cada control una vez y comprueba qué cubre en cada norma.",
   "private": true,
   "engines": {
     "node": ">=20"
@@ -29,6 +29,7 @@
     "ai-act",
     "cra",
     "nist-csf",
+    "dora",
     "compliance",
     "grc",
     "cybersecurity",

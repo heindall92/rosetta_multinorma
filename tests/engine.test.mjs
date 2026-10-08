@@ -39,7 +39,7 @@ describe('API pública', () => {
     for (const k of ['indexar', 'calcular', 'coberturaReq', 'solapamiento', 'inferencia', 'equivalencias', 'prioridades', 'coherencia', 'planAccion', 'desdeSoaEns', 'nis2Aplicabilidad', 'orden', 'instantanea', 'parejasClase',
       'perfilRegulatorio', 'perfilNormalizado', 'sugerirControles', 'fundirPropios', 'listaNormas', 'etiqueta'])
       assert.equal(typeof E[k], 'function', k);
-    assert.deepEqual(E.FW, ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra', 'nist']);
+    assert.deepEqual(E.FW, ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra', 'nist', 'dora']);
   });
 });
 
@@ -226,7 +226,7 @@ describe('casos de ejemplo con el catálogo real', () => {
   }
   test('instantánea reproducible del caso de clase (TechServ)', () => {
     const r = E.calcular(IX, CASOS.find((c) => c.id === 'techserv').state);
-    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null, ria: null, cra: null, nist: null }, grado: 0.893, brechas: 4 });
+    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null, ria: null, cra: null, nist: null, dora: null }, grado: 0.893, brechas: 4 });
   });
   test('contraste ENS ↔ ISO 27001 con las parejas del material de clase', () => {
     const p = E.parejasClase(IX); const ref = require('../src/data/parejas.json');
@@ -364,9 +364,9 @@ describe('perfil regulatorio', () => {
     assert.equal(pr({ ia: true }).iso42001.estado, 'voluntaria'); assert.equal(pr({}).iso42001.estado, 'no-aplica');
     assert.equal(pr({}, {}, 'es', ['mp-acme'])['mp-acme'].estado, 'voluntaria');
   });
-  test('normas que aún no están en Rosetta: DORA, solo dentro de la UE', () => {
+  test('ya no quedan normas europeas pendientes: DORA, RIA y CRA están en Rosetta', () => {
     const f = E.perfilRegulatorio({ financiera: true, ia: true, fabricante: true }).futuras.map((x) => x.id);
-    assert.deepEqual(f, ['dora']);
+    assert.deepEqual(f, []);
     assert.deepEqual(E.perfilRegulatorio({ jurisdiccion: 'fuera', financiera: true, ia: true }).futuras, []);
   });
   test('entradas hostiles o vacías se normalizan al perfil por defecto', () => {
@@ -538,5 +538,38 @@ describe('NIST CSF 2.0', () => {
     const all = Object.fromEntries(CAT.controls.map((c) => [c.id, { estado: 'implantado' }]));
     close(E.calcular(IX, { alcance: { nist: { on: true } }, controles: all, exclusiones: {} }).fw.nist.grado, 1);
     assert.ok(E.solapamiento(IX).iso27001.nist.pct > 0.8);
+  });
+});
+
+describe('DORA (Reglamento (UE) 2022/2554)', () => {
+  const st = (dora, controles = {}) => ({ alcance: { iso27001: { on: true }, dora: { on: true, ...dora } }, controles, exclusiones: {} });
+  const vivos = (d) => E.calcular(IX, st(d)).req.dora.filter((r) => r.estado !== 'no-exigido').map((r) => r.id);
+  test('24 requisitos de los capítulos II a VI, aplicables desde el 17-01-2025', () => {
+    const R = CAT.frameworks.dora.reqs; assert.equal(R.length, 24); assert.equal(CAT.frameworks.dora.tope, 'parcial');
+    for (const r of R) { assert.equal(r.desde, '2025-01-17'); assert.ok(IX.reqUcs.dora[r.id].some((l) => l.w === 1), r.id); }
+  });
+  test('régimen general frente a simplificado (art. 16) y TLPT solo para entidades designadas', () => {
+    const g = vivos({ regimen: 'general' }); assert.ok(g.includes('6') && !g.includes('16') && !g.includes('26'));
+    const s2 = vivos({ regimen: 'simplificado' }); assert.ok(s2.includes('16') && !s2.includes('6') && s2.includes('19'));
+    assert.ok(vivos({ regimen: 'general', tlpt: true }).includes('26'));
+    assert.equal(E.calcular(IX, st({ regimen: 'simplificado' })).req.dora.find((r) => r.id === '9').motivo, 'simplificado');
+  });
+  test('solo el art. 45 (intercambio de información) es excluible', () => {
+    assert.equal(E.excluible('dora', '45'), true);
+    for (const id of ['5', '19', '28.3']) assert.equal(E.excluible('dora', id), false);
+    assert.deepEqual(E.doraAlcance({ regimen: 'x', tlpt: 'si' }), { regimen: 'general', tlpt: false });
+  });
+  test('plazos de notificación del Reglamento Delegado (UE) 2025/301 en la ficha del art. 19', () => {
+    assert.match(CAT.frameworks.dora.reqs.find((r) => r.id === '19').nota, /4 h.*24 h.*72 h.*un mes/);
+  });
+  test('alertas CO-19 y CO-20; perfil: obligatoria para entidades financieras de la UE', () => {
+    const a = st({}); const h = E.coherencia(IX, a, E.calcular(IX, a)).map((x) => x.id);
+    assert.ok(h.includes('CO-19') && h.includes('CO-20'));
+    assert.equal(E.perfilRegulatorio({ financiera: true }).marcos.dora.estado, 'obligatoria');
+    assert.equal(E.perfilRegulatorio({ financiera: true }).marcos.nis2.estado, 'confirmar');
+    assert.equal(E.perfilRegulatorio({}).marcos.dora.estado, 'no-aplica');
+  });
+  test('ninguna equivalencia con DORA es total', () => {
+    for (const r of CAT.frameworks.dora.reqs) for (const g of IX.fw) for (const x of E.equivalencias(IX, 'dora', r.id).otras[g] || []) assert.notEqual(x.fuerza, 'total', `dora ${r.id} → ${g}`);
   });
 });
