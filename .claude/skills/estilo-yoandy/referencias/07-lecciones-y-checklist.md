@@ -21,13 +21,14 @@
 14. **Etiquetas truncadas en móvil** dentro del gráfico: pon la leyenda debajo.
 15. **Cifras del README desfasadas**: recuéntalas en cada versión (la prueba de coherencia ayuda).
 16. **Webs del ecosistema supuestas**: comprueba antes de enlazar.
+17. **Tabla cortada en el móvil sin desplazamiento** (Movilización, «Riesgos principales»). Dos causas: la utilidad `table` de Tailwind 4 anula `hidden` (oculta un `div` envoltorio, nunca la `<table class="table">`), y un panel con `overflow-hidden` esconde el desbordamiento, así que «anchura de página ≤ 390» no lo ve. Toda tabla necesita tarjetas por debajo de 640 px o un envoltorio con `overflow-x-auto`, y el e2e comprueba en cada vista que ningún texto visible se sale de la pantalla.
 
 ## Lista de cierre (antes de decir «terminado»)
 
 ### Producto
 - [ ] Hace lo pedido de punta a punta, con estado vacío, demo, error y carga.
 - [ ] Español e inglés completos; sin restos de español en inglés.
-- [ ] Claro y oscuro, siete acentos, 1440 y 390 px revisados **con capturas miradas**.
+- [ ] Claro y oscuro, siete acentos, 1440 y 390 px revisados **con capturas miradas**; en 390 px ninguna tabla ni texto recortado (comprobación e2e de recorte por vista).
 - [ ] Barra lateral, barra superior (búsqueda, idioma, tema, ayuda), cabecera de página y centro de ayuda (guía, método, datos, atajos, glosario, acerca de con ecosistema y soporte).
 - [ ] Movimiento: escala 0,97 al pulsar, muelles sin rebote, movimiento reducido = fundido (probado).
 - [ ] Visualización propia de la herramienta, paleta validada en claro y oscuro.
