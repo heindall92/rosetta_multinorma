@@ -352,7 +352,7 @@ Cada defensa tiene una prueba E2E. Para informar de una vulnerabilidad, consulta
 
 Antes de usar Rosetta con datos de clientes se auditaron cuatro áreas: seguridad, exactitud del catálogo frente a las fuentes oficiales, experiencia de uso y accesibilidad, y arquitectura. El resumen, qué se ha corregido y qué queda pendiente está en [docs/AUDITORIA_PRODUCCION.md](docs/AUDITORIA_PRODUCCION.md). Los informes completos están en [docs/auditoria/](docs/auditoria/).
 
-Los marcos que vienen (Part-IS y marcos propios en la 2.4.0; después RIA, CRA, NIST CSF 2.0 y DORA) están en [ROADMAP.md](ROADMAP.md).
+Los marcos que vienen (Part-IS, marcos propios y un perfil regulatorio que propone las normas aplicables según región y sector en la 2.4.0; después RIA, CRA, NIST CSF 2.0 y DORA) están en [ROADMAP.md](ROADMAP.md).
 
 ## <img src="docs/assets/icons/triangle-alert.svg" width="20" height="20" valign="middle"/> Limitaciones conocidas
 

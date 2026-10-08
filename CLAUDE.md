@@ -12,4 +12,4 @@
 
 ## Siguiente paso
 
-- La siguiente versión y las posteriores están en `ROADMAP.md`. La 2.4.0 es **Part-IS (EASA/AESA) y marcos propios**: Part-IS está prometido en público a quien lo pidió, así que va primero. Léelo antes de proponer trabajo nuevo en Rosetta.
+- La siguiente versión y las posteriores están en `ROADMAP.md`. La 2.4.0 es **Part-IS (EASA/AESA), marcos propios y perfil regulatorio por región y sector**: Part-IS está prometido en público a quien lo pidió, así que va primero. Léelo antes de proponer trabajo nuevo en Rosetta.

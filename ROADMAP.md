@@ -19,7 +19,7 @@ Las dos encajan con el rumbo del ecosistema: marcos públicos sin problemas de d
 
 ---
 
-## 2.4.0 · Part-IS y marcos propios ← siguiente versión
+## 2.4.0 · Part-IS, marcos propios y perfil regulatorio ← siguiente versión
 
 ### 1. Part-IS (EASA / AESA)
 
@@ -80,10 +80,45 @@ El usuario importa su propio marco (una política corporativa, los requisitos de
 - **Interfaz:** el marco propio aparece junto a las normas en Resumen, Requisitos, Brechas y Exportar, con una etiqueta «Marco propio» y la indicación de que su mapeo es del usuario.
 - **Se exporta** con el proyecto y por separado, para compartirlo con otros equipos.
 
+### 3. Perfil regulatorio: qué normas aplican según región y sector
+
+Idea de Yoandy a partir de los perfiles de ponderación de CTEM-Nexus. Hoy el usuario marca a mano qué normas entran en el proyecto. Solo NIS2 tiene un asistente que razona su aplicabilidad (artículos 2 y 3).
+
+La propuesta es generalizar ese asistente. A partir de **dónde opera** la organización y **qué es**, Rosetta propone qué marcos le aplican y por qué, y el mapa circular muestra solo los que el auditor confirma.
+
+**Preguntas del perfil** (pocas y en lenguaje de negocio):
+- **Jurisdicción:** España, otro Estado de la UE, o fuera de la UE (con país, para las leyes LATAM futuras).
+- **Sector:** el actual de NIS2, más aviación.
+- **Rasgos:**
+  - sector público o proveedor TIC del sector público;
+  - entidad financiera;
+  - organización aprobada por EASA o AESA;
+  - desarrolla o despliega sistemas de IA;
+  - fabrica productos con elementos digitales;
+  - tamaño.
+
+**Lo que devuelve el motor** para cada marco del catálogo (función pura en `rosetta-engine.js`, con pruebas):
+
+| Estado | Significado | Ejemplo |
+|---|---|---|
+| **Obligatoria** | La impone una norma, que se cita | ENS para una Administración española (RD 311/2022, art. 2); Part-IS para un operador aprobado |
+| **A confirmar** | Depende de algo que el asistente no puede saber | NIS2 en una administración local, pendiente de la ley de transposición |
+| **Contractual o voluntaria** | No la exige la ley, pero se elige | ISO/IEC 27001 para certificarse o porque un cliente la pide en el pliego |
+| **No aplica** | Con el motivo | ENS para una empresa privada sin contratos con el sector público |
+
+**Cómo se ve:**
+- **Alcance** muestra la propuesta con su base legal. El auditor acepta, quita o añade marcos. **Nunca se oculta nada sin confirmar**: la decisión final es del auditor y queda guardada con su motivo.
+- El **mapa circular** dibuja solo los marcos en alcance. En su leyenda, cada uno lleva una marca del motivo (obligatoria, contractual o voluntaria), sin recargar el anillo.
+- **Exportar e informes** incluyen una tabla «Marcos aplicables y por qué». Es el primer folio que pide un auditor.
+
+**Por qué en la 2.4.0:** Part-IS necesita igualmente su pregunta de aplicabilidad, y cada marco nuevo de la hoja de ruta (RIA, CRA, DORA, leyes LATAM) añade solo su regla al perfil, sin rehacer el asistente.
+
+**Cuidado:** el motor propone, no dictamina. Cada regla cita su artículo y la interfaz recuerda que la aplicabilidad final la confirma el responsable jurídico o el auditor.
+
 ### Aceptación de la 2.4.0
 
 - [ ] Part-IS completo (los 13 requisitos de organización de cada reglamento) en el catálogo, con fuente y fecha de consulta en EUR-Lex.
-- [ ] Pregunta de aplicabilidad de Part-IS en el asistente de Alcance.
+- [ ] Perfil regulatorio (jurisdicción, sector y rasgos) con estado y base legal de cada marco, incluida la aplicabilidad de Part-IS. Pruebas del motor por cada regla; el auditor confirma y su decisión queda guardada; el mapa y los informes muestran el motivo.
 - [ ] Marcos propios: importar (JSON y CSV), mapear, calcular, exportar y borrar, con validación hostil probada.
 - [ ] Ficheros de ejemplo ficticios en `src/data/` o `tests/`: un marco propio y un CSV.
 - [ ] Pruebas del motor nuevas para Part-IS y para el cálculo con marcos propios; e2e de importar y mapear; axe con 0 infracciones en las vistas nuevas.
