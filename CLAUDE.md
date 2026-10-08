@@ -9,3 +9,7 @@
 ## Estilo y diseño
 
 - Antes de tocar la interfaz, el contenido o el repositorio, carga la skill `.claude/skills/estilo-yoandy/` (`SKILL.md` y la referencia que toque).
+
+## Siguiente paso
+
+- La siguiente versión y las posteriores están en `ROADMAP.md`. La 2.4.0 es **Part-IS (EASA/AESA) y marcos propios**: Part-IS está prometido en público a quien lo pidió, así que va primero. Léelo antes de proponer trabajo nuevo en Rosetta.

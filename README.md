@@ -352,6 +352,8 @@ Cada defensa tiene una prueba E2E. Para informar de una vulnerabilidad, consulta
 
 Antes de usar Rosetta con datos de clientes se auditaron cuatro áreas: seguridad, exactitud del catálogo frente a las fuentes oficiales, experiencia de uso y accesibilidad, y arquitectura. El resumen, qué se ha corregido y qué queda pendiente está en [docs/AUDITORIA_PRODUCCION.md](docs/AUDITORIA_PRODUCCION.md). Los informes completos están en [docs/auditoria/](docs/auditoria/).
 
+Los marcos que vienen (Part-IS y marcos propios en la 2.4.0; después RIA, CRA, NIST CSF 2.0 y DORA) están en [ROADMAP.md](ROADMAP.md).
+
 ## <img src="docs/assets/icons/triangle-alert.svg" width="20" height="20" valign="middle"/> Limitaciones conocidas
 
 - **ENS ↔ ISO/IEC 27001 sigue la guía CCN-STIC 825 (abril de 2026)**; el resto de correspondencias (NIS2, ISO/IEC 42001 y las 91 parejas ENS ↔ ISO que la guía no recoge, marcadas en la aplicación) son criterio del autor, contrastado con la plantilla de SoA del curso y con la guía técnica de ENISA. La propia guía advierte que la compatibilidad no es una equivalencia aritmética: revisa el resultado con quien vaya a auditar.
