@@ -34,6 +34,7 @@ Responde a dos peticiones recibidas en LinkedIn tras publicar la 2.3.0: **Part-I
     - como mucho 6 marcos y 500 requisitos por marco.
   - Los marcos propios tienen colores de reserva.
   - El nombre de las hojas de Excel se sanea.
+- **Portada.** El texto y las cifras destacadas incluyen Part-IS (72 % cubierto con ISO/IEC 27001 implantada), el perfil regulatorio y los marcos propios.
 - **Tipografía revisada con la guía apple-design (Emil Kowalski).**
   - Titulares a anchura normal con un espaciado negativo moderado: el titular de la portada se apretaba hasta tocarse las letras.
   - Ninguna etiqueta por debajo de 0,7 rem.

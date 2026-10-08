@@ -27,9 +27,9 @@ function vInicio() {
       <p class="lead">${esc(t('heroLead', TOTAL_REQS, CAT.controls.length))}</p>
       <div class="hero-cta"><button type="button" class="btn primary" data-act="nav" data-view="nuevo">${icon('plus', 17)}${esc(t('stNew'))}</button><button type="button" class="btn" data-act="open-case" data-case="techserv">${icon('orbit', 17)}${esc(t('openCase'))} · TechServ</button></div></div>
     <div class="hero-wheel" aria-hidden="true">${heroWheel()}
-      <div class="tag t1"><b>${pct(SOLAPE.ens.iso27001.pct)}</b>${esc(t('tagOf27'))} ${esc(t('tagEns'))}</div>
-      <div class="tag t2"><b>${pct(SOLAPE.ens.nis2.pct)}</b>${esc(t('tagNis'))}</div>
-      <div class="tag t3"><b>${pct(SOLAPE.iso27001.iso42001.pct)}</b>${esc(t('tagAi'))}</div></div>
+      <div class="tag t1"><b>${pct(SOLAPE0.ens.iso27001.pct)}</b>${esc(t('tagOf27'))} ${esc(t('tagEns'))}</div>
+      <div class="tag t2"><b>${pct(SOLAPE0.ens.nis2.pct)}</b>${esc(t('tagNis'))}</div>
+      <div class="tag t3"><b>${pct(SOLAPE0.iso27001.partis.pct)}</b>${esc(t('tagPartis'))}</div></div>
   </section>
   ${!ws.onboarded && !ws.profileDone ? `<section class="glass pane onboard"><div><h3>${esc(t('whoTitle'))}</h3><p class="small muted" style="margin-top:4px">${esc(t('whoTxt'))}</p></div>
       <div class="form"><label class="fld">${esc(t('name'))}<input type="text" id="ob-nombre" data-ws="profile.nombre" value="${esc(ws.profile.nombre)}" placeholder="${esc(t('namePh'))}"></label>
