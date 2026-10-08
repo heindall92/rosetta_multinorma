@@ -44,7 +44,7 @@ function wheelGeo(RINGS) {
   if (WGEO.size > 12) WGEO.clear();
   const P = (r, deg) => { const a = (deg * Math.PI) / 180; return `${(400 + r * Math.sin(a)).toFixed(2)},${(400 - r * Math.cos(a)).toFixed(2)}`; };
   const sector = (r0, r1, a0, a1) => `M${P(r1, a0)}A${r1},${r1} 0 0 1 ${P(r1, a1)}L${P(r0, a1)}A${r0},${r0} 0 0 0 ${P(r0, a0)}Z`;
-  const TOP = 4; const slots = CAT.controls.length + (CAT.domains.length - 1) + TOP; const step = 360 / slots; const pad = 0.34;
+  const TOP = RINGS.length > 5 ? 6 : 4; const slots = CAT.controls.length + (CAT.domains.length - 1) + TOP; const step = 360 / slots; const pad = 0.34;
   let k = TOP / 2; const spokes = []; const doms = [];
   CAT.domains.forEach((d, di) => {
     const cs = CAT.controls.filter((c) => c.dom === d.id); const start = k * step;
@@ -431,6 +431,13 @@ function riaBox() {
     <p class="small">${esc(t('riaTxt', calc.fw.ria.aplicables, calc.fw.ria.total))}</p>
     <p class="hint">${esc(t('partisSrc', F.fuentes.join(' · '), fmtDate(F.consulta)))}</p></section>`;
 }
+function craBox() {
+  const a = state.alcance.cra; const F = CAT0.frameworks.cra;
+  return `<section class="glass pane stack"><h3>${fwTag('cra')} ${esc(t('craTitle'))}</h3>
+    <div class="form"><label class="fld span2">${esc(t('craClase'))}<select id="set-cra-clase" data-set="alcance.cra.clase">${t('craClases').map(([v, l]) => opt(v, l, a.clase)).join('')}</select><span class="hint">${esc(t('craRuta.' + a.clase))}</span></label></div>
+    <p class="small">${esc(t('craTxt'))}</p>
+    <p class="hint">${esc(t('partisSrc', F.fuentes.join(' · '), fmtDate(F.consulta)))}</p></section>`;
+}
 function partisBox() {
   const a = state.alcance.partis; const F = CAT0.frameworks.partis;
   return `<section class="glass pane stack"><h3>${fwTag('partis')} ${esc(t('partisTitle'))}</h3>
@@ -478,6 +485,7 @@ function vAlcance() {
   ${propuestaTabla()}
   ${a.partis.on ? partisBox() : ''}
   ${a.ria.on ? riaBox() : ''}
+  ${a.cra.on ? craBox() : ''}
   ${a.ens.on ? `<section class="glass pane stack"><h3>${fwTag('ens')} ${esc(t('ensCat'))}</h3>${ensLevels(a.ens, 'set')}<p class="hint">${esc(t('ensCount', calc.fw.ens.aplicables + calc.fw.ens.excluidos, calc.fw.ens.noExigidos))}</p>
     <div class="row"><button type="button" class="btn sm" data-act="import-ens-into">${icon('upload', 15)}${esc(t('updateFromEns'))}</button><span class="hint">${esc(t('updateFromEnsTxt'))}</span></div></section>` : ''}
   <section class="glass pane stack"><h3>${fwTag('nis2')} ${esc(t('nis2Title'))}</h3>${nis2Form(state.nis2q, 'set')}${nis2Box(state.nis2q)}</section>

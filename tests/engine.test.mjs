@@ -39,7 +39,7 @@ describe('API pública', () => {
     for (const k of ['indexar', 'calcular', 'coberturaReq', 'solapamiento', 'inferencia', 'equivalencias', 'prioridades', 'coherencia', 'planAccion', 'desdeSoaEns', 'nis2Aplicabilidad', 'orden', 'instantanea', 'parejasClase',
       'perfilRegulatorio', 'perfilNormalizado', 'sugerirControles', 'fundirPropios', 'listaNormas', 'etiqueta'])
       assert.equal(typeof E[k], 'function', k);
-    assert.deepEqual(E.FW, ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria']);
+    assert.deepEqual(E.FW, ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra']);
   });
 });
 
@@ -226,7 +226,7 @@ describe('casos de ejemplo con el catálogo real', () => {
   }
   test('instantánea reproducible del caso de clase (TechServ)', () => {
     const r = E.calcular(IX, CASOS.find((c) => c.id === 'techserv').state);
-    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null, ria: null }, grado: 0.893, brechas: 4 });
+    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null, ria: null, cra: null }, grado: 0.893, brechas: 4 });
   });
   test('contraste ENS ↔ ISO 27001 con las parejas del material de clase', () => {
     const p = E.parejasClase(IX); const ref = require('../src/data/parejas.json');
@@ -364,9 +364,9 @@ describe('perfil regulatorio', () => {
     assert.equal(pr({ ia: true }).iso42001.estado, 'voluntaria'); assert.equal(pr({}).iso42001.estado, 'no-aplica');
     assert.equal(pr({}, {}, 'es', ['mp-acme'])['mp-acme'].estado, 'voluntaria');
   });
-  test('normas que aún no están en Rosetta: DORA y CRA, solo dentro de la UE', () => {
+  test('normas que aún no están en Rosetta: DORA, solo dentro de la UE', () => {
     const f = E.perfilRegulatorio({ financiera: true, ia: true, fabricante: true }).futuras.map((x) => x.id);
-    assert.deepEqual(f, ['dora', 'cra']);
+    assert.deepEqual(f, ['dora']);
     assert.deepEqual(E.perfilRegulatorio({ jurisdiccion: 'fuera', financiera: true, ia: true }).futuras, []);
   });
   test('entradas hostiles o vacías se normalizan al perfil por defecto', () => {
@@ -474,4 +474,45 @@ describe('RIA (Reglamento (UE) 2024/1689, modificado por el 2026/1744)', () => {
 test('el motivo del RIA en el perfil es el vigente, no el de norma futura', () => {
   for (const l of ['es', 'en']) assert.doesNotMatch(E.perfilRegulatorio({ ia: true }, {}, l).marcos.ria.motivo, /2\.5\.0/);
   assert.match(E.perfilRegulatorio({ ia: true }).marcos.ria.motivo, /02-12-2027/);
+});
+
+describe('CRA (Reglamento (UE) 2024/2847)', () => {
+  const st = (controles = {}, exclusiones = {}) => ({ alcance: { iso27001: { on: true }, cra: { on: true, clase: 'importante1' } }, controles, exclusiones });
+  test('29 requisitos: 14 propiedades del producto, 8 de gestión de vulnerabilidades y 7 obligaciones del fabricante', () => {
+    const R = CAT.frameworks.cra.reqs; assert.equal(R.length, 29); assert.equal(CAT.frameworks.cra.tope, 'parcial');
+    assert.equal(R.filter((r) => r.id.startsWith('I.')).length, 14); assert.equal(R.filter((r) => r.id.startsWith('II.')).length, 8);
+    for (const r of R) assert.ok(IX.reqUcs.cra[r.id].some((l) => l.w === 1), `${r.id} necesita un control que lo cubra por completo`);
+  });
+  test('fechas: notificación (art. 14) desde el 11-09-2026; el resto desde el 11-12-2027', () => {
+    for (const r of CAT.frameworks.cra.reqs) assert.equal(r.desde, r.id === '14' ? '2026-09-11' : '2027-12-11', r.id);
+  });
+  test('solo los puntos 2 b–m de la parte I admiten exclusión justificada', () => {
+    assert.equal(E.excluible('cra', 'I.2.b'), true); assert.equal(E.excluible('cra', 'I.2.m'), true);
+    for (const id of ['I.1', 'I.2.a', 'II.1', '14', '32']) assert.equal(E.excluible('cra', id), false, id);
+    const c = E.calcular(IX, st({}, { cra: { 'I.2.g': 'No trata datos personales', '14': 'no' } }));
+    const e = Object.fromEntries(c.req.cra.map((r) => [r.id, r.estado]));
+    assert.equal(e['I.2.g'], 'excluido'); assert.notEqual(e['14'], 'excluido');
+  });
+  test('ninguna equivalencia con el CRA es total; GOB-15 sirve al RIA y al CRA', () => {
+    for (const r of CAT.frameworks.cra.reqs) for (const g of IX.fw) for (const x of E.equivalencias(IX, 'cra', r.id).otras[g] || []) assert.notEqual(x.fuerza, 'total', `cra ${r.id} → ${g}`);
+    const g15 = CAT.controls.find((c) => c.id === 'GOB-15').maps;
+    assert.ok(g15.ria.length && g15.cra.some((m) => m.id === '32'));
+  });
+  test('alertas CO-17 (sin notificación a ENISA) y CO-18 (sin SBOM)', () => {
+    const a = st(); const h = E.coherencia(IX, a, E.calcular(IX, a)).map((x) => x.id);
+    assert.ok(h.includes('CO-17') && h.includes('CO-18'));
+    const b = st({ 'INC-11': { estado: 'implantado' }, 'DES-09': { estado: 'implantado' } }); const h2 = E.coherencia(IX, b, E.calcular(IX, b)).map((x) => x.id);
+    assert.ok(!h2.includes('CO-17') && !h2.includes('CO-18'));
+  });
+  test('perfil: obligatorio para el fabricante en la UE, a confirmar fuera, no aplica si no fabrica', () => {
+    assert.equal(E.perfilRegulatorio({ fabricante: true }).marcos.cra.estado, 'obligatoria');
+    assert.match(E.perfilRegulatorio({ fabricante: true }).marcos.cra.motivo, /11-09-2026/);
+    assert.equal(E.perfilRegulatorio({ fabricante: true, jurisdiccion: 'fuera' }).marcos.cra.estado, 'confirmar');
+    assert.equal(E.perfilRegulatorio({}).marcos.cra.estado, 'no-aplica');
+    assert.deepEqual(E.craAlcance({ clase: '<x>' }), { clase: 'predeterminada' });
+  });
+  test('el caso del fabricante trae el CRA de clase I', () => {
+    const c = CASOS.find((x) => x.id === 'sensorica');
+    assert.equal(c.state.alcance.cra.on, true); assert.equal(c.state.alcance.cra.clase, 'importante1'); assert.equal(c.state.perfil.fabricante, true);
+  });
 });

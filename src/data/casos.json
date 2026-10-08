@@ -70,6 +70,10 @@
           "alto": true,
           "transparencia": true,
           "gpai": "no"
+        },
+        "cra": {
+          "on": false,
+          "clase": "predeterminada"
         }
       },
       "nis2q": {
@@ -1536,6 +1540,10 @@
           "alto": true,
           "transparencia": false,
           "gpai": "no"
+        },
+        "cra": {
+          "on": false,
+          "clase": "predeterminada"
         }
       },
       "nis2q": {
@@ -3026,6 +3034,10 @@
           "alto": true,
           "transparencia": false,
           "gpai": "no"
+        },
+        "cra": {
+          "on": false,
+          "clase": "predeterminada"
         }
       },
       "nis2q": {
@@ -4179,6 +4191,10 @@
           "alto": true,
           "transparencia": true,
           "gpai": "no"
+        },
+        "cra": {
+          "on": false,
+          "clase": "predeterminada"
         }
       },
       "nis2q": {
@@ -5272,6 +5288,10 @@
           "alto": false,
           "transparencia": true,
           "gpai": "no"
+        },
+        "cra": {
+          "on": false,
+          "clase": "predeterminada"
         }
       },
       "nis2q": {
@@ -6762,6 +6782,10 @@
           "alto": true,
           "transparencia": true,
           "gpai": "no"
+        },
+        "cra": {
+          "on": false,
+          "clase": "predeterminada"
         }
       },
       "nis2q": {
@@ -7843,6 +7867,1291 @@
           },
           "grado": 0.865,
           "brechas": 2,
+          "ejemplo": true
+        }
+      ]
+    }
+  },
+  {
+    "id": "sensorica",
+    "icono": "cpu",
+    "titulo": "Sensórica Levante",
+    "sector": "Fabricante de cámaras IP e IoT",
+    "sector_en": "IP camera and IoT manufacturer",
+    "resumen": "Fabricante de 140 personas de cámaras IP y pasarelas IoT con su firmware y su app. Tiene un SGSI certificado en ISO/IEC 27001 para la parte corporativa; el CRA le exige ahora seguridad del producto y, desde el 11-09-2026, notificar a ENISA las vulnerabilidades explotadas. NIS2 la hace entidad importante.",
+    "resumen_en": "140-person manufacturer of IP cameras and IoT gateways with their firmware and app. It has an ISO/IEC 27001 certified ISMS for the corporate side; the CRA now requires product security and, since 11-09-2026, reporting actively exploited vulnerabilities to ENISA. NIS2 makes it an important entity.",
+    "retos": [
+      "Notificar a ENISA en 24 h desde septiembre de 2026",
+      "SBOM solo de una parte de los productos",
+      "Producto de clase I: preparar la evaluación de la conformidad"
+    ],
+    "retos_en": [
+      "Reporting to ENISA within 24 h since September 2026",
+      "SBOM for only part of the products",
+      "Class I product: prepare the conformity assessment"
+    ],
+    "meta": {
+      "normas": [
+        "iso27001",
+        "nis2",
+        "cra"
+      ],
+      "grado": 0.905,
+      "controles": 104,
+      "brechas": 3,
+      "altas": 4,
+      "nis2": "importante"
+    },
+    "state": {
+      "version": 1,
+      "caseId": "sensorica",
+      "proyecto": {
+        "nombre": "Sensórica Levante · CRA + NIS2 + 27001",
+        "organizacion": "Sensórica Levante, S.L. (ficticia)",
+        "sector": "Fabricante de productos digitales",
+        "descripcion": "Cámaras IP y pasarelas IoT para industria y hogar, con su firmware y la app de gestión"
+      },
+      "alcance": {
+        "ens": {
+          "on": false,
+          "categoria": "MEDIA",
+          "niveles": {}
+        },
+        "iso27001": {
+          "on": true
+        },
+        "nis2": {
+          "on": true,
+          "tipo": "importante"
+        },
+        "iso42001": {
+          "on": false
+        },
+        "partis": {
+          "on": false,
+          "regimen": "I"
+        },
+        "ria": {
+          "on": false,
+          "rol": "ambos",
+          "alto": true,
+          "transparencia": true,
+          "gpai": "no"
+        },
+        "cra": {
+          "on": true,
+          "clase": "importante1"
+        }
+      },
+      "nis2q": {
+        "sector": "anexo2",
+        "especial": "ninguno",
+        "tamano": "mediana",
+        "infraDigital": false
+      },
+      "perfil": {
+        "jurisdiccion": "es",
+        "publico": false,
+        "proveedorPublico": false,
+        "financiera": false,
+        "aviacion": "no",
+        "ia": false,
+        "fabricante": true
+      },
+      "controles": {
+        "GOB-01": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · GOB-01",
+          "revision": "2026-03-05",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-02": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · GOB-02",
+          "revision": "2026-04-06",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-03": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · GOB-03",
+          "revision": "2026-05-07",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-04": {
+          "estado": "parcial",
+          "responsable": "CISO",
+          "evidencias": "",
+          "revision": "2026-06-08",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-05": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · GOB-05",
+          "revision": "2026-07-09",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-06": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · GOB-06",
+          "revision": "2026-08-10",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-07": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · GOB-07",
+          "revision": "2026-03-11",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-08": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · GOB-08",
+          "revision": "2026-04-12",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-09": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · GOB-09",
+          "revision": "2026-05-13",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-10": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · GOB-10",
+          "revision": "2026-06-14",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-11": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · GOB-11",
+          "revision": "2026-07-15",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-12": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-13": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · GOB-13",
+          "revision": "2026-08-16",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-14": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "GOB-15": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-01": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · RIE-01",
+          "revision": "2026-03-17",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-02": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · RIE-02",
+          "revision": "2026-04-18",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-03": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · RIE-03",
+          "revision": "2026-05-19",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-04": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · RIE-04",
+          "revision": "2026-06-20",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-05": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · RIE-05",
+          "revision": "2026-07-21",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-06": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · RIE-06",
+          "revision": "2026-08-22",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-07": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · RIE-07",
+          "revision": "2026-03-23",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-08": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · RIE-08",
+          "revision": "2026-04-04",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-09": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · RIE-09",
+          "revision": "2026-05-05",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-10": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · RIE-10",
+          "revision": "2026-06-06",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-11": {
+          "estado": "implantado",
+          "responsable": "CISO",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · RIE-11",
+          "revision": "2026-07-07",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-12": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "RIE-13": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "PER-01": {
+          "estado": "implantado",
+          "responsable": "Personas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · PER-01",
+          "revision": "2026-08-08",
+          "notas": "",
+          "origen": ""
+        },
+        "PER-02": {
+          "estado": "implantado",
+          "responsable": "Personas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · PER-02",
+          "revision": "2026-03-09",
+          "notas": "",
+          "origen": ""
+        },
+        "PER-03": {
+          "estado": "implantado",
+          "responsable": "Personas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · PER-03",
+          "revision": "2026-04-10",
+          "notas": "",
+          "origen": ""
+        },
+        "PER-04": {
+          "estado": "implantado",
+          "responsable": "Personas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · PER-04",
+          "revision": "2026-05-11",
+          "notas": "",
+          "origen": ""
+        },
+        "PER-05": {
+          "estado": "implantado",
+          "responsable": "Personas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · PER-05",
+          "revision": "2026-06-12",
+          "notas": "",
+          "origen": ""
+        },
+        "PER-06": {
+          "estado": "implantado",
+          "responsable": "Personas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · PER-06",
+          "revision": "2026-07-13",
+          "notas": "",
+          "origen": ""
+        },
+        "PER-07": {
+          "estado": "implantado",
+          "responsable": "Personas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · PER-07",
+          "revision": "2026-08-14",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-01": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · ACT-01",
+          "revision": "2026-03-15",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-02": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · ACT-02",
+          "revision": "2026-04-16",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-03": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · ACT-03",
+          "revision": "2026-05-17",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-04": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · ACT-04",
+          "revision": "2026-06-18",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-05": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · ACT-05",
+          "revision": "2026-07-19",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-06": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · ACT-06",
+          "revision": "2026-08-20",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-07": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · ACT-07",
+          "revision": "2026-03-21",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-08": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · ACT-08",
+          "revision": "2026-04-22",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-09": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "ACT-10": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-01": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · ACC-01",
+          "revision": "2026-05-23",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-02": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · ACC-02",
+          "revision": "2026-06-04",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-03": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · ACC-03",
+          "revision": "2026-07-05",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-04": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · ACC-04",
+          "revision": "2026-08-06",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-05": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · ACC-05",
+          "revision": "2026-03-07",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-06": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · ACC-06",
+          "revision": "2026-04-08",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-07": {
+          "estado": "parcial",
+          "responsable": "Sistemas",
+          "evidencias": "",
+          "revision": "2026-05-09",
+          "notas": "",
+          "origen": ""
+        },
+        "ACC-08": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · ACC-08",
+          "revision": "2026-06-10",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-01": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · OPE-01",
+          "revision": "2026-07-11",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-02": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · OPE-02",
+          "revision": "2026-08-12",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-03": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · OPE-03",
+          "revision": "2026-03-13",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-04": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · OPE-04",
+          "revision": "2026-04-14",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-05": {
+          "estado": "parcial",
+          "responsable": "Sistemas",
+          "evidencias": "",
+          "revision": "2026-05-15",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-06": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · OPE-06",
+          "revision": "2026-06-16",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-07": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · OPE-07",
+          "revision": "2026-07-17",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-08": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · OPE-08",
+          "revision": "2026-08-18",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-09": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · OPE-09",
+          "revision": "2026-03-19",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-10": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · OPE-10",
+          "revision": "2026-04-20",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-11": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · OPE-11",
+          "revision": "2026-05-21",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-12": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · OPE-12",
+          "revision": "2026-06-22",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-13": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · OPE-13",
+          "revision": "2026-07-23",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-14": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · OPE-14",
+          "revision": "2026-08-04",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-15": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · OPE-15",
+          "revision": "2026-03-05",
+          "notas": "",
+          "origen": ""
+        },
+        "OPE-16": {
+          "estado": "implantado",
+          "responsable": "Sistemas",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · OPE-16",
+          "revision": "2026-04-06",
+          "notas": "",
+          "origen": ""
+        },
+        "RED-01": {
+          "estado": "implantado",
+          "responsable": "Redes",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · RED-01",
+          "revision": "2026-05-07",
+          "notas": "",
+          "origen": ""
+        },
+        "RED-02": {
+          "estado": "implantado",
+          "responsable": "Redes",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · RED-02",
+          "revision": "2026-06-08",
+          "notas": "",
+          "origen": ""
+        },
+        "RED-03": {
+          "estado": "implantado",
+          "responsable": "Redes",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · RED-03",
+          "revision": "2026-07-09",
+          "notas": "",
+          "origen": ""
+        },
+        "RED-04": {
+          "estado": "implantado",
+          "responsable": "Redes",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · RED-04",
+          "revision": "2026-08-10",
+          "notas": "",
+          "origen": ""
+        },
+        "RED-05": {
+          "estado": "parcial",
+          "responsable": "Redes",
+          "evidencias": "",
+          "revision": "2026-03-11",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-01": {
+          "estado": "implantado",
+          "responsable": "Ingeniería de producto",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · DES-01",
+          "revision": "2026-04-12",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-02": {
+          "estado": "implantado",
+          "responsable": "Ingeniería de producto",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · DES-02",
+          "revision": "2026-05-13",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-03": {
+          "estado": "parcial",
+          "responsable": "Ingeniería de producto",
+          "evidencias": "",
+          "revision": "2026-06-14",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-04": {
+          "estado": "implantado",
+          "responsable": "Ingeniería de producto",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · DES-04",
+          "revision": "2026-07-15",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-05": {
+          "estado": "implantado",
+          "responsable": "Ingeniería de producto",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · DES-05",
+          "revision": "2026-08-16",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-06": {
+          "estado": "implantado",
+          "responsable": "Ingeniería de producto",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · DES-06",
+          "revision": "2026-03-17",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-07": {
+          "estado": "implantado",
+          "responsable": "Ingeniería de producto",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · DES-07",
+          "revision": "2026-04-18",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-08": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-09": {
+          "estado": "parcial",
+          "responsable": "Ingeniería de producto",
+          "evidencias": "",
+          "revision": "2026-05-19",
+          "notas": "SBOM solo del firmware de las cámaras; falta la app móvil y las pasarelas.",
+          "origen": ""
+        },
+        "DES-10": {
+          "estado": "parcial",
+          "responsable": "Ingeniería de producto",
+          "evidencias": "",
+          "revision": "2026-06-20",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-11": {
+          "estado": "implantado",
+          "responsable": "Ingeniería de producto",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · DES-11",
+          "revision": "2026-07-21",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-12": {
+          "estado": "parcial",
+          "responsable": "Ingeniería de producto",
+          "evidencias": "",
+          "revision": "2026-08-22",
+          "notas": "",
+          "origen": ""
+        },
+        "DES-13": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "PRO-01": {
+          "estado": "implantado",
+          "responsable": "Compras",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · PRO-01",
+          "revision": "2026-03-23",
+          "notas": "",
+          "origen": ""
+        },
+        "PRO-02": {
+          "estado": "implantado",
+          "responsable": "Compras",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · PRO-02",
+          "revision": "2026-04-04",
+          "notas": "",
+          "origen": ""
+        },
+        "PRO-03": {
+          "estado": "parcial",
+          "responsable": "Compras",
+          "evidencias": "",
+          "revision": "2026-05-05",
+          "notas": "",
+          "origen": ""
+        },
+        "PRO-04": {
+          "estado": "implantado",
+          "responsable": "Compras",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · PRO-04",
+          "revision": "2026-06-06",
+          "notas": "",
+          "origen": ""
+        },
+        "PRO-05": {
+          "estado": "implantado",
+          "responsable": "Compras",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · PRO-05",
+          "revision": "2026-07-07",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-01": {
+          "estado": "implantado",
+          "responsable": "PSIRT",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · INC-01",
+          "revision": "2026-08-08",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-02": {
+          "estado": "implantado",
+          "responsable": "PSIRT",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · INC-02",
+          "revision": "2026-03-09",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-03": {
+          "estado": "implantado",
+          "responsable": "PSIRT",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · INC-03",
+          "revision": "2026-04-10",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-04": {
+          "estado": "implantado",
+          "responsable": "PSIRT",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · INC-04",
+          "revision": "2026-05-11",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-05": {
+          "estado": "implantado",
+          "responsable": "PSIRT",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · INC-05",
+          "revision": "2026-06-12",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-06": {
+          "estado": "implantado",
+          "responsable": "PSIRT",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · INC-06",
+          "revision": "2026-07-13",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-07": {
+          "estado": "parcial",
+          "responsable": "PSIRT",
+          "evidencias": "",
+          "revision": "2026-08-14",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-08": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-09": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-10": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "INC-11": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "El PSIRT gestiona avisos de seguridad, pero aún no está dado de alta en la plataforma única de ENISA: obligatorio desde el 11-09-2026.",
+          "origen": ""
+        },
+        "CON-01": {
+          "estado": "implantado",
+          "responsable": "Continuidad",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · CON-01",
+          "revision": "2026-03-15",
+          "notas": "",
+          "origen": ""
+        },
+        "CON-02": {
+          "estado": "implantado",
+          "responsable": "Continuidad",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · CON-02",
+          "revision": "2026-04-16",
+          "notas": "",
+          "origen": ""
+        },
+        "CON-03": {
+          "estado": "parcial",
+          "responsable": "Continuidad",
+          "evidencias": "",
+          "revision": "2026-05-17",
+          "notas": "",
+          "origen": ""
+        },
+        "CON-04": {
+          "estado": "implantado",
+          "responsable": "Continuidad",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · CON-04",
+          "revision": "2026-06-18",
+          "notas": "",
+          "origen": ""
+        },
+        "CON-05": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "FIS-01": {
+          "estado": "implantado",
+          "responsable": "Servicios generales",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · FIS-01",
+          "revision": "2026-07-19",
+          "notas": "",
+          "origen": ""
+        },
+        "FIS-02": {
+          "estado": "implantado",
+          "responsable": "Servicios generales",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · FIS-02",
+          "revision": "2026-08-20",
+          "notas": "",
+          "origen": ""
+        },
+        "FIS-03": {
+          "estado": "implantado",
+          "responsable": "Servicios generales",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · FIS-03",
+          "revision": "2026-03-21",
+          "notas": "",
+          "origen": ""
+        },
+        "FIS-04": {
+          "estado": "implantado",
+          "responsable": "Servicios generales",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · FIS-04",
+          "revision": "2026-04-22",
+          "notas": "",
+          "origen": ""
+        },
+        "FIS-05": {
+          "estado": "implantado",
+          "responsable": "Servicios generales",
+          "evidencias": "Evidencia del SGSI o del PSIRT (ficticia) · FIS-05",
+          "revision": "2026-05-23",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-01": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-02": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-03": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-04": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-05": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-06": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-07": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-08": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-09": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-10": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-11": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-12": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-13": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-14": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-15": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-16": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-17": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-18": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-19": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-20": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        },
+        "IA-21": {
+          "estado": "pendiente",
+          "responsable": "",
+          "evidencias": "",
+          "revision": "",
+          "notas": "",
+          "origen": ""
+        }
+      },
+      "exclusiones": {
+        "cra": {
+          "I.2.m": "Las pasarelas IoT no almacenan datos de usuario ni ajustes personales: el restablecimiento de fábrica ya devuelve el equipo a su estado original (evaluación de riesgos PR-2026-04, ficticia)."
+        }
+      },
+      "acciones": {
+        "INC-11": {
+          "estado": "En curso",
+          "responsable": "PSIRT",
+          "fecha": "2026-10-31",
+          "nota": "Alta en la plataforma única y procedimiento 24 h / 72 h"
+        },
+        "DES-09": {
+          "estado": "En curso",
+          "responsable": "Ingeniería de producto",
+          "fecha": "2026-12-15",
+          "nota": "SBOM CycloneDX en la cadena de construcción"
+        },
+        "DES-13": {
+          "estado": "Pendiente",
+          "responsable": "CISO",
+          "fecha": "2027-03-31",
+          "nota": ""
+        },
+        "GOB-15": {
+          "estado": "Pendiente",
+          "responsable": "Calidad",
+          "fecha": "2027-09-30",
+          "nota": "Clase I: control interno si se aplican normas armonizadas"
+        }
+      },
+      "historial": [
+        {
+          "fecha": "2026-04-01",
+          "cov": {
+            "ens": null,
+            "iso27001": 0.584,
+            "nis2": 0.529,
+            "iso42001": null,
+            "partis": null,
+            "ria": null,
+            "cra": 0.397
+          },
+          "grado": 0.543,
+          "brechas": 20,
+          "ejemplo": true
+        },
+        {
+          "fecha": "2026-05-01",
+          "cov": {
+            "ens": null,
+            "iso27001": 0.649,
+            "nis2": 0.588,
+            "iso42001": null,
+            "partis": null,
+            "ria": null,
+            "cra": 0.441
+          },
+          "grado": 0.603,
+          "brechas": 17,
+          "ejemplo": true
+        },
+        {
+          "fecha": "2026-06-01",
+          "cov": {
+            "ens": null,
+            "iso27001": 0.714,
+            "nis2": 0.647,
+            "iso42001": null,
+            "partis": null,
+            "ria": null,
+            "cra": 0.485
+          },
+          "grado": 0.664,
+          "brechas": 13,
+          "ejemplo": true
+        },
+        {
+          "fecha": "2026-07-01",
+          "cov": {
+            "ens": null,
+            "iso27001": 0.779,
+            "nis2": 0.706,
+            "iso42001": null,
+            "partis": null,
+            "ria": null,
+            "cra": 0.529
+          },
+          "grado": 0.724,
+          "brechas": 10,
+          "ejemplo": true
+        },
+        {
+          "fecha": "2026-08-01",
+          "cov": {
+            "ens": null,
+            "iso27001": 0.844,
+            "nis2": 0.764,
+            "iso42001": null,
+            "partis": null,
+            "ria": null,
+            "cra": 0.573
+          },
+          "grado": 0.784,
+          "brechas": 6,
+          "ejemplo": true
+        },
+        {
+          "fecha": "2026-09-01",
+          "cov": {
+            "ens": null,
+            "iso27001": 0.909,
+            "nis2": 0.823,
+            "iso42001": null,
+            "partis": null,
+            "ria": null,
+            "cra": 0.617
+          },
+          "grado": 0.845,
+          "brechas": 3,
           "ejemplo": true
         }
       ]

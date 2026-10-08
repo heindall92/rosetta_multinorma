@@ -1,5 +1,5 @@
 {
-  "version": "2.5.0",
+  "version": "2.6.0",
   "domains": [
     {
       "id": "GOB",
@@ -3621,6 +3621,343 @@
           "nota_en": "Model evaluation with adversarial testing, mitigation of systemic risks, serious incident reporting and cybersecurity."
         }
       ]
+    },
+    "cra": {
+      "id": "cra",
+      "tope": "parcial",
+      "consulta": "2026-10-09",
+      "fuentes": [
+        "Reglamento (UE) 2024/2847 de ciberresiliencia (DO L de 20.11.2024): notificación (art. 14) desde el 11-09-2026 y el resto desde el 11-12-2027"
+      ],
+      "reqs": [
+        {
+          "id": "I.1",
+          "code": "Anexo I.I.1",
+          "t": "Diseño, desarrollo y producción con un nivel de ciberseguridad adecuado a los riesgos",
+          "t_en": "Designed, developed and produced with an appropriate level of cybersecurity based on the risks",
+          "g": "Anexo I, parte I · propiedades del producto",
+          "g_en": "Annex I, Part I · product properties",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.I.1",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.I.1",
+          "nota": "Parte de la evaluación de riesgos del producto. Los puntos de la parte I.2 se aplican «cuando proceda» según esa evaluación: pueden justificarse como no aplicables.",
+          "nota_en": "It starts from the product risk assessment. The points of Part I.2 apply \"where applicable\" according to that assessment: they may be justified as not applicable."
+        },
+        {
+          "id": "I.2.a",
+          "code": "Anexo I.I.2 a",
+          "t": "Sin vulnerabilidades explotables conocidas al comercializarse",
+          "t_en": "No known exploitable vulnerabilities when placed on the market",
+          "g": "Anexo I, parte I · propiedades del producto",
+          "g_en": "Annex I, Part I · product properties",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.I.2 a",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.I.2 a"
+        },
+        {
+          "id": "I.2.b",
+          "code": "Anexo I.I.2 b",
+          "t": "Configuración segura por defecto, con opción de restablecerla",
+          "t_en": "Secure by default configuration, with the possibility to reset it",
+          "g": "Anexo I, parte I · propiedades del producto",
+          "g_en": "Annex I, Part I · product properties",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.I.2 b",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.I.2 b"
+        },
+        {
+          "id": "I.2.c",
+          "code": "Anexo I.I.2 c",
+          "t": "Actualizaciones de seguridad, automáticas por defecto y con opción de desactivarlas",
+          "t_en": "Security updates, automatic by default with an opt-out",
+          "g": "Anexo I, parte I · propiedades del producto",
+          "g_en": "Annex I, Part I · product properties",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.I.2 c",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.I.2 c"
+        },
+        {
+          "id": "I.2.d",
+          "code": "Anexo I.I.2 d",
+          "t": "Protección frente al acceso no autorizado (autenticación, identidades y accesos)",
+          "t_en": "Protection from unauthorised access (authentication, identity and access management)",
+          "g": "Anexo I, parte I · propiedades del producto",
+          "g_en": "Annex I, Part I · product properties",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.I.2 d",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.I.2 d"
+        },
+        {
+          "id": "I.2.e",
+          "code": "Anexo I.I.2 e",
+          "t": "Confidencialidad de los datos almacenados, transmitidos o tratados (cifrado)",
+          "t_en": "Confidentiality of stored, transmitted or processed data (encryption)",
+          "g": "Anexo I, parte I · propiedades del producto",
+          "g_en": "Annex I, Part I · product properties",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.I.2 e",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.I.2 e"
+        },
+        {
+          "id": "I.2.f",
+          "code": "Anexo I.I.2 f",
+          "t": "Integridad de los datos, los programas y la configuración",
+          "t_en": "Integrity of data, programs and configuration",
+          "g": "Anexo I, parte I · propiedades del producto",
+          "g_en": "Annex I, Part I · product properties",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.I.2 f",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.I.2 f"
+        },
+        {
+          "id": "I.2.g",
+          "code": "Anexo I.I.2 g",
+          "t": "Minimización de los datos tratados",
+          "t_en": "Minimisation of the data processed",
+          "g": "Anexo I, parte I · propiedades del producto",
+          "g_en": "Annex I, Part I · product properties",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.I.2 g",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.I.2 g"
+        },
+        {
+          "id": "I.2.h",
+          "code": "Anexo I.I.2 h",
+          "t": "Disponibilidad de las funciones esenciales y resiliencia frente a la denegación de servicio",
+          "t_en": "Availability of essential functions and resilience against denial of service",
+          "g": "Anexo I, parte I · propiedades del producto",
+          "g_en": "Annex I, Part I · product properties",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.I.2 h",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.I.2 h"
+        },
+        {
+          "id": "I.2.i",
+          "code": "Anexo I.I.2 i",
+          "t": "Impacto mínimo en la disponibilidad de otros dispositivos o redes",
+          "t_en": "Minimal impact on the availability of other devices or networks",
+          "g": "Anexo I, parte I · propiedades del producto",
+          "g_en": "Annex I, Part I · product properties",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.I.2 i",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.I.2 i"
+        },
+        {
+          "id": "I.2.j",
+          "code": "Anexo I.I.2 j",
+          "t": "Superficie de ataque limitada, incluidas las interfaces externas",
+          "t_en": "Limited attack surfaces, including external interfaces",
+          "g": "Anexo I, parte I · propiedades del producto",
+          "g_en": "Annex I, Part I · product properties",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.I.2 j",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.I.2 j"
+        },
+        {
+          "id": "I.2.k",
+          "code": "Anexo I.I.2 k",
+          "t": "Reducción del impacto de los incidentes con mecanismos de mitigación de la explotación",
+          "t_en": "Reduced impact of incidents through exploitation mitigation mechanisms",
+          "g": "Anexo I, parte I · propiedades del producto",
+          "g_en": "Annex I, Part I · product properties",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.I.2 k",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.I.2 k"
+        },
+        {
+          "id": "I.2.l",
+          "code": "Anexo I.I.2 l",
+          "t": "Registro y supervisión de la actividad interna relevante para la seguridad",
+          "t_en": "Recording and monitoring of relevant internal activity",
+          "g": "Anexo I, parte I · propiedades del producto",
+          "g_en": "Annex I, Part I · product properties",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.I.2 l",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.I.2 l"
+        },
+        {
+          "id": "I.2.m",
+          "code": "Anexo I.I.2 m",
+          "t": "Eliminación segura y permanente de datos y ajustes",
+          "t_en": "Secure and permanent removal of data and settings",
+          "g": "Anexo I, parte I · propiedades del producto",
+          "g_en": "Annex I, Part I · product properties",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.I.2 m",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.I.2 m"
+        },
+        {
+          "id": "II.1",
+          "code": "Anexo I.II.1",
+          "t": "Identificar y documentar vulnerabilidades y componentes, con una lista de materiales de software (SBOM)",
+          "t_en": "Identify and document vulnerabilities and components, with a software bill of materials (SBOM)",
+          "g": "Anexo I, parte II · gestión de vulnerabilidades",
+          "g_en": "Annex I, Part II · vulnerability handling",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.II.1",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.II.1",
+          "nota": "La SBOM recoge al menos las dependencias de primer nivel, en un formato legible por máquina.",
+          "nota_en": "The SBOM covers at least the top-level dependencies, in a machine-readable format."
+        },
+        {
+          "id": "II.2",
+          "code": "Anexo I.II.2",
+          "t": "Corregir sin demora, con actualizaciones de seguridad separadas de las funcionales cuando sea posible",
+          "t_en": "Remediate without delay, with security updates separate from feature updates where feasible",
+          "g": "Anexo I, parte II · gestión de vulnerabilidades",
+          "g_en": "Annex I, Part II · vulnerability handling",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.II.2",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.II.2"
+        },
+        {
+          "id": "II.3",
+          "code": "Anexo I.II.3",
+          "t": "Pruebas y revisiones de seguridad periódicas",
+          "t_en": "Regular security tests and reviews",
+          "g": "Anexo I, parte II · gestión de vulnerabilidades",
+          "g_en": "Annex I, Part II · vulnerability handling",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.II.3",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.II.3"
+        },
+        {
+          "id": "II.4",
+          "code": "Anexo I.II.4",
+          "t": "Divulgación pública de las vulnerabilidades corregidas",
+          "t_en": "Public disclosure of fixed vulnerabilities",
+          "g": "Anexo I, parte II · gestión de vulnerabilidades",
+          "g_en": "Annex I, Part II · vulnerability handling",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.II.4",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.II.4"
+        },
+        {
+          "id": "II.5",
+          "code": "Anexo I.II.5",
+          "t": "Política de divulgación coordinada de vulnerabilidades",
+          "t_en": "Coordinated vulnerability disclosure policy",
+          "g": "Anexo I, parte II · gestión de vulnerabilidades",
+          "g_en": "Annex I, Part II · vulnerability handling",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.II.5",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.II.5"
+        },
+        {
+          "id": "II.6",
+          "code": "Anexo I.II.6",
+          "t": "Facilitar el intercambio de información sobre vulnerabilidades, con una dirección de contacto",
+          "t_en": "Facilitate sharing of vulnerability information, with a contact address",
+          "g": "Anexo I, parte II · gestión de vulnerabilidades",
+          "g_en": "Annex I, Part II · vulnerability handling",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.II.6",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.II.6"
+        },
+        {
+          "id": "II.7",
+          "code": "Anexo I.II.7",
+          "t": "Distribución segura de las actualizaciones",
+          "t_en": "Secure distribution of updates",
+          "g": "Anexo I, parte II · gestión de vulnerabilidades",
+          "g_en": "Annex I, Part II · vulnerability handling",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.II.7",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.II.7"
+        },
+        {
+          "id": "II.8",
+          "code": "Anexo I.II.8",
+          "t": "Actualizaciones de seguridad gratuitas y sin demora, con avisos para el usuario",
+          "t_en": "Security updates free of charge and without delay, with advisory messages",
+          "g": "Anexo I, parte II · gestión de vulnerabilidades",
+          "g_en": "Annex I, Part II · vulnerability handling",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, anexo I.II.8",
+          "ref_en": "Regulation (EU) 2024/2847, Annex I.II.8"
+        },
+        {
+          "id": "13.r",
+          "code": "Art. 13 · riesgos",
+          "t": "Evaluación documentada de los riesgos de ciberseguridad del producto, mantenida durante el periodo de soporte",
+          "t_en": "Documented cybersecurity risk assessment of the product, kept up to date during the support period",
+          "g": "Obligaciones del fabricante",
+          "g_en": "Manufacturer obligations",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, Art. 13 · riesgos",
+          "ref_en": "Regulation (EU) 2024/2847, Art. 13 · riesgos"
+        },
+        {
+          "id": "13.c",
+          "code": "Art. 13 · componentes",
+          "t": "Diligencia debida con los componentes de terceros, incluido el software libre",
+          "t_en": "Due diligence on third-party components, including free and open-source software",
+          "g": "Obligaciones del fabricante",
+          "g_en": "Manufacturer obligations",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, Art. 13 · componentes",
+          "ref_en": "Regulation (EU) 2024/2847, Art. 13 · componentes"
+        },
+        {
+          "id": "13.8",
+          "code": "Art. 13.8",
+          "t": "Periodo de soporte acorde con la vida útil esperada (en general, al menos cinco años)",
+          "t_en": "Support period matching the expected lifetime (in general, at least five years)",
+          "g": "Obligaciones del fabricante",
+          "g_en": "Manufacturer obligations",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, Art. 13.8",
+          "ref_en": "Regulation (EU) 2024/2847, Art. 13.8"
+        },
+        {
+          "id": "14",
+          "code": "Art. 14",
+          "t": "Notificación de vulnerabilidades explotadas e incidentes graves (24 h, 72 h e informe final)",
+          "t_en": "Reporting of actively exploited vulnerabilities and severe incidents (24 h, 72 h and final report)",
+          "g": "Obligaciones del fabricante",
+          "g_en": "Manufacturer obligations",
+          "desde": "2026-09-11",
+          "ref": "Reglamento (UE) 2024/2847, Art. 14",
+          "ref_en": "Regulation (EU) 2024/2847, Art. 14",
+          "nota": "Aplicable desde el 11-09-2026, antes que el resto del reglamento. Se notifica al CSIRT coordinador y a ENISA a través de la plataforma única de notificación: alerta temprana en 24 h, notificación en 72 h e informe final en 14 días tras la corrección (vulnerabilidad) o en un mes (incidente). No equivale a la notificación de NIS2.",
+          "nota_en": "Applies from 11-09-2026, before the rest of the regulation. It goes to the coordinating CSIRT and ENISA through the single reporting platform: early warning within 24 h, notification within 72 h and a final report 14 days after the fix (vulnerability) or within one month (incident). It is not the same as NIS2 reporting."
+        },
+        {
+          "id": "A2",
+          "code": "Art. 13 · anexo II",
+          "t": "Información e instrucciones de seguridad para el usuario",
+          "t_en": "Security information and instructions for the user",
+          "g": "Obligaciones del fabricante",
+          "g_en": "Manufacturer obligations",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, Art. 13 · anexo II",
+          "ref_en": "Regulation (EU) 2024/2847, Art. 13 · Annex II"
+        },
+        {
+          "id": "31",
+          "code": "Art. 31 · anexo VII",
+          "t": "Documentación técnica",
+          "t_en": "Technical documentation",
+          "g": "Obligaciones del fabricante",
+          "g_en": "Manufacturer obligations",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, Art. 31 · anexo VII",
+          "ref_en": "Regulation (EU) 2024/2847, Art. 31 · Annex VII"
+        },
+        {
+          "id": "32",
+          "code": "Arts. 28, 30 y 32",
+          "t": "Evaluación de la conformidad, declaración UE de conformidad y marcado CE",
+          "t_en": "Conformity assessment, EU declaration of conformity and CE marking",
+          "g": "Obligaciones del fabricante",
+          "g_en": "Manufacturer obligations",
+          "desde": "2027-12-11",
+          "ref": "Reglamento (UE) 2024/2847, Arts. 28, 30 y 32",
+          "ref_en": "Regulation (EU) 2024/2847, Arts. 28, 30 and 32",
+          "nota": "El procedimiento depende de la clase del producto: predeterminada, importante de clase I o II (anexo III) o crítica (anexo IV).",
+          "nota_en": "The procedure depends on the product class: default, important class I or II (Annex III) or critical (Annex IV)."
+        }
+      ]
     }
   },
   "controls": [
@@ -3669,7 +4006,8 @@
             "w": 1
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Security policy approved by management",
       "obj_en": "A single, formally approved policy setting objectives, legal framework, roles and commitment to improvement.",
@@ -3724,7 +4062,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Security roles, responsibilities and committee",
       "obj_en": "Designated security roles (information, service, security and system owners) and a committee with defined duties.",
@@ -3771,7 +4110,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Management commitment and oversight",
       "obj_en": "Management approves the measures, oversees their implementation and is accountable for compliance.",
@@ -3804,7 +4144,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Management body training",
       "obj_en": "Members of management receive regular training to identify risks and assess management practices.",
@@ -3845,7 +4186,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Security rules and procedures",
       "obj_en": "Written, approved usage rules and operating procedures known to those who apply them.",
@@ -3902,7 +4244,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Context, scope and interested parties",
       "obj_en": "The management system defines its scope from the organisation context and interested parties’ expectations.",
@@ -3943,7 +4286,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Management system objectives and planned changes",
       "obj_en": "Measurable objectives with a plan to achieve them, and planned changes to the management system.",
@@ -3999,6 +4343,12 @@
             "id": "11",
             "w": 0.5
           }
+        ],
+        "cra": [
+          {
+            "id": "31",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Documented information",
@@ -4031,7 +4381,8 @@
           }
         ],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Internal and external communication",
       "obj_en": "It is decided what is communicated about security, to whom, when and through which channel.",
@@ -4068,7 +4419,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Resources for security",
       "obj_en": "Enough budget, people and tools to run and improve the management system.",
@@ -4105,7 +4457,13 @@
           }
         ],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": [
+          {
+            "id": "II.6",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Contact with authorities and interest groups",
       "obj_en": "Established channels with authorities, the reference CSIRT and specialist groups.",
@@ -4146,7 +4504,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "System and component authorisation process",
       "obj_en": "Nothing goes into production, gets connected or used without prior authorisation from its owner.",
@@ -4179,7 +4538,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Security in project management",
       "obj_en": "Security requirements are built into every project from the start.",
@@ -4214,7 +4574,8 @@
             "w": 1
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       }
     },
     {
@@ -4239,6 +4600,16 @@
           },
           {
             "id": "49",
+            "w": 1
+          }
+        ],
+        "cra": [
+          {
+            "id": "32",
+            "w": 1
+          },
+          {
+            "id": "31",
             "w": 1
           }
         ]
@@ -4284,7 +4655,13 @@
             "w": 1
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": [
+          {
+            "id": "13.r",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Risk analysis and assessment",
       "obj_en": "A documented method (e.g. MAGERIT) applied periodically and after significant changes.",
@@ -4343,7 +4720,8 @@
             "w": 1
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Risk treatment and Statement of Applicability",
       "obj_en": "An approved treatment plan and a statement justifying which controls apply and which do not.",
@@ -4375,7 +4753,8 @@
         "nis2": [],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Threat intelligence",
       "obj_en": "Information about threats is collected and analysed to anticipate them.",
@@ -4411,7 +4790,8 @@
         "nis2": [],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Legal, regulatory and contractual requirements",
       "obj_en": "Inventory of applicable obligations and how each is met, including intellectual property.",
@@ -4439,7 +4819,13 @@
         "nis2": [],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": [
+          {
+            "id": "I.2.g",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Personal data protection",
       "obj_en": "Processing activities recorded and protected under GDPR and Spanish data protection law.",
@@ -4472,7 +4858,8 @@
             "id": "18",
             "w": 0.5
           }
-        ]
+        ],
+        "cra": []
       },
       "t_en": "Protection of records",
       "obj_en": "Records are protected against loss, alteration or improper access during their retention period.",
@@ -4519,7 +4906,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Metrics and effectiveness assessment",
       "obj_en": "Indicators that show whether measures work, with regular review of results.",
@@ -4570,7 +4958,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Internal audit and independent review",
       "obj_en": "Audits planned and run by independent staff, protecting systems during testing.",
@@ -4608,7 +4997,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Management review",
       "obj_en": "Management periodically reviews the management system and decides improvements.",
@@ -4645,7 +5035,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Policy compliance monitoring",
       "obj_en": "Compliance with policies and rules is checked regularly and deviations are corrected.",
@@ -4700,7 +5091,8 @@
             "id": "20",
             "w": 1
           }
-        ]
+        ],
+        "cra": []
       },
       "t_en": "Nonconformities, corrective action and improvement",
       "obj_en": "Every nonconformity is analysed, corrected without delay and feeds continual improvement.",
@@ -4739,7 +5131,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       }
     },
     {
@@ -4767,7 +5160,8 @@
             "w": 1
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       }
     },
     {
@@ -4802,7 +5196,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Background verification",
       "obj_en": "Background checks proportionate to the role before joining.",
@@ -4847,7 +5242,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Duties, terms and confidentiality",
       "obj_en": "Security and confidentiality obligations signed by employees and contractors.",
@@ -4894,7 +5290,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Awareness and cyber hygiene",
       "obj_en": "Regular awareness campaigns and basic digital hygiene practices.",
@@ -4950,7 +5347,8 @@
             "id": "4",
             "w": 0.5
           }
-        ]
+        ],
+        "cra": []
       },
       "t_en": "Training and competence",
       "obj_en": "Role-specific training, with proven competence for technical staff.",
@@ -4983,7 +5381,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Disciplinary process",
       "obj_en": "A formal, known procedure to respond to security breaches.",
@@ -5024,7 +5423,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Termination, role change and return of assets",
       "obj_en": "Access removed and assets recovered when the relationship ends or changes.",
@@ -5064,7 +5464,8 @@
         "nis2": [],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Remote working",
       "obj_en": "Security conditions for working away from the premises.",
@@ -5115,7 +5516,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Asset inventory",
       "obj_en": "An up-to-date inventory of information, systems and services, each with an owner.",
@@ -5160,7 +5562,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Information classification and labelling",
       "obj_en": "Information is classified by sensitivity and labelled accordingly.",
@@ -5197,7 +5600,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Acceptable use and handling of assets",
       "obj_en": "Clear rules for using and handling information and equipment.",
@@ -5250,7 +5654,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Information media",
       "obj_en": "Controlled custody, transport and use of media, including removable media.",
@@ -5291,7 +5696,13 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": [
+          {
+            "id": "I.2.m",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Secure erasure and destruction",
       "obj_en": "Information and equipment are erased or destroyed irrecoverably at end of life.",
@@ -5339,7 +5750,8 @@
         "nis2": [],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Information transfer",
       "obj_en": "Rules and secure means to exchange information with third parties.",
@@ -5383,7 +5795,8 @@
         "nis2": [],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Data masking and leakage prevention",
       "obj_en": "Sensitive data is masked where not needed and its egress is monitored.",
@@ -5416,7 +5829,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Backups",
       "obj_en": "Regular, protected backups with tested restores.",
@@ -5461,7 +5875,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Electronic signature and time stamps",
       "obj_en": "Qualified signature and time stamping where the law or the service requires them.",
@@ -5496,7 +5911,8 @@
         "nis2": [],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       }
     },
     {
@@ -5530,7 +5946,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Identification and identity management",
       "obj_en": "Every user has a unique, traceable identity managed throughout its life cycle.",
@@ -5571,7 +5988,13 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": [
+          {
+            "id": "I.2.d",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Access control and least privilege",
       "obj_en": "Access policy based on need-to-know and least privilege.",
@@ -5608,7 +6031,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Access rights management and review",
       "obj_en": "Permissions are granted, changed and reviewed periodically with approval.",
@@ -5641,7 +6065,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Segregation of duties",
       "obj_en": "No single person controls a critical operation end to end.",
@@ -5690,7 +6115,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Privileged accounts and administration systems",
       "obj_en": "Separate, monitored administration accounts used from dedicated systems.",
@@ -5735,7 +6161,13 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": [
+          {
+            "id": "I.2.d",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Secure authentication",
       "obj_en": "Authentication proportionate to risk and well-protected credentials.",
@@ -5776,7 +6208,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Multi-factor authentication",
       "obj_en": "Second factor for remote, privileged and exposed-service access.",
@@ -5808,7 +6241,8 @@
         "nis2": [],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Access to source code",
       "obj_en": "Source code and development tools have restricted, logged access.",
@@ -5841,7 +6275,13 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": [
+          {
+            "id": "I.2.b",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Secure configuration and hardening",
       "obj_en": "Systems are deployed with reference security configurations.",
@@ -5874,7 +6314,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Configuration management",
       "obj_en": "Configuration is kept under control and drift is detected.",
@@ -5920,7 +6361,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Change management",
       "obj_en": "Changes are assessed, approved, tested and recorded before being applied.",
@@ -5961,7 +6403,13 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": [
+          {
+            "id": "I.2.c",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Maintenance and security patching",
       "obj_en": "Updates and maintenance applied within defined timeframes by criticality.",
@@ -6002,7 +6450,29 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": [
+          {
+            "id": "I.2.a",
+            "w": 1
+          },
+          {
+            "id": "II.2",
+            "w": 1
+          },
+          {
+            "id": "II.4",
+            "w": 1
+          },
+          {
+            "id": "II.5",
+            "w": 1
+          },
+          {
+            "id": "II.6",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Vulnerability handling and disclosure",
       "obj_en": "Vulnerabilities are detected, prioritised and fixed, with a channel for external reports.",
@@ -6035,7 +6505,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Protection against malicious code",
       "obj_en": "Antimalware or EDR on every device, centrally managed.",
@@ -6076,7 +6547,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Software installation in production",
       "obj_en": "Only authorised software, installed by authorised staff.",
@@ -6118,7 +6590,13 @@
           }
         ],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": [
+          {
+            "id": "I.2.l",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Activity logging",
       "obj_en": "User and system event logs, protected and retained.",
@@ -6155,7 +6633,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Clock synchronisation",
       "obj_en": "All systems use a common, reliable time source.",
@@ -6205,7 +6684,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Monitoring and intrusion detection",
       "obj_en": "Continuous monitoring of networks and systems to detect anomalous behaviour.",
@@ -6237,7 +6717,13 @@
         "nis2": [],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": [
+          {
+            "id": "I.2.h",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Capacity management and DoS protection",
       "obj_en": "Sized capacity and measures against saturation and DoS attacks.",
@@ -6277,7 +6763,8 @@
         "nis2": [],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "User endpoint devices",
       "obj_en": "Laptops, phones and other devices protected, encrypted and managed.",
@@ -6313,7 +6800,8 @@
         "nis2": [],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Clear desk and session locking",
       "obj_en": "No papers or unattended screens with sensitive information.",
@@ -6354,7 +6842,17 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": [
+          {
+            "id": "I.2.e",
+            "w": 1
+          },
+          {
+            "id": "I.2.f",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Cryptography and key management",
       "obj_en": "Approved algorithms and a complete key life cycle.",
@@ -6390,7 +6888,8 @@
         "nis2": [],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Email and web browsing protection",
       "obj_en": "Email and web filtering against malware, phishing and malicious sites.",
@@ -6427,7 +6926,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Secure architecture and certified components",
       "obj_en": "Documented architecture with security principles and qualified products.",
@@ -6476,7 +6976,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Network security and perimeter",
       "obj_en": "Network protected at its perimeter and network services managed securely.",
@@ -6521,7 +7022,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Network and flow segregation",
       "obj_en": "Networks separated by function and trust level, with controlled flows.",
@@ -6570,7 +7072,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Communications protection",
       "obj_en": "Encryption and authentication of communications leaving the perimeter.",
@@ -6607,7 +7110,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "System interconnection",
       "obj_en": "Each connection with third-party systems is authorised and documented.",
@@ -6644,7 +7148,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Secure and emergency communications",
       "obj_en": "Encrypted voice, video and messaging plus an alternative channel for emergencies.",
@@ -6695,6 +7200,16 @@
             "id": "15",
             "w": 0.5
           }
+        ],
+        "cra": [
+          {
+            "id": "I.1",
+            "w": 0.5
+          },
+          {
+            "id": "I.2.k",
+            "w": 1
+          }
         ]
       },
       "t_en": "Secure development life cycle",
@@ -6737,7 +7252,13 @@
           }
         ],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": [
+          {
+            "id": "I.2.f",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Application security requirements",
       "obj_en": "Security requirements defined and approved before developing or buying.",
@@ -6788,6 +7309,16 @@
             "id": "55",
             "w": 0.5
           }
+        ],
+        "cra": [
+          {
+            "id": "I.2.a",
+            "w": 0.5
+          },
+          {
+            "id": "II.3",
+            "w": 1
+          }
         ]
       },
       "t_en": "Security testing and acceptance",
@@ -6820,7 +7351,8 @@
         "nis2": [],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Environment separation",
       "obj_en": "Development, test and production separated with different access.",
@@ -6857,7 +7389,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Outsourced development",
       "obj_en": "Outsourced development meets the same requirements and is supervised.",
@@ -6894,7 +7427,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Acquisition of ICT products and services",
       "obj_en": "Security criteria when buying ICT products and services.",
@@ -6931,7 +7465,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Web service and application protection",
       "obj_en": "Web applications protected and audited before exposure.",
@@ -6967,7 +7502,184 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
+      }
+    },
+    {
+      "id": "DES-09",
+      "dom": "DES",
+      "t": "Lista de materiales de software (SBOM) y componentes de terceros",
+      "t_en": "Software bill of materials (SBOM) and third-party components",
+      "obj": "Cada producto tiene una SBOM en formato legible por máquina, mantenida en cada versión, y los componentes de terceros pasan una diligencia debida que vigila sus vulnerabilidades.",
+      "obj_en": "Every product has a machine-readable SBOM kept up to date with each release, and third-party components go through due diligence that tracks their vulnerabilities.",
+      "ev": "SBOM por versión (SPDX o CycloneDX) · inventario de dependencias · registro de diligencia debida",
+      "ev_en": "SBOM per release (SPDX or CycloneDX) · dependency inventory · due diligence records",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "A8.28",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [
+          {
+            "id": "II.1",
+            "w": 1
+          },
+          {
+            "id": "13.c",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "DES-10",
+      "dom": "DES",
+      "t": "Seguridad por defecto y superficie de ataque mínima del producto",
+      "t_en": "Secure by default and minimal attack surface of the product",
+      "obj": "El producto sale con la configuración más segura, sin contraseñas por defecto ni servicios innecesarios, con interfaces externas mínimas y sin perjudicar a otros dispositivos o redes.",
+      "obj_en": "The product ships with the most secure configuration, without default passwords or unnecessary services, with minimal external interfaces and without harming other devices or networks.",
+      "ev": "Guía de bastionado de fábrica · análisis de superficie de ataque · pruebas de restablecimiento",
+      "ev_en": "Factory hardening guide · attack surface analysis · reset tests",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "A8.9",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [
+          {
+            "id": "I.2.b",
+            "w": 1
+          },
+          {
+            "id": "I.2.j",
+            "w": 1
+          },
+          {
+            "id": "I.2.i",
+            "w": 1
+          },
+          {
+            "id": "I.2.k",
+            "w": 0.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "DES-11",
+      "dom": "DES",
+      "t": "Actualizaciones de seguridad del producto durante el periodo de soporte",
+      "t_en": "Product security updates during the support period",
+      "obj": "Las actualizaciones de seguridad se publican sin demora, gratis, firmadas y distribuidas de forma segura, separadas de las funcionales cuando es posible, automáticas por defecto y durante todo el periodo de soporte declarado.",
+      "obj_en": "Security updates are released without delay, free of charge, signed and securely distributed, separate from feature updates where possible, automatic by default and throughout the declared support period.",
+      "ev": "Política de periodo de soporte · canal de actualización firmado · avisos de seguridad publicados",
+      "ev_en": "Support period policy · signed update channel · published security advisories",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "A8.8",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [
+          {
+            "id": "I.2.c",
+            "w": 1
+          },
+          {
+            "id": "II.7",
+            "w": 1
+          },
+          {
+            "id": "II.8",
+            "w": 1
+          },
+          {
+            "id": "13.8",
+            "w": 1
+          },
+          {
+            "id": "II.2",
+            "w": 0.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "DES-12",
+      "dom": "DES",
+      "t": "Información e instrucciones de seguridad para el usuario del producto",
+      "t_en": "Security information and instructions for the product user",
+      "obj": "El producto va acompañado de la información del anexo II: fabricante y punto de contacto de vulnerabilidades, uso previsto, riesgos conocidos, periodo de soporte, cómo instalar actualizaciones y cómo retirarlo de forma segura.",
+      "obj_en": "The product comes with the information in Annex II: manufacturer and vulnerability contact point, intended purpose, known risks, support period, how to install updates and how to decommission it securely.",
+      "ev": "Instrucciones de seguridad · ficha del producto con el periodo de soporte · página de contacto de seguridad",
+      "ev_en": "Security instructions · product sheet with the support period · security contact page",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [
+          {
+            "id": "A2",
+            "w": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "DES-13",
+      "dom": "DES",
+      "t": "Evaluación de riesgos de ciberseguridad del producto",
+      "t_en": "Product cybersecurity risk assessment",
+      "obj": "Cada producto con elementos digitales tiene una evaluación de riesgos documentada desde el diseño, que decide qué requisitos esenciales aplican y se actualiza durante el periodo de soporte.",
+      "obj_en": "Every product with digital elements has a documented risk assessment from the design stage, which decides which essential requirements apply and is updated during the support period.",
+      "ev": "Evaluación de riesgos por producto · matriz de requisitos esenciales y justificación de los no aplicables",
+      "ev_en": "Risk assessment per product · essential requirements matrix with justification of those not applicable",
+      "maps": {
+        "ens": [],
+        "iso27001": [
+          {
+            "id": "C6.1.2",
+            "w": 0
+          }
+        ],
+        "nis2": [],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [
+          {
+            "id": "13.r",
+            "w": 1
+          },
+          {
+            "id": "I.1",
+            "w": 1
+          }
+        ]
       }
     },
     {
@@ -7018,7 +7730,8 @@
             "w": 1
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Security in supplier relationships",
       "obj_en": "Security requirements included in contracts and service level agreements.",
@@ -7056,7 +7769,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Monitoring of supplier services",
       "obj_en": "Contracted services are supervised, reviewed and their changes managed.",
@@ -7098,7 +7812,13 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": [
+          {
+            "id": "13.c",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "ICT supply chain security",
       "obj_en": "Risks introduced by suppliers and their subcontractors are assessed.",
@@ -7131,7 +7851,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Supplier directory",
       "obj_en": "Up-to-date register of suppliers and service providers with their criticality.",
@@ -7164,7 +7885,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Cloud services",
       "obj_en": "Acquisition, use and exit of cloud services with security requirements.",
@@ -7206,7 +7928,8 @@
             "w": 1
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Incident management plan",
       "obj_en": "Incident management procedure with roles, phases and criteria.",
@@ -7244,7 +7967,8 @@
             "w": 1
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Internal event reporting",
       "obj_en": "Everyone knows how and to whom to report a security event.",
@@ -7282,7 +8006,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Event assessment and classification",
       "obj_en": "Criteria to decide whether an event is an incident and how severe it is.",
@@ -7324,7 +8049,8 @@
             "w": 1
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Incident response",
       "obj_en": "Containment, eradication and recovery following tested procedures.",
@@ -7366,7 +8092,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Lessons learned",
       "obj_en": "Post-incident review of every relevant incident with improvement actions.",
@@ -7403,7 +8130,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Collection of evidence",
       "obj_en": "Evidence collected and preserved so it holds up in court.",
@@ -7475,6 +8203,12 @@
             "id": "73",
             "w": 0.5
           }
+        ],
+        "cra": [
+          {
+            "id": "14",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Reporting to the authority on time",
@@ -7507,7 +8241,8 @@
           }
         ],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Communication to affected customers and users",
       "obj_en": "Notice to recipients of the affected services and of measures they can take.",
@@ -7543,7 +8278,8 @@
             "w": 1
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       }
     },
     {
@@ -7574,6 +8310,36 @@
         "ria": [
           {
             "id": "73",
+            "w": 1
+          }
+        ],
+        "cra": []
+      }
+    },
+    {
+      "id": "INC-11",
+      "dom": "INC",
+      "t": "Notificación a ENISA de vulnerabilidades explotadas e incidentes graves",
+      "t_en": "Reporting actively exploited vulnerabilities and severe incidents to ENISA",
+      "obj": "El fabricante notifica por la plataforma única de ENISA las vulnerabilidades explotadas activamente y los incidentes graves que afecten a sus productos: alerta temprana en 24 h, notificación en 72 h e informe final; e informa a los usuarios afectados.",
+      "obj_en": "The manufacturer reports through ENISA’s single reporting platform the actively exploited vulnerabilities and severe incidents affecting its products: early warning within 24 h, notification within 72 h and a final report; and informs the affected users.",
+      "ev": "Procedimiento del art. 14 · alta en la plataforma única · registro de notificaciones",
+      "ev_en": "Article 14 procedure · registration on the single platform · reporting log",
+      "maps": {
+        "ens": [],
+        "iso27001": [],
+        "nis2": [
+          {
+            "id": "23.a",
+            "w": 0
+          }
+        ],
+        "iso42001": [],
+        "partis": [],
+        "ria": [],
+        "cra": [
+          {
+            "id": "14",
             "w": 1
           }
         ]
@@ -7610,7 +8376,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Impact analysis",
       "obj_en": "Critical processes, their maximum tolerable downtime and dependencies are identified.",
@@ -7660,7 +8427,8 @@
             "w": 0.5
           }
         ],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Continuity and recovery plan",
       "obj_en": "Approved, known business continuity and disaster recovery plan.",
@@ -7693,7 +8461,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Continuity testing",
       "obj_en": "The plan is tested regularly and corrected with what is learned.",
@@ -7742,7 +8511,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Redundancy and alternative means",
       "obj_en": "Alternative facilities, systems and communications for critical services.",
@@ -7775,7 +8545,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Crisis management",
       "obj_en": "Crisis committee, activation criteria and communication during the crisis.",
@@ -7824,7 +8595,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Secure areas and physical access control",
       "obj_en": "Defined perimeters with controlled and identified physical access.",
@@ -7861,7 +8633,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Physical security monitoring",
       "obj_en": "Premises are continuously monitored against unauthorised access.",
@@ -7910,7 +8683,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Protection against environmental threats",
       "obj_en": "Rooms conditioned and protected against fire, water and temperature.",
@@ -7951,7 +8725,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Utilities and cabling",
       "obj_en": "Guaranteed power and communications, protected cabling.",
@@ -7996,7 +8771,8 @@
         ],
         "iso42001": [],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Equipment entry and exit",
       "obj_en": "Equipment entering and leaving is logged and protected off-premises.",
@@ -8046,7 +8822,8 @@
             "id": "17",
             "w": 0.5
           }
-        ]
+        ],
+        "cra": []
       },
       "t_en": "AI policy",
       "obj_en": "An approved AI policy, aligned with other policies and reviewed periodically.",
@@ -8091,7 +8868,8 @@
             "id": "26.2",
             "w": 0.5
           }
-        ]
+        ],
+        "cra": []
       },
       "t_en": "AI roles and concern reporting",
       "obj_en": "Responsibilities defined across the life cycle and a channel to raise concerns.",
@@ -8140,7 +8918,8 @@
           }
         ],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "AI system resources",
       "obj_en": "Data, tools, compute and people documented for each AI system.",
@@ -8203,7 +8982,8 @@
             "id": "9",
             "w": 1
           }
-        ]
+        ],
+        "cra": []
       },
       "t_en": "AI risk management",
       "obj_en": "AI-specific risks (bias, robustness, transparency, misuse) assessed and treated.",
@@ -8251,7 +9031,8 @@
             "id": "27",
             "w": 0.5
           }
-        ]
+        ],
+        "cra": []
       },
       "t_en": "AI system impact assessment",
       "obj_en": "Impact on people, groups and society assessed and documented before deployment.",
@@ -8288,7 +9069,8 @@
             "id": "17",
             "w": 0.5
           }
-        ]
+        ],
+        "cra": []
       },
       "t_en": "Responsible AI development",
       "obj_en": "Objectives and processes that guide responsible design and development.",
@@ -8341,7 +9123,8 @@
             "id": "53",
             "w": 0.5
           }
-        ]
+        ],
+        "cra": []
       },
       "t_en": "AI system specification and documentation",
       "obj_en": "Requirements, design and technical documentation maintained across the life cycle.",
@@ -8387,7 +9170,8 @@
             "id": "15",
             "w": 1
           }
-        ]
+        ],
+        "cra": []
       },
       "t_en": "Verification, validation and deployment",
       "obj_en": "Model validation criteria and a controlled deployment plan.",
@@ -8437,7 +9221,8 @@
             "id": "72",
             "w": 0.5
           }
-        ]
+        ],
+        "cra": []
       },
       "t_en": "AI system operation and monitoring",
       "obj_en": "Production monitoring of performance, drift and errors.",
@@ -8479,7 +9264,8 @@
             "id": "26.6",
             "w": 1
           }
-        ]
+        ],
+        "cra": []
       },
       "t_en": "AI system event logs",
       "obj_en": "Logging of inputs, decisions and relevant events for traceability.",
@@ -8537,7 +9323,8 @@
             "id": "26.4",
             "w": 0.5
           }
-        ]
+        ],
+        "cra": []
       },
       "t_en": "Data governance for AI",
       "obj_en": "Acquisition, quality, provenance and preparation of data controlled and documented.",
@@ -8585,7 +9372,8 @@
             "id": "50.1",
             "w": 0.5
           }
-        ]
+        ],
+        "cra": []
       },
       "t_en": "Information for users and interested parties",
       "obj_en": "User documentation and transparent communication about the AI system.",
@@ -8625,7 +9413,8 @@
             "id": "26.1",
             "w": 1
           }
-        ]
+        ],
+        "cra": []
       },
       "t_en": "Responsible and intended use",
       "obj_en": "Processes and objectives that keep use of the system within its intended scope.",
@@ -8675,7 +9464,8 @@
           }
         ],
         "partis": [],
-        "ria": []
+        "ria": [],
+        "cra": []
       },
       "t_en": "Third parties and customers in the AI chain",
       "obj_en": "Responsibilities shared with suppliers and customers of AI components or services.",
@@ -8710,7 +9500,8 @@
             "id": "4",
             "w": 1
           }
-        ]
+        ],
+        "cra": []
       }
     },
     {
@@ -8738,7 +9529,8 @@
             "id": "5",
             "w": 1
           }
-        ]
+        ],
+        "cra": []
       }
     },
     {
@@ -8770,7 +9562,8 @@
             "id": "26.2",
             "w": 1
           }
-        ]
+        ],
+        "cra": []
       }
     },
     {
@@ -8810,7 +9603,8 @@
             "id": "20",
             "w": 0.5
           }
-        ]
+        ],
+        "cra": []
       }
     },
     {
@@ -8842,7 +9636,8 @@
             "id": "27",
             "w": 1
           }
-        ]
+        ],
+        "cra": []
       }
     },
     {
@@ -8882,7 +9677,8 @@
             "id": "50.3",
             "w": 0.5
           }
-        ]
+        ],
+        "cra": []
       }
     },
     {
@@ -8914,7 +9710,8 @@
             "id": "55",
             "w": 1
           }
-        ]
+        ],
+        "cra": []
       }
     }
   ]

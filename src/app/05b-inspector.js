@@ -58,7 +58,7 @@ function inspReq(f, id) {
   <div class="blk"><h4>${esc(t('equivalents'))}</h4><div class="maps">${eqs}</div></div>
   ${canEx ? `<div class="blk"><h4>${esc(t('exclusion'))}</h4>
     <label class="switch-l"><span class="switch"><input type="checkbox" id="ex-sw" data-exsw="1" data-fw="${f}" data-id="${esc(id)}"${ex ? ' checked' : ''}><span></span></span>${esc(t('excludeIt'))}</label>
-    ${ex ? `<label class="fld">${esc(t('justification'))}<input type="text" id="ex-${f}-${esc(id)}" data-exfw="${f}" data-exid="${esc(id)}" value="${esc(cov.justificacion || '')}" placeholder="${esc(t('justPh'))}"></label>` : ''}</div>` : onFw(f) && !E.excluible(f, id) ? `<div class="blk"><h4>${esc(t('exclusion'))}</h4><p class="hint">${esc(t(f === 'partis' ? 'notExcludablePartis' : 'notExcludable'))}</p></div>` : ''}
+    ${ex ? `<label class="fld">${esc(t('justification'))}<input type="text" id="ex-${f}-${esc(id)}" data-exfw="${f}" data-exid="${esc(id)}" value="${esc(cov.justificacion || '')}" placeholder="${esc(t('justPh'))}"></label>` : ''}</div>` : onFw(f) && !E.excluible(f, id) ? `<div class="blk"><h4>${esc(t('exclusion'))}</h4><p class="hint">${esc(t({ partis: 'notExcludablePartis', ria: 'notExcludableRia', cra: 'notExcludableCra' }[f] || 'notExcludable'))}</p></div>` : ''}
   <button type="button" class="btn" data-act="tr-center" data-fw="${f}" data-id="${esc(id)}">${icon('waypoints', 16)}${esc(t('openPrism'))}</button>`;
 }
 

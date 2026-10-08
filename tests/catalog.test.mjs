@@ -12,7 +12,7 @@ const ICONS = require('../src/data/icons.json');
 const dupes = (arr) => arr.filter((x, i) => arr.indexOf(x) !== i);
 
 describe('catálogo', () => {
-  test('cinco normas con el número de requisitos esperado', () => {
+  test('siete normas con el número de requisitos esperado', () => {
     assert.deepEqual(Object.keys(CAT.frameworks), E.FW);
     const n = Object.fromEntries(E.FW.map((f) => [f, CAT.frameworks[f].reqs.length]));
     // ENS: 73 medidas del Anexo II · ISO 27001: cl. 4–10 + 93 controles · NIS2: RE 2024/2690 · ISO 42001: cl. 4–10 + 38 controles
@@ -84,8 +84,8 @@ describe('catálogo', () => {
 });
 
 describe('casos de ejemplo', () => {
-  test('seis casos con identificador único, datos bilingües y perfil regulatorio', () => {
-    assert.equal(CASOS.length, 6);
+  test('siete casos con identificador único, datos bilingües y perfil regulatorio', () => {
+    assert.equal(CASOS.length, 7);
     for (const c of CASOS) assert.deepEqual(E.perfilNormalizado(c.state.perfil), c.state.perfil, `${c.id}: perfil válido`);
     assert.deepEqual(dupes(CASOS.map((c) => c.id)), []);
     for (const c of CASOS) for (const k of ['titulo', 'sector', 'sector_en', 'resumen', 'resumen_en']) assert.ok(c[k], `${c.id}.${k}`);

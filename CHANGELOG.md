@@ -1,5 +1,24 @@
 # Cambios
 
+## 2.6.0 · octubre de 2026
+
+**CRA, la ley europea de ciberresiliencia** (Reglamento (UE) 2024/2847), para fabricantes de productos con elementos digitales.
+
+- **29 requisitos**, cada uno con su fecha de aplicación.
+  - Notificación a ENISA y al CSIRT coordinador de vulnerabilidades explotadas e incidentes graves (art. 14), en vigor desde el 11-09-2026.
+  - 14 propiedades del producto (anexo I, parte I).
+  - 8 de gestión de vulnerabilidades (anexo I, parte II).
+  - 6 obligaciones del fabricante: evaluación de riesgos, componentes de terceros, periodo de soporte, información al usuario, documentación técnica y conformidad con marcado CE. El resto aplica desde el 11-12-2027.
+- **Exclusiones justificadas solo en los puntos 2 b–m de la parte I**, que el reglamento aplica «cuando proceda».
+- **Clase del producto en Alcance**, con su ruta de evaluación de la conformidad.
+- **Seis controles nuevos**: DES-09 (SBOM), DES-10 (seguridad por defecto), DES-11 (actualizaciones), DES-12 (información al usuario), DES-13 (riesgos del producto) e INC-11 (notificación a ENISA). GOB-15 (conformidad y marcado CE) se comparte con el RIA. Catálogo 2.6.0: 134 controles y 389 requisitos.
+- **Perfil regulatorio.** Para un fabricante, el CRA es obligatorio en la UE y a confirmar fuera. Deja de figurar entre las normas futuras; solo queda DORA.
+- **Coherencia.** CO-17 (sin notificación a ENISA) y CO-18 (sin SBOM).
+- **Caso nuevo:** Sensórica Levante, fabricante ficticio de cámaras IP de clase I.
+- **Mapa circular.** Con más de cinco anillos deja más hueco arriba para las etiquetas.
+- **Corregido** (fallo de la 2.5.0): en un proyecto, el interruptor del RIA en «Marcos aplicables y por qué» no lo activaba, y su motivo no se guardaba. Nueva prueba e2e que activa, desactiva y razona cada norma.
+- **Pruebas:** 119 de motor, catálogo y build y 59 en navegador.
+
 ## 2.5.0 · octubre de 2026
 
 **RIA, el Reglamento europeo de IA** (Reglamento (UE) 2024/1689), con las fechas del Ómnibus digital sobre IA (Reglamento (UE) 2026/1744, publicado el 24-07-2026 y en vigor desde el 27-07-2026).

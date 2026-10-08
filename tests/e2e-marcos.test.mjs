@@ -232,3 +232,34 @@ test('RIA: rol y riesgo deciden qué se exige, con fecha de aplicación y etique
   await act('lang', { v: 'es' }); await page.waitForTimeout(150);
   noErrors('RIA');
 });
+
+test('CRA: caso del fabricante, exclusión justificada solo donde el anexo I lo permite y ruta de conformidad por clase', async () => {
+  await R(() => window.__ROSETTA__.openCase('sensorica'));
+  assert.deepEqual(await R(() => window.__ROSETTA__.calc.alcance), ['iso27001', 'nis2', 'cra']);
+  const hall = await R(() => window.__ROSETTA__.hall.map((h) => h.id));
+  assert.ok(hall.includes('CO-17') && hall.includes('CO-18'));
+  await act('insp-req', { fw: 'cra', id: 'I.2.b' });
+  assert.equal(await page.locator('#insp [data-exsw]').count(), 1, 'I.2.b admite exclusión');
+  await act('insp-req', { fw: 'cra', id: '14' });
+  assert.equal(await page.locator('#insp [data-exsw]').count(), 0);
+  assert.match(await page.locator('#insp').innerText(), /11 sept 2026|11 Sept 2026|11 sep 2026/i);
+  await act('insp-close');
+  await R(() => window.__ROSETTA__.go('alcance'));
+  await page.selectOption('#set-cra-clase', 'importante2'); await page.waitForTimeout(150);
+  assert.match(await page.locator('#view').innerText(), /Siempre con organismo notificado/);
+  noErrors('CRA');
+});
+
+test('cada norma se puede activar y desactivar desde Alcance, con su motivo', async () => {
+  await R(() => window.__ROSETTA__.openCase('aguas')); await R(() => window.__ROSETTA__.go('alcance'));
+  const fws = await R(() => window.__ROSETTA__.FW);
+  for (const f of fws) {
+    const antes = await R((f) => window.__ROSETTA__.state.alcance[f].on, f);
+    await page.locator(`#set-on-${f}`).evaluate((el) => el.click()); await page.waitForTimeout(120);
+    assert.equal(await R((f) => window.__ROSETTA__.state.alcance[f].on, f), !antes, `${f} cambia`);
+    assert.equal(await R((f) => window.__ROSETTA__.calc.alcance.includes(f), f), !antes, `${f} en el cálculo`);
+    await page.fill(`#set-mot-${f}`, `Motivo ${f}`); await page.locator(`#set-mot-${f}`).blur(); await page.waitForTimeout(500);
+    assert.equal(await R((f) => window.__ROSETTA__.state.alcance[f].motivo, f), `Motivo ${f}`);
+  }
+  noErrors('activar normas');
+});
