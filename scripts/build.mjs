@@ -42,8 +42,8 @@ export function buildModules(dir) {
 /* Fuentes incrustadas: el nombre del fichero fija la familia; los ejes variables, los de la fuente. */
 export const FONTS = [
   { file: 'bricolage-grotesque-latin.woff2', family: 'Bricolage Grotesque', weight: '200 800', stretch: '75% 100%' },
-  { file: 'onest-latin.woff2', family: 'Onest', weight: '100 900' },
-  { file: 'martian-mono-latin.woff2', family: 'Martian Mono', weight: '100 800', stretch: '75% 112.5%' }
+  { file: 'geist-latin.woff2', family: 'Geist', weight: '100 900' },
+  { file: 'geist-mono-latin.woff2', family: 'Geist Mono', weight: '100 900' }
 ];
 const LATIN = 'U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD';
 export function buildFonts() {

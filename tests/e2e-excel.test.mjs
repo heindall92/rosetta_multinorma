@@ -74,10 +74,10 @@ for (const modo of ['file', 'http']) {
 
     test('fuentes incrustadas, sin Google Fonts', async () => {
       await s.page.evaluate(() => document.fonts.ready);
-      const ok = await s.page.evaluate(() => ['16px "Onest"', '16px "Bricolage Grotesque"', '12px "Martian Mono"'].map((f) => document.fonts.check(f)));
+      const ok = await s.page.evaluate(() => ['16px "Geist"', '16px "Bricolage Grotesque"', '12px "Geist Mono"'].map((f) => document.fonts.check(f)));
       assert.deepEqual(ok, [true, true, true]);
       const loaded = await s.page.evaluate(() => [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family.replace(/"/g, '')));
-      assert.ok(loaded.includes('Onest') && loaded.includes('Bricolage Grotesque'), loaded.join(','));
+      assert.ok(loaded.includes('Geist') && loaded.includes('Geist Mono') && loaded.includes('Bricolage Grotesque'), loaded.join(','));
     });
 
     test('importar la SoA del ENS (SheetJS 0.20.3 autoalojado, con SRI)', async () => {

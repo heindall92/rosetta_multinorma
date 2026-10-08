@@ -414,7 +414,7 @@ rosetta_multinorma/
 ├── 🧩 src/
 │   ├── index.html                Plantilla con directivas del build
 │   ├── styles/rosetta.css        Tokens OKLCH, claro y oscuro, 7 acentos, barra lateral y móvil
-│   ├── fonts/                    Bricolage Grotesque, Onest, Martian Mono (OFL)
+│   ├── fonts/                    Bricolage Grotesque (titulares), Geist y Geist Mono (OFL)
 │   ├── engine/rosetta-engine.js  Motor de cálculo sin DOM
 │   ├── app/                      Interfaz, por módulos
 │   │   ├── 00-i18n.js            Textos en español e inglés
@@ -446,7 +446,7 @@ rosetta_multinorma/
 
 Distribuido bajo licencia [GPLv2](LICENSE) · © 2026 Yoandy Ramírez Delgado.
 
-Componentes de terceros: iconos de [Lucide](https://lucide.dev) (ISC) y logotipos de [Simple Icons](https://simpleicons.org) (CC0) en la tabla `rosetta.yaml`, cuyas marcas pertenecen a sus titulares; tipografías Bricolage Grotesque, Onest y Martian Mono (SIL Open Font License 1.1), incrustadas; [SheetJS](https://sheetjs.com) 0.20.3 y [xlsx-js-style](https://github.com/gitbrent/xlsx-js-style) 1.2.0 (Apache 2.0); [Playwright](https://playwright.dev) y [axe-core](https://github.com/dequelabs/axe-core) solo para pruebas. ENS, NIS2 y el RE 2024/2690 son normas públicas (BOE, EUR-Lex); ISO/IEC 27001 e ISO/IEC 42001 son obras protegidas de ISO/IEC.
+Componentes de terceros: iconos de [Lucide](https://lucide.dev) (ISC) y logotipos de [Simple Icons](https://simpleicons.org) (CC0) en la tabla `rosetta.yaml`, cuyas marcas pertenecen a sus titulares; tipografías Bricolage Grotesque, [Geist y Geist Mono](https://vercel.com/font) (SIL Open Font License 1.1), incrustadas; [SheetJS](https://sheetjs.com) 0.20.3 y [xlsx-js-style](https://github.com/gitbrent/xlsx-js-style) 1.2.0 (Apache 2.0); [Playwright](https://playwright.dev) y [axe-core](https://github.com/dequelabs/axe-core) solo para pruebas. ENS, NIS2 y el RE 2024/2690 son normas públicas (BOE, EUR-Lex); ISO/IEC 27001 e ISO/IEC 42001 son obras protegidas de ISO/IEC.
 
 ## <img src="docs/assets/icons/user-round.svg" width="20" height="20" valign="middle"/> Autor
 

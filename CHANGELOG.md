@@ -36,6 +36,7 @@ Responde a dos peticiones recibidas en LinkedIn tras publicar la 2.3.0: **Part-I
   - El nombre de las hojas de Excel se sanea.
 - **Portada.** El texto y las cifras destacadas incluyen Part-IS (72 % cubierto con ISO/IEC 27001 implantada), el perfil regulatorio y los marcos propios.
 - **Tipografía revisada con la guía apple-design (Emil Kowalski).**
+  - **Geist** para el texto y la interfaz y **Geist Mono** para códigos y cifras, la pareja común del ecosistema. Sustituyen a Onest y Martian Mono. **Bricolage Grotesque** queda solo para los titulares y las cifras grandes, como seña de Rosetta. Al ir incrustada, se ve igual en cualquier sistema y en las capturas. La página pesa 27 KB menos.
   - Titulares a anchura normal con un espaciado negativo moderado: el titular de la portada se apretaba hasta tocarse las letras.
   - Ninguna etiqueta por debajo de 0,7 rem.
   - Cuerpo en `rem` para respetar el tamaño de letra del usuario.

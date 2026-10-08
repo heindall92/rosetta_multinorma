@@ -27,7 +27,7 @@ Los valores exactos están en `plantillas/tokens.css` (cópialo como punto de pa
 
 ## Tipografía
 
-- Geist (variable) para texto y Geist Mono para IDs, cifras, `kbd` y antetítulos; incrustadas (woff2), sin Google Fonts en la app. Rosetta usa Bricolage Grotesque + Onest + Martian Mono: cada herramienta puede tener su par, siempre local.
+- Geist (variable) para texto y Geist Mono para IDs, cifras, `kbd` y antetítulos; incrustadas (woff2), sin Google Fonts en la app. Rosetta usa también Geist y Geist Mono, y reserva Bricolage Grotesque para titulares y cifras grandes (2.4.0). Una tipografía de titular propia es aceptable si se usa solo en tamaños grandes y sin comprimir; en texto e interfaz, Geist. Revisa siempre la tipografía con el apartado 15 de `emil-kowalski/apple-design.md`: espaciado negativo moderado en titulares (en torno a −0,02 em, nunca letras que se tocan), ninguna etiqueta por debajo de 0,7 rem y cuerpo en rem.
 - Cifras con `font-variant-numeric: tabular-nums` y `white-space: nowrap`; porcentaje con espacio duro (`94,4 %`).
 - Números en formato del idioma (`es-ES`: coma decimal; `en-GB`: punto). Fechas largas localizadas.
 - Tamaño mínimo de texto 11 px. Títulos con tracking negativo (−0,012 a −0,045 em).
