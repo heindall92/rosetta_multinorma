@@ -1,5 +1,16 @@
 # Cambios
 
+## 2.7.0 · octubre de 2026
+
+**NIST Cybersecurity Framework 2.0** (NIST CSWP 29, febrero de 2024).
+
+- **Las 106 subcategorías**, en 6 funciones (Gobernar, Identificar, Proteger, Detectar, Responder y Recuperar) y 22 categorías, con su código oficial y títulos abreviados propios en español e inglés.
+- **Cobertura completa.** Cada subcategoría tiene un control unificado que la cubre por completo. No hacen falta controles nuevos: el catálogo ya cubría el CSF. Si se implanta todo lo que exige ISO/IEC 27001, se cubre el 88 % del CSF; con el ENS, el 65 %.
+- **Voluntario.** El perfil regulatorio lo propone como contractual o voluntario. Las subcategorías que no encajen en el perfil de la organización se excluyen con su justificación.
+- **Correspondencias de criterio propio**, nunca más que parciales.
+- **Inicio en el móvil.** Las tarjetas de los casos muestran solo los anillos de las normas de su alcance, y el antetítulo con las ocho normas parte línea en lugar de desbordar.
+- **Pruebas.** 4 pruebas nuevas del motor: estructura oficial, cobertura, carácter voluntario y solapamiento.
+
 ## 2.6.0 · octubre de 2026
 
 **CRA, la ley europea de ciberresiliencia** (Reglamento (UE) 2024/2847), para fabricantes de productos con elementos digitales.

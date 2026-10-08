@@ -118,6 +118,7 @@ function sanitizeState(raw) {
     ria: { on: g('ria').on === true, ...E.riaAlcance(g('ria')) },
     cra: { on: g('cra').on === true, ...E.craAlcance(g('cra')) }
   };
+  for (const f of FW_BASE) if (!st.alcance[f]) st.alcance[f] = { on: g(f).on === true }; // normas sin opciones propias
   for (const m of st.marcos) st.alcance[m.id] = { on: g(m.id).on === true };
   for (const f of fws) if (mot(f)) st.alcance[f].motivo = mot(f);
   const pf = isObj(r.perfil) ? r.perfil : {};

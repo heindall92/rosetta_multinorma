@@ -39,7 +39,7 @@ describe('API pública', () => {
     for (const k of ['indexar', 'calcular', 'coberturaReq', 'solapamiento', 'inferencia', 'equivalencias', 'prioridades', 'coherencia', 'planAccion', 'desdeSoaEns', 'nis2Aplicabilidad', 'orden', 'instantanea', 'parejasClase',
       'perfilRegulatorio', 'perfilNormalizado', 'sugerirControles', 'fundirPropios', 'listaNormas', 'etiqueta'])
       assert.equal(typeof E[k], 'function', k);
-    assert.deepEqual(E.FW, ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra']);
+    assert.deepEqual(E.FW, ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra', 'nist']);
   });
 });
 
@@ -226,7 +226,7 @@ describe('casos de ejemplo con el catálogo real', () => {
   }
   test('instantánea reproducible del caso de clase (TechServ)', () => {
     const r = E.calcular(IX, CASOS.find((c) => c.id === 'techserv').state);
-    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null, ria: null, cra: null }, grado: 0.893, brechas: 4 });
+    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null, ria: null, cra: null, nist: null }, grado: 0.893, brechas: 4 });
   });
   test('contraste ENS ↔ ISO 27001 con las parejas del material de clase', () => {
     const p = E.parejasClase(IX); const ref = require('../src/data/parejas.json');
@@ -514,5 +514,29 @@ describe('CRA (Reglamento (UE) 2024/2847)', () => {
   test('el caso del fabricante trae el CRA de clase I', () => {
     const c = CASOS.find((x) => x.id === 'sensorica');
     assert.equal(c.state.alcance.cra.on, true); assert.equal(c.state.alcance.cra.clase, 'importante1'); assert.equal(c.state.perfil.fabricante, true);
+  });
+});
+
+describe('NIST CSF 2.0', () => {
+  const R = CAT.frameworks.nist.reqs;
+  test('6 funciones, 22 categorías y 106 subcategorías con su código oficial', () => {
+    assert.equal(R.length, 106);
+    assert.deepEqual([...new Set(R.map((r) => r.id.slice(0, 2)))], ['GV', 'ID', 'PR', 'DE', 'RS', 'RC']);
+    assert.equal(new Set(R.map((r) => r.id.split('-')[0])).size, 22);
+    for (const r of R) assert.match(r.id, /^(GV|ID|PR|DE|RS|RC)\.[A-Z]{2}-\d\d$/);
+    const n = (p) => R.filter((r) => r.id.startsWith(p)).length;
+    assert.deepEqual([n('GV'), n('ID'), n('PR'), n('DE'), n('RS'), n('RC')], [31, 21, 22, 11, 13, 8]);
+  });
+  test('cada subcategoría tiene un control que la cubre por completo', () => {
+    for (const r of R) assert.ok(IX.reqUcs.nist[r.id].some((l) => l.w === 1), r.id);
+  });
+  test('voluntario: admite exclusiones (perfil organizativo) y el perfil lo propone como voluntario', () => {
+    assert.equal(E.excluible('nist', 'GV.OC-01'), true);
+    assert.equal(E.perfilRegulatorio({}).marcos.nist.estado, 'voluntaria');
+  });
+  test('con todos los controles implantados, el CSF queda al 100 %; ISO/IEC 27001 cubre gran parte', () => {
+    const all = Object.fromEntries(CAT.controls.map((c) => [c.id, { estado: 'implantado' }]));
+    close(E.calcular(IX, { alcance: { nist: { on: true } }, controles: all, exclusiones: {} }).fw.nist.grado, 1);
+    assert.ok(E.solapamiento(IX).iso27001.nist.pct > 0.8);
   });
 });

@@ -8,13 +8,13 @@
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
-  const FW = ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra'];
-  const FW_LABEL = { ens: 'ENS', iso27001: 'ISO/IEC 27001', nis2: 'NIS2', iso42001: 'ISO/IEC 42001', partis: 'Part-IS', ria: 'RIA', cra: 'CRA' };
+  const FW = ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra', 'nist'];
+  const FW_LABEL = { ens: 'ENS', iso27001: 'ISO/IEC 27001', nis2: 'NIS2', iso42001: 'ISO/IEC 42001', partis: 'Part-IS', ria: 'RIA', cra: 'CRA', nist: 'NIST CSF' };
   const FW_LABEL_EN = { ria: 'AI Act' };
   const FW_LONG = { ens: 'Esquema Nacional de Seguridad (RD 311/2022)', iso27001: 'ISO/IEC 27001:2022', nis2: 'Directiva NIS2 y RE 2024/2690', iso42001: 'ISO/IEC 42001:2023',
-    partis: 'Part-IS · Reglamentos (UE) 2023/203 y 2022/1645', ria: 'RIA · Reglamento (UE) 2024/1689 de inteligencia artificial', cra: 'CRA · Reglamento (UE) 2024/2847 de ciberresiliencia' };
+    partis: 'Part-IS · Reglamentos (UE) 2023/203 y 2022/1645', ria: 'RIA · Reglamento (UE) 2024/1689 de inteligencia artificial', cra: 'CRA · Reglamento (UE) 2024/2847 de ciberresiliencia', nist: 'NIST Cybersecurity Framework 2.0' };
   const FW_LONG_EN = { ens: 'Spanish National Security Framework (RD 311/2022)', iso27001: 'ISO/IEC 27001:2022', nis2: 'NIS2 Directive and IR 2024/2690', iso42001: 'ISO/IEC 42001:2023',
-    partis: 'Part-IS · Regulations (EU) 2023/203 and 2022/1645', ria: 'AI Act · Regulation (EU) 2024/1689', cra: 'CRA · Cyber Resilience Act, Regulation (EU) 2024/2847' };
+    partis: 'Part-IS · Regulations (EU) 2023/203 and 2022/1645', ria: 'AI Act · Regulation (EU) 2024/1689', cra: 'CRA · Cyber Resilience Act, Regulation (EU) 2024/2847', nist: 'NIST Cybersecurity Framework 2.0' };
   const ESTADOS = ['implantado', 'parcial', 'pendiente', 'no-aplica'];
   const ESTADO_LABEL = { implantado: 'Implantado', parcial: 'Parcial', pendiente: 'Pendiente', 'no-aplica': 'No aplica' };
   const ESTADO_LABEL_EN = { implantado: 'Implemented', parcial: 'Partial', pendiente: 'Pending', 'no-aplica': 'Not applicable' };
@@ -645,6 +645,7 @@
       n2Base: 'Directiva (UE) 2022/2555, arts. 2 y 3', n2Base26: 'Directiva (UE) 2022/2555, art. 26', n2Base4: 'Directiva (UE) 2022/2555, art. 4', n2Trans: ' La aplicación concreta depende de la ley nacional de transposición.',
       ia: 'Norma voluntaria, pero es la base reconocida para gobernar los sistemas de IA y preparar el RIA (Reglamento (UE) 2024/1689).', iaNo: 'La organización no desarrolla ni despliega sistemas de IA.',
       riaOk: 'Desarrolla o despliega IA en la UE: le aplican al menos la alfabetización en IA y las prácticas prohibidas (desde el 02-02-2025). El resto depende del rol (proveedor o responsable del despliegue) y del riesgo: transparencia desde el 02-08-2026 y alto riesgo del anexo III desde el 02-12-2027 (Reglamento (UE) 2026/1744).',
+      nist: 'Marco voluntario del NIST (EE. UU.): lenguaje común con clientes internacionales y de LATAM para expresar el perfil actual y el objetivo.', nistBase: 'NIST CSWP 29 (CSF 2.0)',
       cra: 'Fabrica productos con elementos digitales: la notificación de vulnerabilidades explotadas e incidentes graves (art. 14) le obliga desde el 11-09-2026; los requisitos esenciales, la gestión de vulnerabilidades y el marcado CE, desde el 11-12-2027.',
       craFuera: 'Fuera de la UE, el CRA alcanza a quien comercializa productos con elementos digitales en la Unión.', craBase: 'Reglamento (UE) 2024/2847, art. 2', craNo: 'La organización no fabrica productos con elementos digitales.',
       riaFuera: 'Fuera de la UE, el RIA alcanza a quien comercializa sistemas en la Unión o cuyos resultados se usan en ella (art. 2.1).', riaBase: 'Reglamento (UE) 2024/1689, art. 2', riaNo: 'La organización no desarrolla ni despliega sistemas de IA.',
@@ -669,6 +670,7 @@
       n2Base: 'Directive (EU) 2022/2555, arts. 2 and 3', n2Base26: 'Directive (EU) 2022/2555, art. 26', n2Base4: 'Directive (EU) 2022/2555, art. 4', n2Trans: ' How it applies depends on the national transposition law.',
       ia: 'Voluntary standard, but the recognised basis to govern AI systems and prepare for the AI Act (Regulation (EU) 2024/1689).', iaNo: 'The organisation neither develops nor deploys AI systems.',
       riaOk: 'It develops or deploys AI in the EU: at least AI literacy and the prohibited practices apply (since 02-02-2025). The rest depends on the role (provider or deployer) and the risk: transparency from 02-08-2026 and Annex III high risk from 02-12-2027 (Regulation (EU) 2026/1744).',
+      nist: 'Voluntary NIST (US) framework: a common language with international and LATAM customers to express current and target profiles.', nistBase: 'NIST CSWP 29 (CSF 2.0)',
       cra: 'It manufactures products with digital elements: reporting actively exploited vulnerabilities and severe incidents (art. 14) has applied since 11-09-2026; the essential requirements, vulnerability handling and CE marking from 11-12-2027.',
       craFuera: 'Outside the EU, the CRA reaches those who place products with digital elements on the Union market.', craBase: 'Regulation (EU) 2024/2847, art. 2', craNo: 'The organisation does not manufacture products with digital elements.',
       riaFuera: 'Outside the EU, the AI Act reaches those who place systems on the Union market or whose output is used in it (art. 2.1).', riaBase: 'Regulation (EU) 2024/1689, art. 2', riaNo: 'The organisation neither develops nor deploys AI systems.',
@@ -718,6 +720,7 @@
     const sgsiLegal = m.partis.estado === 'obligatoria' || m.nis2.estado === 'obligatoria' || m.ens.estado === 'obligatoria' || financiera;
     m.iso27001 = R('voluntaria', T.iso27Base, sgsiLegal ? T.iso27Sgsi : T.iso27);
     m.iso42001 = p.ia ? R('voluntaria', T.iso27Base, T.ia) : R('no-aplica', T.iso27Base, T.iaNo);
+    m.nist = R('voluntaria', T.nistBase, T.nist);
     m.cra = !p.fabricante ? R('no-aplica', T.craBase, T.craNo) : ue ? R('obligatoria', T.craBase, T.cra) : R('confirmar', T.craBase, T.craFuera);
     m.ria = !p.ia ? R('no-aplica', T.riaBase, T.riaNo) : ue ? R('obligatoria', T.riaBase, T.riaOk) : R('confirmar', T.riaBase, T.riaFuera);
     for (const f of propios || []) m[f] = R('voluntaria', T.propioBase, T.propio);

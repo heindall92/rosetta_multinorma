@@ -12,4 +12,4 @@
 
 ## Siguiente paso
 
-- La siguiente versión y las posteriores están en `ROADMAP.md`. La 2.6.0 (CRA) está publicada; la siguiente es la **2.7.0, NIST CSF 2.0**, y después la 2.8.0 con DORA (la única norma que el perfil aún anuncia como futura). Léelo antes de proponer trabajo nuevo en Rosetta.
+- La siguiente versión y las posteriores están en `ROADMAP.md`. La 2.7.0 (NIST CSF 2.0) está publicada; la siguiente es la **2.8.0, DORA**, y después las leyes LATAM. Léelo antes de proponer trabajo nuevo en Rosetta.

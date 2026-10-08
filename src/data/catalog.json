@@ -1,5 +1,5 @@
 {
-  "version": "2.6.0",
+  "version": "2.7.0",
   "domains": [
     {
       "id": "GOB",
@@ -3958,6 +3958,1076 @@
           "nota_en": "The procedure depends on the product class: default, important class I or II (Annex III) or critical (Annex IV)."
         }
       ]
+    },
+    "nist": {
+      "id": "nist",
+      "tope": "parcial",
+      "consulta": "2026-10-09",
+      "fuentes": [
+        "NIST Cybersecurity Framework (CSF) 2.0, NIST CSWP 29 (26 de febrero de 2024): 6 funciones, 22 categorías y 106 subcategorías"
+      ],
+      "reqs": [
+        {
+          "id": "GV.OC-01",
+          "code": "GV.OC-01",
+          "t": "Misión de la organización entendida para guiar la gestión del riesgo",
+          "t_en": "Organizational mission understood to inform risk management",
+          "g": "Gobernar · Contexto organizativo",
+          "g_en": "Govern · Organizational Context",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.OC-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.OC-01"
+        },
+        {
+          "id": "GV.OC-02",
+          "code": "GV.OC-02",
+          "t": "Partes interesadas y sus expectativas en ciberseguridad",
+          "t_en": "Stakeholders and their cybersecurity expectations understood",
+          "g": "Gobernar · Contexto organizativo",
+          "g_en": "Govern · Organizational Context",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.OC-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.OC-02"
+        },
+        {
+          "id": "GV.OC-03",
+          "code": "GV.OC-03",
+          "t": "Requisitos legales, regulatorios y contractuales gestionados",
+          "t_en": "Legal, regulatory and contractual requirements managed",
+          "g": "Gobernar · Contexto organizativo",
+          "g_en": "Govern · Organizational Context",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.OC-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.OC-03"
+        },
+        {
+          "id": "GV.OC-04",
+          "code": "GV.OC-04",
+          "t": "Objetivos, capacidades y servicios críticos de los que dependen otros",
+          "t_en": "Critical objectives, capabilities and services that others depend on",
+          "g": "Gobernar · Contexto organizativo",
+          "g_en": "Govern · Organizational Context",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.OC-04",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.OC-04"
+        },
+        {
+          "id": "GV.OC-05",
+          "code": "GV.OC-05",
+          "t": "Resultados, capacidades y servicios de los que depende la organización",
+          "t_en": "Outcomes, capabilities and services the organization depends on",
+          "g": "Gobernar · Contexto organizativo",
+          "g_en": "Govern · Organizational Context",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.OC-05",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.OC-05"
+        },
+        {
+          "id": "GV.RM-01",
+          "code": "GV.RM-01",
+          "t": "Objetivos de gestión del riesgo acordados",
+          "t_en": "Risk management objectives agreed",
+          "g": "Gobernar · Estrategia de gestión del riesgo",
+          "g_en": "Govern · Risk Management Strategy",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.RM-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.RM-01"
+        },
+        {
+          "id": "GV.RM-02",
+          "code": "GV.RM-02",
+          "t": "Apetito y tolerancia al riesgo",
+          "t_en": "Risk appetite and tolerance",
+          "g": "Gobernar · Estrategia de gestión del riesgo",
+          "g_en": "Govern · Risk Management Strategy",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.RM-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.RM-02"
+        },
+        {
+          "id": "GV.RM-03",
+          "code": "GV.RM-03",
+          "t": "Ciberseguridad integrada en la gestión de riesgos de la empresa",
+          "t_en": "Cybersecurity included in enterprise risk management",
+          "g": "Gobernar · Estrategia de gestión del riesgo",
+          "g_en": "Govern · Risk Management Strategy",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.RM-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.RM-03"
+        },
+        {
+          "id": "GV.RM-04",
+          "code": "GV.RM-04",
+          "t": "Dirección estratégica de las opciones de respuesta al riesgo",
+          "t_en": "Strategic direction for risk response options",
+          "g": "Gobernar · Estrategia de gestión del riesgo",
+          "g_en": "Govern · Risk Management Strategy",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.RM-04",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.RM-04"
+        },
+        {
+          "id": "GV.RM-05",
+          "code": "GV.RM-05",
+          "t": "Líneas de comunicación sobre riesgos, también con proveedores",
+          "t_en": "Lines of communication for cybersecurity risks, including suppliers",
+          "g": "Gobernar · Estrategia de gestión del riesgo",
+          "g_en": "Govern · Risk Management Strategy",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.RM-05",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.RM-05"
+        },
+        {
+          "id": "GV.RM-06",
+          "code": "GV.RM-06",
+          "t": "Método común para calcular, documentar y priorizar riesgos",
+          "t_en": "Standardized method for calculating, documenting and prioritizing risks",
+          "g": "Gobernar · Estrategia de gestión del riesgo",
+          "g_en": "Govern · Risk Management Strategy",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.RM-06",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.RM-06"
+        },
+        {
+          "id": "GV.RM-07",
+          "code": "GV.RM-07",
+          "t": "Oportunidades estratégicas (riesgos positivos)",
+          "t_en": "Strategic opportunities (positive risks)",
+          "g": "Gobernar · Estrategia de gestión del riesgo",
+          "g_en": "Govern · Risk Management Strategy",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.RM-07",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.RM-07"
+        },
+        {
+          "id": "GV.RR-01",
+          "code": "GV.RR-01",
+          "t": "Liderazgo responsable de la ciberseguridad y de la cultura",
+          "t_en": "Leadership accountable for cybersecurity and culture",
+          "g": "Gobernar · Roles, responsabilidades y autoridades",
+          "g_en": "Govern · Roles, Responsibilities, and Authorities",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.RR-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.RR-01"
+        },
+        {
+          "id": "GV.RR-02",
+          "code": "GV.RR-02",
+          "t": "Roles, responsabilidades y autoridades definidos",
+          "t_en": "Roles, responsibilities and authorities established",
+          "g": "Gobernar · Roles, responsabilidades y autoridades",
+          "g_en": "Govern · Roles, Responsibilities, and Authorities",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.RR-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.RR-02"
+        },
+        {
+          "id": "GV.RR-03",
+          "code": "GV.RR-03",
+          "t": "Recursos adecuados para la ciberseguridad",
+          "t_en": "Adequate resources allocated",
+          "g": "Gobernar · Roles, responsabilidades y autoridades",
+          "g_en": "Govern · Roles, Responsibilities, and Authorities",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.RR-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.RR-03"
+        },
+        {
+          "id": "GV.RR-04",
+          "code": "GV.RR-04",
+          "t": "Ciberseguridad en las prácticas de recursos humanos",
+          "t_en": "Cybersecurity included in human resources practices",
+          "g": "Gobernar · Roles, responsabilidades y autoridades",
+          "g_en": "Govern · Roles, Responsibilities, and Authorities",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.RR-04",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.RR-04"
+        },
+        {
+          "id": "GV.PO-01",
+          "code": "GV.PO-01",
+          "t": "Política de ciberseguridad establecida",
+          "t_en": "Cybersecurity policy established",
+          "g": "Gobernar · Política",
+          "g_en": "Govern · Policy",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.PO-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.PO-01"
+        },
+        {
+          "id": "GV.PO-02",
+          "code": "GV.PO-02",
+          "t": "Política revisada, actualizada y comunicada",
+          "t_en": "Policy reviewed, updated and communicated",
+          "g": "Gobernar · Política",
+          "g_en": "Govern · Policy",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.PO-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.PO-02"
+        },
+        {
+          "id": "GV.OV-01",
+          "code": "GV.OV-01",
+          "t": "Resultados de la estrategia revisados para ajustar el rumbo",
+          "t_en": "Strategy outcomes reviewed to adjust direction",
+          "g": "Gobernar · Supervisión",
+          "g_en": "Govern · Oversight",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.OV-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.OV-01"
+        },
+        {
+          "id": "GV.OV-02",
+          "code": "GV.OV-02",
+          "t": "Estrategia revisada frente a requisitos y riesgos",
+          "t_en": "Strategy reviewed against requirements and risks",
+          "g": "Gobernar · Supervisión",
+          "g_en": "Govern · Oversight",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.OV-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.OV-02"
+        },
+        {
+          "id": "GV.OV-03",
+          "code": "GV.OV-03",
+          "t": "Desempeño de la gestión de riesgos evaluado",
+          "t_en": "Risk management performance evaluated",
+          "g": "Gobernar · Supervisión",
+          "g_en": "Govern · Oversight",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.OV-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.OV-03"
+        },
+        {
+          "id": "GV.SC-01",
+          "code": "GV.SC-01",
+          "t": "Programa y política de riesgos de la cadena de suministro",
+          "t_en": "Supply chain risk management program and policy",
+          "g": "Gobernar · Cadena de suministro",
+          "g_en": "Govern · Cybersecurity Supply Chain Risk Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.SC-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.SC-01"
+        },
+        {
+          "id": "GV.SC-02",
+          "code": "GV.SC-02",
+          "t": "Roles con proveedores, clientes y socios",
+          "t_en": "Roles with suppliers, customers and partners",
+          "g": "Gobernar · Cadena de suministro",
+          "g_en": "Govern · Cybersecurity Supply Chain Risk Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.SC-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.SC-02"
+        },
+        {
+          "id": "GV.SC-03",
+          "code": "GV.SC-03",
+          "t": "Riesgos de la cadena integrados en la gestión de riesgos",
+          "t_en": "Supply chain risk integrated into risk management",
+          "g": "Gobernar · Cadena de suministro",
+          "g_en": "Govern · Cybersecurity Supply Chain Risk Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.SC-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.SC-03"
+        },
+        {
+          "id": "GV.SC-04",
+          "code": "GV.SC-04",
+          "t": "Proveedores conocidos y priorizados por criticidad",
+          "t_en": "Suppliers known and prioritized by criticality",
+          "g": "Gobernar · Cadena de suministro",
+          "g_en": "Govern · Cybersecurity Supply Chain Risk Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.SC-04",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.SC-04"
+        },
+        {
+          "id": "GV.SC-05",
+          "code": "GV.SC-05",
+          "t": "Requisitos de ciberseguridad en los contratos",
+          "t_en": "Cybersecurity requirements in contracts",
+          "g": "Gobernar · Cadena de suministro",
+          "g_en": "Govern · Cybersecurity Supply Chain Risk Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.SC-05",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.SC-05"
+        },
+        {
+          "id": "GV.SC-06",
+          "code": "GV.SC-06",
+          "t": "Diligencia debida antes de contratar",
+          "t_en": "Planning and due diligence before formal relationships",
+          "g": "Gobernar · Cadena de suministro",
+          "g_en": "Govern · Cybersecurity Supply Chain Risk Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.SC-06",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.SC-06"
+        },
+        {
+          "id": "GV.SC-07",
+          "code": "GV.SC-07",
+          "t": "Riesgos de cada proveedor registrados y supervisados",
+          "t_en": "Supplier risks recorded and monitored",
+          "g": "Gobernar · Cadena de suministro",
+          "g_en": "Govern · Cybersecurity Supply Chain Risk Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.SC-07",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.SC-07"
+        },
+        {
+          "id": "GV.SC-08",
+          "code": "GV.SC-08",
+          "t": "Proveedores incluidos en la respuesta a incidentes",
+          "t_en": "Suppliers included in incident planning and response",
+          "g": "Gobernar · Cadena de suministro",
+          "g_en": "Govern · Cybersecurity Supply Chain Risk Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.SC-08",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.SC-08"
+        },
+        {
+          "id": "GV.SC-09",
+          "code": "GV.SC-09",
+          "t": "Seguridad de la cadena en el ciclo de vida de productos y servicios",
+          "t_en": "Supply chain security across the product and service lifecycle",
+          "g": "Gobernar · Cadena de suministro",
+          "g_en": "Govern · Cybersecurity Supply Chain Risk Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.SC-09",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.SC-09"
+        },
+        {
+          "id": "GV.SC-10",
+          "code": "GV.SC-10",
+          "t": "Previsiones para el fin de la relación con el proveedor",
+          "t_en": "Provisions for the end of supplier relationships",
+          "g": "Gobernar · Cadena de suministro",
+          "g_en": "Govern · Cybersecurity Supply Chain Risk Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), GV.SC-10",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), GV.SC-10"
+        },
+        {
+          "id": "ID.AM-01",
+          "code": "ID.AM-01",
+          "t": "Inventario de hardware",
+          "t_en": "Hardware inventory",
+          "g": "Identificar · Gestión de activos",
+          "g_en": "Identify · Asset Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.AM-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.AM-01"
+        },
+        {
+          "id": "ID.AM-02",
+          "code": "ID.AM-02",
+          "t": "Inventario de software, servicios y sistemas",
+          "t_en": "Software, services and systems inventory",
+          "g": "Identificar · Gestión de activos",
+          "g_en": "Identify · Asset Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.AM-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.AM-02"
+        },
+        {
+          "id": "ID.AM-03",
+          "code": "ID.AM-03",
+          "t": "Flujos de datos y comunicaciones de red documentados",
+          "t_en": "Network communication and data flows represented",
+          "g": "Identificar · Gestión de activos",
+          "g_en": "Identify · Asset Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.AM-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.AM-03"
+        },
+        {
+          "id": "ID.AM-04",
+          "code": "ID.AM-04",
+          "t": "Inventario de servicios de proveedores",
+          "t_en": "Inventory of supplier services",
+          "g": "Identificar · Gestión de activos",
+          "g_en": "Identify · Asset Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.AM-04",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.AM-04"
+        },
+        {
+          "id": "ID.AM-05",
+          "code": "ID.AM-05",
+          "t": "Activos priorizados por clasificación, criticidad e impacto",
+          "t_en": "Assets prioritized by classification, criticality and impact",
+          "g": "Identificar · Gestión de activos",
+          "g_en": "Identify · Asset Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.AM-05",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.AM-05"
+        },
+        {
+          "id": "ID.AM-07",
+          "code": "ID.AM-07",
+          "t": "Inventario de datos y metadatos",
+          "t_en": "Inventory of data and metadata",
+          "g": "Identificar · Gestión de activos",
+          "g_en": "Identify · Asset Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.AM-07",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.AM-07"
+        },
+        {
+          "id": "ID.AM-08",
+          "code": "ID.AM-08",
+          "t": "Activos gestionados durante todo su ciclo de vida",
+          "t_en": "Assets managed throughout their lifecycle",
+          "g": "Identificar · Gestión de activos",
+          "g_en": "Identify · Asset Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.AM-08",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.AM-08"
+        },
+        {
+          "id": "ID.RA-01",
+          "code": "ID.RA-01",
+          "t": "Vulnerabilidades de los activos identificadas y registradas",
+          "t_en": "Asset vulnerabilities identified and recorded",
+          "g": "Identificar · Evaluación de riesgos",
+          "g_en": "Identify · Risk Assessment",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.RA-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.RA-01"
+        },
+        {
+          "id": "ID.RA-02",
+          "code": "ID.RA-02",
+          "t": "Inteligencia de amenazas de fuentes externas",
+          "t_en": "Cyber threat intelligence from sharing forums",
+          "g": "Identificar · Evaluación de riesgos",
+          "g_en": "Identify · Risk Assessment",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.RA-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.RA-02"
+        },
+        {
+          "id": "ID.RA-03",
+          "code": "ID.RA-03",
+          "t": "Amenazas internas y externas identificadas",
+          "t_en": "Internal and external threats identified",
+          "g": "Identificar · Evaluación de riesgos",
+          "g_en": "Identify · Risk Assessment",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.RA-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.RA-03"
+        },
+        {
+          "id": "ID.RA-04",
+          "code": "ID.RA-04",
+          "t": "Impactos y probabilidades identificados",
+          "t_en": "Impacts and likelihoods identified",
+          "g": "Identificar · Evaluación de riesgos",
+          "g_en": "Identify · Risk Assessment",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.RA-04",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.RA-04"
+        },
+        {
+          "id": "ID.RA-05",
+          "code": "ID.RA-05",
+          "t": "Riesgo determinado para priorizar la respuesta",
+          "t_en": "Risk understood to prioritize response",
+          "g": "Identificar · Evaluación de riesgos",
+          "g_en": "Identify · Risk Assessment",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.RA-05",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.RA-05"
+        },
+        {
+          "id": "ID.RA-06",
+          "code": "ID.RA-06",
+          "t": "Respuestas al riesgo elegidas, planificadas y seguidas",
+          "t_en": "Risk responses chosen, planned and tracked",
+          "g": "Identificar · Evaluación de riesgos",
+          "g_en": "Identify · Risk Assessment",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.RA-06",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.RA-06"
+        },
+        {
+          "id": "ID.RA-07",
+          "code": "ID.RA-07",
+          "t": "Cambios y excepciones evaluados por su riesgo",
+          "t_en": "Changes and exceptions assessed for risk impact",
+          "g": "Identificar · Evaluación de riesgos",
+          "g_en": "Identify · Risk Assessment",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.RA-07",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.RA-07"
+        },
+        {
+          "id": "ID.RA-08",
+          "code": "ID.RA-08",
+          "t": "Proceso para recibir y responder a divulgaciones de vulnerabilidades",
+          "t_en": "Process to receive and respond to vulnerability disclosures",
+          "g": "Identificar · Evaluación de riesgos",
+          "g_en": "Identify · Risk Assessment",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.RA-08",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.RA-08"
+        },
+        {
+          "id": "ID.RA-09",
+          "code": "ID.RA-09",
+          "t": "Autenticidad e integridad del hardware y el software antes de usarlos",
+          "t_en": "Authenticity and integrity of hardware and software assessed before use",
+          "g": "Identificar · Evaluación de riesgos",
+          "g_en": "Identify · Risk Assessment",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.RA-09",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.RA-09"
+        },
+        {
+          "id": "ID.RA-10",
+          "code": "ID.RA-10",
+          "t": "Proveedores críticos evaluados antes de contratar",
+          "t_en": "Critical suppliers assessed before acquisition",
+          "g": "Identificar · Evaluación de riesgos",
+          "g_en": "Identify · Risk Assessment",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.RA-10",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.RA-10"
+        },
+        {
+          "id": "ID.IM-01",
+          "code": "ID.IM-01",
+          "t": "Mejoras a partir de las evaluaciones",
+          "t_en": "Improvements identified from evaluations",
+          "g": "Identificar · Mejora",
+          "g_en": "Identify · Improvement",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.IM-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.IM-01"
+        },
+        {
+          "id": "ID.IM-02",
+          "code": "ID.IM-02",
+          "t": "Mejoras a partir de pruebas y ejercicios",
+          "t_en": "Improvements identified from tests and exercises",
+          "g": "Identificar · Mejora",
+          "g_en": "Identify · Improvement",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.IM-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.IM-02"
+        },
+        {
+          "id": "ID.IM-03",
+          "code": "ID.IM-03",
+          "t": "Mejoras a partir de la operación de los procesos",
+          "t_en": "Improvements identified from executing processes",
+          "g": "Identificar · Mejora",
+          "g_en": "Identify · Improvement",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.IM-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.IM-03"
+        },
+        {
+          "id": "ID.IM-04",
+          "code": "ID.IM-04",
+          "t": "Planes de respuesta y de ciberseguridad mantenidos y mejorados",
+          "t_en": "Incident response and other plans maintained and improved",
+          "g": "Identificar · Mejora",
+          "g_en": "Identify · Improvement",
+          "ref": "NIST CSF 2.0 (CSWP 29), ID.IM-04",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), ID.IM-04"
+        },
+        {
+          "id": "PR.AA-01",
+          "code": "PR.AA-01",
+          "t": "Identidades y credenciales gestionadas",
+          "t_en": "Identities and credentials managed",
+          "g": "Proteger · Identidad, autenticación y acceso",
+          "g_en": "Protect · Identity Management, Authentication, and Access Control",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.AA-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.AA-01"
+        },
+        {
+          "id": "PR.AA-02",
+          "code": "PR.AA-02",
+          "t": "Identidades verificadas y vinculadas a credenciales",
+          "t_en": "Identities proofed and bound to credentials",
+          "g": "Proteger · Identidad, autenticación y acceso",
+          "g_en": "Protect · Identity Management, Authentication, and Access Control",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.AA-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.AA-02"
+        },
+        {
+          "id": "PR.AA-03",
+          "code": "PR.AA-03",
+          "t": "Usuarios, servicios y hardware autenticados",
+          "t_en": "Users, services and hardware authenticated",
+          "g": "Proteger · Identidad, autenticación y acceso",
+          "g_en": "Protect · Identity Management, Authentication, and Access Control",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.AA-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.AA-03"
+        },
+        {
+          "id": "PR.AA-04",
+          "code": "PR.AA-04",
+          "t": "Aserciones de identidad protegidas y verificadas",
+          "t_en": "Identity assertions protected and verified",
+          "g": "Proteger · Identidad, autenticación y acceso",
+          "g_en": "Protect · Identity Management, Authentication, and Access Control",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.AA-04",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.AA-04"
+        },
+        {
+          "id": "PR.AA-05",
+          "code": "PR.AA-05",
+          "t": "Permisos con mínimo privilegio y segregación de funciones",
+          "t_en": "Access permissions with least privilege and separation of duties",
+          "g": "Proteger · Identidad, autenticación y acceso",
+          "g_en": "Protect · Identity Management, Authentication, and Access Control",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.AA-05",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.AA-05"
+        },
+        {
+          "id": "PR.AA-06",
+          "code": "PR.AA-06",
+          "t": "Acceso físico gestionado según el riesgo",
+          "t_en": "Physical access managed according to risk",
+          "g": "Proteger · Identidad, autenticación y acceso",
+          "g_en": "Protect · Identity Management, Authentication, and Access Control",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.AA-06",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.AA-06"
+        },
+        {
+          "id": "PR.AT-01",
+          "code": "PR.AT-01",
+          "t": "Concienciación y formación general del personal",
+          "t_en": "General awareness and training of personnel",
+          "g": "Proteger · Concienciación y formación",
+          "g_en": "Protect · Awareness and Training",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.AT-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.AT-01"
+        },
+        {
+          "id": "PR.AT-02",
+          "code": "PR.AT-02",
+          "t": "Formación de las personas con funciones especializadas",
+          "t_en": "Training for specialized roles",
+          "g": "Proteger · Concienciación y formación",
+          "g_en": "Protect · Awareness and Training",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.AT-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.AT-02"
+        },
+        {
+          "id": "PR.DS-01",
+          "code": "PR.DS-01",
+          "t": "Datos en reposo protegidos",
+          "t_en": "Data at rest protected",
+          "g": "Proteger · Seguridad de los datos",
+          "g_en": "Protect · Data Security",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.DS-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.DS-01"
+        },
+        {
+          "id": "PR.DS-02",
+          "code": "PR.DS-02",
+          "t": "Datos en tránsito protegidos",
+          "t_en": "Data in transit protected",
+          "g": "Proteger · Seguridad de los datos",
+          "g_en": "Protect · Data Security",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.DS-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.DS-02"
+        },
+        {
+          "id": "PR.DS-10",
+          "code": "PR.DS-10",
+          "t": "Datos en uso protegidos",
+          "t_en": "Data in use protected",
+          "g": "Proteger · Seguridad de los datos",
+          "g_en": "Protect · Data Security",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.DS-10",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.DS-10"
+        },
+        {
+          "id": "PR.DS-11",
+          "code": "PR.DS-11",
+          "t": "Copias de seguridad creadas, protegidas y probadas",
+          "t_en": "Backups created, protected and tested",
+          "g": "Proteger · Seguridad de los datos",
+          "g_en": "Protect · Data Security",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.DS-11",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.DS-11"
+        },
+        {
+          "id": "PR.PS-01",
+          "code": "PR.PS-01",
+          "t": "Gestión de la configuración",
+          "t_en": "Configuration management",
+          "g": "Proteger · Seguridad de las plataformas",
+          "g_en": "Protect · Platform Security",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.PS-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.PS-01"
+        },
+        {
+          "id": "PR.PS-02",
+          "code": "PR.PS-02",
+          "t": "Software mantenido, sustituido y retirado según el riesgo",
+          "t_en": "Software maintained, replaced and removed according to risk",
+          "g": "Proteger · Seguridad de las plataformas",
+          "g_en": "Protect · Platform Security",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.PS-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.PS-02"
+        },
+        {
+          "id": "PR.PS-03",
+          "code": "PR.PS-03",
+          "t": "Hardware mantenido, sustituido y retirado según el riesgo",
+          "t_en": "Hardware maintained, replaced and removed according to risk",
+          "g": "Proteger · Seguridad de las plataformas",
+          "g_en": "Protect · Platform Security",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.PS-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.PS-03"
+        },
+        {
+          "id": "PR.PS-04",
+          "code": "PR.PS-04",
+          "t": "Registros generados para la supervisión continua",
+          "t_en": "Log records generated for continuous monitoring",
+          "g": "Proteger · Seguridad de las plataformas",
+          "g_en": "Protect · Platform Security",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.PS-04",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.PS-04"
+        },
+        {
+          "id": "PR.PS-05",
+          "code": "PR.PS-05",
+          "t": "Software no autorizado impedido",
+          "t_en": "Unauthorized software prevented",
+          "g": "Proteger · Seguridad de las plataformas",
+          "g_en": "Protect · Platform Security",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.PS-05",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.PS-05"
+        },
+        {
+          "id": "PR.PS-06",
+          "code": "PR.PS-06",
+          "t": "Desarrollo seguro integrado en el ciclo de vida",
+          "t_en": "Secure software development integrated",
+          "g": "Proteger · Seguridad de las plataformas",
+          "g_en": "Protect · Platform Security",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.PS-06",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.PS-06"
+        },
+        {
+          "id": "PR.IR-01",
+          "code": "PR.IR-01",
+          "t": "Redes y entornos protegidos frente a accesos no autorizados",
+          "t_en": "Networks and environments protected from unauthorized access",
+          "g": "Proteger · Resiliencia de la infraestructura",
+          "g_en": "Protect · Technology Infrastructure Resilience",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.IR-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.IR-01"
+        },
+        {
+          "id": "PR.IR-02",
+          "code": "PR.IR-02",
+          "t": "Activos protegidos frente a amenazas ambientales",
+          "t_en": "Assets protected from environmental threats",
+          "g": "Proteger · Resiliencia de la infraestructura",
+          "g_en": "Protect · Technology Infrastructure Resilience",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.IR-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.IR-02"
+        },
+        {
+          "id": "PR.IR-03",
+          "code": "PR.IR-03",
+          "t": "Mecanismos de resiliencia en situaciones normales y adversas",
+          "t_en": "Resilience mechanisms in normal and adverse situations",
+          "g": "Proteger · Resiliencia de la infraestructura",
+          "g_en": "Protect · Technology Infrastructure Resilience",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.IR-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.IR-03"
+        },
+        {
+          "id": "PR.IR-04",
+          "code": "PR.IR-04",
+          "t": "Capacidad de recursos suficiente",
+          "t_en": "Adequate resource capacity",
+          "g": "Proteger · Resiliencia de la infraestructura",
+          "g_en": "Protect · Technology Infrastructure Resilience",
+          "ref": "NIST CSF 2.0 (CSWP 29), PR.IR-04",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), PR.IR-04"
+        },
+        {
+          "id": "DE.CM-01",
+          "code": "DE.CM-01",
+          "t": "Redes y servicios de red supervisados",
+          "t_en": "Networks and network services monitored",
+          "g": "Detectar · Monitorización continua",
+          "g_en": "Detect · Continuous Monitoring",
+          "ref": "NIST CSF 2.0 (CSWP 29), DE.CM-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), DE.CM-01"
+        },
+        {
+          "id": "DE.CM-02",
+          "code": "DE.CM-02",
+          "t": "Entorno físico supervisado",
+          "t_en": "Physical environment monitored",
+          "g": "Detectar · Monitorización continua",
+          "g_en": "Detect · Continuous Monitoring",
+          "ref": "NIST CSF 2.0 (CSWP 29), DE.CM-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), DE.CM-02"
+        },
+        {
+          "id": "DE.CM-03",
+          "code": "DE.CM-03",
+          "t": "Actividad del personal y uso de la tecnología supervisados",
+          "t_en": "Personnel activity and technology usage monitored",
+          "g": "Detectar · Monitorización continua",
+          "g_en": "Detect · Continuous Monitoring",
+          "ref": "NIST CSF 2.0 (CSWP 29), DE.CM-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), DE.CM-03"
+        },
+        {
+          "id": "DE.CM-06",
+          "code": "DE.CM-06",
+          "t": "Actividades de los proveedores externos supervisadas",
+          "t_en": "External service provider activities monitored",
+          "g": "Detectar · Monitorización continua",
+          "g_en": "Detect · Continuous Monitoring",
+          "ref": "NIST CSF 2.0 (CSWP 29), DE.CM-06",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), DE.CM-06"
+        },
+        {
+          "id": "DE.CM-09",
+          "code": "DE.CM-09",
+          "t": "Hardware, software y entornos de ejecución supervisados",
+          "t_en": "Computing hardware, software and runtime environments monitored",
+          "g": "Detectar · Monitorización continua",
+          "g_en": "Detect · Continuous Monitoring",
+          "ref": "NIST CSF 2.0 (CSWP 29), DE.CM-09",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), DE.CM-09"
+        },
+        {
+          "id": "DE.AE-02",
+          "code": "DE.AE-02",
+          "t": "Eventos adversos analizados",
+          "t_en": "Adverse events analyzed",
+          "g": "Detectar · Análisis de eventos adversos",
+          "g_en": "Detect · Adverse Event Analysis",
+          "ref": "NIST CSF 2.0 (CSWP 29), DE.AE-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), DE.AE-02"
+        },
+        {
+          "id": "DE.AE-03",
+          "code": "DE.AE-03",
+          "t": "Información correlacionada de varias fuentes",
+          "t_en": "Information correlated from multiple sources",
+          "g": "Detectar · Análisis de eventos adversos",
+          "g_en": "Detect · Adverse Event Analysis",
+          "ref": "NIST CSF 2.0 (CSWP 29), DE.AE-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), DE.AE-03"
+        },
+        {
+          "id": "DE.AE-04",
+          "code": "DE.AE-04",
+          "t": "Impacto y alcance de los eventos estimados",
+          "t_en": "Impact and scope of events estimated",
+          "g": "Detectar · Análisis de eventos adversos",
+          "g_en": "Detect · Adverse Event Analysis",
+          "ref": "NIST CSF 2.0 (CSWP 29), DE.AE-04",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), DE.AE-04"
+        },
+        {
+          "id": "DE.AE-06",
+          "code": "DE.AE-06",
+          "t": "Información de eventos adversos comunicada a quien corresponde",
+          "t_en": "Adverse event information provided to authorized staff and tools",
+          "g": "Detectar · Análisis de eventos adversos",
+          "g_en": "Detect · Adverse Event Analysis",
+          "ref": "NIST CSF 2.0 (CSWP 29), DE.AE-06",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), DE.AE-06"
+        },
+        {
+          "id": "DE.AE-07",
+          "code": "DE.AE-07",
+          "t": "Inteligencia de amenazas integrada en el análisis",
+          "t_en": "Threat intelligence integrated into analysis",
+          "g": "Detectar · Análisis de eventos adversos",
+          "g_en": "Detect · Adverse Event Analysis",
+          "ref": "NIST CSF 2.0 (CSWP 29), DE.AE-07",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), DE.AE-07"
+        },
+        {
+          "id": "DE.AE-08",
+          "code": "DE.AE-08",
+          "t": "Incidentes declarados según criterios definidos",
+          "t_en": "Incidents declared when criteria are met",
+          "g": "Detectar · Análisis de eventos adversos",
+          "g_en": "Detect · Adverse Event Analysis",
+          "ref": "NIST CSF 2.0 (CSWP 29), DE.AE-08",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), DE.AE-08"
+        },
+        {
+          "id": "RS.MA-01",
+          "code": "RS.MA-01",
+          "t": "Plan de respuesta ejecutado con los terceros pertinentes",
+          "t_en": "Incident response plan executed with relevant third parties",
+          "g": "Responder · Gestión de incidentes",
+          "g_en": "Respond · Incident Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), RS.MA-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RS.MA-01"
+        },
+        {
+          "id": "RS.MA-02",
+          "code": "RS.MA-02",
+          "t": "Informes de incidentes clasificados y validados",
+          "t_en": "Incident reports triaged and validated",
+          "g": "Responder · Gestión de incidentes",
+          "g_en": "Respond · Incident Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), RS.MA-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RS.MA-02"
+        },
+        {
+          "id": "RS.MA-03",
+          "code": "RS.MA-03",
+          "t": "Incidentes categorizados y priorizados",
+          "t_en": "Incidents categorized and prioritized",
+          "g": "Responder · Gestión de incidentes",
+          "g_en": "Respond · Incident Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), RS.MA-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RS.MA-03"
+        },
+        {
+          "id": "RS.MA-04",
+          "code": "RS.MA-04",
+          "t": "Incidentes escalados cuando hace falta",
+          "t_en": "Incidents escalated as needed",
+          "g": "Responder · Gestión de incidentes",
+          "g_en": "Respond · Incident Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), RS.MA-04",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RS.MA-04"
+        },
+        {
+          "id": "RS.MA-05",
+          "code": "RS.MA-05",
+          "t": "Criterios para iniciar la recuperación aplicados",
+          "t_en": "Criteria for initiating recovery applied",
+          "g": "Responder · Gestión de incidentes",
+          "g_en": "Respond · Incident Management",
+          "ref": "NIST CSF 2.0 (CSWP 29), RS.MA-05",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RS.MA-05"
+        },
+        {
+          "id": "RS.AN-03",
+          "code": "RS.AN-03",
+          "t": "Análisis de lo ocurrido y de la causa raíz",
+          "t_en": "Analysis of what happened and the root cause",
+          "g": "Responder · Análisis de incidentes",
+          "g_en": "Respond · Incident Analysis",
+          "ref": "NIST CSF 2.0 (CSWP 29), RS.AN-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RS.AN-03"
+        },
+        {
+          "id": "RS.AN-06",
+          "code": "RS.AN-06",
+          "t": "Acciones de la investigación registradas con integridad y procedencia",
+          "t_en": "Investigation actions recorded with integrity and provenance",
+          "g": "Responder · Análisis de incidentes",
+          "g_en": "Respond · Incident Analysis",
+          "ref": "NIST CSF 2.0 (CSWP 29), RS.AN-06",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RS.AN-06"
+        },
+        {
+          "id": "RS.AN-07",
+          "code": "RS.AN-07",
+          "t": "Datos del incidente recogidos con integridad y procedencia",
+          "t_en": "Incident data collected with integrity and provenance",
+          "g": "Responder · Análisis de incidentes",
+          "g_en": "Respond · Incident Analysis",
+          "ref": "NIST CSF 2.0 (CSWP 29), RS.AN-07",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RS.AN-07"
+        },
+        {
+          "id": "RS.AN-08",
+          "code": "RS.AN-08",
+          "t": "Magnitud del incidente estimada y validada",
+          "t_en": "Incident magnitude estimated and validated",
+          "g": "Responder · Análisis de incidentes",
+          "g_en": "Respond · Incident Analysis",
+          "ref": "NIST CSF 2.0 (CSWP 29), RS.AN-08",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RS.AN-08"
+        },
+        {
+          "id": "RS.CO-02",
+          "code": "RS.CO-02",
+          "t": "Partes interesadas internas y externas notificadas",
+          "t_en": "Internal and external stakeholders notified",
+          "g": "Responder · Comunicación de la respuesta",
+          "g_en": "Respond · Incident Response Reporting and Communication",
+          "ref": "NIST CSF 2.0 (CSWP 29), RS.CO-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RS.CO-02"
+        },
+        {
+          "id": "RS.CO-03",
+          "code": "RS.CO-03",
+          "t": "Información compartida con las partes designadas",
+          "t_en": "Information shared with designated stakeholders",
+          "g": "Responder · Comunicación de la respuesta",
+          "g_en": "Respond · Incident Response Reporting and Communication",
+          "ref": "NIST CSF 2.0 (CSWP 29), RS.CO-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RS.CO-03"
+        },
+        {
+          "id": "RS.MI-01",
+          "code": "RS.MI-01",
+          "t": "Incidentes contenidos",
+          "t_en": "Incidents contained",
+          "g": "Responder · Mitigación de incidentes",
+          "g_en": "Respond · Incident Mitigation",
+          "ref": "NIST CSF 2.0 (CSWP 29), RS.MI-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RS.MI-01"
+        },
+        {
+          "id": "RS.MI-02",
+          "code": "RS.MI-02",
+          "t": "Incidentes erradicados",
+          "t_en": "Incidents eradicated",
+          "g": "Responder · Mitigación de incidentes",
+          "g_en": "Respond · Incident Mitigation",
+          "ref": "NIST CSF 2.0 (CSWP 29), RS.MI-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RS.MI-02"
+        },
+        {
+          "id": "RC.RP-01",
+          "code": "RC.RP-01",
+          "t": "Fase de recuperación del plan de respuesta ejecutada",
+          "t_en": "Recovery portion of the response plan executed",
+          "g": "Recuperar · Ejecución del plan de recuperación",
+          "g_en": "Recover · Incident Recovery Plan Execution",
+          "ref": "NIST CSF 2.0 (CSWP 29), RC.RP-01",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RC.RP-01"
+        },
+        {
+          "id": "RC.RP-02",
+          "code": "RC.RP-02",
+          "t": "Acciones de recuperación seleccionadas, priorizadas y realizadas",
+          "t_en": "Recovery actions selected, prioritized and performed",
+          "g": "Recuperar · Ejecución del plan de recuperación",
+          "g_en": "Recover · Incident Recovery Plan Execution",
+          "ref": "NIST CSF 2.0 (CSWP 29), RC.RP-02",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RC.RP-02"
+        },
+        {
+          "id": "RC.RP-03",
+          "code": "RC.RP-03",
+          "t": "Integridad de las copias verificada antes de restaurar",
+          "t_en": "Integrity of backups verified before restoring",
+          "g": "Recuperar · Ejecución del plan de recuperación",
+          "g_en": "Recover · Incident Recovery Plan Execution",
+          "ref": "NIST CSF 2.0 (CSWP 29), RC.RP-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RC.RP-03"
+        },
+        {
+          "id": "RC.RP-04",
+          "code": "RC.RP-04",
+          "t": "Funciones críticas consideradas para la operación tras el incidente",
+          "t_en": "Critical functions considered for post-incident operations",
+          "g": "Recuperar · Ejecución del plan de recuperación",
+          "g_en": "Recover · Incident Recovery Plan Execution",
+          "ref": "NIST CSF 2.0 (CSWP 29), RC.RP-04",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RC.RP-04"
+        },
+        {
+          "id": "RC.RP-05",
+          "code": "RC.RP-05",
+          "t": "Integridad de los activos restaurados verificada",
+          "t_en": "Integrity of restored assets verified",
+          "g": "Recuperar · Ejecución del plan de recuperación",
+          "g_en": "Recover · Incident Recovery Plan Execution",
+          "ref": "NIST CSF 2.0 (CSWP 29), RC.RP-05",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RC.RP-05"
+        },
+        {
+          "id": "RC.RP-06",
+          "code": "RC.RP-06",
+          "t": "Fin de la recuperación declarado y documentado",
+          "t_en": "End of recovery declared and documented",
+          "g": "Recuperar · Ejecución del plan de recuperación",
+          "g_en": "Recover · Incident Recovery Plan Execution",
+          "ref": "NIST CSF 2.0 (CSWP 29), RC.RP-06",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RC.RP-06"
+        },
+        {
+          "id": "RC.CO-03",
+          "code": "RC.CO-03",
+          "t": "Actividades de recuperación comunicadas a las partes interesadas",
+          "t_en": "Recovery activities communicated to stakeholders",
+          "g": "Recuperar · Comunicación de la recuperación",
+          "g_en": "Recover · Incident Recovery Communication",
+          "ref": "NIST CSF 2.0 (CSWP 29), RC.CO-03",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RC.CO-03"
+        },
+        {
+          "id": "RC.CO-04",
+          "code": "RC.CO-04",
+          "t": "Actualizaciones públicas por los canales aprobados",
+          "t_en": "Public updates shared through approved methods",
+          "g": "Recuperar · Comunicación de la recuperación",
+          "g_en": "Recover · Incident Recovery Communication",
+          "ref": "NIST CSF 2.0 (CSWP 29), RC.CO-04",
+          "ref_en": "NIST CSF 2.0 (CSWP 29), RC.CO-04"
+        }
+      ]
     }
   },
   "controls": [
@@ -4007,7 +5077,17 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.PO-01",
+            "w": 1
+          },
+          {
+            "id": "GV.PO-02",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Security policy approved by management",
       "obj_en": "A single, formally approved policy setting objectives, legal framework, roles and commitment to improvement.",
@@ -4063,7 +5143,17 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.RR-02",
+            "w": 1
+          },
+          {
+            "id": "GV.SC-02",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Security roles, responsibilities and committee",
       "obj_en": "Designated security roles (information, service, security and system owners) and a committee with defined duties.",
@@ -4111,7 +5201,17 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.RM-02",
+            "w": 0.5
+          },
+          {
+            "id": "GV.RR-01",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Management commitment and oversight",
       "obj_en": "Management approves the measures, oversees their implementation and is accountable for compliance.",
@@ -4145,7 +5245,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Management body training",
       "obj_en": "Members of management receive regular training to identify risks and assess management practices.",
@@ -4187,7 +5288,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.PO-02",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Security rules and procedures",
       "obj_en": "Written, approved usage rules and operating procedures known to those who apply them.",
@@ -4245,7 +5352,21 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.OC-01",
+            "w": 1
+          },
+          {
+            "id": "GV.OC-02",
+            "w": 1
+          },
+          {
+            "id": "GV.OC-04",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Context, scope and interested parties",
       "obj_en": "The management system defines its scope from the organisation context and interested parties’ expectations.",
@@ -4287,7 +5408,17 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.RM-01",
+            "w": 1
+          },
+          {
+            "id": "GV.RM-07",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Management system objectives and planned changes",
       "obj_en": "Measurable objectives with a plan to achieve them, and planned changes to the management system.",
@@ -4349,7 +5480,8 @@
             "id": "31",
             "w": 0.5
           }
-        ]
+        ],
+        "nist": []
       },
       "t_en": "Documented information",
       "obj_en": "Required documents and records are created, approved, versioned and retained in a controlled way.",
@@ -4382,7 +5514,13 @@
         ],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.RM-05",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Internal and external communication",
       "obj_en": "It is decided what is communicated about security, to whom, when and through which channel.",
@@ -4420,7 +5558,13 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.RR-03",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Resources for security",
       "obj_en": "Enough budget, people and tools to run and improve the management system.",
@@ -4461,6 +5605,12 @@
         "cra": [
           {
             "id": "II.6",
+            "w": 0.5
+          }
+        ],
+        "nist": [
+          {
+            "id": "RS.CO-03",
             "w": 0.5
           }
         ]
@@ -4505,7 +5655,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "System and component authorisation process",
       "obj_en": "Nothing goes into production, gets connected or used without prior authorisation from its owner.",
@@ -4539,7 +5690,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Security in project management",
       "obj_en": "Security requirements are built into every project from the start.",
@@ -4575,7 +5727,8 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       }
     },
     {
@@ -4612,7 +5765,8 @@
             "id": "31",
             "w": 1
           }
-        ]
+        ],
+        "nist": []
       }
     },
     {
@@ -4660,6 +5814,40 @@
           {
             "id": "13.r",
             "w": 0.5
+          }
+        ],
+        "nist": [
+          {
+            "id": "GV.RM-01",
+            "w": 0.5
+          },
+          {
+            "id": "GV.RM-02",
+            "w": 1
+          },
+          {
+            "id": "GV.RM-03",
+            "w": 1
+          },
+          {
+            "id": "GV.RM-06",
+            "w": 1
+          },
+          {
+            "id": "GV.RM-07",
+            "w": 1
+          },
+          {
+            "id": "ID.RA-03",
+            "w": 1
+          },
+          {
+            "id": "ID.RA-04",
+            "w": 1
+          },
+          {
+            "id": "ID.RA-05",
+            "w": 1
           }
         ]
       },
@@ -4721,7 +5909,17 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.RM-04",
+            "w": 1
+          },
+          {
+            "id": "ID.RA-06",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Risk treatment and Statement of Applicability",
       "obj_en": "An approved treatment plan and a statement justifying which controls apply and which do not.",
@@ -4754,7 +5952,21 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "ID.RA-02",
+            "w": 1
+          },
+          {
+            "id": "ID.RA-03",
+            "w": 0.5
+          },
+          {
+            "id": "DE.AE-07",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Threat intelligence",
       "obj_en": "Information about threats is collected and analysed to anticipate them.",
@@ -4791,7 +6003,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.OC-03",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Legal, regulatory and contractual requirements",
       "obj_en": "Inventory of applicable obligations and how each is met, including intellectual property.",
@@ -4824,6 +6042,12 @@
           {
             "id": "I.2.g",
             "w": 1
+          }
+        ],
+        "nist": [
+          {
+            "id": "ID.AM-07",
+            "w": 0.5
           }
         ]
       },
@@ -4859,7 +6083,8 @@
             "w": 0.5
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Protection of records",
       "obj_en": "Records are protected against loss, alteration or improper access during their retention period.",
@@ -4907,7 +6132,13 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.OV-03",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Metrics and effectiveness assessment",
       "obj_en": "Indicators that show whether measures work, with regular review of results.",
@@ -4959,7 +6190,13 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "ID.IM-01",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Internal audit and independent review",
       "obj_en": "Audits planned and run by independent staff, protecting systems during testing.",
@@ -4998,7 +6235,17 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.OV-01",
+            "w": 1
+          },
+          {
+            "id": "GV.OV-02",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Management review",
       "obj_en": "Management periodically reviews the management system and decides improvements.",
@@ -5036,7 +6283,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "DE.CM-03",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Policy compliance monitoring",
       "obj_en": "Compliance with policies and rules is checked regularly and deviations are corrected.",
@@ -5092,7 +6345,17 @@
             "w": 1
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "ID.IM-01",
+            "w": 0.5
+          },
+          {
+            "id": "ID.IM-03",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Nonconformities, corrective action and improvement",
       "obj_en": "Every nonconformity is analysed, corrected without delay and feeds continual improvement.",
@@ -5132,7 +6395,8 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       }
     },
     {
@@ -5161,7 +6425,8 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       }
     },
     {
@@ -5197,7 +6462,17 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.RR-04",
+            "w": 1
+          },
+          {
+            "id": "PR.AA-02",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Background verification",
       "obj_en": "Background checks proportionate to the role before joining.",
@@ -5243,7 +6518,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.RR-04",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Duties, terms and confidentiality",
       "obj_en": "Security and confidentiality obligations signed by employees and contractors.",
@@ -5291,7 +6572,13 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "PR.AT-01",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Awareness and cyber hygiene",
       "obj_en": "Regular awareness campaigns and basic digital hygiene practices.",
@@ -5348,7 +6635,13 @@
             "w": 0.5
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "PR.AT-02",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Training and competence",
       "obj_en": "Role-specific training, with proven competence for technical staff.",
@@ -5382,7 +6675,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Disciplinary process",
       "obj_en": "A formal, known procedure to respond to security breaches.",
@@ -5424,7 +6718,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.RR-04",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Termination, role change and return of assets",
       "obj_en": "Access removed and assets recovered when the relationship ends or changes.",
@@ -5465,7 +6765,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Remote working",
       "obj_en": "Security conditions for working away from the premises.",
@@ -5517,7 +6818,25 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "ID.AM-01",
+            "w": 1
+          },
+          {
+            "id": "ID.AM-02",
+            "w": 1
+          },
+          {
+            "id": "ID.AM-07",
+            "w": 1
+          },
+          {
+            "id": "ID.AM-08",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Asset inventory",
       "obj_en": "An up-to-date inventory of information, systems and services, each with an owner.",
@@ -5563,7 +6882,17 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "ID.AM-05",
+            "w": 1
+          },
+          {
+            "id": "ID.AM-07",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Information classification and labelling",
       "obj_en": "Information is classified by sensitivity and labelled accordingly.",
@@ -5601,7 +6930,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Acceptable use and handling of assets",
       "obj_en": "Clear rules for using and handling information and equipment.",
@@ -5655,7 +6985,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "PR.DS-01",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Information media",
       "obj_en": "Controlled custody, transport and use of media, including removable media.",
@@ -5701,6 +7037,16 @@
           {
             "id": "I.2.m",
             "w": 1
+          }
+        ],
+        "nist": [
+          {
+            "id": "ID.AM-08",
+            "w": 0.5
+          },
+          {
+            "id": "PR.PS-03",
+            "w": 0.5
           }
         ]
       },
@@ -5751,7 +7097,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "ID.AM-03",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Information transfer",
       "obj_en": "Rules and secure means to exchange information with third parties.",
@@ -5796,7 +7148,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "PR.DS-10",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Data masking and leakage prevention",
       "obj_en": "Sensitive data is masked where not needed and its egress is monitored.",
@@ -5830,7 +7188,17 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "PR.DS-11",
+            "w": 1
+          },
+          {
+            "id": "RC.RP-03",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Backups",
       "obj_en": "Regular, protected backups with tested restores.",
@@ -5876,7 +7244,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Electronic signature and time stamps",
       "obj_en": "Qualified signature and time stamping where the law or the service requires them.",
@@ -5912,7 +7281,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       }
     },
     {
@@ -5947,7 +7317,17 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "PR.AA-01",
+            "w": 1
+          },
+          {
+            "id": "PR.AA-02",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Identification and identity management",
       "obj_en": "Every user has a unique, traceable identity managed throughout its life cycle.",
@@ -5994,6 +7374,12 @@
             "id": "I.2.d",
             "w": 0.5
           }
+        ],
+        "nist": [
+          {
+            "id": "PR.AA-05",
+            "w": 1
+          }
         ]
       },
       "t_en": "Access control and least privilege",
@@ -6032,7 +7418,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "PR.AA-05",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Access rights management and review",
       "obj_en": "Permissions are granted, changed and reviewed periodically with approval.",
@@ -6066,7 +7458,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "PR.AA-05",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Segregation of duties",
       "obj_en": "No single person controls a critical operation end to end.",
@@ -6116,7 +7514,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Privileged accounts and administration systems",
       "obj_en": "Separate, monitored administration accounts used from dedicated systems.",
@@ -6167,6 +7566,16 @@
             "id": "I.2.d",
             "w": 1
           }
+        ],
+        "nist": [
+          {
+            "id": "PR.AA-03",
+            "w": 1
+          },
+          {
+            "id": "PR.AA-04",
+            "w": 1
+          }
         ]
       },
       "t_en": "Secure authentication",
@@ -6209,7 +7618,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "PR.AA-03",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Multi-factor authentication",
       "obj_en": "Second factor for remote, privileged and exposed-service access.",
@@ -6242,7 +7657,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Access to source code",
       "obj_en": "Source code and development tools have restricted, logged access.",
@@ -6281,6 +7697,12 @@
             "id": "I.2.b",
             "w": 0.5
           }
+        ],
+        "nist": [
+          {
+            "id": "PR.PS-01",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Secure configuration and hardening",
@@ -6315,7 +7737,17 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "ID.AM-08",
+            "w": 0.5
+          },
+          {
+            "id": "PR.PS-01",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Configuration management",
       "obj_en": "Configuration is kept under control and drift is detected.",
@@ -6362,7 +7794,13 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "ID.RA-07",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Change management",
       "obj_en": "Changes are assessed, approved, tested and recorded before being applied.",
@@ -6408,6 +7846,16 @@
           {
             "id": "I.2.c",
             "w": 0.5
+          }
+        ],
+        "nist": [
+          {
+            "id": "PR.PS-02",
+            "w": 1
+          },
+          {
+            "id": "PR.PS-03",
+            "w": 1
           }
         ]
       },
@@ -6472,6 +7920,16 @@
             "id": "II.6",
             "w": 1
           }
+        ],
+        "nist": [
+          {
+            "id": "ID.RA-01",
+            "w": 1
+          },
+          {
+            "id": "ID.RA-08",
+            "w": 1
+          }
         ]
       },
       "t_en": "Vulnerability handling and disclosure",
@@ -6506,7 +7964,17 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "PR.PS-05",
+            "w": 0.5
+          },
+          {
+            "id": "DE.CM-09",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Protection against malicious code",
       "obj_en": "Antimalware or EDR on every device, centrally managed.",
@@ -6548,7 +8016,17 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "ID.RA-09",
+            "w": 0.5
+          },
+          {
+            "id": "PR.PS-05",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Software installation in production",
       "obj_en": "Only authorised software, installed by authorised staff.",
@@ -6596,6 +8074,12 @@
             "id": "I.2.l",
             "w": 1
           }
+        ],
+        "nist": [
+          {
+            "id": "PR.PS-04",
+            "w": 1
+          }
         ]
       },
       "t_en": "Activity logging",
@@ -6634,7 +8118,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Clock synchronisation",
       "obj_en": "All systems use a common, reliable time source.",
@@ -6685,7 +8170,25 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "DE.CM-01",
+            "w": 1
+          },
+          {
+            "id": "DE.CM-03",
+            "w": 1
+          },
+          {
+            "id": "DE.CM-09",
+            "w": 1
+          },
+          {
+            "id": "DE.AE-03",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Monitoring and intrusion detection",
       "obj_en": "Continuous monitoring of networks and systems to detect anomalous behaviour.",
@@ -6721,6 +8224,12 @@
         "cra": [
           {
             "id": "I.2.h",
+            "w": 1
+          }
+        ],
+        "nist": [
+          {
+            "id": "PR.IR-04",
             "w": 1
           }
         ]
@@ -6764,7 +8273,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "User endpoint devices",
       "obj_en": "Laptops, phones and other devices protected, encrypted and managed.",
@@ -6801,7 +8311,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Clear desk and session locking",
       "obj_en": "No papers or unattended screens with sensitive information.",
@@ -6852,6 +8363,16 @@
             "id": "I.2.f",
             "w": 0.5
           }
+        ],
+        "nist": [
+          {
+            "id": "PR.DS-01",
+            "w": 1
+          },
+          {
+            "id": "PR.DS-10",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Cryptography and key management",
@@ -6889,7 +8410,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Email and web browsing protection",
       "obj_en": "Email and web filtering against malware, phishing and malicious sites.",
@@ -6927,7 +8449,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Secure architecture and certified components",
       "obj_en": "Documented architecture with security principles and qualified products.",
@@ -6977,7 +8500,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "PR.IR-01",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Network security and perimeter",
       "obj_en": "Network protected at its perimeter and network services managed securely.",
@@ -7023,7 +8552,17 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "ID.AM-03",
+            "w": 1
+          },
+          {
+            "id": "PR.IR-01",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Network and flow segregation",
       "obj_en": "Networks separated by function and trust level, with controlled flows.",
@@ -7073,7 +8612,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "PR.DS-02",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Communications protection",
       "obj_en": "Encryption and authentication of communications leaving the perimeter.",
@@ -7111,7 +8656,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "System interconnection",
       "obj_en": "Each connection with third-party systems is authorised and documented.",
@@ -7149,7 +8695,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Secure and emergency communications",
       "obj_en": "Encrypted voice, video and messaging plus an alternative channel for emergencies.",
@@ -7210,6 +8757,12 @@
             "id": "I.2.k",
             "w": 1
           }
+        ],
+        "nist": [
+          {
+            "id": "PR.PS-06",
+            "w": 1
+          }
         ]
       },
       "t_en": "Secure development life cycle",
@@ -7258,7 +8811,8 @@
             "id": "I.2.f",
             "w": 1
           }
-        ]
+        ],
+        "nist": []
       },
       "t_en": "Application security requirements",
       "obj_en": "Security requirements defined and approved before developing or buying.",
@@ -7319,6 +8873,12 @@
             "id": "II.3",
             "w": 1
           }
+        ],
+        "nist": [
+          {
+            "id": "ID.IM-02",
+            "w": 0.5
+          }
         ]
       },
       "t_en": "Security testing and acceptance",
@@ -7352,7 +8912,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Environment separation",
       "obj_en": "Development, test and production separated with different access.",
@@ -7390,7 +8951,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Outsourced development",
       "obj_en": "Outsourced development meets the same requirements and is supervised.",
@@ -7428,7 +8990,21 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.SC-06",
+            "w": 1
+          },
+          {
+            "id": "ID.RA-09",
+            "w": 1
+          },
+          {
+            "id": "ID.RA-10",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Acquisition of ICT products and services",
       "obj_en": "Security criteria when buying ICT products and services.",
@@ -7466,7 +9042,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Web service and application protection",
       "obj_en": "Web applications protected and audited before exposure.",
@@ -7503,7 +9080,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "ID.RA-09",
+            "w": 0.5
+          }
+        ]
       }
     },
     {
@@ -7535,6 +9118,16 @@
           {
             "id": "13.c",
             "w": 1
+          }
+        ],
+        "nist": [
+          {
+            "id": "GV.SC-09",
+            "w": 0.5
+          },
+          {
+            "id": "ID.AM-02",
+            "w": 0.5
           }
         ]
       }
@@ -7577,7 +9170,8 @@
             "id": "I.2.k",
             "w": 0.5
           }
-        ]
+        ],
+        "nist": []
       }
     },
     {
@@ -7622,7 +9216,8 @@
             "id": "II.2",
             "w": 0.5
           }
-        ]
+        ],
+        "nist": []
       }
     },
     {
@@ -7646,7 +9241,8 @@
             "id": "A2",
             "w": 1
           }
-        ]
+        ],
+        "nist": []
       }
     },
     {
@@ -7679,7 +9275,8 @@
             "id": "I.1",
             "w": 1
           }
-        ]
+        ],
+        "nist": []
       }
     },
     {
@@ -7731,7 +9328,29 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.SC-02",
+            "w": 1
+          },
+          {
+            "id": "GV.SC-05",
+            "w": 1
+          },
+          {
+            "id": "GV.SC-06",
+            "w": 0.5
+          },
+          {
+            "id": "GV.SC-10",
+            "w": 1
+          },
+          {
+            "id": "ID.RA-10",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Security in supplier relationships",
       "obj_en": "Security requirements included in contracts and service level agreements.",
@@ -7770,7 +9389,21 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.SC-07",
+            "w": 1
+          },
+          {
+            "id": "GV.SC-08",
+            "w": 0.5
+          },
+          {
+            "id": "DE.CM-06",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Monitoring of supplier services",
       "obj_en": "Contracted services are supervised, reviewed and their changes managed.",
@@ -7818,6 +9451,20 @@
             "id": "13.c",
             "w": 0.5
           }
+        ],
+        "nist": [
+          {
+            "id": "GV.SC-01",
+            "w": 1
+          },
+          {
+            "id": "GV.SC-03",
+            "w": 1
+          },
+          {
+            "id": "GV.SC-09",
+            "w": 1
+          }
         ]
       },
       "t_en": "ICT supply chain security",
@@ -7852,7 +9499,21 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.OC-05",
+            "w": 0.5
+          },
+          {
+            "id": "GV.SC-04",
+            "w": 1
+          },
+          {
+            "id": "ID.AM-04",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Supplier directory",
       "obj_en": "Up-to-date register of suppliers and service providers with their criticality.",
@@ -7886,7 +9547,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Cloud services",
       "obj_en": "Acquisition, use and exit of cloud services with security requirements.",
@@ -7929,7 +9591,21 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.SC-08",
+            "w": 1
+          },
+          {
+            "id": "ID.IM-04",
+            "w": 1
+          },
+          {
+            "id": "RS.MA-01",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Incident management plan",
       "obj_en": "Incident management procedure with roles, phases and criteria.",
@@ -7968,7 +9644,13 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "DE.AE-06",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Internal event reporting",
       "obj_en": "Everyone knows how and to whom to report a security event.",
@@ -8007,7 +9689,41 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "DE.AE-02",
+            "w": 1
+          },
+          {
+            "id": "DE.AE-03",
+            "w": 1
+          },
+          {
+            "id": "DE.AE-04",
+            "w": 1
+          },
+          {
+            "id": "DE.AE-07",
+            "w": 0.5
+          },
+          {
+            "id": "DE.AE-08",
+            "w": 1
+          },
+          {
+            "id": "RS.MA-02",
+            "w": 1
+          },
+          {
+            "id": "RS.MA-03",
+            "w": 1
+          },
+          {
+            "id": "RS.AN-08",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Event assessment and classification",
       "obj_en": "Criteria to decide whether an event is an incident and how severe it is.",
@@ -8050,7 +9766,29 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "RS.MA-01",
+            "w": 1
+          },
+          {
+            "id": "RS.MA-04",
+            "w": 1
+          },
+          {
+            "id": "RS.MA-05",
+            "w": 0.5
+          },
+          {
+            "id": "RS.MI-01",
+            "w": 1
+          },
+          {
+            "id": "RS.MI-02",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Incident response",
       "obj_en": "Containment, eradication and recovery following tested procedures.",
@@ -8093,7 +9831,21 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "ID.IM-03",
+            "w": 0.5
+          },
+          {
+            "id": "RS.AN-03",
+            "w": 1
+          },
+          {
+            "id": "RC.RP-06",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Lessons learned",
       "obj_en": "Post-incident review of every relevant incident with improvement actions.",
@@ -8131,7 +9883,21 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "RS.AN-03",
+            "w": 0.5
+          },
+          {
+            "id": "RS.AN-06",
+            "w": 1
+          },
+          {
+            "id": "RS.AN-07",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Collection of evidence",
       "obj_en": "Evidence collected and preserved so it holds up in court.",
@@ -8209,6 +9975,12 @@
             "id": "14",
             "w": 0.5
           }
+        ],
+        "nist": [
+          {
+            "id": "RS.CO-02",
+            "w": 1
+          }
         ]
       },
       "t_en": "Reporting to the authority on time",
@@ -8242,7 +10014,21 @@
         ],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "RS.CO-02",
+            "w": 0.5
+          },
+          {
+            "id": "RS.CO-03",
+            "w": 1
+          },
+          {
+            "id": "RC.CO-04",
+            "w": 0.5
+          }
+        ]
       },
       "t_en": "Communication to affected customers and users",
       "obj_en": "Notice to recipients of the affected services and of measures they can take.",
@@ -8279,7 +10065,8 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       }
     },
     {
@@ -8313,7 +10100,8 @@
             "w": 1
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       }
     },
     {
@@ -8342,7 +10130,8 @@
             "id": "14",
             "w": 1
           }
-        ]
+        ],
+        "nist": []
       }
     },
     {
@@ -8377,7 +10166,25 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "GV.OC-04",
+            "w": 1
+          },
+          {
+            "id": "GV.OC-05",
+            "w": 1
+          },
+          {
+            "id": "ID.AM-05",
+            "w": 0.5
+          },
+          {
+            "id": "RC.RP-04",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Impact analysis",
       "obj_en": "Critical processes, their maximum tolerable downtime and dependencies are identified.",
@@ -8428,7 +10235,37 @@
           }
         ],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "ID.IM-04",
+            "w": 0.5
+          },
+          {
+            "id": "RS.MA-05",
+            "w": 1
+          },
+          {
+            "id": "RC.RP-01",
+            "w": 1
+          },
+          {
+            "id": "RC.RP-02",
+            "w": 1
+          },
+          {
+            "id": "RC.RP-04",
+            "w": 0.5
+          },
+          {
+            "id": "RC.RP-05",
+            "w": 1
+          },
+          {
+            "id": "RC.RP-06",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Continuity and recovery plan",
       "obj_en": "Approved, known business continuity and disaster recovery plan.",
@@ -8462,7 +10299,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "ID.IM-02",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Continuity testing",
       "obj_en": "The plan is tested regularly and corrected with what is learned.",
@@ -8512,7 +10355,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "PR.IR-03",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Redundancy and alternative means",
       "obj_en": "Alternative facilities, systems and communications for critical services.",
@@ -8546,7 +10395,17 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "RC.CO-03",
+            "w": 1
+          },
+          {
+            "id": "RC.CO-04",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Crisis management",
       "obj_en": "Crisis committee, activation criteria and communication during the crisis.",
@@ -8596,7 +10455,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "PR.AA-06",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Secure areas and physical access control",
       "obj_en": "Defined perimeters with controlled and identified physical access.",
@@ -8634,7 +10499,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "DE.CM-02",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Physical security monitoring",
       "obj_en": "Premises are continuously monitored against unauthorised access.",
@@ -8684,7 +10555,13 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": [
+          {
+            "id": "PR.IR-02",
+            "w": 1
+          }
+        ]
       },
       "t_en": "Protection against environmental threats",
       "obj_en": "Rooms conditioned and protected against fire, water and temperature.",
@@ -8726,7 +10603,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Utilities and cabling",
       "obj_en": "Guaranteed power and communications, protected cabling.",
@@ -8772,7 +10650,8 @@
         "iso42001": [],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Equipment entry and exit",
       "obj_en": "Equipment entering and leaving is logged and protected off-premises.",
@@ -8823,7 +10702,8 @@
             "w": 0.5
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "AI policy",
       "obj_en": "An approved AI policy, aligned with other policies and reviewed periodically.",
@@ -8869,7 +10749,8 @@
             "w": 0.5
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "AI roles and concern reporting",
       "obj_en": "Responsibilities defined across the life cycle and a channel to raise concerns.",
@@ -8919,7 +10800,8 @@
         ],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "AI system resources",
       "obj_en": "Data, tools, compute and people documented for each AI system.",
@@ -8983,7 +10865,8 @@
             "w": 1
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "AI risk management",
       "obj_en": "AI-specific risks (bias, robustness, transparency, misuse) assessed and treated.",
@@ -9032,7 +10915,8 @@
             "w": 0.5
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "AI system impact assessment",
       "obj_en": "Impact on people, groups and society assessed and documented before deployment.",
@@ -9070,7 +10954,8 @@
             "w": 0.5
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Responsible AI development",
       "obj_en": "Objectives and processes that guide responsible design and development.",
@@ -9124,7 +11009,8 @@
             "w": 0.5
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "AI system specification and documentation",
       "obj_en": "Requirements, design and technical documentation maintained across the life cycle.",
@@ -9171,7 +11057,8 @@
             "w": 1
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Verification, validation and deployment",
       "obj_en": "Model validation criteria and a controlled deployment plan.",
@@ -9222,7 +11109,8 @@
             "w": 0.5
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "AI system operation and monitoring",
       "obj_en": "Production monitoring of performance, drift and errors.",
@@ -9265,7 +11153,8 @@
             "w": 1
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "AI system event logs",
       "obj_en": "Logging of inputs, decisions and relevant events for traceability.",
@@ -9324,7 +11213,8 @@
             "w": 0.5
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Data governance for AI",
       "obj_en": "Acquisition, quality, provenance and preparation of data controlled and documented.",
@@ -9373,7 +11263,8 @@
             "w": 0.5
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Information for users and interested parties",
       "obj_en": "User documentation and transparent communication about the AI system.",
@@ -9414,7 +11305,8 @@
             "w": 1
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Responsible and intended use",
       "obj_en": "Processes and objectives that keep use of the system within its intended scope.",
@@ -9465,7 +11357,8 @@
         ],
         "partis": [],
         "ria": [],
-        "cra": []
+        "cra": [],
+        "nist": []
       },
       "t_en": "Third parties and customers in the AI chain",
       "obj_en": "Responsibilities shared with suppliers and customers of AI components or services.",
@@ -9501,7 +11394,8 @@
             "w": 1
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       }
     },
     {
@@ -9530,7 +11424,8 @@
             "w": 1
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       }
     },
     {
@@ -9563,7 +11458,8 @@
             "w": 1
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       }
     },
     {
@@ -9604,7 +11500,8 @@
             "w": 0.5
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       }
     },
     {
@@ -9637,7 +11534,8 @@
             "w": 1
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       }
     },
     {
@@ -9678,7 +11576,8 @@
             "w": 0.5
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       }
     },
     {
@@ -9711,7 +11610,8 @@
             "w": 1
           }
         ],
-        "cra": []
+        "cra": [],
+        "nist": []
       }
     }
   ]
