@@ -153,7 +153,7 @@ async function exportXlsx() {
     X.utils.book_append_sheet(wb, sheet([['ID', tx('Dominio', 'Domain'), t('control'), t('objective'), tx('Estado', 'State'), t('owner'), t('evidence'), t('lastRev'), ...FW.map((f) => fwLbl(f)), tx('Normas del alcance', 'Frameworks in scope'), tx('Prioridad', 'Priority')],
       ...CAT.controls.map((c) => { const d = state.controles[c.id]; const cc = calc.controles[c.id]; return [c.id, dT(c.dom), cT(c.id), tt(c, 'obj'), estL(d.estado), d.responsable, d.evidencias, d.revision, ...FW.map((f) => mapsTxt(c, f)), cc.normas.map((f) => fwLbl(f)).join(', '), rank[c.id] || '']; })],
       [9, 22, 36, 50, 12, 24, 50, 12, ...FW.map(() => 22), 26, 9], 0, { fillCol: [4], freeze: { xSplit: 3, ySplit: 1 } }), tx('Controles unificados', 'Unified controls'));
-    const sheetName = { ens: 'SoA ENS', iso27001: 'SoA ISO 27001', nis2: 'NIS2', iso42001: 'SoA ISO 42001', partis: 'SoA Part-IS', ria: tx('RIA', 'AI Act'), cra: 'CRA', nist: 'NIST CSF', dora: 'DORA', cl21663: 'CL Ley 21.663', cl21719: 'CL Ley 21.719' };
+    const sheetName = { ens: 'SoA ENS', iso27001: 'SoA ISO 27001', nis2: 'NIS2', iso42001: 'SoA ISO 42001', partis: 'SoA Part-IS', ria: tx('RIA', 'AI Act'), cra: 'CRA', nist: 'NIST CSF', dora: 'DORA', cl21663: 'CL Ley 21.663', cl21719: 'CL Ley 21.719', co1581: 'CO Ley 1581', mx2025: 'MX LFPDPPP', pe29733: 'PE Ley 29733', ar25326: 'AR Ley 25.326' };
     const usados = new Set(['Resumen', 'Summary', 'Aplicabilidad', 'Applicability']);
     for (const f of FWV) if (!sheetName[f]) { // marcos propios: nombre válido para Excel (sin : \ / ? * [ ], 31 caracteres) y único
       let n = fwLbl(f).replace(/[:\\/?*[\]]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 22) || 'Marco'; let k = 2; const b = n;

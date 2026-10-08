@@ -89,6 +89,18 @@
         },
         "cl21719": {
           "on": false
+        },
+        "co1581": {
+          "on": false
+        },
+        "mx2025": {
+          "on": false
+        },
+        "pe29733": {
+          "on": false
+        },
+        "ar25326": {
+          "on": false
         }
       },
       "nis2q": {
@@ -1574,6 +1586,18 @@
           "oiv": false
         },
         "cl21719": {
+          "on": false
+        },
+        "co1581": {
+          "on": false
+        },
+        "mx2025": {
+          "on": false
+        },
+        "pe29733": {
+          "on": false
+        },
+        "ar25326": {
           "on": false
         }
       },
@@ -3085,6 +3109,18 @@
         },
         "cl21719": {
           "on": false
+        },
+        "co1581": {
+          "on": false
+        },
+        "mx2025": {
+          "on": false
+        },
+        "pe29733": {
+          "on": false
+        },
+        "ar25326": {
+          "on": false
         }
       },
       "nis2q": {
@@ -4258,6 +4294,18 @@
         },
         "cl21719": {
           "on": false
+        },
+        "co1581": {
+          "on": false
+        },
+        "mx2025": {
+          "on": false
+        },
+        "pe29733": {
+          "on": false
+        },
+        "ar25326": {
+          "on": false
         }
       },
       "nis2q": {
@@ -5370,6 +5418,18 @@
           "oiv": false
         },
         "cl21719": {
+          "on": false
+        },
+        "co1581": {
+          "on": false
+        },
+        "mx2025": {
+          "on": false
+        },
+        "pe29733": {
+          "on": false
+        },
+        "ar25326": {
           "on": false
         }
       },
@@ -6881,6 +6941,18 @@
         },
         "cl21719": {
           "on": false
+        },
+        "co1581": {
+          "on": false
+        },
+        "mx2025": {
+          "on": false
+        },
+        "pe29733": {
+          "on": false
+        },
+        "ar25326": {
+          "on": false
         }
       },
       "nis2q": {
@@ -8051,6 +8123,18 @@
           "oiv": false
         },
         "cl21719": {
+          "on": false
+        },
+        "co1581": {
+          "on": false
+        },
+        "mx2025": {
+          "on": false
+        },
+        "pe29733": {
+          "on": false
+        },
+        "ar25326": {
           "on": false
         }
       },
@@ -9354,6 +9438,18 @@
         },
         "cl21719": {
           "on": false
+        },
+        "co1581": {
+          "on": false
+        },
+        "mx2025": {
+          "on": false
+        },
+        "pe29733": {
+          "on": false
+        },
+        "ar25326": {
+          "on": false
         }
       },
       "nis2q": {
@@ -10635,12 +10731,12 @@
     "resumen_en": "900-person Chilean electricity distributor, designated an operator of vital importance by ANCI. It works with NIST CSF for its parent company and is preparing for Data Protection Law 21.719; it also operates in Peru.",
     "retos": [
       "Alerta temprana al CSIRT Nacional en 3 horas",
-      "Vulneraciones de datos sin procedimiento",
+      "Vulneraciones de datos en Chile y en Perú (48 h)",
       "Delegado de ciberseguridad recién nombrado"
     ],
     "retos_en": [
       "Early warning to the National CSIRT within 3 hours",
-      "No procedure for personal data breaches",
+      "Personal data breaches in Chile and Peru (48 h)",
       "Newly appointed cybersecurity delegate"
     ],
     "meta": {
@@ -10648,12 +10744,13 @@
         "iso27001",
         "nist",
         "cl21663",
-        "cl21719"
+        "cl21719",
+        "pe29733"
       ],
-      "grado": 0.9351851851851852,
+      "grado": 0.9163359788359788,
       "controles": 109,
-      "brechas": 3,
-      "altas": 3
+      "brechas": 5,
+      "altas": 4
     },
     "state": {
       "version": 1,
@@ -10710,6 +10807,19 @@
         },
         "cl21719": {
           "on": true
+        },
+        "co1581": {
+          "on": false
+        },
+        "mx2025": {
+          "on": false
+        },
+        "pe29733": {
+          "on": true,
+          "motivo": "Atiende a clientes industriales en Perú y trata sus datos de contacto y de consumo."
+        },
+        "ar25326": {
+          "on": false
         }
       },
       "nis2q": {

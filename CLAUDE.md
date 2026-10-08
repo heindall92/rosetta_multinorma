@@ -12,4 +12,4 @@
 
 ## Siguiente paso
 
-- La siguiente versión y las posteriores están en `ROADMAP.md`. La 2.9.0 (Chile) está publicada; la siguiente es la **2.10.0**, protección de datos de Colombia, México, Perú y Argentina. Léelo antes de proponer trabajo nuevo en Rosetta.
+- La siguiente versión y las posteriores están en `ROADMAP.md`. La hoja de ruta está completada con la 2.10.0 (15 normas y leyes de la UE, EE. UU. y Latinoamérica). Lo siguiente sale de las peticiones de usuarios y de la revisión experta de los mapeos (Part-IS, RIA, CRA, DORA y LATAM). Léelo antes de proponer trabajo nuevo en Rosetta.

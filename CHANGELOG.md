@@ -1,5 +1,18 @@
 # Cambios
 
+## 2.10.0 · octubre de 2026
+
+**Protección de datos en Colombia, México, Perú y Argentina.** Con esta versión se completa la hoja de ruta.
+
+- **Colombia:** Ley 1581 de 2012 y Decreto 1377 de 2013, 11 requisitos. Autorización, consultas en 10 días hábiles, reclamos en 15, RNBD, incidentes a la SIC en 15 días hábiles, transferencias y responsabilidad demostrada.
+- **México:** LFPDPPP de 2025, 10 requisitos. Aviso de privacidad, consentimiento, derechos ARCO (20 + 15 días), seguridad, vulneraciones, confidencialidad, encargados, transferencias y departamento de datos.
+- **Perú:** Ley 29733 y Reglamento de 2024, 9 requisitos. Incidentes graves a la ANPD en 48 horas y oficial de datos personales.
+- **Argentina:** Ley 25.326, 10 requisitos. Acceso en 10 días corridos, rectificación en 5 días hábiles, registro ante la AAIP y transferencias. Como la ley no obliga a notificar brechas, la alerta CO-22 no se activa.
+- **Perfil por país**, con «también opera en». Solo lo que depende del tamaño o la actividad (registros y oficial de datos) admite exclusión justificada.
+- Las cuatro leyes reutilizan el dominio de privacidad: no hacen falta controles nuevos.
+- **Energía Austral** suma la ley peruana.
+- **Pruebas.** 5 pruebas nuevas del motor y una e2e. Total: 140 de motor, catálogo y build y 64 en navegador.
+
 ## 2.9.0 · octubre de 2026
 
 **Latinoamérica, empezando por Chile.**

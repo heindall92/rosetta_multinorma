@@ -24,7 +24,7 @@ const XLSX_LIBS = {
   leer: { file: 'vendor/sheetjs-0.20.3.full.min.js', cdn: 'https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js', sri: 'sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT' },
   escribir: { file: 'vendor/xlsx-js-style-1.2.0.bundle.js', cdn: 'https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js', sri: 'sha384-OUW9euuUyxyHcAhTqbhI+Iyb8LMssXt/cpz0yXhs9UWG2/R/uaWdakx/4cfww7Vb' }
 };
-const VERSION = '2.9.0';
+const VERSION = '2.10.0';
 const DOM = Object.fromEntries(CAT0.domains.map((d) => [d.id, d]));
 const SOLAPE0 = E.solapamiento(IX0);
 let SOLAPE = SOLAPE0;
@@ -43,7 +43,7 @@ function reindex() {
 }
 /* Nombres y colores de cada norma. Los marcos propios toman el nombre que trae su fichero (saneado al importar)
  * y uno de cuatro colores de reserva; las normas incluidas tienen el suyo. */
-const FW_SHORT = { ens: 'ENS', iso27001: '27001', nis2: 'NIS2', iso42001: '42001', partis: 'Part-IS', ria: 'RIA', cra: 'CRA', nist: 'CSF', dora: 'DORA', cl21663: 'CL 21.663', cl21719: 'CL 21.719' };
+const FW_SHORT = { ens: 'ENS', iso27001: '27001', nis2: 'NIS2', iso42001: '42001', partis: 'Part-IS', ria: 'RIA', cra: 'CRA', nist: 'CSF', dora: 'DORA', cl21663: 'CL 21.663', cl21719: 'CL 21.719', co1581: 'CO 1581', mx2025: 'MX LFPDPPP', pe29733: 'PE 29733', ar25326: 'AR 25.326' };
 const esPropio = (f) => !!(IX.propio && IX.propio[f]);
 const fwLbl = (f) => (FW_BASE.includes(f) || IX.req[f] ? E.etiqueta(IX, f, LANG()) : t('ownFw'));
 const fwShort = (f) => (LANG() === 'en' && E.FW_LABEL_EN[f]) || FW_SHORT[f] || (() => { const n = fwLbl(f); return n.length > 14 ? n.slice(0, 13).trim() + '…' : n; })();
@@ -206,7 +206,7 @@ function deleteProject(id) {
   if (ws.activeId === id) { ws.activeId = null; state = null; recompute(); }
   saveWs();
 }
-const alcanceDefecto = () => ({ ens: { on: true, categoria: 'MEDIA', niveles: {} }, iso27001: { on: true }, nis2: { on: false, tipo: 'fuera' }, iso42001: { on: false }, partis: { on: false, regimen: 'I' }, ria: { on: false, ...E.riaAlcance() }, cra: { on: false, ...E.craAlcance() }, nist: { on: false }, dora: { on: false, ...E.doraAlcance() }, cl21663: { on: false, oiv: false }, cl21719: { on: false } });
+const alcanceDefecto = () => ({ ens: { on: true, categoria: 'MEDIA', niveles: {} }, iso27001: { on: true }, nis2: { on: false, tipo: 'fuera' }, iso42001: { on: false }, partis: { on: false, regimen: 'I' }, ria: { on: false, ...E.riaAlcance() }, cra: { on: false, ...E.craAlcance() }, nist: { on: false }, dora: { on: false, ...E.doraAlcance() }, cl21663: { on: false, oiv: false }, cl21719: { on: false }, co1581: { on: false }, mx2025: { on: false }, pe29733: { on: false }, ar25326: { on: false } });
 function blankState({ nombre = '', organizacion = '', sector = '', descripcion = '', alcance, nis2q, perfil } = {}) {
   const st = { version: 1, proyecto: { nombre: nombre || organizacion, organizacion, sector, descripcion },
     alcance: alcance || alcanceDefecto(),

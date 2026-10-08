@@ -286,11 +286,24 @@ test('LATAM: las leyes de Chile solo se ven si la organización opera allí, y e
   assert.equal(await page.locator('#set-on-cl21719').count(), 1);
   assert.match(await page.locator('#sec-propuesta').innerText(), /Ley 21\.719 \(Chile\)[\s\S]*A confirmar/);
   await R(() => window.__ROSETTA__.openCase('austral'));
-  assert.deepEqual(await R(() => window.__ROSETTA__.calc.alcance), ['iso27001', 'nist', 'cl21663', 'cl21719']);
+  assert.deepEqual(await R(() => window.__ROSETTA__.calc.alcance), ['iso27001', 'nist', 'cl21663', 'cl21719', 'pe29733']);
   const hall = await R(() => window.__ROSETTA__.hall.map((h) => h.id));
   assert.ok(hall.includes('CO-21') && hall.includes('CO-22'));
   await R(() => window.__ROSETTA__.go('alcance'));
   await page.uncheck('#set-cl-oiv'); await page.waitForTimeout(150);
   assert.equal(await R(() => window.__ROSETTA__.calc.fw.cl21663.aplicables), 2);
   noErrors('LATAM');
+});
+
+test('LATAM: una empresa mexicana ve su ley y la de los países donde opera, nada más', async () => {
+  await R(() => window.__ROSETTA__.openCase('aguas')); await R(() => window.__ROSETTA__.go('alcance'));
+  if (await page.locator('#set-pf-op-cl').isChecked()) { await page.uncheck('#set-pf-op-cl'); await page.waitForTimeout(150); } // viene de la prueba anterior
+  await page.selectOption('#set-pf-jur', 'mx'); await page.waitForTimeout(150);
+  await page.check('#set-pf-op-co'); await page.waitForTimeout(150);
+  const vis = await R(() => window.__ROSETTA__.FWV);
+  assert.ok(vis.includes('mx2025') && vis.includes('co1581') && !vis.includes('pe29733') && !vis.includes('cl21663'));
+  await page.click('[data-act="perfil-aplicar"]'); await page.waitForTimeout(200);
+  assert.ok((await R(() => window.__ROSETTA__.calc.alcance)).includes('mx2025'));
+  assert.ok(!(await R(() => window.__ROSETTA__.calc.alcance)).includes('nis2'), 'NIS2 no aplica en México');
+  noErrors('LATAM México');
 });

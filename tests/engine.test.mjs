@@ -39,7 +39,7 @@ describe('API pública', () => {
     for (const k of ['indexar', 'calcular', 'coberturaReq', 'solapamiento', 'inferencia', 'equivalencias', 'prioridades', 'coherencia', 'planAccion', 'desdeSoaEns', 'nis2Aplicabilidad', 'orden', 'instantanea', 'parejasClase',
       'perfilRegulatorio', 'perfilNormalizado', 'sugerirControles', 'fundirPropios', 'listaNormas', 'etiqueta'])
       assert.equal(typeof E[k], 'function', k);
-    assert.deepEqual(E.FW, ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra', 'nist', 'dora', 'cl21663', 'cl21719']);
+    assert.deepEqual(E.FW, ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra', 'nist', 'dora', 'cl21663', 'cl21719', 'co1581', 'mx2025', 'pe29733', 'ar25326']);
   });
 });
 
@@ -226,7 +226,7 @@ describe('casos de ejemplo con el catálogo real', () => {
   }
   test('instantánea reproducible del caso de clase (TechServ)', () => {
     const r = E.calcular(IX, CASOS.find((c) => c.id === 'techserv').state);
-    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null, ria: null, cra: null, nist: null, dora: null, cl21663: null, cl21719: null }, grado: 0.893, brechas: 4 });
+    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null, ria: null, cra: null, nist: null, dora: null, cl21663: null, cl21719: null, co1581: null, mx2025: null, pe29733: null, ar25326: null }, grado: 0.893, brechas: 4 });
   });
   test('contraste ENS ↔ ISO 27001 con las parejas del material de clase', () => {
     const p = E.parejasClase(IX); const ref = require('../src/data/parejas.json');
@@ -603,5 +603,34 @@ describe('Chile: Ley 21.663 y Ley 21.719', () => {
     const st = { alcance: { cl21663: { on: true }, cl21719: { on: true } }, controles: {}, exclusiones: {} };
     const h = E.coherencia(IX, st, E.calcular(IX, st)).map((x) => x.id);
     assert.ok(h.includes('CO-21') && h.includes('CO-22'));
+  });
+});
+
+describe('Protección de datos en Colombia, México, Perú y Argentina', () => {
+  const L = { co1581: ['co', 11], mx2025: ['mx', 10], pe29733: ['pe', 9], ar25326: ['ar', 10] };
+  test('cada ley con su región, sus requisitos y cobertura completa con el dominio de privacidad', () => {
+    for (const [f, [r, n]] of Object.entries(L)) {
+      const F = CAT.frameworks[f]; assert.equal(F.region, r); assert.equal(F.datos, true); assert.equal(F.reqs.length, n, f);
+      for (const q of F.reqs) assert.ok(IX.reqUcs[f][q.id].some((l) => l.w === 1), `${f} ${q.id}`);
+    }
+  });
+  test('plazos clave en la ficha: SIC en 15 días hábiles, ANPD en 48 horas, ARCO en México', () => {
+    assert.match(CAT.frameworks.co1581.reqs.find((r) => r.id === 'inc').t, /15 días hábiles/);
+    assert.match(CAT.frameworks.pe29733.reqs.find((r) => r.id === 'inc').t, /48 horas/);
+    assert.match(CAT.frameworks.mx2025.reqs.find((r) => r.id === 'arco').nota, /Veinte días/);
+  });
+  test('Argentina no obliga a notificar brechas: sin alerta CO-22; las demás sí', () => {
+    const al = (f) => ({ alcance: { [f]: { on: true } }, controles: {}, exclusiones: {} });
+    const co22 = (f) => E.coherencia(IX, al(f), E.calcular(IX, al(f))).some((h) => h.id === 'CO-22');
+    assert.equal(co22('ar25326'), false); for (const f of ['co1581', 'mx2025', 'pe29733']) assert.equal(co22(f), true, f);
+  });
+  test('perfil: obligatoria en su país, a confirmar si opera allí, no aplica en otro caso', () => {
+    const m = E.perfilRegulatorio({ jurisdiccion: 'mx', opera: ['co'] }).marcos;
+    assert.equal(m.mx2025.estado, 'obligatoria'); assert.equal(m.co1581.estado, 'confirmar'); assert.equal(m.pe29733.estado, 'no-aplica');
+    assert.equal(E.perfilRegulatorio({ jurisdiccion: 'ar' }).marcos.ar25326.estado, 'obligatoria');
+  });
+  test('solo lo que depende del tamaño o la actividad es excluible (registro, oficial)', () => {
+    assert.equal(E.excluible('co1581', 'rnbd'), true); assert.equal(E.excluible('co1581', 'inc'), false);
+    assert.equal(E.excluible('pe29733', 'oficial'), true); assert.equal(E.excluible('ar25326', 'reg'), true); assert.equal(E.excluible('mx2025', 'vul'), false);
   });
 });

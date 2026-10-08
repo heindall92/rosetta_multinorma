@@ -12,7 +12,7 @@ const ICONS = require('../src/data/icons.json');
 const dupes = (arr) => arr.filter((x, i) => arr.indexOf(x) !== i);
 
 describe('catálogo', () => {
-  test('once normas con el número de requisitos esperado', () => {
+  test('quince normas con el número de requisitos esperado', () => {
     assert.deepEqual(Object.keys(CAT.frameworks), E.FW);
     const n = Object.fromEntries(E.FW.map((f) => [f, CAT.frameworks[f].reqs.length]));
     // ENS: 73 medidas del Anexo II · ISO 27001: cl. 4–10 + 93 controles · NIS2: RE 2024/2690 · ISO 42001: cl. 4–10 + 38 controles
