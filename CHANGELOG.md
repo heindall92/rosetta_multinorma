@@ -1,5 +1,23 @@
 # Cambios
 
+## 2.9.0 · octubre de 2026
+
+**Latinoamérica, empezando por Chile.**
+
+- **Perfil regulatorio con país.** La jurisdicción admite Chile, Colombia, México, Perú y Argentina, y una casilla nueva, «También opera en». Las normas regionales solo se ven si la organización está u opera en ese país, o si las tiene en el alcance.
+- **Ley 21.663 Marco de Ciberseguridad.**
+  - 10 requisitos vigentes desde el 01-03-2025, con los deberes del art. 8 solo para operadores de importancia vital.
+  - Reporte al CSIRT Nacional en 3 h, 72 h (24 h para OIV) y 15 días.
+  - Base: Resolución 295/2024 y taxonomía de la Resolución Ex. 7/2025.
+- **Ley 21.719 de protección de datos personales.**
+  - 10 requisitos, en vigor desde el 01-12-2026.
+  - Aviso del Boletín 18.623-07, que propone aplazarla un año.
+  - La notificación de vulneraciones no tiene plazo en horas en la ley, y así se explica.
+- **Dominio nuevo, Privacidad y protección de datos (PRI)**, con 10 controles reutilizables para las leyes de datos de la región. Controles nuevos INC-13 (reporte al CSIRT Nacional) y GOB-17 (delegado de ciberseguridad). Catálogo 2.9.0: 152 controles, 14 dominios y 539 requisitos.
+- **Coherencia.** CO-21 y CO-22.
+- **Caso nuevo:** Energía Austral.
+- **Pruebas.** 5 pruebas nuevas del motor y una e2e de visibilidad por país.
+
 ## 2.8.0 · octubre de 2026
 
 **DORA**, el Reglamento (UE) 2022/2554 de resiliencia operativa digital del sector financiero, aplicable desde el 17-01-2025.

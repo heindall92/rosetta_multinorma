@@ -24,7 +24,7 @@ const XLSX_LIBS = {
   leer: { file: 'vendor/sheetjs-0.20.3.full.min.js', cdn: 'https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js', sri: 'sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT' },
   escribir: { file: 'vendor/xlsx-js-style-1.2.0.bundle.js', cdn: 'https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js', sri: 'sha384-OUW9euuUyxyHcAhTqbhI+Iyb8LMssXt/cpz0yXhs9UWG2/R/uaWdakx/4cfww7Vb' }
 };
-const VERSION = '2.8.0';
+const VERSION = '2.9.0';
 const DOM = Object.fromEntries(CAT0.domains.map((d) => [d.id, d]));
 const SOLAPE0 = E.solapamiento(IX0);
 let SOLAPE = SOLAPE0;
