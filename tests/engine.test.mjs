@@ -634,3 +634,57 @@ describe('Protección de datos en Colombia, México, Perú y Argentina', () => {
     assert.equal(E.excluible('pe29733', 'oficial'), true); assert.equal(E.excluible('ar25326', 'reg'), true); assert.equal(E.excluible('mx2025', 'vul'), false);
   });
 });
+
+describe('Ecosistema: CTEM-Nexus (2.11)', () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const dirFx = path.join(path.dirname(new URL(import.meta.url).pathname), 'fixtures');
+  const ida = JSON.parse(fs.readFileSync(path.join(dirFx, 'ctem-a-rosetta.json'), 'utf8'));
+  const caso = CASOS.find((c) => c.id === 'techserv');
+  const base = () => { const s = JSON.parse(JSON.stringify(caso.state)); for (const d of ida.datos) s.controles[d.control] = { ...s.controles[d.control], estado: 'parcial' }; s.controles['OPE-04'] = { ...s.controles['OPE-04'], estado: 'implantado' }; s.controles['ACC-06'] = { ...s.controles['ACC-06'], estado: 'parcial' }; return s; };
+
+  test('lee el sobre de CTEM-Nexus sin perder nada', () => {
+    const c = E.desdeCtem(ida);
+    assert.equal(c.proyecto, ida.proyecto);
+    assert.equal(c.generado, ida.origen.generado);
+    assert.deepEqual(Object.values(c.controles), ida.datos);
+  });
+  test('rechaza otros sobres y sanea la evidencia', () => {
+    assert.equal(E.desdeCtem({ ...ida, origen: { ...ida.origen, herramienta: 'kairos' } }), null);
+    assert.equal(E.desdeCtem({ ...ida, tipo: 'indicadores' }), null);
+    assert.equal(E.desdeCtem({ ...ida, version: 2 }), null);
+    const mal = E.desdeCtem({ ...ida, datos: [{ control: 'XX', abiertos: 1 }, { control: 'OPE-04', porBanda: { critica: -3, alta: 'x' }, hallazgos: [{ id: 'H1', banda: 'enorme', estado: 'raro', cve: 'nada', vence: 'mañana' }, { titulo: 'sin id' }], iso27001: ['A8.8', 'texto largo de una norma'] }] });
+    assert.deepEqual(Object.keys(mal.controles), ['OPE-04']);
+    const e = mal.controles['OPE-04'];
+    assert.deepEqual(e.porBanda, { critica: 0, alta: 0, media: 0, baja: 0 });
+    assert.deepEqual(e.hallazgos, [{ id: 'H1', titulo: '', cve: null, banda: 'baja', puntuacion: 0, activo: '', estado: 'abierto', vence: '' }]);
+    assert.deepEqual(e.iso27001, ['A8.8']);
+  });
+  test('CO-23: control implantado con hallazgos críticos o altos abiertos', () => {
+    const s = base(); s.ctem = E.desdeCtem(ida);
+    const r = E.calcular(IX, s);
+    const co = E.coherencia(IX, s, r, { hoy: '2026-10-09' }).filter((h) => h.id === 'CO-23');
+    const ev = s.ctem.controles['OPE-04'];
+    assert.ok(ev.porBanda.critica + ev.porBanda.alta > 0, 'la demo tiene exposición crítica o alta en OPE-04');
+    assert.deepEqual(co.map((h) => h.ambito), ['OPE-04']); // ACC-06 está parcial: no salta
+    assert.equal(co[0].sev, 'Alta');
+    assert.match(co[0].detalle, /H-\d+/);
+    const en = E.coherencia(IX, s, r, { hoy: '2026-10-09', lang: 'en' }).find((h) => h.id === 'CO-23');
+    assert.match(en.titulo, /CTEM-Nexus sees/);
+    delete s.ctem;
+    assert.equal(E.coherencia(IX, s, E.calcular(IX, s), { hoy: '2026-10-09' }).filter((h) => h.id === 'CO-23').length, 0);
+  });
+  test('devuelve el estado de los 152 controles y la evidencia recibida sin cambios (ida y vuelta)', () => {
+    const s = base(); s.ctem = E.desdeCtem(ida);
+    const vuelta = E.aCtem(IX, s, '2.11.0', new Date('2026-09-16T10:00:00Z'));
+    assert.equal(vuelta.format, 'yrd-ecosistema');
+    assert.equal(vuelta.tipo, 'controles');
+    assert.equal(vuelta.origen.herramienta, 'rosetta');
+    assert.equal(vuelta.datos.length, CAT.controls.length);
+    assert.equal(vuelta.datos.find((d) => d.control === 'OPE-04').estado, 'implantado');
+    assert.deepEqual(vuelta.datos.filter((d) => d.ctem).map((d) => d.ctem), ida.datos.slice().sort((a, b) => CAT.controls.findIndex((c) => c.id === a.control) - CAT.controls.findIndex((c) => c.id === b.control)));
+    const out = path.join(dirFx, 'rosetta-a-ctem.json');
+    if (process.env.GOLDEN === '1' || !fs.existsSync(out)) fs.writeFileSync(out, JSON.stringify(vuelta, null, 1) + '\n');
+    assert.deepEqual(JSON.parse(fs.readFileSync(out, 'utf8')), JSON.parse(JSON.stringify(vuelta)));
+  });
+});

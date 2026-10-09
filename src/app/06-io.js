@@ -268,9 +268,21 @@ function importProyecto(text) {
   try {
     const o = safeParse(text);
     if (isObj(o) && o.kind === 'rosetta-backup') { restoreBackup(o); return; }
+    if (isObj(o) && o.format === 'yrd-ecosistema') { importCtem(o); return; }
     if (isObj(o) && isObj(o.controles) && isObj(o.alcance)) { createProject(o, { msg: t('tSaved') }); return; }
     throw new Error('formato');
   } catch (e) { toast(t('tNotProject'), 'error'); }
+}
+/* --- Ecosistema: CTEM-Nexus --- */
+function importCtem(o) {
+  const c = E.desdeCtem(o);
+  if (!c) { toast(t('tNotCtem'), 'error'); return; }
+  if (!state) { toast(t('tCtemNoProject'), 'error'); return; }
+  state.ctem = { ...c, importado: today() };
+  commit(t('tCtemIn', Object.keys(c.controles).length));
+}
+function exportCtem() {
+  saveFile(`${slug()}_${LANG() === 'en' ? 'to_ctem_nexus' : 'para_ctem_nexus'}_${today()}.json`, JSON.stringify(E.aCtem(IX, state, VERSION), null, 1));
 }
 function backup() {
   const projects = ws.projects.map((p) => ({ meta: p, state: store.get(PKEY(p.id)) }));

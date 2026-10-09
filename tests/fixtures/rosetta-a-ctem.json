@@ -1,0 +1,1866 @@
+{
+ "format": "yrd-ecosistema",
+ "version": 1,
+ "origen": {
+  "herramienta": "rosetta",
+  "version": "2.11.0",
+  "generado": "2026-09-16T10:00:00Z"
+ },
+ "tipo": "controles",
+ "proyecto": "TechServ · Mapa multinorma",
+ "datos": [
+  {
+   "control": "GOB-01",
+   "titulo": "Política de seguridad aprobada por la dirección",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2025-12-03"
+  },
+  {
+   "control": "GOB-02",
+   "titulo": "Roles, responsabilidades y comité de seguridad",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2025-12-06"
+  },
+  {
+   "control": "GOB-03",
+   "titulo": "Compromiso y supervisión de la dirección",
+   "estado": "parcial",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2025-12-05"
+  },
+  {
+   "control": "GOB-04",
+   "titulo": "Formación del órgano de dirección",
+   "estado": "pendiente",
+   "responsable": "Responsable de Seguridad",
+   "revision": ""
+  },
+  {
+   "control": "GOB-05",
+   "titulo": "Normativa y procedimientos de seguridad",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2025-12-08"
+  },
+  {
+   "control": "GOB-06",
+   "titulo": "Contexto, alcance y partes interesadas",
+   "estado": "parcial",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2025-12-12"
+  },
+  {
+   "control": "GOB-07",
+   "titulo": "Objetivos y planificación de cambios del sistema de gestión",
+   "estado": "pendiente",
+   "responsable": "Responsable de Seguridad",
+   "revision": ""
+  },
+  {
+   "control": "GOB-08",
+   "titulo": "Información documentada",
+   "estado": "implantado",
+   "responsable": "Responsable del Sistema",
+   "revision": "2025-11-24"
+  },
+  {
+   "control": "GOB-09",
+   "titulo": "Comunicación interna y externa",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2025-11-22"
+  },
+  {
+   "control": "GOB-10",
+   "titulo": "Recursos para la seguridad",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2025-11-26"
+  },
+  {
+   "control": "GOB-11",
+   "titulo": "Contacto con autoridades y grupos de interés",
+   "estado": "implantado",
+   "responsable": "Responsable del Sistema",
+   "revision": "2025-11-27"
+  },
+  {
+   "control": "GOB-12",
+   "titulo": "Proceso de autorización de sistemas y componentes",
+   "estado": "implantado",
+   "responsable": "Responsable del Sistema",
+   "revision": "2025-11-23"
+  },
+  {
+   "control": "GOB-13",
+   "titulo": "Seguridad en la gestión de proyectos",
+   "estado": "implantado",
+   "responsable": "Compras / Resp. Seguridad",
+   "revision": "2025-11-25"
+  },
+  {
+   "control": "GOB-14",
+   "titulo": "Manual del SGSI ante la autoridad y gestión de sus cambios",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "GOB-15",
+   "titulo": "Evaluación de la conformidad, declaración UE y marcado CE",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "GOB-16",
+   "titulo": "Marco de gestión del riesgo TIC y resiliencia operativa digital",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "GOB-17",
+   "titulo": "Delegado de ciberseguridad",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "RIE-01",
+   "titulo": "Análisis y evaluación de riesgos",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2026-06-12"
+  },
+  {
+   "control": "RIE-02",
+   "titulo": "Tratamiento de riesgos y Declaración de Aplicabilidad",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2026-06-16"
+  },
+  {
+   "control": "RIE-03",
+   "titulo": "Inteligencia de amenazas",
+   "estado": "parcial",
+   "responsable": "SOC (SecOps Iberia) / Resp. Seguridad",
+   "revision": "2026-06-14"
+  },
+  {
+   "control": "RIE-04",
+   "titulo": "Requisitos legales, reglamentarios y contractuales",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2026-06-18"
+  },
+  {
+   "control": "RIE-05",
+   "titulo": "Protección de datos personales",
+   "estado": "implantado",
+   "responsable": "DPD / Resp. Seguridad",
+   "revision": "2026-06-17"
+  },
+  {
+   "control": "RIE-06",
+   "titulo": "Protección de los registros",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2026-06-21"
+  },
+  {
+   "control": "RIE-07",
+   "titulo": "Métricas y evaluación de la eficacia",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2026-06-20"
+  },
+  {
+   "control": "RIE-08",
+   "titulo": "Auditoría interna y revisión independiente",
+   "estado": "parcial",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2026-06-23"
+  },
+  {
+   "control": "RIE-09",
+   "titulo": "Revisión por la dirección",
+   "estado": "parcial",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2026-06-22"
+  },
+  {
+   "control": "RIE-10",
+   "titulo": "Supervisión del cumplimiento de políticas",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2026-02-02"
+  },
+  {
+   "control": "RIE-11",
+   "titulo": "No conformidades, acciones correctivas y mejora",
+   "estado": "parcial",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2026-02-03"
+  },
+  {
+   "control": "RIE-12",
+   "titulo": "Riesgos con impacto en la seguridad operacional (aviación)",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "RIE-13",
+   "titulo": "Respuesta a los hallazgos de la autoridad competente",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "PER-01",
+   "titulo": "Verificación de antecedentes",
+   "estado": "implantado",
+   "responsable": "Dirección de Personas (RRHH)",
+   "revision": "2026-08-10"
+  },
+  {
+   "control": "PER-02",
+   "titulo": "Deberes, condiciones y confidencialidad",
+   "estado": "implantado",
+   "responsable": "Dirección de Personas (RRHH)",
+   "revision": "2026-08-06"
+  },
+  {
+   "control": "PER-03",
+   "titulo": "Concienciación y ciberhigiene",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2026-08-07"
+  },
+  {
+   "control": "PER-04",
+   "titulo": "Formación y competencia",
+   "estado": "implantado",
+   "responsable": "Dirección de Personas (RRHH)",
+   "revision": "2026-08-03"
+  },
+  {
+   "control": "PER-05",
+   "titulo": "Proceso disciplinario",
+   "estado": "implantado",
+   "responsable": "Dirección de Personas (RRHH)",
+   "revision": "2026-08-05"
+  },
+  {
+   "control": "PER-06",
+   "titulo": "Cese, cambio de puesto y devolución de activos",
+   "estado": "implantado",
+   "responsable": "Dirección de Personas (RRHH)",
+   "revision": "2026-08-01"
+  },
+  {
+   "control": "PER-07",
+   "titulo": "Trabajo en remoto",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-08-02"
+  },
+  {
+   "control": "ACT-01",
+   "titulo": "Inventario de activos",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-06-12"
+  },
+  {
+   "control": "ACT-02",
+   "titulo": "Clasificación y etiquetado de la información",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-06-16"
+  },
+  {
+   "control": "ACT-03",
+   "titulo": "Uso aceptable y manipulación de activos",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2026-06-14"
+  },
+  {
+   "control": "ACT-04",
+   "titulo": "Soportes de información",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-06-18"
+  },
+  {
+   "control": "ACT-05",
+   "titulo": "Borrado y destrucción segura",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-06-17"
+  },
+  {
+   "control": "ACT-06",
+   "titulo": "Transferencia de información",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-06-21"
+  },
+  {
+   "control": "ACT-07",
+   "titulo": "Enmascaramiento de datos y prevención de fugas",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-06-19"
+  },
+  {
+   "control": "ACT-08",
+   "titulo": "Copias de seguridad",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-06-03"
+  },
+  {
+   "control": "ACT-09",
+   "titulo": "Firma electrónica y sellos de tiempo",
+   "estado": "implantado",
+   "responsable": "Responsable del Sistema",
+   "revision": "2026-06-01"
+  },
+  {
+   "control": "ACT-10",
+   "titulo": "Limpieza de metadatos e información oculta en documentos",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "ACC-01",
+   "titulo": "Identificación y gestión de identidades",
+   "estado": "implantado",
+   "responsable": "Responsable del Sistema",
+   "revision": "2025-10-29"
+  },
+  {
+   "control": "ACC-02",
+   "titulo": "Control de acceso y mínimo privilegio",
+   "estado": "parcial",
+   "responsable": "Responsable del Sistema",
+   "revision": "2025-10-30",
+   "ctem": {
+    "control": "ACC-02",
+    "titulo": "Control de acceso y mínimo privilegio",
+    "ens": [
+     "op.acc.2",
+     "op.acc.4"
+    ],
+    "iso27001": [
+     "A5.15",
+     "A8.3"
+    ],
+    "nis2": [
+     "11.1"
+    ],
+    "nist": [
+     "PR.AA-05"
+    ],
+    "dora": [
+     "9"
+    ],
+    "abiertos": 2,
+    "porBanda": {
+     "critica": 1,
+     "alta": 1,
+     "media": 0,
+     "baja": 0
+    },
+    "kev": 1,
+    "vencidos": 1,
+    "peor": 90.7,
+    "hallazgos": [
+     {
+      "id": "H-002",
+      "titulo": "ProxyShell en Microsoft Exchange",
+      "cve": "CVE-2021-34473",
+      "banda": "critica",
+      "puntuacion": 90.7,
+      "activo": "Exchange OWA",
+      "estado": "abierto",
+      "vence": "2026-09-05"
+     },
+     {
+      "id": "H-006",
+      "titulo": "Delegación sin restricciones en APP01",
+      "cve": null,
+      "banda": "alta",
+      "puntuacion": 62.7,
+      "activo": "Servidor de aplicaciones APP01",
+      "estado": "abierto",
+      "vence": "2026-09-19"
+     }
+    ]
+   }
+  },
+  {
+   "control": "ACC-03",
+   "titulo": "Gestión y revisión de derechos de acceso",
+   "estado": "implantado",
+   "responsable": "Responsable del Sistema",
+   "revision": "2025-10-31"
+  },
+  {
+   "control": "ACC-04",
+   "titulo": "Segregación de funciones",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2025-11-01"
+  },
+  {
+   "control": "ACC-05",
+   "titulo": "Cuentas privilegiadas y sistemas de administración",
+   "estado": "parcial",
+   "responsable": "Responsable del Sistema",
+   "revision": "2025-11-03",
+   "ctem": {
+    "control": "ACC-05",
+    "titulo": "Cuentas privilegiadas y sistemas de administración",
+    "ens": [
+     "op.acc.2",
+     "op.acc.3",
+     "op.acc.4"
+    ],
+    "iso27001": [
+     "A8.2",
+     "A8.18"
+    ],
+    "nis2": [
+     "11.3",
+     "11.4"
+    ],
+    "nist": [],
+    "dora": [],
+    "abiertos": 3,
+    "porBanda": {
+     "critica": 0,
+     "alta": 2,
+     "media": 1,
+     "baja": 0
+    },
+    "kev": 0,
+    "vencidos": 0,
+    "peor": 74.3,
+    "hallazgos": [
+     {
+      "id": "H-005",
+      "titulo": "Cuenta de servicio svc_sql con SPN «kerberoastable»",
+      "cve": null,
+      "banda": "alta",
+      "puntuacion": 74.3,
+      "activo": "Controlador de dominio DC01",
+      "estado": "abierto",
+      "vence": "2026-09-19"
+     },
+     {
+      "id": "H-006",
+      "titulo": "Delegación sin restricciones en APP01",
+      "cve": null,
+      "banda": "alta",
+      "puntuacion": 62.7,
+      "activo": "Servidor de aplicaciones APP01",
+      "estado": "abierto",
+      "vence": "2026-09-19"
+     },
+     {
+      "id": "H-009",
+      "titulo": "Contraseña de administrador local reutilizada (sin LAPS)",
+      "cve": null,
+      "banda": "media",
+      "puntuacion": 54.7,
+      "activo": "Estaciones de trabajo (VLAN 50)",
+      "estado": "abierto",
+      "vence": "2026-10-06"
+     }
+    ]
+   }
+  },
+  {
+   "control": "ACC-06",
+   "titulo": "Autenticación segura",
+   "estado": "parcial",
+   "responsable": "Responsable del Sistema",
+   "revision": "2025-11-04",
+   "ctem": {
+    "control": "ACC-06",
+    "titulo": "Autenticación segura",
+    "ens": [
+     "op.acc.5",
+     "op.acc.6",
+     "op.acc.1"
+    ],
+    "iso27001": [
+     "A5.17",
+     "A8.5"
+    ],
+    "nis2": [
+     "11.6"
+    ],
+    "nist": [
+     "PR.AA-03",
+     "PR.AA-04"
+    ],
+    "dora": [],
+    "abiertos": 5,
+    "porBanda": {
+     "critica": 0,
+     "alta": 4,
+     "media": 1,
+     "baja": 0
+    },
+    "kev": 0,
+    "vencidos": 0,
+    "peor": 76.4,
+    "hallazgos": [
+     {
+      "id": "H-010",
+      "titulo": "SQL Server con cuenta «sa» y contraseña débil",
+      "cve": null,
+      "banda": "alta",
+      "puntuacion": 76.4,
+      "activo": "ERP y base de datos financiera",
+      "estado": "abierto",
+      "vence": "2026-09-20"
+     },
+     {
+      "id": "H-005",
+      "titulo": "Cuenta de servicio svc_sql con SPN «kerberoastable»",
+      "cve": null,
+      "banda": "alta",
+      "puntuacion": 74.3,
+      "activo": "Controlador de dominio DC01",
+      "estado": "abierto",
+      "vence": "2026-09-19"
+     },
+     {
+      "id": "H-018",
+      "titulo": "Usuarios sin preautenticación Kerberos (AS-REP roasting)",
+      "cve": null,
+      "banda": "alta",
+      "puntuacion": 72.5,
+      "activo": "Controlador de dominio DC01",
+      "estado": "abierto",
+      "vence": "2026-09-24"
+     },
+     {
+      "id": "H-007",
+      "titulo": "ADCS ESC1: plantilla «UserAuth» permite SAN arbitrario",
+      "cve": null,
+      "banda": "alta",
+      "puntuacion": 68.3,
+      "activo": "Entidad de certificación PKI-CA01",
+      "estado": "abierto",
+      "vence": "2026-09-19"
+     },
+     {
+      "id": "H-009",
+      "titulo": "Contraseña de administrador local reutilizada (sin LAPS)",
+      "cve": null,
+      "banda": "media",
+      "puntuacion": 54.7,
+      "activo": "Estaciones de trabajo (VLAN 50)",
+      "estado": "abierto",
+      "vence": "2026-10-06"
+     }
+    ]
+   }
+  },
+  {
+   "control": "ACC-07",
+   "titulo": "Autenticación multifactor",
+   "estado": "parcial",
+   "responsable": "Responsable del Sistema",
+   "revision": "2025-11-05",
+   "ctem": {
+    "control": "ACC-07",
+    "titulo": "Autenticación multifactor",
+    "ens": [
+     "op.acc.5",
+     "op.acc.6"
+    ],
+    "iso27001": [
+     "A8.5"
+    ],
+    "nis2": [
+     "11.7",
+     "21.2.j"
+    ],
+    "nist": [
+     "PR.AA-03"
+    ],
+    "dora": [
+     "9"
+    ],
+    "abiertos": 2,
+    "porBanda": {
+     "critica": 0,
+     "alta": 2,
+     "media": 0,
+     "baja": 0
+    },
+    "kev": 0,
+    "vencidos": 0,
+    "peor": 76.4,
+    "hallazgos": [
+     {
+      "id": "H-010",
+      "titulo": "SQL Server con cuenta «sa» y contraseña débil",
+      "cve": null,
+      "banda": "alta",
+      "puntuacion": 76.4,
+      "activo": "ERP y base de datos financiera",
+      "estado": "abierto",
+      "vence": "2026-09-20"
+     },
+     {
+      "id": "H-018",
+      "titulo": "Usuarios sin preautenticación Kerberos (AS-REP roasting)",
+      "cve": null,
+      "banda": "alta",
+      "puntuacion": 72.5,
+      "activo": "Controlador de dominio DC01",
+      "estado": "abierto",
+      "vence": "2026-09-24"
+     }
+    ]
+   }
+  },
+  {
+   "control": "ACC-08",
+   "titulo": "Acceso al código fuente",
+   "estado": "parcial",
+   "responsable": "Responsable del Sistema",
+   "revision": "2025-11-07"
+  },
+  {
+   "control": "OPE-01",
+   "titulo": "Configuración segura y bastionado",
+   "estado": "parcial",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-04-08",
+   "ctem": {
+    "control": "OPE-01",
+    "titulo": "Configuración segura y bastionado",
+    "ens": [
+     "op.exp.2"
+    ],
+    "iso27001": [
+     "A8.9"
+    ],
+    "nis2": [
+     "6.3"
+    ],
+    "nist": [
+     "PR.PS-01"
+    ],
+    "dora": [],
+    "abiertos": 4,
+    "porBanda": {
+     "critica": 0,
+     "alta": 2,
+     "media": 2,
+     "baja": 0
+    },
+    "kev": 0,
+    "vencidos": 0,
+    "peor": 70.4,
+    "hallazgos": [
+     {
+      "id": "H-012",
+      "titulo": "Servicio de cola de impresión activo en el DC",
+      "cve": null,
+      "banda": "alta",
+      "puntuacion": 70.4,
+      "activo": "Controlador de dominio DC01",
+      "estado": "abierto",
+      "vence": "2026-09-21"
+     },
+     {
+      "id": "H-007",
+      "titulo": "ADCS ESC1: plantilla «UserAuth» permite SAN arbitrario",
+      "cve": null,
+      "banda": "alta",
+      "puntuacion": 68.3,
+      "activo": "Entidad de certificación PKI-CA01",
+      "estado": "abierto",
+      "vence": "2026-09-19"
+     },
+     {
+      "id": "H-008",
+      "titulo": "Firma SMB no obligatoria en servidores",
+      "cve": null,
+      "banda": "media",
+      "puntuacion": 58.8,
+      "activo": "Servidor de aplicaciones APP01",
+      "estado": "abierto",
+      "vence": "2026-10-06"
+     },
+     {
+      "id": "H-011",
+      "titulo": "LLMNR y NBT-NS habilitados",
+      "cve": null,
+      "banda": "media",
+      "puntuacion": 50.8,
+      "activo": "Estaciones de trabajo (VLAN 50)",
+      "estado": "abierto",
+      "vence": "2026-10-07"
+     }
+    ]
+   }
+  },
+  {
+   "control": "OPE-02",
+   "titulo": "Gestión de la configuración",
+   "estado": "parcial",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-04-06",
+   "ctem": {
+    "control": "OPE-02",
+    "titulo": "Gestión de la configuración",
+    "ens": [
+     "op.exp.3"
+    ],
+    "iso27001": [
+     "A8.9"
+    ],
+    "nis2": [
+     "6.3"
+    ],
+    "nist": [
+     "ID.AM-08",
+     "PR.PS-01"
+    ],
+    "dora": [],
+    "abiertos": 1,
+    "porBanda": {
+     "critica": 0,
+     "alta": 1,
+     "media": 0,
+     "baja": 0
+    },
+    "kev": 0,
+    "vencidos": 0,
+    "peor": 70.4,
+    "hallazgos": [
+     {
+      "id": "H-012",
+      "titulo": "Servicio de cola de impresión activo en el DC",
+      "cve": null,
+      "banda": "alta",
+      "puntuacion": 70.4,
+      "activo": "Controlador de dominio DC01",
+      "estado": "abierto",
+      "vence": "2026-09-21"
+     }
+    ]
+   }
+  },
+  {
+   "control": "OPE-03",
+   "titulo": "Gestión de cambios",
+   "estado": "implantado",
+   "responsable": "Responsable del Sistema",
+   "revision": "2026-04-05"
+  },
+  {
+   "control": "OPE-04",
+   "titulo": "Mantenimiento y parches de seguridad",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-04-04",
+   "ctem": {
+    "control": "OPE-04",
+    "titulo": "Mantenimiento y parches de seguridad",
+    "ens": [
+     "op.exp.4"
+    ],
+    "iso27001": [
+     "A8.8",
+     "A7.13"
+    ],
+    "nis2": [
+     "6.6",
+     "6.4"
+    ],
+    "nist": [
+     "PR.PS-02",
+     "PR.PS-03"
+    ],
+    "dora": [
+     "7",
+     "9"
+    ],
+    "abiertos": 7,
+    "porBanda": {
+     "critica": 5,
+     "alta": 2,
+     "media": 0,
+     "baja": 0
+    },
+    "kev": 7,
+    "vencidos": 5,
+    "peor": 92.5,
+    "hallazgos": [
+     {
+      "id": "H-001",
+      "titulo": "Log4Shell en Apache Log4j 2",
+      "cve": "CVE-2021-44228",
+      "banda": "critica",
+      "puntuacion": 92.5,
+      "activo": "Portal web de clientes",
+      "estado": "validado",
+      "vence": "2026-09-05"
+     },
+     {
+      "id": "H-002",
+      "titulo": "ProxyShell en Microsoft Exchange",
+      "cve": "CVE-2021-34473",
+      "banda": "critica",
+      "puntuacion": 90.7,
+      "activo": "Exchange OWA",
+      "estado": "abierto",
+      "vence": "2026-09-05"
+     },
+     {
+      "id": "H-013",
+      "titulo": "NTLM relay en Exchange (sin EPA)",
+      "cve": "CVE-2024-21410",
+      "banda": "critica",
+      "puntuacion": 90.7,
+      "activo": "Exchange OWA",
+      "estado": "abierto",
+      "vence": "2026-09-05"
+     },
+     {
+      "id": "H-004",
+      "titulo": "RCE sin autenticar en NetScaler Gateway",
+      "cve": "CVE-2023-3519",
+      "banda": "critica",
+      "puntuacion": 86.9,
+      "activo": "Citrix NetScaler Gateway",
+      "estado": "abierto",
+      "vence": "2026-09-06"
+     },
+     {
+      "id": "H-003",
+      "titulo": "Citrix Bleed: fuga de memoria y robo de sesiones",
+      "cve": "CVE-2023-4966",
+      "banda": "critica",
+      "puntuacion": 85.7,
+      "activo": "Citrix NetScaler Gateway",
+      "estado": "abierto",
+      "vence": "2026-09-06"
+     },
+     {
+      "id": "H-014",
+      "titulo": "Apache ActiveMQ: deserialización OpenWire",
+      "cve": "CVE-2023-46604",
+      "banda": "alta",
+      "puntuacion": 75.7,
+      "activo": "Servidor de aplicaciones APP01",
+      "estado": "abierto",
+      "vence": "2026-09-22"
+     },
+     {
+      "id": "H-016",
+      "titulo": "Microsoft Office: RCE mediante documentos",
+      "cve": "CVE-2023-36884",
+      "banda": "alta",
+      "puntuacion": 67.7,
+      "activo": "Estaciones de trabajo (VLAN 50)",
+      "estado": "abierto",
+      "vence": "2026-09-23"
+     }
+    ]
+   }
+  },
+  {
+   "control": "OPE-05",
+   "titulo": "Gestión y divulgación de vulnerabilidades",
+   "estado": "parcial",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-04-02",
+   "ctem": {
+    "control": "OPE-05",
+    "titulo": "Gestión y divulgación de vulnerabilidades",
+    "ens": [
+     "op.exp.4",
+     "op.mon.3",
+     "mp.s.2"
+    ],
+    "iso27001": [
+     "A8.8"
+    ],
+    "nis2": [
+     "6.10"
+    ],
+    "nist": [
+     "ID.RA-01",
+     "ID.RA-08"
+    ],
+    "dora": [
+     "25"
+    ],
+    "abiertos": 7,
+    "porBanda": {
+     "critica": 5,
+     "alta": 2,
+     "media": 0,
+     "baja": 0
+    },
+    "kev": 7,
+    "vencidos": 5,
+    "peor": 92.5,
+    "hallazgos": [
+     {
+      "id": "H-001",
+      "titulo": "Log4Shell en Apache Log4j 2",
+      "cve": "CVE-2021-44228",
+      "banda": "critica",
+      "puntuacion": 92.5,
+      "activo": "Portal web de clientes",
+      "estado": "validado",
+      "vence": "2026-09-05"
+     },
+     {
+      "id": "H-002",
+      "titulo": "ProxyShell en Microsoft Exchange",
+      "cve": "CVE-2021-34473",
+      "banda": "critica",
+      "puntuacion": 90.7,
+      "activo": "Exchange OWA",
+      "estado": "abierto",
+      "vence": "2026-09-05"
+     },
+     {
+      "id": "H-013",
+      "titulo": "NTLM relay en Exchange (sin EPA)",
+      "cve": "CVE-2024-21410",
+      "banda": "critica",
+      "puntuacion": 90.7,
+      "activo": "Exchange OWA",
+      "estado": "abierto",
+      "vence": "2026-09-05"
+     },
+     {
+      "id": "H-004",
+      "titulo": "RCE sin autenticar en NetScaler Gateway",
+      "cve": "CVE-2023-3519",
+      "banda": "critica",
+      "puntuacion": 86.9,
+      "activo": "Citrix NetScaler Gateway",
+      "estado": "abierto",
+      "vence": "2026-09-06"
+     },
+     {
+      "id": "H-003",
+      "titulo": "Citrix Bleed: fuga de memoria y robo de sesiones",
+      "cve": "CVE-2023-4966",
+      "banda": "critica",
+      "puntuacion": 85.7,
+      "activo": "Citrix NetScaler Gateway",
+      "estado": "abierto",
+      "vence": "2026-09-06"
+     },
+     {
+      "id": "H-014",
+      "titulo": "Apache ActiveMQ: deserialización OpenWire",
+      "cve": "CVE-2023-46604",
+      "banda": "alta",
+      "puntuacion": 75.7,
+      "activo": "Servidor de aplicaciones APP01",
+      "estado": "abierto",
+      "vence": "2026-09-22"
+     },
+     {
+      "id": "H-016",
+      "titulo": "Microsoft Office: RCE mediante documentos",
+      "cve": "CVE-2023-36884",
+      "banda": "alta",
+      "puntuacion": 67.7,
+      "activo": "Estaciones de trabajo (VLAN 50)",
+      "estado": "abierto",
+      "vence": "2026-09-23"
+     }
+    ]
+   }
+  },
+  {
+   "control": "OPE-06",
+   "titulo": "Protección frente a código dañino",
+   "estado": "implantado",
+   "responsable": "SOC (SecOps Iberia) / Resp. Seguridad",
+   "revision": "2026-04-01"
+  },
+  {
+   "control": "OPE-07",
+   "titulo": "Instalación de software en producción",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-03-31"
+  },
+  {
+   "control": "OPE-08",
+   "titulo": "Registro de actividad",
+   "estado": "implantado",
+   "responsable": "SOC (SecOps Iberia) / Resp. Seguridad",
+   "revision": "2026-03-29"
+  },
+  {
+   "control": "OPE-09",
+   "titulo": "Sincronización de relojes",
+   "estado": "implantado",
+   "responsable": "SOC (SecOps Iberia) / Resp. Seguridad",
+   "revision": "2026-03-28"
+  },
+  {
+   "control": "OPE-10",
+   "titulo": "Monitorización y detección de intrusiones",
+   "estado": "parcial",
+   "responsable": "SOC (SecOps Iberia) / Resp. Seguridad",
+   "revision": "2026-04-01"
+  },
+  {
+   "control": "OPE-11",
+   "titulo": "Gestión de la capacidad y protección frente a denegación de servicio",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-04-02"
+  },
+  {
+   "control": "OPE-12",
+   "titulo": "Dispositivos de usuario final",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-04-04"
+  },
+  {
+   "control": "OPE-13",
+   "titulo": "Puesto despejado y bloqueo de sesión",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2026-04-05"
+  },
+  {
+   "control": "OPE-14",
+   "titulo": "Criptografía y gestión de claves",
+   "estado": "parcial",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-03-27",
+   "ctem": {
+    "control": "OPE-14",
+    "titulo": "Criptografía y gestión de claves",
+    "ens": [
+     "op.exp.10",
+     "mp.si.2",
+     "mp.eq.3"
+    ],
+    "iso27001": [
+     "A8.24"
+    ],
+    "nis2": [
+     "9"
+    ],
+    "nist": [
+     "PR.DS-01",
+     "PR.DS-10"
+    ],
+    "dora": [
+     "9"
+    ],
+    "abiertos": 1,
+    "porBanda": {
+     "critica": 0,
+     "alta": 1,
+     "media": 0,
+     "baja": 0
+    },
+    "kev": 0,
+    "vencidos": 0,
+    "peor": 68.3,
+    "hallazgos": [
+     {
+      "id": "H-007",
+      "titulo": "ADCS ESC1: plantilla «UserAuth» permite SAN arbitrario",
+      "cve": null,
+      "banda": "alta",
+      "puntuacion": 68.3,
+      "activo": "Entidad de certificación PKI-CA01",
+      "estado": "abierto",
+      "vence": "2026-09-19"
+     }
+    ]
+   }
+  },
+  {
+   "control": "OPE-15",
+   "titulo": "Protección del correo y la navegación",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-03-28"
+  },
+  {
+   "control": "OPE-16",
+   "titulo": "Arquitectura segura y componentes certificados",
+   "estado": "parcial",
+   "responsable": "Responsable del Sistema",
+   "revision": "2026-03-29"
+  },
+  {
+   "control": "RED-01",
+   "titulo": "Seguridad y perímetro de red",
+   "estado": "parcial",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-01-09",
+   "ctem": {
+    "control": "RED-01",
+    "titulo": "Seguridad y perímetro de red",
+    "ens": [
+     "mp.com.1",
+     "mp.com.4",
+     "op.pl.2",
+     "op.mon.1"
+    ],
+    "iso27001": [
+     "A8.20",
+     "A8.21"
+    ],
+    "nis2": [
+     "6.7"
+    ],
+    "nist": [
+     "PR.IR-01"
+    ],
+    "dora": [
+     "9"
+    ],
+    "abiertos": 2,
+    "porBanda": {
+     "critica": 2,
+     "alta": 0,
+     "media": 0,
+     "baja": 0
+    },
+    "kev": 2,
+    "vencidos": 2,
+    "peor": 86.9,
+    "hallazgos": [
+     {
+      "id": "H-004",
+      "titulo": "RCE sin autenticar en NetScaler Gateway",
+      "cve": "CVE-2023-3519",
+      "banda": "critica",
+      "puntuacion": 86.9,
+      "activo": "Citrix NetScaler Gateway",
+      "estado": "abierto",
+      "vence": "2026-09-06"
+     },
+     {
+      "id": "H-003",
+      "titulo": "Citrix Bleed: fuga de memoria y robo de sesiones",
+      "cve": "CVE-2023-4966",
+      "banda": "critica",
+      "puntuacion": 85.7,
+      "activo": "Citrix NetScaler Gateway",
+      "estado": "abierto",
+      "vence": "2026-09-06"
+     }
+    ]
+   }
+  },
+  {
+   "control": "RED-02",
+   "titulo": "Segregación de redes y flujos",
+   "estado": "parcial",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-01-05",
+   "ctem": {
+    "control": "RED-02",
+    "titulo": "Segregación de redes y flujos",
+    "ens": [
+     "mp.com.4",
+     "op.ext.4",
+     "mp.com.1",
+     "op.pl.2"
+    ],
+    "iso27001": [
+     "A8.22"
+    ],
+    "nis2": [
+     "6.8"
+    ],
+    "nist": [
+     "ID.AM-03",
+     "PR.IR-01"
+    ],
+    "dora": [],
+    "abiertos": 1,
+    "porBanda": {
+     "critica": 0,
+     "alta": 0,
+     "media": 1,
+     "baja": 0
+    },
+    "kev": 0,
+    "vencidos": 0,
+    "peor": 50.8,
+    "hallazgos": [
+     {
+      "id": "H-011",
+      "titulo": "LLMNR y NBT-NS habilitados",
+      "cve": null,
+      "banda": "media",
+      "puntuacion": 50.8,
+      "activo": "Estaciones de trabajo (VLAN 50)",
+      "estado": "abierto",
+      "vence": "2026-10-07"
+     }
+    ]
+   }
+  },
+  {
+   "control": "RED-03",
+   "titulo": "Protección de las comunicaciones",
+   "estado": "parcial",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-01-06",
+   "ctem": {
+    "control": "RED-03",
+    "titulo": "Protección de las comunicaciones",
+    "ens": [
+     "mp.com.2",
+     "mp.com.3"
+    ],
+    "iso27001": [
+     "A8.24",
+     "A8.20",
+     "A8.21"
+    ],
+    "nis2": [
+     "9",
+     "21.2.j"
+    ],
+    "nist": [
+     "PR.DS-02"
+    ],
+    "dora": [],
+    "abiertos": 1,
+    "porBanda": {
+     "critica": 0,
+     "alta": 0,
+     "media": 1,
+     "baja": 0
+    },
+    "kev": 0,
+    "vencidos": 0,
+    "peor": 58.8,
+    "hallazgos": [
+     {
+      "id": "H-008",
+      "titulo": "Firma SMB no obligatoria en servidores",
+      "cve": null,
+      "banda": "media",
+      "puntuacion": 58.8,
+      "activo": "Servidor de aplicaciones APP01",
+      "estado": "abierto",
+      "vence": "2026-10-06"
+     }
+    ]
+   }
+  },
+  {
+   "control": "RED-04",
+   "titulo": "Interconexión de sistemas",
+   "estado": "implantado",
+   "responsable": "Responsable del Sistema",
+   "revision": "2026-01-02"
+  },
+  {
+   "control": "RED-05",
+   "titulo": "Comunicaciones seguras y de emergencia",
+   "estado": "parcial",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-01-04"
+  },
+  {
+   "control": "DES-01",
+   "titulo": "Ciclo de vida de desarrollo seguro",
+   "estado": "parcial",
+   "responsable": "Jefe de Desarrollo",
+   "revision": "2025-11-23"
+  },
+  {
+   "control": "DES-02",
+   "titulo": "Requisitos de seguridad de las aplicaciones",
+   "estado": "parcial",
+   "responsable": "Jefe de Desarrollo",
+   "revision": "2025-11-27"
+  },
+  {
+   "control": "DES-03",
+   "titulo": "Pruebas de seguridad y aceptación",
+   "estado": "implantado",
+   "responsable": "Jefe de Desarrollo",
+   "revision": "2025-11-26"
+  },
+  {
+   "control": "DES-04",
+   "titulo": "Separación de entornos",
+   "estado": "implantado",
+   "responsable": "Jefe de Desarrollo",
+   "revision": "2025-11-30"
+  },
+  {
+   "control": "DES-05",
+   "titulo": "Desarrollo externalizado",
+   "estado": "parcial",
+   "responsable": "Jefe de Desarrollo",
+   "revision": "2025-11-28"
+  },
+  {
+   "control": "DES-06",
+   "titulo": "Adquisición de productos y servicios TIC",
+   "estado": "implantado",
+   "responsable": "Compras / Resp. Seguridad",
+   "revision": "2025-12-02"
+  },
+  {
+   "control": "DES-07",
+   "titulo": "Protección de servicios y aplicaciones web",
+   "estado": "implantado",
+   "responsable": "Jefe de Desarrollo",
+   "revision": "2025-12-01"
+  },
+  {
+   "control": "DES-08",
+   "titulo": "Productos de seguridad certificados (Catálogo CPSTIC)",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "DES-09",
+   "titulo": "Lista de materiales de software (SBOM) y componentes de terceros",
+   "estado": "parcial",
+   "responsable": "",
+   "revision": "",
+   "ctem": {
+    "control": "DES-09",
+    "titulo": "Lista de materiales de software (SBOM) y componentes de terceros",
+    "ens": [],
+    "iso27001": [
+     "A8.28"
+    ],
+    "nis2": [],
+    "nist": [
+     "GV.SC-09",
+     "ID.AM-02"
+    ],
+    "dora": [],
+    "abiertos": 1,
+    "porBanda": {
+     "critica": 1,
+     "alta": 0,
+     "media": 0,
+     "baja": 0
+    },
+    "kev": 1,
+    "vencidos": 1,
+    "peor": 92.5,
+    "hallazgos": [
+     {
+      "id": "H-001",
+      "titulo": "Log4Shell en Apache Log4j 2",
+      "cve": "CVE-2021-44228",
+      "banda": "critica",
+      "puntuacion": 92.5,
+      "activo": "Portal web de clientes",
+      "estado": "validado",
+      "vence": "2026-09-05"
+     }
+    ]
+   }
+  },
+  {
+   "control": "DES-10",
+   "titulo": "Seguridad por defecto y superficie de ataque mínima del producto",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "DES-11",
+   "titulo": "Actualizaciones de seguridad del producto durante el periodo de soporte",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "DES-12",
+   "titulo": "Información e instrucciones de seguridad para el usuario del producto",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "DES-13",
+   "titulo": "Evaluación de riesgos de ciberseguridad del producto",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "PRO-01",
+   "titulo": "Seguridad en las relaciones con proveedores",
+   "estado": "implantado",
+   "responsable": "Compras / Resp. Seguridad",
+   "revision": "2026-08-25"
+  },
+  {
+   "control": "PRO-02",
+   "titulo": "Seguimiento de los servicios de proveedores",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-08-21"
+  },
+  {
+   "control": "PRO-03",
+   "titulo": "Seguridad de la cadena de suministro TIC",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2026-08-22"
+  },
+  {
+   "control": "PRO-04",
+   "titulo": "Directorio de proveedores",
+   "estado": "parcial",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2026-08-29"
+  },
+  {
+   "control": "PRO-05",
+   "titulo": "Servicios en la nube",
+   "estado": "implantado",
+   "responsable": "Responsable del Sistema",
+   "revision": "2025-03-28"
+  },
+  {
+   "control": "PRO-06",
+   "titulo": "Registro de información de los acuerdos con proveedores de TIC",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "PRO-07",
+   "titulo": "Estrategias de salida y riesgo de concentración en proveedores de TIC",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "INC-01",
+   "titulo": "Plan de gestión de incidentes",
+   "estado": "implantado",
+   "responsable": "SOC (SecOps Iberia) / Resp. Seguridad",
+   "revision": "2026-05-25"
+  },
+  {
+   "control": "INC-02",
+   "titulo": "Notificación interna de eventos",
+   "estado": "implantado",
+   "responsable": "SOC (SecOps Iberia) / Resp. Seguridad",
+   "revision": "2026-05-29"
+  },
+  {
+   "control": "INC-03",
+   "titulo": "Evaluación y clasificación de eventos",
+   "estado": "implantado",
+   "responsable": "SOC (SecOps Iberia) / Resp. Seguridad",
+   "revision": "2026-05-28"
+  },
+  {
+   "control": "INC-04",
+   "titulo": "Respuesta a incidentes",
+   "estado": "implantado",
+   "responsable": "SOC (SecOps Iberia) / Resp. Seguridad",
+   "revision": "2026-05-21"
+  },
+  {
+   "control": "INC-05",
+   "titulo": "Lecciones aprendidas",
+   "estado": "implantado",
+   "responsable": "SOC (SecOps Iberia) / Resp. Seguridad",
+   "revision": "2026-05-20"
+  },
+  {
+   "control": "INC-06",
+   "titulo": "Recopilación de evidencias",
+   "estado": "implantado",
+   "responsable": "SOC (SecOps Iberia) / Resp. Seguridad",
+   "revision": "2026-05-24"
+  },
+  {
+   "control": "INC-07",
+   "titulo": "Notificación a la autoridad en plazo",
+   "estado": "parcial",
+   "responsable": "SOC (SecOps Iberia) / Resp. Seguridad",
+   "revision": "2026-05-23"
+  },
+  {
+   "control": "INC-08",
+   "titulo": "Comunicación a clientes y usuarios afectados",
+   "estado": "pendiente",
+   "responsable": "Equipo de respuesta a incidentes",
+   "revision": ""
+  },
+  {
+   "control": "INC-09",
+   "titulo": "Notificación a la autoridad aeronáutica",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "INC-10",
+   "titulo": "Notificación de incidentes graves de IA",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "INC-11",
+   "titulo": "Notificación a ENISA de vulnerabilidades explotadas e incidentes graves",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "INC-12",
+   "titulo": "Notificación de incidentes graves a la autoridad financiera",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "INC-13",
+   "titulo": "Reporte de incidentes al CSIRT Nacional de Chile",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "CON-01",
+   "titulo": "Análisis de impacto",
+   "estado": "implantado",
+   "responsable": "Responsable de Seguridad",
+   "revision": "2025-04-06"
+  },
+  {
+   "control": "CON-02",
+   "titulo": "Plan de continuidad y recuperación",
+   "estado": "implantado",
+   "responsable": "Responsable del Sistema",
+   "revision": "2025-04-12"
+  },
+  {
+   "control": "CON-03",
+   "titulo": "Pruebas de continuidad",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2025-04-10"
+  },
+  {
+   "control": "CON-04",
+   "titulo": "Redundancia y medios alternativos",
+   "estado": "implantado",
+   "responsable": "Jefe de Operaciones TI",
+   "revision": "2025-04-16"
+  },
+  {
+   "control": "CON-05",
+   "titulo": "Gestión de crisis",
+   "estado": "implantado",
+   "responsable": "Responsable del Sistema",
+   "revision": "2025-04-14"
+  },
+  {
+   "control": "CON-06",
+   "titulo": "Programa de pruebas de resiliencia operativa digital",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "CON-07",
+   "titulo": "Pruebas de penetración basadas en amenazas (TLPT)",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "FIS-01",
+   "titulo": "Áreas seguras y control de acceso físico",
+   "estado": "implantado",
+   "responsable": "Facilities / Resp. del Sistema",
+   "revision": "2026-08-14"
+  },
+  {
+   "control": "FIS-02",
+   "titulo": "Vigilancia de la seguridad física",
+   "estado": "implantado",
+   "responsable": "Facilities / Resp. del Sistema",
+   "revision": "2026-08-13"
+  },
+  {
+   "control": "FIS-03",
+   "titulo": "Protección frente a amenazas ambientales",
+   "estado": "implantado",
+   "responsable": "Facilities / Resp. del Sistema",
+   "revision": "2026-08-11"
+  },
+  {
+   "control": "FIS-04",
+   "titulo": "Suministros y cableado",
+   "estado": "implantado",
+   "responsable": "Facilities / Resp. del Sistema",
+   "revision": "2026-08-20"
+  },
+  {
+   "control": "FIS-05",
+   "titulo": "Entrada y salida de equipos",
+   "estado": "implantado",
+   "responsable": "Facilities / Resp. del Sistema",
+   "revision": "2026-08-19"
+  },
+  {
+   "control": "IA-01",
+   "titulo": "Política de IA",
+   "estado": "parcial",
+   "responsable": "Comité de IA",
+   "revision": "2026-03-08"
+  },
+  {
+   "control": "IA-02",
+   "titulo": "Roles de IA y canal de inquietudes",
+   "estado": "parcial",
+   "responsable": "Comité de IA",
+   "revision": "2026-03-12"
+  },
+  {
+   "control": "IA-03",
+   "titulo": "Recursos de los sistemas de IA",
+   "estado": "parcial",
+   "responsable": "Comité de IA",
+   "revision": "2026-03-11"
+  },
+  {
+   "control": "IA-04",
+   "titulo": "Gestión de riesgos de IA",
+   "estado": "parcial",
+   "responsable": "Comité de IA",
+   "revision": "2026-03-05"
+  },
+  {
+   "control": "IA-05",
+   "titulo": "Evaluación de impacto de los sistemas de IA",
+   "estado": "parcial",
+   "responsable": "Comité de IA",
+   "revision": "2026-03-03"
+  },
+  {
+   "control": "IA-06",
+   "titulo": "Desarrollo responsable de IA",
+   "estado": "parcial",
+   "responsable": "Comité de IA",
+   "revision": "2026-03-07"
+  },
+  {
+   "control": "IA-07",
+   "titulo": "Especificación y documentación del sistema de IA",
+   "estado": "parcial",
+   "responsable": "Comité de IA",
+   "revision": "2026-03-06"
+  },
+  {
+   "control": "IA-08",
+   "titulo": "Verificación, validación y despliegue",
+   "estado": "parcial",
+   "responsable": "Comité de IA",
+   "revision": "2026-02-27"
+  },
+  {
+   "control": "IA-09",
+   "titulo": "Operación y monitorización del sistema de IA",
+   "estado": "parcial",
+   "responsable": "Comité de IA",
+   "revision": "2026-02-26"
+  },
+  {
+   "control": "IA-10",
+   "titulo": "Registros de eventos del sistema de IA",
+   "estado": "parcial",
+   "responsable": "Comité de IA",
+   "revision": "2026-08-14"
+  },
+  {
+   "control": "IA-11",
+   "titulo": "Gobierno de datos para IA",
+   "estado": "parcial",
+   "responsable": "Comité de IA",
+   "revision": "2026-08-15"
+  },
+  {
+   "control": "IA-12",
+   "titulo": "Información a usuarios y partes interesadas",
+   "estado": "parcial",
+   "responsable": "Comité de IA",
+   "revision": "2026-08-11"
+  },
+  {
+   "control": "IA-13",
+   "titulo": "Uso responsable y uso previsto",
+   "estado": "parcial",
+   "responsable": "Comité de IA",
+   "revision": "2026-08-13"
+  },
+  {
+   "control": "IA-14",
+   "titulo": "Terceros y clientes en la cadena de IA",
+   "estado": "parcial",
+   "responsable": "Comité de IA",
+   "revision": "2026-08-19"
+  },
+  {
+   "control": "IA-15",
+   "titulo": "Alfabetización en IA",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "IA-16",
+   "titulo": "Revisión de prácticas de IA prohibidas",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "IA-17",
+   "titulo": "Supervisión humana del sistema de IA",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "IA-18",
+   "titulo": "Gestión de la calidad y seguimiento poscomercialización de la IA",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "IA-19",
+   "titulo": "Evaluación de impacto en los derechos fundamentales",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "IA-20",
+   "titulo": "Transparencia: aviso de IA y marcado de contenido sintético",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "IA-21",
+   "titulo": "Obligaciones de los modelos de IA de uso general",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "PRI-01",
+   "titulo": "Política y aviso de privacidad",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "PRI-02",
+   "titulo": "Base de licitud y consentimiento",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "PRI-03",
+   "titulo": "Atención de los derechos de los titulares en plazo",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "PRI-04",
+   "titulo": "Inventario de tratamientos y registro ante la autoridad",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "PRI-05",
+   "titulo": "Encargados del tratamiento con contrato",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "PRI-06",
+   "titulo": "Transferencias internacionales de datos",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "PRI-07",
+   "titulo": "Notificación de vulneraciones de datos personales",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "PRI-08",
+   "titulo": "Delegado u oficial de protección de datos",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "PRI-09",
+   "titulo": "Evaluación de impacto en protección de datos",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  },
+  {
+   "control": "PRI-10",
+   "titulo": "Finalidad, minimización y conservación de los datos",
+   "estado": "pendiente",
+   "responsable": "",
+   "revision": ""
+  }
+ ]
+}

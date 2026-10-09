@@ -140,6 +140,12 @@ La propuesta es generalizar ese asistente. A partir de **dónde opera** la organ
 | 2.9.0 ✓ publicada | **Chile**: Ley 21.663 y Ley 21.719 | Diario Oficial de Chile | Perfil con país y «también opera en»; dominio de privacidad. |
 | 2.10.0 ✓ publicada | Protección de datos de **Colombia, México, Perú y Argentina** | Ley 1581, LFPDPPP 2025, Ley 29733 y Reglamento 2024, Ley 25.326 | Reutiliza el dominio de privacidad. |
 
+## Ecosistema
+
+| Versión | Integración | Estado |
+|---|---|---|
+| 2.11.0 ✓ publicada | **CTEM-Nexus**: evidencia técnica por control, regla CO-23 y sobre de vuelta | Ida y vuelta probada en los dos repositorios |
+
 **Mediante marcos propios, sin texto en el repositorio:** IEC 62443 e ISO/IEC 20000. Como mucho se publicaría una plantilla con su numeración; el texto lo pone quien tiene la licencia.
 
 ## Reglas que no cambian

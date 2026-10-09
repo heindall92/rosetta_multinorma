@@ -512,8 +512,18 @@ function vAlcance() {
 }
 
 /* ================= Exportar ================= */
+function ctemPane() {
+  const c = state.ctem;
+  const n = c ? Object.keys(c.controles).length : 0;
+  const contra = c ? hall.filter((x) => x.id === 'CO-23').length : 0;
+  return `<section class="glass pane ctem-pane" data-testid="ctem-pane" aria-labelledby="ctem-h"><div class="row ctem-head"><span class="case-ic">${icon('waypoints', 22)}</span><div style="min-width:0"><div class="eyebrow">${esc(t('ctemEyebrow'))}</div><h3 id="ctem-h">${esc(t('ctemTitle'))}</h3></div></div>
+    <p class="small muted">${esc(t('ctemLead'))}</p>
+    <p class="small">${c ? esc(t('ctemStatus', c.importado || c.generado.slice(0, 10), n, contra, num1(c.resumen.indice))) : esc(t('ctemNone'))}</p>
+    <div class="row wrap"><button type="button" class="btn" data-act="import-ctem">${icon('upload', 16)}${esc(t('ctemImport'))}</button><button type="button" class="btn" data-act="export-ctem">${icon('download', 16)}${esc(t('ctemExport'))}</button>${c ? `<button type="button" class="btn ghost" data-act="ctem-clear">${icon('x', 16)}${esc(t('ctemClear'))}</button>` : ''}</div></section>`;
+}
 function vExport() {
   return `${head(`${icon('download', 14)}${esc(t('expEyebrow'))}`, esc(t('expTitle')), esc(t('expLead')))}
-  <div class="grid g3">${t('exp').map(([ic, title, desc, act, label], i) => `<section class="glass pane ex${i === 0 ? ' primary-ex' : ''}"><span class="case-ic">${icon(ic, 22)}</span><h3>${esc(title)}</h3><p class="small muted">${esc(desc)}</p><button type="button" class="btn${i === 0 ? ' primary' : ''}" data-act="${act}">${icon('download', 16)}${esc(label)}</button></section>`).join('')}</div>`;
+  <div class="grid g3">${t('exp').map(([ic, title, desc, act, label], i) => `<section class="glass pane ex${i === 0 ? ' primary-ex' : ''}"><span class="case-ic">${icon(ic, 22)}</span><h3>${esc(title)}</h3><p class="small muted">${esc(desc)}</p><button type="button" class="btn${i === 0 ? ' primary' : ''}" data-act="${act}">${icon('download', 16)}${esc(label)}</button></section>`).join('')}</div>
+  ${ctemPane()}`;
 }
 

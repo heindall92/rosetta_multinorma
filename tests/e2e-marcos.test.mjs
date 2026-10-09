@@ -307,3 +307,31 @@ test('LATAM: una empresa mexicana ve su ley y la de los países donde opera, nad
   assert.ok(!(await R(() => window.__ROSETTA__.calc.alcance)).includes('nis2'), 'NIS2 no aplica en México');
   noErrors('LATAM México');
 });
+
+test('Ecosistema: importa la evidencia de CTEM-Nexus, salta CO-23 y devuelve el sobre de controles', async () => {
+  await R(() => window.__ROSETTA__.openCase('techserv'));
+  await R(() => window.__ROSETTA__.go('exportar'));
+  assert.match(await page.locator('[data-testid="ctem-pane"]').innerText(), /Sin evidencia de CTEM-Nexus/);
+  const chooser = page.waitForEvent('filechooser');
+  await page.click('[data-act="import-ctem"]');
+  await (await chooser).setFiles(join(ROOT, 'tests/fixtures/ctem-a-rosetta.json')); await page.waitForTimeout(350);
+  const ida = JSON.parse(readFileSync(join(ROOT, 'tests/fixtures/ctem-a-rosetta.json'), 'utf8'));
+  assert.equal(await R(() => Object.keys(window.__ROSETTA__.state.ctem.controles).length), ida.datos.length);
+  assert.match(await page.locator('[data-testid="ctem-pane"]').innerText(), new RegExp(`${ida.datos.length} controles con hallazgos`));
+  assert.ok((await R(() => window.__ROSETTA__.hall.map((h) => h.id))).includes('CO-23'), 'TechServ declara implantados controles con exposición abierta');
+  await act('insp-uc', { id: 'OPE-04' });
+  assert.match(await page.locator('[data-testid="ctem-blk"]').innerText(), /Exposición técnica · CTEM-Nexus[\s\S]*abiertos?/i);
+  await act('insp-close');
+  const { name, text } = await descarga(() => page.click('[data-act="export-ctem"]'));
+  assert.match(name, /para_ctem_nexus_\d{4}-\d{2}-\d{2}\.json$/);
+  const vuelta = JSON.parse(text);
+  assert.equal(vuelta.tipo, 'controles');
+  assert.equal(vuelta.datos.filter((d) => d.ctem).length, ida.datos.length);
+  // Sobrevive a guardar y reabrir el proyecto (saneado al cargar).
+  await R(() => window.__ROSETTA__.go('exportar'));
+  const proj = JSON.parse((await descarga(() => page.click('[data-act="export-json"]'))).text);
+  assert.equal(Object.keys(proj.ctem.controles).length, ida.datos.length);
+  await page.click('[data-act="ctem-clear"]'); await page.waitForTimeout(150);
+  assert.equal(await R(() => window.__ROSETTA__.state.ctem), undefined);
+  noErrors('CTEM-Nexus');
+});

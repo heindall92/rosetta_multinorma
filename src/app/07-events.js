@@ -274,6 +274,9 @@ document.addEventListener('click', (ev) => {
     case 'export-plan': saveFile(fname('plan', 'csv'), planCsv()); break;
     case 'export-ctl': saveFile(fname('ctl', 'csv'), ctlCsv()); break;
     case 'export-json': saveFile(fname('proj', 'json'), JSON.stringify(state, null, 1)); break;
+    case 'export-ctem': exportCtem(); break;
+    case 'import-ctem': pickFile('.json,application/json', (f) => checkSize(f, LIM.fileJson, t('fileIs')) && readText(f, (txt) => { let o = null; try { o = safeParse(txt); } catch (e) { /* no es JSON */ } if (o) importCtem(o); else toast(t('tNotCtem'), 'error'); })); break;
+    case 'ctem-clear': delete state.ctem; commit(t('tCtemOut')); break;
     default: break;
   }
 });

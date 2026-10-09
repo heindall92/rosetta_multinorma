@@ -314,7 +314,7 @@ select option { background: var(--bg); color: var(--ink); }
 .stsw button[aria-pressed="true"].parcial { background: var(--warn-bg); color: var(--warn); }
 .stsw button[aria-pressed="true"].implantado { background: var(--ok-bg); color: var(--ok); }
 .stsw button[aria-pressed="true"].no-aplica { background: var(--hair-2); color: var(--ink-2); }
-.stsw.lg button { width: auto; padding: 0 12px; gap: 6px; display: inline-flex; font-size: .8rem; font-weight: 550; height: 34px; }
+.stsw.lg button { color: var(--muted); width: auto; padding: 0 12px; gap: 6px; display: inline-flex; font-size: .8rem; font-weight: 550; height: 34px; }
 
 /* ============ Órbita (panel) ============ */
 .orbit { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(320px, .9fr); gap: var(--gap); align-items: start; }
@@ -991,3 +991,11 @@ select option { background: var(--bg); color: var(--ink); }
 .fwt { max-width: 100%; } .fwt-l { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .eyebrow { max-width: 100%; } /* el antetítulo largo (8 normas) parte línea en el móvil en vez de desbordar */
 .pf-ops { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px 18px; } .pf-ops legend { padding: 0; margin-bottom: 8px; color: var(--muted); }
+
+/* ---------- Ecosistema: CTEM-Nexus ---------- */
+.ctem-pane { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+.ctem-head { gap: 12px; align-items: center; }
+.ctem-blk.clash { border-left: 3px solid var(--warn); padding-left: 10px; }
+.ctem-blk h4 { display: flex; align-items: center; gap: 6px; }
+.ctem-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: .8125rem; }
+.warn-txt { color: var(--warn); display: flex; gap: 6px; align-items: flex-start; }

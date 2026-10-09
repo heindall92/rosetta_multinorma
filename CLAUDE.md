@@ -12,4 +12,4 @@
 
 ## Siguiente paso
 
-- La siguiente versión y las posteriores están en `ROADMAP.md`. La hoja de ruta está completada con la 2.10.0 (15 normas y leyes de la UE, EE. UU. y Latinoamérica). Lo siguiente sale de las peticiones de usuarios y de la revisión experta de los mapeos (Part-IS, RIA, CRA, DORA y LATAM). Léelo antes de proponer trabajo nuevo en Rosetta.
+- La siguiente versión y las posteriores están en `ROADMAP.md`. La hoja de ruta está completada con la 2.10.0 (15 normas y leyes de la UE, EE. UU. y Latinoamérica). La 2.11.0 añade la integración con CTEM-Nexus (sobre `yrd-ecosistema`, regla CO-23). Lo siguiente sale de las peticiones de usuarios, de la revisión experta de los mapeos (Part-IS, RIA, CRA, DORA y LATAM) y del resto del ecosistema (Compliance Studio, KAIROS). Léelo antes de proponer trabajo nuevo en Rosetta.

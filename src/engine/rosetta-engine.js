@@ -352,7 +352,8 @@
     ['CO-19', 'Alta', 'DORA en alcance sin notificación de incidentes graves a la autoridad financiera (art. 19).'],
     ['CO-20', 'Media', 'DORA en alcance sin registro de información de los acuerdos con proveedores de TIC (art. 28.3).'],
     ['CO-21', 'Alta', 'Ley 21.663 en alcance sin reporte de incidentes al CSIRT Nacional (alerta en 3 h).'],
-    ['CO-22', 'Alta', 'Ley de protección de datos en alcance sin procedimiento de notificación de vulneraciones.']
+    ['CO-22', 'Alta', 'Ley de protección de datos en alcance sin procedimiento de notificación de vulneraciones.'],
+    ['CO-23', 'Alta', 'Control implantado con hallazgos técnicos críticos o altos abiertos según CTEM-Nexus.']
   ];
   /* Mensajes de las reglas en español e inglés */
   const tt = (obj, key, lang) => (lang === 'en' && obj && obj[key + '_en'] ? obj[key + '_en'] : obj ? obj[key] : '');
@@ -382,7 +383,8 @@
       co18: ['Productos sin SBOM', (e) => `Sin lista de materiales de software no se pueden identificar las vulnerabilidades de los componentes (anexo I, parte II, punto 1). El control DES-09 está ${e}.`, 'Genera la SBOM en cada versión desde la cadena de construcción, en SPDX o CycloneDX.', 'CRA, anexo I.II.1'],
       co15: ['Sin alfabetización en IA', (e) => `El art. 4 del RIA obliga desde el 02-02-2025 a proveedores y responsables del despliegue a adoptar medidas de alfabetización en IA. El control IA-15 está ${e}.`, 'Define un plan de alfabetización por perfil y registra la formación de quien opera o usa la IA.', 'RIA, art. 4'],
       co16: ['Sin revisión de prácticas prohibidas', (e) => `Las prácticas del art. 5 están prohibidas desde el 02-02-2025 y llevan las multas más altas del RIA. El control IA-16 está ${e}.`, 'Contrasta cada sistema y uso de IA con el art. 5 y documenta la decisión.', 'RIA, art. 5'],
-      co14: [(m, n) => `${m}: ${n} requisito${n === 1 ? '' : 's'} sin controles`, 'Un requisito sin controles cuenta siempre como brecha: Rosetta no puede saber qué lo cumple.', 'Abre el marco en Alcance y asigna los controles, empezando por las sugerencias.']
+      co14: [(m, n) => `${m}: ${n} requisito${n === 1 ? '' : 's'} sin controles`, 'Un requisito sin controles cuenta siempre como brecha: Rosetta no puede saber qué lo cumple.', 'Abre el marco en Alcance y asigna los controles, empezando por las sugerencias.'],
+      co23: [(id, n) => `${id} implantado, pero CTEM-Nexus ve ${n} hallazgo${n === 1 ? '' : 's'} crítico${n === 1 ? '' : 's'} o alto${n === 1 ? '' : 's'} abierto${n === 1 ? '' : 's'}`, (l, f) => `La exposición técnica contradice la declaración (${f}): ${l}. Un auditor que pida la evidencia técnica la encontrará.`, 'Corrige los hallazgos o deja el control en «Parcial» hasta cerrarlos, con su acción y fecha.', 'CTEM-Nexus']
     },
     en: {
       est: (e) => ESTADO_LABEL_EN[e].toLowerCase(), y: ' and ',
@@ -409,7 +411,8 @@
       co18: ['Products without an SBOM', (e) => `Without a software bill of materials, component vulnerabilities cannot be identified (Annex I, Part II, point 1). Control DES-09 is ${e}.`, 'Generate the SBOM for every release from the build pipeline, in SPDX or CycloneDX.', 'CRA, Annex I.II.1'],
       co15: ['No AI literacy', (e) => `AI Act art. 4 has required providers and deployers to take AI literacy measures since 02-02-2025. Control IA-15 is ${e}.`, 'Define a literacy plan by role and record the training of those who operate or use AI.', 'AI Act, art. 4'],
       co16: ['No review of prohibited practices', (e) => `The practices in art. 5 have been prohibited since 02-02-2025 and carry the AI Act’s highest fines. Control IA-16 is ${e}.`, 'Check every AI system and use against art. 5 and document the decision.', 'AI Act, art. 5'],
-      co14: [(m, n) => `${m}: ${n} requirement${n === 1 ? '' : 's'} without controls`, 'A requirement without controls always counts as a gap: Rosetta cannot know what meets it.', 'Open the framework in Scope and assign controls, starting with the suggestions.']
+      co14: [(m, n) => `${m}: ${n} requirement${n === 1 ? '' : 's'} without controls`, 'A requirement without controls always counts as a gap: Rosetta cannot know what meets it.', 'Open the framework in Scope and assign controls, starting with the suggestions.'],
+      co23: [(id, n) => `${id} implemented, but CTEM-Nexus sees ${n} open critical or high finding${n === 1 ? '' : 's'}`, (l, f) => `The technical exposure contradicts the statement (${f}): ${l}. An auditor asking for technical evidence will find it.`, 'Fix the findings or keep the control as “Partial” until they are closed, with its action and date.', 'CTEM-Nexus']
     }
   };
   const REGLAS_EN = {
@@ -428,7 +431,8 @@
     'CO-19': 'DORA in scope without reporting major incidents to the financial authority (art. 19).',
     'CO-20': 'DORA in scope without a register of information on ICT third-party arrangements (art. 28.3).',
     'CO-21': 'Law 21.663 in scope without incident reporting to the National CSIRT (3 h early warning).',
-    'CO-22': 'Data protection law in scope without a breach notification procedure.'
+    'CO-22': 'Data protection law in scope without a breach notification procedure.',
+    'CO-23': 'Control implemented with open critical or high technical findings according to CTEM-Nexus.'
   };
   function coherencia(ix, st, calc, opts = {}) {
     const lang = opts.lang === 'en' ? 'en' : 'es'; const M = MSG[lang];
@@ -451,6 +455,14 @@
     if (on('cra') && ix.ucMap['DES-09'] && est('DES-09') !== 'implantado') add('CO-18', 'DES-09', M.co18[0], M.co18[1](M.est(est('DES-09'))), M.co18[2], M.co18[3]);
     if (on('ria') && ix.ucMap['IA-15'] && est('IA-15') !== 'implantado') add('CO-15', 'IA-15', M.co15[0], M.co15[1](M.est(est('IA-15'))), M.co15[2], M.co15[3]);
     if (on('ria') && ix.ucMap['IA-16'] && est('IA-16') !== 'implantado') add('CO-16', 'IA-16', M.co16[0], M.co16[1](M.est(est('IA-16'))), M.co16[2], M.co16[3]);
+    if (st.ctem && st.ctem.controles) {
+      for (const [id, e] of Object.entries(st.ctem.controles)) {
+        const n = (e.porBanda.critica || 0) + (e.porBanda.alta || 0);
+        if (!ix.ucMap[id] || est(id) !== 'implantado' || !n) continue;
+        const l = e.hallazgos.filter((h) => h.banda === 'critica' || h.banda === 'alta').slice(0, 5).map((h) => `${h.id} ${h.titulo} (${h.activo})`).join('; ');
+        add('CO-23', id, M.co23[0](id, n), M.co23[1](l, st.ctem.generado ? st.ctem.generado.slice(0, 10) : 'CTEM-Nexus'), M.co23[2], M.co23[3]);
+      }
+    }
     if (on('partis') && ix.ucMap['RIE-12'] && est('RIE-12') !== 'implantado') add('CO-13', 'RIE-12', M.co13[0], M.co13[1](M.est(est('RIE-12'))), M.co13[2], M.co13[3]);
     for (const f of calc.alcance) {
       if (!ix.propio[f]) continue;
@@ -805,6 +817,55 @@
     return out.sort((a, b) => b.score - a.score || orden(a.id, b.id)).slice(0, n || 3);
   }
 
+  /* ---------- Ecosistema: sobre «yrd-ecosistema» con CTEM-Nexus ---------- */
+  const ECO = { format: 'yrd-ecosistema', version: 1 };
+  const BANDAS = ['critica', 'alta', 'media', 'baja'];
+  const ESTADOS_HALL = ['abierto', 'validado', 'no_explotable', 'mitigado', 'aceptado'];
+  const isO = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
+  const tx = (v, n) => (typeof v === 'string' ? v : typeof v === 'number' && isFinite(v) ? String(v) : '').replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, n || 200);
+  const nn = (v, max) => { const x = typeof v === 'number' && isFinite(v) ? v : 0; return Math.max(0, Math.min(max || 1e6, Math.round(x * 10) / 10)); };
+  const lista = (v, n, re) => (Array.isArray(v) ? v.slice(0, n) : []).map((x) => tx(x, 20)).filter((x) => x && (!re || re.test(x)));
+  /** Evidencia de un control tal como la envía CTEM-Nexus (saneada; si es válida, idéntica a la recibida). */
+  function evidenciaCtem(e) {
+    if (!isO(e) || !/^[A-Z]{2,3}-\d{2}$/.test(tx(e.control, 10))) return null;
+    const pb = isO(e.porBanda) ? e.porBanda : {};
+    return {
+      control: tx(e.control, 10), titulo: tx(e.titulo, 200),
+      ens: lista(e.ens, 20), iso27001: lista(e.iso27001, 20, /^A\d+\.\d+$/), nis2: lista(e.nis2, 20), nist: lista(e.nist, 20), dora: lista(e.dora, 20),
+      abiertos: nn(e.abiertos), porBanda: Object.fromEntries(BANDAS.map((b) => [b, nn(pb[b])])), kev: nn(e.kev), vencidos: nn(e.vencidos), peor: nn(e.peor, 100),
+      hallazgos: (Array.isArray(e.hallazgos) ? e.hallazgos.slice(0, 200) : []).filter(isO).map((h) => ({
+        id: tx(h.id, 40), titulo: tx(h.titulo, 200), cve: /^CVE-\d{4}-\d{4,7}$/.test(tx(h.cve, 20)) ? tx(h.cve, 20) : null,
+        banda: BANDAS.includes(h.banda) ? h.banda : 'baja', puntuacion: nn(h.puntuacion, 100), activo: tx(h.activo, 160),
+        estado: ESTADOS_HALL.includes(h.estado) ? h.estado : 'abierto', vence: /^\d{4}-\d{2}-\d{2}$/.test(tx(h.vence, 10)) ? tx(h.vence, 10) : ''
+      })).filter((h) => h.id)
+    };
+  }
+  /** Lee el sobre de hallazgos de CTEM-Nexus (o el estado ya guardado). Devuelve null si no lo es. */
+  function desdeCtem(o) {
+    if (!isO(o)) return null;
+    const sobre = o.format === ECO.format;
+    if (sobre && (o.version !== ECO.version || !isO(o.origen) || o.origen.herramienta !== 'ctem-nexus' || o.tipo !== 'hallazgos' || !Array.isArray(o.datos))) return null;
+    const datos = sobre ? o.datos : isO(o.controles) ? Object.values(o.controles) : null;
+    if (!datos) return null;
+    const controles = {};
+    for (const d of datos.slice(0, 500)) { const e = evidenciaCtem(d); if (e) controles[e.control] = e; }
+    const r = isO(o.resumen) ? o.resumen : {};
+    return {
+      generado: tx(sobre ? o.origen.generado : o.generado, 40), version: tx(sobre ? o.origen.version : o.version, 20), proyecto: tx(o.proyecto, 120),
+      resumen: { indice: nn(r.indice, 100), abiertos: nn(r.abiertos) }, controles
+    };
+  }
+  /** Sobre «controles» para CTEM-Nexus: estado de cada control y, si llegó, su evidencia técnica sin cambios. */
+  function aCtem(ix, st, version, ahora) {
+    const ctem = (st.ctem && st.ctem.controles) || {};
+    const datos = ix.cat.controls.filter((c) => !ix.propio || !c.propio).map((c) => {
+      const d = (st.controles || {})[c.id] || {};
+      return { control: c.id, titulo: c.t, estado: estadoUc(st, c.id), responsable: tx(d.responsable, 120), revision: /^\d{4}-\d{2}-\d{2}$/.test(d.revision || '') ? d.revision : '', ...(ctem[c.id] ? { ctem: ctem[c.id] } : {}) };
+    });
+    return { format: ECO.format, version: ECO.version, origen: { herramienta: 'rosetta', version: String(version || ''), generado: (ahora || new Date()).toISOString().replace(/\.\d{3}Z$/, 'Z') },
+      tipo: 'controles', proyecto: tx((st.proyecto || {}).nombre || (st.proyecto || {}).organizacion, 120), datos };
+  }
+
   /** Nombre corto de una norma o de un marco propio. */
   function etiqueta(ix, f, lang) { return (lang === 'en' && FW_LABEL_EN[f]) || FW_LABEL[f] || (ix && ix.cat.frameworks[f] && ix.cat.frameworks[f].nombre) || f; }
   function codigo(ix, f, id) { const r = ix.req[f][id]; return r ? r.code || id : id; }
@@ -813,7 +874,7 @@
   function instantanea(calc) { const o = {}; for (const f of Object.keys(calc.fw)) o[f] = calc.fw[f].on ? Math.round(calc.fw[f].grado * 1000) / 1000 : null; return { cov: o, grado: Math.round(calc.kpi.grado * 1000) / 1000, brechas: calc.kpi.brechas }; }
 
   return { FW, FW_LABEL, FW_LABEL_EN, etiqueta, riaAlcance, RIA_ROLES, RIA_GPAI, craAlcance, CRA_CLASES, doraAlcance, DORA_REGIMENES, LATAM, fundirPropios, listaNormas, FW_LONG, FW_LONG_EN, ESTADOS, ESTADO_LABEL, ESTADO_LABEL_EN, REGLAS_EN, tt, SCORE, W, DIMS, NIVELES_ENS, CAT_NIVEL, REGLAS, TAMANOS, NIS2_ESPECIALES,
-    ESTADOS_PERFIL, JURISDICCIONES, AVIACION, PERFIL_DEF, perfilNormalizado, perfilRegulatorio, sugerirControles,
+    ESTADOS_PERFIL, JURISDICCIONES, AVIACION, PERFIL_DEF, perfilNormalizado, perfilRegulatorio, sugerirControles, desdeCtem, aCtem, evidenciaCtem,
     indexar, nivelExigidoEns, categoriaEfectiva, excluible, exigidaEns, categoriaDeNiveles, aplicaReq, coberturaReq, calcular, solapamiento, inferencia,
     equivalencias, prioridades, parseIsoRef, parejasClase, ccnPareja, fuerzaCcn, contrasteCcn825, coherencia, planAccion, puntuacionEns, desdeSoaEns, nis2Aplicabilidad, orden, codigo, titulo, instantanea, estadoUc };
 });

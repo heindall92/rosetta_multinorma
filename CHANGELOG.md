@@ -1,5 +1,16 @@
 # Cambios
 
+## 2.11.0 · octubre de 2026
+
+**Evidencia técnica de CTEM-Nexus.** Primera integración del ecosistema con el sobre común `yrd-ecosistema`.
+
+- **Importar hallazgos de CTEM-Nexus** (Exportar → CTEM-Nexus, o «Importar proyecto» con el sobre). La evidencia se sanea al leerla y al cargar el proyecto: identificadores, bandas, estados, fechas y CVE fuera de formato se descartan.
+- **Ficha del control** con la exposición técnica: abiertos por prioridad, KEV, vencidos y los peores hallazgos.
+- **Regla CO-23 (alta):** control implantado con hallazgos críticos o altos abiertos.
+- **Sobre para CTEM-Nexus** con el estado de los 152 controles y la evidencia recibida sin cambios.
+- **Accesibilidad.** Las etiquetas del selector de estado de la ficha no llegaban a 4,5:1 en tema claro (3,6:1). Corregido y cubierto por axe.
+- **Pruebas.** 4 del motor, 1 e2e y 4 de axe. Total: 144 de motor, catálogo y build y 69 en navegador.
+
 ## 2.10.0 · octubre de 2026
 
 **Protección de datos en Colombia, México, Perú y Argentina.** Con esta versión se completa la hoja de ruta.

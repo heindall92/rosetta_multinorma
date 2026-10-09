@@ -90,7 +90,7 @@ Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto n
         <img src="docs/assets/stack/navegador.svg" height="48" alt="Playwright">
         <img src="docs/assets/stack/accesibilidad.svg" height="48" alt="axe-core">
         <img src="docs/assets/stack/codeql.svg" height="48" alt="CodeQL"><br>
-        <sub><code>node:test 140 · Playwright 64 · axe-core 0 violaciones · CodeQL</code></sub>
+        <sub><code>node:test 144 · Playwright 69 · axe-core 0 violaciones · CodeQL</code></sub>
       </td>
       <td valign="top"><code>╰─ ⌁ seguridad:</code><br><br>
         <img src="docs/assets/stack/csp.svg" height="48" alt="CSP">
@@ -331,6 +331,17 @@ Las equivalencias **ENS ↔ ISO/IEC 27001:2022** siguen la guía oficial del Cen
 
 NIS2 e ISO/IEC 42001 no tienen una guía equivalente: sus correspondencias siguen siendo criterio del autor, contrastado con la guía técnica de ENISA.
 
+## <img src="docs/assets/icons/waypoints.svg" width="20" height="20" valign="middle"/> Novedades de la 2.11.0: evidencia técnica de CTEM-Nexus
+
+Rosetta dice qué controles exige cada norma; [CTEM-Nexus](https://github.com/heindall92/ctem-nexus) dice qué está expuesto de verdad. Desde esta versión, las dos hablan por fichero con el sobre común del ecosistema (`yrd-ecosistema`, versión 1):
+
+1. En CTEM-Nexus, **Ecosistema → Rosetta → Evidencia por control** descarga los hallazgos abiertos agrupados por control unificado (OPE-04, ACC-07…), con sus identificadores de ENS, ISO/IEC 27001, NIS2, NIST CSF 2.0 y DORA.
+2. En Rosetta, **Exportar → CTEM-Nexus → Importar hallazgos**. Cada control muestra en su ficha la **exposición técnica**: abiertos por prioridad, KEV, vencidos y los peores hallazgos con su activo y fecha límite.
+3. **Regla CO-23 (alta).** Un control declarado «Implantado» con hallazgos críticos o altos abiertos es una contradicción que un auditor encontrará. Rosetta la señala con los hallazgos concretos.
+4. **Sobre para CTEM-Nexus.** Rosetta devuelve el estado de los 152 controles y, sin cambios, la evidencia que recibió. CTEM-Nexus avisa en cada hallazgo si su control figura como implantado.
+
+La ida y vuelta está cubierta por pruebas en los dos repositorios con el mismo fichero (`tests/fixtures/ctem-a-rosetta.json` y `rosetta-a-ctem.json`). De paso se corrigió el contraste de las etiquetas del selector de estado en la ficha (3,6:1 → AA).
+
 ## <img src="docs/assets/icons/globe.svg" width="20" height="20" valign="middle"/> Novedades de la 2.10.0: protección de datos en Colombia, México, Perú y Argentina
 
 Cuatro leyes de protección de datos personales, sobre el dominio de privacidad de la 2.9.0:
@@ -470,13 +481,13 @@ Las 28 obligaciones del Reglamento (UE) 2024/1689 que afectan a una organizació
 
 | Suite | Pruebas | Qué comprueba |
 |---|---|---|
-| Motor (`engine.test.mjs`) | 112 | Colombia, México, Perú y Argentina (región, cobertura, plazos, sin CO-22 en Argentina, perfil, exclusiones). Chile (requisitos con fecha y región, deberes de OIV, perfil por país y «también opera en», CO-21 y CO-22). DORA (24 requisitos, régimen simplificado y TLPT, exclusión solo del art. 45, plazos de 2025/301, CO-19 y CO-20, perfil). NIST CSF 2.0 (106 subcategorías en 6 funciones y 22 categorías, cobertura completa, voluntario). CRA (29 requisitos, fechas, exclusiones solo en el anexo I.I.2 b–m, equivalencias, CO-17 y CO-18, perfil). RIA (rol, riesgo, fechas del Ómnibus, sin exclusiones, equivalencias, CO-15 y CO-16, perfil). Part-IS (13 requisitos, sin exclusiones, equivalencias nunca totales, alertas CO-12 y CO-13), perfil regulatorio (cada regla del ENS, NIS2, Part-IS, ISO y normas futuras, entradas hostiles), marcos propios (fusión sin tocar el catálogo, cálculo, CO-14) y sugerencias de mapeo. Media ponderada, techo de los enlaces parciales, exclusiones no permitidas, categoría ENS efectiva, KPI, prioridades, solapamiento, equivalencias, correspondencias de la CCN-STIC 825, aplicabilidad NIS2 (17 casos), cinco casos de ejemplo y una instantánea fija. |
+| Motor (`engine.test.mjs`) | 116 | Ecosistema con CTEM-Nexus (sobre leído sin pérdidas, sobres ajenos rechazados, evidencia hostil saneada, regla CO-23 en los dos idiomas e ida y vuelta con fichero fijo). Colombia, México, Perú y Argentina (región, cobertura, plazos, sin CO-22 en Argentina, perfil, exclusiones). Chile (requisitos con fecha y región, deberes de OIV, perfil por país y «también opera en», CO-21 y CO-22). DORA (24 requisitos, régimen simplificado y TLPT, exclusión solo del art. 45, plazos de 2025/301, CO-19 y CO-20, perfil). NIST CSF 2.0 (106 subcategorías en 6 funciones y 22 categorías, cobertura completa, voluntario). CRA (29 requisitos, fechas, exclusiones solo en el anexo I.I.2 b–m, equivalencias, CO-17 y CO-18, perfil). RIA (rol, riesgo, fechas del Ómnibus, sin exclusiones, equivalencias, CO-15 y CO-16, perfil). Part-IS (13 requisitos, sin exclusiones, equivalencias nunca totales, alertas CO-12 y CO-13), perfil regulatorio (cada regla del ENS, NIS2, Part-IS, ISO y normas futuras, entradas hostiles), marcos propios (fusión sin tocar el catálogo, cálculo, CO-14) y sugerencias de mapeo. Media ponderada, techo de los enlaces parciales, exclusiones no permitidas, categoría ENS efectiva, KPI, prioridades, solapamiento, equivalencias, correspondencias de la CCN-STIC 825, aplicabilidad NIS2 (17 casos), cinco casos de ejemplo y una instantánea fija. |
 | Catálogo (`catalog.test.mjs`) | 16 | Quince normas; 13 requisitos de Part-IS con fuentes, matiz y referencia en los dos idiomas; cada control declara todas las normas; nueve casos con perfil válido. 73 medidas del ENS más 4 artículos, 93 controles de ISO/IEC 27001 y 38 de ISO/IEC 42001, cláusula 6.1.1, art. 23.4 a–e de NIS2, identificadores únicos, enlaces a requisitos existentes, ningún requisito sin control. |
 | Build (`build.test.mjs`) | 10 | Determinismo, documento bien formado, datos idénticos a `src/data`, CSP, hashes SRI, fuentes incrustadas, iconos existentes y `dist/` al día. |
 | E2E (`e2e.test.mjs`) | 24 | Valores por defecto (claro, español, azul), menú sin proyecto, todas las vistas con los cinco casos, centro de ayuda (buscador y enlaces del autor), barra lateral (anchos, ratón, teclado, tableta), deshacer y rehacer, idioma, tema, móvil, ficheros hostiles, inyección de fórmulas y aviso de almacenamiento lleno. Red bloqueada. |
-| Part-IS, RIA, CRA, DORA, LATAM, perfil y marcos propios (`e2e-marcos.test.mjs`) | 16 | Caso de aviación (anillos solo del alcance, prefijo IS.I/IS.D.OR, matiz, sin exclusiones), perfil aplicado y motivo en el informe, asistente, marco propio hostil (prototype pollution, HTML, identificadores y controles inválidos), mapeo con sugerencias, persistencia, exportar e importar sin pérdidas, CSV con comillas y fórmulas, borrar y deshacer, 390 px y ficheros de ejemplo de `tests/fixtures`. |
+| Part-IS, RIA, CRA, DORA, LATAM, CTEM-Nexus, perfil y marcos propios (`e2e-marcos.test.mjs`) | 17 | Importación de la evidencia de CTEM-Nexus, CO-23, ficha del control, sobre de vuelta y persistencia. Caso de aviación (anillos solo del alcance, prefijo IS.I/IS.D.OR, matiz, sin exclusiones), perfil aplicado y motivo en el informe, asistente, marco propio hostil (prototype pollution, HTML, identificadores y controles inválidos), mapeo con sugerencias, persistencia, exportar e importar sin pérdidas, CSV con comillas y fórmulas, borrar y deshacer, 390 px y ficheros de ejemplo de `tests/fixtures`. |
 | Excel, CSP y fuentes (`e2e-excel.test.mjs`) | 13 | Por `file://` y por HTTP: CSP sin violaciones y bloqueando código inyectado, fuentes sin Google Fonts, importación de una SoA del ENS, exportación sin fórmulas y rechazo de una librería manipulada. |
-| Accesibilidad (`a11y.test.mjs`) | 8 | axe-core (WCAG 2.2 A/AA) en 12 vistas y, aparte, en Alcance con el perfil, Part-IS y el editor de mapeo abierto, Resumen con cinco anillos y Requisitos de Part-IS; claro y oscuro, 1440 y 390 px: cero violaciones. |
+| Accesibilidad (`a11y.test.mjs`) | 12 | axe-core (WCAG 2.2 A/AA) en 12 vistas y, aparte, en Exportar y en la ficha de un control con evidencia de CTEM-Nexus, en Alcance con el perfil, Part-IS y el editor de mapeo abierto, Resumen con cinco anillos y Requisitos de Part-IS; claro y oscuro, 1440 y 390 px: cero violaciones. |
 
 La [integración continua](.github/workflows/ci.yml) ejecuta todo en cada *push* y *pull request*, comprueba que `dist/` está al día y audita dependencias cada lunes. [CodeQL](.github/workflows/codeql.yml) analiza el código en cada *push*.
 

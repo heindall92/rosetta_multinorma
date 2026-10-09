@@ -150,6 +150,8 @@ function sanitizeState(raw) {
     for (const f of fws) cov[f] = hc[f] === null || hc[f] === undefined ? null : num(hc[f], 0, 1, 0);
     return { fecha: h.fecha, cov, grado: num(h.grado, 0, 1, 0), brechas: Math.round(num(h.brechas, 0, 9999, 0)), ejemplo: h.ejemplo === true };
   });
+  const ctem = isObj(r.ctem) ? E.desdeCtem(r.ctem) : null;
+  if (ctem && Object.keys(ctem.controles).length) st.ctem = { ...ctem, importado: dateOk(r.ctem.importado) };
   return st;
 }
 const PROJ_ID = /^(p-[a-z0-9]{4,20}|demo-[a-z]{2,20})$/;

@@ -13,6 +13,18 @@ function inspHead(eyebrow, title, ic, fwc = '') {
   return `<div class="insp-h"><span class="case-ic${fwc ? ' ' + fwc : ''}">${icon(ic, 20)}</span><div style="min-width:0"><div class="eyebrow">${eyebrow}</div><h2>${esc(title)}</h2></div><span class="spacer"></span>
     <button type="button" class="ibtn" data-act="insp-close" aria-label="${esc(t('close'))}">${icon('x', 18)}</button></div>`;
 }
+/* Exposición técnica que CTEM-Nexus atribuye al control (si se importó) */
+function ctemBlk(id) {
+  const e = state.ctem && state.ctem.controles[id]; if (!e) return '';
+  const B = t('ctemBand');
+  const chips = ['critica', 'alta', 'media', 'baja'].filter((b) => e.porBanda[b]).map((b) => `<span class="pill${b === 'critica' ? ' crit' : b === 'alta' ? ' warn' : ''}">${esc(B[b])} · ${e.porBanda[b]}</span>`).join('');
+  const clash = calc.controles[id].estado === 'implantado' && (e.porBanda.critica + e.porBanda.alta) > 0;
+  return `<div class="blk ctem-blk${clash ? ' clash' : ''}" data-testid="ctem-blk"><h4>${icon('waypoints', 15)} ${esc(t('ctemInsp'))}</h4>
+    <div class="chips"><span class="pill">${esc(t('ctemOpen', e.abiertos))}</span>${chips}${e.kev ? `<span class="pill">${esc(t('ctemKev', e.kev))}</span>` : ''}${e.vencidos ? `<span class="pill">${esc(t('ctemDue', e.vencidos))}</span>` : ''}</div>
+    ${clash ? `<p class="small warn-txt">${icon('triangle-alert', 14)} ${esc(E.REGLAS_EN && LANG() === 'en' ? E.REGLAS_EN['CO-23'] : E.REGLAS.find((r) => r[0] === 'CO-23')[2])}</p>` : ''}
+    <ul class="ctem-list">${e.hallazgos.slice(0, 6).map((h) => `<li><span class="mono">${esc(h.id)}</span> ${esc(h.titulo)} <span class="muted">· ${esc(h.activo)} · ${esc(B[h.banda])} ${num1(h.puntuacion)}${h.vence ? ` · ${esc(h.vence)}` : ''}</span></li>`).join('')}</ul>
+    <p class="tiny muted">${esc(t('ctemAt', (state.ctem.generado || '').slice(0, 10) || state.ctem.importado || '—'))}</p></div>`;
+}
 function inspUc(id) {
   const c = IX.ucMap[id]; const d = state.controles[id]; const cc = calc.controles[id];
   const g = prio.find((p) => p.id === id); const rank = g ? prio.indexOf(g) + 1 : 0;
@@ -23,6 +35,7 @@ function inspUc(id) {
   return `${inspHead(`${esc(id)} · ${esc(dT(c.dom))}`, cT(id), DOM[c.dom].ic)}
   ${stateSwitch(id, cc.estado, true)}
   ${g ? `<div class="callout">${icon('lightbulb', 17)}<span>${esc(t('unlocksTxt', num1(g.ganancia), g.normas.map((f) => fwLbl(f)).join(', '), rank))}</span></div>` : ''}
+  ${ctemBlk(id)}
   <div class="blk"><h4>${esc(t('objective'))}</h4><p class="small">${esc(tt(c, 'obj'))}</p></div>
   <div class="blk"><h4>${esc(t('usualEv'))}</h4><p class="norma">${esc(tt(c, 'ev'))}</p></div>
   <div class="form">

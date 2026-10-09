@@ -1,0 +1,806 @@
+{
+  "format": "yrd-ecosistema",
+  "version": 1,
+  "origen": {
+    "herramienta": "ctem-nexus",
+    "version": "ejemplo",
+    "generado": "2026-09-16T09:00:00Z"
+  },
+  "tipo": "hallazgos",
+  "proyecto": "Ejemplo · Industrias Meridiano S.A.",
+  "datos": [
+    {
+      "control": "DES-09",
+      "titulo": "Lista de materiales de software (SBOM) y componentes de terceros",
+      "ens": [],
+      "iso27001": [
+        "A8.28"
+      ],
+      "nis2": [],
+      "nist": [
+        "GV.SC-09",
+        "ID.AM-02"
+      ],
+      "dora": [],
+      "abiertos": 1,
+      "porBanda": {
+        "critica": 1,
+        "alta": 0,
+        "media": 0,
+        "baja": 0
+      },
+      "kev": 1,
+      "vencidos": 1,
+      "peor": 92.5,
+      "hallazgos": [
+        {
+          "id": "H-001",
+          "titulo": "Log4Shell en Apache Log4j 2",
+          "cve": "CVE-2021-44228",
+          "banda": "critica",
+          "puntuacion": 92.5,
+          "activo": "Portal web de clientes",
+          "estado": "validado",
+          "vence": "2026-09-05"
+        }
+      ]
+    },
+    {
+      "control": "OPE-04",
+      "titulo": "Mantenimiento y parches de seguridad",
+      "ens": [
+        "op.exp.4"
+      ],
+      "iso27001": [
+        "A8.8",
+        "A7.13"
+      ],
+      "nis2": [
+        "6.6",
+        "6.4"
+      ],
+      "nist": [
+        "PR.PS-02",
+        "PR.PS-03"
+      ],
+      "dora": [
+        "7",
+        "9"
+      ],
+      "abiertos": 7,
+      "porBanda": {
+        "critica": 5,
+        "alta": 2,
+        "media": 0,
+        "baja": 0
+      },
+      "kev": 7,
+      "vencidos": 5,
+      "peor": 92.5,
+      "hallazgos": [
+        {
+          "id": "H-001",
+          "titulo": "Log4Shell en Apache Log4j 2",
+          "cve": "CVE-2021-44228",
+          "banda": "critica",
+          "puntuacion": 92.5,
+          "activo": "Portal web de clientes",
+          "estado": "validado",
+          "vence": "2026-09-05"
+        },
+        {
+          "id": "H-002",
+          "titulo": "ProxyShell en Microsoft Exchange",
+          "cve": "CVE-2021-34473",
+          "banda": "critica",
+          "puntuacion": 90.7,
+          "activo": "Exchange OWA",
+          "estado": "abierto",
+          "vence": "2026-09-05"
+        },
+        {
+          "id": "H-013",
+          "titulo": "NTLM relay en Exchange (sin EPA)",
+          "cve": "CVE-2024-21410",
+          "banda": "critica",
+          "puntuacion": 90.7,
+          "activo": "Exchange OWA",
+          "estado": "abierto",
+          "vence": "2026-09-05"
+        },
+        {
+          "id": "H-004",
+          "titulo": "RCE sin autenticar en NetScaler Gateway",
+          "cve": "CVE-2023-3519",
+          "banda": "critica",
+          "puntuacion": 86.9,
+          "activo": "Citrix NetScaler Gateway",
+          "estado": "abierto",
+          "vence": "2026-09-06"
+        },
+        {
+          "id": "H-003",
+          "titulo": "Citrix Bleed: fuga de memoria y robo de sesiones",
+          "cve": "CVE-2023-4966",
+          "banda": "critica",
+          "puntuacion": 85.7,
+          "activo": "Citrix NetScaler Gateway",
+          "estado": "abierto",
+          "vence": "2026-09-06"
+        },
+        {
+          "id": "H-014",
+          "titulo": "Apache ActiveMQ: deserialización OpenWire",
+          "cve": "CVE-2023-46604",
+          "banda": "alta",
+          "puntuacion": 75.7,
+          "activo": "Servidor de aplicaciones APP01",
+          "estado": "abierto",
+          "vence": "2026-09-22"
+        },
+        {
+          "id": "H-016",
+          "titulo": "Microsoft Office: RCE mediante documentos",
+          "cve": "CVE-2023-36884",
+          "banda": "alta",
+          "puntuacion": 67.7,
+          "activo": "Estaciones de trabajo (VLAN 50)",
+          "estado": "abierto",
+          "vence": "2026-09-23"
+        }
+      ]
+    },
+    {
+      "control": "OPE-05",
+      "titulo": "Gestión y divulgación de vulnerabilidades",
+      "ens": [
+        "op.exp.4",
+        "op.mon.3",
+        "mp.s.2"
+      ],
+      "iso27001": [
+        "A8.8"
+      ],
+      "nis2": [
+        "6.10"
+      ],
+      "nist": [
+        "ID.RA-01",
+        "ID.RA-08"
+      ],
+      "dora": [
+        "25"
+      ],
+      "abiertos": 7,
+      "porBanda": {
+        "critica": 5,
+        "alta": 2,
+        "media": 0,
+        "baja": 0
+      },
+      "kev": 7,
+      "vencidos": 5,
+      "peor": 92.5,
+      "hallazgos": [
+        {
+          "id": "H-001",
+          "titulo": "Log4Shell en Apache Log4j 2",
+          "cve": "CVE-2021-44228",
+          "banda": "critica",
+          "puntuacion": 92.5,
+          "activo": "Portal web de clientes",
+          "estado": "validado",
+          "vence": "2026-09-05"
+        },
+        {
+          "id": "H-002",
+          "titulo": "ProxyShell en Microsoft Exchange",
+          "cve": "CVE-2021-34473",
+          "banda": "critica",
+          "puntuacion": 90.7,
+          "activo": "Exchange OWA",
+          "estado": "abierto",
+          "vence": "2026-09-05"
+        },
+        {
+          "id": "H-013",
+          "titulo": "NTLM relay en Exchange (sin EPA)",
+          "cve": "CVE-2024-21410",
+          "banda": "critica",
+          "puntuacion": 90.7,
+          "activo": "Exchange OWA",
+          "estado": "abierto",
+          "vence": "2026-09-05"
+        },
+        {
+          "id": "H-004",
+          "titulo": "RCE sin autenticar en NetScaler Gateway",
+          "cve": "CVE-2023-3519",
+          "banda": "critica",
+          "puntuacion": 86.9,
+          "activo": "Citrix NetScaler Gateway",
+          "estado": "abierto",
+          "vence": "2026-09-06"
+        },
+        {
+          "id": "H-003",
+          "titulo": "Citrix Bleed: fuga de memoria y robo de sesiones",
+          "cve": "CVE-2023-4966",
+          "banda": "critica",
+          "puntuacion": 85.7,
+          "activo": "Citrix NetScaler Gateway",
+          "estado": "abierto",
+          "vence": "2026-09-06"
+        },
+        {
+          "id": "H-014",
+          "titulo": "Apache ActiveMQ: deserialización OpenWire",
+          "cve": "CVE-2023-46604",
+          "banda": "alta",
+          "puntuacion": 75.7,
+          "activo": "Servidor de aplicaciones APP01",
+          "estado": "abierto",
+          "vence": "2026-09-22"
+        },
+        {
+          "id": "H-016",
+          "titulo": "Microsoft Office: RCE mediante documentos",
+          "cve": "CVE-2023-36884",
+          "banda": "alta",
+          "puntuacion": 67.7,
+          "activo": "Estaciones de trabajo (VLAN 50)",
+          "estado": "abierto",
+          "vence": "2026-09-23"
+        }
+      ]
+    },
+    {
+      "control": "ACC-02",
+      "titulo": "Control de acceso y mínimo privilegio",
+      "ens": [
+        "op.acc.2",
+        "op.acc.4"
+      ],
+      "iso27001": [
+        "A5.15",
+        "A8.3"
+      ],
+      "nis2": [
+        "11.1"
+      ],
+      "nist": [
+        "PR.AA-05"
+      ],
+      "dora": [
+        "9"
+      ],
+      "abiertos": 2,
+      "porBanda": {
+        "critica": 1,
+        "alta": 1,
+        "media": 0,
+        "baja": 0
+      },
+      "kev": 1,
+      "vencidos": 1,
+      "peor": 90.7,
+      "hallazgos": [
+        {
+          "id": "H-002",
+          "titulo": "ProxyShell en Microsoft Exchange",
+          "cve": "CVE-2021-34473",
+          "banda": "critica",
+          "puntuacion": 90.7,
+          "activo": "Exchange OWA",
+          "estado": "abierto",
+          "vence": "2026-09-05"
+        },
+        {
+          "id": "H-006",
+          "titulo": "Delegación sin restricciones en APP01",
+          "cve": null,
+          "banda": "alta",
+          "puntuacion": 62.7,
+          "activo": "Servidor de aplicaciones APP01",
+          "estado": "abierto",
+          "vence": "2026-09-19"
+        }
+      ]
+    },
+    {
+      "control": "RED-01",
+      "titulo": "Seguridad y perímetro de red",
+      "ens": [
+        "mp.com.1",
+        "mp.com.4",
+        "op.pl.2",
+        "op.mon.1"
+      ],
+      "iso27001": [
+        "A8.20",
+        "A8.21"
+      ],
+      "nis2": [
+        "6.7"
+      ],
+      "nist": [
+        "PR.IR-01"
+      ],
+      "dora": [
+        "9"
+      ],
+      "abiertos": 2,
+      "porBanda": {
+        "critica": 2,
+        "alta": 0,
+        "media": 0,
+        "baja": 0
+      },
+      "kev": 2,
+      "vencidos": 2,
+      "peor": 86.9,
+      "hallazgos": [
+        {
+          "id": "H-004",
+          "titulo": "RCE sin autenticar en NetScaler Gateway",
+          "cve": "CVE-2023-3519",
+          "banda": "critica",
+          "puntuacion": 86.9,
+          "activo": "Citrix NetScaler Gateway",
+          "estado": "abierto",
+          "vence": "2026-09-06"
+        },
+        {
+          "id": "H-003",
+          "titulo": "Citrix Bleed: fuga de memoria y robo de sesiones",
+          "cve": "CVE-2023-4966",
+          "banda": "critica",
+          "puntuacion": 85.7,
+          "activo": "Citrix NetScaler Gateway",
+          "estado": "abierto",
+          "vence": "2026-09-06"
+        }
+      ]
+    },
+    {
+      "control": "ACC-06",
+      "titulo": "Autenticación segura",
+      "ens": [
+        "op.acc.5",
+        "op.acc.6",
+        "op.acc.1"
+      ],
+      "iso27001": [
+        "A5.17",
+        "A8.5"
+      ],
+      "nis2": [
+        "11.6"
+      ],
+      "nist": [
+        "PR.AA-03",
+        "PR.AA-04"
+      ],
+      "dora": [],
+      "abiertos": 5,
+      "porBanda": {
+        "critica": 0,
+        "alta": 4,
+        "media": 1,
+        "baja": 0
+      },
+      "kev": 0,
+      "vencidos": 0,
+      "peor": 76.4,
+      "hallazgos": [
+        {
+          "id": "H-010",
+          "titulo": "SQL Server con cuenta «sa» y contraseña débil",
+          "cve": null,
+          "banda": "alta",
+          "puntuacion": 76.4,
+          "activo": "ERP y base de datos financiera",
+          "estado": "abierto",
+          "vence": "2026-09-20"
+        },
+        {
+          "id": "H-005",
+          "titulo": "Cuenta de servicio svc_sql con SPN «kerberoastable»",
+          "cve": null,
+          "banda": "alta",
+          "puntuacion": 74.3,
+          "activo": "Controlador de dominio DC01",
+          "estado": "abierto",
+          "vence": "2026-09-19"
+        },
+        {
+          "id": "H-018",
+          "titulo": "Usuarios sin preautenticación Kerberos (AS-REP roasting)",
+          "cve": null,
+          "banda": "alta",
+          "puntuacion": 72.5,
+          "activo": "Controlador de dominio DC01",
+          "estado": "abierto",
+          "vence": "2026-09-24"
+        },
+        {
+          "id": "H-007",
+          "titulo": "ADCS ESC1: plantilla «UserAuth» permite SAN arbitrario",
+          "cve": null,
+          "banda": "alta",
+          "puntuacion": 68.3,
+          "activo": "Entidad de certificación PKI-CA01",
+          "estado": "abierto",
+          "vence": "2026-09-19"
+        },
+        {
+          "id": "H-009",
+          "titulo": "Contraseña de administrador local reutilizada (sin LAPS)",
+          "cve": null,
+          "banda": "media",
+          "puntuacion": 54.7,
+          "activo": "Estaciones de trabajo (VLAN 50)",
+          "estado": "abierto",
+          "vence": "2026-10-06"
+        }
+      ]
+    },
+    {
+      "control": "ACC-07",
+      "titulo": "Autenticación multifactor",
+      "ens": [
+        "op.acc.5",
+        "op.acc.6"
+      ],
+      "iso27001": [
+        "A8.5"
+      ],
+      "nis2": [
+        "11.7",
+        "21.2.j"
+      ],
+      "nist": [
+        "PR.AA-03"
+      ],
+      "dora": [
+        "9"
+      ],
+      "abiertos": 2,
+      "porBanda": {
+        "critica": 0,
+        "alta": 2,
+        "media": 0,
+        "baja": 0
+      },
+      "kev": 0,
+      "vencidos": 0,
+      "peor": 76.4,
+      "hallazgos": [
+        {
+          "id": "H-010",
+          "titulo": "SQL Server con cuenta «sa» y contraseña débil",
+          "cve": null,
+          "banda": "alta",
+          "puntuacion": 76.4,
+          "activo": "ERP y base de datos financiera",
+          "estado": "abierto",
+          "vence": "2026-09-20"
+        },
+        {
+          "id": "H-018",
+          "titulo": "Usuarios sin preautenticación Kerberos (AS-REP roasting)",
+          "cve": null,
+          "banda": "alta",
+          "puntuacion": 72.5,
+          "activo": "Controlador de dominio DC01",
+          "estado": "abierto",
+          "vence": "2026-09-24"
+        }
+      ]
+    },
+    {
+      "control": "ACC-05",
+      "titulo": "Cuentas privilegiadas y sistemas de administración",
+      "ens": [
+        "op.acc.2",
+        "op.acc.3",
+        "op.acc.4"
+      ],
+      "iso27001": [
+        "A8.2",
+        "A8.18"
+      ],
+      "nis2": [
+        "11.3",
+        "11.4"
+      ],
+      "nist": [],
+      "dora": [],
+      "abiertos": 3,
+      "porBanda": {
+        "critica": 0,
+        "alta": 2,
+        "media": 1,
+        "baja": 0
+      },
+      "kev": 0,
+      "vencidos": 0,
+      "peor": 74.3,
+      "hallazgos": [
+        {
+          "id": "H-005",
+          "titulo": "Cuenta de servicio svc_sql con SPN «kerberoastable»",
+          "cve": null,
+          "banda": "alta",
+          "puntuacion": 74.3,
+          "activo": "Controlador de dominio DC01",
+          "estado": "abierto",
+          "vence": "2026-09-19"
+        },
+        {
+          "id": "H-006",
+          "titulo": "Delegación sin restricciones en APP01",
+          "cve": null,
+          "banda": "alta",
+          "puntuacion": 62.7,
+          "activo": "Servidor de aplicaciones APP01",
+          "estado": "abierto",
+          "vence": "2026-09-19"
+        },
+        {
+          "id": "H-009",
+          "titulo": "Contraseña de administrador local reutilizada (sin LAPS)",
+          "cve": null,
+          "banda": "media",
+          "puntuacion": 54.7,
+          "activo": "Estaciones de trabajo (VLAN 50)",
+          "estado": "abierto",
+          "vence": "2026-10-06"
+        }
+      ]
+    },
+    {
+      "control": "OPE-01",
+      "titulo": "Configuración segura y bastionado",
+      "ens": [
+        "op.exp.2"
+      ],
+      "iso27001": [
+        "A8.9"
+      ],
+      "nis2": [
+        "6.3"
+      ],
+      "nist": [
+        "PR.PS-01"
+      ],
+      "dora": [],
+      "abiertos": 4,
+      "porBanda": {
+        "critica": 0,
+        "alta": 2,
+        "media": 2,
+        "baja": 0
+      },
+      "kev": 0,
+      "vencidos": 0,
+      "peor": 70.4,
+      "hallazgos": [
+        {
+          "id": "H-012",
+          "titulo": "Servicio de cola de impresión activo en el DC",
+          "cve": null,
+          "banda": "alta",
+          "puntuacion": 70.4,
+          "activo": "Controlador de dominio DC01",
+          "estado": "abierto",
+          "vence": "2026-09-21"
+        },
+        {
+          "id": "H-007",
+          "titulo": "ADCS ESC1: plantilla «UserAuth» permite SAN arbitrario",
+          "cve": null,
+          "banda": "alta",
+          "puntuacion": 68.3,
+          "activo": "Entidad de certificación PKI-CA01",
+          "estado": "abierto",
+          "vence": "2026-09-19"
+        },
+        {
+          "id": "H-008",
+          "titulo": "Firma SMB no obligatoria en servidores",
+          "cve": null,
+          "banda": "media",
+          "puntuacion": 58.8,
+          "activo": "Servidor de aplicaciones APP01",
+          "estado": "abierto",
+          "vence": "2026-10-06"
+        },
+        {
+          "id": "H-011",
+          "titulo": "LLMNR y NBT-NS habilitados",
+          "cve": null,
+          "banda": "media",
+          "puntuacion": 50.8,
+          "activo": "Estaciones de trabajo (VLAN 50)",
+          "estado": "abierto",
+          "vence": "2026-10-07"
+        }
+      ]
+    },
+    {
+      "control": "OPE-02",
+      "titulo": "Gestión de la configuración",
+      "ens": [
+        "op.exp.3"
+      ],
+      "iso27001": [
+        "A8.9"
+      ],
+      "nis2": [
+        "6.3"
+      ],
+      "nist": [
+        "ID.AM-08",
+        "PR.PS-01"
+      ],
+      "dora": [],
+      "abiertos": 1,
+      "porBanda": {
+        "critica": 0,
+        "alta": 1,
+        "media": 0,
+        "baja": 0
+      },
+      "kev": 0,
+      "vencidos": 0,
+      "peor": 70.4,
+      "hallazgos": [
+        {
+          "id": "H-012",
+          "titulo": "Servicio de cola de impresión activo en el DC",
+          "cve": null,
+          "banda": "alta",
+          "puntuacion": 70.4,
+          "activo": "Controlador de dominio DC01",
+          "estado": "abierto",
+          "vence": "2026-09-21"
+        }
+      ]
+    },
+    {
+      "control": "OPE-14",
+      "titulo": "Criptografía y gestión de claves",
+      "ens": [
+        "op.exp.10",
+        "mp.si.2",
+        "mp.eq.3"
+      ],
+      "iso27001": [
+        "A8.24"
+      ],
+      "nis2": [
+        "9"
+      ],
+      "nist": [
+        "PR.DS-01",
+        "PR.DS-10"
+      ],
+      "dora": [
+        "9"
+      ],
+      "abiertos": 1,
+      "porBanda": {
+        "critica": 0,
+        "alta": 1,
+        "media": 0,
+        "baja": 0
+      },
+      "kev": 0,
+      "vencidos": 0,
+      "peor": 68.3,
+      "hallazgos": [
+        {
+          "id": "H-007",
+          "titulo": "ADCS ESC1: plantilla «UserAuth» permite SAN arbitrario",
+          "cve": null,
+          "banda": "alta",
+          "puntuacion": 68.3,
+          "activo": "Entidad de certificación PKI-CA01",
+          "estado": "abierto",
+          "vence": "2026-09-19"
+        }
+      ]
+    },
+    {
+      "control": "RED-03",
+      "titulo": "Protección de las comunicaciones",
+      "ens": [
+        "mp.com.2",
+        "mp.com.3"
+      ],
+      "iso27001": [
+        "A8.24",
+        "A8.20",
+        "A8.21"
+      ],
+      "nis2": [
+        "9",
+        "21.2.j"
+      ],
+      "nist": [
+        "PR.DS-02"
+      ],
+      "dora": [],
+      "abiertos": 1,
+      "porBanda": {
+        "critica": 0,
+        "alta": 0,
+        "media": 1,
+        "baja": 0
+      },
+      "kev": 0,
+      "vencidos": 0,
+      "peor": 58.8,
+      "hallazgos": [
+        {
+          "id": "H-008",
+          "titulo": "Firma SMB no obligatoria en servidores",
+          "cve": null,
+          "banda": "media",
+          "puntuacion": 58.8,
+          "activo": "Servidor de aplicaciones APP01",
+          "estado": "abierto",
+          "vence": "2026-10-06"
+        }
+      ]
+    },
+    {
+      "control": "RED-02",
+      "titulo": "Segregación de redes y flujos",
+      "ens": [
+        "mp.com.4",
+        "op.ext.4",
+        "mp.com.1",
+        "op.pl.2"
+      ],
+      "iso27001": [
+        "A8.22"
+      ],
+      "nis2": [
+        "6.8"
+      ],
+      "nist": [
+        "ID.AM-03",
+        "PR.IR-01"
+      ],
+      "dora": [],
+      "abiertos": 1,
+      "porBanda": {
+        "critica": 0,
+        "alta": 0,
+        "media": 1,
+        "baja": 0
+      },
+      "kev": 0,
+      "vencidos": 0,
+      "peor": 50.8,
+      "hallazgos": [
+        {
+          "id": "H-011",
+          "titulo": "LLMNR y NBT-NS habilitados",
+          "cve": null,
+          "banda": "media",
+          "puntuacion": 50.8,
+          "activo": "Estaciones de trabajo (VLAN 50)",
+          "estado": "abierto",
+          "vence": "2026-10-07"
+        }
+      ]
+    }
+  ],
+  "resumen": {
+    "indice": 90.9,
+    "abiertos": 16
+  }
+}
