@@ -17,6 +17,7 @@
 - Sin relleno de IA: nada de «¡Excelente pregunta!», «en el panorama actual», «sumérgete», «potencia tu…», listas de emoji, ni cierres del tipo «¿Quieres que…?» cuando la tarea está clara.
 - En la interfaz, microtexto que explica el **porqué** («Corta 3 rutas hacia el controlador de dominio»), no solo el qué.
 - Las correcciones se **explican** (qué estaba mal, por qué, cómo se ha comprobado). Si fallaste tú, dilo.
+- **Sin jerga que el público no entiende.** Cada término técnico se define donde aparece por primera vez (glosario de la ayuda e indicación en el campo). En todo el ecosistema se dice **«activo crítico»** (criticidad 5: aquel cuyo compromiso pararía el negocio o expondría su información más sensible), **nunca «joya de la corona»**; como mucho se menciona que en la jerga del sector se llama así.
 - Con Yoandy: resumen final breve con lo hecho, lo encontrado, cifras de pruebas y el siguiente paso.
 
 ## Estrategia de LinkedIn (analítica 2–8 oct 2026)
@@ -36,7 +37,7 @@
 | Rosetta Multinorma | `heindall92/rosetta_multinorma` | heindall92.github.io/rosetta_multinorma/ | ENS, ISO/IEC 27001, NIS2 e ISO/IEC 42001 sobre 115 controles unificados (CCN-STIC 825) | Anillos y círculos |
 | ENS Compliance Studio | `heindall92/grc_ens_compliance_studio` | …/grc_ens_compliance_studio/ | Categorización, MAGERIT y declaración de aplicabilidad; se importa en Rosetta | Propia |
 | KAIROS | `heindall92/kairos` | …/kairos/ | Continuidad: BIA, BCP, DRP y ruta crítica de recuperación | Propia (tiempo) |
-| CTEM-Nexus | `heindall92/ctem-nexus` | …/ctem-nexus/ | Prioriza exposición técnica y rutas de ataque a las joyas de la corona | Franjas por activo y grafo |
+| CTEM-Nexus | `heindall92/ctem-nexus` | …/ctem-nexus/ | Prioriza exposición técnica y rutas de ataque hacia los activos críticos | Franjas por activo y grafo |
 | ENS AD Auditor | `heindall92/ens_ad-auditor` | (sin web publicada) | Directorio activo frente a las medidas del ENS | Propia |
 | ARGOS | `heindall92/argos-grc` | …/argos-grc/ | Laboratorio GRC estilo Hack The Box: rutas, máquinas con flags, simulacros, rangos y logros | Propia (juego) |
 | Norvik | `heindall92/Norvik_Gobernanza` | (sin web publicada) | Gobernanza: roles, políticas y el marco que une al resto | Propia |
