@@ -203,13 +203,16 @@ const SUITE = [
   ['argos', 'ARGOS', 'https://heindall92.github.io/argos-grc/', 'https://github.com/heindall92/argos-grc'],
   ['rosetta', 'Rosetta', 'https://heindall92.github.io/rosetta_multinorma/', 'https://github.com/heindall92/rosetta_multinorma'],
   ['ens', 'ENS Compliance Studio', 'https://heindall92.github.io/grc_ens_compliance_studio/app/dist/ens-compliance-studio.html', 'https://github.com/heindall92/grc_ens_compliance_studio'],
-  ['kairos', 'KAIROS', 'https://heindall92.github.io/kairos/', 'https://github.com/heindall92/kairos']
+  ['kairos', 'KAIROS', 'https://heindall92.github.io/kairos/', 'https://github.com/heindall92/kairos'],
+  ['ctem', 'CTEM-Nexus', 'https://heindall92.github.io/ctem-nexus/', 'https://github.com/heindall92/ctem-nexus'],
+  ['adaudit', 'ENS AD Auditor', 'https://heindall92.github.io/ens_ad-auditor/', 'https://github.com/heindall92/ens_ad-auditor'],
+  ['norvik', 'Norvik', null, 'https://github.com/heindall92/Norvik_Gobernanza']
 ];
 function suiteGrc() {
   const d = t('suiteDesc');
   return `<section class="suite" aria-labelledby="suite-h"><h3 class="help-sec" id="suite-h">${icon('layers', 16)}${esc(t('suiteTitle'))}</h3><p class="small muted">${esc(t('suiteTxt'))}</p>
     <div class="suite-grid">${SUITE.map(([id, n, app, repo]) => `<article class="suite-card${id === 'rosetta' ? ' here' : ''}"><div class="suite-hd"><b>${esc(n)}</b>${id === 'rosetta' ? `<span class="pill suite-here">${esc(t('suiteHere'))}</span>` : ''}</div><p>${esc(d[id])}</p>
-      <div class="row">${id === 'rosetta' ? '' : ext(app, `${esc(t('suiteOpen'))}${icon('arrow-right', 15)}`, 'btn sm primary')}${ext(repo, `${brandIcon('github', 15)}${esc(t('suiteCode'))}`, 'btn sm')}</div></article>`).join('')}</div></section>`;
+      <div class="row">${id === 'rosetta' || !app ? '' : ext(app, `${esc(t('suiteOpen'))}${icon('arrow-right', 15)}`, 'btn sm primary')}${ext(repo, `${brandIcon('github', 15)}${esc(t('suiteCode'))}`, 'btn sm')}</div></article>`).join('')}</div></section>`;
 }
 function helpAbout() {
   return `<div class="about-card"><div class="avatar c-rosa about-av" style="--s:84px" aria-hidden="true">YR</div><div class="about-who">

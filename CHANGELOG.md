@@ -1,5 +1,10 @@
 # Cambios
 
+## 2.11.1 · octubre de 2026
+
+- **Herramientas GRC del autor:** Ayuda → Acerca de pasa de cuatro a siete herramientas (se suman CTEM-Nexus, ENS AD Auditor, con su panel web, y Norvik, de escritorio) y explica que comparten el sobre de intercambio `yrd-ecosistema`. ARGOS ya describe sus máquinas con flags y sus rangos.
+- **Pruebas.** La e2e de Acerca de comprueba las siete tarjetas y sus enlaces. Total: 144 de motor, catálogo y build y 69 en navegador.
+
 ## 2.11.0 · octubre de 2026
 
 **Evidencia técnica de CTEM-Nexus.** Primera integración del ecosistema con el sobre común `yrd-ecosistema`.
