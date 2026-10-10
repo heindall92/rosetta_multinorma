@@ -34,13 +34,15 @@
 
 | Herramienta | Repositorio | Web | Qué hace | Firma visual |
 |---|---|---|---|---|
-| Rosetta Multinorma | `heindall92/rosetta_multinorma` | heindall92.github.io/rosetta_multinorma/ | ENS, ISO/IEC 27001, NIS2 e ISO/IEC 42001 sobre 115 controles unificados (CCN-STIC 825) | Anillos y círculos |
+| Rosetta Multinorma | `heindall92/rosetta_multinorma` | heindall92.github.io/rosetta_multinorma/ | 15 normas y leyes (UE, EE. UU. y Latinoamérica) sobre 152 controles unificados (CCN-STIC 825) | Anillos y círculos |
 | ENS Compliance Studio | `heindall92/grc_ens_compliance_studio` | …/grc_ens_compliance_studio/ | Categorización, MAGERIT y declaración de aplicabilidad; se importa en Rosetta | Propia |
 | KAIROS | `heindall92/kairos` | …/kairos/ | Continuidad: BIA, BCP, DRP y ruta crítica de recuperación | Propia (tiempo) |
 | CTEM-Nexus | `heindall92/ctem-nexus` | …/ctem-nexus/ | Prioriza exposición técnica y rutas de ataque hacia los activos críticos | Franjas por activo y grafo |
-| ENS AD Auditor | `heindall92/ens_ad-auditor` | (sin web publicada) | Directorio activo frente a las medidas del ENS | Propia |
+| ENS AD Auditor | `heindall92/ens_ad-auditor` | …/ens_ad-auditor/ (modo navegador) | Directorio activo frente a las medidas del ENS | Propia |
 | ARGOS | `heindall92/argos-grc` | …/argos-grc/ | Laboratorio GRC estilo Hack The Box: rutas, máquinas con flags, simulacros, rangos y logros | Propia (juego) |
 | Norvik | `heindall92/Norvik_Gobernanza` | (sin web publicada) | Gobernanza: roles, políticas y el marco que une al resto | Propia |
+
+Sobre común de intercambio `yrd-ecosistema` v1 (esquema en `heindall92/ctem-nexus/shared/schemas/`): KAIROS envía `bia` y recibe `activos`; Studio envía `soa`; ENS AD Auditor envía `hallazgos`; Rosetta ↔ CTEM-Nexus `hallazgos`/`controles`; Norvik `responsables`/`indicadores`. Cada par tiene fichero de ida, de vuelta y prueba en los dos repos. El bloque «Herramientas GRC del autor» de Acerca de lista las siete en todas.
 
 Antes de afirmar que una web existe, compruébalo; si no hay, `web: null` y solo enlace al código.
 
