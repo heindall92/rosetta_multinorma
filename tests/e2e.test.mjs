@@ -329,3 +329,37 @@ test('vista móvil (390 px) sin desbordamiento horizontal', async () => {
   }
   await m.close();
 });
+
+test('refuerzos del ENS: ficha con casillas y texto del BOE, cobertura, CO-25, deshacer, Alcance y saneado', async () => {
+  const E2 = (fn, arg) => page.evaluate(fn, arg);
+  const act = (a, data = {}) => E2(([a, data]) => { const b = document.createElement('button'); b.dataset.act = a; Object.assign(b.dataset, data); b.hidden = true; document.body.append(b); b.click(); b.remove(); }, [a, data]);
+  await E2(() => { window.__ROSETTA__.openCase('techserv'); window.__ROSETTA__.ui.normaFw = 'ens'; window.__ROSETTA__.go('normas'); }); await page.waitForTimeout(200);
+  assert.match(await page.locator('#view').innerText(), /2 sin sus refuerzos/);
+  const fila = () => E2(() => { const r = window.__ROSETTA__.calc.req.ens.find((x) => x.id === 'op.acc.6'); return { estado: r.estado, falta: r.refuerzos.faltan }; });
+  assert.deepEqual(await fila(), { estado: 'parcial', falta: ['R8'] });
+  await act('insp-req', { fw: 'ens', id: 'op.acc.6' }); await page.waitForTimeout(150);
+  const insp = await page.locator('#insp').innerText();
+  assert.match(insp, /Refuerzos · Nivel Alto/i); assert.match(insp, /5 de 6 exigencias de refuerzo cumplidas/); assert.match(insp, /Doble factor para acceso desde o a través de zonas no controladas/);
+  assert.equal(await page.locator('#insp summary', { hasText: 'Texto del RD 311/2022' }).count(), 9);
+  const r8 = page.locator('#insp input[data-ref="op.acc.6"][data-r="R8"]');
+  assert.equal(await r8.isChecked(), false);
+  await r8.check(); await page.waitForTimeout(250);
+  assert.deepEqual(await fila(), { estado: 'cubierto', falta: [] });
+  const co25 = () => E2(() => window.__ROSETTA__.hall.filter((h) => h.id === 'CO-25').map((h) => h.reqs || [h.req]).flat());
+  assert.deepEqual(await co25(), ['mp.s.2']);
+  await page.locator('body').press('Control+z'); await page.waitForTimeout(250);
+  assert.deepEqual(await fila(), { estado: 'parcial', falta: ['R8'] }, 'deshacer quita el refuerzo');
+  await act('insp-close');
+  await E2(() => window.__ROSETTA__.go('alcance')); await page.waitForTimeout(150);
+  assert.equal(await page.locator('#set-ens-ref').isChecked(), true);
+  await page.uncheck('#set-ens-ref'); await page.waitForTimeout(250);
+  assert.deepEqual(await co25(), [], 'sin evaluación no hay CO-25');
+  assert.equal((await fila()).estado, 'cubierto');
+  await page.check('#set-ens-ref'); await page.waitForTimeout(200);
+  // Proyecto anterior a la 2.13.0 (sin la marca) y refuerzos hostiles
+  await importJson(null, `{"proyecto":{"nombre":"Antiguo"},"alcance":{"ens":{"on":true,"categoria":"ALTA"}},"controles":{},
+    "refuerzos":{"op.acc.6":["R8","R99","R8","<b>x</b>"],"zz.9":["R1"],"mp.s.2":"R3","__proto__":{"polluted":"yes"}}}`);
+  const r = await E2(() => { const s = window.__ROSETTA__.state; return { ev: s.alcance.ens.refuerzos, ref: s.refuerzos, polluted: ({}).polluted }; });
+  assert.deepEqual(r, { ev: false, ref: { 'op.acc.6': ['R8'] }, polluted: undefined });
+  noErrors('refuerzos');
+});

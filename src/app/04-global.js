@@ -76,7 +76,8 @@ function nis2Form(q, pre) {
 function ensLevels(a, pre) {
   return `<div class="form"><label class="fld">${esc(t('category'))}<select id="${pre}-cat" data-${pre}="alcance.ens.categoria">${['BÁSICA', 'MEDIA', 'ALTA'].map((c) => opt(c, t('cats.' + c), a.categoria)).join('')}</select></label>
     <div class="fld">${esc(t('dimLevels'))}<span class="hint">${esc(t('dimOpt'))}</span></div></div>
-    <div class="dims">${E.DIMS.map((d) => `<label>${d}<select id="${pre}-dim-${d}" data-${pre}="alcance.ens.niveles.${d}" aria-label="${d}">${opt('', '—', a.niveles[d] || '')}${E.NIVELES_ENS.map((n) => opt(n, t('lv.' + n), a.niveles[d] || '')).join('')}</select></label>`).join('')}</div>`;
+    <div class="dims">${E.DIMS.map((d) => `<label>${d}<select id="${pre}-dim-${d}" data-${pre}="alcance.ens.niveles.${d}" aria-label="${d}">${opt('', '—', a.niveles[d] || '')}${E.NIVELES_ENS.map((n) => opt(n, t('lv.' + n), a.niveles[d] || '')).join('')}</select></label>`).join('')}</div>
+    <label class="switch-l"><span class="switch"><input type="checkbox" id="${pre}-ens-ref" data-${pre}="alcance.ens.refuerzos" data-type="bool"${a.refuerzos ? ' checked' : ''}><span></span></span><span class="small">${esc(t('refEval'))}</span></label>`;
 }
 function scopeCards(a, pre) {
   const vis = (f) => !regionDe(f) || a[f].on || (ui.wizard && (ui.wizard.perfil.jurisdiccion === regionDe(f) || (ui.wizard.perfil.opera || []).includes(regionDe(f))));

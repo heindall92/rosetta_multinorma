@@ -457,6 +457,10 @@ select option { background: var(--bg); color: var(--ink); }
 .li { display: grid; grid-template-columns: 76px minmax(0, 1fr) 150px auto; gap: 14px; align-items: center; padding: var(--row) 20px; border-top: 1px solid var(--hair); cursor: pointer; transition: background .12s; }
 .li:hover { background: var(--glass-in); }
 .li.on { background: var(--accent-soft); }
+/* Sobre el fondo de la fila seleccionada, las etiquetas de estado se acercan a la tinta para mantener 4,5:1 */
+.li.on .pill.warn, .li.on .pill.parcial { color: color-mix(in oklch, var(--warn) 72%, var(--ink)); }
+.li.on .pill.crit, .li.on .pill.brecha, .li.on .pill.pendiente { color: color-mix(in oklch, var(--crit) 80%, var(--ink)); }
+.li.on .pill.ok, .li.on .pill.cubierto, .li.on .pill.implantado { color: color-mix(in oklch, var(--ok) 80%, var(--ink)); }
 .li.dim { opacity: .5; }
 .li:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 0; }
 .li .id { font: 600 .72rem var(--f-mono); }
@@ -999,3 +1003,12 @@ select option { background: var(--bg); color: var(--ink); }
 .ctem-blk h4 { display: flex; align-items: center; gap: 6px; }
 .ctem-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: .8125rem; }
 .warn-txt { color: var(--warn); display: flex; gap: 6px; align-items: flex-start; }
+.warn-inline { color: var(--warn); font-weight: 600; }
+/* Refuerzos del ENS en la ficha de la medida */
+.ref-list { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 6px; }
+.ref-list li { border: 1px solid var(--hair); border-radius: 12px; padding: 8px 10px; }
+.ref-chk { display: grid; grid-template-columns: auto auto 1fr auto; gap: 8px; align-items: center; font-size: .86rem; cursor: pointer; }
+.ref-chk input { width: 16px; height: 16px; accent-color: var(--accent); }
+.ref-list details { margin-top: 4px; }
+.ref-list summary { font-size: .76rem; color: var(--muted); cursor: pointer; }
+.ref-txt { white-space: pre-line; margin-top: 6px; color: var(--ink-2, var(--ink)); }

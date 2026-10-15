@@ -43,6 +43,15 @@ for (const [name, v, tema, caso, w] of VISTAS) {
   await p.waitForTimeout(400); await p.locator('#sec-marcos').scrollIntoViewIfNeeded(); await p.waitForTimeout(900); await limpiar(p);
   await p.screenshot({ path: join(OUT, 'marcos-light.png') }); await ctx.close();
 }
+{ // Refuerzos del ENS: ficha de op.acc.6 en TechServ, con el refuerzo que falta (2.13.0)
+  const { ctx, p } = await abrir(1440, 'claro');
+  await p.evaluate(() => { const R = window.__ROSETTA__; R.openCase('techserv'); R.ui.normaFw = 'ens'; R.go('normas');
+    const b = document.createElement('button'); b.dataset.act = 'insp-req'; b.dataset.fw = 'ens'; b.dataset.id = 'op.acc.6'; b.hidden = true; document.body.append(b); b.click(); b.remove(); });
+  await p.waitForTimeout(500);
+  await p.evaluate(() => { const d = [...document.querySelectorAll('#insp .ref-list li')].find((li) => li.querySelector('[data-r="R8"]')); d.querySelector('details').open = true; d.scrollIntoView({ block: 'center' }); });
+  await p.mouse.move(700, 450); await p.waitForTimeout(1200); await limpiar(p);
+  await p.screenshot({ path: join(OUT, 'refuerzos-light.png') }); await ctx.close();
+}
 { // RGPD y LOPDGDD en el hospital: vista de la norma y ficha de la EIPD (2.12.0)
   const { ctx, p } = await abrir(1440, 'claro');
   await p.evaluate(() => { const R = window.__ROSETTA__; R.openCase('hospital'); R.ui.normaFw = 'rgpd'; R.go('normas'); });

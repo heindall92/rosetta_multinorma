@@ -110,7 +110,7 @@ function sanitizeState(raw) {
   const reqOk = (f, k) => (FW_BASE.includes(f) ? !!IX0.req[f][k] : st.marcos.find((m) => m.id === f).requisitos.some((x) => x.id === k));
   const mot = (f) => s(g(f).motivo, 300);
   st.alcance = {
-    ens: { on: g('ens').on === true, categoria: oneOf(g('ens').categoria, CATS_ENS, 'MEDIA'), niveles: Object.fromEntries(E.DIMS.filter((d) => E.NIVELES_ENS.includes(niv[d])).map((d) => [d, niv[d]])) },
+    ens: { on: g('ens').on === true, categoria: oneOf(g('ens').categoria, CATS_ENS, 'MEDIA'), niveles: Object.fromEntries(E.DIMS.filter((d) => E.NIVELES_ENS.includes(niv[d])).map((d) => [d, niv[d]])), refuerzos: g('ens').refuerzos === true },
     iso27001: { on: g('iso27001').on === true },
     nis2: { on: g('nis2').on === true, tipo: oneOf(g('nis2').tipo, NIS2_TIPOS, 'fuera') },
     iso42001: { on: g('iso42001').on === true },
@@ -132,6 +132,14 @@ function sanitizeState(raw) {
   for (const c of CAT0.controls) {
     const d = isObj(rc[c.id]) ? rc[c.id] : {};
     st.controles[c.id] = { estado: oneOf(d.estado, E.ESTADOS, 'pendiente'), responsable: s(d.responsable, 200), evidencias: s(d.evidencias, 2000), revision: dateOk(d.revision), notas: s(d.notas, 2000), origen: oneOf(d.origen, ['', 'ens'], '') };
+  }
+  // Refuerzos implantados por medida del ENS: solo medidas y refuerzos que existen en el anexo II, sin duplicados
+  st.refuerzos = {};
+  const rr = isObj(r.refuerzos) ? r.refuerzos : {};
+  for (const [k, v] of safeEntries(rr, 100)) {
+    const val = (D.refuerzos.medidas[k] || []).map((x) => x.id);
+    const ok = arr(v, 20).filter((x) => val.includes(x));
+    if (ok.length) st.refuerzos[k] = val.filter((x) => ok.includes(x));
   }
   st.exclusiones = {};
   const re = isObj(r.exclusiones) ? r.exclusiones : {};

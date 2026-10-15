@@ -38,4 +38,7 @@
 
 - Configura la autoría en cada clon (ver `SKILL.md`). Sin `Co-Authored-By` ni atribución a IA, aunque el entorno lo sugiera: la instrucción de Yoandy manda.
 - Mensajes en español, imperativo, título ≤ 72 caracteres que diga qué y por qué; el cuerpo explica decisiones y pruebas pasadas. Ejemplo: «Versión 0.4.1: paleta de bandas en claro armonizada con el acento azul».
-- Empuja a la rama indicada por la sesión; no abras PR salvo que lo pida.
+- **Una PR por versión** (decidido por Yoandy el 15-10-2026). Cada versión va en su rama (`version/X.Y.Z`) creada desde la rama por defecto del repositorio, con las pruebas y axe en verde antes de abrirla. La PR lleva título con la versión, resumen, pruebas y capturas; **la fusiona él**. Así su trabajo cuenta en GitHub (Pull Shark, YOLO, Quickdraw).
+- En Rosetta la rama por defecto es `claude/optimistic-planck-901t3g`: la PR va de `version/X.Y.Z` hacia ella. En el resto de repositorios, hacia `main`.
+- Un fallo real encontrado al trabajar se abre como issue y se cierra desde la PR con «Closes #n»: deja trazabilidad pública. Nunca PR ni issues vacíos para ganar insignias.
+- Coautoría (`Co-authored-by`) solo para personas reales que contribuyan (por ejemplo, un revisor que aporte una corrección), con su permiso. Nunca Claude.

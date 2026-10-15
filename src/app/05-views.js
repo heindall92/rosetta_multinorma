@@ -289,6 +289,7 @@ function vControles() {
 }
 
 /* ================= Requisitos por norma ================= */
+const refAviso = () => { const n = calc.req.ens.filter((r) => r.refuerzos && r.refuerzos.limita).length; return n ? ` · <span class="warn-inline">${esc(t('refSin', n))}</span>` : ''; };
 function vNormas() {
   const f = ui.normaFw; const fw = calc.fw[f];
   const q = normTxt(ui.normaQ.trim());
@@ -301,7 +302,7 @@ function vNormas() {
   for (const r of rows) {
     const g = rG(f, r.id); if (g !== lastG) { flush(); lastG = g; }
     const ex = r.estado === 'excluido'; const live = r.estado !== 'no-exigido' && !ex;
-    const sub = ex ? `${t('excludedBy')}: ${r.justificacion || t('unjustified')}` : f === 'ens' && state.alcance.ens.on ? `${t('level')} ${t('lv.' + r.nivel)} · ${exigL(r.exigencia)}` : '';
+    const sub = ex ? `${t('excludedBy')}: ${r.justificacion || t('unjustified')}` : f === 'ens' && state.alcance.ens.on ? `${t('level')} ${t('lv.' + r.nivel)} · ${exigL(r.exigencia)}${r.refuerzos && r.refuerzos.exigidos && r.refuerzos.evaluado ? ` · ${t('refCorto', r.refuerzos.cumplidos, r.refuerzos.exigidos)}` : ''}` : '';
     buf += `<div class="li req${live ? '' : ' dim'}${ui.insp && ui.insp.type === 'req' && ui.insp.fw === f && ui.insp.id === r.id ? ' on' : ''}" role="button" tabindex="0" data-act="insp-req" data-fw="${f}" data-id="${esc(r.id)}">
       <span class="id">${esc(reqCode(f, r.id))}</span><div class="tt"><b>${esc(rT(f, r.id))}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</div>
       <div class="meter">${live ? `<div class="bar"><i class="${r.estado === 'cubierto' ? 'ok' : r.estado === 'parcial' ? 'warn' : 'crit'}" style="width:${Math.max(r.score * 100, r.estado === 'brecha' ? 4 : 0)}%"></i></div><span class="num">${pct(r.score)}</span>` : '<span></span><span></span>'}</div>
@@ -310,7 +311,7 @@ function vNormas() {
   flush();
   return `${head(`${icon('file-check', 14)}${esc(t('normEyebrow'))}`, esc(t('normTitle')), esc(t('normLead')))}
   ${tabs}
-  <section class="glass pane stack fw-${fwCls(f)}"><div class="row spread"><div><h3>${esc(fwLong(f))}</h3><p class="small muted" style="margin-top:3px">${onFw(f) ? `${esc(t('applicable', fw.aplicables))} · ${pct(fw.grado)}${fw.excluidos ? ` · ${fw.excluidos} ${esc(t('cov.excluido').toLowerCase())}` : ''}${fw.noExigidos ? ` · ${fw.noExigidos} ${esc(t('cov.no-exigido').toLowerCase())}` : ''}` : esc(t('orient'))}</p></div>${onFw(f) ? '' : `<button type="button" class="btn sm" data-act="nav" data-view="alcance">${icon('plus', 15)}${esc(t('addScope'))}</button>`}</div>${stackBar(fw)}</section>
+  <section class="glass pane stack fw-${fwCls(f)}"><div class="row spread"><div><h3>${esc(fwLong(f))}</h3><p class="small muted" style="margin-top:3px">${onFw(f) ? `${esc(t('applicable', fw.aplicables))} · ${pct(fw.grado)}${fw.excluidos ? ` · ${fw.excluidos} ${esc(t('cov.excluido').toLowerCase())}` : ''}${fw.noExigidos ? ` · ${fw.noExigidos} ${esc(t('cov.no-exigido').toLowerCase())}` : ''}${f === 'ens' ? refAviso() : ''}` : esc(t('orient'))}</p></div>${onFw(f) ? '' : `<button type="button" class="btn sm" data-act="nav" data-view="alcance">${icon('plus', 15)}${esc(t('addScope'))}</button>`}</div>${stackBar(fw)}</section>
   <div class="toolbar"><div class="search">${icon('search', 16)}<input type="search" id="norma-q" data-uiq="normaQ" value="${esc(ui.normaQ)}" placeholder="${esc(t('reqSearch'))}" aria-label="${esc(t('reqSearch'))}"></div>
     <div class="chipset" role="group">${filtros.map(([v, l, n]) => `<button type="button" data-act="norma-estado" data-v="${v}" aria-pressed="${ui.normaEstado === v}">${esc(l)}<span class="n">${n}</span></button>`).join('')}</div></div>
   ${html || `<section class="glass pane">${empty('search', esc(t('noResults')), esc(t('noResultsTxt')))}</section>`}`;

@@ -104,6 +104,12 @@ function loadXLSX(uso = 'escribir') {
     .catch((e) => { delete XLSX_CACHE[uso]; throw e; });
   return XLSX_CACHE[uso];
 }
+/* Refuerzos de una medida para la SoA en Excel: los implantados y, si faltan exigidos, cuáles («R2, R5 · faltan: R6») */
+function refTxt(r) {
+  const h = (state.refuerzos || {})[r.id] || []; const x = r.refuerzos; if (!x) return h.join(', ');
+  const faltan = [...x.faltan, ...x.gruposFaltan.map((g) => `[${g.join(tx(' o ', ' or '))}]`)];
+  return [h.join(', '), faltan.length && x.exigidos ? `${tx('faltan', 'missing')}: ${faltan.join(', ')}` : ''].filter(Boolean).join(' · ');
+}
 async function exportXlsx() {
   try {
     const X = await loadXLSX();
@@ -164,11 +170,11 @@ async function exportXlsx() {
         const aplica = r.estado === 'no-exigido' ? tx('NO EXIGIDO', 'NOT REQUIRED') : r.estado === 'excluido' ? no() : yes();
         const just = r.estado === 'excluido' ? r.justificacion || `(${t('unjustified')})` : r.estado === 'no-exigido' ? noExigidoTxt(f, r) : tx(`Aplica. Soportado por ${IX.reqUcs[f][r.id].map((l) => l.uc).join(', ')}.`, `Applies. Supported by ${IX.reqUcs[f][r.id].map((l) => l.uc).join(', ')}.`);
         const evid = IX.reqUcs[f][r.id].map((l) => state.controles[l.uc].evidencias ? `[${l.uc}] ${state.controles[l.uc].evidencias}` : '').filter(Boolean).join(' · ').slice(0, 3000);
-        return [reqCode(f, r.id), rT(f, r.id), rG(f, r.id), ...(f === 'ens' ? [r.nivel ? t('lv.' + r.nivel) : '', r.exigencia || ''] : []), aplica, just, t('cov.' + r.estado), r.estado === 'no-exigido' || r.estado === 'excluido' ? '' : r.score, ucList(f, r.id), evid];
+        return [reqCode(f, r.id), rT(f, r.id), rG(f, r.id), ...(f === 'ens' ? [r.nivel ? t('lv.' + r.nivel) : '', r.exigencia || '', refTxt(r)] : []), aplica, just, t('cov.' + r.estado), r.estado === 'no-exigido' || r.estado === 'excluido' ? '' : r.score, ucList(f, r.id), evid];
       });
-      const hd = [tx('Código', 'Code'), tx('Requisito', 'Requirement'), tx('Grupo', 'Group'), ...(f === 'ens' ? [tx('Nivel exigido', 'Required level'), t('exig')] : []), tx('¿Aplica?', 'Applies?'), t('justification'), tx('Cobertura', 'Coverage'), tx('% soporte', '% support'), tx('Controles (estado)', 'Controls (state)'), t('evidence')];
-      const off = f === 'ens' ? 2 : 0;
-      X.utils.book_append_sheet(wb, sheet([hd, ...rows], [10, 44, 26, ...(f === 'ens' ? [10, 18] : []), 12, 50, 12, 10, 50, 60], 0, { fillCol: [5 + off], pctCol: [6 + off], freeze: { xSplit: 2, ySplit: 1 } }), sheetName[f] + (calc.fw[f].on ? '' : tx(' (fuera)', ' (out)')));
+      const hd = [tx('Código', 'Code'), tx('Requisito', 'Requirement'), tx('Grupo', 'Group'), ...(f === 'ens' ? [tx('Nivel exigido', 'Required level'), t('exig'), tx('Refuerzos implantados', 'Reinforcements implemented')] : []), tx('¿Aplica?', 'Applies?'), t('justification'), tx('Cobertura', 'Coverage'), tx('% soporte', '% support'), tx('Controles (estado)', 'Controls (state)'), t('evidence')];
+      const off = f === 'ens' ? 3 : 0;
+      X.utils.book_append_sheet(wb, sheet([hd, ...rows], [10, 44, 26, ...(f === 'ens' ? [10, 18, 22] : []), 12, 50, 12, 10, 50, 60], 0, { fillCol: [5 + off], pctCol: [6 + off], freeze: { xSplit: 2, ySplit: 1 } }), sheetName[f] + (calc.fw[f].on ? '' : tx(' (fuera)', ' (out)')));
     }
     X.utils.book_append_sheet(wb, sheet([[t('control'), t('description'), ...FW.map((f) => (f === 'nis2' ? tx('NIS2 (art. y RE 2024/2690)', 'NIS2 (art. and IR 2024/2690)') : fwLbl(f))), tx('Relaciones informativas', 'Informative relations')],
       ...CAT.controls.map((c) => [c.id, cT(c.id), ...FW.map((f) => mapsTxt(c, f)), FWV.map((f) => c.maps[f].filter((m) => m.w === 0).map((m) => `${fwLbl(f)} ${reqCode(f, m.id)}`).join(', ')).filter(Boolean).join(' · ')])],
@@ -191,6 +197,19 @@ function nivelesDe(categorizacion) {
   }
   return niveles;
 }
+/* Refuerzos implantados de cada medida: de una columna «Refuerzos» del Excel («R2, R5») o de la tabla de refuerzos
+ * de ENS Compliance Studio (exigible o alternativa elegida, con implementación descrita). Solo refuerzos que existen. */
+function refuerzosDe(code, txt) { const val = (D.refuerzos.medidas[code] || []).map((x) => x.id); const ok = new Set(String(txt || '').toUpperCase().match(/R\d+/g) || []); return val.filter((x) => ok.has(x)); }
+function refuerzosStudio(tabla) {
+  const out = {};
+  for (const r of arr(tabla, 500)) {
+    if (!isObj(r) || !IX.req.ens[r.codigo]) continue;
+    const impl = String(r.implementacion || '').trim();
+    if (!impl || /^[—–-]+$/.test(impl) || !/^(s[ií]|alternativa)/i.test(String(r.exigible || '').trim())) continue;
+    const v = refuerzosDe(r.codigo, r.refuerzo); if (v.length) out[r.codigo] = refuerzosDe(r.codigo, [...(out[r.codigo] || []), ...v].join(' '));
+  }
+  return out;
+}
 function limpiaSoa(raw) {
   const out = {};
   for (const [code, d] of safeEntries(raw, 200)) {
@@ -207,7 +226,7 @@ async function leerSoaEns(file) {
     if (isObj(o) && o.kind === 'ens-studio-backup') { const items = arr(o.projects, 300).filter((x) => isObj(x) && isObj(x.state) && isObj(x.state.soa)); const own = items.find((x) => isObj(x.meta) && x.meta.kind === 'own'); o = (own || items[0] || {}).state; }
     if (!isObj(o) || !isObj(o.soa)) throw new Error(t('tNoJsonSoa'));
     const pr = isObj(o.proyecto) ? o.proyecto : {};
-    return { soa: limpiaSoa(o.soa), niveles: nivelesDe(o.categorizacion), organizacion: s(pr.organizacion, 200), descripcion: s(pr.sistema, 300) };
+    return { soa: limpiaSoa(o.soa), refuerzos: refuerzosStudio(o.refuerzos), niveles: nivelesDe(o.categorizacion), organizacion: s(pr.organizacion, 200), descripcion: s(pr.sistema, 300) };
   }
   if (!checkSize(file, LIM.fileXlsx, t('excelIs'))) return null;
   const X = await loadXLSX('leer');
@@ -219,12 +238,13 @@ async function leerSoaEns(file) {
   if (!soaRows) throw new Error(t('tNoSoa'));
   const hdr = soaRows[h].map(normH);
   const col = (...keys) => hdr.findIndex((x) => keys.some((k2) => x === normH(k2) || x.startsWith(normH(k2))));
-  const C = { codigo: col('Código'), aplica: col('¿Aplica?', 'Aplica'), just: col('Justificación'), estado: col('Estado de implantación', 'Estado'), pct: col('% implantación'), ev: col('Evidencias'), resp: col('Responsable') };
-  const raw = {};
+  const C = { codigo: col('Código'), aplica: col('¿Aplica?', 'Aplica'), just: col('Justificación'), estado: col('Estado de implantación', 'Estado'), pct: col('% implantación'), ev: col('Evidencias'), resp: col('Responsable'), ref: col('Refuerzos implantados', 'Refuerzos') };
+  const raw = {}; const refuerzos = {};
   for (const r of soaRows.slice(h + 1)) {
     const code = String(r[C.codigo] ?? '').trim(); if (!IX.req.ens[code]) continue;
     const g = (i) => (i >= 0 ? (r[i] ?? '') : '');
     raw[code] = { aplica: g(C.aplica), estado: g(C.estado), pct: g(C.pct), evidencias: g(C.ev), responsable: g(C.resp), justificacion: g(C.just) };
+    const rf = refuerzosDe(code, g(C.ref)); if (rf.length) refuerzos[code] = rf;
   }
   let categorizacion = [];
   for (const name of wb.SheetNames) {
@@ -235,7 +255,7 @@ async function leerSoaEns(file) {
   let organizacion = file.name.replace(/\.xlsx$/i, ''); let descripcion = '';
   const pName = wb.SheetNames.find((x) => normH(x) === 'portada');
   if (pName) for (const row of rowsOf(pName)) { const v = (row || []).filter((c) => c !== null && c !== ''); if (v.length === 2 && normH(v[0]) === 'organizacion') organizacion = s(v[1], 200).replace(/\s+–.*$/, ''); if (v.length === 2 && normH(v[0]) === 'sistema de informacion') descripcion = s(v[1], 300); }
-  return { soa: limpiaSoa(raw), niveles: nivelesDe(categorizacion), organizacion, descripcion };
+  return { soa: limpiaSoa(raw), refuerzos, niveles: nivelesDe(categorizacion), organizacion, descripcion };
 }
 function aplicaImportEns(st, data) {
   const r = E.desdeSoaEns(IX, data.soa);
@@ -244,6 +264,7 @@ function aplicaImportEns(st, data) {
   st.ensSoa = Object.fromEntries(Object.entries(data.soa).map(([k2, d]) => [k2, { aplica: d.aplica, estado: d.estado, pct: d.pct, justificacion: d.justificacion, evidencias: d.evidencias, responsable: d.responsable }]));
   if (Object.keys(data.niveles || {}).length) { st.alcance.ens.niveles = data.niveles; st.alcance.ens.categoria = E.categoriaDeNiveles(data.niveles) || st.alcance.ens.categoria; }
   st.alcance.ens.on = true;
+  if (Object.keys(data.refuerzos || {}).length) st.refuerzos = { ...(st.refuerzos || {}), ...data.refuerzos };
   return r.heredados;
 }
 async function importEns(file, destino) {
