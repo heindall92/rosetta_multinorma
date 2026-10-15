@@ -110,6 +110,28 @@
     return best || CAT_NIVEL[categoria] || 'ALTO';
   }
   const exigidaEns = (txt) => { const s = String(txt || '').trim(); return !!s && !/^n\.?a\.?$/i.test(s); };
+
+  /* ---------- Refuerzos del ENS (anexo II del RD 311/2022) ----------
+   * La exigencia de cada nivel se lee así: «+ R5» obliga a R5; «+ [R2 o R3 o R4]» obliga a uno de ellos. Es la misma
+   * lectura que hace ENS Compliance Studio. Una medida exigida sin sus refuerzos no se cumple del todo: su cobertura
+   * nunca pasa de parcial (0,5). La evaluación se activa por proyecto (alcance.ens.refuerzos). */
+  function exigenciaRefuerzos(txt) {
+    const s = String(txt || '').trim();
+    if (!exigidaEns(s)) return { aplica: false, obligatorios: [], grupos: [] };
+    const grupos = [];
+    const resto = s.replace(/\[([^\]]+)\]/g, (_, g) => { grupos.push(g.split(/\s+o\s+/).map((x) => x.trim()).filter((x) => /^R\d+$/.test(x))); return ''; });
+    return { aplica: true, obligatorios: resto.match(/R\d+/g) || [], grupos: grupos.filter((g) => g.length) };
+  }
+  /** Qué refuerzos faltan para una exigencia, dados los implantados. */
+  function refuerzosEstado(exig, hechos) {
+    const h = new Set(Array.isArray(hechos) ? hechos : []);
+    const x = typeof exig === 'string' ? exigenciaRefuerzos(exig) : exig;
+    const faltan = x.obligatorios.filter((r) => !h.has(r));
+    const gruposFaltan = x.grupos.filter((g) => !g.some((r) => h.has(r)));
+    const exigidos = x.obligatorios.length + x.grupos.length;
+    return { obligatorios: x.obligatorios, grupos: x.grupos, faltan, gruposFaltan, exigidos, cumplidos: exigidos - faltan.length - gruposFaltan.length, ok: !faltan.length && !gruposFaltan.length };
+  }
+  const evaluaRefuerzos = (st) => !!(st && st.alcance && st.alcance.ens && st.alcance.ens.refuerzos === true);
   function categoriaDeNiveles(niveles) {
     const vals = DIMS.map((d) => niveles && niveles[d]).filter((x) => NIVELES_ENS.includes(x));
     if (!vals.length) return null;
@@ -199,14 +221,19 @@
     for (const l of links) { const e = estadoUc(st, l.uc); num += l.w * SCORE[e]; den += l.w; detalle.push({ uc: l.uc, w: l.w, estado: e }); }
     // Techo: si ningún control equivale por completo (todos w = 0,5), el requisito nunca pasa de «parcial».
     const techo = links.reduce((a, l) => Math.max(a, l.w), 0);
-    const score = den ? (num / den) * techo : 0;
+    const base = den ? (num / den) * techo : 0;
+    let score = base, refuerzos;
+    if (f === 'ens' && ap.aplica && ap.exigencia !== undefined) {
+      refuerzos = { ...refuerzosEstado(ap.exigencia, st.refuerzos && st.refuerzos[id]), evaluado: evaluaRefuerzos(st) };
+      if (refuerzos.evaluado && !refuerzos.ok && score > 0.5) { score = 0.5; refuerzos.limita = true; refuerzos.base = base; }
+    }
     let estado;
     if (!ap.aplica) estado = 'no-exigido';
     else if (ex !== undefined) estado = 'excluido';
     else if (score >= 1 - EPS) estado = 'cubierto';
     else if (score > EPS) estado = 'parcial';
     else estado = 'brecha';
-    return { f, id, estado, score, detalle, justificacion: ex, ...ap };
+    return { f, id, estado, score, detalle, justificacion: ex, ...ap, ...(refuerzos ? { refuerzos } : {}) };
   }
 
   function calcular(ix, st) {
@@ -356,7 +383,8 @@
     ['CO-21', 'Alta', 'Ley 21.663 en alcance sin reporte de incidentes al CSIRT Nacional (alerta en 3 h).'],
     ['CO-22', 'Alta', 'Ley de protección de datos en alcance sin procedimiento de notificación de vulneraciones.'],
     ['CO-23', 'Alta', 'Control implantado con hallazgos técnicos críticos o altos abiertos según CTEM-Nexus.'],
-    ['CO-24', 'Alta', 'RGPD en el sector público o en sus proveedores sin el ENS en el alcance (LOPDGDD, disposición adicional primera).']
+    ['CO-24', 'Alta', 'RGPD en el sector público o en sus proveedores sin el ENS en el alcance (LOPDGDD, disposición adicional primera).'],
+    ['CO-25', 'Media', 'Medida del ENS exigida sin los refuerzos de su nivel: su cobertura no pasa de parcial.']
   ];
   /* Mensajes de las reglas en español e inglés */
   const tt = (obj, key, lang) => (lang === 'en' && obj && obj[key + '_en'] ? obj[key + '_en'] : obj ? obj[key] : '');
@@ -380,6 +408,8 @@
       co13: ['Riesgos sin la mirada de la seguridad operacional', (e) => `Part-IS no mide solo la información: pide identificar los elementos e interfaces cuya alteración podría afectar a la seguridad operacional y evaluarlos con el SMS. El control RIE-12 está ${e}.`, 'Inventaría los elementos e interfaces relevantes para la seguridad operacional y llévalos al análisis de riesgos junto al responsable del SMS.', 'Part-IS, puntos .205 y .210'],
       co21: ['Sin reporte al CSIRT Nacional de Chile', (e) => `La Ley 21.663 exige una alerta temprana en 3 horas, un segundo reporte en 72 horas (24 para operadores de importancia vital) y un informe final en 15 días. El control INC-13 está ${e}.`, 'Registra la organización en la plataforma de la ANCI y define quién reporta cada incidente y en qué plazo.', 'Ley 21.663, art. 9'],
       co24q: { publico: 'la entidad del sector público', proveedor: 'quien presta servicios al sector público' },
+      co25: [(id) => `${id}: faltan refuerzos de su nivel`, (n) => `${n} medidas del ENS sin los refuerzos de su nivel`, (l) => `Faltan: ${l}. Una medida sin los refuerzos que exige su nivel no se cumple del todo, aunque sus controles estén implantados: en la certificación es una no conformidad. Su cobertura queda en parcial.`, 'Implanta los refuerzos y márcalos en la ficha de cada medida, o revisa la categoría y los niveles si la exigencia no corresponde.', 'RD 311/2022, anexo II'],
+      refUno: (g) => `uno de ${g.join(', ').replace(/, (R\d+)$/, ' o $1')}`,
       co22: [(m) => `${m}: sin procedimiento de vulneraciones`, (e) => `La ley obliga a notificar las vulneraciones de datos personales a la autoridad y, cuando procede, a los titulares. El control PRI-07 está ${e}.`, 'Define cómo se detecta, evalúa, registra y notifica una vulneración de datos personales, con los plazos de cada país.'],
       co19: ['Sin notificación de incidentes graves (DORA)', (e) => `DORA exige notificar los incidentes TIC graves a la autoridad financiera: inicial en 4 h desde la clasificación y como mucho 24 h, intermedio en 72 h y final en un mes. El control INC-12 está ${e}.`, 'Aprueba el procedimiento con los criterios de clasificación del art. 18, las plantillas de las ITS y quién notifica.', 'DORA, arts. 18 y 19'],
       co20: ['Sin registro de información de proveedores TIC', (e) => `El registro del art. 28.3 se remite a la autoridad cuando lo pide y es la base para evaluar la concentración. El control PRO-06 está ${e}.`, 'Completa el registro con todos los acuerdos TIC y marca los que soportan funciones esenciales o importantes.', 'DORA, art. 28.3'],
@@ -410,6 +440,8 @@
       co13: ['Risk assessment without the aviation safety view', (e) => `Part-IS does not look only at information: it asks you to identify the elements and interfaces whose compromise could affect aviation safety and to assess them with the SMS. Control RIE-12 is ${e}.`, 'List the elements and interfaces relevant to aviation safety and bring them into the risk assessment with the safety manager.', 'Part-IS, points .205 and .210'],
       co21: ['No reporting to Chile’s National CSIRT', (e) => `Law 21.663 requires an early warning within 3 hours, a second report within 72 hours (24 for operators of vital importance) and a final report within 15 days. Control INC-13 is ${e}.`, 'Register the organisation on the ANCI platform and define who reports each incident and within which deadline.', 'Law 21.663, art. 9'],
       co24q: { publico: 'the public sector entity', proveedor: 'whoever provides services to the public sector' },
+      co25: [(id) => `${id}: reinforcements for its level are missing`, (n) => `${n} ENS measures without the reinforcements for their level`, (l) => `Missing: ${l}. A measure without the reinforcements its level requires is not fully met, even if its controls are implemented: at certification it is a nonconformity. Its coverage stays partial.`, 'Implement the reinforcements and tick them in each measure’s panel, or review the category and levels if the requirement does not fit.', 'RD 311/2022, Annex II'],
+      refUno: (g) => `one of ${g.join(', ').replace(/, (R\d+)$/, ' or $1')}`,
       co22: [(m) => `${m}: no breach procedure`, (e) => `The law requires notifying personal data breaches to the authority and, where applicable, to data subjects. Control PRI-07 is ${e}.`, 'Define how a personal data breach is detected, assessed, recorded and notified, with each country’s deadlines.'],
       co19: ['No major incident reporting (DORA)', (e) => `DORA requires reporting major ICT incidents to the financial authority: initial within 4 h of classification and at most 24 h, intermediate within 72 h and final within one month. Control INC-12 is ${e}.`, 'Approve the procedure with the art. 18 classification criteria, the ITS templates and who reports.', 'DORA, arts. 18 and 19'],
       co20: ['No register of ICT third-party information', (e) => `The art. 28.3 register is submitted to the authority on request and underpins the concentration assessment. Control PRO-06 is ${e}.`, 'Complete the register with every ICT arrangement and flag those supporting critical or important functions.', 'DORA, art. 28.3'],
@@ -440,7 +472,8 @@
     'CO-21': 'Law 21.663 in scope without incident reporting to the National CSIRT (3 h early warning).',
     'CO-22': 'Data protection law in scope without a breach notification procedure.',
     'CO-23': 'Control implemented with open critical or high technical findings according to CTEM-Nexus.',
-    'CO-24': 'GDPR in the public sector or its suppliers without the ENS in scope (LOPDGDD, first additional provision).'
+    'CO-24': 'GDPR in the public sector or its suppliers without the ENS in scope (LOPDGDD, first additional provision).',
+    'CO-25': 'Required ENS measure without the reinforcements for its level: its coverage stays partial.'
   };
   function coherencia(ix, st, calc, opts = {}) {
     const lang = opts.lang === 'en' ? 'en' : 'es'; const M = MSG[lang];
@@ -518,10 +551,17 @@
         const d = st.ensSoa[r.id];
         if (!d || !/^implantada$/i.test(String(d.estado || ''))) continue;
         if (r.estado === 'brecha') add('CO-06', `ENS ${r.id}`, M.co06[0](r.id), titulo(ix, 'ens', r.id, lang), M.co06[1], '', { fw: 'ens', req: r.id });
-        else if (r.estado === 'parcial') parciales.push(r.id);
+        else if (r.estado === 'parcial' && !(r.refuerzos && r.refuerzos.limita)) parciales.push(r.id); // si solo faltan refuerzos, lo dice CO-25
       }
       // Las medidas solo parcialmente sostenidas se agrupan en un único hallazgo para no ahogar a las demás
       if (parciales.length) add('CO-06', parciales.length === 1 ? `ENS ${parciales[0]}` : M.nMed(parciales.length), M.co06p(parciales.length), M.afecta(parciales.join(', ')).trim(), M.co06[1], '', { fw: 'ens', reqs: parciales });
+    }
+    if (on('ens') && evaluaRefuerzos(st)) {
+      const sin = calc.req.ens.filter((r) => r.refuerzos && r.refuerzos.limita);
+      const lista = (xs) => (xs.length > 1 ? `${xs.slice(0, -1).join(', ')}${M.y}${xs[xs.length - 1]}` : xs[0] || '');
+      const faltaTxt = (r) => lista([...r.refuerzos.faltan, ...r.refuerzos.gruposFaltan.map((g) => M.refUno(g))]);
+      if (sin.length === 1) add('CO-25', `ENS ${sin[0].id}`, M.co25[0](sin[0].id), M.co25[2](faltaTxt(sin[0])), M.co25[3], M.co25[4], { fw: 'ens', req: sin[0].id });
+      else if (sin.length) add('CO-25', M.nMed(sin.length), M.co25[1](sin.length), M.co25[2](sin.slice(0, 8).map((r) => `${r.id} (${faltaTxt(r)})`).join('; ') + (sin.length > 8 ? '…' : '')), M.co25[3], M.co25[4], { fw: 'ens', reqs: sin.map((r) => r.id) });
     }
     const peso = { Alta: 0, Media: 1, Baja: 2 };
     return F.sort((a, b) => peso[a.sev] - peso[b.sev] || a.id.localeCompare(b.id));
@@ -887,7 +927,7 @@
 
   return { FW, FW_LABEL, FW_LABEL_EN, etiqueta, riaAlcance, RIA_ROLES, RIA_GPAI, craAlcance, CRA_CLASES, doraAlcance, DORA_REGIMENES, LATAM, fundirPropios, listaNormas, FW_LONG, FW_LONG_EN, ESTADOS, ESTADO_LABEL, ESTADO_LABEL_EN, REGLAS_EN, tt, SCORE, W, DIMS, NIVELES_ENS, CAT_NIVEL, REGLAS, TAMANOS, NIS2_ESPECIALES,
     ESTADOS_PERFIL, JURISDICCIONES, AVIACION, PERFIL_DEF, perfilNormalizado, perfilRegulatorio, sugerirControles, desdeCtem, aCtem, evidenciaCtem,
-    indexar, nivelExigidoEns, categoriaEfectiva, excluible, exigidaEns, categoriaDeNiveles, aplicaReq, coberturaReq, calcular, solapamiento, inferencia,
+    indexar, exigenciaRefuerzos, refuerzosEstado, evaluaRefuerzos, nivelExigidoEns, categoriaEfectiva, excluible, exigidaEns, categoriaDeNiveles, aplicaReq, coberturaReq, calcular, solapamiento, inferencia,
     equivalencias, prioridades, parseIsoRef, parejasClase, ccnPareja, fuerzaCcn, contrasteCcn825, coherencia, planAccion, puntuacionEns, desdeSoaEns, nis2Aplicabilidad, orden, codigo, titulo, instantanea, estadoUc };
 });
 

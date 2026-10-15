@@ -52,6 +52,20 @@ function extraReq(f, r) {
   if (esPropio(f)) return `<div class="blk"><h4>${esc(t('mpBadge'))} · ${esc(t('mpUserMap'))}</h4>${r.texto ? `<p class="small">${esc(r.texto)}</p>` : ''}</div>`;
   return '';
 }
+/* Refuerzos del ENS en la ficha de la medida: los exigidos por el nivel del sistema, las alternativas y los opcionales,
+ * cada uno con su casilla y el texto del RD 311/2022 (BOE, reproducible). */
+function refBloque(f, id, cov) {
+  const lista = f === 'ens' && D.refuerzos.medidas[id]; if (!lista) return '';
+  const rf = cov.refuerzos; const hechos = new Set((state.refuerzos || {})[id] || []);
+  const oblig = new Set(rf ? rf.obligatorios : []); const alt = new Set(rf ? rf.grupos.flat() : []);
+  const papel = (r) => (oblig.has(r) ? ['refOblig', 'crit'] : alt.has(r) ? ['refAlt', 'warn'] : ['refOpc', 'neutral']);
+  const resumen = rf && onFw('ens') ? (rf.exigidos ? t('refResumen', rf.cumplidos, rf.exigidos) : t('refNinguno')) : '';
+  return `<div class="blk"><h4>${esc(t('refTitle'))}${rf && cov.nivel ? ` · ${esc(t('level'))} ${esc(t('lv.' + cov.nivel))}` : ''}</h4>
+    ${rf && onFw('ens') && !rf.evaluado ? `<p class="hint">${esc(t('refOff'))}</p>` : ''}
+    ${resumen ? `<p class="small${rf.ok ? ' muted' : ' warn-txt'}">${rf.ok ? '' : icon('triangle-alert', 14)}${esc(resumen)}</p>` : ''}
+    <ul class="ref-list">${lista.map((x) => { const [k, c] = papel(x.id); return `<li><label class="ref-chk"><input type="checkbox" data-ref="${esc(id)}" data-r="${esc(x.id)}"${hechos.has(x.id) ? ' checked' : ''}><span class="mono">${esc(x.id)}</span><span>${esc(LANG() === 'en' ? x.t_en : x.t)}</span><span class="pill ${c}">${esc(t(k))}</span></label>
+      <details><summary>${esc(t('refBoe'))}</summary><p class="ref-txt small">${esc(x.texto)}</p></details></li>`; }).join('')}</ul></div>`;
+}
 function inspReq(f, id) {
   const r = IX.req[f][id]; const cov = reqRow(f, id); const showRel = ws.settings.mostrarRelaciones;
   const eq = E.equivalencias(IX, f, id);
@@ -66,7 +80,7 @@ function inspReq(f, id) {
   <p class="small muted">${esc(rG(f, id))}</p>
   <div class="row">${onFw(f) ? covPill(cov.estado) : `<span class="pill neutral">${esc(t('outOfScope'))}</span>`}${cov.estado !== 'no-exigido' && cov.estado !== 'excluido' ? `<span class="small muted num">${esc(t('support', pct(cov.score)))}</span>` : ''}</div>
   ${cov.estado === 'no-exigido' ? `<div class="callout">${icon('info', 17)}<span>${esc(noExigidoTxt(f, cov))}</span></div>` : ''}
-  ${ens}${extraReq(f, r)}
+  ${ens}${extraReq(f, r)}${refBloque(f, id, cov)}
   <div class="blk"><h4>${esc(t('supportedBy'))} · ${ctl.length}</h4>${ctl.map((l) => { const fz = fuerzaDe(l.w); return `<div class="ucrow">${ucChip(l.uc)}<div style="min-width:0"><b>${esc(cT(l.uc))}</b><div><span class="weight ${fz}">${esc(t('fuerzaCorta.' + fz))}</span></div></div>${l.w > 0 ? stateSwitch(l.uc, E.estadoUc(state, l.uc)) : '<span></span>'}</div>`; }).join('')}</div>
   <div class="blk"><h4>${esc(t('equivalents'))}</h4><div class="maps">${eqs}</div></div>
   ${canEx ? `<div class="blk"><h4>${esc(t('exclusion'))}</h4>

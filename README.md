@@ -29,7 +29,7 @@ Rosetta enlaza los **594 requisitos** de dieciséis normas y leyes (ENS, ISO/IEC
 
 - el grado de cumplimiento de cada norma del alcance y de cada uno de sus requisitos;
 - qué marcos aplican a la organización y por qué, según su **perfil regulatorio** (jurisdicción, sector y rasgos), con la base legal de cada uno;
-- los requisitos sin cubrir y las incoherencias entre normas (24 reglas);
+- los requisitos sin cubrir y las incoherencias entre normas (25 reglas);
 - el orden de implantación, según cuántos requisitos cubre cada control pendiente en todas las normas.
 
 Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto no salen del equipo.
@@ -66,7 +66,7 @@ Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto n
         <img src="docs/assets/stack/dominios.svg" height="48" alt="Dominios">
         <img src="docs/assets/stack/coherencia.svg" height="48" alt="Reglas de coherencia">
         <img src="docs/assets/stack/plan.svg" height="48" alt="Plan de acción"><br>
-        <sub><code>152 controles · 14 dominios · 24 reglas · perfil regulatorio · plan priorizado</code></sub>
+        <sub><code>152 controles · 14 dominios · 25 reglas · 92 refuerzos del ENS · perfil regulatorio · plan priorizado</code></sub>
       </td>
     </tr>
     <tr>
@@ -92,7 +92,7 @@ Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto n
         <img src="docs/assets/stack/navegador.svg" height="48" alt="Playwright">
         <img src="docs/assets/stack/accesibilidad.svg" height="48" alt="axe-core">
         <img src="docs/assets/stack/codeql.svg" height="48" alt="CodeQL"><br>
-        <sub><code>node:test 154 · Playwright 73 · axe-core 0 violaciones · CodeQL</code></sub>
+        <sub><code>node:test 163 · Playwright 83 · axe-core 0 violaciones · CodeQL</code></sub>
       </td>
       <td valign="top"><code>╰─ ⌁ seguridad:</code><br><br>
         <img src="docs/assets/stack/csp.svg" height="48" alt="CSP">
@@ -105,7 +105,7 @@ Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto n
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="2"><code>version: 2.12.0&nbsp;&nbsp;·&nbsp;&nbsp;catalogo: 2.12.0&nbsp;&nbsp;·&nbsp;&nbsp;CCN-STIC 825: abril 2026&nbsp;&nbsp;·&nbsp;&nbsp;pruebas: 227 ok&nbsp;&nbsp;·&nbsp;&nbsp;licencia: GPLv2</code></td>
+      <td colspan="2"><code>version: 2.13.0&nbsp;&nbsp;·&nbsp;&nbsp;catalogo: 2.13.0&nbsp;&nbsp;·&nbsp;&nbsp;CCN-STIC 825: abril 2026&nbsp;&nbsp;·&nbsp;&nbsp;pruebas: 246 ok&nbsp;&nbsp;·&nbsp;&nbsp;licencia: GPLv2</code></td>
     </tr>
   </tfoot>
 </table>
@@ -201,7 +201,7 @@ mindmap
 | <img src="docs/assets/icons/waypoints.svg" width="18"/> | **Equivalencias** | Para un requisito de cualquier norma: los controles que lo cubren y los requisitos equivalentes en las demás normas, con el tipo de correspondencia (total, parcial o informativa). |
 | <img src="docs/assets/icons/layers.svg" width="18"/> | **Controles** | Los 152 controles con su estado, normas a las que sirven, responsable, evidencias y fecha de revisión. |
 | <img src="docs/assets/icons/file-check.svg" width="18"/> | **Requisitos** | Declaración de aplicabilidad de cada norma: cobertura por requisito, nivel exigido en el ENS y exclusiones justificadas. Las cláusulas 4–10 y los arts. 20, 21 y 23 de NIS2 no se pueden excluir. |
-| <img src="docs/assets/icons/shield-alert.svg" width="18"/> | **Brechas** | Requisitos sin cubrir y 24 reglas de coherencia (entre ellas, el ENS que la LOPDGDD exige para los datos personales del sector público, reporte al CSIRT Nacional de Chile y vulneraciones de datos personales, notificación de incidentes graves y registro de información de DORA, notificación a ENISA y SBOM del CRA, alfabetización en IA y prácticas prohibidas del RIA, notificación a la autoridad aeronáutica y riesgos con impacto en la seguridad operacional de Part-IS, y requisitos de marcos propios sin controles): notificación NIS2 (24 h, 72 h, 1 mes), formación de la dirección, evaluación de impacto de IA, exclusiones contradictorias, controles sin evidencias o sin revisar en 12 meses, entre otras. |
+| <img src="docs/assets/icons/shield-alert.svg" width="18"/> | **Brechas** | Requisitos sin cubrir y 25 reglas de coherencia (entre ellas, medidas del ENS sin los refuerzos de su nivel, el ENS que la LOPDGDD exige para los datos personales del sector público, reporte al CSIRT Nacional de Chile y vulneraciones de datos personales, notificación de incidentes graves y registro de información de DORA, notificación a ENISA y SBOM del CRA, alfabetización en IA y prácticas prohibidas del RIA, notificación a la autoridad aeronáutica y riesgos con impacto en la seguridad operacional de Part-IS, y requisitos de marcos propios sin controles): notificación NIS2 (24 h, 72 h, 1 mes), formación de la dirección, evaluación de impacto de IA, exclusiones contradictorias, controles sin evidencias o sin revisar en 12 meses, entre otras. |
 | <img src="docs/assets/icons/square-kanban.svg" width="18"/> | **Plan** | Tablero pendiente, en curso y hecha, ordenado por requisitos cubiertos, con responsable y fecha. |
 | <img src="docs/assets/icons/grid-3x3.svg" width="18"/> | **Correspondencias** | Requisitos de cada norma por dominio, solapamiento entre normas y tabla completa control ↔ requisitos. |
 | <img src="docs/assets/icons/compass.svg" width="18"/> | **Alcance** | Perfil regulatorio con la propuesta de marcos aplicables y su base legal, decisión y motivo del auditor, categoría y niveles del ENS, aplicabilidad de NIS2, reglamento de Part-IS y marcos propios (importar, mapear con sugerencias, exportar y borrar). |
@@ -227,6 +227,9 @@ También incluye siete casos de ejemplo con datos ficticios (proveedor TIC del s
 <tr>
 <td><img src="docs/img/readme/mapa-light.png" alt="Correspondencias"/><br/><sub><b>Correspondencias</b> · requisitos por dominio y tabla completa</sub></td>
 <td><img src="docs/img/readme/alcance-light.png" alt="Alcance"/><br/><sub><b>Alcance</b> · perfil regulatorio, Part-IS y asistente NIS2</sub></td>
+</tr>
+<tr>
+<td colspan="2"><img src="docs/img/readme/refuerzos-light.png" alt="Refuerzos del ENS en la ficha de op.acc.6"/><br/><sub><b>Refuerzos del ENS</b> · ficha de op.acc.6 en TechServ (categoría ALTA): R8 sin implantar, con el texto del RD 311/2022 desplegado</sub></td>
 </tr>
 <tr>
 <td colspan="2"><img src="docs/img/readme/rgpd-light.png" alt="RGPD y LOPDGDD en el hospital"/><br/><sub><b>RGPD y LOPDGDD</b> · las 15 obligaciones en el caso del hospital, con la EIPD del sistema de IA como brecha</sub></td>
@@ -342,6 +345,23 @@ Las equivalencias **ENS ↔ ISO/IEC 27001:2022** siguen la guía oficial del Cen
 - **Probado.** Ocho pruebas del motor comprueban que no falta ninguna medida ni código, que todos los controles principales están conectados, el reparto 42/26/5, la fuerza por origen, que ninguna equivalencia total carece de respaldo y la simetría ENS → ISO e ISO → ENS.
 
 NIS2 e ISO/IEC 42001 no tienen una guía equivalente: sus correspondencias siguen siendo criterio del autor, contrastado con la guía técnica de ENISA.
+
+## <img src="docs/assets/icons/layers.svg" width="20" height="20" valign="middle"/> Novedades de la 2.13.0: refuerzos del ENS
+
+Hasta ahora, una medida del ENS se daba por cubierta con sus controles aunque faltaran los refuerzos que exige su nivel (el hallazgo E05 de la auditoría). En una certificación, un refuerzo ausente es una no conformidad. La 2.13.0 los modela:
+
+- **Los 92 refuerzos del anexo II** del RD 311/2022 (`src/data/refuerzos.json`), con su título en los dos idiomas y el texto del BOE, que se puede reproducir.
+- **Exigencia por nivel**, con la misma lectura que ENS Compliance Studio: en op.acc.5 de nivel MEDIO, «+ [R2 o R3 o R4] + R5» obliga a R5 y a uno de R2, R3 o R4. Un **contrato común** (`tests/fixtures/ens-exigencias-refuerzos.json`, 219 exigencias) se comprueba en los dos repositorios: si una herramienta cambia la lectura, su CI falla.
+- **Ficha de la medida** con una casilla por refuerzo, su papel (exigido, alternativa u opcional), el resumen («5 de 6 exigencias de refuerzo cumplidas») y el texto del RD desplegable.
+- **Cobertura honesta**: una medida sin los refuerzos de su nivel no pasa de **parcial**. Al subir la categoría o los niveles, la exigencia se recalcula.
+- **Regla CO-25 (media)**: lista las medidas a las que les faltan refuerzos y cuáles. CO-06 deja de confundirlas con controles parciales.
+- **Proyectos anteriores intactos**: la evaluación se activa en *Alcance → ENS*; los proyectos nuevos la traen activada y los anteriores a la 2.13.0 la tienen desactivada hasta que la actives.
+- **Entrada y salida**: la SoA del ENS en Excel lleva la columna «Refuerzos implantados» (con los que faltan) y se importan desde una columna «Refuerzos» de la plantilla o desde la tabla de refuerzos de ENS Compliance Studio.
+- **Casos**: TechServ (mp.s.2 R3 y op.acc.6 R8), el hospital (op.exp.8 R5) y Lumen (op.acc.6 R9) enseñan un hueco real cada uno.
+- **Exportaciones verificadas**: una suite nueva descarga las 108 exportaciones de los nueve casos en los dos idiomas y comprueba que cada fichero se abre y que el proyecto vuelve a entrar idéntico.
+- **Accesibilidad**: la etiqueta «Parcial» de la fila seleccionada en *Requisitos* daba 4,24:1 en tema claro; ahora pasa de 4,5:1.
+
+Los **perfiles de cumplimiento específicos del CCN** (universidades, entidades locales, NIS2) quedan para la siguiente versión: sus guías no se pueden reproducir y hay que procesarlas desde el PDF oficial, como la CCN-STIC 825.
 
 ## <img src="docs/assets/icons/user-lock.svg" width="20" height="20" valign="middle"/> Novedades de la 2.12.0: RGPD y LOPDGDD
 
@@ -514,13 +534,14 @@ Las 28 obligaciones del Reglamento (UE) 2024/1689 que afectan a una organizació
 
 | Suite | Pruebas | Qué comprueba |
 |---|---|---|
-| Motor (`engine.test.mjs`) | 128 | RGPD y LOPDGDD (15 requisitos con fechas y fuentes, cobertura plena con los 25 controles enlazados, plazos en la ficha, exclusiones solo donde la ley las permite, perfil en España, la UE y fuera, CO-22 y CO-24 en los dos idiomas, casos y etiquetas). Ecosistema con CTEM-Nexus (sobre leído sin pérdidas, sobres ajenos rechazados, evidencia hostil saneada, regla CO-23 en los dos idiomas e ida y vuelta con fichero fijo). Colombia, México, Perú y Argentina (región, cobertura, plazos, sin CO-22 en Argentina, perfil, exclusiones). Chile (requisitos con fecha y región, deberes de OIV, perfil por país y «también opera en», CO-21 y CO-22). DORA (24 requisitos, régimen simplificado y TLPT, exclusión solo del art. 45, plazos de 2025/301, CO-19 y CO-20, perfil). NIST CSF 2.0 (106 subcategorías en 6 funciones y 22 categorías, cobertura completa, voluntario). CRA (29 requisitos, fechas, exclusiones solo en el anexo I.I.2 b–m, equivalencias, CO-17 y CO-18, perfil). RIA (rol, riesgo, fechas del Ómnibus, sin exclusiones, equivalencias, CO-15 y CO-16, perfil). Part-IS (13 requisitos, sin exclusiones, equivalencias nunca totales, alertas CO-12 y CO-13), perfil regulatorio (cada regla del ENS, NIS2, Part-IS, ISO y normas futuras, entradas hostiles), marcos propios (fusión sin tocar el catálogo, cálculo, CO-14) y sugerencias de mapeo. Media ponderada, techo de los enlaces parciales, exclusiones no permitidas, categoría ENS efectiva, KPI, prioridades, solapamiento, equivalencias, correspondencias de la CCN-STIC 825, aplicabilidad NIS2 (17 casos), cinco casos de ejemplo y una instantánea fija. |
+| Motor (`engine.test.mjs`) | 137 | Refuerzos del ENS (contrato de las 219 exigencias del anexo II compartido con ENS Compliance Studio y comprobado en los dos repositorios, obligatorios y alternativas, los 92 refuerzos con título y texto del BOE, techo de 0,5, proyectos anteriores sin cambios, el nivel decide, CO-25 en los dos idiomas sin duplicar CO-06 y huecos de los casos). RGPD y LOPDGDD (15 requisitos con fechas y fuentes, cobertura plena con los 25 controles enlazados, plazos en la ficha, exclusiones solo donde la ley las permite, perfil en España, la UE y fuera, CO-22 y CO-24 en los dos idiomas, casos y etiquetas). Ecosistema con CTEM-Nexus (sobre leído sin pérdidas, sobres ajenos rechazados, evidencia hostil saneada, regla CO-23 en los dos idiomas e ida y vuelta con fichero fijo). Colombia, México, Perú y Argentina (región, cobertura, plazos, sin CO-22 en Argentina, perfil, exclusiones). Chile (requisitos con fecha y región, deberes de OIV, perfil por país y «también opera en», CO-21 y CO-22). DORA (24 requisitos, régimen simplificado y TLPT, exclusión solo del art. 45, plazos de 2025/301, CO-19 y CO-20, perfil). NIST CSF 2.0 (106 subcategorías en 6 funciones y 22 categorías, cobertura completa, voluntario). CRA (29 requisitos, fechas, exclusiones solo en el anexo I.I.2 b–m, equivalencias, CO-17 y CO-18, perfil). RIA (rol, riesgo, fechas del Ómnibus, sin exclusiones, equivalencias, CO-15 y CO-16, perfil). Part-IS (13 requisitos, sin exclusiones, equivalencias nunca totales, alertas CO-12 y CO-13), perfil regulatorio (cada regla del ENS, NIS2, Part-IS, ISO y normas futuras, entradas hostiles), marcos propios (fusión sin tocar el catálogo, cálculo, CO-14) y sugerencias de mapeo. Media ponderada, techo de los enlaces parciales, exclusiones no permitidas, categoría ENS efectiva, KPI, prioridades, solapamiento, equivalencias, correspondencias de la CCN-STIC 825, aplicabilidad NIS2 (17 casos), cinco casos de ejemplo y una instantánea fija. |
 | Catálogo (`catalog.test.mjs`) | 16 | Dieciséis normas, 15 obligaciones del RGPD; 13 requisitos de Part-IS con fuentes, matiz y referencia en los dos idiomas; cada control declara todas las normas; nueve casos con perfil válido. 73 medidas del ENS más 4 artículos, 93 controles de ISO/IEC 27001 y 38 de ISO/IEC 42001, cláusula 6.1.1, art. 23.4 a–e de NIS2, identificadores únicos, enlaces a requisitos existentes, ningún requisito sin control. |
 | Build (`build.test.mjs`) | 10 | Determinismo, documento bien formado, datos idénticos a `src/data`, CSP, hashes SRI, fuentes incrustadas, iconos existentes y `dist/` al día. |
-| E2E (`e2e.test.mjs`) | 27 | Valores por defecto (claro, español, azul), menú sin proyecto, todas las vistas con los cinco casos, centro de ayuda (buscador y enlaces del autor), barra lateral (anchos, ratón, teclado, tableta), deshacer y rehacer, idioma, tema, móvil, ficheros hostiles, inyección de fórmulas y aviso de almacenamiento lleno. Red bloqueada. |
+| E2E (`e2e.test.mjs`) | 28 | Refuerzos en la ficha (casillas, texto del BOE, cobertura, CO-25, deshacer, Alcance, proyecto antiguo y refuerzos hostiles saneados). Valores por defecto (claro, español, azul), menú sin proyecto, todas las vistas con los cinco casos, centro de ayuda (buscador y enlaces del autor), barra lateral (anchos, ratón, teclado, tableta), deshacer y rehacer, idioma, tema, móvil, ficheros hostiles, inyección de fórmulas y aviso de almacenamiento lleno. Red bloqueada. |
 | Part-IS, RIA, CRA, DORA, RGPD, LATAM, CTEM-Nexus, perfil y marcos propios (`e2e-marcos.test.mjs`) | 19 | RGPD en el hospital (ficha con plazos, exclusión solo de la EIPD, CO-24 al quitar el ENS) y `window.__ROSETTA__` ausente sin automatización. Importación de la evidencia de CTEM-Nexus, CO-23, ficha del control, sobre de vuelta y persistencia. Caso de aviación (anillos solo del alcance, prefijo IS.I/IS.D.OR, matiz, sin exclusiones), perfil aplicado y motivo en el informe, asistente, marco propio hostil (prototype pollution, HTML, identificadores y controles inválidos), mapeo con sugerencias, persistencia, exportar e importar sin pérdidas, CSV con comillas y fórmulas, borrar y deshacer, 390 px y ficheros de ejemplo de `tests/fixtures`. |
-| Excel, CSP y fuentes (`e2e-excel.test.mjs`) | 15 | Por `file://` y por HTTP: CSP sin violaciones y bloqueando código inyectado, fuentes sin Google Fonts, importación de una SoA del ENS, exportación sin fórmulas, hoja del RGPD con sus 15 obligaciones y rechazo de una librería manipulada. |
-| Accesibilidad (`a11y.test.mjs`) | 12 | axe-core (WCAG 2.2 A/AA) en 12 vistas y, aparte, en Exportar y en la ficha de un control con evidencia de CTEM-Nexus, en Alcance con el perfil, Part-IS y el editor de mapeo abierto, Resumen con cinco anillos y Requisitos de Part-IS; claro y oscuro, 1440 y 390 px: cero violaciones. |
+| Excel, CSP y fuentes (`e2e-excel.test.mjs`) | 17 | Por `file://` y por HTTP: CSP sin violaciones y bloqueando código inyectado, fuentes sin Google Fonts, importación de una SoA del ENS, exportación sin fórmulas, hoja del RGPD con sus 15 obligaciones, columna de refuerzos de la SoA del ENS e importación de refuerzos desde Excel y desde ENS Compliance Studio y rechazo de una librería manipulada. |
+| Exportaciones (`e2e-exportar.test.mjs`) | 3 | Las 108 exportaciones de los nueve casos en español e inglés: Excel sin fórmulas y con nombres de hoja válidos, Markdown con tablas regulares, CSV con BOM y sin inyección de fórmulas, sobre para CTEM-Nexus y proyecto JSON que vuelve a entrar idéntico; copia de seguridad que restaura todos los proyectos. Comprobado además fuera de la CI con openpyxl, LibreOffice Calc, html5lib y el esquema de `yrd-ecosistema`. |
+| Accesibilidad (`a11y.test.mjs`) | 16 | axe-core (WCAG 2.2 A/AA) en 12 vistas y, aparte, en Exportar y en la ficha de un control con evidencia de CTEM-Nexus, en Alcance con el perfil, Part-IS y el editor de mapeo abierto, Resumen con cinco anillos, Requisitos de Part-IS y la ficha de una medida con sus refuerzos desplegados; claro y oscuro, 1440 y 390 px: cero violaciones. |
 
 La [integración continua](.github/workflows/ci.yml) ejecuta todo en cada *push* y *pull request*, comprueba que `dist/` está al día y audita dependencias cada lunes. [CodeQL](.github/workflows/codeql.yml) analiza el código en cada *push*.
 
@@ -546,7 +567,7 @@ Lo publicado y lo que viene (refuerzos del ENS y perfiles del CCN, accesibilidad
 ## <img src="docs/assets/icons/triangle-alert.svg" width="20" height="20" valign="middle"/> Limitaciones conocidas
 
 - **ENS ↔ ISO/IEC 27001 sigue la guía CCN-STIC 825 (abril de 2026)**; el resto de correspondencias (NIS2, ISO/IEC 42001 y las 91 parejas ENS ↔ ISO que la guía no recoge, marcadas en la aplicación) son criterio del autor, contrastado con la plantilla de SoA del curso y con la guía técnica de ENISA. La propia guía advierte que la compatibilidad no es una equivalencia aritmética: revisa el resultado con quien vaya a auditar.
-- **Los refuerzos del ENS (R1, R2…) no se modelan por separado**: una medida con refuerzos se evalúa con los mismos controles que sin ellos.
+- **Los refuerzos del ENS se registran a mano** en la ficha de cada medida (o se importan de la SoA o de ENS Compliance Studio): Rosetta no infiere de los controles qué refuerzo concreto está implantado.
 - **Datos sin cifrar en el `localStorage` del navegador.** Todas las páginas de `heindall92.github.io` comparten origen; para datos reales, usa un dominio propio o la copia local, y haz copias de seguridad desde *Exportar*.
 - **ISO/IEC 27001 e ISO/IEC 42001 están protegidas por derechos de autor.** Rosetta solo incluye referencias y títulos abreviados.
 - **NIS2 en España**: a octubre de 2026 la ley de transposición sigue en tramitación; el asistente aplica la Directiva.

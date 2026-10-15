@@ -52,7 +52,7 @@ Descartados tras probarlos: XSS por cualquiera de las cuatro vías de entrada, c
 | E02 | Se podían excluir cláusulas 4–10 y arts. 20, 21 y 23 de NIS2 | ✅ No excluibles en motor, validación e interfaz |
 | E03 | Faltaban entidades CER, prestadores de confianza no cualificados, DORA y exclusiones del art. 2.7–2.8 | ✅ Añadidos; el RE 2024/2690 solo se indica para entidades en el ámbito |
 | E04 | La categoría del ENS podía quedar por debajo de los niveles | ✅ Categoría efectiva = máxima |
-| E05 | Refuerzos del ENS (R1…Rn) sin modelar | ⏳ Requiere sub-requisitos por refuerzo |
+| E05 | Refuerzos del ENS (R1…Rn) sin modelar | ✅ 2.13.0: 92 refuerzos, techo de parcial sin ellos y regla CO-25 |
 | E06 | Solapamiento ISO/IEC 27001 → ENS inflado (96 %) | ✅ Solo enlaces totales (85 %) |
 | E07 | CO-06 ignoraba medidas parciales; CO-09 no avisaba sin fecha | ✅ |
 | E08 | El texto de fuentes decía que los títulos ISO eran paráfrasis | ✅ Corregido |

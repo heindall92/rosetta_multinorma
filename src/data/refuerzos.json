@@ -1,0 +1,633 @@
+{
+  "fuente": "Real Decreto 311/2022, de 3 de mayo (ENS), anexo II: refuerzos de cada medida. Texto del BOE (BOE-A-2022-7191), que se puede reproducir.",
+  "medidas": {
+    "op.pl.1": [
+      {
+        "id": "R1",
+        "t": "Análisis de riesgos semiformal",
+        "t_en": "Semi-formal risk analysis",
+        "texto": "Se deberá realizar un análisis de riesgos semiformal, usando un lenguaje específico, con un catálogo básico de amenazas y una semántica definida. Es decir, una presentación con tablas que:\n– [op.pl.1.r1.1] Valore cualitativamente los activos más valiosos del sistema.\n– [op.pl.1.r1.2] Cuantifique las amenazas más probables.\n– [op.pl.1.r1.3] Valore las salvaguardas que protegen de dichas amenazas.\n– [op.pl.1.r1.4] Valore el riesgo residual."
+      },
+      {
+        "id": "R2",
+        "t": "Análisis de riesgos formal",
+        "t_en": "Formal risk analysis",
+        "texto": "Se deberá realizar un análisis formal, usando un lenguaje específico, con un fundamento matemático reconocido internacionalmente, que:\n– [op.pl.1.r2.1] Valore cualitativamente los activos más valiosos del sistema.\n– [op.pl.1.r2.2] Cuantifique las amenazas posibles.\n– [op.pl.1.r2.3] Valore y priorice las salvaguardas adecuadas.\n– [op.pl.1.r2.4] Valore y asuma formalmente el riesgo residual."
+      }
+    ],
+    "op.pl.2": [
+      {
+        "id": "R1",
+        "t": "Sistema de gestión",
+        "t_en": "Management system",
+        "texto": "[op.pl.2.r1.1] Sistema de gestión, relativo a la planificación, organización y control de los recursos relativos a la seguridad de la información."
+      },
+      {
+        "id": "R2",
+        "t": "Sistema de gestión de la seguridad con mejora continua",
+        "t_en": "Security management system with continuous improvement",
+        "texto": "[op.pl.2.r2.1] Sistema de gestión de la seguridad de la información, con actualización y aprobación periódica."
+      },
+      {
+        "id": "R3",
+        "t": "Validación de datos",
+        "t_en": "Data validation",
+        "texto": "[op.pl.2.r3.1] Controles técnicos internos, incluyendo la validación de datos de entrada, salida y datos intermedios."
+      }
+    ],
+    "op.pl.4": [
+      {
+        "id": "R1",
+        "t": "Mejora continua de la gestión de la capacidad",
+        "t_en": "Continuous improvement of capacity management",
+        "texto": "– [op.pl.4.r1.1] Se realizará una previsión de la capacidad y se mantendrá actualizada durante todo el ciclo de vida del sistema.\n– [op.pl.4.r1.2] Se emplearán herramientas y recursos para la monitorización de la capacidad."
+      }
+    ],
+    "op.acc.1": [
+      {
+        "id": "R1",
+        "t": "Identificación avanzada",
+        "t_en": "Advanced identification",
+        "texto": "– [op.acc.1.r1.1] La identificación del usuario permitirá al Responsable del Sistema, al Responsable de la Seguridad o a sus respectivos administradores delegados, singularizar a la persona asociada al mismo, así como sus responsabilidades en el sistema.\n– [op.acc.1.r1.2] Los datos de identificación serán utilizados por el sistema para determinar los privilegios del usuario conforme a los requisitos de control de acceso establecidos en la documentación de seguridad.\n– [op.acc.1.r1.3] Se asegurará la existencia de una lista actualizada de usuarios autorizados y mantenida por el administrador del sistema/de la seguridad del sistema."
+      }
+    ],
+    "op.acc.2": [
+      {
+        "id": "R1",
+        "t": "Privilegios de acceso",
+        "t_en": "Access privileges",
+        "texto": "– [op.acc.2.r1.1] Todos los usuarios autorizados deben tener un conjunto de atributos de seguridad (privilegios) que puedan ser mantenidos individualmente.\n– [op.acc.2.r1.2] Los privilegios de acceso se implementarán para restringir el tipo de acceso que un usuario puede tener (lectura, escritura, modificación, borrado, etc.)."
+      }
+    ],
+    "op.acc.3": [
+      {
+        "id": "R1",
+        "t": "Segregación rigurosa",
+        "t_en": "Strict segregation",
+        "texto": "– [op.acc.3.r1.1] Siempre que sea posible, la misma persona no aunará funciones de configuración y mantenimiento del sistema.\n– [op.acc.3.r1.2] La misma persona no puede aunar funciones de auditoría o supervisión con cualquier otra función."
+      }
+    ],
+    "op.acc.5": [
+      {
+        "id": "R1",
+        "t": "Contraseñas",
+        "t_en": "Passwords",
+        "texto": "– [op.acc.5.r1.1] Se empleará una contraseña como mecanismo de autenticación.\n– [op.acc.5.r1.2] Se impondrán normas de complejidad mínima y robustez frente a ataques de adivinación (ver guías CCN-STIC)."
+      },
+      {
+        "id": "R2",
+        "t": "Contraseña + OTP",
+        "t_en": "Password + OTP",
+        "texto": "– [op.acc.5.r2.1] Se requerirá una contraseña de un solo uso (OTP, en inglés) como complemento a la contraseña de usuario."
+      },
+      {
+        "id": "R3",
+        "t": "Certificados",
+        "t_en": "Certificates",
+        "texto": "– [op.acc.5.r3.1] Se emplearán certificados cualificados como mecanismo de autenticación.\n– [op.acc.5.r3.2] El uso del certificado estará protegido por un segundo factor, del tipo PIN o biométrico.\n– [op.acc.5.r3.3] Las credenciales utilizadas deberán haber sido obtenidas tras un registro previo presencial, o bien telemático, usando un certificado electrónico cualificado."
+      },
+      {
+        "id": "R4",
+        "t": "Certificados en dispositivo físico",
+        "t_en": "Certificates on a physical device",
+        "texto": "– [op.acc.5.r4.1] Se emplearán certificados cualificados como mecanismo de autenticación, en soporte físico (tarjeta o similar) usando algoritmos, parámetros y dispositivos autorizados por el CCN.\n– [op.acc.5.r4.2] El uso del certificado estará protegido por un segundo factor, del tipo PIN o biométrico.\n– [op.acc.5.r4.3] Las credenciales utilizadas deberán haber sido obtenidas tras un registro previo presencial, o bien telemático, usando certificado electrónico cualificado."
+      },
+      {
+        "id": "R5",
+        "t": "Registro",
+        "t_en": "Logging",
+        "texto": "– [op.acc.5.r5.1] Se registrarán los accesos con éxito y los fallidos.\n– [op.acc.5.r5.2] Se informará al usuario del último acceso efectuado con su identidad."
+      }
+    ],
+    "op.acc.6": [
+      {
+        "id": "R1",
+        "t": "Contraseñas",
+        "t_en": "Passwords",
+        "texto": "– [op.acc.6.r1.1] Se empleará una contraseña como mecanismo de autenticación cuando el acceso se realiza desde zonas controladas y sin atravesar zonas no controladas (véase refuerzo R8).\n– [op.acc.6.r1.2] Se impondrán normas de complejidad mínima y robustez frente a ataques de adivinación (ver guías CCN-STIC)."
+      },
+      {
+        "id": "R2",
+        "t": "Contraseña + otro factor de autenticación",
+        "t_en": "Password + another authentication factor",
+        "texto": "– [op.acc.6.r2.1] Se requerirá un segundo factor tal como «algo que se tiene», es decir, un dispositivo, una contraseña de un solo uso (OTP, en inglés) como complemento a la contraseña de usuario, o «algo que se es»."
+      },
+      {
+        "id": "R3",
+        "t": "Certificados",
+        "t_en": "Certificates",
+        "texto": "– [op.acc.6.r3.1] Se emplearán certificados cualificados como mecanismo de autenticación.\n– [op.acc.6.r3.2] El uso del certificado estará protegido por un segundo factor, del tipo PIN o biométrico."
+      },
+      {
+        "id": "R4",
+        "t": "Certificados en dispositivo físico",
+        "t_en": "Certificates on a physical device",
+        "texto": "– [op.acc.6.r4.1] Se emplearán certificados cualificados como mecanismo de autenticación, en soporte físico (tarjeta o similar) usando algoritmos, parámetros y dispositivos autorizados por el CCN.\n– [op.acc.6.r4.2] El uso del certificado estará protegido por un segundo factor, del tipo PIN o biométrico."
+      },
+      {
+        "id": "R5",
+        "t": "Registro",
+        "t_en": "Logging",
+        "texto": "– [op.acc.6.r5.1] Se registrarán los accesos con éxito y los fallidos.\n– [op.acc.6.r5.2] Se informará al usuario del último acceso efectuado con su identidad."
+      },
+      {
+        "id": "R6",
+        "t": "Limitación de la ventana de acceso",
+        "t_en": "Access window limitation",
+        "texto": "– [op.acc.6.r6.1] Se definirán aquellos puntos en los que el sistema requerirá una renovación de la autenticación del usuario, mediante identificación singular, no bastando con la sesión establecida."
+      },
+      {
+        "id": "R7",
+        "t": "Suspensión por no utilización",
+        "t_en": "Suspension for non-use",
+        "texto": "– [op.acc.6.r7.1] Las credenciales se suspenderán tras un periodo definido de no utilización."
+      },
+      {
+        "id": "R8",
+        "t": "Doble factor para acceso desde o a través de zonas no controladas",
+        "t_en": "Two factors for access from or through uncontrolled zones",
+        "texto": "Se denomina «zona controlada» aquella que no es de acceso público, requiriéndose que el usuario, antes de tener acceso al equipo, se haya autenticado previamente de alguna forma (control de acceso a las instalaciones), diferente del mecanismo de autenticación lógica frente al sistema. Un ejemplo de zona no controlada es Internet.\n– [op.acc.6.r8.1] Para el acceso desde o a través de zonas no controladas se requerirá un doble factor de autenticación: R2, R3 o R4."
+      },
+      {
+        "id": "R9",
+        "t": "Acceso remoto (todos los niveles)",
+        "t_en": "Remote access (all levels)",
+        "texto": "– [op.acc.6.r9.1] Será de aplicación la ITS de Interconexión de sistemas de información.\n– [op.acc.6.r9.2] El acceso remoto deberá considerar los siguientes aspectos:\na) Ser autorizado por la autoridad correspondiente.\nb) El tráfico deberá ser cifrado.\nc) Si la utilización no se produce de manera constante, el acceso remoto deberá encontrarse inhabilitado y habilitarse únicamente cuando sea necesario.\nd) Deberán recogerse registros de auditoría de este tipo de conexiones."
+      }
+    ],
+    "op.exp.3": [
+      {
+        "id": "R1",
+        "t": "Mantenimiento regular de la configuración",
+        "t_en": "Regular configuration maintenance",
+        "texto": "– [op.exp.3.r1.1] Existirán configuraciones hardware/software, autorizadas y mantenidas regularmente, para los servidores, elementos de red y estaciones de trabajo.\n– [op.exp.3.r1.2] Se verificará periódicamente la configuración hardware/software del sistema para asegurar que no se han introducido ni instalado elementos no autorizados.\n– [op.exp.3.r1.3] Se mantendrá una lista de servicios autorizados para servidores y estaciones de trabajo."
+      },
+      {
+        "id": "R2",
+        "t": "Responsabilidad de la configuración",
+        "t_en": "Configuration ownership",
+        "texto": "– [op.exp.3.r2.1] La configuración de seguridad del sistema operativo y aplicaciones, tanto de estaciones y servidores como de la electrónica de red del sistema, será responsabilidad de un número muy limitado de administradores del sistema."
+      },
+      {
+        "id": "R3",
+        "t": "Copias de seguridad",
+        "t_en": "Backups",
+        "texto": "– [op.exp.3.r3.1] Se realizarán copias de seguridad de la configuración del sistema de forma que sea posible reconstruirlo en parte o en su totalidad tras un incidente."
+      }
+    ],
+    "op.exp.4": [
+      {
+        "id": "R1",
+        "t": "Pruebas en preproducción",
+        "t_en": "Pre-production testing",
+        "texto": "[op.exp.4.r1.1] Antes de poner en producción una nueva versión o una versión parcheada, se comprobará en un entorno de prueba controlado y consistente en configuración al entorno de producción, que la nueva instalación funciona correctamente y no disminuye la eficacia de las funciones necesarias para el trabajo diario."
+      },
+      {
+        "id": "R2",
+        "t": "Prevención de fallos",
+        "t_en": "Failure prevention",
+        "texto": "[op.exp.4.r2.1] Antes de la aplicación de las configuraciones, parches y actualizaciones de seguridad se preverá un mecanismo para revertirlos en caso de aparición de efectos adversos."
+      }
+    ],
+    "op.exp.5": [
+      {
+        "id": "R1",
+        "t": "Prevención de fallos",
+        "t_en": "Failure prevention",
+        "texto": "– [op.exp.5.r1.1] Antes de la aplicación de los cambios, se deberá tener en cuenta la posibilidad de revertirlos en caso de la aparición de efectos adversos.\n– [op.exp.5.r1.2] Todos los fallos en el software y hardware deberán ser comunicados al responsable designado en la organización de la seguridad.\n– [op.exp.5.r1.3] Todos los cambios en el sistema deberán documentarse, incluyendo una valoración del impacto que dicho cambio supone en la seguridad del sistema."
+      }
+    ],
+    "op.exp.6": [
+      {
+        "id": "R1",
+        "t": "Escaneo periódico",
+        "t_en": "Periodic scanning",
+        "texto": "– [op.exp.6.r1.1] Todo el sistema se escaneará regularmente para detectar código dañino."
+      },
+      {
+        "id": "R2",
+        "t": "Revisión preventiva del sistema",
+        "t_en": "Preventive system review",
+        "texto": "– [op.exp.6.r2.1] Las funciones críticas se analizarán al arrancar el sistema en prevención de modificaciones no autorizadas."
+      },
+      {
+        "id": "R3",
+        "t": "Lista blanca",
+        "t_en": "Allow list",
+        "texto": "– [op.exp.6.r3.1] Solamente se podrán ejecutar aquellas aplicaciones previamente autorizadas. Se implementará una lista blanca para impedir la ejecución de aplicaciones no autorizadas."
+      },
+      {
+        "id": "R4",
+        "t": "Capacidad de respuesta en caso de incidente",
+        "t_en": "Incident response capability",
+        "texto": "– [op.exp.6.r4.1] Se emplearán herramientas de seguridad orientadas a detectar, investigar y resolver actividades sospechosas en puestos de usuario y servidores (EDR - Endpoint Detection and Response)."
+      }
+    ],
+    "op.exp.7": [
+      {
+        "id": "R1",
+        "t": "Notificación",
+        "t_en": "Notification",
+        "texto": "– [op.exp.7.r1.1] Se dispondrá de soluciones de ventanilla única para la notificación de incidentes al CCN-CERT, que permita la distribución de notificaciones a las diferentes entidades de manera federada, utilizando para ello dependencias administrativas jerárquicas."
+      },
+      {
+        "id": "R2",
+        "t": "Detección y Respuesta",
+        "t_en": "Detection and response",
+        "texto": "El proceso integral para hacer frente a los incidentes que puedan tener un impacto en la seguridad del sistema ([op.exp.7.1]) deberá incluir:\n– [op.exp.7.r2.1] Implantación de medidas urgentes, incluyendo la detención de servicios, el aislamiento del sistema afectado, la recogida de evidencias y protección de los registros, según convenga al caso.\n– [op.exp.7.r2.2] Asignación de recursos para investigar las causas, analizar las consecuencias y resolver el incidente.\n– [op.exp.7.r2.3] Informar del incidente a los responsables de la información y servicios afectados y de las actuaciones llevadas a cabo para su resolución.\n– [op.exp.7.r2.4] Medidas para:\na) Prevenir que se repita el incidente.\nb) Incluir en los procedimientos de usuario la identificación y forma de tratar el incidente.\nc) Actualizar, extender, mejorar u optimizar los procedimientos de resolución de incidentes."
+      },
+      {
+        "id": "R3",
+        "t": "Reconfiguración dinámica",
+        "t_en": "Dynamic reconfiguration",
+        "texto": "La reconfiguración dinámica del sistema persigue detener, desviar o limitar ataques, acotando los daños.\n– [op.exp.7.r3.1] La reconfiguración dinámica incluye, por ejemplo, cambios en las reglas de los enrutadores (routers), listas de control de acceso, parámetros del sistema de detección / prevención de intrusiones y reglas en los cortafuegos y puertas de enlace, aislamiento de elementos críticos y aislamiento de las copias de seguridad.\n– [op.exp.7.r3.2] El organismo adaptará los procedimientos de reconfiguración dinámica reaccionando a los anuncios recibidos del CCN-CERT relativos a ciberamenazas sofisticadas y campañas de ataques."
+      }
+    ],
+    "op.exp.8": [
+      {
+        "id": "R1",
+        "t": "Revisión de los registros",
+        "t_en": "Log review",
+        "texto": "– [op.exp.8.r1.1] Se revisarán informalmente, de forma periódica, los registros de actividad, buscando patrones anormales."
+      },
+      {
+        "id": "R2",
+        "t": "Sincronización del reloj del sistema",
+        "t_en": "System clock synchronisation",
+        "texto": "– [op.exp.8.r2.1] El sistema deberá disponer de una referencia de tiempo (timestamp) para facilitar las funciones de registro de eventos y auditoría. La modificación de la referencia de tiempo del sistema será una función de administración y, en caso de realizarse su sincronización con otros dispositivos, deberán utilizarse mecanismos de autenticación e integridad."
+      },
+      {
+        "id": "R3",
+        "t": "Retención de registros",
+        "t_en": "Log retention",
+        "texto": "– [op.exp.8.r3.1] En la documentación de seguridad del sistema se deberán indicar los eventos de seguridad que serán auditados y el tiempo de retención de los registros antes de ser eliminados."
+      },
+      {
+        "id": "R4",
+        "t": "Control de acceso",
+        "t_en": "Access control",
+        "texto": "– [op.exp.8.r4.1] Los registros de actividad y, en su caso, las copias de seguridad de los mismos, solamente podrán ser accedidos o eliminarse por personal debidamente autorizado."
+      },
+      {
+        "id": "R5",
+        "t": "Revisión automática y correlación de eventos",
+        "t_en": "Automated review and event correlation",
+        "texto": "– [op.exp.8.r5.1] El sistema deberá implementar herramientas para analizar y revisar la actividad del sistema y la información de auditoría, en búsqueda de comprometimientos de la seguridad posibles o reales.\n– [op.exp.8.r5.2] Se dispondrá de un sistema automático de recolección de registros, correlación de eventos y respuesta automática ante los mismos."
+      }
+    ],
+    "op.exp.10": [
+      {
+        "id": "R1",
+        "t": "Algoritmos autorizados",
+        "t_en": "Authorised algorithms",
+        "texto": "– [op.exp.10.r1.1] Se emplearán algoritmos y parámetros autorizados por el CCN."
+      }
+    ],
+    "op.ext.4": [
+      {
+        "id": "R1",
+        "t": "Coordinación de actividades",
+        "t_en": "Coordination of activities",
+        "texto": "– [op.ext.4.r1.1] Cuando se interconecten sistemas en los que la identificación, autenticación y autorización tengan lugar en diferentes dominios de seguridad, bajo distintas responsabilidades, las medidas de seguridad locales se acompañarán de los correspondientes mecanismos y procedimientos de coordinación para la atribución y ejercicio efectivos de las responsabilidades de cada sistema."
+      }
+    ],
+    "op.nub.1": [
+      {
+        "id": "R1",
+        "t": "Servicios certificados",
+        "t_en": "Certified services",
+        "texto": "– [op.nub.1.r1.1] Cuando se utilicen servicios en la nube suministrados por terceros, estos deberán estar certificados bajo una metodología de certificación reconocida por el Organismo de Certificación del Esquema Nacional de Evaluación y Certificación de Seguridad de las Tecnologías de la Información.\n– [op.nub.1.r1.2] Si el servicio en la nube es un servicio de seguridad deberá cumplir con los requisitos establecidos en [op.pl.5]."
+      },
+      {
+        "id": "R2",
+        "t": "Guías de Configuración de Seguridad Específicas",
+        "t_en": "Specific security configuration guides",
+        "texto": "– [op.nub.1.r2.1] La configuración de seguridad de los sistemas que proporcionan estos servicios deberá realizarse según la correspondiente guía CCN-STIC de Configuración de Seguridad Específica, orientadas tanto al usuario como al proveedor."
+      }
+    ],
+    "op.mon.1": [
+      {
+        "id": "R1",
+        "t": "Detección basada en reglas",
+        "t_en": "Rule-based detection",
+        "texto": "– [op.mon.1.r1.1] El sistema dispondrá de herramientas de detección o prevención de intrusiones basadas en reglas."
+      },
+      {
+        "id": "R2",
+        "t": "Procedimientos de respuesta",
+        "t_en": "Response procedures",
+        "texto": "– [op.mon.1.r2.1] Existirán procedimientos de respuesta a las alertas generadas por el sistema de detección o prevención de intrusiones."
+      }
+    ],
+    "op.mon.2": [
+      {
+        "id": "R1",
+        "t": "Efectividad del sistema de gestión de incidentes",
+        "t_en": "Effectiveness of the incident management system",
+        "texto": "– [op.mon.2.r1.1] Se recopilarán los datos precisos que posibiliten evaluar el comportamiento del sistema de gestión de incidentes, de acuerdo con la Instrucción Técnica de Seguridad de Notificación de Incidentes de Seguridad y con la correspondiente guía CCN-STIC."
+      },
+      {
+        "id": "R2",
+        "t": "Eficiencia del sistema de gestión de la seguridad",
+        "t_en": "Efficiency of the security management system",
+        "texto": "– [op.mon.2.r2.1] Se recopilarán los datos precisos para conocer la eficiencia del sistema de seguridad, en relación con los recursos consumidos, en términos de horas y presupuesto."
+      }
+    ],
+    "op.mon.3": [
+      {
+        "id": "R1",
+        "t": "Correlación de eventos",
+        "t_en": "Event correlation",
+        "texto": "– [op.mon.3.r1.1] Se dispondrá de un sistema automático de recolección de eventos de seguridad que permita la correlación de los mismos."
+      },
+      {
+        "id": "R2",
+        "t": "Análisis dinámico",
+        "t_en": "Dynamic analysis",
+        "texto": "– [op.mon.3.r2.1] Se dispondrá de soluciones de vigilancia que permitan determinar la superficie de exposición con relación a vulnerabilidades y deficiencias de configuración."
+      },
+      {
+        "id": "R3",
+        "t": "Ciberamenazas avanzadas",
+        "t_en": "Advanced cyber threats",
+        "texto": "– [op.mon.3.r3.1] Se dispondrá de sistemas para detección de amenazas avanzadas y comportamientos anómalos.\n– [op.mon.3.r3.2] Se dispondrá de sistemas para la detección de amenazas persistentes avanzadas (Advanced Persistent Threat, APT) mediante la detección de anomalías significativas en el tráfico de la red."
+      },
+      {
+        "id": "R4",
+        "t": "Observatorios digitales",
+        "t_en": "Digital observatories",
+        "texto": "– [op.mon.3.r4.1] Se dispondrá de observatorios digitales con fines de cibervigilancia dedicados a la detección y seguimiento de anomalías que pudieran representar indicadores de amenaza en contenidos digitales."
+      },
+      {
+        "id": "R5",
+        "t": "Minería de datos",
+        "t_en": "Data mining",
+        "texto": "Se aplicarán medidas para prevenir, detectar y reaccionar frente a intentos de minería de datos:\n– [op.mon.3.r5.1] Limitación de las consultas, monitorizando volumen y frecuencia.\n– [op.mon.3.r5.2] Alerta a los administradores de seguridad de comportamientos sospechosos en tiempo real."
+      },
+      {
+        "id": "R6",
+        "t": "Inspecciones de seguridad",
+        "t_en": "Security inspections",
+        "texto": "Periódicamente, o tras incidentes que hayan desvelado vulnerabilidades del sistema nuevas o subestimadas, se realizarán las siguientes inspecciones:\n– [op.mon.3.r6.1] Verificación de configuración.\n– [op.mon.3.r6.2] Análisis de vulnerabilidades.\n– [op.mon.3.r6.3] Pruebas de penetración."
+      }
+    ],
+    "mp.if.4": [
+      {
+        "id": "R1",
+        "t": "Suministro eléctrico de emergencia",
+        "t_en": "Emergency power supply",
+        "texto": "– [mp.if.4.r1.1] En caso de fallo del suministro principal, el abastecimiento eléctrico deberá estar garantizado durante el tiempo suficiente para una terminación ordenada de los procesos y la salvaguarda de la información."
+      }
+    ],
+    "mp.per.2": [
+      {
+        "id": "R1",
+        "t": "Confirmación expresa",
+        "t_en": "Express confirmation",
+        "texto": "– [mp.per.2.r1.1] Se ha de obtener la confirmación expresa de que los usuarios conocen las instrucciones de seguridad necesarias y obligatorias y su aceptación, así como los procedimientos necesarios para llevarlas a cabo de manera adecuada."
+      }
+    ],
+    "mp.eq.1": [
+      {
+        "id": "R1",
+        "t": "Almacenamiento del material",
+        "t_en": "Storage of material",
+        "texto": "– [mp.eq.1.r1.1] Una vez usado, y siempre que sea factible, el material se almacenará en lugar cerrado."
+      }
+    ],
+    "mp.eq.2": [
+      {
+        "id": "R1",
+        "t": "Cierre de sesiones",
+        "t_en": "Session closing",
+        "texto": "– [mp.eq.2.r1.1] Pasado un cierto tiempo, superior al anterior, se cancelarán las sesiones abiertas desde dicho puesto de trabajo.\nUna Guía CCN-STIC concretará la implementación de la configuración de seguridad adaptada a la categorización del sistema o perfil de cumplimiento asociado."
+      }
+    ],
+    "mp.eq.3": [
+      {
+        "id": "R1",
+        "t": "Cifrado del disco",
+        "t_en": "Disk encryption",
+        "texto": "– [mp.eq.3.r1.1] Se protegerá el dispositivo portátil mediante cifrado del disco duro cuando el nivel de confidencialidad de la información almacenada en el mismo sea de nivel MEDIO."
+      },
+      {
+        "id": "R2",
+        "t": "Entornos protegidos",
+        "t_en": "Protected environments",
+        "texto": "– [mp.eq.3.r2.1] El uso de dispositivos portátiles fuera de las instalaciones de la organización se restringirá a entornos protegidos, donde el acceso sea controlado y a salvo de hurtos y miradas indiscretas."
+      }
+    ],
+    "mp.eq.4": [
+      {
+        "id": "R1",
+        "t": "Productos certificados",
+        "t_en": "Certified products",
+        "texto": "– [mp.eq.4.r1.1] Se usarán, cuando sea posible, productos o servicios que cumplan lo establecido en [op.pl.5]."
+      }
+    ],
+    "mp.com.2": [
+      {
+        "id": "R1",
+        "t": "Algoritmos y parámetros autorizados",
+        "t_en": "Authorised algorithms and parameters",
+        "texto": "– [mp.com.2.r1.1] Se emplearán algoritmos y parámetros autorizados por el CCN."
+      },
+      {
+        "id": "R2",
+        "t": "Dispositivos hardware",
+        "t_en": "Hardware devices",
+        "texto": "– [mp.com.2.r2.1] Se emplearán, dispositivos hardware en el establecimiento y utilización de la red privada virtual."
+      },
+      {
+        "id": "R3",
+        "t": "Productos certificados",
+        "t_en": "Certified products",
+        "texto": "– [mp.com.2.r3.1] Se usarán productos o servicios que cumplan lo establecido en [op.pl.5]."
+      }
+    ],
+    "mp.com.3": [
+      {
+        "id": "R1",
+        "t": "Redes privadas virtuales",
+        "t_en": "Virtual private networks",
+        "texto": "– [mp.com.3.r1.1] Se emplearán redes privadas virtuales cifradas cuando la comunicación discurra por redes fuera del propio dominio de seguridad."
+      },
+      {
+        "id": "R2",
+        "t": "Algoritmos y parámetros autorizados",
+        "t_en": "Authorised algorithms and parameters",
+        "texto": "– [mp.com.3.r2.1] Se emplearán algoritmos y parámetros autorizados por el CCN."
+      },
+      {
+        "id": "R3",
+        "t": "Dispositivos hardware",
+        "t_en": "Hardware devices",
+        "texto": "– [mp.com.3.r3.1] Se recomienda emplear dispositivos hardware en el establecimiento y utilización de la red privada virtual."
+      },
+      {
+        "id": "R4",
+        "t": "Productos certificados",
+        "t_en": "Certified products",
+        "texto": "– [mp.com.3.r4.1] Se emplearán productos certificados conforme a lo establecido en [op.pl.5]."
+      }
+    ],
+    "mp.com.4": [
+      {
+        "id": "R1",
+        "t": "Segmentación lógica básica",
+        "t_en": "Basic logical segmentation",
+        "texto": "– [mp.com.4.r1.1] Los segmentos de red se implementarán por medio de redes de área local virtuales (Virtual Local Area Network, VLAN).\n– [mp.com.4.r1.2] La red que conforma el sistema deberá segregarse en distintas subredes contemplando como mínimo:\n• Usuarios.\n• Servicios.\n• Administración."
+      },
+      {
+        "id": "R2",
+        "t": "Segmentación lógica avanzada",
+        "t_en": "Advanced logical segmentation",
+        "texto": "– [mp.com.4.r2.1] Los segmentos de red se implementarán por medio de redes privadas virtuales (Virtual Private Network, VPN)."
+      },
+      {
+        "id": "R3",
+        "t": "Segmentación física",
+        "t_en": "Physical segmentation",
+        "texto": "– [mp.com.4.r3.1] Los segmentos de red se implementarán con medios físicos separados."
+      },
+      {
+        "id": "R4",
+        "t": "Puntos de interconexión",
+        "t_en": "Interconnection points",
+        "texto": "– [mp.com.4.r4.1] Control de entrada de los usuarios que llegan a cada segmento y control de entrada y salida de la información disponible en cada segmento.\n– [mp.com.4.r4.2] El punto de interconexión estará particularmente asegurado, mantenido y monitorizado, (como en [mp.com.1])."
+      }
+    ],
+    "mp.si.2": [
+      {
+        "id": "R1",
+        "t": "Productos certificados",
+        "t_en": "Certified products",
+        "texto": "– [mp.si.2.r1.1] Se emplearán productos certificados conforme a lo establecido en [op.pl.5]."
+      },
+      {
+        "id": "R2",
+        "t": "Copias de seguridad",
+        "t_en": "Backups",
+        "texto": "– [mp.si.2.r2.1] Las copias se seguridad se cifrarán utilizando algoritmos y parámetros autorizados por el CCN."
+      }
+    ],
+    "mp.si.5": [
+      {
+        "id": "R1",
+        "t": "Productos certificados",
+        "t_en": "Certified products",
+        "texto": "– [mp.si.5.r1.1] Se usarán productos o servicios que cumplan lo establecido en [op.pl.5]."
+      }
+    ],
+    "mp.sw.1": [
+      {
+        "id": "R1",
+        "t": "Mínimo privilegio",
+        "t_en": "Least privilege",
+        "texto": "– [mp.sw.1.r1.1] Las aplicaciones se desarrollarán respetando el principio de mínimo privilegio, accediendo únicamente a los recursos imprescindibles para su función, y con los privilegios que sean indispensables."
+      },
+      {
+        "id": "R2",
+        "t": "Metodología de desarrollo seguro",
+        "t_en": "Secure development methodology",
+        "texto": "– [mp.sw.1.r2.1] Se aplicará una metodología de desarrollo seguro reconocida que:\na) Tendrá en consideración los aspectos de seguridad a lo largo de todo el ciclo de vida.\nb) Incluirá normas de programación segura, especialmente: control de asignación y liberación de memoria, desbordamiento de memoria (overflow).\nc) Tratará específicamente los datos usados en pruebas.\nd) Permitirá la inspección del código fuente."
+      },
+      {
+        "id": "R3",
+        "t": "Seguridad desde el diseño",
+        "t_en": "Security by design",
+        "texto": "– [mp.sw.1.r3.1] Los siguientes elementos serán parte integral del diseño del sistema:\na) Los mecanismos de identificación y autenticación.\nb) Los mecanismos de protección de la información tratada.\nc) La generación y tratamiento de pistas de auditoría."
+      },
+      {
+        "id": "R4",
+        "t": "Datos de pruebas",
+        "t_en": "Test data",
+        "texto": "– [mp.sw.1.r4.1] Preferiblemente, las pruebas previas a la implantación o modificación de los sistemas de información no se realizarán con datos reales. En caso de que fuese necesario recurrir a datos reales se garantizará el nivel de seguridad correspondiente."
+      }
+    ],
+    "mp.sw.2": [
+      {
+        "id": "R1",
+        "t": "Pruebas",
+        "t_en": "Testing",
+        "texto": "– [mp.sw.2.r1.1] Las pruebas se realizarán en un entorno aislado (pre-producción)."
+      }
+    ],
+    "mp.info.3": [
+      {
+        "id": "R1",
+        "t": "Certificados cualificados",
+        "t_en": "Qualified certificates",
+        "texto": "– [mp.info.3.r1.1] Cuando se empleen sistemas de firma electrónica avanzada basados en certificados, estos serán cualificados."
+      },
+      {
+        "id": "R2",
+        "t": "Algoritmos y parámetros autorizados",
+        "t_en": "Authorised algorithms and parameters",
+        "texto": "– [mp.info.3.r2.1] Se emplearán algoritmos y parámetros autorizados por el CCN o por un esquema nacional o europeo que resulte de aplicación.\nEl CCN determinará los algoritmos criptográficos que hayan sido autorizados nominalmente para su uso en el Esquema Nacional de Seguridad conforme a la Instrucción Técnica de Seguridad Criptología de empleo en el ENS."
+      },
+      {
+        "id": "R3",
+        "t": "Verificación y validación de firma",
+        "t_en": "Signature verification and validation",
+        "texto": "– [mp.info.3.r3.1] Cuando proceda, se garantizará la verificación y validación de la firma electrónica durante el tiempo requerido por la actividad administrativa que aquélla soporte, sin perjuicio de que se pueda ampliar este período de acuerdo con lo que establezca la Política de Firma Electrónica y de Certificados que sea de aplicación. Para tal fin se adjuntará a la firma, o se referenciará, toda la información pertinente para su verificación y validación, incluyendo certificados o datos de verificación y validación."
+      },
+      {
+        "id": "R4",
+        "t": "Firma electrónica avanzada basada en certificados cualificados",
+        "t_en": "Advanced electronic signature based on qualified certificates",
+        "texto": "– [mp.info.3.r4.1] Se usará firma electrónica avanzada basada en certificados cualificados complementada por un segundo factor del tipo «algo que se sabe» o «algo que se es»."
+      }
+    ],
+    "mp.info.6": [
+      {
+        "id": "R1",
+        "t": "Pruebas de recuperación",
+        "t_en": "Recovery tests",
+        "texto": "– [mp.info.6.r1.1] Los procedimientos de copia de seguridad y restauración deben probarse regularmente. Su frecuencia dependerá de la criticidad de los datos y del impacto que cause la falta de disponibilidad."
+      },
+      {
+        "id": "R2",
+        "t": "Protección de las copias de seguridad",
+        "t_en": "Backup protection",
+        "texto": "– [mp.info.6.r2.1] Al menos, una de las copias de seguridad se almacenará de forma separada en lugar diferente, de tal manera que un incidente no pueda afectar tanto al repositorio original como a la copia simultáneamente."
+      }
+    ],
+    "mp.s.2": [
+      {
+        "id": "R1",
+        "t": "Auditorías de seguridad",
+        "t_en": "Security audits",
+        "texto": "– [mp.s.2.r1.1] Se realizarán auditorías continuas de seguridad de «caja negra» sobre las aplicaciones web durante la fase de desarrollo y antes de la fase de producción.\n– [mp.s.2.r1.2] La frecuencia de estas auditorías de seguridad quedará definida en el procedimiento de auditoría."
+      },
+      {
+        "id": "R2",
+        "t": "Auditorías de seguridad avanzada",
+        "t_en": "Advanced security audits",
+        "texto": "– [mp.s.2.r2.1] Se realizarán auditorías de seguridad de «caja blanca» sobre las aplicaciones web durante la fase de desarrollo.\n– [mp.s.2.r2.2] Se emplearán metodologías definidas y herramientas automáticas de detección de vulnerabilidades en la realización de las auditorías de seguridad sobre las aplicaciones web.\n– [mp.s.2.r2.3] Una vez finalizada una auditoría de seguridad, se analizarán los resultados y se solventarán las vulnerabilidades encontradas mediante los procedimientos definidos [op.exp.5]."
+      },
+      {
+        "id": "R3",
+        "t": "Protección de las cachés",
+        "t_en": "Cache protection",
+        "texto": "– [mp.s.2.r3.1] Se prevendrán ataques de manipulación de programas o dispositivos que realizan una acción en representación de otros, conocidos en terminología inglesa como \"proxies\" y, sistemas especiales de almacenamiento de alta velocidad, conocidos en terminología inglesa como \"cachés\"."
+      }
+    ],
+    "mp.s.3": [
+      {
+        "id": "R1",
+        "t": "Monitorización",
+        "t_en": "Monitoring",
+        "texto": "– [mp.s.3.r1.1] Se registrará el uso de la navegación web, estableciendo los elementos que se registran, el periodo de retención de estos registros y el uso que el organismo prevé hacer de ellos.\n– [mp.s.3.r1.2] Se establecerá una función para la ruptura de canales cifrados a fin de inspeccionar su contenido, indicando qué se analiza, qué se registra, durante cuánto tiempo se retienen los registros y qué uso prevé hacer el organismo de estas inspecciones. Todo ello sin perjuicio de que se puedan autorizar accesos cifrados singulares a destinos de confianza.\n– [mp.s.3.r1.3] Se establecerá una lista negra de destinos vetados."
+      }
+    ],
+    "mp.s.4": [
+      {
+        "id": "R1",
+        "t": "Detección y reacción",
+        "t_en": "Detection and reaction",
+        "texto": "– [mp.s.4.r1.1] Se establecerá un sistema de detección y tratamiento de ataques de denegación de servicio (DoS y DDoS).\n– [mp.s. 4.r1.2] Se establecerán procedimientos de reacción a los ataques, incluyendo la comunicación con el proveedor de comunicaciones."
+      }
+    ]
+  }
+}

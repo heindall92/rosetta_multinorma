@@ -11,13 +11,14 @@ La publicación de Rosetta en LinkedIn (octubre de 2026, más de 5.600 impresion
 
 Las dos encajan con el rumbo del ecosistema: marcos públicos sin problemas de derechos de autor, sectores regulados (banca, transporte, industria) y correcciones hechas en abierto con revisión experta, como la de Heyker D. con la CCN-STIC 825 en la 2.3.0.
 
-## Estado actual (2.12.0)
+## Estado actual (2.13.0)
 
 - **16 normas y leyes, 594 requisitos y 152 controles unificados** en 14 dominios (`src/data/catalog.json`): **ENS** (RD 311/2022), **ISO/IEC 27001:2022**, **NIS2** (Directiva 2022/2555 y Reglamento de Ejecución 2024/2690), **ISO/IEC 42001:2023**, **Part-IS** (Reglamentos (UE) 2023/203 y 2022/1645), el **RIA** (Reglamento (UE) 2024/1689, con el Ómnibus 2026/1744), el **CRA** (Reglamento (UE) 2024/2847), el **NIST CSF 2.0**, **DORA** (Reglamento (UE) 2022/2554), el **RGPD con la LOPDGDD**, las leyes 21.663 y 21.719 de **Chile** y las leyes de protección de datos de **Colombia, México, Perú y Argentina**.
 - ENS ↔ ISO/IEC 27001 sigue la CCN-STIC 825; el resto de correspondencias son criterio propio y la interfaz lo indica. Las de los marcos con «tope parcial» nunca pasan de parciales frente a otra norma.
 - **Perfil regulatorio** con la propuesta de marcos aplicables y su base legal; el mapa circular dibuja solo los marcos del alcance.
 - **Marcos propios** en JSON o CSV, con mapeo asistido.
-- **24 reglas de coherencia**, entre ellas la evidencia técnica de CTEM-Nexus (CO-23) y el ENS para los datos personales del sector público (CO-24).
+- **25 reglas de coherencia**, entre ellas la evidencia técnica de CTEM-Nexus (CO-23), el ENS para los datos personales del sector público (CO-24) y los refuerzos del ENS (CO-25).
+- **Refuerzos del ENS** (92, con el texto del BOE): una medida sin los refuerzos de su nivel no pasa de parcial.
 
 ---
 
@@ -152,7 +153,8 @@ La propuesta es generalizar ese asistente. A partir de **dónde opera** la organ
 | Versión | Contenido | Estado |
 |---|---|---|
 | 2.12.0 ✓ publicada | **RGPD y LOPDGDD** (15 requisitos, regla CO-24), exigencias de 4 medidas del ENS comprobadas contra el BOE y `window.__ROSETTA__` solo en pruebas | Hecha |
-| 2.13.0 ← siguiente | **Refuerzos del ENS** (R1…Rn como sub-requisitos según el nivel, hallazgo E05 de la auditoría) y **perfiles de cumplimiento específicos del CCN** | Pendiente |
+| 2.13.0 ✓ publicada | **Refuerzos del ENS** (92 refuerzos, techo de parcial, regla CO-25, importación y exportación) y verificación de todas las exportaciones | Hecha |
+| 2.13.x ← siguiente | **Perfiles de cumplimiento específicos del CCN** (CCN-STIC 881A universidades, 883 y 890A entidades locales, 892 NIS2): un script los procesa desde el PDF oficial, que no se sube al repositorio, como la CCN-STIC 825 | Pendiente: necesita los PDF |
 | 2.14.0 | **Accesibilidad y ritmo de trabajo:** la rueda se recorre con el teclado (M3), acciones en bloque en Controles (M8), los ~60 textos de las exportaciones en el diccionario (M11) y redibujado parcial (M2) | Pendiente |
 | 3.0.0 | **Fase 1 de producción:** almacenamiento cifrado en el navegador (AES-256-GCM, PWA) y Trusted Types | Pendiente |
 

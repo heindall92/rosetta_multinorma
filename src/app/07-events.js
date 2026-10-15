@@ -6,7 +6,7 @@ function setPath(obj, path, value, schema = 'state') {
   // Solo rutas conocidas del modelo (lista blanca)
   const okState = (ks[0] === 'controles' && UC_IDS.has(ks[1]) && ['estado', 'responsable', 'evidencias', 'revision', 'notas'].includes(ks[2]) && ks.length === 3)
     || (ks[0] === 'proyecto' && ['nombre', 'organizacion', 'descripcion', 'sector'].includes(ks[1]) && ks.length === 2)
-    || (ks[0] === 'alcance' && FW.includes(ks[1]) && ((['on', 'motivo'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'categoria' && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'niveles' && E.DIMS.includes(ks[3]) && ks.length === 4) || (ks[1] === 'partis' && ks[2] === 'regimen' && ks.length === 3) || (ks[1] === 'ria' && ['rol', 'alto', 'transparencia', 'gpai'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'cra' && ks[2] === 'clase' && ks.length === 3) || (ks[1] === 'dora' && ['regimen', 'tlpt'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'cl21663' && ks[2] === 'oiv' && ks.length === 3)))
+    || (ks[0] === 'alcance' && FW.includes(ks[1]) && ((['on', 'motivo'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'ens' && ['categoria', 'refuerzos'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'niveles' && E.DIMS.includes(ks[3]) && ks.length === 4) || (ks[1] === 'partis' && ks[2] === 'regimen' && ks.length === 3) || (ks[1] === 'ria' && ['rol', 'alto', 'transparencia', 'gpai'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'cra' && ks[2] === 'clase' && ks.length === 3) || (ks[1] === 'dora' && ['regimen', 'tlpt'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'cl21663' && ks[2] === 'oiv' && ks.length === 3)))
     || (ks[0] === 'perfil' && ks[1] === 'opera' && E.LATAM.includes(ks[2]) && ks.length === 3)
     || (ks[0] === 'perfil' && has(E.PERFIL_DEF, ks[1]) && ks.length === 2)
     || (ks[0] === 'nis2q' && ['sector', 'especial', 'tamano', 'infraDigital'].includes(ks[1]) && ks.length === 2);
@@ -29,6 +29,7 @@ function setPath(obj, path, value, schema = 'state') {
   else if (ks[0] === 'alcance' && ks[1] === 'dora' && ['regimen', 'tlpt'].includes(last)) o[last] = E.doraAlcance({ [last]: value })[last];
   else if (ks[0] === 'alcance' && last === 'motivo') o[last] = s(value, 300);
   else if (ks[0] === 'alcance' && ks[1] === 'cl21663' && last === 'oiv') o[last] = value === true;
+  else if (ks[0] === 'alcance' && ks[1] === 'ens' && last === 'refuerzos') o[last] = value === true;
   else if (ks[0] === 'perfil') o[last] = typeof E.PERFIL_DEF[last] === 'boolean' ? value === true : E.perfilNormalizado({ [last]: value })[last];
   else o[last] = typeof value === 'string' ? s(value) : value;
   return true;
@@ -67,6 +68,15 @@ document.addEventListener('change', (ev) => {
     return; // ya guardado en «input»
   }
   if (el.dataset.uibool) { ui[el.dataset.uibool] = el.checked; render(); return; }
+  if (el.dataset.ref && state) { // refuerzo del ENS marcado o desmarcado en la ficha de la medida
+    const id = el.dataset.ref, r = el.dataset.r; const val = (D.refuerzos.medidas[id] || []).map((x) => x.id);
+    if (!IX.req.ens[id] || !val.includes(r)) return;
+    const cur = new Set((state.refuerzos || {})[id] || []); if (el.checked) cur.add(r); else cur.delete(r);
+    state.refuerzos = state.refuerzos || {};
+    if (cur.size) state.refuerzos[id] = val.filter((x) => cur.has(x)); else delete state.refuerzos[id];
+    commit(t(el.checked ? 'tRefOn' : 'tRefOff', `${id} ${r}`));
+    return;
+  }
   if (el.dataset.exsw && state) {
     const f = el.dataset.fw, id = el.dataset.id; if (!FW.includes(f) || !IX.req[f][id] || !E.excluible(f, id)) return;
     if (el.checked) { state.exclusiones[f][id] = ''; commit(t('tExcl', `${fwLbl(f)} ${reqCode(f, id)}`)); const inp = document.getElementById(`ex-${f}-${id}`); if (inp) inp.focus(); }

@@ -96,3 +96,28 @@ for (const theme of ['light', 'dark']) for (const width of [1440, 390]) {
     assert.deepEqual(fallos, []);
   });
 }
+
+/* 2.13.0: refuerzos del ENS en la ficha de la medida (casillas, papeles y texto del BOE desplegado) y en Requisitos */
+for (const theme of ['light', 'dark']) for (const width of [1440, 390]) {
+  test(`axe sin violaciones con los refuerzos del ENS · tema ${theme} · ${width} px`, async () => {
+    const ctx = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: theme, bypassCSP: true, reducedMotion: 'reduce' });
+    await ctx.route(/^https?:\/\//, (r) => r.abort());
+    const p = await ctx.newPage();
+    await p.goto(URL_APP); await p.waitForFunction(() => window.__ROSETTA__);
+    if (theme === 'dark') await p.evaluate(() => document.querySelector('[data-act="toggle-theme"]').click());
+    await p.evaluate(() => { const R = window.__ROSETTA__; R.openCase('techserv'); R.ui.normaFw = 'ens'; R.go('normas'); });
+    await p.addScriptTag({ content: AXE });
+    const fallos = [];
+    for (const paso of ['requisitos', 'ficha', 'alcance']) {
+      if (paso === 'ficha') await p.evaluate(() => { const b = document.createElement('button'); b.dataset.act = 'insp-req'; b.dataset.fw = 'ens'; b.dataset.id = 'op.acc.6'; b.hidden = true; document.body.append(b); b.click(); b.remove(); document.querySelectorAll('#insp details').forEach((d) => { d.open = true; }); });
+      if (paso === 'alcance') await p.evaluate(() => { const b = document.createElement('button'); b.dataset.act = 'insp-close'; b.hidden = true; document.body.append(b); b.click(); b.remove(); window.__ROSETTA__.go('alcance'); });
+      await p.waitForTimeout(250);
+      const r = await p.evaluate(async () => (await window.axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'], resultTypes: ['violations'] }))
+        .violations.flatMap((x) => x.nodes.map((n) => `${x.id} · ${n.target.join(' ')}`)));
+      for (const f of r) fallos.push(`${paso}: ${f}`);
+      if (paso === 'ficha') assert.equal(await p.locator('#insp .ref-list li').count(), 9);
+    }
+    await ctx.close();
+    assert.deepEqual(fallos, []);
+  });
+}

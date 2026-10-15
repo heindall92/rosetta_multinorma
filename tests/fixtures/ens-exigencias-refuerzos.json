@@ -1,0 +1,2009 @@
+{
+ "formato": "contrato-refuerzos-ens",
+ "version": 1,
+ "fuente": "RD 311/2022, anexo II",
+ "casos": [
+  {
+   "medida": "org.1",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "org.1",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "org.1",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "org.2",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "org.2",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "org.2",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "org.3",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "org.3",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "org.3",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "org.4",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "org.4",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "org.4",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.pl.1",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.pl.1",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.pl.1",
+   "nivel": "alto",
+   "exigencia": "+ R2",
+   "aplica": true,
+   "obligatorios": [
+    "R2"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.pl.2",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.pl.2",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.pl.2",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2 + R3",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.pl.3",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.pl.3",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.pl.3",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.pl.4",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.pl.4",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.pl.4",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.pl.5",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.pl.5",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.pl.5",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.acc.1",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.acc.1",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.acc.1",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.acc.2",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.acc.2",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.acc.2",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.acc.3",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.acc.3",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.acc.3",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.acc.4",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.acc.4",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.acc.4",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.acc.5",
+   "nivel": "bajo",
+   "exigencia": "+ [R1 o R2 o R3 o R4]",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": [
+    [
+     "R1",
+     "R2",
+     "R3",
+     "R4"
+    ]
+   ]
+  },
+  {
+   "medida": "op.acc.5",
+   "nivel": "medio",
+   "exigencia": "+ [R2 o R3 o R4] + R5",
+   "aplica": true,
+   "obligatorios": [
+    "R5"
+   ],
+   "grupos": [
+    [
+     "R2",
+     "R3",
+     "R4"
+    ]
+   ]
+  },
+  {
+   "medida": "op.acc.5",
+   "nivel": "alto",
+   "exigencia": "+ [R2 o R3 o R4] + R5",
+   "aplica": true,
+   "obligatorios": [
+    "R5"
+   ],
+   "grupos": [
+    [
+     "R2",
+     "R3",
+     "R4"
+    ]
+   ]
+  },
+  {
+   "medida": "op.acc.6",
+   "nivel": "bajo",
+   "exigencia": "+ [R1 o R2 o R3 o R4] + R8 + R9",
+   "aplica": true,
+   "obligatorios": [
+    "R8",
+    "R9"
+   ],
+   "grupos": [
+    [
+     "R1",
+     "R2",
+     "R3",
+     "R4"
+    ]
+   ]
+  },
+  {
+   "medida": "op.acc.6",
+   "nivel": "medio",
+   "exigencia": "+ [R1 o R2 o R3 o R4] + R5 + R8 + R9",
+   "aplica": true,
+   "obligatorios": [
+    "R5",
+    "R8",
+    "R9"
+   ],
+   "grupos": [
+    [
+     "R1",
+     "R2",
+     "R3",
+     "R4"
+    ]
+   ]
+  },
+  {
+   "medida": "op.acc.6",
+   "nivel": "alto",
+   "exigencia": "+ [R1 o R2 o R3 o R4] + R5 + R6 + R7 + R8 + R9",
+   "aplica": true,
+   "obligatorios": [
+    "R5",
+    "R6",
+    "R7",
+    "R8",
+    "R9"
+   ],
+   "grupos": [
+    [
+     "R1",
+     "R2",
+     "R3",
+     "R4"
+    ]
+   ]
+  },
+  {
+   "medida": "op.exp.1",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.1",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.1",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.2",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.2",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.2",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.3",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.3",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.3",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2 + R3",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.4",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.4",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.4",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.5",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.5",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.5",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.6",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.6",
+   "nivel": "medio",
+   "exigencia": "+ R1 + R2",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.6",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2 + R3 + R4",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2",
+    "R3",
+    "R4"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.7",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.7",
+   "nivel": "medio",
+   "exigencia": "+ R1 + R2",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.7",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2 + R3",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.8",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.8",
+   "nivel": "medio",
+   "exigencia": "+ R1 + R2 + R3 + R4",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2",
+    "R3",
+    "R4"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.8",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2 + R3 + R4 + R5",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2",
+    "R3",
+    "R4",
+    "R5"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.9",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.9",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.9",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.10",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.10",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.exp.10",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.ext.1",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.ext.1",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.ext.1",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.ext.2",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.ext.2",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.ext.2",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.ext.3",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.ext.3",
+   "nivel": "medio",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.ext.3",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.ext.4",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.ext.4",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.ext.4",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.nub.1",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.nub.1",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.nub.1",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.cont.1",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.cont.1",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.cont.1",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.cont.2",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.cont.2",
+   "nivel": "medio",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.cont.2",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.cont.3",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.cont.3",
+   "nivel": "medio",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.cont.3",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.cont.4",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.cont.4",
+   "nivel": "medio",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.cont.4",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.mon.1",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.mon.1",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.mon.1",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.mon.2",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.mon.2",
+   "nivel": "medio",
+   "exigencia": "+ R1 + R2",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.mon.2",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.mon.3",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "op.mon.3",
+   "nivel": "medio",
+   "exigencia": "+ R1 + R2",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "op.mon.3",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2 + R3 + R4 + R5 + R6",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2",
+    "R3",
+    "R4",
+    "R5",
+    "R6"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.1",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.1",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.1",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.2",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.2",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.2",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.3",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.3",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.3",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.4",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.4",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.4",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.5",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.5",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.5",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.6",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.6",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.6",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.7",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.7",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.if.7",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.per.1",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.per.1",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.per.1",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.per.2",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.per.2",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.per.2",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.per.3",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.per.3",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.per.3",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.per.4",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.per.4",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.per.4",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.eq.1",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.eq.1",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.eq.1",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.eq.2",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.eq.2",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.eq.2",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.eq.3",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.eq.3",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.eq.3",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.eq.4",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.eq.4",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.eq.4",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.com.1",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.com.1",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.com.1",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.com.2",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.com.2",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.com.2",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2 + R3",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.com.3",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.com.3",
+   "nivel": "medio",
+   "exigencia": "+ R1 + R2",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.com.3",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2 + R3 + R4",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2",
+    "R3",
+    "R4"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.com.4",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.com.4",
+   "nivel": "medio",
+   "exigencia": "+ [R1 o R2 o R3]",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": [
+    [
+     "R1",
+     "R2",
+     "R3"
+    ]
+   ]
+  },
+  {
+   "medida": "mp.com.4",
+   "nivel": "alto",
+   "exigencia": "+ [R2 o R3] + R4",
+   "aplica": true,
+   "obligatorios": [
+    "R4"
+   ],
+   "grupos": [
+    [
+     "R2",
+     "R3"
+    ]
+   ]
+  },
+  {
+   "medida": "mp.si.1",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.si.1",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.si.1",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.si.2",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.si.2",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.si.2",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.si.3",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.si.3",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.si.3",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.si.4",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.si.4",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.si.4",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.si.5",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.si.5",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.si.5",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.sw.1",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.sw.1",
+   "nivel": "medio",
+   "exigencia": "+ R1 + R2 + R3 + R4",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2",
+    "R3",
+    "R4"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.sw.1",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2 + R3 + R4",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2",
+    "R3",
+    "R4"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.sw.2",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.sw.2",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.sw.2",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.1",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.1",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.1",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.2",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.2",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.2",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.3",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.3",
+   "nivel": "medio",
+   "exigencia": "+ R1 + R2 + R3",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2",
+    "R3"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.3",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2 + R3 + R4",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2",
+    "R3",
+    "R4"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.4",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.4",
+   "nivel": "medio",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.4",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.5",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.5",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.5",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.6",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.6",
+   "nivel": "medio",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.info.6",
+   "nivel": "alto",
+   "exigencia": "+ R1 + R2",
+   "aplica": true,
+   "obligatorios": [
+    "R1",
+    "R2"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.s.1",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.s.1",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.s.1",
+   "nivel": "alto",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.s.2",
+   "nivel": "bajo",
+   "exigencia": "+ [R1 o R2]",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": [
+    [
+     "R1",
+     "R2"
+    ]
+   ]
+  },
+  {
+   "medida": "mp.s.2",
+   "nivel": "medio",
+   "exigencia": "+ [R1 o R2]",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": [
+    [
+     "R1",
+     "R2"
+    ]
+   ]
+  },
+  {
+   "medida": "mp.s.2",
+   "nivel": "alto",
+   "exigencia": "+ R2 + R3",
+   "aplica": true,
+   "obligatorios": [
+    "R2",
+    "R3"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.s.3",
+   "nivel": "bajo",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.s.3",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.s.3",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  },
+  {
+   "medida": "mp.s.4",
+   "nivel": "bajo",
+   "exigencia": "n.a.",
+   "aplica": false,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.s.4",
+   "nivel": "medio",
+   "exigencia": "aplica",
+   "aplica": true,
+   "obligatorios": [],
+   "grupos": []
+  },
+  {
+   "medida": "mp.s.4",
+   "nivel": "alto",
+   "exigencia": "+ R1",
+   "aplica": true,
+   "obligatorios": [
+    "R1"
+   ],
+   "grupos": []
+  }
+ ]
+}

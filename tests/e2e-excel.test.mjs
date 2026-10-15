@@ -4,7 +4,8 @@
 import { test, describe, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, writeFileSync, mkdtempSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join, resolve, normalize, sep } from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
@@ -121,6 +122,28 @@ for (const modo of ['file', 'http']) {
       assert.ok(wb.SheetNames.includes('RGPD'), wb.SheetNames.join(','));
       const filas = XLSX.utils.sheet_to_json(wb.Sheets.RGPD, { header: 1 }).filter((f) => /^(Art|LOPDGDD)/.test(String(f[0] || f[1] || '')) || /^(Art|LOPDGDD)/.test(String(f[1] || '')));
       assert.equal(filas.length, 15, JSON.stringify(XLSX.utils.sheet_to_json(wb.Sheets.RGPD, { header: 1 }).slice(0, 3)));
+    });
+
+    test('refuerzos del ENS: columna en la SoA exportada e importación desde Excel y desde ENS Compliance Studio', async () => {
+      await s.page.evaluate(() => window.__ROSETTA__.openCase('techserv'));
+      const dl = s.page.waitForEvent('download', { timeout: 20000 });
+      await act(s.page, 'export-xlsx');
+      const wb = XLSX.read(readFileSync(await (await dl).path()), { type: 'buffer' });
+      const filas = XLSX.utils.sheet_to_json(wb.Sheets['SoA ENS'], { header: 1 });
+      const col = filas[0].indexOf('Refuerzos implantados'); assert.ok(col > 0, filas[0].join(','));
+      assert.match(String(filas.find((f) => f[0] === 'op.acc.6')[col]), /R5, R6, R7, R9 · faltan: R8/);
+      const dir = mkdtempSync(join(tmpdir(), 'rosetta-ref-'));
+      const importa = async (f) => { const ch = s.page.waitForEvent('filechooser'); await act(s.page, 'import-ens'); await (await ch).setFiles(f); await s.page.waitForTimeout(600); return s.page.evaluate(() => ({ ref: window.__ROSETTA__.state.refuerzos, ev: window.__ROSETTA__.state.alcance.ens.refuerzos })); };
+      const x = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(x, XLSX.utils.aoa_to_sheet([['Código', 'Medida', '¿Aplica?', 'Estado de implantación', 'Refuerzos'], ['op.acc.5', 'Mecanismo de autenticación', 'SÍ', 'Implantada', 'R5, r2'], ['mp.s.2', 'Web', 'SÍ', 'Implantada', 'R9 y R1'], ['org.1', 'Política', 'SÍ', 'Implantada', '']]), 'SoA');
+      const fx = join(dir, 'soa-refuerzos.xlsx'); writeFileSync(fx, XLSX.write(x, { type: 'buffer', bookType: 'xlsx' }));
+      assert.deepEqual(await importa(fx), { ref: { 'op.acc.5': ['R2', 'R5'], 'mp.s.2': ['R1'] }, ev: true });
+      const studio = { kind: 'ens-studio-backup', projects: [{ meta: { kind: 'own' }, state: { proyecto: { organizacion: 'Ayuntamiento (ficticio)' }, soa: { 'op.pl.1': { aplica: 'SÍ', estado: 'Implantada' } },
+        refuerzos: [{ codigo: 'op.pl.1', refuerzo: 'R2', exigible: 'Sí', implementacion: 'PILAR formal' }, { codigo: 'op.pl.1', refuerzo: 'R1', exigible: 'No', implementacion: '—' },
+          { codigo: 'op.acc.5', refuerzo: 'R3', exigible: 'Alternativa', implementacion: 'Cl@ve' }, { codigo: 'op.acc.5', refuerzo: 'R4', exigible: 'Alternativa', implementacion: '' }, { codigo: 'zz.1', refuerzo: 'R1', exigible: 'Sí', implementacion: 'x' }] } }] };
+      const fj = join(dir, 'studio.json'); writeFileSync(fj, JSON.stringify(studio));
+      assert.deepEqual(await importa(fj), { ref: { 'op.pl.1': ['R2'], 'op.acc.5': ['R3'] }, ev: true });
+      assert.deepEqual(await s.page.evaluate(() => window.__csp), []);
     });
 
     if (modo === 'http') test('una librería manipulada se rechaza (SRI)', async () => {

@@ -1,5 +1,22 @@
 # Cambios
 
+## 2.13.0 · octubre de 2026
+
+**Refuerzos del ENS.** Cierra el hallazgo E05 de la auditoría de producción.
+
+- **92 refuerzos del anexo II** del RD 311/2022 con título en español e inglés y el texto del BOE (`src/data/refuerzos.json`, generado del mismo anexo que usa ENS Compliance Studio).
+- **Motor:** `exigenciaRefuerzos` y `refuerzosEstado` leen la exigencia de cada nivel (obligatorios y grupos «[R2 o R3 o R4]») igual que Compliance Studio. Con la evaluación activa, una medida sin sus refuerzos no pasa de 0,5.
+- **Regla CO-25 (media):** medidas del ENS sin los refuerzos de su nivel, con los que faltan. CO-06 ya no las cuenta como controles parciales.
+- **Interfaz:** casillas por refuerzo en la ficha de la medida, con su papel y el texto del RD; resumen en cada fila de *Requisitos* y aviso en la cabecera; interruptor «Evaluar los refuerzos» en *Alcance* y en el asistente.
+- **Compatibilidad:** los proyectos nuevos evalúan los refuerzos; los anteriores a la 2.13.0 no cambian hasta activarlo.
+- **Excel:** columna «Refuerzos implantados» en la SoA del ENS; importación desde una columna «Refuerzos» de la plantilla y desde la tabla de refuerzos de las copias de ENS Compliance Studio.
+- **Casos:** TechServ, el hospital y Lumen evalúan los refuerzos y enseñan un hueco cada uno; CitaFácil, en BÁSICA, los tiene completos.
+- **Exportaciones verificadas:** nueva suite `e2e-exportar.test.mjs` con las 108 exportaciones de los nueve casos en los dos idiomas (Excel, Markdown, CSV, JSON, sobre para CTEM-Nexus y copia de seguridad) e ida y vuelta del proyecto. Fuera de la CI se abrieron además con openpyxl, LibreOffice Calc, html5lib (la app) y el esquema de `yrd-ecosistema`: cero fallos.
+- **Accesibilidad:** contraste de las etiquetas de estado en la fila seleccionada de *Requisitos* (4,24:1 → AA).
+- **Flujo de trabajo:** desde esta versión, cada versión llega como PR desde `version/X.Y.Z`.
+- **Contrato con ENS Compliance Studio:** `tests/fixtures/ens-exigencias-refuerzos.json` (219 exigencias) se comprueba aquí y en Studio con el mismo fichero.
+- **Pruebas.** 9 del motor, 1 e2e, 1 de Excel, 3 de exportaciones y 4 de axe. Total: 163 de motor, catálogo y build y 83 en navegador.
+
 ## 2.12.0 · octubre de 2026
 
 **RGPD y LOPDGDD.** La ley de protección de datos que faltaba: la europea, con su desarrollo español.

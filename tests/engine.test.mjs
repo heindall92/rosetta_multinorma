@@ -226,7 +226,7 @@ describe('casos de ejemplo con el catálogo real', () => {
   }
   test('instantánea reproducible del caso de clase (TechServ)', () => {
     const r = E.calcular(IX, CASOS.find((c) => c.id === 'techserv').state);
-    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null, ria: null, cra: null, nist: null, dora: null, rgpd: null, cl21663: null, cl21719: null, co1581: null, mx2025: null, pe29733: null, ar25326: null }, grado: 0.893, brechas: 4 });
+    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.919, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null, ria: null, cra: null, nist: null, dora: null, rgpd: null, cl21663: null, cl21719: null, co1581: null, mx2025: null, pe29733: null, ar25326: null }, grado: 0.891, brechas: 4 }); // 2.13.0: dos refuerzos sin implantar (mp.s.2 R3, op.acc.6 R8)
   });
   test('contraste ENS ↔ ISO 27001 con las parejas del material de clase', () => {
     const p = E.parejasClase(IX); const ref = require('../src/data/parejas.json');
@@ -750,5 +750,84 @@ describe('RGPD y LOPDGDD', () => {
   test('etiquetas en los dos idiomas', () => {
     assert.equal(E.etiqueta(IX, 'rgpd', 'es'), 'RGPD'); assert.equal(E.etiqueta(IX, 'rgpd', 'en'), 'GDPR');
     assert.match(E.FW_LONG.rgpd, /2016\/679/); assert.match(E.FW_LONG_EN.rgpd, /LOPDGDD/);
+  });
+});
+
+describe('Refuerzos del ENS (anexo II)', () => {
+  const REF = require('../src/data/refuerzos.json');
+  const CASO = () => JSON.parse(JSON.stringify(CASOS.find((c) => c.id === 'techserv').state));
+  test('lectura de la exigencia: obligatorios y grupos alternativos, igual que ENS Compliance Studio', () => {
+    assert.deepEqual(E.exigenciaRefuerzos('+ [R2 o R3 o R4] + R5'), { aplica: true, obligatorios: ['R5'], grupos: [['R2', 'R3', 'R4']] });
+    assert.deepEqual(E.exigenciaRefuerzos('aplica'), { aplica: true, obligatorios: [], grupos: [] });
+    assert.deepEqual(E.exigenciaRefuerzos('n.a.'), { aplica: false, obligatorios: [], grupos: [] });
+    assert.deepEqual(E.exigenciaRefuerzos('+ R1 + R2 + R3'), { aplica: true, obligatorios: ['R1', 'R2', 'R3'], grupos: [] });
+  });
+  test('estado: obligatorios que faltan y grupos sin ninguna alternativa elegida', () => {
+    const x = E.refuerzosEstado('+ [R1 o R2 o R3 o R4] + R5 + R6', ['R3', 'R5']);
+    assert.deepEqual(x.faltan, ['R6']); assert.deepEqual(x.gruposFaltan, []); assert.equal(x.exigidos, 3); assert.equal(x.cumplidos, 2); assert.equal(x.ok, false);
+    assert.equal(E.refuerzosEstado('+ [R2 o R3] + R4', ['R3', 'R4']).ok, true);
+    assert.deepEqual(E.refuerzosEstado('+ [R2 o R3] + R4', ['R4']).gruposFaltan, [['R2', 'R3']]);
+  });
+  test('datos: cada refuerzo citado en una exigencia existe, con título en los dos idiomas y texto del BOE', () => {
+    let n = 0;
+    for (const r of CAT.frameworks.ens.reqs) for (const lv of ['bajo', 'medio', 'alto']) for (const id of String(r[lv]).match(/R\d+/g) || []) {
+      const x = (REF.medidas[r.id] || []).find((y) => y.id === id); assert.ok(x, `${r.id} ${id}`); n++;
+    }
+    assert.ok(n > 100);
+    const todos = Object.values(REF.medidas).flat(); assert.equal(todos.length, 92);
+    for (const x of todos) { assert.ok(x.t && x.t_en && x.texto.length > 20, x.id); }
+    assert.match(REF.medidas['op.acc.5'].find((x) => x.id === 'R5').t, /Registro/);
+    assert.match(REF.fuente, /BOE-A-2022-7191/);
+  });
+  test('una medida sin sus refuerzos no pasa de parcial; con ellos vuelve a cubierta', () => {
+    const st = CASO(); const r0 = E.calcular(IX, st).req.ens.find((x) => x.id === 'op.acc.6');
+    assert.equal(r0.estado, 'parcial'); assert.equal(r0.score, 0.5); assert.equal(r0.refuerzos.base, 1); assert.equal(r0.refuerzos.limita, true); assert.deepEqual(r0.refuerzos.faltan, ['R8']);
+    st.refuerzos['op.acc.6'] = [...st.refuerzos['op.acc.6'], 'R8'];
+    const r1 = E.calcular(IX, st).req.ens.find((x) => x.id === 'op.acc.6');
+    assert.equal(r1.estado, 'cubierto'); assert.equal(r1.refuerzos.ok, true);
+    const mp = E.calcular(IX, st).req.ens.find((x) => x.id === 'mp.s.2');
+    assert.equal(mp.score, 0.5, 'con base 0,7 y sin R3, el techo deja 0,5'); assert.equal(mp.refuerzos.base, 0.7);
+  });
+  test('sin evaluación (proyectos anteriores a la 2.13.0) los refuerzos no cambian la cobertura', () => {
+    const st = CASO(); st.alcance.ens.refuerzos = false; st.refuerzos = {};
+    const r = E.calcular(IX, st).req.ens.find((x) => x.id === 'op.acc.6');
+    assert.equal(r.estado, 'cubierto'); assert.equal(r.refuerzos.evaluado, false); assert.equal(r.refuerzos.ok, false);
+    delete st.alcance.ens.refuerzos; assert.equal(E.evaluaRefuerzos(st), false);
+  });
+  test('el nivel decide: subir la categoría exige más refuerzos', () => {
+    const st = CASO(); st.alcance.ens.categoria = 'MEDIA'; st.alcance.ens.niveles = {};
+    const mp = E.calcular(IX, st).req.ens.find((x) => x.id === 'mp.s.2');
+    assert.equal(mp.exigencia, '+ [R1 o R2]'); assert.equal(mp.refuerzos.ok, true, 'en MEDIA basta R1 o R2');
+  });
+  test('CO-25 con las medidas que faltan, en los dos idiomas; CO-06 no las confunde con controles parciales', () => {
+    const st = CASO(); const r = E.calcular(IX, st);
+    const h = E.coherencia(IX, st, r, { hoy: '2026-10-15' });
+    const co25 = h.filter((x) => x.id === 'CO-25');
+    assert.equal(co25.length, 1); assert.equal(co25[0].sev, 'Media'); assert.deepEqual(co25[0].reqs.sort(), ['mp.s.2', 'op.acc.6']);
+    assert.match(co25[0].detalle, /mp\.s\.2 \(R3\)/); assert.match(co25[0].detalle, /op\.acc\.6 \(R8\)/); assert.match(co25[0].ref, /anexo II/);
+    const en = E.coherencia(IX, st, r, { hoy: '2026-10-15', lang: 'en' }).find((x) => x.id === 'CO-25');
+    assert.match(en.titulo, /without the reinforcements/);
+    for (const x of h.filter((y) => y.id === 'CO-06')) assert.ok(!(x.reqs || [x.req]).includes('mp.s.2'), 'CO-06 no repite lo que dice CO-25');
+    const uno = CASO(); uno.refuerzos['op.acc.6'] = [...uno.refuerzos['op.acc.6'], 'R8'];
+    const u = E.coherencia(IX, uno, E.calcular(IX, uno)).find((x) => x.id === 'CO-25');
+    assert.equal(u.titulo, 'mp.s.2: faltan refuerzos de su nivel'); assert.match(u.detalle, /Faltan: R3\./);
+    const grupo = CASO(); grupo.refuerzos['op.acc.6'] = ['R5', 'R6', 'R7', 'R8', 'R9']; grupo.refuerzos['mp.s.2'] = ['R2', 'R3'];
+    assert.match(E.coherencia(IX, grupo, E.calcular(IX, grupo)).find((x) => x.id === 'CO-25').detalle, /uno de R1, R2, R3 o R4/);
+  });
+  test('contrato con ENS Compliance Studio: las 219 exigencias del anexo II se leen igual en los dos repositorios', () => {
+    // El mismo fichero está en grc_ens_compliance_studio/tests/fixtures y lo comprueba su parseExigencia.
+    const fs = require('node:fs'); const path = require('node:path');
+    const out = path.join(path.dirname(new URL(import.meta.url).pathname), 'fixtures', 'ens-exigencias-refuerzos.json');
+    const casos = CAT.frameworks.ens.reqs.filter((r) => r.g !== 'Articulado').flatMap((r) => ['bajo', 'medio', 'alto'].map((nivel) => ({ medida: r.id, nivel, exigencia: r[nivel], ...E.exigenciaRefuerzos(r[nivel]) })));
+    const contrato = { formato: 'contrato-refuerzos-ens', version: 1, fuente: 'RD 311/2022, anexo II', casos };
+    if (process.env.GOLDEN === '1' || !fs.existsSync(out)) fs.writeFileSync(out, JSON.stringify(contrato, null, 1) + '\n');
+    assert.equal(casos.length, 219);
+    assert.deepEqual(JSON.parse(fs.readFileSync(out, 'utf8')), contrato);
+  });
+  test('casos: los que tienen el ENS evalúan los refuerzos y enseñan un hueco real', () => {
+    for (const id of ['techserv', 'hospital', 'lumen']) {
+      const c = CASOS.find((x) => x.id === id); assert.equal(c.state.alcance.ens.refuerzos, true, id);
+      assert.ok(E.coherencia(IX, c.state, E.calcular(IX, c.state)).some((h) => h.id === 'CO-25'), id);
+    }
   });
 });
