@@ -68,6 +68,35 @@ function restoreFocus(key, scope) {
   const el = [...host.querySelectorAll(key)].find(ok) || [...document.querySelectorAll(key)].find(ok);
   if (el) el.focus({ preventScroll: true });
 }
+/* Redibujado parcial (M2): compara el HTML nuevo con el DOM actual y solo toca lo que cambia. Mantiene foco,
+ * scroll, paneles abiertos y el estilo calculado de lo que no cambia; con 152 controles, redibujar la vista entera
+ * con innerHTML costaba hasta 270 ms con la CPU lenta. Los nodos se emparejan por posición, etiqueta, id y data-id. */
+function morph(el, html) {
+  const tpl = document.createElement('template'); tpl.innerHTML = html;
+  morphKids(el, tpl.content);
+}
+const mKey = (n) => (n.nodeType === 1 ? `${n.nodeName}|${n.id}|${n.getAttribute('data-id') || ''}|${n.getAttribute('data-fw') || ''}` : `#${n.nodeType}`);
+function morphKids(a, b) {
+  const nb = [...b.childNodes];
+  for (let i = 0; i < nb.length; i++) {
+    const x = a.childNodes[i], y = nb[i];
+    if (!x) a.appendChild(y);
+    else if (mKey(x) !== mKey(y)) a.replaceChild(y, x);
+    else morphNode(x, y);
+  }
+  while (a.childNodes.length > nb.length) a.removeChild(a.lastChild);
+}
+function morphNode(x, y) {
+  if (x.nodeType !== 1) { if (x.nodeValue !== y.nodeValue) x.nodeValue = y.nodeValue; return; }
+  for (const at of [...x.attributes]) if (!y.hasAttribute(at.name)) x.removeAttribute(at.name);
+  for (const at of y.attributes) if (x.getAttribute(at.name) !== at.value) x.setAttribute(at.name, at.value);
+  const tag = x.nodeName;
+  if (tag === 'TEXTAREA') { if (x !== document.activeElement && x.value !== y.value) x.value = y.value; return; }
+  if (tag !== 'SELECT') morphKids(x, y); else if (x.innerHTML !== y.innerHTML) x.innerHTML = y.innerHTML;
+  if (tag === 'INPUT') { if (x.type === 'checkbox' || x.type === 'radio') x.checked = y.hasAttribute('checked'); else if (x !== document.activeElement && x.value !== (y.getAttribute('value') || '')) x.value = y.getAttribute('value') || ''; }
+  if (tag === 'SELECT') { const o = [...y.options].find((op) => op.hasAttribute('selected')); const v = o ? o.value : (y.options[0] && y.options[0].value) || ''; if (x !== document.activeElement && x.value !== v) x.value = v; }
+}
+let _lastView = null;
 function render() {
   const ae = document.activeElement; const active = ae && ae.id;
   const fKey = !active && ae !== document.body ? focusKey(ae) : null;
@@ -76,7 +105,9 @@ function render() {
   applyRail(); $('#dock').innerHTML = renderDock();
   $('#tabbar').innerHTML = renderTabbar();
   const V = { inicio: vInicio, nuevo: vNuevo, perfil: vPerfil, ajustes: vAjustes, ayuda: vAyuda, panel: vOrbita, traductor: vPrisma, controles: vControles, normas: vNormas, mapa: vMapa, alcance: vAlcance, brechas: vBrechas, plan: vPlan, exportar: vExport };
-  $('#view').innerHTML = !state && PROJECT_VIEWS.includes(ui.view) ? vNeedProject(ui.view) : (state && isDemo() && PROJECT_VIEWS.includes(ui.view) ? demoBanner() : '') + (V[ui.view] || vInicio)();
+  const html = !state && PROJECT_VIEWS.includes(ui.view) ? vNeedProject(ui.view) : (state && isDemo() && PROJECT_VIEWS.includes(ui.view) ? demoBanner() : '') + (V[ui.view] || vInicio)();
+  const vk = `${ui.view}|${state ? state.caseId || ws.activeId : ''}|${LANG()}`;
+  if (vk === _lastView) morph($('#view'), html); else { $('#view').innerHTML = html; _lastView = vk; } // al cambiar de vista, redibujado completo (animaciones de entrada)
   renderInsp(); renderPop(); renderSheet(); renderPalette();
   if (ui.view === 'traductor') requestAnimationFrame(drawBeams);
   if (active) { const el = document.getElementById(active); if (el) { el.focus({ preventScroll: true }); if (sel) { try { el.setSelectionRange(sel[0], sel[1]); } catch (e) { /* n/a */ } } } }

@@ -153,7 +153,8 @@ document.addEventListener('keydown', (ev) => {
     const nx = its[(i + (ev.key === 'ArrowDown' ? 1 : -1) + its.length) % its.length]; if (nx) nx.focus(); return;
   }
   if (ev.key === 'Escape') { if (closeLayers()) ev.preventDefault(); return; }
-  if ((ev.key === 'Enter' || ev.key === ' ') && tg.getAttribute && tg.getAttribute('role') === 'button' && tg.dataset.act && tg.tagName !== 'BUTTON') { ev.preventDefault(); tg.click(); return; }
+  if (tg.closest && tg.closest('.wheel:not(.hero) .spoke') && wheelKey(ev, tg.closest('.spoke'))) return;
+  if ((ev.key === 'Enter' || ev.key === ' ') && tg.getAttribute && tg.getAttribute('role') === 'button' && tg.dataset.act && tg.tagName !== 'BUTTON') { ev.preventDefault(); if (typeof tg.click === 'function') tg.click(); else tg.dispatchEvent(new MouseEvent('click', { bubbles: true })); return; } // los <g> de SVG no tienen click()
   if (typing || ev.ctrlKey || ev.metaKey || ev.altKey) return;
   if (ev.key === '/') { const q = $('#uc-q') || $('#tr-q') || $('#norma-q') || $('#mapa-q') || $('#help-q') || $('#glo-q'); ev.preventDefault(); if (q) q.focus(); else { ui.palette = true; ui.paletteQ = ''; renderPalette(); } return; }
   if (ev.key === '?') { ui.helpTab = 'atajos'; go('ayuda'); return; }
@@ -162,6 +163,26 @@ document.addEventListener('keydown', (ev) => {
   if (gPending) { gPending = false; const m = { o: 'panel', p: 'traductor', c: 'controles', n: 'normas', m: 'mapa', b: 'brechas', l: 'plan', i: 'inicio', a: 'alcance', e: 'exportar' }[ev.key.toLowerCase()]; if (m) go(m); }
 });
 document.addEventListener('toggle', (ev) => { const k = ev.target && ev.target.dataset && ev.target.dataset.keep; if (k) ui[k] = ev.target.open; }, true);
+
+/* ---------- Rueda con teclado: flechas por control, Re Pág / Av Pág por dominio, Inicio y Fin ---------- */
+function wheelKey(ev, sp) {
+  const all = [...document.querySelectorAll('.wheel:not(.hero) .spoke')]; const i = all.indexOf(sp); if (i < 0) return false;
+  const dom = (el) => (IX.ucMap[el.dataset.id] || {}).dom;
+  let j = null;
+  if (ev.key === 'ArrowRight' || ev.key === 'ArrowDown') j = (i + 1) % all.length;
+  else if (ev.key === 'ArrowLeft' || ev.key === 'ArrowUp') j = (i - 1 + all.length) % all.length;
+  else if (ev.key === 'Home') j = 0;
+  else if (ev.key === 'End') j = all.length - 1;
+  else if (ev.key === 'PageDown') { j = all.findIndex((x, k) => k > i && dom(x) !== dom(sp)); if (j < 0) j = 0; }
+  else if (ev.key === 'PageUp') { const d0 = all.findIndex((x) => dom(x) === dom(sp)); const prev = d0 > 0 ? dom(all[d0 - 1]) : dom(all[all.length - 1]); j = all.findIndex((x) => dom(x) === prev); }
+  if (j === null) return false;
+  ev.preventDefault();
+  for (const x of all) x.tabIndex = -1;
+  all[j].tabIndex = 0; ui.wFocus = all[j].dataset.id; all[j].focus();
+  return true;
+}
+document.addEventListener('focusin', (ev) => { const sp = ev.target.closest && ev.target.closest('.wheel:not(.hero) .spoke'); if (sp) { ui.wFocus = sp.dataset.id; hoverSpoke = sp; wheelHover(sp); } });
+document.addEventListener('focusout', (ev) => { const sp = ev.target.closest && ev.target.closest('.wheel:not(.hero) .spoke'); const to = ev.relatedTarget; if (sp && !(to && to.closest && to.closest('.wheel:not(.hero) .spoke'))) { hoverSpoke = null; wheelHover(null); } });
 
 /* ---------- Tooltip ligero para [data-tip] (texto plano: textContent) y núcleo vivo de la rueda ---------- */
 const tipEl = () => $('#tip');
@@ -279,6 +300,13 @@ document.addEventListener('click', (ev) => {
     case 'plan-all': ui.planAll = true; render(); break;
     case 'undo': undo(); break;
     /* exportaciones */
+    case 'bulk-apply': { // acciones en bloque sobre los controles visibles en Controles; un único paso de deshacer
+      if (!state) break; const ids = ucFiltrados().map((c) => c.id);
+      const est = oneOf($('#bulk-estado').value, E.ESTADOS, ''); const resp = s($('#bulk-resp').value, 200).trim(); const rev = dateOk($('#bulk-rev').value);
+      if (!ids.length || (!est && !resp && !rev)) { toast(t('bulkNothing')); break; }
+      for (const id of ids) { const d = state.controles[id]; if (est) { d.estado = est; if ((est === 'implantado' || est === 'parcial') && !d.revision) d.revision = today(); } if (resp) d.responsable = resp; if (rev) d.revision = rev; }
+      commit(t('tBulk', ids.length)); break;
+    }
     case 'export-xlsx': exportXlsx(); break;
     case 'export-md': saveFile(fname('report', 'md'), informeMd()); break;
     case 'export-plan': saveFile(fname('plan', 'csv'), planCsv()); break;

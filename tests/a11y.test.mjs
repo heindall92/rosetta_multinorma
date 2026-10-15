@@ -121,3 +121,28 @@ for (const theme of ['light', 'dark']) for (const width of [1440, 390]) {
     assert.deepEqual(fallos, []);
   });
 }
+
+/* 2.14.0: rueda con un control enfocado por teclado y panel de acciones en bloque abierto */
+for (const theme of ['light', 'dark']) for (const width of [1440, 390]) {
+  test(`axe sin violaciones con la rueda enfocada y las acciones en bloque · tema ${theme} · ${width} px`, async () => {
+    const ctx = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: theme, bypassCSP: true, reducedMotion: 'reduce' });
+    await ctx.route(/^https?:\/\//, (r) => r.abort());
+    const p = await ctx.newPage();
+    await p.goto(URL_APP); await p.waitForFunction(() => window.__ROSETTA__);
+    if (theme === 'dark') await p.evaluate(() => document.querySelector('[data-act="toggle-theme"]').click());
+    await p.evaluate(() => { window.__ROSETTA__.openCase('hospital'); window.__ROSETTA__.go('panel'); }); await p.waitForTimeout(400);
+    await p.addScriptTag({ content: AXE });
+    const fallos = [];
+    for (const paso of ['rueda', 'bloque']) {
+      if (paso === 'rueda') { await p.locator('.wheel:not(.hero) .spoke[tabindex="0"]').focus(); await p.keyboard.press('ArrowRight'); }
+      if (paso === 'bloque') await p.evaluate(() => { window.__ROSETTA__.ui.bulkOpen = true; window.__ROSETTA__.go('controles'); });
+      await p.waitForTimeout(250);
+      const r = await p.evaluate(async () => (await window.axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'], resultTypes: ['violations'] }))
+        .violations.flatMap((x) => x.nodes.map((n) => `${x.id} · ${n.target.join(' ')}`)));
+      for (const f of r) fallos.push(`${paso}: ${f}`);
+    }
+    assert.equal(await p.locator('.bulk[open] #bulk-estado').count(), 1);
+    await ctx.close();
+    assert.deepEqual(fallos, []);
+  });
+}

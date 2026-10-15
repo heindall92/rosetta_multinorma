@@ -170,7 +170,7 @@ async function exportXlsx() {
         const aplica = r.estado === 'no-exigido' ? tx('NO EXIGIDO', 'NOT REQUIRED') : r.estado === 'excluido' ? no() : yes();
         const just = r.estado === 'excluido' ? r.justificacion || `(${t('unjustified')})` : r.estado === 'no-exigido' ? noExigidoTxt(f, r) : tx(`Aplica. Soportado por ${IX.reqUcs[f][r.id].map((l) => l.uc).join(', ')}.`, `Applies. Supported by ${IX.reqUcs[f][r.id].map((l) => l.uc).join(', ')}.`);
         const evid = IX.reqUcs[f][r.id].map((l) => state.controles[l.uc].evidencias ? `[${l.uc}] ${state.controles[l.uc].evidencias}` : '').filter(Boolean).join(' · ').slice(0, 3000);
-        return [reqCode(f, r.id), rT(f, r.id), rG(f, r.id), ...(f === 'ens' ? [r.nivel ? t('lv.' + r.nivel) : '', r.exigencia || '', refTxt(r)] : []), aplica, just, t('cov.' + r.estado), r.estado === 'no-exigido' || r.estado === 'excluido' ? '' : r.score, ucList(f, r.id), evid];
+        return [reqCode(f, r.id), rT(f, r.id), rG(f, r.id), ...(f === 'ens' ? [r.nivel ? t('lv.' + r.nivel) : '', exigL(r.exigencia || ''), refTxt(r)] : []), aplica, just, t('cov.' + r.estado), r.estado === 'no-exigido' || r.estado === 'excluido' ? '' : r.score, ucList(f, r.id), evid];
       });
       const hd = [tx('Código', 'Code'), tx('Requisito', 'Requirement'), tx('Grupo', 'Group'), ...(f === 'ens' ? [tx('Nivel exigido', 'Required level'), t('exig'), tx('Refuerzos implantados', 'Reinforcements implemented')] : []), tx('¿Aplica?', 'Applies?'), t('justification'), tx('Cobertura', 'Coverage'), tx('% soporte', '% support'), tx('Controles (estado)', 'Controls (state)'), t('evidence')];
       const off = f === 'ens' ? 3 : 0;

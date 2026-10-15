@@ -24,7 +24,7 @@ const XLSX_LIBS = {
   leer: { file: 'vendor/sheetjs-0.20.3.full.min.js', cdn: 'https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js', sri: 'sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT' },
   escribir: { file: 'vendor/xlsx-js-style-1.2.0.bundle.js', cdn: 'https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js', sri: 'sha384-OUW9euuUyxyHcAhTqbhI+Iyb8LMssXt/cpz0yXhs9UWG2/R/uaWdakx/4cfww7Vb' }
 };
-const VERSION = '2.13.0';
+const VERSION = '2.14.0';
 const DOM = Object.fromEntries(CAT0.domains.map((d) => [d.id, d]));
 const SOLAPE0 = E.solapamiento(IX0);
 let SOLAPE = SOLAPE0;
@@ -62,10 +62,14 @@ function t(key, ...args) {
   if (v === undefined) { v = I18N.es; for (const k of key.split('.')) v = v == null ? undefined : v[k]; }
   return typeof v === 'function' ? v(...args) : (v ?? key);
 }
-const pct = (x, d = 0) => (Number(x) * 100).toLocaleString(LOC(), { maximumFractionDigits: d, minimumFractionDigits: d }) + ' %';
-const num1 = (x) => Number(x).toLocaleString(LOC(), { maximumFractionDigits: 1, minimumFractionDigits: 1 });
+/* Formateadores Intl en caché: crear uno por llamada costaba ~150 ms por redibujado del Resumen con la CPU lenta */
+const _fmt = new Map();
+const fmtN = (d) => { const k = `n|${LOC()}|${d}`; let f = _fmt.get(k); if (!f) { f = new Intl.NumberFormat(LOC(), { maximumFractionDigits: d, minimumFractionDigits: d }); _fmt.set(k, f); } return f; };
+const fmtD = (opts) => { const k = `d|${LOC()}|${JSON.stringify(opts)}`; let f = _fmt.get(k); if (!f) { f = new Intl.DateTimeFormat(LOC(), opts); _fmt.set(k, f); } return f; };
+const pct = (x, d = 0) => fmtN(d).format(Number(x) * 100) + ' %';
+const num1 = (x) => fmtN(1).format(Number(x));
 const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
-const fmtDate = (iso) => { if (!iso) return '—'; const d = new Date(iso.length === 10 ? iso + 'T00:00:00' : iso); return isNaN(d) ? iso : d.toLocaleDateString(LOC(), { day: 'numeric', month: 'short', year: 'numeric' }); };
+const fmtDate = (iso) => { if (!iso) return '—'; const d = new Date(iso.length === 10 ? iso + 'T00:00:00' : iso); return isNaN(d) ? iso : fmtD({ day: 'numeric', month: 'short', year: 'numeric' }).format(d); };
 const plural = (n, a, b) => `${n} ${n === 1 ? a : b}`;
 /* Textos del catálogo en el idioma activo */
 const tt = (o, k) => E.tt(o, k, LANG());
