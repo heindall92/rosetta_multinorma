@@ -59,7 +59,7 @@ Descartados tras probarlos: XSS por cualquiera de las cuatro vías de entrada, c
 
 **Verificado contra el BOE en la 2.12.0** (el entorno de la auditoría no tenía acceso): la exigencia por nivel de op.pl.5 (categoría: n.a., aplica, aplica), op.acc.5 (ICAT: + [R1 o R2 o R3 o R4]; + [R2 o R3 o R4] + R5; + [R2 o R3 o R4] + R5), mp.si.1 (C: n.a., aplica, aplica; el refuerzo R1 de marca de agua es opcional) y mp.s.2 (categoría: + [R1 o R2]; + [R1 o R2]; + R2 + R3) coincide con el texto consolidado del RD 311/2022 (BOE-A-2022-7191) y con el catálogo. ✅
 
-**Siguientes marcos, por prioridad:** RGPD y LOPDGDD (✅ 2.12.0), Reglamento de IA (UE) 2024/1689, DORA y perfiles de cumplimiento del CCN (P1); CRA, ISO 22301 e ISO/IEC 27701 (P2); NIST CSF 2.0 y CIS v8.1, este último con permiso de CIS por su licencia (P3).
+**Siguientes marcos, por prioridad:** RGPD y LOPDGDD (✅ 2.12.0), Reglamento de IA (UE) 2024/1689, DORA y perfiles de cumplimiento del CCN (✅ 2.15.0: 881A y 890A) (P1); CRA, ISO 22301 e ISO/IEC 27701 (P2); NIST CSF 2.0 y CIS v8.1, este último con permiso de CIS por su licencia (P3).
 
 ## 3. Experiencia de uso y accesibilidad
 

@@ -77,7 +77,18 @@ function ensLevels(a, pre) {
   return `<div class="form"><label class="fld">${esc(t('category'))}<select id="${pre}-cat" data-${pre}="alcance.ens.categoria">${['BÁSICA', 'MEDIA', 'ALTA'].map((c) => opt(c, t('cats.' + c), a.categoria)).join('')}</select></label>
     <div class="fld">${esc(t('dimLevels'))}<span class="hint">${esc(t('dimOpt'))}</span></div></div>
     <div class="dims">${E.DIMS.map((d) => `<label>${d}<select id="${pre}-dim-${d}" data-${pre}="alcance.ens.niveles.${d}" aria-label="${d}">${opt('', '—', a.niveles[d] || '')}${E.NIVELES_ENS.map((n) => opt(n, t('lv.' + n), a.niveles[d] || '')).join('')}</select></label>`).join('')}</div>
-    <label class="switch-l"><span class="switch"><input type="checkbox" id="${pre}-ens-ref" data-${pre}="alcance.ens.refuerzos" data-type="bool"${a.refuerzos ? ' checked' : ''}><span></span></span><span class="small">${esc(t('refEval'))}</span></label>`;
+    <label class="switch-l"><span class="switch"><input type="checkbox" id="${pre}-ens-ref" data-${pre}="alcance.ens.refuerzos" data-type="bool"${a.refuerzos ? ' checked' : ''}><span></span></span><span class="small">${esc(t('refEval'))}</span></label>${perfilEnsForm(a, pre)}`;
+}
+/* Perfil de cumplimiento específico del CCN (art. 30 del RD 311/2022): sustituye la tabla del anexo II en su ámbito */
+function perfilEnsForm(a, pre) {
+  const ps = PERFILES.perfiles; const pf = a.perfil && ps[a.perfil]; const en = LANG() === 'en';
+  const conds = pf ? [...new Set(Object.values(pf.medidas).filter((m) => m && m.cond).map((m) => m.cond))] : [];
+  const pa = pf ? E.perfilAdecuado(IX, a) : null;
+  return `<div class="form perfil-ccn"><label class="fld span2">${esc(t('pceLabel'))}<select id="${pre}-pce" data-${pre}="alcance.ens.perfil">${opt('', t('pceNone'), a.perfil || '')}${Object.entries(ps).map(([k, p]) => opt(k, `${p.guia} · ${en ? p.nombre_en : p.nombre} (${t('cats.' + p.categoria)})`, a.perfil || '')).join('')}</select>
+    <span class="hint">${esc(pf ? `${en ? pf.ambito_en : pf.ambito} ${t('pceCount', pf.aplican)}` : t('pceHint'))}</span></label>
+    ${conds.map((c) => `<label class="switch-l span2"><span class="switch"><input type="checkbox" id="${pre}-pce-${c}" data-${pre}="alcance.ens.perfilCond.${c}" data-type="bool"${a.perfilCond && a.perfilCond[c] ? ' checked' : ''}><span></span></span><span class="small">${esc(t('pceCond.' + c))}</span></label>`).join('')}
+    ${pa && !pa.ok ? `<p class="callout warn span2">${icon('triangle-alert', 17)}<span>${esc(t('pceMismatch', pf.guia, t('cats.' + pf.categoria), t('cats.' + pa.categoria)))}</span></p>` : ''}
+    ${PERFILES.retirados.map((r) => `<p class="hint span2">${icon('info', 14)} ${esc(t('pceRetirada', r.guia, fmtDate(r.retirada), en ? r.nota_en : r.nota))}</p>`).join('')}</div>`;
 }
 function scopeCards(a, pre) {
   const vis = (f) => !regionDe(f) || a[f].on || (ui.wizard && (ui.wizard.perfil.jurisdiccion === regionDe(f) || (ui.wizard.perfil.opera || []).includes(regionDe(f))));
@@ -103,7 +114,7 @@ function vNuevo() {
     body = `<div class="grid g3">${ch('cero', 'fromZero', 'fromZeroTxt')}${ch('ens', 'fromEns', 'fromEnsTxt')}${ch('todo', 'fromAll', 'fromAllTxt')}</div>
       ${w.inicio === 'ens' ? `<div class="stack"><h3>${esc(t('ensFile'))}</h3><p class="small muted">${esc(t('ensFileTxt'))}</p><div class="row"><button type="button" class="btn sm" data-act="wz-ens-file">${icon('upload', 15)}${esc(t('chooseFile'))}</button>${w.ensInfo ? `<span class="ok-box">${icon('circle-check', 16)}${esc(w.ensInfo)}</span>` : ''}</div></div>` : ''}
       <div class="glass pane"><dl class="kv"><dt>${esc(t('org'))}</dt><dd><b>${esc(w.organizacion || t('yourOrg'))}</b></dd><dt>${esc(t('scopeDesc'))}</dt><dd>${esc(w.descripcion || '—')}</dd><dt>${esc(t('fws'))}</dt><dd class="chips">${FW_BASE.filter((f) => w.alcance[f].on).map((f) => fwTag(f)).join('') || '—'}</dd>
-        ${w.alcance.ens.on ? `<dt>ENS</dt><dd>${esc(t('category'))}: ${esc(t('cats.' + w.alcance.ens.categoria))}</dd>` : ''}<dt>NIS2</dt><dd>${entPill(E.nis2Aplicabilidad(w.nis2q).tipo)}</dd></dl></div>`;
+        ${w.alcance.ens.on ? `<dt>ENS</dt><dd>${esc(t('category'))}: ${esc(t('cats.' + w.alcance.ens.categoria))}${w.alcance.ens.perfil ? ` · ${esc(PERFILES.perfiles[w.alcance.ens.perfil].guia)}` : ''}</dd>` : ''}<dt>NIS2</dt><dd>${entPill(E.nis2Aplicabilidad(w.nis2q).tipo)}</dd></dl></div>`;
   }
   return `${head(esc(t('wzEyebrow')), esc(t('wzTitle')), esc(t('wzLead')))}
   <section class="glass pane stack" style="gap:22px">${stepper}${w.error ? `<div class="alert">${icon('triangle-alert', 16)}${esc(w.error)}</div>` : ''}${body}

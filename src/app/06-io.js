@@ -35,6 +35,7 @@ function informeMd() {
   L.push(tx(`- Cobertura media: **${pct(k.grado, 1)}** de ${k.requisitos} requisitos aplicables en ${plural(k.normas, 'norma', 'normas')}.`, `- Average coverage: **${pct(k.grado, 1)}** of ${k.requisitos} applicable requirements across ${plural(k.normas, 'framework', 'frameworks')}.`));
   L.push(tx(`- Controles unificados relevantes: **${k.controles}** (${k.implantados} implantados, ${k.parciales} parciales, ${k.pendientes} pendientes). Cada control cubre de media **${num1(k.reutilizacion)}** requisitos: ${pct(k.ahorro)} menos trabajo que abordar cada norma por separado.`,
     `- Relevant unified controls: **${k.controles}** (${k.implantados} implemented, ${k.parciales} partial, ${k.pendientes} pending). Each control covers **${num1(k.reutilizacion)}** requirements on average: ${pct(k.ahorro)} less work than tackling each framework separately.`));
+  if (state.alcance.ens.on) { const pf = state.alcance.ens.perfil && PERFILES.perfiles[state.alcance.ens.perfil]; L.push(`- ENS: ${tx('categoría', 'category')} **${t('cats.' + state.alcance.ens.categoria)}**${pf ? tx(`, con el perfil de cumplimiento **${pf.guia}** (${mdSafe(pf.nombre)}): ${calc.fw.ens.noExigidos} medidas no exigidas por el perfil.`, ` with the **${pf.guia}** compliance profile (${mdSafe(pf.nombre_en)}): ${calc.fw.ens.noExigidos} measures not required by the profile.`) : '.'}`); }
   if (state.alcance.nis2.on) { const r = E.nis2Aplicabilidad(state.nis2q, LANG()); L.push(`- NIS2: **${mdSafe(t('ent.' + state.alcance.nis2.tipo))}**. ${mdSafe(r.motivo)}`); }
   const sv = (x) => hall.filter((h) => h.sev === x).length;
   L.push(tx(`- Revisión de coherencia: **${sv('Alta')} alertas altas**, ${sv('Media')} medias y ${sv('Baja')} bajas.`, `- Consistency review: **${sv('Alta')} high alerts**, ${sv('Media')} medium and ${sv('Baja')} low.`), '');
@@ -147,6 +148,7 @@ async function exportXlsx() {
     kv(tx('Ahorro por reutilización de controles', 'Saving from control reuse'), k.ahorro, true); kv(t('highAlerts'), hall.filter((h) => h.sev === 'Alta').length);
     if (state.alcance.nis2.on) kv('NIS2', t('ent.' + state.alcance.nis2.tipo));
     if (state.alcance.ens.on) kv(tx('Categoría ENS', 'ENS category'), t('cats.' + state.alcance.ens.categoria));
+    if (state.alcance.ens.on && state.alcance.ens.perfil) { const pf = PERFILES.perfiles[state.alcance.ens.perfil]; kv(tx('Perfil de cumplimiento del CCN', 'CCN compliance profile'), `${pf.guia} · ${tx(pf.nombre, pf.nombre_en)} (${t('cats.' + pf.categoria)})`); }
     res.push([]); const ovStart = res.length + 1;
     res.push([tx('Solapamiento (si cumples la fila → cobertura de la columna)', 'Overlap (if you comply with the row → coverage of the column)'), ...FW.map((f) => fwLbl(f))], ...FW.map((a) => [fwLbl(a), ...FW.map((b) => (a === b ? '—' : SOLAPE[a][b].pct))]));
     const wsR = sheet(res, [48, 12, 12, 12, 12, 12, 12, 12, 12, 12], 2, { autofilter: false, pctCol: [9] });
@@ -168,7 +170,7 @@ async function exportXlsx() {
     for (const f of FWV) {
       const rows = calc.req[f].map((r) => {
         const aplica = r.estado === 'no-exigido' ? tx('NO EXIGIDO', 'NOT REQUIRED') : r.estado === 'excluido' ? no() : yes();
-        const just = r.estado === 'excluido' ? r.justificacion || `(${t('unjustified')})` : r.estado === 'no-exigido' ? noExigidoTxt(f, r) : tx(`Aplica. Soportado por ${IX.reqUcs[f][r.id].map((l) => l.uc).join(', ')}.`, `Applies. Supported by ${IX.reqUcs[f][r.id].map((l) => l.uc).join(', ')}.`);
+        const just = r.estado === 'excluido' ? r.justificacion || `(${t('unjustified')})` : r.estado === 'no-exigido' ? noExigidoTxt(f, r) : tx(`Aplica. Soportado por ${IX.reqUcs[f][r.id].map((l) => l.uc).join(', ')}.`, `Applies. Supported by ${IX.reqUcs[f][r.id].map((l) => l.uc).join(', ')}.`) + (f === 'ens' && r.perfil && perfilMedida(r.id) && perfilMedida(r.id).m.criterio ? ` ${t('pceCrit', perfilMedida(r.id).g.guia)}: ${tx(perfilMedida(r.id).m.criterio, perfilMedida(r.id).m.criterio_en)}` : '');
         const evid = IX.reqUcs[f][r.id].map((l) => state.controles[l.uc].evidencias ? `[${l.uc}] ${state.controles[l.uc].evidencias}` : '').filter(Boolean).join(' · ').slice(0, 3000);
         return [reqCode(f, r.id), rT(f, r.id), rG(f, r.id), ...(f === 'ens' ? [r.nivel ? t('lv.' + r.nivel) : '', exigL(r.exigencia || ''), refTxt(r)] : []), aplica, just, t('cov.' + r.estado), r.estado === 'no-exigido' || r.estado === 'excluido' ? '' : r.score, ucList(f, r.id), evid];
       });

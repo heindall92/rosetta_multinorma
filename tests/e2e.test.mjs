@@ -364,6 +364,49 @@ test('refuerzos del ENS: ficha con casillas y texto del BOE, cobertura, CO-25, d
   noErrors('refuerzos');
 });
 
+test('2.15.0: perfiles de cumplimiento del CCN en Alcance, ficha, CO-26, condición, idioma y saneado', async () => {
+  const E2 = (fn, arg) => page.evaluate(fn, arg);
+  const act = (a, data = {}) => E2(([a, data]) => { const b = document.createElement('button'); b.dataset.act = a; Object.assign(b.dataset, data); b.hidden = true; document.body.append(b); b.click(); b.remove(); }, [a, data]);
+  const ens = () => E2(() => { const R = window.__ROSETTA__; return { ap: R.calc.fw.ens.aplicables, ne: R.calc.fw.ens.noExigidos, co26: R.hall.filter((h) => h.id === 'CO-26').length, perfil: R.state.alcance.ens.perfil }; });
+  await E2(() => { window.__ROSETTA__.openCase('techserv'); window.__ROSETTA__.go('alcance'); }); await page.waitForTimeout(200);
+  const sinPerfil = await ens(); assert.equal(sinPerfil.perfil, ''); assert.equal(sinPerfil.co26, 0);
+  assert.match(await viewText(), /CCN-STIC 892 se retiró el 28 mar 2025/);
+  await page.selectOption('#set-pce', '890a'); await page.waitForTimeout(250);
+  let x = await ens(); assert.equal(x.perfil, '890a'); assert.equal(x.co26, 1, 'techserv es de categoría ALTA');
+  assert.equal(x.ne, sinPerfil.ne, 'fuera de su ámbito el perfil no se aplica: se calcula con el anexo II');
+  assert.match(await viewText(), /es para sistemas de categoría Básica y este sistema es de categoría Alta/);
+  assert.match(await viewText(), /Ayuntamientos de menos de 5\.000 habitantes.*Exige 38 medidas/s);
+  // Sistema en el ámbito del perfil: categoría BÁSICA y niveles en BAJO
+  await page.selectOption('#set-cat', 'BÁSICA'); for (const d of ['D', 'I', 'C', 'A', 'T']) await page.selectOption(`#set-dim-${d}`, 'BAJO'); await page.waitForTimeout(250);
+  x = await ens(); assert.equal(x.co26, 0); assert.equal(x.ne, 35);
+  assert.equal(await page.locator('.perfil-ccn .callout').count(), 0);
+  await page.check('#set-pce-nis2'); await page.waitForTimeout(250);
+  assert.equal((await ens()).ne, 34, 'con servicios NIS2 se exige op.cont.2');
+  await page.locator('body').press('Control+z'); await page.waitForTimeout(250);
+  assert.equal((await ens()).ne, 35, 'deshacer quita la condición');
+  await act('insp-req', { fw: 'ens', id: 'op.ext.1' }); await page.waitForTimeout(150);
+  assert.match(await page.locator('#insp').innerText(), /No exigida por el perfil de cumplimiento CCN-STIC 890A/);
+  await act('insp-req', { fw: 'ens', id: 'op.cont.2' }); await page.waitForTimeout(150);
+  assert.match(await page.locator('#insp').innerText(), /solo la exige si la entidad presta servicios de los anexos I y II de NIS2/);
+  await act('insp-req', { fw: 'ens', id: 'op.pl.1' }); await page.waitForTimeout(150);
+  let insp = await page.locator('#insp').innerText();
+  assert.match(insp, /Criterio de la CCN-STIC 890A/); assert.match(insp, /Plataforma de Gobernanza del CCN/); assert.match(insp, /Nivel Bajo · .*CCN-STIC 890A/);
+  await act('lang', { v: 'en' }); await page.waitForTimeout(200);
+  await act('insp-req', { fw: 'ens', id: 'op.pl.1' }); await page.waitForTimeout(150);
+  insp = await page.locator('#insp').innerText(); assert.match(insp, /CCN-STIC 890A criterion/); assert.match(insp, /CCN Governance Platform/);
+  await act('insp-close'); await act('lang', { v: 'es' }); await page.waitForTimeout(200);
+  // 881A: refuerzo añadido por el perfil
+  await page.selectOption('#set-pce', '881a'); await page.selectOption('#set-cat', 'MEDIA'); await page.waitForTimeout(250);
+  assert.equal(await E2(() => window.__ROSETTA__.calc.req.ens.find((r) => r.id === 'op.exp.6').exigencia), 'aplica + R4');
+  assert.equal(await page.locator('#set-pce-evidencia').count(), 1); assert.equal(await page.locator('#set-pce-nis2').count(), 0);
+  // Saneado al importar: perfil desconocido y condiciones que no son booleanas o no existen
+  await importJson(null, '{"proyecto":{"nombre":"Hostil"},"alcance":{"ens":{"on":true,"categoria":"BÁSICA","perfil":"<img src=x>","perfilCond":{"nis2":"yes","foo":true,"evidencia":true}}},"controles":{}}');
+  assert.deepEqual(await E2(() => ({ p: window.__ROSETTA__.state.alcance.ens.perfil, c: window.__ROSETTA__.state.alcance.ens.perfilCond })), { p: '', c: { evidencia: true } });
+  await importJson({ proyecto: { nombre: 'Municipio' }, alcance: { ens: { on: true, categoria: 'BÁSICA', perfil: '890a', perfilCond: { nis2: true } } }, controles: {} });
+  assert.deepEqual(await E2(() => ({ p: window.__ROSETTA__.state.alcance.ens.perfil, c: window.__ROSETTA__.state.alcance.ens.perfilCond })), { p: '890a', c: { nis2: true } });
+  noErrors('perfiles CCN');
+});
+
 test('2.14.0: la rueda se recorre con el teclado (una parada de tabulador, flechas, Av/Re Pág, Inicio, Fin, Intro y Esc)', async () => {
   await page.evaluate(() => { window.__ROSETTA__.openCase('techserv'); window.__ROSETTA__.go('panel'); }); await page.waitForTimeout(700);
   const sp = '.wheel:not(.hero) .spoke';

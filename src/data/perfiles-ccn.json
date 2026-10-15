@@ -1,0 +1,444 @@
+{
+ "fuente": "Guías CCN-STIC 881A (mayo de 2022) y 890A (noviembre de 2025) del Centro Criptológico Nacional: solo la declaración de aplicabilidad (nivel por medida, refuerzos añadidos y criterios resumidos). Las guías no se reproducen.",
+ "perfiles": {
+  "881a": {
+   "guia": "CCN-STIC 881A",
+   "nombre": "Universidades",
+   "nombre_en": "Universities",
+   "edicion": "2022-05",
+   "categoria": "MEDIA",
+   "aplican": 69,
+   "ambito": "Sistemas de las universidades con necesidades de seguridad de categoría MEDIA.",
+   "ambito_en": "University systems with MEDIUM-category security needs.",
+   "medidas": {
+    "org.1": {
+     "nivel": "MEDIO"
+    },
+    "org.2": {
+     "nivel": "MEDIO"
+    },
+    "org.3": {
+     "nivel": "MEDIO"
+    },
+    "org.4": {
+     "nivel": "MEDIO"
+    },
+    "op.pl.1": {
+     "nivel": "MEDIO"
+    },
+    "op.pl.2": {
+     "nivel": "MEDIO"
+    },
+    "op.pl.3": {
+     "nivel": "MEDIO"
+    },
+    "op.pl.4": {
+     "nivel": "MEDIO"
+    },
+    "op.pl.5": {
+     "nivel": "MEDIO"
+    },
+    "op.acc.1": {
+     "nivel": "MEDIO"
+    },
+    "op.acc.2": {
+     "nivel": "MEDIO"
+    },
+    "op.acc.3": {
+     "nivel": "MEDIO"
+    },
+    "op.acc.4": {
+     "nivel": "MEDIO"
+    },
+    "op.acc.5": {
+     "nivel": "MEDIO",
+     "extra": [
+      "R5"
+     ],
+     "criterio": "Si los servicios tratan información con confidencialidad de nivel BAJO, basta con los requisitos de categoría BÁSICA más R5.",
+     "criterio_en": "For services handling information with LOW confidentiality, BASIC requirements plus R5 are enough."
+    },
+    "op.acc.6": {
+     "nivel": "MEDIO"
+    },
+    "op.exp.1": {
+     "nivel": "MEDIO"
+    },
+    "op.exp.2": {
+     "nivel": "MEDIO"
+    },
+    "op.exp.3": {
+     "nivel": "MEDIO"
+    },
+    "op.exp.4": {
+     "nivel": "MEDIO"
+    },
+    "op.exp.5": {
+     "nivel": "MEDIO"
+    },
+    "op.exp.6": {
+     "nivel": "BAJO",
+     "extra": [
+      "R4"
+     ],
+     "criterio": "Requisitos de categoría BÁSICA más R4 (capacidad de respuesta: EDR en puestos y servidores).",
+     "criterio_en": "BASIC requirements plus R4 (response capability: EDR on endpoints and servers)."
+    },
+    "op.exp.7": {
+     "nivel": "MEDIO"
+    },
+    "op.exp.8": {
+     "nivel": "MEDIO"
+    },
+    "op.exp.9": {
+     "nivel": "MEDIO"
+    },
+    "op.exp.10": {
+     "nivel": "MEDIO"
+    },
+    "op.ext.1": {
+     "nivel": "MEDIO"
+    },
+    "op.ext.2": {
+     "nivel": "MEDIO"
+    },
+    "op.ext.3": null,
+    "op.ext.4": {
+     "nivel": "MEDIO"
+    },
+    "op.nub.1": {
+     "nivel": "MEDIO"
+    },
+    "op.cont.1": {
+     "nivel": "MEDIO"
+    },
+    "op.cont.2": null,
+    "op.cont.3": null,
+    "op.cont.4": null,
+    "op.mon.1": {
+     "nivel": "MEDIO"
+    },
+    "op.mon.2": {
+     "nivel": "MEDIO"
+    },
+    "op.mon.3": {
+     "nivel": "BAJO",
+     "extra": [
+      "R1"
+     ],
+     "criterio": "Requisitos de categoría BÁSICA más R1 (correlación automática de eventos de seguridad).",
+     "criterio_en": "BASIC requirements plus R1 (automatic correlation of security events)."
+    },
+    "mp.if.1": {
+     "nivel": "MEDIO"
+    },
+    "mp.if.2": {
+     "nivel": "MEDIO"
+    },
+    "mp.if.3": {
+     "nivel": "MEDIO"
+    },
+    "mp.if.4": {
+     "nivel": "MEDIO"
+    },
+    "mp.if.5": {
+     "nivel": "MEDIO"
+    },
+    "mp.if.6": {
+     "nivel": "MEDIO"
+    },
+    "mp.if.7": {
+     "nivel": "MEDIO"
+    },
+    "mp.per.1": {
+     "nivel": "MEDIO"
+    },
+    "mp.per.2": {
+     "nivel": "BAJO",
+     "criterio": "Requisitos de categoría BÁSICA.",
+     "criterio_en": "BASIC requirements."
+    },
+    "mp.per.3": {
+     "nivel": "MEDIO"
+    },
+    "mp.per.4": {
+     "nivel": "MEDIO"
+    },
+    "mp.eq.1": {
+     "nivel": "MEDIO"
+    },
+    "mp.eq.2": {
+     "nivel": "MEDIO"
+    },
+    "mp.eq.3": {
+     "nivel": "MEDIO"
+    },
+    "mp.eq.4": {
+     "nivel": "BAJO",
+     "criterio": "Requisitos de nivel BAJO.",
+     "criterio_en": "LOW-level requirements."
+    },
+    "mp.com.1": {
+     "nivel": "MEDIO"
+    },
+    "mp.com.2": {
+     "nivel": "MEDIO"
+    },
+    "mp.com.3": {
+     "nivel": "MEDIO"
+    },
+    "mp.com.4": {
+     "nivel": "MEDIO"
+    },
+    "mp.si.1": {
+     "nivel": "MEDIO"
+    },
+    "mp.si.2": {
+     "nivel": "MEDIO",
+     "extra": [
+      "R2"
+     ],
+     "criterio": "Requisitos de nivel MEDIO más R2 (copias de seguridad cifradas con algoritmos autorizados por el CCN).",
+     "criterio_en": "MEDIUM-level requirements plus R2 (backups encrypted with CCN-approved algorithms)."
+    },
+    "mp.si.3": {
+     "nivel": "MEDIO"
+    },
+    "mp.si.4": {
+     "nivel": "MEDIO"
+    },
+    "mp.si.5": {
+     "nivel": "MEDIO"
+    },
+    "mp.sw.1": {
+     "nivel": "MEDIO"
+    },
+    "mp.sw.2": {
+     "nivel": "BAJO",
+     "criterio": "Las aplicaciones que no gestionan servicios corporativos pueden quedarse en categoría BÁSICA.",
+     "criterio_en": "Applications that do not run corporate services may stay at BASIC category."
+    },
+    "mp.info.1": {
+     "nivel": "MEDIO"
+    },
+    "mp.info.2": {
+     "nivel": "MEDIO"
+    },
+    "mp.info.3": {
+     "nivel": "MEDIO"
+    },
+    "mp.info.4": {
+     "nivel": "ALTO",
+     "cond": "evidencia",
+     "criterio": "Nivel ALTO solo para la información que pueda usarse como evidencia electrónica; si no la hay, la medida no aplica.",
+     "criterio_en": "HIGH level only for information that may be used as electronic evidence; otherwise the measure does not apply."
+    },
+    "mp.info.5": {
+     "nivel": "MEDIO"
+    },
+    "mp.info.6": {
+     "nivel": "MEDIO"
+    },
+    "mp.s.1": {
+     "nivel": "MEDIO"
+    },
+    "mp.s.2": {
+     "nivel": "MEDIO"
+    },
+    "mp.s.3": {
+     "nivel": "MEDIO"
+    },
+    "mp.s.4": {
+     "nivel": "MEDIO"
+    }
+   }
+  },
+  "890a": {
+   "guia": "CCN-STIC 890A",
+   "nombre": "Entidades locales (requisitos fundamentales)",
+   "nombre_en": "Local entities (fundamental requirements)",
+   "edicion": "2025-11",
+   "categoria": "BÁSICA",
+   "aplican": 38,
+   "ambito": "Ayuntamientos de menos de 5.000 habitantes, sus agrupaciones y entidades locales menores, con servicios de nivel BAJO en todas las dimensiones. Es transitorio: hay que seguir mejorando hasta la categoría que corresponda.",
+   "ambito_en": "Municipalities under 5,000 inhabitants, their groupings and minor local entities, with services at LOW level in every dimension. It is transitional: security must keep improving up to the proper category.",
+   "medidas": {
+    "org.1": {
+     "nivel": "BAJO"
+    },
+    "org.2": {
+     "nivel": "BAJO"
+    },
+    "org.3": {
+     "nivel": "BAJO"
+    },
+    "org.4": {
+     "nivel": "BAJO"
+    },
+    "op.pl.1": {
+     "nivel": "BAJO",
+     "criterio": "Análisis de riesgos automatizado en la Plataforma de Gobernanza del CCN.",
+     "criterio_en": "Risk analysis automated in the CCN Governance Platform."
+    },
+    "op.pl.2": null,
+    "op.pl.3": {
+     "nivel": "BAJO"
+    },
+    "op.pl.4": null,
+    "op.pl.5": null,
+    "op.acc.1": {
+     "nivel": "BAJO"
+    },
+    "op.acc.2": {
+     "nivel": "BAJO"
+    },
+    "op.acc.3": null,
+    "op.acc.4": {
+     "nivel": "BAJO"
+    },
+    "op.acc.5": {
+     "nivel": "BAJO"
+    },
+    "op.acc.6": {
+     "nivel": "BAJO",
+     "criterio": "Se recomienda R2 (contraseña más otro factor) también desde zonas controladas, sobre todo si se prestan servicios de los anexos I y II de NIS2.",
+     "criterio_en": "R2 (password plus another factor) is recommended even from controlled zones, especially when providing NIS2 Annex I and II services."
+    },
+    "op.exp.1": {
+     "nivel": "BAJO"
+    },
+    "op.exp.2": {
+     "nivel": "BAJO"
+    },
+    "op.exp.3": null,
+    "op.exp.4": {
+     "nivel": "BAJO"
+    },
+    "op.exp.5": null,
+    "op.exp.6": {
+     "nivel": "BAJO"
+    },
+    "op.exp.7": {
+     "nivel": "BAJO"
+    },
+    "op.exp.8": {
+     "nivel": "BAJO",
+     "criterio": "Basta con registrar la actividad de los usuarios en los servidores.",
+     "criterio_en": "Logging user activity on servers is enough."
+    },
+    "op.exp.9": null,
+    "op.exp.10": {
+     "nivel": "BAJO"
+    },
+    "op.ext.1": null,
+    "op.ext.2": null,
+    "op.ext.3": null,
+    "op.ext.4": null,
+    "op.nub.1": null,
+    "op.cont.1": null,
+    "op.cont.2": {
+     "nivel": "ALTO",
+     "cond": "nis2",
+     "criterio": "Solo si la entidad presta servicios de los anexos I y II de NIS2 (agua, residuos, tráfico): mecanismos efectivos de continuidad, con el modelo de la CCN-STIC 890 anexo IV.",
+     "criterio_en": "Only if the entity provides NIS2 Annex I and II services (water, waste, traffic): effective continuity mechanisms, using the CCN-STIC 890 Annex IV model."
+    },
+    "op.cont.3": null,
+    "op.cont.4": null,
+    "op.mon.1": null,
+    "op.mon.2": {
+     "nivel": "BAJO"
+    },
+    "op.mon.3": null,
+    "mp.if.1": {
+     "nivel": "BAJO",
+     "criterio": "Sin CPD, el equipamiento se instala en áreas a las que solo accede personal autorizado.",
+     "criterio_en": "Without a data centre, equipment goes in areas only authorised staff can access."
+    },
+    "mp.if.2": null,
+    "mp.if.3": null,
+    "mp.if.4": null,
+    "mp.if.5": null,
+    "mp.if.6": null,
+    "mp.if.7": null,
+    "mp.per.1": null,
+    "mp.per.2": {
+     "nivel": "BAJO"
+    },
+    "mp.per.3": {
+     "nivel": "BAJO"
+    },
+    "mp.per.4": {
+     "nivel": "BAJO"
+    },
+    "mp.eq.1": {
+     "nivel": "BAJO"
+    },
+    "mp.eq.2": {
+     "nivel": "MEDIO"
+    },
+    "mp.eq.3": {
+     "nivel": "BAJO"
+    },
+    "mp.eq.4": {
+     "nivel": "BAJO"
+    },
+    "mp.com.1": {
+     "nivel": "BAJO",
+     "criterio": "Sin red, cada equipo tiene activo el cortafuegos del sistema operativo.",
+     "criterio_en": "Without a network, each device runs the operating system firewall."
+    },
+    "mp.com.2": {
+     "nivel": "BAJO"
+    },
+    "mp.com.3": null,
+    "mp.com.4": null,
+    "mp.si.1": null,
+    "mp.si.2": null,
+    "mp.si.3": {
+     "nivel": "BAJO"
+    },
+    "mp.si.4": {
+     "nivel": "BAJO"
+    },
+    "mp.si.5": {
+     "nivel": "BAJO"
+    },
+    "mp.sw.1": null,
+    "mp.sw.2": null,
+    "mp.info.1": {
+     "nivel": "BAJO"
+    },
+    "mp.info.2": null,
+    "mp.info.3": {
+     "nivel": "BAJO"
+    },
+    "mp.info.4": null,
+    "mp.info.5": {
+     "nivel": "BAJO"
+    },
+    "mp.info.6": {
+     "nivel": "BAJO",
+     "criterio": "Al menos una copia de seguridad fuera de línea, actualizada y en lugar seguro.",
+     "criterio_en": "At least one offline backup, kept up to date and stored securely."
+    },
+    "mp.s.1": {
+     "nivel": "BAJO"
+    },
+    "mp.s.2": null,
+    "mp.s.3": {
+     "nivel": "BAJO"
+    },
+    "mp.s.4": null
+   }
+  }
+ },
+ "retirados": [
+  {
+   "guia": "CCN-STIC 892",
+   "nombre": "Entidades del Reglamento de Ejecución (UE) 2024/2690 (NIS2)",
+   "retirada": "2025-03-28",
+   "nota": "Despublicada por el CCN con efecto inmediato; se elabora una nueva versión para las entidades sujetas al RE 2024/2690 y al ENS. Los certificados ya emitidos siguen siendo válidos.",
+   "nota_en": "Withdrawn by the CCN with immediate effect; a new version for entities under IR 2024/2690 and the ENS is being drafted. Certificates already issued remain valid."
+  }
+ ]
+}

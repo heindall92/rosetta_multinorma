@@ -629,6 +629,8 @@ select option { background: var(--bg); color: var(--ink); }
 @media (min-width: 1241px) { body.insp-open .main { padding-right: 516px; } body.insp-open .scrim { display: none; } }
 .callout { display: flex; gap: 10px; align-items: flex-start; padding: 12px 14px; border-radius: 14px; background: var(--accent-soft); font-size: .86rem; }
 .callout .ic { color: var(--accent); margin-top: 2px; }
+.callout.warn { background: var(--warn-bg); } .callout.warn .ic { color: var(--warn); }
+.perfil-ccn { margin-top: 6px; } .perfil-ccn .hint .ic { vertical-align: -2px; }
 .ucrow { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 14px; background: var(--glass-in); border: 1px solid var(--hair); }
 .ucrow b { font-size: .86rem; font-weight: 550; }
 .weight { font: 600 .7rem var(--f-mono); padding: 3px 7px; border-radius: 6px; text-transform: uppercase; letter-spacing: .05em; background: var(--glass-in); color: var(--muted); }
@@ -991,6 +993,9 @@ select option { background: var(--bg); color: var(--ink); }
 .warn-t { color: var(--warn); display: inline-flex; gap: 6px; align-items: center; }
 .insp .nota { padding: 10px 12px; border-radius: 12px; border-left: 3px solid var(--fw); background: color-mix(in oklch, var(--fw) 8%, transparent); font-size: .84rem; }
 @media (max-width: 980px) { .prow { grid-template-columns: auto minmax(0, 1fr); } .prow-why, .prow-mot { grid-column: 1 / -1; } }
+/* Con la ficha abierta el área de trabajo se estrecha como en una tableta: misma disposición, y las etiquetas nunca invaden la columna vecina */
+@media (min-width: 1241px) { body.insp-open .prow { grid-template-columns: auto minmax(0, 1fr); } body.insp-open .prow-why, body.insp-open .prow-mot { grid-column: 1 / -1; } }
+.prow-why .pill { max-width: 100%; white-space: normal; }
 .mp-add .btn { white-space: normal; text-align: left; height: auto; min-height: 30px; padding-block: 5px; max-width: 100%; }
 .mp-add select { max-width: min(280px, 100%); }
 .fwt { max-width: 100%; } .fwt-l { min-width: 0; overflow: hidden; text-overflow: ellipsis; }

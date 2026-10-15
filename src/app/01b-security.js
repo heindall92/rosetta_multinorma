@@ -110,7 +110,8 @@ function sanitizeState(raw) {
   const reqOk = (f, k) => (FW_BASE.includes(f) ? !!IX0.req[f][k] : st.marcos.find((m) => m.id === f).requisitos.some((x) => x.id === k));
   const mot = (f) => s(g(f).motivo, 300);
   st.alcance = {
-    ens: { on: g('ens').on === true, categoria: oneOf(g('ens').categoria, CATS_ENS, 'MEDIA'), niveles: Object.fromEntries(E.DIMS.filter((d) => E.NIVELES_ENS.includes(niv[d])).map((d) => [d, niv[d]])), refuerzos: g('ens').refuerzos === true },
+    ens: { on: g('ens').on === true, categoria: oneOf(g('ens').categoria, CATS_ENS, 'MEDIA'), niveles: Object.fromEntries(E.DIMS.filter((d) => E.NIVELES_ENS.includes(niv[d])).map((d) => [d, niv[d]])), refuerzos: g('ens').refuerzos === true,
+      perfil: oneOf(g('ens').perfil, ['', ...Object.keys(PERFILES.perfiles)], ''), perfilCond: Object.fromEntries(E.PERFIL_CONDS.filter((c) => isObj(g('ens').perfilCond) && g('ens').perfilCond[c] === true).map((c) => [c, true])) },
     iso27001: { on: g('iso27001').on === true },
     nis2: { on: g('nis2').on === true, tipo: oneOf(g('nis2').tipo, NIS2_TIPOS, 'fuera') },
     iso42001: { on: g('iso42001').on === true },
