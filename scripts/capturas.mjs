@@ -52,6 +52,20 @@ for (const [name, v, tema, caso, w] of VISTAS) {
   await p.mouse.move(700, 450); await p.waitForTimeout(1200); await limpiar(p);
   await p.screenshot({ path: join(OUT, 'refuerzos-light.png') }); await ctx.close();
 }
+{ // Perfil de cumplimiento del CCN: Alcance con la CCN-STIC 890A y ficha de op.cont.2 con su criterio (2.15.0)
+  const { ctx, p } = await abrir(1440, 'claro');
+  // Ayuntamiento ficticio: ninguno de los nueve casos es una entidad local
+  const proyecto = { proyecto: { nombre: 'ENS del ayuntamiento', organizacion: 'Ayuntamiento de Valdeolmo (ficticio)', descripcion: 'Sede electrónica, padrón y abastecimiento de agua' },
+    alcance: { ens: { on: true, categoria: 'BÁSICA', niveles: { D: 'BAJO', I: 'BAJO', C: 'BAJO', A: 'BAJO', T: 'BAJO' }, refuerzos: true, perfil: '890a', perfilCond: { nis2: true } } }, controles: {} };
+  const ch = p.waitForEvent('filechooser');
+  await p.evaluate(() => { const b = document.createElement('button'); b.dataset.act = 'import-json'; b.hidden = true; document.body.append(b); b.click(); b.remove(); });
+  await (await ch).setFiles({ name: 'ayuntamiento.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(proyecto)) }); await p.waitForTimeout(400);
+  await p.evaluate(() => { window.__ROSETTA__.go('alcance'); }); await p.waitForTimeout(300);
+  await p.evaluate(() => { const b = document.createElement('button'); b.dataset.act = 'insp-req'; b.dataset.fw = 'ens'; b.dataset.id = 'op.cont.2'; b.hidden = true; document.body.append(b); b.click(); b.remove(); });
+  await p.waitForTimeout(600); await p.evaluate(() => document.querySelector('.perfil-ccn').scrollIntoView({ block: 'center' }));
+  await p.mouse.move(700, 450); await p.waitForTimeout(1200); await limpiar(p);
+  await p.screenshot({ path: join(OUT, 'perfil-ccn-light.png') }); await ctx.close();
+}
 { // RGPD y LOPDGDD en el hospital: vista de la norma y ficha de la EIPD (2.12.0)
   const { ctx, p } = await abrir(1440, 'claro');
   await p.evaluate(() => { const R = window.__ROSETTA__; R.openCase('hospital'); R.ui.normaFw = 'rgpd'; R.go('normas'); });

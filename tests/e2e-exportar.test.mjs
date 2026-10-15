@@ -121,3 +121,26 @@ test('la copia de seguridad se descarga, es válida y restaura todos los proyect
   assert.equal(await p2.evaluate(() => window.__ROSETTA__.ws.projects.length), n0);
   await ctx2.close();
 });
+
+test('2.15.0: con un perfil del CCN, el Excel lo declara y la SoA del ENS sigue su declaración de aplicabilidad', async () => {
+  await act('lang', { v: 'es' });
+  await page.evaluate(() => { window.__ROSETTA__.openCase('techserv'); window.__ROSETTA__.go('alcance'); });
+  await page.selectOption('#set-pce', '881a'); await page.selectOption('#set-cat', 'MEDIA');
+  for (const d of ['D', 'I', 'C', 'A', 'T']) await page.selectOption(`#set-dim-${d}`, 'MEDIO');
+  await page.evaluate(() => window.__ROSETTA__.go('exportar'));
+  const x = await descarga('export-xlsx'); comprobarExcel(x.name, x.buf, 'es');
+  const wb = XLSX.read(x.buf, { type: 'buffer' });
+  const res = XLSX.utils.sheet_to_json(wb.Sheets.Resumen, { header: 1 });
+  assert.ok(res.some((f) => f[0] === 'Perfil de cumplimiento del CCN' && /^CCN-STIC 881A · Universidades \(Media\)$/.test(f[1])), 'el resumen declara el perfil');
+  const soa = XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames.find((n) => n.startsWith('SoA ENS'))], { header: 1 });
+  const fila = (id) => soa.find((f) => f[0] === id);
+  assert.equal(fila('op.exp.6')[3], 'Bajo'); assert.equal(fila('op.exp.6')[4], 'aplica + R4');
+  assert.match(fila('op.exp.6')[7], /Criterio de la CCN-STIC 881A: Requisitos de categoría BÁSICA más R4/);
+  assert.equal(fila('op.ext.3')[6], 'NO EXIGIDO'); assert.match(fila('op.ext.3')[7], /perfil de cumplimiento CCN-STIC 881A/);
+  assert.match(fila('mp.info.4')[7], /solo la exige si hay información que pueda usarse como evidencia electrónica/);
+  const md = (await descarga('export-md')).buf.toString('utf8'); comprobarMd('perfil', md);
+  assert.match(md, /- ENS: categoría \*\*Media\*\*, con el perfil de cumplimiento \*\*CCN-STIC 881A\*\* \(Universidades\): 5 medidas no exigidas por el perfil\./);
+  const json = JSON.parse((await descarga('export-json')).buf.toString('utf8'));
+  assert.equal(json.alcance.ens.perfil, '881a');
+  assert.deepEqual(errors.splice(0), []);
+});

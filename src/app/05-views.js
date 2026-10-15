@@ -174,7 +174,7 @@ function vOrbita() {
     <section class="glass wheel-card">${wheelSVG(state, calc)}${wheelLegend()}</section>
     <div class="side-stack">
       <section class="glass pane stack">
-        <div class="row">${calc.alcance.map((f) => fwTag(f)).join('')}${n2.on ? entPill(n2.tipo) : ''}${state.alcance.ens.on ? `<span class="cat">ENS · ${esc(t('cats.' + state.alcance.ens.categoria))}</span>` : ''}</div>
+        <div class="row">${calc.alcance.map((f) => fwTag(f)).join('')}${n2.on ? entPill(n2.tipo) : ''}${state.alcance.ens.on ? `<span class="cat">ENS · ${esc(t('cats.' + state.alcance.ens.categoria))}${state.alcance.ens.perfil ? ` · ${esc(PERFILES.perfiles[state.alcance.ens.perfil].guia)}` : ''}</span>` : ''}</div>
         <div class="big-num"><b class="num">${pct(k.grado)}</b><span>${esc(t('ofReqs', k.requisitos, k.normas))}</span></div>
         ${stackBar(tot)}
         <div class="legend"><span><i style="background:var(--ok)"></i>${esc(t('cov.cubierto'))} ${tot.cubiertos}</span><span><i style="background:var(--warn)"></i>${esc(t('cov.parcial'))} ${tot.parciales}</span><span><i style="background:var(--crit)"></i>${esc(t('cov.brecha'))} ${tot.brechas}</span></div>

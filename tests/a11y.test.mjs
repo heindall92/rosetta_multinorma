@@ -146,3 +146,32 @@ for (const theme of ['light', 'dark']) for (const width of [1440, 390]) {
     assert.deepEqual(fallos, []);
   });
 }
+
+/* 2.15.0: perfil de cumplimiento del CCN en Alcance (con la condición, el aviso de CO-26 y la guía retirada), en la ficha y en el asistente */
+for (const theme of ['light', 'dark']) for (const width of [1440, 390]) {
+  test(`axe sin violaciones con un perfil del CCN · tema ${theme} · ${width} px`, async () => {
+    const ctx = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: theme, bypassCSP: true, reducedMotion: 'reduce' });
+    await ctx.route(/^https?:\/\//, (r) => r.abort());
+    const p = await ctx.newPage();
+    await p.goto(URL_APP); await p.waitForFunction(() => window.__ROSETTA__);
+    if (theme === 'dark') await p.evaluate(() => document.querySelector('[data-act="toggle-theme"]').click());
+    await p.evaluate(() => { window.__ROSETTA__.openCase('techserv'); window.__ROSETTA__.go('alcance'); }); await p.waitForTimeout(250);
+    await p.selectOption('#set-pce', '890a');
+    await p.addScriptTag({ content: AXE });
+    const fallos = [];
+    for (const paso of ['alcance', 'ficha', 'asistente']) {
+      if (paso === 'ficha') { await p.selectOption('#set-cat', 'BÁSICA'); for (const d of ['D', 'I', 'C', 'A', 'T']) await p.selectOption(`#set-dim-${d}`, 'BAJO'); }
+      if (paso === 'ficha') await p.evaluate(() => { const b = document.createElement('button'); b.dataset.act = 'insp-req'; b.dataset.fw = 'ens'; b.dataset.id = 'op.pl.1'; b.hidden = true; document.body.append(b); b.click(); b.remove(); });
+      if (paso === 'asistente') await p.evaluate(() => { const b = document.createElement('button'); b.dataset.act = 'insp-close'; b.hidden = true; document.body.append(b); b.click(); b.remove(); const R = window.__ROSETTA__; R.go('nuevo'); R.ui.wizard.step = 2; R.ui.wizard.alcance.ens.perfil = '881a'; R.go('nuevo'); });
+      await p.waitForTimeout(250);
+      const r = await p.evaluate(async () => (await window.axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'], resultTypes: ['violations'] }))
+        .violations.flatMap((x) => x.nodes.map((n) => `${x.id} · ${n.target.join(' ')}`)));
+      for (const f of r) fallos.push(`${paso}: ${f}`);
+      if (paso === 'alcance') { assert.equal(await p.locator('.perfil-ccn .callout.warn').count(), 1); assert.equal(await p.locator('#set-pce-nis2').count(), 1); }
+      if (paso === 'ficha') assert.match(await p.locator('#insp').innerText(), /Criterio de la CCN-STIC 890A/);
+      if (paso === 'asistente') assert.equal(await p.locator('#wz-pce-evidencia').count(), 1);
+    }
+    await ctx.close();
+    assert.deepEqual(fallos, []);
+  });
+}

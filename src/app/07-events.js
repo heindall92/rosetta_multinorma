@@ -6,7 +6,7 @@ function setPath(obj, path, value, schema = 'state') {
   // Solo rutas conocidas del modelo (lista blanca)
   const okState = (ks[0] === 'controles' && UC_IDS.has(ks[1]) && ['estado', 'responsable', 'evidencias', 'revision', 'notas'].includes(ks[2]) && ks.length === 3)
     || (ks[0] === 'proyecto' && ['nombre', 'organizacion', 'descripcion', 'sector'].includes(ks[1]) && ks.length === 2)
-    || (ks[0] === 'alcance' && FW.includes(ks[1]) && ((['on', 'motivo'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'ens' && ['categoria', 'refuerzos'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'niveles' && E.DIMS.includes(ks[3]) && ks.length === 4) || (ks[1] === 'partis' && ks[2] === 'regimen' && ks.length === 3) || (ks[1] === 'ria' && ['rol', 'alto', 'transparencia', 'gpai'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'cra' && ks[2] === 'clase' && ks.length === 3) || (ks[1] === 'dora' && ['regimen', 'tlpt'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'cl21663' && ks[2] === 'oiv' && ks.length === 3)))
+    || (ks[0] === 'alcance' && FW.includes(ks[1]) && ((['on', 'motivo'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'ens' && ['categoria', 'refuerzos', 'perfil'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'ens' && ks[2] === 'perfilCond' && E.PERFIL_CONDS.includes(ks[3]) && ks.length === 4) || (ks[1] === 'ens' && ks[2] === 'niveles' && E.DIMS.includes(ks[3]) && ks.length === 4) || (ks[1] === 'partis' && ks[2] === 'regimen' && ks.length === 3) || (ks[1] === 'ria' && ['rol', 'alto', 'transparencia', 'gpai'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'cra' && ks[2] === 'clase' && ks.length === 3) || (ks[1] === 'dora' && ['regimen', 'tlpt'].includes(ks[2]) && ks.length === 3) || (ks[1] === 'cl21663' && ks[2] === 'oiv' && ks.length === 3)))
     || (ks[0] === 'perfil' && ks[1] === 'opera' && E.LATAM.includes(ks[2]) && ks.length === 3)
     || (ks[0] === 'perfil' && has(E.PERFIL_DEF, ks[1]) && ks.length === 2)
     || (ks[0] === 'nis2q' && ['sector', 'especial', 'tamano', 'infraDigital'].includes(ks[1]) && ks.length === 2);
@@ -30,6 +30,8 @@ function setPath(obj, path, value, schema = 'state') {
   else if (ks[0] === 'alcance' && last === 'motivo') o[last] = s(value, 300);
   else if (ks[0] === 'alcance' && ks[1] === 'cl21663' && last === 'oiv') o[last] = value === true;
   else if (ks[0] === 'alcance' && ks[1] === 'ens' && last === 'refuerzos') o[last] = value === true;
+  else if (ks[0] === 'alcance' && ks[1] === 'ens' && last === 'perfil') o[last] = oneOf(value, ['', ...Object.keys(PERFILES.perfiles)], '');
+  else if (ks[0] === 'alcance' && ks[2] === 'perfilCond') { if (value === true) o[last] = true; else delete o[last]; }
   else if (ks[0] === 'perfil') o[last] = typeof E.PERFIL_DEF[last] === 'boolean' ? value === true : E.perfilNormalizado({ [last]: value })[last];
   else o[last] = typeof value === 'string' ? s(value) : value;
   return true;
@@ -129,7 +131,9 @@ function closeLayers() {
 }
 document.addEventListener('keydown', (ev) => {
   const tg = ev.target; const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(tg.tagName) && tg.id !== 'pal-q' && tg.id !== 'tr-q';
-  if ((ev.ctrlKey || ev.metaKey) && !typing && state && (ev.key.toLowerCase() === 'z' || ev.key.toLowerCase() === 'y')) { ev.preventDefault(); undo(ev.key.toLowerCase() === 'y' || ev.shiftKey); return; }
+  // Las casillas y los desplegables no tienen deshacer propio: Ctrl+Z deshace en Rosetta aunque tengan el foco
+  const deshacerNativo = tg.tagName === 'TEXTAREA' || (tg.tagName === 'INPUT' && !['checkbox', 'radio', 'range', 'color', 'file', 'button'].includes(tg.type));
+  if ((ev.ctrlKey || ev.metaKey) && !deshacerNativo && state && (ev.key.toLowerCase() === 'z' || ev.key.toLowerCase() === 'y')) { ev.preventDefault(); undo(ev.key.toLowerCase() === 'y' || ev.shiftKey); return; }
   if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'k') { ev.preventDefault(); ui.palette = !ui.palette; ui.paletteQ = ''; ui.paletteIdx = 0; renderPalette(); return; }
   if (ui.palette) {
     const items = ui._pItems || [];

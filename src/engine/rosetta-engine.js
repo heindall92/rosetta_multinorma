@@ -49,7 +49,7 @@
     const ks = Object.keys(cat.frameworks);
     return [...FW.filter((f) => ks.includes(f)), ...ks.filter((f) => !FW.includes(f))];
   }
-  function indexar(catBase, ccn, propios) {
+  function indexar(catBase, ccn, propios, perfiles) {
     const cat = fundirPropios(catBase, propios);
     const fw = listaNormas(cat);
     const reqUcs = {}; const reqRel = {}; const ucMap = {}; const req = {};
@@ -62,7 +62,7 @@
       for (const f of fw) for (const m of c.maps[f] || []) if (reqUcs[f][m.id]) (m.w > 0 ? reqUcs : reqRel)[f][m.id].push({ uc: c.id, w: m.w });
     }
     const propio = Object.fromEntries(fw.map((f) => [f, !!cat.frameworks[f].propio]));
-    return { cat, fw, propio, reqUcs, reqRel, ucMap, req, ccn: ccn || null, ccnPar: ccn ? indexarCcn(ccn) : null };
+    return { cat, fw, propio, reqUcs, reqRel, ucMap, req, ccn: ccn || null, ccnPar: ccn ? indexarCcn(ccn) : null, perfiles: perfiles && perfiles.perfiles ? perfiles : null };
   }
 
   /* ---------- CCN-STIC 825: correspondencias oficiales ENS ↔ ISO/IEC 27001:2022 ----------
@@ -199,12 +199,36 @@
       (r.riesgo === 'gpai' && x.gpai !== 'no') || (r.riesgo === 'sistemico' && x.gpai === 'sistemico');
     return ok ? { aplica: true } : { aplica: false, motivo: r.riesgo };
   }
+  /* ---------- Perfiles de cumplimiento específicos del CCN (CCN-STIC 881A y 890A) ----------
+   * Un perfil sustituye la tabla del anexo II para su ámbito: fija con qué nivel se exige cada medida, deja fuera las que
+   * marca N/A, añade refuerzos («(+R4)») y algunas medidas solo aplican si se da una condición (información que sirve de
+   * evidencia electrónica en la 881A; servicios de los anexos I y II de NIS2 en la 890A). */
+  const PERFIL_CONDS = ['nis2', 'evidencia'];
+  const perfilEns = (ix, a) => (a && a.perfil && ix.perfiles && ix.perfiles.perfiles[a.perfil]) || null;
+  function aplicaPerfil(r, pf, a, clave) {
+    const m = pf.medidas[r.id];
+    const cond = m && m.cond ? !!(a.perfilCond && a.perfilCond[m.cond] === true) : true;
+    if (!m || !cond) return { aplica: false, motivo: 'perfil', perfil: clave, ...(m && m.cond ? { cond: m.cond } : {}) };
+    const base = r[m.nivel.toLowerCase()];
+    const exig0 = exigidaEns(base) ? base : 'aplica';
+    const ya = exigenciaRefuerzos(exig0).obligatorios;
+    const exigencia = exig0 + (m.extra || []).filter((x) => !ya.includes(x)).map((x) => ` + ${x}`).join('');
+    return { aplica: true, nivel: m.nivel, exigencia, perfil: clave, ...(m.cond ? { cond: m.cond } : {}) };
+  }
+  /** ¿Corresponde el perfil a la categoría del sistema? Un perfil vale para su categoría o una inferior, nunca para una superior. */
+  function perfilAdecuado(ix, a) {
+    const pf = perfilEns(ix, a); if (!pf) return null;
+    const orden = ['BÁSICA', 'MEDIA', 'ALTA']; const cat = categoriaEfectiva(a);
+    return { ok: orden.indexOf(cat) <= orden.indexOf(pf.categoria), categoria: cat, perfil: pf };
+  }
   function aplicaReq(ix, st, f, id) {
     if (f === 'ria') { const r = ix.req.ria[id]; return r ? aplicaRia(r, st.alcance && st.alcance.ria) : { aplica: true }; }
     if (f === 'cl21663') { const r = ix.req.cl21663[id]; return r && r.tipo === 'oiv' && !(st.alcance && st.alcance.cl21663 && st.alcance.cl21663.oiv === true) ? { aplica: false, motivo: 'oiv' } : { aplica: true }; }
     if (f === 'dora') { const r = ix.req.dora[id]; return r ? aplicaDora(r, st.alcance && st.alcance.dora) : { aplica: true }; }
     if (f !== 'ens') return { aplica: true };
     const r = ix.req.ens[id]; const a = st.alcance.ens || {};
+    // Un perfil solo sustituye al anexo II dentro de su ámbito (categoría igual o inferior a la suya); el articulado se exige siempre
+    const pf = perfilEns(ix, a); if (pf && Object.prototype.hasOwnProperty.call(pf.medidas, id) && perfilAdecuado(ix, a).ok) return aplicaPerfil(r, pf, a, a.perfil);
     const nivel = nivelExigidoEns(r.dims, a.niveles, categoriaEfectiva(a));
     const exig = r[nivel.toLowerCase()];
     return { aplica: exigidaEns(exig), nivel, exigencia: exig };
@@ -384,7 +408,8 @@
     ['CO-22', 'Alta', 'Ley de protección de datos en alcance sin procedimiento de notificación de vulneraciones.'],
     ['CO-23', 'Alta', 'Control implantado con hallazgos técnicos críticos o altos abiertos según CTEM-Nexus.'],
     ['CO-24', 'Alta', 'RGPD en el sector público o en sus proveedores sin el ENS en el alcance (LOPDGDD, disposición adicional primera).'],
-    ['CO-25', 'Media', 'Medida del ENS exigida sin los refuerzos de su nivel: su cobertura no pasa de parcial.']
+    ['CO-25', 'Media', 'Medida del ENS exigida sin los refuerzos de su nivel: su cobertura no pasa de parcial.'],
+    ['CO-26', 'Alta', 'Perfil de cumplimiento específico del CCN aplicado a un sistema de categoría superior a la del perfil.']
   ];
   /* Mensajes de las reglas en español e inglés */
   const tt = (obj, key, lang) => (lang === 'en' && obj && obj[key + '_en'] ? obj[key + '_en'] : obj ? obj[key] : '');
@@ -410,6 +435,7 @@
       co24q: { publico: 'la entidad del sector público', proveedor: 'quien presta servicios al sector público' },
       co25: [(id) => `${id}: faltan refuerzos de su nivel`, (n) => `${n} medidas del ENS sin los refuerzos de su nivel`, (l) => `Faltan: ${l}. Una medida sin los refuerzos que exige su nivel no se cumple del todo, aunque sus controles estén implantados: en la certificación es una no conformidad. Su cobertura queda en parcial.`, 'Implanta los refuerzos y márcalos en la ficha de cada medida, o revisa la categoría y los niveles si la exigencia no corresponde.', 'RD 311/2022, anexo II'],
       refUno: (g) => `uno de ${g.join(', ').replace(/, (R\d+)$/, ' o $1')}`,
+      co26: [(g) => `${g} aplicado a un sistema de categoría superior`, (g, pc, c) => `La ${g} es un perfil de cumplimiento específico para sistemas de categoría ${pc}, y la categoría del sistema es ${c} según sus niveles. Un perfil solo sustituye al anexo II dentro de su ámbito: con una categoría superior se exige el anexo II completo y la certificación no se puede basar en el perfil. Rosetta calcula la cobertura con el anexo II.`, 'Quita el perfil en Alcance y evalúa con el anexo II, o revisa los niveles de las dimensiones si el sistema sí está en el ámbito del perfil.', 'RD 311/2022, art. 30; CCN-STIC 881A y 890A'],
       co22: [(m) => `${m}: sin procedimiento de vulneraciones`, (e) => `La ley obliga a notificar las vulneraciones de datos personales a la autoridad y, cuando procede, a los titulares. El control PRI-07 está ${e}.`, 'Define cómo se detecta, evalúa, registra y notifica una vulneración de datos personales, con los plazos de cada país.'],
       co19: ['Sin notificación de incidentes graves (DORA)', (e) => `DORA exige notificar los incidentes TIC graves a la autoridad financiera: inicial en 4 h desde la clasificación y como mucho 24 h, intermedio en 72 h y final en un mes. El control INC-12 está ${e}.`, 'Aprueba el procedimiento con los criterios de clasificación del art. 18, las plantillas de las ITS y quién notifica.', 'DORA, arts. 18 y 19'],
       co20: ['Sin registro de información de proveedores TIC', (e) => `El registro del art. 28.3 se remite a la autoridad cuando lo pide y es la base para evaluar la concentración. El control PRO-06 está ${e}.`, 'Completa el registro con todos los acuerdos TIC y marca los que soportan funciones esenciales o importantes.', 'DORA, art. 28.3'],
@@ -442,6 +468,7 @@
       co24q: { publico: 'the public sector entity', proveedor: 'whoever provides services to the public sector' },
       co25: [(id) => `${id}: reinforcements for its level are missing`, (n) => `${n} ENS measures without the reinforcements for their level`, (l) => `Missing: ${l}. A measure without the reinforcements its level requires is not fully met, even if its controls are implemented: at certification it is a nonconformity. Its coverage stays partial.`, 'Implement the reinforcements and tick them in each measure’s panel, or review the category and levels if the requirement does not fit.', 'RD 311/2022, Annex II'],
       refUno: (g) => `one of ${g.join(', ').replace(/, (R\d+)$/, ' or $1')}`,
+      co26: [(g) => `${g} applied to a higher-category system`, (g, pc, c) => `${g} is a specific compliance profile for ${pc}-category systems, and the system’s category is ${c} according to its levels. A profile only replaces Annex II within its scope: with a higher category the full Annex II is required and certification cannot rely on the profile. Rosetta computes coverage against Annex II.`, 'Remove the profile in Scope and assess against Annex II, or review the dimension levels if the system really is within the profile’s scope.', 'RD 311/2022, art. 30; CCN-STIC 881A and 890A'],
       co22: [(m) => `${m}: no breach procedure`, (e) => `The law requires notifying personal data breaches to the authority and, where applicable, to data subjects. Control PRI-07 is ${e}.`, 'Define how a personal data breach is detected, assessed, recorded and notified, with each country’s deadlines.'],
       co19: ['No major incident reporting (DORA)', (e) => `DORA requires reporting major ICT incidents to the financial authority: initial within 4 h of classification and at most 24 h, intermediate within 72 h and final within one month. Control INC-12 is ${e}.`, 'Approve the procedure with the art. 18 classification criteria, the ITS templates and who reports.', 'DORA, arts. 18 and 19'],
       co20: ['No register of ICT third-party information', (e) => `The art. 28.3 register is submitted to the authority on request and underpins the concentration assessment. Control PRO-06 is ${e}.`, 'Complete the register with every ICT arrangement and flag those supporting critical or important functions.', 'DORA, art. 28.3'],
@@ -473,7 +500,8 @@
     'CO-22': 'Data protection law in scope without a breach notification procedure.',
     'CO-23': 'Control implemented with open critical or high technical findings according to CTEM-Nexus.',
     'CO-24': 'GDPR in the public sector or its suppliers without the ENS in scope (LOPDGDD, first additional provision).',
-    'CO-25': 'Required ENS measure without the reinforcements for its level: its coverage stays partial.'
+    'CO-25': 'Required ENS measure without the reinforcements for its level: its coverage stays partial.',
+    'CO-26': 'CCN specific compliance profile applied to a system whose category is higher than the profile’s.'
   };
   function coherencia(ix, st, calc, opts = {}) {
     const lang = opts.lang === 'en' ? 'en' : 'es'; const M = MSG[lang];
@@ -562,6 +590,11 @@
       const faltaTxt = (r) => lista([...r.refuerzos.faltan, ...r.refuerzos.gruposFaltan.map((g) => M.refUno(g))]);
       if (sin.length === 1) add('CO-25', `ENS ${sin[0].id}`, M.co25[0](sin[0].id), M.co25[2](faltaTxt(sin[0])), M.co25[3], M.co25[4], { fw: 'ens', req: sin[0].id });
       else if (sin.length) add('CO-25', M.nMed(sin.length), M.co25[1](sin.length), M.co25[2](sin.slice(0, 8).map((r) => `${r.id} (${faltaTxt(r)})`).join('; ') + (sin.length > 8 ? '…' : '')), M.co25[3], M.co25[4], { fw: 'ens', reqs: sin.map((r) => r.id) });
+    }
+    if (on('ens')) {
+      const pa = perfilAdecuado(ix, st.alcance.ens);
+      const CAT_EN = { 'BÁSICA': 'BASIC', MEDIA: 'MEDIUM', ALTA: 'HIGH' }; const cn = (c) => (lang === 'en' ? CAT_EN[c] : c);
+      if (pa && !pa.ok) add('CO-26', pa.perfil.guia, M.co26[0](pa.perfil.guia), M.co26[1](pa.perfil.guia, cn(pa.perfil.categoria), cn(pa.categoria)), M.co26[2], M.co26[3], { fw: 'ens' });
     }
     const peso = { Alta: 0, Media: 1, Baja: 2 };
     return F.sort((a, b) => peso[a.sev] - peso[b.sev] || a.id.localeCompare(b.id));
@@ -927,7 +960,7 @@
 
   return { FW, FW_LABEL, FW_LABEL_EN, etiqueta, riaAlcance, RIA_ROLES, RIA_GPAI, craAlcance, CRA_CLASES, doraAlcance, DORA_REGIMENES, LATAM, fundirPropios, listaNormas, FW_LONG, FW_LONG_EN, ESTADOS, ESTADO_LABEL, ESTADO_LABEL_EN, REGLAS_EN, tt, SCORE, W, DIMS, NIVELES_ENS, CAT_NIVEL, REGLAS, TAMANOS, NIS2_ESPECIALES,
     ESTADOS_PERFIL, JURISDICCIONES, AVIACION, PERFIL_DEF, perfilNormalizado, perfilRegulatorio, sugerirControles, desdeCtem, aCtem, evidenciaCtem,
-    indexar, exigenciaRefuerzos, refuerzosEstado, evaluaRefuerzos, nivelExigidoEns, categoriaEfectiva, excluible, exigidaEns, categoriaDeNiveles, aplicaReq, coberturaReq, calcular, solapamiento, inferencia,
+    indexar, perfilEns, perfilAdecuado, PERFIL_CONDS, exigenciaRefuerzos, refuerzosEstado, evaluaRefuerzos, nivelExigidoEns, categoriaEfectiva, excluible, exigidaEns, categoriaDeNiveles, aplicaReq, coberturaReq, calcular, solapamiento, inferencia,
     equivalencias, prioridades, parseIsoRef, parejasClase, ccnPareja, fuerzaCcn, contrasteCcn825, coherencia, planAccion, puntuacionEns, desdeSoaEns, nis2Aplicabilidad, orden, codigo, titulo, instantanea, estadoUc };
 });
 

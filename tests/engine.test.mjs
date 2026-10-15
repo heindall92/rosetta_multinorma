@@ -832,3 +832,95 @@ describe('Refuerzos del ENS (anexo II)', () => {
     }
   });
 });
+
+describe('Perfiles de cumplimiento específicos del CCN (CCN-STIC 881A y 890A)', () => {
+  const PF = require('../src/data/perfiles-ccn.json');
+  const REF = require('../src/data/refuerzos.json');
+  const IXP = E.indexar(CAT, null, [], PF);
+  const MEDIDAS = CAT.frameworks.ens.reqs.filter((r) => r.g !== 'Articulado').map((r) => r.id);
+  const st = (ens) => ({ alcance: { ens: { on: true, categoria: 'MEDIA', niveles: {}, refuerzos: true, ...ens } }, controles: {}, refuerzos: {} });
+  const fila = (s, id) => E.calcular(IXP, s).req.ens.find((x) => x.id === id);
+  const caso = (ens) => { const c = structuredClone(CASOS.find((x) => x.id === 'techserv').state); Object.assign(c.alcance.ens, ens); return c; };
+
+  test('datos: las 73 medidas, niveles válidos, refuerzos que existen y criterios breves en los dos idiomas', () => {
+    assert.deepEqual(Object.keys(PF.perfiles), ['881a', '890a']);
+    for (const [k, p] of Object.entries(PF.perfiles)) {
+      assert.deepEqual(Object.keys(p.medidas).sort(), [...MEDIDAS].sort(), k);
+      for (const x of ['guia', 'nombre', 'nombre_en', 'edicion', 'ambito', 'ambito_en']) assert.ok(p[x], `${k}.${x}`);
+      assert.ok(['BÁSICA', 'MEDIA', 'ALTA'].includes(p.categoria));
+      const vivas = Object.entries(p.medidas).filter(([, m]) => m);
+      // La guía cuenta como exigidas las medidas que su tabla no marca N/A: las condicionales con N/A no entran
+      assert.equal(vivas.filter(([, m]) => !(m.cond && m.nivel === 'ALTO' && k === '890a')).length, p.aplican, k);
+      for (const [id, m] of vivas) {
+        assert.ok(E.NIVELES_ENS.includes(m.nivel), `${k} ${id}`);
+        for (const r of m.extra || []) assert.ok((REF.medidas[id] || []).some((x) => x.id === r), `${k} ${id} ${r}`);
+        if (m.cond) assert.ok(E.PERFIL_CONDS.includes(m.cond), `${k} ${id}`);
+        if (m.criterio) { assert.ok(m.criterio_en, `${k} ${id}`); assert.ok(m.criterio.length < 220, `${k} ${id}: resumen, no reproducción`); }
+      }
+    }
+    assert.equal(PF.perfiles['881a'].aplican, 69); assert.equal(PF.perfiles['890a'].aplican, 38);
+    assert.equal(PF.retirados[0].guia, 'CCN-STIC 892'); assert.equal(PF.retirados[0].retirada, '2025-03-28');
+    assert.match(PF.fuente, /no se reproducen/);
+  });
+
+  test('sin perfil, o con uno que no existe, se aplica el anexo II completo', () => {
+    const base = E.calcular(IXP, st({})).fw.ens;
+    assert.equal(E.calcular(IXP, st({ perfil: 'xyz' })).fw.ens.aplicables, base.aplicables);
+    assert.equal(E.calcular(IX, st({ perfil: '890a' })).fw.ens.aplicables, base.aplicables, 'un índice sin perfiles los ignora');
+    assert.equal(E.perfilEns(IXP, { perfil: '' }), null);
+  });
+
+  test('890A: 38 medidas en nivel BAJO; la continuidad solo con servicios NIS2', () => {
+    const s = st({ categoria: 'BÁSICA', perfil: '890a' });
+    const w = E.calcular(IXP, s).fw.ens;
+    const art = CAT.frameworks.ens.reqs.length - 73;
+    assert.equal(w.aplicables, 38 + art, 'el articulado se exige siempre'); assert.equal(w.noExigidos, 35);
+    const oc = fila(s, 'op.cont.2'); assert.equal(oc.estado, 'no-exigido'); assert.equal(oc.motivo, 'perfil'); assert.equal(oc.cond, 'nis2');
+    const ext = fila(s, 'op.ext.1'); assert.equal(ext.estado, 'no-exigido'); assert.equal(ext.cond, undefined);
+    s.alcance.ens.perfilCond = { nis2: true };
+    const oc2 = fila(s, 'op.cont.2'); assert.equal(oc2.estado, 'brecha'); assert.equal(oc2.nivel, 'ALTO'); assert.equal(oc2.exigencia, 'aplica'); assert.equal(oc2.perfil, '890a');
+    assert.equal(E.calcular(IXP, s).fw.ens.aplicables, 39 + art);
+    assert.equal(fila(s, 'mp.eq.2').nivel, 'MEDIO', 'la guía exige mp.eq.2 en MEDIO');
+  });
+
+  test('881A: nivel del perfil y refuerzos añadidos, sin duplicar los del anexo II', () => {
+    const s = st({ perfil: '881a', categoria: 'MEDIA' });
+    const art = CAT.frameworks.ens.reqs.length - 73;
+    assert.equal(E.calcular(IXP, s).fw.ens.aplicables, 68 + art, 'mp.info.4 solo con información que sirva de evidencia');
+    const ex6 = fila(s, 'op.exp.6'); assert.equal(ex6.nivel, 'BAJO'); assert.equal(ex6.exigencia, 'aplica + R4'); assert.deepEqual(ex6.refuerzos.obligatorios, ['R4']);
+    assert.equal(fila(s, 'op.mon.3').exigencia, 'aplica + R1');
+    assert.equal(fila(s, 'mp.si.2').exigencia, 'aplica + R2');
+    const a5 = fila(s, 'op.acc.5'); assert.equal(a5.exigencia, CAT.frameworks.ens.reqs.find((r) => r.id === 'op.acc.5').medio); assert.equal((a5.exigencia.match(/R5/g) || []).length, 1);
+    for (const id of ['op.ext.3', 'op.cont.2', 'op.cont.3', 'op.cont.4']) assert.equal(fila(s, id).motivo, 'perfil', id);
+    s.alcance.ens.perfilCond = { evidencia: true };
+    assert.equal(fila(s, 'mp.info.4').nivel, 'ALTO'); assert.equal(E.calcular(IXP, s).fw.ens.aplicables, 69 + art);
+    for (const r of CAT.frameworks.ens.reqs.filter((x) => x.g === 'Articulado')) assert.notEqual(fila(s, r.id).estado, 'no-exigido', r.id);
+  });
+
+  test('un refuerzo que añade el perfil también limita la cobertura (CO-25)', () => {
+    const c = caso({ perfil: '881a', categoria: 'MEDIA', niveles: {} });
+    for (const l of IXP.reqUcs.ens['op.exp.6']) c.controles[l.uc] = { ...c.controles[l.uc], estado: 'implantado' };
+    c.refuerzos['op.exp.6'] = [];
+    const r = E.calcular(IXP, c).req.ens.find((x) => x.id === 'op.exp.6');
+    assert.equal(r.score, 0.5); assert.deepEqual(r.refuerzos.faltan, ['R4']);
+    c.refuerzos['op.exp.6'] = ['R4'];
+    assert.equal(E.calcular(IXP, c).req.ens.find((x) => x.id === 'op.exp.6').refuerzos.ok, true);
+  });
+
+  test('CO-26: el perfil no vale para una categoría superior a la suya, en los dos idiomas', () => {
+    const co26 = (c, lang) => E.coherencia(IXP, c, E.calcular(IXP, c), { hoy: '2026-10-15', lang }).find((h) => h.id === 'CO-26');
+    assert.equal(co26(caso({ perfil: '890a', categoria: 'BÁSICA', niveles: {} })), undefined);
+    const h = co26(caso({ perfil: '890a', categoria: 'BÁSICA', niveles: { C: 'MEDIO' } }));
+    assert.equal(h.sev, 'Alta'); assert.match(h.titulo, /CCN-STIC 890A/); assert.match(h.detalle, /categoría BÁSICA.*MEDIA/); assert.match(h.ref, /art\. 30/);
+    assert.match(co26(caso({ perfil: '890a', categoria: 'MEDIA', niveles: {} }), 'en').detalle, /BASIC-category.*MEDIUM/);
+    assert.equal(co26(caso({ perfil: '881a', categoria: 'BÁSICA', niveles: {} })), undefined, 'un perfil más exigente que la categoría no es incoherente');
+    const alta = caso({ perfil: '881a', categoria: 'MEDIA', niveles: { D: 'ALTO' } }); assert.ok(co26(alta));
+    // Fuera del ámbito del perfil se calcula con el anexo II completo, como dice el hallazgo
+    const sin = structuredClone(alta); sin.alcance.ens.perfil = '';
+    assert.deepEqual(E.calcular(IXP, alta).req.ens.map((r) => [r.id, r.estado, r.exigencia]), E.calcular(IXP, sin).req.ens.map((r) => [r.id, r.estado, r.exigencia]));
+    assert.ok(E.calcular(IXP, alta).req.ens.every((r) => !r.perfil));
+    assert.ok(E.REGLAS.some((r) => r[0] === 'CO-26') && E.REGLAS_EN['CO-26']);
+    const off = caso({ perfil: '890a', categoria: 'ALTA' }); off.alcance.ens.on = false;
+    assert.equal(co26(off), undefined, 'sin el ENS en el alcance no hay CO-26');
+  });
+});
