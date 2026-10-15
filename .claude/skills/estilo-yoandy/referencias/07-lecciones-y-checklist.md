@@ -32,6 +32,18 @@
 25. **Informe «de una página» que ocupa dos.** Verifica con `pdfinfo` tras generar el PDF; al imprimir, menos filas (`print:hidden`), columnas (`print:grid-cols-*`), 10,5 px y sin relleno inferior del contenedor (página en blanco).
 26. **Commit con una prueba roja.** Pasa la batería completa *antes* del commit; si se cuela, se arregla en un commit nuevo, nunca con `--amend`.
 
+## Commits que se reconocen fuera
+
+En octubre de 2026, el commit «Rosetta 2.11.0: evidencia técnica de CTEM-Nexus y regla CO-23» se seleccionó para el Corpus Hub de XERJ, un índice público de soluciones de código de referencia. Lo que tenía y hay que repetir:
+
+- **Una funcionalidad completa en un solo commit:** motor, interfaz, pruebas y ficheros de ejemplo juntos (14 ficheros, unas 250 líneas), sin «arreglos» posteriores.
+- **Pruebas en el mismo commit**, que fallan si se quita el cambio.
+- **Contrato explícito y probado en los dos lados:** el mismo fichero de ida y vuelta en los dos repositorios.
+- **Título que dice el qué y la versión** («Rosetta 2.11.0: …») y cuerpo que explica el porqué.
+- **Alcance pequeño y cerrado:** una regla nueva (CO-23), un formato y su documentación, no cinco cosas a medias.
+
+Cuidado con los correos de «tu repo ha sido seleccionado»: suelen ser también promoción de una herramienta. Se agradecen, pero no se instala nada por ellos sin revisarlo.
+
 ## Lista de cierre (antes de decir «terminado»)
 
 ### Producto
