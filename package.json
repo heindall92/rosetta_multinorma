@@ -1,7 +1,7 @@
 {
   "name": "rosetta-multinorma",
-  "version": "2.11.1",
-  "description": "Rosetta: mapa multinorma ENS · ISO/IEC 27001 · NIS2 · ISO/IEC 42001 · Part-IS · RIA · CRA · NIST CSF · DORA · leyes de Latinoamérica, con perfil regulatorio y marcos propios. Implanta cada control una vez y comprueba qué cubre en cada norma.",
+  "version": "2.12.0",
+  "description": "Rosetta: mapa multinorma ENS · ISO/IEC 27001 · NIS2 · ISO/IEC 42001 · Part-IS · RIA · CRA · NIST CSF · DORA · RGPD y LOPDGDD · leyes de Latinoamérica, con perfil regulatorio y marcos propios. Implanta cada control una vez y comprueba qué cubre en cada norma.",
   "private": true,
   "engines": {
     "node": ">=20"
@@ -30,6 +30,9 @@
     "cra",
     "nist-csf",
     "dora",
+    "rgpd",
+    "gdpr",
+    "lopdgdd",
     "chile",
     "latam",
     "compliance",

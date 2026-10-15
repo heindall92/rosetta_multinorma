@@ -39,7 +39,7 @@ describe('API pública', () => {
     for (const k of ['indexar', 'calcular', 'coberturaReq', 'solapamiento', 'inferencia', 'equivalencias', 'prioridades', 'coherencia', 'planAccion', 'desdeSoaEns', 'nis2Aplicabilidad', 'orden', 'instantanea', 'parejasClase',
       'perfilRegulatorio', 'perfilNormalizado', 'sugerirControles', 'fundirPropios', 'listaNormas', 'etiqueta'])
       assert.equal(typeof E[k], 'function', k);
-    assert.deepEqual(E.FW, ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra', 'nist', 'dora', 'cl21663', 'cl21719', 'co1581', 'mx2025', 'pe29733', 'ar25326']);
+    assert.deepEqual(E.FW, ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra', 'nist', 'dora', 'rgpd', 'cl21663', 'cl21719', 'co1581', 'mx2025', 'pe29733', 'ar25326']);
   });
 });
 
@@ -226,7 +226,7 @@ describe('casos de ejemplo con el catálogo real', () => {
   }
   test('instantánea reproducible del caso de clase (TechServ)', () => {
     const r = E.calcular(IX, CASOS.find((c) => c.id === 'techserv').state);
-    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null, ria: null, cra: null, nist: null, dora: null, cl21663: null, cl21719: null, co1581: null, mx2025: null, pe29733: null, ar25326: null }, grado: 0.893, brechas: 4 });
+    assert.deepEqual(E.instantanea(r), { cov: { ens: 0.929, iso27001: 0.887, nis2: 0.862, iso42001: null, partis: null, ria: null, cra: null, nist: null, dora: null, rgpd: null, cl21663: null, cl21719: null, co1581: null, mx2025: null, pe29733: null, ar25326: null }, grado: 0.893, brechas: 4 });
   });
   test('contraste ENS ↔ ISO 27001 con las parejas del material de clase', () => {
     const p = E.parejasClase(IX); const ref = require('../src/data/parejas.json');
@@ -686,5 +686,69 @@ describe('Ecosistema: CTEM-Nexus (2.11)', () => {
     const out = path.join(dirFx, 'rosetta-a-ctem.json');
     if (process.env.GOLDEN === '1' || !fs.existsSync(out)) fs.writeFileSync(out, JSON.stringify(vuelta, null, 1) + '\n');
     assert.deepEqual(JSON.parse(fs.readFileSync(out, 'utf8')), JSON.parse(JSON.stringify(vuelta)));
+  });
+});
+
+describe('RGPD y LOPDGDD', () => {
+  const F = CAT.frameworks.rgpd;
+  const al = (extra = {}) => ({ alcance: { rgpd: { on: true }, ...extra.alcance }, controles: extra.controles || {}, exclusiones: {}, perfil: extra.perfil });
+  test('15 requisitos sin región, de datos personales, con fuentes y fechas de aplicación', () => {
+    assert.equal(F.reqs.length, 15); assert.equal(F.region, undefined); assert.equal(F.datos, true); assert.equal(F.tope, 'parcial');
+    assert.ok(F.fuentes.some((f) => /2016\/679/.test(f)) && F.fuentes.some((f) => /3\/2018/.test(f)));
+    for (const r of F.reqs) { for (const k of ['code', 't', 't_en', 'g', 'g_en', 'ref', 'ref_en']) assert.ok(r[k], `${r.id}.${k}`); assert.match(r.desde, /^2018-(05-25|12-07)$/, r.id); }
+    assert.equal(F.reqs.find((r) => r.id === 'dig').desde, '2018-12-07', 'los derechos digitales son de la LOPDGDD');
+  });
+  test('cobertura completa: cada requisito tiene al menos un control total', () => {
+    for (const q of F.reqs) assert.ok(IX.reqUcs.rgpd[q.id].some((l) => l.w === 1), q.id);
+  });
+  test('plazos y matices en la ficha: 72 horas, un mes, 14 años, DA 1.ª del ENS', () => {
+    const r = (id) => F.reqs.find((x) => x.id === id);
+    assert.match(r('brecha').t, /72 horas/); assert.match(r('der').nota, /un mes/); assert.match(r('base').nota, /14 años/); assert.match(r('seg').nota, /ENS/);
+    assert.match(r('dpd').nota, /art\. 34\.1 LOPDGDD/);
+  });
+  test('solo lo que depende del tamaño, del riesgo o de la actividad es excluible', () => {
+    for (const id of ['rat', 'eipd', 'dpd', 'transf', 'dig']) assert.equal(E.excluible('rgpd', id), true, id);
+    for (const id of ['pri', 'resp', 'base', 'pbdd', 'info', 'der', 'enc', 'seg', 'brecha', 'com']) assert.equal(E.excluible('rgpd', id), false, id);
+  });
+  test('cobertura plena con los 25 controles enlazados implantados; sin ellos, 15 brechas', () => {
+    const ids = CAT.controls.filter((c) => c.maps.rgpd.length).map((c) => c.id);
+    assert.equal(ids.length, 25);
+    assert.equal(E.calcular(IX, al()).fw.rgpd.cubiertos, 0);
+    const st = al({ controles: Object.fromEntries(ids.map((id) => [id, { estado: 'implantado' }])) });
+    const r = E.calcular(IX, st);
+    assert.equal(r.fw.rgpd.cubiertos, 15); assert.equal(r.fw.rgpd.grado, 1);
+  });
+  test('perfil: obligatorio en España y en la UE, a confirmar fuera (art. 3.2)', () => {
+    const m = (p, lang) => E.perfilRegulatorio(p, {}, lang).marcos.rgpd;
+    assert.equal(m({ jurisdiccion: 'es' }).estado, 'obligatoria'); assert.match(m({ jurisdiccion: 'es' }).motivo, /LOPDGDD/);
+    assert.equal(m({ jurisdiccion: 'ue' }).estado, 'obligatoria'); assert.match(m({ jurisdiccion: 'ue' }).motivo, /solo aplican a lo que trate en España/);
+    for (const j of ['cl', 'mx', 'fuera']) assert.equal(m({ jurisdiccion: j }).estado, 'confirmar', j);
+    assert.match(m({ jurisdiccion: 'fuera' }).motivo, /art\. 3\.2/); assert.match(m({ jurisdiccion: 'fuera' }, 'en').motivo, /monitors their behaviour/);
+  });
+  test('CO-22: sin procedimiento de violaciones de datos salta también para el RGPD', () => {
+    const h = (c) => E.coherencia(IX, al({ controles: c }), E.calcular(IX, al({ controles: c }))).filter((x) => x.id === 'CO-22' && x.fw === 'rgpd');
+    assert.equal(h({}).length, 1); assert.equal(h({ 'PRI-07': { estado: 'implantado' } }).length, 0);
+  });
+  test('CO-24: sector público o proveedor con RGPD y sin el ENS en el alcance', () => {
+    const co24 = (perfil, ens, lang) => { const st = al({ perfil, alcance: ens ? { ens: { on: true, categoria: 'MEDIA', niveles: {} } } : {} }); return E.coherencia(IX, st, E.calcular(IX, st), { lang }).filter((x) => x.id === 'CO-24'); };
+    const pub = co24({ jurisdiccion: 'es', publico: true });
+    assert.equal(pub.length, 1); assert.equal(pub[0].sev, 'Alta'); assert.equal(pub[0].ambito, 'RIE-05'); assert.match(pub[0].detalle, /entidad del sector público/); assert.match(pub[0].ref, /disposición adicional primera/);
+    assert.match(co24({ jurisdiccion: 'es', proveedorPublico: true })[0].detalle, /presta servicios al sector público/);
+    assert.equal(co24({ jurisdiccion: 'es', publico: true }, true).length, 0, 'con el ENS en el alcance no salta');
+    assert.equal(co24({ jurisdiccion: 'es' }).length, 0, 'empresa privada sin contratos públicos');
+    assert.equal(co24({ jurisdiccion: 'ue', publico: true }).length, 0, 'la LOPDGDD es española');
+    assert.match(co24({ jurisdiccion: 'es', publico: true }, false, 'en')[0].titulo, /without the ENS/);
+    assert.ok(E.REGLAS.some((r) => r[0] === 'CO-24') && E.REGLAS_EN['CO-24']);
+  });
+  test('casos: el hospital y CitaFácil lo tienen en el alcance, con la EIPD del sistema de IA como brecha', () => {
+    for (const id of ['hospital', 'citafacil']) {
+      const c = CASOS.find((x) => x.id === id); const r = E.calcular(IX, c.state);
+      assert.ok(r.alcance.includes('rgpd'), id); assert.deepEqual(c.meta.normas, r.alcance); assert.equal(c.meta.grado, r.kpi.grado);
+      assert.equal(r.req.rgpd.find((q) => q.id === 'eipd').estado, 'brecha', id);
+    }
+  });
+  test('etiquetas en los dos idiomas', () => {
+    assert.equal(E.etiqueta(IX, 'rgpd', 'es'), 'RGPD'); assert.equal(E.etiqueta(IX, 'rgpd', 'en'), 'GDPR');
+    assert.match(E.FW_LONG.rgpd, /2016\/679/); assert.match(E.FW_LONG_EN.rgpd, /LOPDGDD/);
   });
 });

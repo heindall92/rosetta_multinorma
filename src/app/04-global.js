@@ -48,7 +48,7 @@ function vInicio() {
       <div class="rings">${FW_BASE.filter((f) => c.meta.normas.includes(f)).map((f) => { const on = c.meta.normas.includes(f); const cc = caseCalc(c.id); return `<figure>${miniRing(f, on ? cc.fw[f].grado : 0, on ? cc.fw[f].cubiertos : 0, cc.fw[f].aplicables, 40, !on)}<figcaption>${fwShort(f)}</figcaption></figure>`; }).join('')}</div>
       <p>${esc(caseTxt(c, 'resumen'))}</p>
       <ul class="retos">${caseTxt(c, 'retos').map((r) => `<li>${icon('flag', 14)}${esc(r)}</li>`).join('')}</ul>
-      <div class="row small muted"><span><b class="num" style="color:var(--ink)">${pct(c.meta.grado)}</b> ${esc(t('covered'))}</span>·<span><b class="num" style="color:var(--ink)">${c.meta.brechas}</b> ${esc(t('gaps'))}</span>·<span><b class="num" style="color:var(--crit)">${c.meta.altas}</b> ${esc(t('highAlerts'))}</span></div>
+      <div class="row small muted"><span><b class="num" style="color:var(--ink)">${pct(c.meta.grado)}</b> ${esc(t('covered'))}</span>·<span><b class="num" style="color:var(--ink)">${c.meta.brechas}</b> ${esc(t('gapW', c.meta.brechas))}</span>·<span><b class="num" style="color:var(--crit)">${c.meta.altas}</b> ${esc(t('highAlerts'))}</span></div>
       <button type="button" class="btn${ws.activeId === 'demo-' + c.id ? '' : ' primary'}" data-act="open-case" data-case="${esc(c.id)}">${esc(ws.projects.some((p) => p.id === 'demo-' + c.id) ? t('continue') : t('openCase'))}${icon('arrow-right', 16)}</button>
     </article>`).join('')}</div></section>` : ''}`;
 }

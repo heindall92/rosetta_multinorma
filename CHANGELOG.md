@@ -1,5 +1,20 @@
 # Cambios
 
+## 2.12.0 · octubre de 2026
+
+**RGPD y LOPDGDD.** La ley de protección de datos que faltaba: la europea, con su desarrollo español.
+
+- **Marco `rgpd`:** Reglamento (UE) 2016/679 y Ley Orgánica 3/2018, 15 requisitos sobre el dominio de privacidad, sin controles nuevos. Principios y responsabilidad proactiva, base jurídica (consentimiento desde los 14 años), protección desde el diseño, información por capas, derechos en un mes, encargados, registro de actividades, EIPD, DPD, seguridad del art. 32, violaciones a la autoridad en 72 horas y a los interesados, transferencias y derechos digitales de la LOPDGDD (arts. 87–91). 25 controles enlazados; cada requisito tiene al menos un control total.
+- **Regla CO-24 (alta):** RGPD en el sector público o en sus proveedores sin el ENS en el alcance, que la disposición adicional primera de la LOPDGDD exige para los datos personales.
+- **CO-22** también salta para el RGPD sin procedimiento de violaciones de datos.
+- **Perfil regulatorio:** obligatorio en España y en la UE; a confirmar fuera de la Unión (art. 3.2). Solo el registro, la EIPD, el DPD, las transferencias y los derechos digitales admiten exclusión justificada.
+- **Casos:** el hospital y CitaFácil incluyen el RGPD, con el estado de los diez controles de privacidad.
+- **Exportación:** hoja «RGPD» (en inglés, «GDPR») en el Excel y fila en el informe.
+- **BOE:** comprobada la exigencia por nivel de op.pl.5, op.acc.5, mp.si.1 y mp.s.2 contra el texto consolidado del RD 311/2022; coincide con el catálogo. Era el pendiente de exactitud de la auditoría de producción.
+- **Seguridad:** `window.__ROSETTA__` solo existe con el navegador automatizado (`navigator.webdriver`); en uso normal no se expone nada (punto 0.4 de la auditoría).
+- **Corrección:** las tarjetas de las normas decían «1 brechas»; ahora concuerdan en singular y plural.
+- **Pruebas.** 11 del motor, 2 e2e y 2 de Excel. Total: 154 de motor, catálogo y build y 73 en navegador, con axe a cero.
+
 ## 2.11.1 · octubre de 2026
 
 - **Herramientas GRC del autor:** Ayuda → Acerca de pasa de cuatro a siete herramientas (se suman CTEM-Nexus, ENS AD Auditor, con su panel web, y Norvik, de escritorio) y explica que comparten el sobre de intercambio `yrd-ecosistema`. ARGOS ya describe sus máquinas con flags y sus rangos.

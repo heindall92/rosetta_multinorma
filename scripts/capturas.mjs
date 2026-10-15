@@ -43,6 +43,12 @@ for (const [name, v, tema, caso, w] of VISTAS) {
   await p.waitForTimeout(400); await p.locator('#sec-marcos').scrollIntoViewIfNeeded(); await p.waitForTimeout(900); await limpiar(p);
   await p.screenshot({ path: join(OUT, 'marcos-light.png') }); await ctx.close();
 }
+{ // RGPD y LOPDGDD en el hospital: vista de la norma y ficha de la EIPD (2.12.0)
+  const { ctx, p } = await abrir(1440, 'claro');
+  await p.evaluate(() => { const R = window.__ROSETTA__; R.openCase('hospital'); R.ui.normaFw = 'rgpd'; R.go('normas'); });
+  await p.mouse.move(1435, 300); await p.waitForTimeout(1600); await limpiar(p);
+  await p.screenshot({ path: join(OUT, 'rgpd-light.png') }); await ctx.close();
+}
 const { ctx, p } = await abrir(1440, 'oscuro');
 await p.evaluate(() => { window.__ROSETTA__.openCase('techserv'); window.__ROSETTA__.go('brechas'); });
 await p.mouse.move(1000, 400); await p.keyboard.press('['); await p.waitForTimeout(1300); await limpiar(p);

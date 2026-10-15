@@ -8,14 +8,14 @@
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
-  const FW = ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra', 'nist', 'dora', 'cl21663', 'cl21719', 'co1581', 'mx2025', 'pe29733', 'ar25326'];
-  const FW_LABEL = { ens: 'ENS', iso27001: 'ISO/IEC 27001', nis2: 'NIS2', iso42001: 'ISO/IEC 42001', partis: 'Part-IS', ria: 'RIA', cra: 'CRA', nist: 'NIST CSF', dora: 'DORA', cl21663: 'Ley 21.663 (Chile)', cl21719: 'Ley 21.719 (Chile)', co1581: 'Ley 1581 (Colombia)', mx2025: 'LFPDPPP (México)', pe29733: 'Ley 29733 (Perú)', ar25326: 'Ley 25.326 (Argentina)' };
+  const FW = ['ens', 'iso27001', 'nis2', 'iso42001', 'partis', 'ria', 'cra', 'nist', 'dora', 'rgpd', 'cl21663', 'cl21719', 'co1581', 'mx2025', 'pe29733', 'ar25326'];
+  const FW_LABEL = { ens: 'ENS', iso27001: 'ISO/IEC 27001', nis2: 'NIS2', iso42001: 'ISO/IEC 42001', partis: 'Part-IS', ria: 'RIA', cra: 'CRA', nist: 'NIST CSF', dora: 'DORA', rgpd: 'RGPD', cl21663: 'Ley 21.663 (Chile)', cl21719: 'Ley 21.719 (Chile)', co1581: 'Ley 1581 (Colombia)', mx2025: 'LFPDPPP (México)', pe29733: 'Ley 29733 (Perú)', ar25326: 'Ley 25.326 (Argentina)' };
   const LATAM = ['cl', 'co', 'mx', 'pe', 'ar'];
-  const FW_LABEL_EN = { ria: 'AI Act' };
+  const FW_LABEL_EN = { ria: 'AI Act', rgpd: 'GDPR' };
   const FW_LONG = { ens: 'Esquema Nacional de Seguridad (RD 311/2022)', iso27001: 'ISO/IEC 27001:2022', nis2: 'Directiva NIS2 y RE 2024/2690', iso42001: 'ISO/IEC 42001:2023',
-    partis: 'Part-IS · Reglamentos (UE) 2023/203 y 2022/1645', ria: 'RIA · Reglamento (UE) 2024/1689 de inteligencia artificial', cra: 'CRA · Reglamento (UE) 2024/2847 de ciberresiliencia', nist: 'NIST Cybersecurity Framework 2.0', dora: 'DORA · Reglamento (UE) 2022/2554 de resiliencia operativa digital', cl21663: 'Ley 21.663 Marco de Ciberseguridad (Chile)', cl21719: 'Ley 21.719 de protección de datos personales (Chile)', co1581: 'Ley 1581 de 2012 de protección de datos (Colombia)', mx2025: 'Ley Federal de Protección de Datos Personales en Posesión de los Particulares (México, 2025)', pe29733: 'Ley 29733 de Protección de Datos Personales y Reglamento 2024 (Perú)', ar25326: 'Ley 25.326 de Protección de los Datos Personales (Argentina)' };
+    partis: 'Part-IS · Reglamentos (UE) 2023/203 y 2022/1645', ria: 'RIA · Reglamento (UE) 2024/1689 de inteligencia artificial', cra: 'CRA · Reglamento (UE) 2024/2847 de ciberresiliencia', nist: 'NIST Cybersecurity Framework 2.0', dora: 'DORA · Reglamento (UE) 2022/2554 de resiliencia operativa digital', rgpd: 'RGPD · Reglamento (UE) 2016/679 y LOPDGDD (Ley Orgánica 3/2018)', cl21663: 'Ley 21.663 Marco de Ciberseguridad (Chile)', cl21719: 'Ley 21.719 de protección de datos personales (Chile)', co1581: 'Ley 1581 de 2012 de protección de datos (Colombia)', mx2025: 'Ley Federal de Protección de Datos Personales en Posesión de los Particulares (México, 2025)', pe29733: 'Ley 29733 de Protección de Datos Personales y Reglamento 2024 (Perú)', ar25326: 'Ley 25.326 de Protección de los Datos Personales (Argentina)' };
   const FW_LONG_EN = { ens: 'Spanish National Security Framework (RD 311/2022)', iso27001: 'ISO/IEC 27001:2022', nis2: 'NIS2 Directive and IR 2024/2690', iso42001: 'ISO/IEC 42001:2023',
-    partis: 'Part-IS · Regulations (EU) 2023/203 and 2022/1645', ria: 'AI Act · Regulation (EU) 2024/1689', cra: 'CRA · Cyber Resilience Act, Regulation (EU) 2024/2847', nist: 'NIST Cybersecurity Framework 2.0', dora: 'DORA · Digital Operational Resilience Act, Regulation (EU) 2022/2554', cl21663: 'Cybersecurity Framework Law 21.663 (Chile)', cl21719: 'Personal Data Protection Law 21.719 (Chile)', co1581: 'Data Protection Law 1581 of 2012 (Colombia)', mx2025: 'Federal Law on Protection of Personal Data Held by Private Parties (Mexico, 2025)', pe29733: 'Personal Data Protection Law 29733 and 2024 Regulation (Peru)', ar25326: 'Personal Data Protection Law 25.326 (Argentina)' };
+    partis: 'Part-IS · Regulations (EU) 2023/203 and 2022/1645', ria: 'AI Act · Regulation (EU) 2024/1689', cra: 'CRA · Cyber Resilience Act, Regulation (EU) 2024/2847', nist: 'NIST Cybersecurity Framework 2.0', dora: 'DORA · Digital Operational Resilience Act, Regulation (EU) 2022/2554', rgpd: 'GDPR · Regulation (EU) 2016/679 and Spanish LOPDGDD (Organic Law 3/2018)', cl21663: 'Cybersecurity Framework Law 21.663 (Chile)', cl21719: 'Personal Data Protection Law 21.719 (Chile)', co1581: 'Data Protection Law 1581 of 2012 (Colombia)', mx2025: 'Federal Law on Protection of Personal Data Held by Private Parties (Mexico, 2025)', pe29733: 'Personal Data Protection Law 29733 and 2024 Regulation (Peru)', ar25326: 'Personal Data Protection Law 25.326 (Argentina)' };
   const ESTADOS = ['implantado', 'parcial', 'pendiente', 'no-aplica'];
   const ESTADO_LABEL = { implantado: 'Implantado', parcial: 'Parcial', pendiente: 'Pendiente', 'no-aplica': 'No aplica' };
   const ESTADO_LABEL_EN = { implantado: 'Implemented', parcial: 'Partial', pendiente: 'Pending', 'no-aplica': 'Not applicable' };
@@ -141,6 +141,8 @@
     if (f === 'cra') return /^I\.2\.[b-m]$/.test(s);
     // DORA: solo el intercambio de información (art. 45) es voluntario; el régimen y las TLPT se fijan en Alcance
     if (f === 'dora') return s === '45';
+    // RGPD: el registro (art. 30.5), la EIPD y el DPD dependen del tamaño o del riesgo; las transferencias y los derechos digitales, de la actividad
+    if (f === 'rgpd') return ['rat', 'eipd', 'dpd', 'transf', 'dig'].includes(s);
     if (f === 'cl21663') return false;
     if (f === 'cl21719') return s === 'mpi'; // el modelo de prevención de infracciones es voluntario
     if (['co1581', 'mx2025', 'pe29733', 'ar25326'].includes(f)) return f === 'co1581' ? s === 'rnbd' || s === 'dem' : f === 'pe29733' ? s === 'oficial' : f === 'ar25326' ? s === 'reg' : false; // registro y oficial dependen del tamaño o la actividad
@@ -353,7 +355,8 @@
     ['CO-20', 'Media', 'DORA en alcance sin registro de información de los acuerdos con proveedores de TIC (art. 28.3).'],
     ['CO-21', 'Alta', 'Ley 21.663 en alcance sin reporte de incidentes al CSIRT Nacional (alerta en 3 h).'],
     ['CO-22', 'Alta', 'Ley de protección de datos en alcance sin procedimiento de notificación de vulneraciones.'],
-    ['CO-23', 'Alta', 'Control implantado con hallazgos técnicos críticos o altos abiertos según CTEM-Nexus.']
+    ['CO-23', 'Alta', 'Control implantado con hallazgos técnicos críticos o altos abiertos según CTEM-Nexus.'],
+    ['CO-24', 'Alta', 'RGPD en el sector público o en sus proveedores sin el ENS en el alcance (LOPDGDD, disposición adicional primera).']
   ];
   /* Mensajes de las reglas en español e inglés */
   const tt = (obj, key, lang) => (lang === 'en' && obj && obj[key + '_en'] ? obj[key + '_en'] : obj ? obj[key] : '');
@@ -376,6 +379,7 @@
       co12: ['Sin notificación a la autoridad aeronáutica', (e) => `Part-IS exige notificar a la autoridad competente (AESA o EASA) los incidentes y vulnerabilidades que puedan suponer un riesgo significativo para la seguridad operacional, coordinado con el Reglamento (UE) 376/2014. No sustituye a la notificación de NIS2. El control INC-09 está ${e}.`, 'Define el canal, los plazos del punto .230 y su AMC, y quién notifica; enlázalo con la notificación de sucesos que ya hace el SMS.', 'Part-IS, punto IS.I.OR.230 / IS.D.OR.230'],
       co13: ['Riesgos sin la mirada de la seguridad operacional', (e) => `Part-IS no mide solo la información: pide identificar los elementos e interfaces cuya alteración podría afectar a la seguridad operacional y evaluarlos con el SMS. El control RIE-12 está ${e}.`, 'Inventaría los elementos e interfaces relevantes para la seguridad operacional y llévalos al análisis de riesgos junto al responsable del SMS.', 'Part-IS, puntos .205 y .210'],
       co21: ['Sin reporte al CSIRT Nacional de Chile', (e) => `La Ley 21.663 exige una alerta temprana en 3 horas, un segundo reporte en 72 horas (24 para operadores de importancia vital) y un informe final en 15 días. El control INC-13 está ${e}.`, 'Registra la organización en la plataforma de la ANCI y define quién reporta cada incidente y en qué plazo.', 'Ley 21.663, art. 9'],
+      co24q: { publico: 'la entidad del sector público', proveedor: 'quien presta servicios al sector público' },
       co22: [(m) => `${m}: sin procedimiento de vulneraciones`, (e) => `La ley obliga a notificar las vulneraciones de datos personales a la autoridad y, cuando procede, a los titulares. El control PRI-07 está ${e}.`, 'Define cómo se detecta, evalúa, registra y notifica una vulneración de datos personales, con los plazos de cada país.'],
       co19: ['Sin notificación de incidentes graves (DORA)', (e) => `DORA exige notificar los incidentes TIC graves a la autoridad financiera: inicial en 4 h desde la clasificación y como mucho 24 h, intermedio en 72 h y final en un mes. El control INC-12 está ${e}.`, 'Aprueba el procedimiento con los criterios de clasificación del art. 18, las plantillas de las ITS y quién notifica.', 'DORA, arts. 18 y 19'],
       co20: ['Sin registro de información de proveedores TIC', (e) => `El registro del art. 28.3 se remite a la autoridad cuando lo pide y es la base para evaluar la concentración. El control PRO-06 está ${e}.`, 'Completa el registro con todos los acuerdos TIC y marca los que soportan funciones esenciales o importantes.', 'DORA, art. 28.3'],
@@ -384,7 +388,8 @@
       co15: ['Sin alfabetización en IA', (e) => `El art. 4 del RIA obliga desde el 02-02-2025 a proveedores y responsables del despliegue a adoptar medidas de alfabetización en IA. El control IA-15 está ${e}.`, 'Define un plan de alfabetización por perfil y registra la formación de quien opera o usa la IA.', 'RIA, art. 4'],
       co16: ['Sin revisión de prácticas prohibidas', (e) => `Las prácticas del art. 5 están prohibidas desde el 02-02-2025 y llevan las multas más altas del RIA. El control IA-16 está ${e}.`, 'Contrasta cada sistema y uso de IA con el art. 5 y documenta la decisión.', 'RIA, art. 5'],
       co14: [(m, n) => `${m}: ${n} requisito${n === 1 ? '' : 's'} sin controles`, 'Un requisito sin controles cuenta siempre como brecha: Rosetta no puede saber qué lo cumple.', 'Abre el marco en Alcance y asigna los controles, empezando por las sugerencias.'],
-      co23: [(id, n) => `${id} implantado, pero CTEM-Nexus ve ${n} hallazgo${n === 1 ? '' : 's'} crítico${n === 1 ? '' : 's'} o alto${n === 1 ? '' : 's'} abierto${n === 1 ? '' : 's'}`, (l, f) => `La exposición técnica contradice la declaración (${f}): ${l}. Un auditor que pida la evidencia técnica la encontrará.`, 'Corrige los hallazgos o deja el control en «Parcial» hasta cerrarlos, con su acción y fecha.', 'CTEM-Nexus']
+      co23: [(id, n) => `${id} implantado, pero CTEM-Nexus ve ${n} hallazgo${n === 1 ? '' : 's'} crítico${n === 1 ? '' : 's'} o alto${n === 1 ? '' : 's'} abierto${n === 1 ? '' : 's'}`, (l, f) => `La exposición técnica contradice la declaración (${f}): ${l}. Un auditor que pida la evidencia técnica la encontrará.`, 'Corrige los hallazgos o deja el control en «Parcial» hasta cerrarlos, con su acción y fecha.', 'CTEM-Nexus'],
+      co24: ['Datos personales en el sector público sin el ENS', (q) => `La disposición adicional primera de la LOPDGDD obliga a ${q} a aplicar a los tratamientos de datos personales las medidas de seguridad del ENS, y el art. 32 del RGPD se demuestra con ellas. El ENS no está en el alcance.`, 'Incluye el ENS en el alcance y relaciona el registro de actividades de tratamiento con la categoría de cada sistema.', 'LOPDGDD, disposición adicional primera; RGPD, art. 32']
     },
     en: {
       est: (e) => ESTADO_LABEL_EN[e].toLowerCase(), y: ' and ',
@@ -404,6 +409,7 @@
       co12: ['No reporting to the aviation authority', (e) => `Part-IS requires reporting to the competent authority (AESA or EASA) the incidents and vulnerabilities that may represent a significant risk to aviation safety, coordinated with Regulation (EU) 376/2014. It does not replace NIS2 reporting. Control INC-09 is ${e}.`, 'Define the channel, the deadlines of point .230 and its AMC, and who reports; link it to the occurrence reporting the SMS already does.', 'Part-IS, point IS.I.OR.230 / IS.D.OR.230'],
       co13: ['Risk assessment without the aviation safety view', (e) => `Part-IS does not look only at information: it asks you to identify the elements and interfaces whose compromise could affect aviation safety and to assess them with the SMS. Control RIE-12 is ${e}.`, 'List the elements and interfaces relevant to aviation safety and bring them into the risk assessment with the safety manager.', 'Part-IS, points .205 and .210'],
       co21: ['No reporting to Chile’s National CSIRT', (e) => `Law 21.663 requires an early warning within 3 hours, a second report within 72 hours (24 for operators of vital importance) and a final report within 15 days. Control INC-13 is ${e}.`, 'Register the organisation on the ANCI platform and define who reports each incident and within which deadline.', 'Law 21.663, art. 9'],
+      co24q: { publico: 'the public sector entity', proveedor: 'whoever provides services to the public sector' },
       co22: [(m) => `${m}: no breach procedure`, (e) => `The law requires notifying personal data breaches to the authority and, where applicable, to data subjects. Control PRI-07 is ${e}.`, 'Define how a personal data breach is detected, assessed, recorded and notified, with each country’s deadlines.'],
       co19: ['No major incident reporting (DORA)', (e) => `DORA requires reporting major ICT incidents to the financial authority: initial within 4 h of classification and at most 24 h, intermediate within 72 h and final within one month. Control INC-12 is ${e}.`, 'Approve the procedure with the art. 18 classification criteria, the ITS templates and who reports.', 'DORA, arts. 18 and 19'],
       co20: ['No register of ICT third-party information', (e) => `The art. 28.3 register is submitted to the authority on request and underpins the concentration assessment. Control PRO-06 is ${e}.`, 'Complete the register with every ICT arrangement and flag those supporting critical or important functions.', 'DORA, art. 28.3'],
@@ -412,7 +418,8 @@
       co15: ['No AI literacy', (e) => `AI Act art. 4 has required providers and deployers to take AI literacy measures since 02-02-2025. Control IA-15 is ${e}.`, 'Define a literacy plan by role and record the training of those who operate or use AI.', 'AI Act, art. 4'],
       co16: ['No review of prohibited practices', (e) => `The practices in art. 5 have been prohibited since 02-02-2025 and carry the AI Act’s highest fines. Control IA-16 is ${e}.`, 'Check every AI system and use against art. 5 and document the decision.', 'AI Act, art. 5'],
       co14: [(m, n) => `${m}: ${n} requirement${n === 1 ? '' : 's'} without controls`, 'A requirement without controls always counts as a gap: Rosetta cannot know what meets it.', 'Open the framework in Scope and assign controls, starting with the suggestions.'],
-      co23: [(id, n) => `${id} implemented, but CTEM-Nexus sees ${n} open critical or high finding${n === 1 ? '' : 's'}`, (l, f) => `The technical exposure contradicts the statement (${f}): ${l}. An auditor asking for technical evidence will find it.`, 'Fix the findings or keep the control as “Partial” until they are closed, with its action and date.', 'CTEM-Nexus']
+      co23: [(id, n) => `${id} implemented, but CTEM-Nexus sees ${n} open critical or high finding${n === 1 ? '' : 's'}`, (l, f) => `The technical exposure contradicts the statement (${f}): ${l}. An auditor asking for technical evidence will find it.`, 'Fix the findings or keep the control as “Partial” until they are closed, with its action and date.', 'CTEM-Nexus'],
+      co24: ['Personal data in the public sector without the ENS', (q) => `The LOPDGDD first additional provision requires ${q} to apply the ENS security measures to personal data processing, and GDPR art. 32 is demonstrated with them. The ENS is not in scope.`, 'Add the ENS to the scope and link the records of processing activities to the category of each system.', 'LOPDGDD, first additional provision; GDPR, art. 32']
     }
   };
   const REGLAS_EN = {
@@ -432,7 +439,8 @@
     'CO-20': 'DORA in scope without a register of information on ICT third-party arrangements (art. 28.3).',
     'CO-21': 'Law 21.663 in scope without incident reporting to the National CSIRT (3 h early warning).',
     'CO-22': 'Data protection law in scope without a breach notification procedure.',
-    'CO-23': 'Control implemented with open critical or high technical findings according to CTEM-Nexus.'
+    'CO-23': 'Control implemented with open critical or high technical findings according to CTEM-Nexus.',
+    'CO-24': 'GDPR in the public sector or its suppliers without the ENS in scope (LOPDGDD, first additional provision).'
   };
   function coherencia(ix, st, calc, opts = {}) {
     const lang = opts.lang === 'en' ? 'en' : 'es'; const M = MSG[lang];
@@ -463,6 +471,7 @@
         add('CO-23', id, M.co23[0](id, n), M.co23[1](l, st.ctem.generado ? st.ctem.generado.slice(0, 10) : 'CTEM-Nexus'), M.co23[2], M.co23[3]);
       }
     }
+    if (on('rgpd') && !on('ens')) { const pf = perfilNormalizado(st.perfil); if (pf.jurisdiccion === 'es' && (pf.publico || pf.proveedorPublico)) add('CO-24', 'RIE-05', M.co24[0], M.co24[1](pf.publico ? M.co24q.publico : M.co24q.proveedor), M.co24[2], M.co24[3], { fw: 'rgpd' }); }
     if (on('partis') && ix.ucMap['RIE-12'] && est('RIE-12') !== 'implantado') add('CO-13', 'RIE-12', M.co13[0], M.co13[1](M.est(est('RIE-12'))), M.co13[2], M.co13[3]);
     for (const f of calc.alcance) {
       if (!ix.propio[f]) continue;
@@ -708,6 +717,7 @@
       piDer: ' Salvo derogación aprobada por la autoridad competente (punto .200 e), que exige un análisis de riesgos documentado.',
       piNo: 'No es una organización aprobada por EASA o AESA.',
       piBaseI: 'Reglamento de Ejecución (UE) 2023/203, modificado por el (UE) 2025/2293', piBaseD: 'Reglamento Delegado (UE) 2022/1645, modificado por el (UE) 2025/22',
+      rgpdEs: 'Trata datos personales en España: le obligan el RGPD (aplicable desde el 25-05-2018) y la LOPDGDD, que lo completa con derechos digitales, DPD obligatorio por actividad y las medidas del ENS para el sector público.', rgpdUe: 'Trata datos personales en la UE: el RGPD le obliga. Los requisitos de la LOPDGDD solo aplican a lo que trate en España (márcalos como excluidos si no es el caso).', rgpdFuera: 'Fuera de la UE, el RGPD aplica si ofrece bienes o servicios a personas que están en la Unión o controla su comportamiento (art. 3.2), y entonces debe designar un representante (art. 27).', rgpdBase: 'Reglamento (UE) 2016/679, arts. 2 y 3; LOPDGDD, art. 2',
       propio: 'Marco propio: lo decide la organización o lo pide un cliente.', propioBase: 'Contractual o voluntaria',
      
      
@@ -737,6 +747,7 @@
       piDer: ' Unless the competent authority approves a derogation (point .200 e), which requires a documented risk assessment.',
       piNo: 'Not an organisation approved by EASA or a national aviation authority.',
       piBaseI: 'Implementing Regulation (EU) 2023/203, as amended by (EU) 2025/2293', piBaseD: 'Delegated Regulation (EU) 2022/1645, as amended by (EU) 2025/22',
+      rgpdEs: 'It processes personal data in Spain: the GDPR (applicable since 25-05-2018) and the LOPDGDD apply; the latter adds digital rights, a mandatory DPO by activity and the ENS measures for the public sector.', rgpdUe: 'It processes personal data in the EU: the GDPR applies. The LOPDGDD requirements only cover processing in Spain (mark them as excluded otherwise).', rgpdFuera: 'Outside the EU, the GDPR applies if it offers goods or services to people in the Union or monitors their behaviour (art. 3.2), in which case it must designate a representative (art. 27).', rgpdBase: 'Regulation (EU) 2016/679, arts. 2 and 3; LOPDGDD, art. 2',
       propio: 'Custom framework: chosen by the organisation or required by a customer.', propioBase: 'Contractual or voluntary',
      
      
@@ -786,6 +797,7 @@
     const ley = (c, base) => (enPais(c) ? R('obligatoria', base, T.datosEn(T.paises[c])) : operaEn(c) ? R('confirmar', base, T.datosOpera(T.paises[c])) : R('no-aplica', base, T.datosNo(T.paises[c])));
     m.co1581 = ley('co', 'Ley 1581 de 2012, art. 2'); m.mx2025 = ley('mx', 'LFPDPPP 2025, arts. 1 y 2'); m.pe29733 = ley('pe', 'Ley 29733, art. 3, y Reglamento DS 016-2024-JUS'); m.ar25326 = ley('ar', 'Ley 25.326, art. 1');
     m.cl21719 = enPais('cl') ? R('obligatoria', T.cl19Base, T.cl19) : operaEn('cl') ? R('confirmar', T.cl19Base, T.cl19Opera) : R('no-aplica', T.cl19Base, T.clNo);
+    m.rgpd = p.jurisdiccion === 'es' ? R('obligatoria', T.rgpdBase, T.rgpdEs) : ue ? R('obligatoria', T.rgpdBase, T.rgpdUe) : R('confirmar', T.rgpdBase, T.rgpdFuera);
     m.dora = !financiera ? R('no-aplica', T.doraBase, T.doraNo) : ue ? R('obligatoria', T.doraBase, T.dora) : R('confirmar', T.doraBase, T.doraFuera);
     m.cra = !p.fabricante ? R('no-aplica', T.craBase, T.craNo) : ue ? R('obligatoria', T.craBase, T.cra) : R('confirmar', T.craBase, T.craFuera);
     m.ria = !p.ia ? R('no-aplica', T.riaBase, T.riaNo) : ue ? R('obligatoria', T.riaBase, T.riaOk) : R('confirmar', T.riaBase, T.riaFuera);

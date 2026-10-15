@@ -68,7 +68,7 @@ test('perfil regulatorio: propone, el auditor aplica y explica, y el informe lo 
   await page.check('#set-pf-publico'); await page.waitForTimeout(150);
   assert.match(await page.locator('#sec-propuesta').innerText(), /Fuera aunque es obligatoria/, 'avisa si el alcance contradice la propuesta');
   await page.click('[data-act="perfil-aplicar"]'); await page.waitForTimeout(200);
-  assert.deepEqual(await R(() => window.__ROSETTA__.calc.alcance), ['ens', 'iso27001', 'nis2']);
+  assert.deepEqual(await R(() => window.__ROSETTA__.calc.alcance), ['ens', 'iso27001', 'nis2', 'rgpd'], 'en España el RGPD es obligatorio');
   assert.equal(await R(() => window.__ROSETTA__.state.perfil.confirmado.length), 10);
   await page.fill('#set-mot-iso27001', 'Certificado del SGSI corporativo exigido por el consorcio');
   await page.locator('#set-mot-iso27001').blur(); await page.waitForTimeout(600);
@@ -78,6 +78,7 @@ test('perfil regulatorio: propone, el auditor aplica y explica, y el informe lo 
   const md = await descarga(() => act('export-md'));
   assert.match(md.text, /## Marcos aplicables y por qué/);
   assert.match(md.text, /\| ENS \| Obligatoria \| RD 311\/2022, art\. 2\.1 \| En el alcance \|/);
+  assert.match(md.text, /\| RGPD \| Obligatoria \| Reglamento \(UE\) 2016\/679, arts\. 2 y 3; LOPDGDD, art\. 2 \| En el alcance \|/);
   assert.match(md.text, /Certificado del SGSI corporativo exigido por el consorcio/);
   noErrors('perfil regulatorio');
 });
@@ -92,7 +93,7 @@ test('asistente: la propuesta del perfil activa Part-IS en un proyecto nuevo', a
   assert.equal(await page.locator('#wz-on-ens').isChecked(), false, 'empresa privada sin contratos públicos: el ENS sale');
   await act('wz-next'); await act('wz-create'); await page.waitForTimeout(200);
   const st = await R(() => ({ al: window.__ROSETTA__.calc.alcance, reg: window.__ROSETTA__.state.alcance.partis.regimen, avi: window.__ROSETTA__.state.perfil.aviacion }));
-  assert.deepEqual(st, { al: ['iso27001', 'partis'], reg: 'I', avi: 'I' });
+  assert.deepEqual(st, { al: ['iso27001', 'partis', 'rgpd'], reg: 'I', avi: 'I' });
   noErrors('asistente');
 });
 
@@ -334,4 +335,44 @@ test('Ecosistema: importa la evidencia de CTEM-Nexus, salta CO-23 y devuelve el 
   await page.click('[data-act="ctem-clear"]'); await page.waitForTimeout(150);
   assert.equal(await R(() => window.__ROSETTA__.state.ctem), undefined);
   noErrors('CTEM-Nexus');
+});
+
+test('RGPD: el hospital lo tiene en el alcance, la ficha da plazos y exclusiones, y CO-24 salta sin el ENS', async () => {
+  await R(() => window.__ROSETTA__.openCase('hospital'));
+  assert.ok((await R(() => window.__ROSETTA__.calc.alcance)).includes('rgpd'));
+  await R(() => window.__ROSETTA__.go('alcance'));
+  assert.ok(await page.locator('#set-on-rgpd').isChecked());
+  assert.match(await page.locator('#sec-propuesta').innerText(), /RGPD[\s\S]*Obligatoria/);
+  await act('insp-req', { fw: 'rgpd', id: 'brecha' });
+  let insp = await page.locator('#insp').innerText();
+  assert.match(insp, /72 horas/); assert.match(insp, /obligación general del RGPD/);
+  assert.equal(await page.locator('#insp [data-exsw]').count(), 0, 'la notificación de violaciones no se excluye');
+  await act('insp-close');
+  await act('insp-req', { fw: 'rgpd', id: 'eipd' });
+  insp = await page.locator('#insp').innerText();
+  assert.match(insp, /listas de la AEPD/);
+  assert.equal(await page.locator('#insp [data-exsw]').count(), 1, 'la EIPD admite exclusión justificada');
+  await act('insp-close');
+  assert.ok(!(await R(() => window.__ROSETTA__.hall.map((h) => h.id))).includes('CO-24'), 'con el ENS en el alcance no hay CO-24');
+  await page.uncheck('#set-on-ens'); await page.waitForTimeout(200);
+  assert.ok((await R(() => window.__ROSETTA__.hall.map((h) => h.id))).includes('CO-24'));
+  await R(() => window.__ROSETTA__.go('brechas')); await page.waitForTimeout(150);
+  assert.match(await page.locator('#view').innerText(), /Datos personales en el sector público sin el ENS/);
+  await R(() => window.__ROSETTA__.go('alcance')); await page.check('#set-on-ens'); await page.waitForTimeout(200);
+  assert.ok(!(await R(() => window.__ROSETTA__.hall.map((h) => h.id))).includes('CO-24'));
+  await R(() => { window.__ROSETTA__.ui.normaFw = 'rgpd'; window.__ROSETTA__.go('normas'); }); await page.waitForTimeout(150);
+  assert.match(await page.locator('#view').innerText(), /81 % · 1 brecha\b/, 'singular con una sola brecha');
+  noErrors('RGPD');
+});
+
+test('Sin automatización no se expone nada en window: __ROSETTA__ solo existe para las pruebas', async () => {
+  const c2 = await browser.newContext(); await c2.route(/^https?:\/\//, (r) => r.abort());
+  await c2.addInitScript(() => Object.defineProperty(Navigator.prototype, 'webdriver', { get: () => false }));
+  const p2 = await c2.newPage(); const errs = []; p2.on('pageerror', (e) => errs.push(e.message));
+  await p2.goto(pathToFileURL(DIST).href);
+  await p2.waitForFunction(() => document.querySelector('#view') && document.querySelector('#view').children.length > 0);
+  assert.equal(await p2.evaluate(() => navigator.webdriver), false);
+  assert.equal(await p2.evaluate(() => typeof window.__ROSETTA__), 'undefined');
+  assert.deepEqual(errs, []);
+  await c2.close();
 });

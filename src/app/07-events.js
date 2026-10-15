@@ -312,4 +312,6 @@ if (ws.activeId && store.get(PKEY(ws.activeId))) { state = sanitizeState(store.g
 ui.view = [...PROJECT_VIEWS, ...GLOBAL_VIEWS].includes(initialView) && (state || !PROJECT_VIEWS.includes(initialView)) ? initialView : (state ? 'panel' : 'inicio');
 render();
 requestAnimationFrame(() => requestAnimationFrame(() => document.documentElement.classList.add('ready'))); // sin animación del raíl al cargar
-window.__ROSETTA__ = Object.freeze({ get state() { return state; }, get calc() { return calc; }, get hall() { return hall; }, get plan() { return plan; }, get prio() { return prio; }, get ws() { return ws; }, get ui() { return ui; }, openCase, go, get IX() { return IX; }, get FW() { return FW; }, get FWV() { return FWV; } });
+/* Gancho de las pruebas: solo cuando el navegador está automatizado (Playwright pone navigator.webdriver a true).
+ * En uso normal no se expone nada en window: ni el estado ni las funciones internas. */
+if (navigator.webdriver === true) window.__ROSETTA__ = Object.freeze({ get state() { return state; }, get calc() { return calc; }, get hall() { return hall; }, get plan() { return plan; }, get prio() { return prio; }, get ws() { return ws; }, get ui() { return ui; }, openCase, go, get IX() { return IX; }, get FW() { return FW; }, get FWV() { return FWV; } });

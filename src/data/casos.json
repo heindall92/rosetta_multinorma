@@ -80,6 +80,9 @@
           "regimen": "general",
           "tlpt": false
         },
+        "rgpd": {
+          "on": false
+        },
         "nist": {
           "on": false
         },
@@ -1501,17 +1504,17 @@
     "icono": "hospital",
     "titulo": "Hospital Comarcal Sierra Norte",
     "sector": "Sanidad pública",
-    "resumen": "Hospital público con el ENS en categoría ALTA. Sanidad es sector de alta criticidad en NIS2 y el hospital supera el umbral de gran empresa: entidad esencial. Acaba de desplegar un sistema de IA de apoyo al triaje radiológico.",
+    "resumen": "Hospital público con el ENS en categoría ALTA. Sanidad es sector de alta criticidad en NIS2 y el hospital supera el umbral de gran empresa: entidad esencial. Trata datos de salud, con DPD obligatorio según el RGPD y la LOPDGDD, y acaba de desplegar un sistema de IA de apoyo al triaje radiológico.",
     "retos": [
       "Entidad esencial NIS2",
-      "IA clínica sin evaluación de impacto",
+      "IA clínica sin EIPD ni evaluación de impacto",
       "Crisis y continuidad hospitalaria"
     ],
     "sector_en": "Public healthcare",
-    "resumen_en": "Public hospital with the ENS at HIGH category. Health is a high-criticality NIS2 sector and the hospital exceeds the large-enterprise threshold: an essential entity. It has just deployed an AI system to support radiology triage.",
+    "resumen_en": "Public hospital with the ENS at HIGH category. Health is a high-criticality NIS2 sector and the hospital exceeds the large-enterprise threshold: an essential entity. It processes health data, with a mandatory DPO under the GDPR and the LOPDGDD, and has just deployed an AI system to support radiology triage.",
     "retos_en": [
       "Essential NIS2 entity",
-      "Clinical AI without impact assessment",
+      "Clinical AI without DPIA or impact assessment",
       "Hospital crisis and continuity"
     ],
     "meta": {
@@ -1519,12 +1522,13 @@
         "ens",
         "nis2",
         "iso42001",
-        "ria"
+        "ria",
+        "rgpd"
       ],
-      "grado": 0.7078681552365762,
-      "controles": 122,
-      "brechas": 31,
-      "altas": 4,
+      "grado": 0.7147817460317459,
+      "controles": 132,
+      "brechas": 32,
+      "altas": 5,
       "nis2": "esencial"
     },
     "state": {
@@ -1577,6 +1581,9 @@
           "on": false,
           "regimen": "general",
           "tlpt": false
+        },
+        "rgpd": {
+          "on": true
         },
         "nist": {
           "on": false
@@ -2543,13 +2550,94 @@
           "revision": "",
           "notas": "",
           "origen": ""
+        },
+        "PRI-01": {
+          "estado": "implantado",
+          "responsable": "Delegado de Protección de Datos",
+          "evidencias": "Cartelería y web con información por capas (ficticia)",
+          "revision": "2026-05-14",
+          "notas": "",
+          "origen": ""
+        },
+        "PRI-02": {
+          "estado": "implantado",
+          "responsable": "Delegado de Protección de Datos",
+          "evidencias": "Bases jurídicas por tratamiento: asistencia sanitaria, art. 9.2 h RGPD (ficticia)",
+          "revision": "2026-05-14",
+          "notas": "",
+          "origen": ""
+        },
+        "PRI-03": {
+          "estado": "implantado",
+          "responsable": "Atención al Paciente",
+          "evidencias": "Registro de solicitudes de derechos y plazos (ficticia)",
+          "revision": "2026-06-02",
+          "notas": "",
+          "origen": ""
+        },
+        "PRI-04": {
+          "estado": "implantado",
+          "responsable": "Delegado de Protección de Datos",
+          "evidencias": "Inventario de actividades de tratamiento publicado en la sede (ficticia)",
+          "revision": "2026-03-20",
+          "notas": "",
+          "origen": ""
+        },
+        "PRI-05": {
+          "estado": "parcial",
+          "responsable": "Contratación",
+          "evidencias": "Contratos de encargo con la lavandería y el laboratorio externo (ficticia)",
+          "revision": "2026-04-10",
+          "notas": "Falta el contrato de encargo con el proveedor del sistema de IA de triaje.",
+          "origen": ""
+        },
+        "PRI-06": {
+          "estado": "parcial",
+          "responsable": "Delegado de Protección de Datos",
+          "evidencias": "",
+          "revision": "2026-04-10",
+          "notas": "El proveedor de IA tiene soporte fuera del EEE: revisar las cláusulas tipo.",
+          "origen": ""
+        },
+        "PRI-07": {
+          "estado": "parcial",
+          "responsable": "Responsable de Seguridad",
+          "evidencias": "Procedimiento de incidentes del ENS (ficticia)",
+          "revision": "2026-02-28",
+          "notas": "Falta coordinar los plazos de la AEPD (72 h) con los de NIS2 y el CCN-CERT.",
+          "origen": ""
+        },
+        "PRI-08": {
+          "estado": "implantado",
+          "responsable": "Gerencia",
+          "evidencias": "Nombramiento del DPD comunicado a la AEPD (ficticia)",
+          "revision": "2026-01-15",
+          "notas": "",
+          "origen": ""
+        },
+        "PRI-09": {
+          "estado": "pendiente",
+          "responsable": "Comité de IA",
+          "evidencias": "",
+          "revision": "",
+          "notas": "Sin EIPD del sistema de IA de triaje radiológico, que trata datos de salud a gran escala.",
+          "origen": ""
+        },
+        "PRI-10": {
+          "estado": "implantado",
+          "responsable": "Delegado de Protección de Datos",
+          "evidencias": "Calendario de conservación de la historia clínica (ficticia)",
+          "revision": "2026-05-14",
+          "notas": "",
+          "origen": ""
         }
       },
       "exclusiones": {
         "ens": {},
         "iso27001": {},
         "nis2": {},
-        "iso42001": {}
+        "iso42001": {},
+        "rgpd": {}
       },
       "acciones": {
         "IA-05": {
@@ -3099,6 +3187,9 @@
           "on": false,
           "regimen": "general",
           "tlpt": false
+        },
+        "rgpd": {
+          "on": false
         },
         "nist": {
           "on": false
@@ -4285,6 +4376,9 @@
           "regimen": "general",
           "tlpt": false
         },
+        "rgpd": {
+          "on": false
+        },
         "nist": {
           "on": false
         },
@@ -5333,17 +5427,17 @@
     "icono": "cloud",
     "titulo": "CitaFácil Cloud",
     "sector": "SaaS para ayuntamientos",
-    "resumen": "Pyme de 28 personas que ofrece cita previa en la nube a ayuntamientos. ENS de categoría BÁSICA, quiere ISO/IEC 27001 y acaba de incorporar un asistente conversacional con IA. Por tamaño, NIS2 no le aplica todavía.",
+    "resumen": "Pyme de 28 personas que ofrece cita previa en la nube a ayuntamientos, como encargada del tratamiento según el RGPD. ENS de categoría BÁSICA, quiere ISO/IEC 27001 y acaba de incorporar un asistente conversacional con IA. Por tamaño, NIS2 no le aplica todavía.",
     "retos": [
       "Asistente de IA sin gobierno",
-      "Muchos controles solo básicos",
+      "Asistente de IA con datos fuera de la UE",
       "NIS2: fuera por tamaño, por ahora"
     ],
     "sector_en": "SaaS for municipalities",
-    "resumen_en": "28-person SME offering cloud appointment booking to town councils. ENS at BASIC category, it wants ISO/IEC 27001 and has just added an AI chat assistant. Given its size, NIS2 does not apply yet.",
+    "resumen_en": "28-person SME offering cloud appointment booking to town councils, as a GDPR processor. ENS at BASIC category, it wants ISO/IEC 27001 and has just added an AI chat assistant. Given its size, NIS2 does not apply yet.",
     "retos_en": [
       "AI assistant without governance",
-      "Many controls only basic",
+      "AI assistant with data outside the EU",
       "NIS2: out by size, for now"
     ],
     "meta": {
@@ -5351,12 +5445,13 @@
         "ens",
         "iso27001",
         "iso42001",
-        "ria"
+        "ria",
+        "rgpd"
       ],
-      "grado": 0.6648071625344353,
-      "controles": 121,
-      "brechas": 58,
-      "altas": 3,
+      "grado": 0.6641050583657587,
+      "controles": 131,
+      "brechas": 60,
+      "altas": 4,
       "nis2": null
     },
     "state": {
@@ -5409,6 +5504,9 @@
           "on": false,
           "regimen": "general",
           "tlpt": false
+        },
+        "rgpd": {
+          "on": true
         },
         "nist": {
           "on": false
@@ -6367,6 +6465,86 @@
           "revision": "2026-09-15",
           "notas": "",
           "origen": ""
+        },
+        "PRI-01": {
+          "estado": "implantado",
+          "responsable": "Dirección",
+          "evidencias": "Política de privacidad del servicio (ficticia)",
+          "revision": "2026-02-11",
+          "notas": "",
+          "origen": ""
+        },
+        "PRI-02": {
+          "estado": "parcial",
+          "responsable": "Dirección",
+          "evidencias": "",
+          "revision": "2026-02-11",
+          "notas": "Como encargada, trata según las instrucciones de cada ayuntamiento; falta recogerlas por escrito en todos los contratos.",
+          "origen": ""
+        },
+        "PRI-03": {
+          "estado": "parcial",
+          "responsable": "Soporte",
+          "evidencias": "",
+          "revision": "",
+          "notas": "Sin procedimiento para trasladar al ayuntamiento las solicitudes de derechos que llegan al soporte.",
+          "origen": ""
+        },
+        "PRI-04": {
+          "estado": "implantado",
+          "responsable": "Dirección",
+          "evidencias": "Registro de actividades como encargada (art. 30.2) (ficticia)",
+          "revision": "2026-02-11",
+          "notas": "",
+          "origen": ""
+        },
+        "PRI-05": {
+          "estado": "parcial",
+          "responsable": "Dirección",
+          "evidencias": "Contratos de encargo con 14 ayuntamientos (ficticia)",
+          "revision": "2026-02-11",
+          "notas": "Falta autorizar como subencargado al proveedor del asistente de IA.",
+          "origen": ""
+        },
+        "PRI-06": {
+          "estado": "pendiente",
+          "responsable": "CTO",
+          "evidencias": "",
+          "revision": "",
+          "notas": "El asistente de IA usa un modelo alojado en EE. UU.: comprobar el marco de privacidad de datos UE-EE. UU.",
+          "origen": ""
+        },
+        "PRI-07": {
+          "estado": "parcial",
+          "responsable": "CTO",
+          "evidencias": "",
+          "revision": "2025-12-03",
+          "notas": "Debe avisar a cada ayuntamiento sin dilación para que notifique a la AEPD en 72 h.",
+          "origen": ""
+        },
+        "PRI-08": {
+          "estado": "implantado",
+          "responsable": "Dirección",
+          "evidencias": "DPD externo contratado (ficticia)",
+          "revision": "2026-01-20",
+          "notas": "",
+          "origen": ""
+        },
+        "PRI-09": {
+          "estado": "pendiente",
+          "responsable": "CTO",
+          "evidencias": "",
+          "revision": "",
+          "notas": "Sin análisis de riesgos del asistente de IA para ofrecérselo a los ayuntamientos.",
+          "origen": ""
+        },
+        "PRI-10": {
+          "estado": "parcial",
+          "responsable": "CTO",
+          "evidencias": "",
+          "revision": "2025-12-03",
+          "notas": "Las citas se conservan sin plazo definido.",
+          "origen": ""
         }
       },
       "exclusiones": {
@@ -6394,7 +6572,8 @@
           "A5.32": "Sin software de terceros con licencia restrictiva."
         },
         "nis2": {},
-        "iso42001": {}
+        "iso42001": {},
+        "rgpd": {}
       },
       "acciones": {
         "IA-05": {
@@ -6931,6 +7110,9 @@
           "on": false,
           "regimen": "general",
           "tlpt": false
+        },
+        "rgpd": {
+          "on": false
         },
         "nist": {
           "on": false
@@ -8114,6 +8296,9 @@
           "on": false,
           "regimen": "general",
           "tlpt": false
+        },
+        "rgpd": {
+          "on": false
         },
         "nist": {
           "on": false
@@ -9431,6 +9616,9 @@
           "on": true,
           "regimen": "general",
           "tlpt": false
+        },
+        "rgpd": {
+          "on": false
         },
         "cl21663": {
           "on": false,
@@ -10800,6 +10988,9 @@
           "on": false,
           "regimen": "general",
           "tlpt": false
+        },
+        "rgpd": {
+          "on": false
         },
         "cl21663": {
           "on": true,

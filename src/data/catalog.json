@@ -1,5 +1,5 @@
 {
-  "version": "2.11.1",
+  "version": "2.12.0",
   "domains": [
     {
       "id": "GOB",
@@ -5342,6 +5342,199 @@
         }
       ]
     },
+    "rgpd": {
+      "id": "rgpd",
+      "datos": true,
+      "tope": "parcial",
+      "consulta": "2026-10-15",
+      "fuentes": [
+        "Reglamento (UE) 2016/679, General de Protección de Datos (DOUE L 119, 4-5-2016)",
+        "Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y garantía de los derechos digitales (BOE-A-2018-16673)"
+      ],
+      "reqs": [
+        {
+          "id": "pri",
+          "code": "Art. 5.1",
+          "t": "Principios de licitud, lealtad y transparencia, limitación de la finalidad, minimización, exactitud, limitación del plazo de conservación, integridad y confidencialidad",
+          "t_en": "Principles of lawfulness, fairness and transparency, purpose limitation, data minimisation, accuracy, storage limitation, integrity and confidentiality",
+          "g": "Principios y responsabilidad proactiva",
+          "g_en": "Principles and accountability",
+          "desde": "2018-05-25",
+          "ref": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018 (LOPDGDD)",
+          "ref_en": "Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD)"
+        },
+        {
+          "id": "resp",
+          "code": "Arts. 5.2 y 24",
+          "t": "Responsabilidad proactiva: medidas técnicas y organizativas apropiadas y capacidad de demostrar el cumplimiento",
+          "t_en": "Accountability: appropriate technical and organisational measures and the ability to demonstrate compliance",
+          "g": "Principios y responsabilidad proactiva",
+          "g_en": "Principles and accountability",
+          "desde": "2018-05-25",
+          "ref": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018 (LOPDGDD)",
+          "ref_en": "Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD)"
+        },
+        {
+          "id": "base",
+          "code": "Arts. 6, 7 y 9 · LOPDGDD arts. 6–9",
+          "t": "Base jurídica de cada tratamiento, condiciones del consentimiento y categorías especiales de datos",
+          "t_en": "Legal basis for each processing, conditions for consent and special categories of data",
+          "g": "Principios y responsabilidad proactiva",
+          "g_en": "Principles and accountability",
+          "desde": "2018-05-25",
+          "ref": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018 (LOPDGDD)",
+          "ref_en": "Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD)",
+          "nota": "En España, los menores pueden consentir desde los 14 años (art. 7 LOPDGDD).",
+          "nota_en": "In Spain, minors can consent from the age of 14 (LOPDGDD art. 7)."
+        },
+        {
+          "id": "pbdd",
+          "code": "Art. 25",
+          "t": "Protección de datos desde el diseño y por defecto",
+          "t_en": "Data protection by design and by default",
+          "g": "Principios y responsabilidad proactiva",
+          "g_en": "Principles and accountability",
+          "desde": "2018-05-25",
+          "ref": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018 (LOPDGDD)",
+          "ref_en": "Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD)"
+        },
+        {
+          "id": "info",
+          "code": "Arts. 12–14 · LOPDGDD art. 11",
+          "t": "Información a los interesados en el momento de la recogida, por capas",
+          "t_en": "Information to data subjects at collection, in layers",
+          "g": "Transparencia y derechos",
+          "g_en": "Transparency and rights",
+          "desde": "2018-05-25",
+          "ref": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018 (LOPDGDD)",
+          "ref_en": "Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD)"
+        },
+        {
+          "id": "der",
+          "code": "Arts. 12 y 15–22 · LOPDGDD arts. 12–18",
+          "t": "Derechos de acceso, rectificación, supresión, limitación, portabilidad y oposición, y garantías frente a decisiones automatizadas",
+          "t_en": "Rights of access, rectification, erasure, restriction, portability and objection, and safeguards against automated decisions",
+          "g": "Transparencia y derechos",
+          "g_en": "Transparency and rights",
+          "desde": "2018-05-25",
+          "ref": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018 (LOPDGDD)",
+          "ref_en": "Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD)",
+          "nota": "Plazo de respuesta: un mes desde la solicitud, prorrogable otros dos meses si es complejo (art. 12.3).",
+          "nota_en": "Response deadline: one month from the request, extendable by two further months when complex (art. 12.3)."
+        },
+        {
+          "id": "enc",
+          "code": "Art. 28 · LOPDGDD art. 33",
+          "t": "Encargados del tratamiento con garantías suficientes y contrato o acto jurídico",
+          "t_en": "Processors with sufficient guarantees and a contract or legal act",
+          "g": "Responsable y encargado",
+          "g_en": "Controller and processor",
+          "desde": "2018-05-25",
+          "ref": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018 (LOPDGDD)",
+          "ref_en": "Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD)"
+        },
+        {
+          "id": "rat",
+          "code": "Art. 30 · LOPDGDD art. 31",
+          "t": "Registro de las actividades de tratamiento",
+          "t_en": "Records of processing activities",
+          "g": "Responsable y encargado",
+          "g_en": "Controller and processor",
+          "desde": "2018-05-25",
+          "ref": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018 (LOPDGDD)",
+          "ref_en": "Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD)",
+          "nota": "El sector público publica además su inventario de actividades de tratamiento (art. 31.2 LOPDGDD).",
+          "nota_en": "The Spanish public sector must also publish its inventory of processing activities (LOPDGDD art. 31.2)."
+        },
+        {
+          "id": "eipd",
+          "code": "Arts. 35 y 36 · LOPDGDD art. 28",
+          "t": "Evaluación de impacto relativa a la protección de datos y consulta previa a la autoridad",
+          "t_en": "Data protection impact assessment and prior consultation with the authority",
+          "g": "Responsable y encargado",
+          "g_en": "Controller and processor",
+          "desde": "2018-05-25",
+          "ref": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018 (LOPDGDD)",
+          "ref_en": "Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD)",
+          "nota": "Obligatoria cuando el tratamiento entraña un alto riesgo: consulta las listas de la AEPD.",
+          "nota_en": "Mandatory when processing is likely to result in a high risk: check the AEPD lists."
+        },
+        {
+          "id": "dpd",
+          "code": "Arts. 37–39 · LOPDGDD arts. 34–37",
+          "t": "Delegado de protección de datos, designado y comunicado a la autoridad",
+          "t_en": "Data protection officer, designated and notified to the authority",
+          "g": "Responsable y encargado",
+          "g_en": "Controller and processor",
+          "desde": "2018-05-25",
+          "ref": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018 (LOPDGDD)",
+          "ref_en": "Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD)",
+          "nota": "Obligatorio en el sector público y en las entidades del art. 34.1 LOPDGDD (centros sanitarios, educativos, entidades financieras, aseguradoras, operadores de telecomunicaciones…).",
+          "nota_en": "Mandatory in the public sector and for the entities in LOPDGDD art. 34.1 (healthcare and education centres, financial entities, insurers, telecom operators…)."
+        },
+        {
+          "id": "seg",
+          "code": "Art. 32 · LOPDGDD DA 1.ª",
+          "t": "Seguridad del tratamiento: seudonimización y cifrado, confidencialidad, integridad, disponibilidad y resiliencia, restauración y verificación periódica",
+          "t_en": "Security of processing: pseudonymisation and encryption, confidentiality, integrity, availability and resilience, restoration and regular testing",
+          "g": "Seguridad y violaciones de datos",
+          "g_en": "Security and personal data breaches",
+          "desde": "2018-05-25",
+          "ref": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018 (LOPDGDD)",
+          "ref_en": "Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD)",
+          "nota": "El sector público y quienes le prestan servicios aplican las medidas del ENS (disposición adicional primera de la LOPDGDD).",
+          "nota_en": "The Spanish public sector and its service providers apply the ENS measures (LOPDGDD first additional provision)."
+        },
+        {
+          "id": "brecha",
+          "code": "Art. 33",
+          "t": "Notificación de violaciones de la seguridad a la autoridad de control en 72 horas",
+          "t_en": "Notification of personal data breaches to the supervisory authority within 72 hours",
+          "g": "Seguridad y violaciones de datos",
+          "g_en": "Security and personal data breaches",
+          "desde": "2018-05-25",
+          "ref": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018 (LOPDGDD)",
+          "ref_en": "Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD)",
+          "nota": "En España, a la AEPD (o a la autoridad autonómica). Se documentan todas las violaciones, también las que no se notifican (art. 33.5).",
+          "nota_en": "In Spain, to the AEPD (or the regional authority). All breaches are documented, including those not notified (art. 33.5)."
+        },
+        {
+          "id": "com",
+          "code": "Art. 34",
+          "t": "Comunicación de la violación a los interesados sin dilación indebida cuando hay alto riesgo",
+          "t_en": "Communication of the breach to data subjects without undue delay when there is a high risk",
+          "g": "Seguridad y violaciones de datos",
+          "g_en": "Security and personal data breaches",
+          "desde": "2018-05-25",
+          "ref": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018 (LOPDGDD)",
+          "ref_en": "Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD)"
+        },
+        {
+          "id": "transf",
+          "code": "Arts. 44–49",
+          "t": "Transferencias internacionales con decisión de adecuación, garantías adecuadas o excepciones",
+          "t_en": "International transfers based on an adequacy decision, appropriate safeguards or derogations",
+          "g": "Transferencias internacionales",
+          "g_en": "International transfers",
+          "desde": "2018-05-25",
+          "ref": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018 (LOPDGDD)",
+          "ref_en": "Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD)"
+        },
+        {
+          "id": "dig",
+          "code": "LOPDGDD arts. 87–91",
+          "t": "Derechos digitales en el ámbito laboral: intimidad frente a dispositivos digitales, desconexión digital, videovigilancia y geolocalización",
+          "t_en": "Digital rights at work: privacy on digital devices, right to disconnect, video surveillance and geolocation",
+          "g": "Derechos digitales (LOPDGDD)",
+          "g_en": "Digital rights (LOPDGDD)",
+          "desde": "2018-12-07",
+          "ref": "Reglamento (UE) 2016/679 (RGPD) y Ley Orgánica 3/2018 (LOPDGDD)",
+          "ref_en": "Regulation (EU) 2016/679 (GDPR) and Spanish Organic Law 3/2018 (LOPDGDD)",
+          "nota": "Exige criterios de uso de los dispositivos y una política interna de desconexión digital, con información previa a los trabajadores.",
+          "nota_en": "Requires criteria for the use of devices and an internal right-to-disconnect policy, with prior information to employees."
+        }
+      ]
+    },
     "cl21663": {
       "id": "cl21663",
       "region": "cl",
@@ -6169,6 +6362,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [
           {
             "id": "8.sgsi",
@@ -6252,6 +6446,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -6322,6 +6517,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -6373,6 +6569,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -6433,6 +6630,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -6512,6 +6710,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -6571,6 +6770,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -6641,6 +6841,7 @@
         ],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [
           {
             "id": "8.reg",
@@ -6697,6 +6898,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -6748,6 +6950,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -6809,6 +7012,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -6859,6 +7063,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -6901,6 +7106,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -6945,6 +7151,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -6990,6 +7197,7 @@
         ],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -7035,6 +7243,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -7062,6 +7271,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [
           {
             "id": "8.del",
@@ -7166,6 +7376,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [
           {
             "id": "8.sgsi",
@@ -7248,6 +7459,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -7307,6 +7519,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -7357,6 +7570,12 @@
           }
         ],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "resp",
+            "w": 0.5
+          }
+        ],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -7404,6 +7623,20 @@
           }
         ],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "resp",
+            "w": 1
+          },
+          {
+            "id": "seg",
+            "w": 1
+          },
+          {
+            "id": "pri",
+            "w": 0.5
+          }
+        ],
         "cl21663": [],
         "cl21719": [
           {
@@ -7479,6 +7712,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -7540,6 +7774,12 @@
           }
         ],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "seg",
+            "w": 0.5
+          }
+        ],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -7610,6 +7850,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [
           {
             "id": "8.rev",
@@ -7671,6 +7912,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -7722,6 +7964,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -7795,6 +8038,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -7843,6 +8087,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -7880,6 +8125,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -7933,6 +8179,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -7992,6 +8239,12 @@
           }
         ],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "dig",
+            "w": 1
+          }
+        ],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -8068,6 +8321,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [
           {
             "id": "8.cap",
@@ -8143,6 +8397,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [
           {
             "id": "8.cap",
@@ -8190,6 +8445,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -8245,6 +8501,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -8294,6 +8551,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -8376,6 +8634,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -8439,6 +8698,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -8485,6 +8745,12 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "dig",
+            "w": 1
+          }
+        ],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -8552,6 +8818,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -8616,6 +8883,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -8678,6 +8946,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -8736,6 +9005,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -8792,6 +9062,12 @@
             "w": 1
           }
         ],
+        "rgpd": [
+          {
+            "id": "seg",
+            "w": 0.5
+          }
+        ],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -8846,6 +9122,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -8890,6 +9167,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -8942,6 +9220,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9007,6 +9286,12 @@
             "w": 0.5
           }
         ],
+        "rgpd": [
+          {
+            "id": "seg",
+            "w": 0.5
+          }
+        ],
         "cl21663": [],
         "cl21719": [
           {
@@ -9063,6 +9348,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9110,6 +9396,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9168,6 +9455,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9236,6 +9524,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9296,6 +9585,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9337,6 +9627,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9389,6 +9680,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9440,6 +9732,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9505,6 +9798,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9578,6 +9872,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9663,6 +9958,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9714,6 +10010,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9773,6 +10070,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9834,6 +10132,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9880,6 +10179,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -9961,6 +10261,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10017,6 +10318,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10066,6 +10368,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10111,6 +10414,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10184,6 +10488,12 @@
             "w": 0.5
           }
         ],
+        "rgpd": [
+          {
+            "id": "seg",
+            "w": 0.5
+          }
+        ],
         "cl21663": [],
         "cl21719": [
           {
@@ -10254,6 +10564,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10300,6 +10611,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10368,6 +10680,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10431,6 +10744,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10494,6 +10808,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10540,6 +10855,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10586,6 +10902,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10660,6 +10977,12 @@
           }
         ],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "pbdd",
+            "w": 0.5
+          }
+        ],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10716,6 +11039,12 @@
         ],
         "nist": [],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "pbdd",
+            "w": 0.5
+          }
+        ],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10795,6 +11124,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [
           {
             "id": "8.rev",
@@ -10841,6 +11171,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10887,6 +11218,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10951,6 +11283,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -10997,6 +11330,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -11047,6 +11381,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -11097,6 +11432,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -11146,6 +11482,7 @@
         ],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -11199,6 +11536,7 @@
         ],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -11231,6 +11569,7 @@
         ],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -11272,6 +11611,7 @@
         ],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -11366,6 +11706,12 @@
             "w": 1
           }
         ],
+        "rgpd": [
+          {
+            "id": "enc",
+            "w": 0.5
+          }
+        ],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -11426,6 +11772,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -11500,6 +11847,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -11560,6 +11908,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -11602,6 +11951,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -11637,6 +11987,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -11678,6 +12029,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -11744,6 +12096,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [
           {
             "id": "7",
@@ -11801,6 +12154,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [
           {
             "id": "7",
@@ -11891,6 +12245,12 @@
             "w": 1
           }
         ],
+        "rgpd": [
+          {
+            "id": "brecha",
+            "w": 0.5
+          }
+        ],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -11968,6 +12328,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [
           {
             "id": "7",
@@ -12046,6 +12407,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -12105,6 +12467,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -12201,6 +12564,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [
           {
             "id": "9",
@@ -12275,6 +12639,12 @@
             "w": 0.5
           }
         ],
+        "rgpd": [
+          {
+            "id": "com",
+            "w": 0.5
+          }
+        ],
         "cl21663": [
           {
             "id": "8.inf",
@@ -12325,6 +12695,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -12367,6 +12738,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -12404,6 +12776,7 @@
         ],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -12441,6 +12814,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -12473,6 +12847,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [
           {
             "id": "9",
@@ -12543,6 +12918,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -12636,6 +13012,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [
           {
             "id": "8.cont",
@@ -12697,6 +13074,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [
           {
             "id": "8.cont",
@@ -12774,6 +13152,7 @@
             "w": 0.5
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -12834,6 +13213,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -12869,6 +13249,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -12901,6 +13282,7 @@
             "w": 1
           }
         ],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -12961,6 +13343,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13012,6 +13395,12 @@
           }
         ],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "dig",
+            "w": 0.5
+          }
+        ],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13075,6 +13464,7 @@
           }
         ],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13125,6 +13515,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13179,6 +13570,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13238,6 +13630,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13292,6 +13685,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13350,6 +13744,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13422,6 +13817,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13479,6 +13875,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13525,6 +13922,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13587,6 +13985,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13642,6 +14041,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13701,6 +14101,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13752,6 +14153,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13819,6 +14221,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13876,6 +14279,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13925,6 +14329,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -13984,6 +14389,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -14028,6 +14434,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -14065,6 +14472,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -14106,6 +14514,12 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "der",
+            "w": 0.5
+          }
+        ],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -14155,6 +14569,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -14196,6 +14611,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -14245,6 +14661,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -14286,6 +14703,7 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [],
         "cl21663": [],
         "cl21719": [],
         "co1581": [],
@@ -14318,6 +14736,16 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "info",
+            "w": 1
+          },
+          {
+            "id": "dig",
+            "w": 0.5
+          }
+        ],
         "cl21663": [],
         "cl21719": [
           {
@@ -14375,6 +14803,12 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "base",
+            "w": 1
+          }
+        ],
         "cl21663": [],
         "cl21719": [
           {
@@ -14432,6 +14866,12 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "der",
+            "w": 1
+          }
+        ],
         "cl21663": [],
         "cl21719": [
           {
@@ -14497,6 +14937,16 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "rat",
+            "w": 1
+          },
+          {
+            "id": "resp",
+            "w": 0.5
+          }
+        ],
         "cl21663": [],
         "cl21719": [
           {
@@ -14544,6 +14994,12 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "enc",
+            "w": 1
+          }
+        ],
         "cl21663": [],
         "cl21719": [
           {
@@ -14601,6 +15057,12 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "transf",
+            "w": 1
+          }
+        ],
         "cl21663": [],
         "cl21719": [
           {
@@ -14658,6 +15120,16 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "brecha",
+            "w": 1
+          },
+          {
+            "id": "com",
+            "w": 1
+          }
+        ],
         "cl21663": [],
         "cl21719": [
           {
@@ -14705,6 +15177,12 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "dpd",
+            "w": 1
+          }
+        ],
         "cl21663": [],
         "cl21719": [
           {
@@ -14757,6 +15235,12 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "eipd",
+            "w": 1
+          }
+        ],
         "cl21663": [],
         "cl21719": [
           {
@@ -14794,6 +15278,16 @@
         "cra": [],
         "nist": [],
         "dora": [],
+        "rgpd": [
+          {
+            "id": "pri",
+            "w": 1
+          },
+          {
+            "id": "pbdd",
+            "w": 1
+          }
+        ],
         "cl21663": [],
         "cl21719": [
           {

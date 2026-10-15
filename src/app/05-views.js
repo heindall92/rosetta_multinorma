@@ -293,7 +293,7 @@ function vNormas() {
   const f = ui.normaFw; const fw = calc.fw[f];
   const q = normTxt(ui.normaQ.trim());
   const rows = calc.req[f].filter((r) => (ui.normaEstado === 'todos' || r.estado === ui.normaEstado) && (!q || normTxt(`${reqCode(f, r.id)} ${IX.req[f][r.id].code} ${rT(f, r.id)}`).includes(q)));
-  const tabs = `<div class="lens-row" role="group" aria-label="${esc(t('fws'))}">${FWV.map((g) => { const w = calc.fw[g]; return `<button type="button" class="lens-tab fw-${fwCls(g)}${onFw(g) ? '' : ' off'}" data-act="norma-fw" data-fw="${g}" aria-pressed="${g === f}">${miniRing(g, w.grado, w.cubiertos, w.aplicables, 52, !onFw(g))}<span><b>${fwLbl(g)}</b><small>${onFw(g) ? `${pct(w.grado)} · ${w.brechas} ${esc(t('gaps'))}` : esc(t('ringOff'))}</small></span></button>`; }).join('')}</div>`;
+  const tabs = `<div class="lens-row" role="group" aria-label="${esc(t('fws'))}">${FWV.map((g) => { const w = calc.fw[g]; return `<button type="button" class="lens-tab fw-${fwCls(g)}${onFw(g) ? '' : ' off'}" data-act="norma-fw" data-fw="${g}" aria-pressed="${g === f}">${miniRing(g, w.grado, w.cubiertos, w.aplicables, 52, !onFw(g))}<span><b>${fwLbl(g)}</b><small>${onFw(g) ? `${pct(w.grado)} · ${w.brechas} ${esc(t('gapW', w.brechas))}` : esc(t('ringOff'))}</small></span></button>`; }).join('')}</div>`;
   const cntE = (e) => calc.req[f].filter((r) => r.estado === e).length;
   const filtros = [['todos', t('all'), calc.req[f].length], ...['brecha', 'parcial', 'cubierto', 'excluido', ...(calc.req[f].some((r) => r.estado === 'no-exigido') ? ['no-exigido'] : [])].map((e) => [e, t('cov.' + e), cntE(e)])];
   let html = ''; let lastG = null; let buf = '';
@@ -330,7 +330,7 @@ function vBrechas() {
     <div class="t">${esc(h.titulo)}</div><div class="d">${esc(multi(h) ? String(h.detalle).replace(/ (Afecta a|Affects):.*$/, '') : h.detalle)}</div>${multi(h) ? `<div class="chips">${h.ucs ? h.ucs.map(ucChip).join('') : h.reqs.filter((r) => IX.req[h.fw] && IX.req[h.fw][r]).map((r) => reqChip(h.fw, r)).join('')}</div>` : ''}
     <div class="a">${icon('arrow-right', 15)}<span>${esc(h.accion)}</span></div>${h.ref ? `<div class="ref">${esc(h.ref)}</div>` : ''}</article>`).join('') || (calc.kpi.brechas ? `<div class="info-box">${icon('info', 16)}${esc(t('noFindingsGaps', calc.kpi.brechas))}</div>` : `<div class="ok-box">${icon('circle-check', 16)}${esc(t('noFindings'))}</div>`)}</div>
   <div class="pane-h" style="margin:10px 4px 0"><div><h2>${esc(t('gapsByFw'))}</h2><p>${esc(t('gapsByFwSub'))}</p></div></div>
-  <div class="grid g2">${calc.alcance.map((f) => { const br = calc.req[f].filter((r) => r.estado === 'brecha'); return `<section class="glass pane stack"><div class="row spread">${fwTag(f)}<span class="small muted">${br.length} ${esc(t('gaps'))} · ${esc(t('exclusive', excl[f].length))}</span></div>
+  <div class="grid g2">${calc.alcance.map((f) => { const br = calc.req[f].filter((r) => r.estado === 'brecha'); return `<section class="glass pane stack"><div class="row spread">${fwTag(f)}<span class="small muted">${br.length} ${esc(t('gapW', br.length))} · ${esc(t('exclusive', excl[f].length))}</span></div>
     ${br.length ? `<div class="chips">${br.map((r) => reqChip(f, r.id, { cov: 'brecha' })).join('')}</div>${excl[f].length ? `<p class="small muted">${esc(t('exclusiveTxt', fwLbl(f), excl[f].map((r) => reqCode(f, r.id)).join(', ')))}</p>` : ''}` : `<div class="ok-box">${icon('circle-check', 16)}${esc(t('noGaps'))}</div>`}</section>`; }).join('')}</div>`;
 }
 

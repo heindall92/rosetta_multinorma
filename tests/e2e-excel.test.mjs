@@ -113,6 +113,16 @@ for (const modo of ['file', 'http']) {
       assert.deepEqual(await s.page.evaluate(() => window.__csp), []);
     });
 
+    test('el RGPD sale en su propia hoja, con sus 15 obligaciones', async () => {
+      await s.page.evaluate(() => window.__ROSETTA__.openCase('hospital'));
+      const dl = s.page.waitForEvent('download', { timeout: 20000 });
+      await act(s.page, 'export-xlsx');
+      const wb = XLSX.read(readFileSync(await (await dl).path()), { type: 'buffer' });
+      assert.ok(wb.SheetNames.includes('RGPD'), wb.SheetNames.join(','));
+      const filas = XLSX.utils.sheet_to_json(wb.Sheets.RGPD, { header: 1 }).filter((f) => /^(Art|LOPDGDD)/.test(String(f[0] || f[1] || '')) || /^(Art|LOPDGDD)/.test(String(f[1] || '')));
+      assert.equal(filas.length, 15, JSON.stringify(XLSX.utils.sheet_to_json(wb.Sheets.RGPD, { header: 1 }).slice(0, 3)));
+    });
+
     if (modo === 'http') test('una librería manipulada se rechaza (SRI)', async () => {
       const t2 = await open(httpUrl);
       await t2.page.route('**/vendor/sheetjs-*.js', async (r) => { const res = await r.fetch(); r.fulfill({ response: res, body: (await res.text()) + '\nwindow.__pwn=1;' }); });

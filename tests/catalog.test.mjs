@@ -12,7 +12,7 @@ const ICONS = require('../src/data/icons.json');
 const dupes = (arr) => arr.filter((x, i) => arr.indexOf(x) !== i);
 
 describe('catálogo', () => {
-  test('quince normas con el número de requisitos esperado', () => {
+  test('dieciséis normas con el número de requisitos esperado', () => {
     assert.deepEqual(Object.keys(CAT.frameworks), E.FW);
     const n = Object.fromEntries(E.FW.map((f) => [f, CAT.frameworks[f].reqs.length]));
     // ENS: 73 medidas del Anexo II · ISO 27001: cl. 4–10 + 93 controles · NIS2: RE 2024/2690 · ISO 42001: cl. 4–10 + 38 controles
@@ -22,6 +22,7 @@ describe('catálogo', () => {
     assert.equal(CAT.frameworks.iso42001.reqs.filter((r) => /^A\d/.test(r.id)).length, 38);
     assert.ok(n.nis2 > 0);
     assert.equal(n.partis, 13, 'Part-IS: puntos .200 a .260');
+    assert.equal(n.rgpd, 15, 'RGPD y LOPDGDD');
     assert.equal(CAT.frameworks.partis.tope, 'parcial');
     assert.ok(CAT.frameworks.partis.fuentes.some((f) => /2023\/203/.test(f)) && CAT.frameworks.partis.fuentes.some((f) => /2022\/1645/.test(f)));
     for (const r of CAT.frameworks.partis.reqs) { assert.match(r.code, /^IS\.I\.OR\.\d{3}$/); for (const k of ['t', 't_en', 'nota', 'nota_en', 'ref', 'ref_en']) assert.ok(r[k], `${r.id}.${k}`); }
