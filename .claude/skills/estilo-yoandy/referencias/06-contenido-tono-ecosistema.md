@@ -34,7 +34,7 @@
 
 | Herramienta | Repositorio | Web | Qué hace | Firma visual |
 |---|---|---|---|---|
-| Rosetta Multinorma | `heindall92/rosetta_multinorma` | heindall92.github.io/rosetta_multinorma/ | 15 normas y leyes (UE, EE. UU. y Latinoamérica) sobre 152 controles unificados (CCN-STIC 825) | Anillos y círculos |
+| Rosetta Multinorma | `heindall92/rosetta_multinorma` | heindall92.github.io/rosetta_multinorma/ | 16 normas y leyes (UE con RGPD y LOPDGDD, EE. UU. y Latinoamérica) sobre 152 controles unificados (CCN-STIC 825) y 24 reglas de coherencia | Anillos y círculos |
 | ENS Compliance Studio | `heindall92/grc_ens_compliance_studio` | …/grc_ens_compliance_studio/ | Categorización, MAGERIT y declaración de aplicabilidad; se importa en Rosetta | Propia |
 | KAIROS | `heindall92/kairos` | …/kairos/ | Continuidad: BIA, BCP, DRP y ruta crítica de recuperación | Propia (tiempo) |
 | CTEM-Nexus | `heindall92/ctem-nexus` | …/ctem-nexus/ | Prioriza exposición técnica y rutas de ataque hacia los activos críticos | Franjas por activo y grafo |
