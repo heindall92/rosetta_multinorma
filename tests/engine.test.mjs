@@ -749,6 +749,7 @@ describe('RGPD y LOPDGDD', () => {
   });
   test('etiquetas en los dos idiomas', () => {
     assert.equal(E.etiqueta(IX, 'rgpd', 'es'), 'RGPD'); assert.equal(E.etiqueta(IX, 'rgpd', 'en'), 'GDPR');
+    assert.equal(E.etiqueta(IX, 'mx2025', 'en'), 'LFPDPPP (Mexico)'); assert.equal(E.etiqueta(IX, 'pe29733', 'en'), 'Law 29733 (Peru)'); assert.equal(E.etiqueta(IX, 'cl21663', 'es'), 'Ley 21.663 (Chile)');
     assert.match(E.FW_LONG.rgpd, /2016\/679/); assert.match(E.FW_LONG_EN.rgpd, /LOPDGDD/);
   });
 });

@@ -1,5 +1,16 @@
 # Cambios
 
+## 2.14.0 · octubre de 2026
+
+**Accesibilidad y ritmo de trabajo.** Cierra los cuatro puntos de experiencia que seguían abiertos en la auditoría de producción (M2, M3, M8 y M11).
+
+- **La rueda se recorre con el teclado (M3).** Una sola parada de tabulador (foco itinerante); las flechas recorren los 152 controles, Re Pág y Av Pág saltan de dominio, Inicio y Fin van al primero y al último, e Intro abre la ficha. El núcleo de la rueda anuncia el control enfocado, cada rayo tiene nombre accesible y, al cerrar la ficha, el foco vuelve a la rueda. Los atajos están en la ayuda.
+- **Acciones en bloque en Controles (M8).** Estado, responsable y fecha de revisión para todos los controles que muestra el filtro actual, con un solo Ctrl + Z para deshacerlo.
+- **Redibujado parcial (M2).** Cada cambio compara el HTML nuevo con el de la vista y solo toca lo que cambia: con la CPU ralentizada ×4, el trabajo del navegador por clic baja de 164 a 69 ms en Resumen, de 353 a 72 ms en Controles, de 208 a 39 ms en Requisitos y de 739 a 107 ms en Correspondencias (medido con trazas de Chrome). Se conservan el foco, el scroll y los paneles abiertos.
+- **Formateadores en caché.** `pct()` y las fechas creaban un formateador `Intl` en cada llamada: ~150 ms por redibujado del Resumen con la CPU lenta.
+- **Exportaciones en inglés (M11).** La exigencia del ENS se traduce en el Excel («applies», «n/a») y las leyes de Latinoamérica llevan nombre en inglés («Law 21.663 (Chile)», «LFPDPPP (Mexico)»). El resto de textos ya estaba en el diccionario.
+- **Pruebas.** 3 e2e (rueda con teclado, acciones en bloque, redibujado parcial), 4 de axe, comprobaciones en inglés en la suite de exportaciones y etiquetas en el motor. Total: 163 de motor, catálogo y build y 90 en navegador.
+
 ## 2.13.0 · octubre de 2026
 
 **Refuerzos del ENS.** Cierra el hallazgo E05 de la auditoría de producción.

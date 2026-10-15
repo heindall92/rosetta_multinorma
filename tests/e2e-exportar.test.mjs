@@ -62,6 +62,12 @@ function comprobarExcel(nombre, buf, lang) {
   const soa = wb.SheetNames.find((n) => n.startsWith('SoA ENS')); assert.ok(soa, `${nombre}: sin SoA ENS`);
   const cab = XLSX.utils.sheet_to_json(wb.Sheets[soa], { header: 1 })[0];
   assert.ok(cab.includes(lang === 'en' ? 'Reinforcements implemented' : 'Refuerzos implantados'), `${nombre}: sin columna de refuerzos`);
+  if (lang === 'en') { // 2.14.0: nada de la app en español en la exportación inglesa
+    const filas = XLSX.utils.sheet_to_json(wb.Sheets[soa], { header: 1 }); const ex = filas[0].indexOf('Requirement');
+    assert.ok(!filas.slice(1).some((f) => /^(aplica|n\.a\.)/.test(String(f[4] || ''))), `${nombre}: exigencia del ENS sin traducir`);
+    const uc = XLSX.utils.sheet_to_json(wb.Sheets['Unified controls'], { header: 1 })[0];
+    assert.ok(uc.includes('Law 21.663 (Chile)') && uc.includes('LFPDPPP (Mexico)') && !uc.some((h) => /^Ley /.test(String(h))), `${nombre}: leyes sin nombre en inglés`);
+  }
 }
 function comprobarMd(nombre, txt) {
   assert.match(txt, /^# /, `${nombre}: sin título`);

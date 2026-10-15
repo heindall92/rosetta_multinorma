@@ -67,6 +67,8 @@ function wheelSVG(st, cc, { hero = false } = {}) {
   const g = wheelGeo(RINGS); const L = LANG(); const pre = hero ? 'hw' : 'ow';
   const on = (f) => st.alcance[f] && st.alcance[f].on;
   const sel = !hero && ui.insp && ui.insp.type === 'uc' ? ui.insp.id : null;
+  // Foco itinerante: una sola parada de tabulador para la rueda; las flechas recorren los controles
+  const roving = !hero ? (g.spokes.some((s) => s.id === (sel || ui.wFocus)) ? sel || ui.wFocus : g.spokes[0] && g.spokes[0].id) : null;
   const out = [];
   for (const s of g.spokes) {
     const e = E.estadoUc(st, s.id); let cells = '';
@@ -75,7 +77,8 @@ function wheelSVG(st, cc, { hero = false } = {}) {
       const cls = `cell fw-${fwCls(f)}${on(f) ? '' : ' off'}`;
       cells += e === 'parcial' ? `<path class="${cls} parcial o" d="${c.full}"/><path class="${cls} parcial f" d="${c.half}"/>` : `<path class="${cls} ${e}" d="${c.full}"/>`;
     }
-    const attrs = hero ? '' : ` data-act="insp-uc" data-id="${esc(s.id)}" data-tip="${esc(`${s.id} · ${cT(s.id)} · ${t('est.' + e)}`)}" data-st="${e}"`;
+    const lbl = `${s.id} · ${cT(s.id)} · ${t('est.' + e)}`;
+    const attrs = hero ? '' : ` data-act="insp-uc" data-id="${esc(s.id)}" data-tip="${esc(lbl)}" data-st="${e}" role="button" tabindex="${s.id === roving ? 0 : -1}" aria-label="${esc(lbl)}"`;
     out.push(`<g class="spoke${sel === s.id ? ' sel' : ''}" style="--i:${s.i}"${attrs}><path class="hit" d="${s.hit}"/>${cells}</g>`);
   }
   const doms = g.doms.map((d) => `<g class="dom" data-tip="${esc(dT(d.id))}"><path class="dom-arc" d="${d.arc}"/><path id="${pre}-${d.id}" d="${d.lbl}" fill="none"/><text class="dom-lbl"><textPath href="#${pre}-${d.id}" startOffset="50%" text-anchor="middle">${esc(DSHORT[L][d.id])}</textPath></text></g>`).join('');
@@ -92,7 +95,7 @@ function wheelSVG(st, cc, { hero = false } = {}) {
       <text class="core-t" x="400" y="456" text-anchor="middle" data-d="${esc(t('coverage'))}">${esc(t('coverage'))}</text>
       <text class="core-s k2" x="400" y="480" text-anchor="middle" data-d="${esc(t('wheelCore', k.controles, k.requisitos))}">${esc(t('wheelCore', k.controles, k.requisitos))}</text>`;
   }
-  const label = hero ? '' : ` role="img" aria-label="${esc(`${t('wheelLbl')}: ${pct(cc.kpi.grado)} ${t('coverage')}`)}"`;
+  const label = hero ? '' : ` role="group" aria-label="${esc(`${t('wheelLbl')}: ${pct(cc.kpi.grado)} ${t('coverage')}. ${t('wheelKeys')}`)}"`;
   const anim = hero || ui.wAnim; if (!hero) ui.wAnim = false; // la rueda se despliega al entrar, no en cada cambio
   return `<svg class="wheel${hero ? ' hero' : ''}${anim ? ' anim' : ''}" viewBox="34 34 732 732"${label}${hero ? ' aria-hidden="true"' : ''}>${doms}${rings}${out.join('')}${core}</svg>`;
 }
@@ -136,7 +139,7 @@ function evolucion(hs) {
   const W = 560, H = 150, Lm = 36, Rm = 12, T = 12, B = 24;
   const X = (i) => Lm + (i * (W - Lm - Rm)) / (pts.length - 1); const Y = (v) => T + (1 - v) * (H - T - B);
   const line = pts.map((h, i) => `${i ? 'L' : 'M'}${X(i).toFixed(1)},${Y(h.grado).toFixed(1)}`).join('');
-  const mes = (f) => new Date(f + 'T00:00:00').toLocaleDateString(LOC(), { month: 'short' }).replace('.', '');
+  const mes = (f) => fmtD({ month: 'short' }).format(new Date(f + 'T00:00:00')).replace('.', '');
   return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(`${t('evo')}: ${pct(pts[0].grado)} → ${pct(pts[pts.length - 1].grado)}`)}">
     <defs><linearGradient id="evoFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".32"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>
     ${[0, 0.5, 1].map((g) => `<line class="gl" x1="${Lm}" x2="${W - Rm}" y1="${Y(g)}" y2="${Y(g)}"/><text class="ax" x="${Lm - 8}" y="${Y(g) + 3}" text-anchor="end">${g * 100}%</text>`).join('')}
@@ -259,14 +262,27 @@ function drawBeams() {
 }
 
 /* ================= Controles unificados ================= */
-function vControles() {
+/* Controles que muestra la vista según los filtros: los usa la lista y las acciones en bloque */
+function ucBase() { return CAT.controls.filter((c) => (!ui.ucSoloRel || calc.controles[c.id].relevante) && (ui.ucFw === 'todos' || c.maps[ui.ucFw].some((m) => m.w > 0))); }
+function ucFiltrados(base = ucBase()) {
   const q = normTxt(ui.ucQ.trim());
-  const base = CAT.controls.filter((c) => (!ui.ucSoloRel || calc.controles[c.id].relevante) && (ui.ucFw === 'todos' || c.maps[ui.ucFw].some((m) => m.w > 0)));
-  const list = base.filter((c) => {
+  return base.filter((c) => {
     if (ui.ucEstado !== 'todos' && calc.controles[c.id].estado !== ui.ucEstado) return false;
     if (q && !normTxt(`${c.id} ${cT(c.id)} ${c.t} ${tt(c, 'obj')} ${FWV.map((f) => c.maps[f].map((m) => reqCode(f, m.id) + ' ' + IX.req[f][m.id].code).join(' ')).join(' ')}`).includes(q)) return false;
     return true;
   });
+}
+function bulkPanel(n) {
+  return `<details class="glass bulk" data-keep="bulkOpen"${ui.bulkOpen ? ' open' : ''}><summary>${icon('list-checks', 16)}<span>${esc(t('bulkTitle'))}</span><small>${esc(t('bulkN', n))}</small></summary>
+    <div class="bulk-body"><p class="hint">${esc(t('bulkLead'))}</p>
+    <div class="bulk-form"><label class="fld">${esc(t('bulkState'))}<select id="bulk-estado"><option value="">${esc(t('bulkKeep'))}</option>${E.ESTADOS.map((e) => `<option value="${e}">${esc(t('est.' + e))}</option>`).join('')}</select></label>
+    <label class="fld">${esc(t('owner'))}<input type="text" id="bulk-resp" maxlength="200" placeholder="${esc(t('bulkKeep'))}"></label>
+    <label class="fld">${esc(t('lastRev'))}<input type="date" id="bulk-rev"></label>
+    <button type="button" class="btn primary" data-act="bulk-apply"${n ? '' : ' disabled'}>${icon('check', 16)}${esc(t('bulkApply', n))}</button></div></div></details>`;
+}
+function vControles() {
+  const base = ucBase();
+  const list = ucFiltrados(base);
   const cnt = (e) => base.filter((c) => calc.controles[c.id].estado === e).length;
   const estados = [['todos', t('all'), base.length], ...E.ESTADOS.map((e) => [e, t('est.' + e), cnt(e)])];
   let html = '';
@@ -285,6 +301,7 @@ function vControles() {
     <div class="chipset" role="group" aria-label="${esc(t('fws'))}">${[['todos', t('allFw')], ...FW.map((f) => [f, fwShort(f)])].map(([v, l]) => `<button type="button" data-act="uc-fw" data-v="${v}" aria-pressed="${ui.ucFw === v}">${v !== 'todos' ? `<span class="dotfw fw-${fwCls(v)}"></span>` : ''}${esc(l)}</button>`).join('')}</div>
     <label class="switch-l"><span class="switch"><input type="checkbox" id="uc-rel" data-uibool="ucSoloRel"${ui.ucSoloRel ? ' checked' : ''}><span></span></span>${esc(t('onlyScope'))}</label></div>
   <div class="chipset" role="group" aria-label="${esc(t('severity'))}">${estados.map(([v, l, n]) => `<button type="button" data-act="uc-estado" data-v="${v}" aria-pressed="${ui.ucEstado === v}">${v !== 'todos' ? icon(ST_IC[v], 14) : ''}${esc(l)}<span class="n">${n}</span></button>`).join('')}</div>
+  ${bulkPanel(list.length)}
   ${html || `<section class="glass pane">${empty('search', esc(t('noResults')), esc(t('noResultsTxt')))}</section>`}`;
 }
 

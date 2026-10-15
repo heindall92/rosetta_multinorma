@@ -363,3 +363,59 @@ test('refuerzos del ENS: ficha con casillas y texto del BOE, cobertura, CO-25, d
   assert.deepEqual(r, { ev: false, ref: { 'op.acc.6': ['R8'] }, polluted: undefined });
   noErrors('refuerzos');
 });
+
+test('2.14.0: la rueda se recorre con el teclado (una parada de tabulador, flechas, Av/Re Pág, Inicio, Fin, Intro y Esc)', async () => {
+  await page.evaluate(() => { window.__ROSETTA__.openCase('techserv'); window.__ROSETTA__.go('panel'); }); await page.waitForTimeout(700);
+  const sp = '.wheel:not(.hero) .spoke';
+  assert.equal(await page.locator(`${sp}[tabindex="0"]`).count(), 1, 'una sola parada de tabulador');
+  assert.equal(await page.locator(sp).count(), 152);
+  assert.equal(await page.locator('.wheel:not(.hero)').getAttribute('role'), 'group');
+  await page.locator(`${sp}[tabindex="0"]`).focus();
+  const st = () => page.evaluate(() => ({ id: document.activeElement.dataset.id, core: document.querySelector('.wheel:not(.hero) .core-v').textContent, label: document.activeElement.getAttribute('aria-label') }));
+  let s = await st(); assert.equal(s.id, 'GOB-01'); assert.equal(s.core, 'GOB-01'); assert.match(s.label, /^GOB-01 · .+ · /);
+  await page.keyboard.press('ArrowRight'); assert.equal((await st()).id, 'GOB-02');
+  await page.keyboard.press('ArrowLeft'); await page.keyboard.press('ArrowLeft'); assert.equal((await st()).id, 'PRI-10', 'da la vuelta');
+  await page.keyboard.press('Home'); await page.keyboard.press('PageDown'); assert.equal((await st()).id, 'RIE-01', 'Av Pág salta de dominio');
+  await page.keyboard.press('PageUp'); assert.equal((await st()).id, 'GOB-01');
+  await page.keyboard.press('End'); assert.equal((await st()).id, 'PRI-10');
+  assert.equal(await page.locator(`${sp}[tabindex="0"]`).count(), 1);
+  await page.keyboard.press('Enter'); await page.waitForTimeout(250);
+  assert.deepEqual(await page.evaluate(() => window.__ROSETTA__.ui.insp && window.__ROSETTA__.ui.insp.id), 'PRI-10');
+  await page.keyboard.press('Escape'); await page.waitForTimeout(250);
+  assert.equal(await page.evaluate(() => document.activeElement.dataset.id), 'PRI-10', 'el foco vuelve al control de la rueda');
+  noErrors('rueda con teclado');
+});
+
+test('2.14.0: acciones en bloque sobre los controles filtrados, con un solo deshacer', async () => {
+  await page.evaluate(() => { window.__ROSETTA__.openCase('techserv'); window.__ROSETTA__.go('controles'); }); await page.waitForTimeout(300);
+  const parciales = () => page.evaluate(() => Object.values(window.__ROSETTA__.state.controles).filter((c) => c.estado === 'parcial').length);
+  const total = await parciales();
+  await page.click('[data-act="uc-estado"][data-v="parcial"]'); await page.waitForTimeout(200);
+  const visibles = await page.locator('#view .li[data-act="insp-uc"]').count();
+  await page.click('.bulk > summary');
+  assert.match(await page.locator('.bulk').innerText(), new RegExp(`${visibles} controles visibles`));
+  await page.click('[data-act="bulk-apply"]'); await page.waitForTimeout(150);
+  assert.equal(await parciales(), total, 'sin nada elegido no cambia nada');
+  await page.selectOption('#bulk-estado', 'implantado'); await page.fill('#bulk-resp', 'Responsable de Seguridad (bloque)'); await page.fill('#bulk-rev', '2026-10-01');
+  await page.click('[data-act="bulk-apply"]'); await page.waitForTimeout(250);
+  assert.equal(await parciales(), total - visibles);
+  const ej = await page.evaluate(() => Object.values(window.__ROSETTA__.state.controles).filter((c) => c.responsable === 'Responsable de Seguridad (bloque)'));
+  assert.equal(ej.length, visibles); assert.ok(ej.every((c) => c.estado === 'implantado' && c.revision === '2026-10-01'));
+  await page.locator('body').press('Control+z'); await page.waitForTimeout(250);
+  assert.equal(await parciales(), total, 'un solo Ctrl + Z deshace el bloque entero');
+  noErrors('acciones en bloque');
+});
+
+test('2.14.0: el redibujado parcial conserva los nodos que no cambian, el foco y el scroll', async () => {
+  await page.evaluate(() => { window.__ROSETTA__.openCase('techserv'); window.__ROSETTA__.ui.ucEstado = 'todos'; window.__ROSETTA__.go('controles'); }); await page.waitForTimeout(300);
+  await page.evaluate(() => { window.__marca = document.querySelector('#uc-PRI-10'); });
+  const btn = page.locator('[data-act="set-state"][data-id="OPE-09"][data-v="parcial"]'); await btn.focus(); // enfocar desplaza hasta el botón
+  const y0 = await page.evaluate(() => window.scrollY); assert.ok(y0 > 300, `scroll de partida ${y0}`);
+  await btn.press('Enter'); await page.waitForTimeout(250);
+  const r = await page.evaluate(() => ({ mismo: window.__marca === document.querySelector('#uc-PRI-10'), y: window.scrollY, foco: document.activeElement.dataset.id + ' ' + document.activeElement.dataset.v, pressed: document.querySelector('[data-act="set-state"][data-id="OPE-09"][data-v="parcial"]').getAttribute('aria-pressed') }));
+  assert.equal(r.mismo, true, 'la fila de PRI-10 es el mismo nodo: no se redibujó');
+  assert.equal(r.y, y0, 'el scroll no salta'); assert.equal(r.foco, 'OPE-09 parcial'); assert.equal(r.pressed, 'true');
+  await page.evaluate(() => window.__ROSETTA__.go('normas')); await page.waitForTimeout(200);
+  assert.equal(await page.evaluate(() => !!window.__marca && window.__marca.isConnected), false, 'al cambiar de vista sí se redibuja entera');
+  noErrors('redibujado parcial');
+});

@@ -337,7 +337,8 @@ select option { background: var(--bg); color: var(--ink); }
 .wheel:has(.spoke:hover) .spoke:not(:hover) .cell { opacity: .28; }
 .wheel .spoke:hover .cell { filter: brightness(1.2) saturate(1.2); }
 .wheel .spoke:focus-visible { outline: none; }
-.wheel .spoke:focus-visible .hit { fill: var(--accent-soft); }
+.wheel .spoke:focus-visible .hit { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2.5; }
+.wheel:has(.spoke:focus-visible) .spoke:not(:focus-visible) .cell { opacity: .28; }
 .wheel .dom-arc { fill: none; stroke: var(--hair-2); stroke-width: 1.5; }
 .wheel .dom-lbl { fill: var(--muted); font: 600 10.5px var(--f-mono); letter-spacing: .06em; text-transform: uppercase; }
 .wheel .ring-off .cell { opacity: .16; }
@@ -1012,3 +1013,11 @@ select option { background: var(--bg); color: var(--ink); }
 .ref-list details { margin-top: 4px; }
 .ref-list summary { font-size: .76rem; color: var(--muted); cursor: pointer; }
 .ref-txt { white-space: pre-line; margin-top: 6px; color: var(--ink-2, var(--ink)); }
+
+/* Acciones en bloque (Controles) */
+.bulk { padding: 0; }
+.bulk > summary { display: flex; align-items: center; gap: 10px; padding: 14px 18px; cursor: pointer; font-weight: 600; list-style: none; }
+.bulk > summary::-webkit-details-marker { display: none; }
+.bulk > summary small { margin-left: auto; color: var(--muted); font-weight: 500; }
+.bulk-body { padding: 0 18px 16px; display: grid; gap: 10px; }
+.bulk-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; align-items: end; }

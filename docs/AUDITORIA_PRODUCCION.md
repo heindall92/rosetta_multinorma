@@ -74,10 +74,10 @@ Descartados tras probarlos: XSS por cualquiera de las cuatro vías de entrada, c
 | 6 iconos con nombres obsoletos de Lucide | ✅ Nombres de Lucide 1.49; prueba de que todo icono usado existe |
 | Textos que no decían nada («Implanta una vez», «Siguiente mejor jugada», nombres de vista metafóricos) | ✅ Textos funcionales en ES y EN; vistas renombradas por su función |
 | Barra lateral con saltos al plegar | ✅ Rediseñada: despliegue al pasar el ratón sin mover los iconos |
-| Los 115 segmentos de la rueda no se alcanzan con el teclado | ⏳ M3 |
-| Cada interacción reconstruye la vista entera (≈ 55 ms; 270 ms con CPU lenta) | ⏳ M2: actualizaciones parciales |
-| Sin acciones masivas en Controles | ⏳ M8 |
-| ≈ 60 textos de las exportaciones fuera del diccionario de idiomas | ⏳ M11 |
+| Los 115 segmentos de la rueda no se alcanzan con el teclado | ✅ 2.14.0: foco itinerante, flechas, Re Pág/Av Pág, Inicio, Fin e Intro (152 controles) |
+| Cada interacción reconstruye la vista entera (≈ 55 ms; 270 ms con CPU lenta) | ✅ 2.14.0: redibujado parcial; trabajo del navegador por clic entre 2,4 y 6,9 veces menor (CPU ×4) |
+| Sin acciones masivas en Controles | ✅ 2.14.0: estado, responsable y revisión de los controles filtrados, con un solo deshacer |
+| ≈ 60 textos de las exportaciones fuera del diccionario de idiomas | ✅ 2.14.0: los últimos (exigencia del ENS y leyes de Latinoamérica); la suite de exportaciones lo comprueba en inglés |
 
 ## 4. Hoja de ruta
 
