@@ -218,6 +218,7 @@ const SUITE = [
   ['kairos', 'KAIROS', 'https://heindall92.github.io/kairos/', 'https://github.com/heindall92/kairos'],
   ['ctem', 'CTEM-Nexus', 'https://heindall92.github.io/ctem-nexus/', 'https://github.com/heindall92/ctem-nexus'],
   ['adaudit', 'ENS AD Auditor', 'https://heindall92.github.io/ens_ad-auditor/', 'https://github.com/heindall92/ens_ad-auditor'],
+  ['mcpshield', 'MCP-Shield', 'https://heindall92.github.io/mcp-shield/', 'https://github.com/heindall92/mcp-shield'],
   ['norvik', 'Norvik', null, 'https://github.com/heindall92/Norvik_Gobernanza']
 ];
 function suiteGrc() {
