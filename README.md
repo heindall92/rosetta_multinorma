@@ -105,7 +105,7 @@ Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto n
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="2"><code>version: 2.15.0&nbsp;&nbsp;·&nbsp;&nbsp;catalogo: 2.15.0&nbsp;&nbsp;·&nbsp;&nbsp;CCN-STIC 825: abril 2026&nbsp;&nbsp;·&nbsp;&nbsp;pruebas: 265 ok&nbsp;&nbsp;·&nbsp;&nbsp;licencia: GPLv2</code></td>
+      <td colspan="2"><code>version: 2.15.1&nbsp;&nbsp;·&nbsp;&nbsp;catalogo: 2.15.1&nbsp;&nbsp;·&nbsp;&nbsp;CCN-STIC 825: abril 2026&nbsp;&nbsp;·&nbsp;&nbsp;pruebas: 265 ok&nbsp;&nbsp;·&nbsp;&nbsp;licencia: GPLv2</code></td>
     </tr>
   </tfoot>
 </table>
@@ -422,6 +422,8 @@ Rosetta dice qué controles exige cada norma; [CTEM-Nexus](https://github.com/he
 2. En Rosetta, **Exportar → CTEM-Nexus → Importar hallazgos**. Cada control muestra en su ficha la **exposición técnica**: abiertos por prioridad, KEV, vencidos y los peores hallazgos con su activo y fecha límite.
 3. **Regla CO-23 (alta).** Un control declarado «Implantado» con hallazgos críticos o altos abiertos es una contradicción que un auditor encontrará. Rosetta la señala con los hallazgos concretos.
 4. **Sobre para CTEM-Nexus.** Rosetta devuelve el estado de los 152 controles y, sin cambios, la evidencia que recibió. CTEM-Nexus avisa en cada hallazgo si su control figura como implantado.
+
+**Desde la 2.15.1, también la seguridad de los asistentes de IA:** [MCP-Shield](https://github.com/heindall92/mcp-shield) exporta los hallazgos de un `mcp.json`, CTEM-Nexus los importa con su guía y sus controles, y llegan aquí en la misma evidencia: cadena de suministro → DES-09/OPE-05, secretos → ACC-06/OPE-14, ficheros → ACC-02/OPE-01 y *tool poisoning* → OPE-01/OPE-10.
 
 La ida y vuelta está cubierta por pruebas en los dos repositorios con el mismo fichero (`tests/fixtures/ctem-a-rosetta.json` y `rosetta-a-ctem.json`). De paso se corrigió el contraste de las etiquetas del selector de estado en la ficha (3,6:1 → AA).
 
