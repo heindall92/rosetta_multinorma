@@ -66,12 +66,17 @@ function refBloque(f, id, cov) {
     <ul class="ref-list">${lista.map((x) => { const [k, c] = papel(x.id); return `<li><label class="ref-chk"><input type="checkbox" data-ref="${esc(id)}" data-r="${esc(x.id)}"${hechos.has(x.id) ? ' checked' : ''}><span class="mono">${esc(x.id)}</span><span>${esc(LANG() === 'en' ? x.t_en : x.t)}</span><span class="pill ${c}">${esc(t(k))}</span></label>
       <details><summary>${esc(t('refBoe'))}</summary><p class="ref-txt small">${esc(x.texto)}</p></details></li>`; }).join('')}</ul></div>`;
 }
+/* Criterio específico del perfil del CCN para la medida (resumen propio, no texto de la guía) */
+function pceFicha(id, cov) {
+  const p = cov.perfil && perfilMedida(id); if (!p || !p.m.criterio) return '';
+  return `<dt>${esc(t('pceCrit', p.g.guia))}</dt><dd>${esc(LANG() === 'en' ? p.m.criterio_en : p.m.criterio)}</dd>`;
+}
 function inspReq(f, id) {
   const r = IX.req[f][id]; const cov = reqRow(f, id); const showRel = ws.settings.mostrarRelaciones;
   const eq = E.equivalencias(IX, f, id);
   const ctl = eq.controles.filter((l) => l.w > 0 || showRel);
   const ex = cov.estado === 'excluido'; const canEx = onFw(f) && cov.estado !== 'no-exigido' && E.excluible(f, id);
-  const ens = f === 'ens' ? `<dl class="kv small"><dt>${esc(t('dims'))}</dt><dd>${esc(r.dims)}</dd><dt>${esc(t('exig'))}</dt><dd class="mono">B ${esc(r.bajo)} · M ${esc(r.medio)} · A ${esc(r.alto)}</dd>${state.alcance.ens.on ? `<dt>${esc(t('inYourSys'))}</dt><dd>${esc(t('level'))} ${esc(t('lv.' + cov.nivel))} · <code>${esc(exigL(cov.exigencia))}</code></dd>` : ''}${ccnFicha(id)}<dt>${esc(t('classIso'))}</dt><dd>${esc(r.ref || '—')}</dd></dl>${ccnAviso(f, id)}` : '';
+  const ens = f === 'ens' ? `<dl class="kv small"><dt>${esc(t('dims'))}</dt><dd>${esc(r.dims)}</dd><dt>${esc(t('exig'))}</dt><dd class="mono">B ${esc(r.bajo)} · M ${esc(r.medio)} · A ${esc(r.alto)}</dd>${state.alcance.ens.on && cov.nivel ? `<dt>${esc(t('inYourSys'))}</dt><dd>${esc(t('level'))} ${esc(t('lv.' + cov.nivel))} · <code>${esc(exigL(cov.exigencia))}</code>${cov.perfil ? ` · ${esc(PERFILES.perfiles[cov.perfil].guia)}` : ''}</dd>` : ''}${pceFicha(id, cov)}${ccnFicha(id)}<dt>${esc(t('classIso'))}</dt><dd>${esc(r.ref || '—')}</dd></dl>${ccnAviso(f, id)}` : '';
   const eqs = FWV.filter((g) => g !== f).map((g) => {
     const rows = eq.otras[g].filter((x) => x.fuerza !== 'relacionado' || showRel);
     return `<div>${fwTag(g, !onFw(g))}<div class="chips">${rows.length ? rows.map((x) => reqChip(g, x.id, { fuerza: x.fuerza, cov: onFw(g) ? reqRow(g, x.id).estado : null, origen: ccnTxt(f, g, x) })).join('') : `<span class="tiny muted">${esc(g === 'iso42001' || f === 'iso42001' ? t('noEqAi') : t('noEq'))}</span>`}</div></div>`;

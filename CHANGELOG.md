@@ -1,5 +1,18 @@
 # Cambios
 
+## 2.15.0 · octubre de 2026
+
+**Perfiles de cumplimiento específicos del CCN** (art. 30 del RD 311/2022).
+
+- **CCN-STIC 881A (universidades, categoría MEDIA) y 890A (requisitos fundamentales de entidades locales pequeñas, categoría BÁSICA).** Datos en `src/data/perfiles-ccn.json`, generados con `scripts/perfiles-ccn.py` desde los PDF oficiales, que no se suben al repositorio. Solo se guardan datos objetivos de la declaración de aplicabilidad: el nivel de cada medida, los refuerzos que añade el perfil y la condición. Los criterios específicos se resumen con redacción propia. El script comprueba el recuento de cada guía (69 y 38 medidas) y admite `--check`.
+- **Motor.** `indexar` recibe los perfiles y `aplicaReq` aplica el del proyecto (`alcance.ens.perfil`) a las 73 medidas del anexo II: nivel del perfil, refuerzos añadidos sin duplicar, N/A como «no exigida por el perfil» y medidas condicionales (`alcance.ens.perfilCond`: `evidencia` en la 881A, `nis2` en la 890A). El articulado se exige siempre. Fuera de su categoría el perfil no se aplica y se calcula con el anexo II.
+- **Regla CO-26 (alta).** Perfil aplicado a un sistema de categoría superior a la del perfil (RD 311/2022, art. 30).
+- **Interfaz.** Selector de perfil y casillas de condición en *Alcance → ENS* y en el asistente, con el ámbito, el recuento, el aviso de CO-26 y la nota de la CCN-STIC 892, retirada el 28-03-2025. En la ficha de la medida aparecen el nivel, la guía y el criterio del perfil. Pregunta nueva en la ayuda.
+- **Exportaciones.** El resumen del Excel y el informe Markdown declaran el perfil. La SoA del ENS lleva el nivel y la exigencia del perfil, el motivo de las medidas no exigidas y el criterio en la justificación.
+- **Anexo II contrastado con el BOE.** `scripts/anexo2-boe.py` compara las dimensiones y la exigencia BAJO/MEDIO/ALTO de las 73 medidas con el texto consolidado del RD 311/2022: las 73 coinciden.
+- **Ctrl + Z** deshace en Rosetta aunque el foco esté en una casilla o un desplegable. Antes el atajo se perdía en el navegador, y con el redibujado parcial de la 2.14.0 el foco se queda en el control.
+- **Pruebas.** 6 del motor, 1 e2e, 1 de exportaciones y 4 de axe. Total: 169 de motor, catálogo y build, y 96 en navegador.
+
 ## 2.14.0 · octubre de 2026
 
 **Accesibilidad y ritmo de trabajo.** Cierra los cuatro puntos de experiencia que seguían abiertos en la auditoría de producción (M2, M3, M8 y M11).

@@ -4,7 +4,8 @@ const E = window.RosettaEngine;
 /* Índice de normas. IX0 es el del catálogo publicado (Part-IS incluido). Si el proyecto activo trae marcos propios,
  * reindex() funde un catálogo derivado y todo lo que depende de él (IX, CAT, FW, SOLAPE) pasa a incluirlos. */
 const CAT0 = D.catalog;
-const IX0 = E.indexar(CAT0, D.ccn825);
+const PERFILES = D['perfiles-ccn'];
+const IX0 = E.indexar(CAT0, D.ccn825, [], PERFILES);
 const FW_BASE = E.FW;
 let IX = IX0, CAT = CAT0, FW = IX0.fw, IX_SIG = '[]';
 /* Normas visibles en las vistas: las regionales (leyes LATAM) solo aparecen si están en el alcance o si el perfil
@@ -24,7 +25,7 @@ const XLSX_LIBS = {
   leer: { file: 'vendor/sheetjs-0.20.3.full.min.js', cdn: 'https://cdn.jsdelivr.net/npm/@e965/xlsx@0.20.3/dist/xlsx.full.min.js', sri: 'sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT' },
   escribir: { file: 'vendor/xlsx-js-style-1.2.0.bundle.js', cdn: 'https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js', sri: 'sha384-OUW9euuUyxyHcAhTqbhI+Iyb8LMssXt/cpz0yXhs9UWG2/R/uaWdakx/4cfww7Vb' }
 };
-const VERSION = '2.14.0';
+const VERSION = '2.15.0';
 const DOM = Object.fromEntries(CAT0.domains.map((d) => [d.id, d]));
 const SOLAPE0 = E.solapamiento(IX0);
 let SOLAPE = SOLAPE0;
@@ -36,7 +37,7 @@ function reindex() {
   const sig = JSON.stringify(ms);
   if (sig === IX_SIG) return false;
   IX_SIG = sig;
-  IX = ms.length ? E.indexar(CAT0, D.ccn825, ms) : IX0;
+  IX = ms.length ? E.indexar(CAT0, D.ccn825, ms, PERFILES) : IX0;
   CAT = IX.cat; FW = IX.fw; SOLAPE = ms.length ? E.solapamiento(IX) : SOLAPE0;
   for (const k of Object.keys(PRISM_DEF)) delete PRISM_DEF[k];
   return true;
@@ -85,7 +86,9 @@ const uid = () => { const a = new Uint8Array(9); crypto.getRandomValues(a); retu
 const initials = (name) => String(name || '').trim().split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('') || '··';
 const reqCode = (f, id) => reqCodeL(f, id);
 /* Por qué un requisito no se exige: el nivel en el ENS; el rol o el riesgo del sistema en el RIA */
-const noExigidoTxt = (f, r) => (f === 'ens' ? t('notRequired', t('lv.' + r.nivel), r.exigencia) : t('notRequiredBy.' + (r.motivo || 'rol')));
+const noExigidoTxt = (f, r) => (f === 'ens' ? (r.motivo === 'perfil' ? t(r.cond ? 'notRequiredCond' : 'notRequiredPerfil', PERFILES.perfiles[r.perfil].guia, r.cond) : t('notRequired', t('lv.' + r.nivel), r.exigencia)) : t('notRequiredBy.' + (r.motivo || 'rol')));
+/* Perfil de cumplimiento del CCN de la medida en el proyecto activo: nivel, refuerzos añadidos y criterio específico */
+const perfilMedida = (id) => { const k = state && state.alcance.ens.perfil; const m = k && PERFILES.perfiles[k] && PERFILES.perfiles[k].medidas[id]; return m ? { k, g: PERFILES.perfiles[k], m } : null; };
 const reqTitle = (f, id) => rT(f, id);
 
 /* Almacenamiento: localStorage si está disponible; si no, memoria (la app funciona igual) */
@@ -210,7 +213,7 @@ function deleteProject(id) {
   if (ws.activeId === id) { ws.activeId = null; state = null; recompute(); }
   saveWs();
 }
-const alcanceDefecto = () => ({ ens: { on: true, categoria: 'MEDIA', niveles: {}, refuerzos: true }, iso27001: { on: true }, nis2: { on: false, tipo: 'fuera' }, iso42001: { on: false }, partis: { on: false, regimen: 'I' }, ria: { on: false, ...E.riaAlcance() }, cra: { on: false, ...E.craAlcance() }, nist: { on: false }, dora: { on: false, ...E.doraAlcance() }, rgpd: { on: false }, cl21663: { on: false, oiv: false }, cl21719: { on: false }, co1581: { on: false }, mx2025: { on: false }, pe29733: { on: false }, ar25326: { on: false } });
+const alcanceDefecto = () => ({ ens: { on: true, categoria: 'MEDIA', niveles: {}, refuerzos: true, perfil: '', perfilCond: {} }, iso27001: { on: true }, nis2: { on: false, tipo: 'fuera' }, iso42001: { on: false }, partis: { on: false, regimen: 'I' }, ria: { on: false, ...E.riaAlcance() }, cra: { on: false, ...E.craAlcance() }, nist: { on: false }, dora: { on: false, ...E.doraAlcance() }, rgpd: { on: false }, cl21663: { on: false, oiv: false }, cl21719: { on: false }, co1581: { on: false }, mx2025: { on: false }, pe29733: { on: false }, ar25326: { on: false } });
 function blankState({ nombre = '', organizacion = '', sector = '', descripcion = '', alcance, nis2q, perfil } = {}) {
   const st = { version: 1, proyecto: { nombre: nombre || organizacion, organizacion, sector, descripcion },
     alcance: alcance || alcanceDefecto(),
