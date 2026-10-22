@@ -29,6 +29,7 @@ Esta skill resume todo lo aprendido trabajando con él para que no tenga que rep
 | Arquitectura, seguridad, build, README, versiones, GitHub Pages | `referencias/05-ingenieria-seguridad-repo.md` |
 | Contenido GRC (ENS, ISO, NIS2, DORA…), tono, LinkedIn, ecosistema | `referencias/06-contenido-tono-ecosistema.md` |
 | Antes de dar algo por cerrado | `referencias/07-lecciones-y-checklist.md` |
+| Muelles en CSS puro (`linear()`), barra de pestañas flotante, pasos con estado, estado vacío, adjuntos y foco (patrones de suiss/ui, sin instalarlo) | `referencias/08-patrones-esuiss-ui.md` |
 
 ## La firma visual en una frase
 
