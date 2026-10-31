@@ -40,9 +40,11 @@
 | CTEM-Nexus | `heindall92/ctem-nexus` | …/ctem-nexus/ | Prioriza exposición técnica y rutas de ataque hacia los activos críticos | Franjas por activo y grafo |
 | ENS AD Auditor | `heindall92/ens_ad-auditor` | …/ens_ad-auditor/ (modo navegador) | Directorio activo frente a las medidas del ENS | Propia |
 | ARGOS | `heindall92/argos-grc` | …/argos-grc/ | Laboratorio GRC estilo Hack The Box: rutas, máquinas con flags, simulacros, rangos y logros | Propia (juego) |
+| MCP-Shield | `heindall92/mcp-shield` | …/mcp-shield/ | Audita las configuraciones MCP de los asistentes de IA; sus hallazgos llegan a Rosetta a través de CTEM-Nexus | Propia |
+| Atlas GRC | `heindall92/atlas-grc` | …/atlas-grc/ | Aprender la ISO/IEC 27001 desde cero: lecciones, prácticas, simulacros CertiProf y la ciudad de Albatrel | Propia (ciudad) |
 | Norvik | `heindall92/Norvik_Gobernanza` | (sin web publicada) | Gobernanza: roles, políticas y el marco que une al resto | Propia |
 
-Sobre común de intercambio `yrd-ecosistema` v1 (esquema en `heindall92/ctem-nexus/shared/schemas/`): KAIROS envía `bia` y recibe `activos`; Studio envía `soa`; ENS AD Auditor envía `hallazgos`; Rosetta ↔ CTEM-Nexus `hallazgos`/`controles`; Norvik `responsables`/`indicadores`. Cada par tiene fichero de ida, de vuelta y prueba en los dos repos. El bloque «Herramientas GRC del autor» de Acerca de lista las siete en todas.
+Sobre común de intercambio `yrd-ecosistema` v1 (esquema en `heindall92/ctem-nexus/shared/schemas/`): KAIROS envía `bia` y recibe `activos`; Studio envía `soa`; ENS AD Auditor envía `hallazgos`; Rosetta ↔ CTEM-Nexus `hallazgos`/`controles`; Norvik `responsables`/`indicadores`. Cada par tiene fichero de ida, de vuelta y prueba en los dos repos. El bloque «Herramientas GRC del autor» de Acerca de lista las nueve en todas: Atlas te enseña la norma, ARGOS te entrena, Rosetta traduce entre marcos, ENS Compliance Studio prepara la conformidad con el ENS, KAIROS cubre la continuidad, CTEM-Nexus mide la exposición técnica, ENS AD Auditor revisa el directorio, MCP-Shield audita los asistentes de IA y Norvik gobierna el conjunto.
 
 Antes de afirmar que una web existe, compruébalo; si no hay, `web: null` y solo enlace al código.
 

@@ -1,5 +1,10 @@
 # Cambios
 
+## 2.15.2 · octubre de 2026
+
+- **Herramientas GRC del autor:** Ayuda → Acerca de pasa a nueve herramientas. Se suma **Atlas GRC**, que enseña la ISO/IEC 27001 desde cero con lecciones, prácticas, simulacros CertiProf y la ciudad de Albatrel que crece contigo. La frase de resumen empieza por «Atlas te enseña la norma».
+- **Pruebas.** La e2e de Acerca de comprueba las nueve tarjetas y los enlaces a la web y al código de Atlas.
+
 ## 2.15.1 · octubre de 2026
 
 - **Herramientas GRC del autor:** Ayuda → Acerca de pasa a ocho herramientas. Se suma **MCP-Shield**, que audita las configuraciones MCP de los asistentes de IA (Claude Desktop, Cursor, VS Code). Sus hallazgos llegan a Rosetta como evidencia por control a través de CTEM-Nexus 1.2.1: cadena de suministro → DES-09/OPE-05, secretos → ACC-06/OPE-14, ficheros → ACC-02/OPE-01 y *tool poisoning* → OPE-01/OPE-10.

@@ -105,7 +105,7 @@ Funciona en el navegador, sin servidor y sin conexión. Los datos del proyecto n
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="2"><code>version: 2.15.1&nbsp;&nbsp;·&nbsp;&nbsp;catalogo: 2.15.1&nbsp;&nbsp;·&nbsp;&nbsp;CCN-STIC 825: abril 2026&nbsp;&nbsp;·&nbsp;&nbsp;pruebas: 265 ok&nbsp;&nbsp;·&nbsp;&nbsp;licencia: GPLv2</code></td>
+      <td colspan="2"><code>version: 2.15.2&nbsp;&nbsp;·&nbsp;&nbsp;catalogo: 2.15.2&nbsp;&nbsp;·&nbsp;&nbsp;CCN-STIC 825: abril 2026&nbsp;&nbsp;·&nbsp;&nbsp;pruebas: 265 ok&nbsp;&nbsp;·&nbsp;&nbsp;licencia: GPLv2</code></td>
     </tr>
   </tfoot>
 </table>
@@ -663,7 +663,7 @@ Componentes de terceros: iconos de [Lucide](https://lucide.dev) (ISC) y logotipo
 </tr>
 </table>
 
-Otras herramientas GRC del autor: [ARGOS](https://github.com/heindall92/argos-grc) (laboratorio de práctica con rutas, casos prácticos y simulacros), [ENS Compliance Studio](https://github.com/heindall92/grc_ens_compliance_studio) (categorización, riesgos MAGERIT y Declaración de Aplicabilidad; su SoA se importa en Rosetta) y [KAIROS](https://github.com/heindall92/kairos) (continuidad de negocio: BIA, BCP y DRP).
+Otras herramientas GRC del autor: [Atlas GRC](https://github.com/heindall92/atlas-grc) (aprender la ISO/IEC 27001 desde cero con lecciones, prácticas y simulacros CertiProf), [ARGOS](https://github.com/heindall92/argos-grc) (laboratorio de práctica con rutas, casos prácticos y simulacros), [ENS Compliance Studio](https://github.com/heindall92/grc_ens_compliance_studio) (categorización, riesgos MAGERIT y Declaración de Aplicabilidad; su SoA se importa en Rosetta) y [KAIROS](https://github.com/heindall92/kairos) (continuidad de negocio: BIA, BCP y DRP).
 
 Errores, correspondencias discutibles o propuestas: abre una *issue* o escribe a <a href="mailto:yoandyramirezdelgado@gmail.com">yoandyramirezdelgado@gmail.com</a>.
 
