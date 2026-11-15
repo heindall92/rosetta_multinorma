@@ -50,7 +50,7 @@ En las sesiones de Claude Code en la nube la máquina se recrea, así que el plu
 
 Comandos del plugin (en Claude Code y Antigravity, con el prefijo `/egm:`): `egm-brainstorm` (explorar la idea con revisores frescos), `egm-draft` (redactar el diseño por secciones), `egm-review <doc>` (revisión del pez), `egm-review-loop` (revisar cualquier documento con revisores y criterios elegidos), `egm-resolve` (decidir hallazgos), `egm-drift-report <carpeta>` (diseño frente a código) y `egm-bootstrap`. Coste: unos 650 tokens fijos por sesión; cada revisión, unos 9.000.
 
-## Ejemplo real: Nessus Lab 2.1
+## Ejemplo real: WhiteFox 2.1 (repositorio nessus-lab)
 
 El diseño de `docs/designs/2.1-pedagogia.md` pasó por un pez antes de construir y salieron 12 hallazgos, 5 de severidad alta. Por ejemplo:
 
