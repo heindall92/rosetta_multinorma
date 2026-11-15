@@ -30,6 +30,7 @@ Esta skill resume todo lo aprendido trabajando con él para que no tenga que rep
 | Contenido GRC (ENS, ISO, NIS2, DORA…), tono, LinkedIn, ecosistema | `referencias/06-contenido-tono-ecosistema.md` |
 | Antes de dar algo por cerrado | `referencias/07-lecciones-y-checklist.md` |
 | Muelles en CSS puro (`linear()`), barra de pestañas flotante, pasos con estado, estado vacío, adjuntos y foco (patrones de suiss/ui, sin instalarlo) | `referencias/08-patrones-esuiss-ui.md` |
+| Diseñar una versión o un cambio importante y revisarlo con ojos frescos antes de construir (método Elephant-Goldfish de Google; plugin `egm` o a mano con cualquier modelo) | `referencias/09-elefante-pez.md` |
 
 ## La firma visual en una frase
 
@@ -39,6 +40,7 @@ Oscuro casi negro frío o claro gris perla, **un único acento** (azul eléctric
 
 1. Lee el código y los documentos existentes; audita con capturas reales (Playwright) en claro/oscuro y 1440/390 px.
 2. Si el trabajo es grande, escribe o actualiza `ROADMAP.md` por fases con criterios de aceptación y márcalo al avanzar.
+   Cada versión o cambio importante se **diseña con un elefante y se revisa con un pez** antes de construir: diseño en `docs/designs/`, revisión por un revisor sin contexto y tabla de decisiones (referencia 09). Con cualquier modelo, no solo con Claude.
 3. Implementa en commits con mensaje en español, en imperativo y explicando el porqué.
 4. Pasa todas las pruebas y axe; regenera capturas; actualiza README, CHANGELOG y versión.
 5. Push y comprobación de la CI. Avisa al usuario con un resumen: qué cambió, qué encontraste (incluidos fallos tuyos) y el siguiente paso.
