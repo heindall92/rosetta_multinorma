@@ -17,6 +17,7 @@ Esta skill resume todo lo aprendido trabajando con él para que no tenga que rep
 4. **Pruébalo antes de enviarlo.** Pruebas unitarias, e2e en navegador real y axe (0 infracciones) antes de cada push. Mira las capturas tú mismo.
 5. **Propiedad intelectual.** Nunca reproducir texto de normas ISO/IEC (solo número de cláusula o control). El BOE se puede citar literalmente. No usar copias filtradas de normas ni exámenes o documentos de profesores. Avisos de independencia de ISO, IEC, PECB, CCN, Gartner, MITRE, CISA, FIRST y entidades de certificación.
 6. **Local-first y sin terceros.** Nada de telemetría, CDNs ni peticiones externas en la app publicada; CSP estricta por hashes.
+7. **Pin UI y skills de diseño, a rajatabla.** Toda herramienta con interfaz lleva el Theme Switch (gota, lluvia o fundido) y la Search Card; la Dynamic Drop Zone donde se suba algo; Task Card, Calendar Card y Liquid Tabs donde haya tareas, fechas o pestañas. Las skills de Emil Kowalski, impeccable y ui-ux-pro-max se instalan en cada repositorio y se usan siempre (referencia 10).
 
 ## Qué leer según la tarea
 
@@ -31,6 +32,7 @@ Esta skill resume todo lo aprendido trabajando con él para que no tenga que rep
 | Antes de dar algo por cerrado | `referencias/07-lecciones-y-checklist.md` |
 | Muelles en CSS puro (`linear()`), barra de pestañas flotante, pasos con estado, estado vacío, adjuntos y foco (patrones de suiss/ui, sin instalarlo) | `referencias/08-patrones-esuiss-ui.md` |
 | Diseñar una versión o un cambio importante y revisarlo con ojos frescos antes de construir (método Elephant-Goldfish de Google; plugin `egm` o a mano con cualquier modelo) | `referencias/09-elefante-pez.md` |
+| **Siempre en cualquier interfaz:** componentes de Pin UI obligatorios (Theme Switch, Search Card, Dynamic Drop Zone, Task Card, Calendar Card, Liquid Tabs; Progress Image opcional) y skills de diseño que hay que instalar y usar | `referencias/10-pin-ui-y-skills.md` |
 
 ## La firma visual en una frase
 
